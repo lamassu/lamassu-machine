@@ -14,7 +14,8 @@ Use that to run the main program, called sencha-brain, along with a Bitcoin
 address you control:
 
 ```
-node bin/sencha-brain --mock-btc '1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8' --mock-bv '/dev/ttys009' --mock-trader
+node bin/sencha-brain --mock-btc '1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8' \ 
+--mock-bv '/dev/ttys009' --mock-trader
 ```
 
 This should output something like this:
