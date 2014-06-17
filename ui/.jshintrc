@@ -1,0 +1,9 @@
+{
+  "trailing": false,
+  "jquery": true,
+  "browser": true,
+  "devel": true,
+  "unused": "last-param",
+  "quotmark": false,
+  "globals": {"Jed": false, "Keyboard": false, "locales": false}
+}

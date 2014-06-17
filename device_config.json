@@ -1,0 +1,26 @@
+{
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "id003": {
+    "rs232": {
+      "device": "/dev/pts/4"
+    }
+  },
+  "qrScanner": {
+    "device": "/dev/video0"
+  },
+  "video": {
+    "device": "/dev/video0",
+    "format": {
+      "width": 1280,
+      "height": 720
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "brain": {
+    "powerStatus": "/sys/class/power_supply/battery/status",
+    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
+    "freeMemRatio": 0.15
+  },
+  "wifi": {
+    "wpa": {
+      "socket": "/tmp/wpa_supplicant"
+    }
+  },
+  "id003": {
+    "rs232": {
+      "device": "/dev/ttyUSB0"
+    }
+  },
+  "qrScanner": {
+    "device": "/dev/video0"
+  }
+}

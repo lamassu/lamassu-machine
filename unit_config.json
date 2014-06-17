@@ -1,0 +1,15 @@
+{
+  "brain": {
+    "unit": {
+      "ssn": "xx-1234-45",
+      "owner": ""
+    },
+    "locale": {
+      "currency": "USD",
+      "localeInfo": {
+        "primaryLocale": "en-US",
+        "primaryLocales": ["en-US"]
+      }
+    }
+  }
+}

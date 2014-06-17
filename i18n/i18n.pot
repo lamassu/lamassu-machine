@@ -1,0 +1,157 @@
+#. extracted from <stdin>
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-31 12:10-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.9.0\n"
+
+#: <stdin>:1
+msgid "Access passphrase"
+msgstr ""
+
+#: <stdin>:3
+msgid "Unlock the Bitcoin Machine"
+msgstr ""
+
+#: <stdin>:5
+msgid "Unlock"
+msgstr ""
+
+#: <stdin>:7
+msgid "Select aWiFi network"
+msgstr ""
+
+#: <stdin>:9
+msgid "Only secured networks are shown."
+msgstr ""
+
+#: <stdin>:11
+msgid "WiFi password"
+msgstr ""
+
+#: <stdin>:13
+msgid "Connect"
+msgstr ""
+
+#: <stdin>:15
+msgid "Hello."
+msgstr ""
+
+#: <stdin>:17
+msgid "START"
+msgstr ""
+
+#: <stdin>:19
+msgid "Tap to buy bitcoins in 3 steps"
+msgstr ""
+
+#: <stdin>:21
+msgid "Our current Bitcoin price is"
+msgstr ""
+
+#: <stdin>:23
+msgid "Scan your Bitcoin address"
+msgstr ""
+
+#: <stdin>:25
+msgid "Hold your QR code up to the scan window to proceed."
+msgstr ""
+
+#: <stdin>:27
+msgid "Insert a bill"
+msgstr ""
+
+#: <stdin>:29
+msgid "Your bitcoins will be sent to:"
+msgstr ""
+
+#: <stdin>:31
+msgid "for each dollar inserted"
+msgstr ""
+
+#: <stdin>:33
+msgid "Tap to complete purchase"
+msgstr ""
+
+#: <stdin>:35
+msgid "SEND BITCOINS"
+msgstr ""
+
+#: <stdin>:37
+msgid "Insert another bill"
+msgstr ""
+
+#: <stdin>:39
+msgid "deposited so far"
+msgstr ""
+
+#: <stdin>:41
+msgid "total bitcoins purchased"
+msgstr ""
+
+#: <stdin>:43
+msgid "See You!"
+msgstr ""
+
+#: <stdin>:45
+msgid "Sorry!"
+msgstr ""
+
+#: <stdin>:47
+msgid "We're down for the moment."
+msgstr ""
+
+#: <stdin>:49
+msgid "Please contact the operator."
+msgstr ""
+
+#: <stdin>:51
+msgid "This machine is locked"
+msgstr ""
+
+#: <stdin>:53
+msgid "Please ask for assistance."
+msgstr ""
+
+#: <stdin>:55
+msgid "We're all out of bitcoins!"
+msgstr ""
+
+#: <stdin>:57
+msgid "We're a little low."
+msgstr ""
+
+#: <stdin>:59
+msgid "Connecting…"
+msgstr ""
+
+#: <stdin>:61
+msgid "This could take a few moments."
+msgstr ""
+
+#: <stdin>:63
+msgid "Sending bitcoins…"
+msgstr ""
+
+#: <stdin>:65
+msgid "Your bitcoins are on their way to:"
+msgstr ""
+
+#: <stdin>:67
+msgid "WiFi failed to connect…"
+msgstr ""
+
+#: <stdin>:69
+msgid "Please try the password again."
+msgstr ""
+
+#: <stdin>:71
+msgid "TRY AGAIN"
+msgstr ""

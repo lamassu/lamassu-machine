@@ -1,0 +1,276 @@
+#. extracted from Lamassu source code
+msgid ""
+msgstr "Project-Id-Version: lamassu-bitcoin-machine-ui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-31 15:34-0400\n"
+"PO-Revision-Date: 2013-11-08 18:30-0500\n"
+"Last-Translator: joshmh <josh@lamassubtc.com>\n"
+"Language-Team: Spanish, Mexico\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: crowdin.net\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_MX\n"
+
+#: locked-password
+msgid "Your passphrase"
+msgstr "Su contraseña"
+
+#: locked-password
+msgid "Access passphrase"
+msgstr "Access passphrase"
+
+#: locked-password
+msgid "Unlock the <strong>Bitcoin Machine</strong>"
+msgstr "Unlock the <strong>Bitcoin Machine</strong>"
+
+#: locked-password
+msgid "Unlock"
+msgstr "Unlock"
+
+#: wifi
+msgid "MORE"
+msgstr "MÁS"
+
+#: wifi
+msgid "Select a WiFi network"
+msgstr "Seleccione una red WiFi"
+
+#: wifi
+msgid "Only secured networks are shown."
+msgstr "Se muestran sólo redes protegidas."
+
+#: wifi
+msgid "The Bitcoin Machine"
+msgstr "La Máquina de Bitcoin"
+
+#. %s is the WiFi network name
+#. example: for HomeNetwork
+#: wifi-password
+msgid "for %s"
+msgstr "para %s"
+
+#: wifi-password
+msgid "WiFi password"
+msgstr "Contraseña de red WiFi"
+
+#: wifi-password
+msgid "Connect"
+msgstr "Conectar"
+
+#. %s is the Bitcoin price
+#. example: Our current Bitcoin price is $123.45
+#: idle
+msgid "Our current Bitcoin price is %s"
+msgstr "Nuestro precio actual de Bitcoin es %s"
+
+#: idle
+msgid "Loading Bitcoin price..."
+msgstr "Cargando el precio de Bitcoin ..."
+
+#: idle
+msgid "Hello."
+msgstr "Hola."
+
+#: idle
+msgid "START"
+msgstr "INICIAR"
+
+#: idle
+msgid "Tap to buy bitcoins in 3 steps"
+msgstr "De un toque para comprar bitcoins en 3 pasos"
+
+#: scan-address
+msgid "Scan your Bitcoin address"
+msgstr "Registre con el explorador su dirección de bitcoin"
+
+#: scan-address
+msgid "Hold your QR code up to the scan window to proceed."
+msgstr "Sostenga el código QR en la ventana de exploración para proceder."
+
+#: insert-bills
+msgid "Insert a bill"
+msgstr "Inserte un billete"
+
+#: insert-bills
+msgid "Your bitcoins will be sent to:"
+msgstr "Sus bitcoins serán enviados a:"
+
+#: insert-bills
+msgid "for each dollar inserted"
+msgstr "por cada dólar que inserte"
+
+#: insert-bills
+msgid "Address was successfully scanned"
+msgstr "La dirección fue analizado con éxito"
+
+#. %s is the bill denomination
+#. example: You inserted a $5 bill
+#: insert-more-bills
+msgid "You inserted a %s bill"
+msgstr "Insertó un billete de %s"
+
+#: insert-more-bills
+msgid "We're out of bitcoins."
+msgstr "Nos quedamos sin bitcoins."
+
+#: insert-more-bills
+msgid "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
+msgstr "Por favor toque <strong>Enviar Bitcoins</strong> para completar su compra."
+
+#: insert-more-bills
+msgid "Tap to complete purchase"
+msgstr "De un toque para completar la compra"
+
+#: insert-more-bills
+msgid "SEND BITCOINS"
+msgstr "ENVIAR BITCOINS"
+
+#: insert-more-bills
+msgid "OR"
+msgstr "Ó"
+
+#: insert-more-bills
+msgid "Insert another bill"
+msgstr "Inserte otro billete"
+
+#: insert-more-bills
+msgid "deposited so far"
+msgstr "depositado hasta este momento"
+
+#: insert-more-bills
+msgid "total bitcoins purchased"
+msgstr "total de bitcoins adquirido"
+
+#: completed
+msgid "Thank you!"
+msgstr "¡Gracias!"
+
+#: completed
+msgid "Your bitcoins are on their way to:"
+msgstr "Los bitcoins están siendo enviados a:"
+
+#: completed
+msgid "View your transaction"
+msgstr "Vea su transacción"
+
+#: completed
+msgid "Tap anywhere when you're done."
+msgstr "De un toque en cualquier lugar en la pantalla  cuando termine."
+
+#: goodbye
+msgid "See You!"
+msgstr "¡Hasta la próxima!"
+
+#: trouble
+msgid "Sorry!"
+msgstr "¡ Lo siento!"
+
+#: trouble
+msgid "We're down for the moment."
+msgstr "Estamos momentáneamente fuera de servicio."
+
+#: trouble
+msgid "Please contact the operator."
+msgstr "Póngase en contacto con el operador."
+
+#: locked
+msgid "This machine is locked"
+msgstr "This machine is locked"
+
+#: locked
+msgid "Please ask for assistance."
+msgstr "Por favor pida ayuda."
+
+#: limit-reached
+msgid "We're all out of bitcoins!"
+msgstr "¡Se nos acabaron los bitcoins!"
+
+#. %s is a bill denomination
+#. example: Please insert $10 or less
+#: high-bill
+msgid "Please insert %s or less."
+msgstr "Por favor inserte %s o menos."
+
+#: high-bill
+msgid "We're a little low."
+msgstr "Por favor use billetes de baja denominación."
+
+#: wifi-connecting
+msgid "This could take a few moments."
+msgstr "Esto puede tardar un momento."
+
+#: wifi-connecting
+msgid "Connected. Waiting for ticker."
+msgstr "Conectado. Esperando cotización."
+
+#. %s is the WiFi network name
+#: wifi-connecting
+msgid "You're connecting to the WiFi network %s"
+msgstr "Se está conectando a la red WiFi %s"
+
+#: wifi-connecting
+msgid "Connecting…"
+msgstr "Conectando..."
+
+#: sending-coins
+msgid "Sending bitcoins…"
+msgstr "Enviando bitcoins..."
+
+#: wifi-failed
+msgid "WiFi failed to connect…"
+msgstr "Falló la conexión a la red WiFi..."
+
+#: wifi-failed
+msgid "Please try the <strong>password</strong> again."
+msgstr "Intente nuevamente la <strong>contraseña</strong>."
+
+#: wifi-failed
+msgid "TRY AGAIN"
+msgstr "INTENTE DE NUEVO"
+
+#: machine
+msgid "Machine Info"
+msgstr "Machine Info"
+
+#: machine
+msgid "SSN"
+msgstr "SSN"
+
+#: machine
+msgid "OWNER"
+msgstr "OWNER"
+
+#: machine
+msgid "IP"
+msgstr "IP"
+
+#: machine
+msgid "CAM"
+msgstr "CAM"
+
+#: machine
+msgid "OFF"
+msgstr "OFF"
+
+#: fix-transaction
+msgid "Last Transaction"
+msgstr "Last Transaction"
+
+#: fix-transaction
+msgid "BTC Address"
+msgstr "BTC Address"
+
+#: fix-transaction
+msgid "Fiat"
+msgstr "Fiat"
+
+#: fix-transaction
+msgid "Bitcoins"
+msgstr "Bitcoins"
+
+#: fix-transaction
+msgid "RESTART"
+msgstr "RESTART"
+

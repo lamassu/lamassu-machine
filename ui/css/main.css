@@ -1,0 +1,938 @@
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  width: 1200px;
+  overflow: hidden;
+  direction: ltr;
+  font-family: ubuntu, droidsansfallback;
+}
+
+body.i18n-he {
+  font-family: raanan, ubuntu, droidsansfallback;
+  direction: rtl;  
+}
+
+input {
+  font-family: ubuntu, droidsansfallback;    
+  direction: ltr;
+}
+.i18n-he input {
+  font-family: raanan, brandon_text, ubuntu, droidsansfallback;  
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.button {
+  -webkit-transition-property: background-color, border-color, color;
+  -webkit-transition-duration: 0.2s;
+}
+
+h1 { margin: 0;}
+body  { margin: 0;}
+#view { background-color: #37E8D7; width: 1280px; height: 800px; position: relative; }
+.viewport {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1280px;
+  height: 800px;
+  display: none;
+}
+
+.cancel, .wifi-cancel { position: absolute; top: 0; right: 0;}
+.i18n-rtl .cancel, .i18n-rtl .wifi-cancel { left: -1; right: auto; -webkit-transform: scaleX(-1); }
+
+.start-buttons {
+  position: absolute; top:250; left: 0; 
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.start-multi .circle-button {
+  font-size: 28px;
+}
+
+.start-buttons .circle-button {
+  width: 210px; height: 210px;
+  margin: 0 50px;
+}
+
+.circle-button {
+  border-radius: 50%;
+  background-color: #ffffff; border: 29px solid; 
+  color: #0e4160;
+  text-align: center;
+  text-transform:uppercase;
+  border-color: #2fdccc;
+  
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;  
+
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.start-buttons .circle-button {
+  font-family: ubuntu, droidsansfallback;
+}
+
+.start-buttons .circle-button .js-i18n-he-IL { 
+  font-size: 35px; 
+  font-family: 'raanan';
+}
+
+.start-buttons .circle-button .js-i18n-he-IL.solo { 
+  font-size: 40px; 
+}
+
+.circle-button-down {
+  border-color: #ffffff;
+  background-color: #1fbaac; color: #ffffff;
+}
+
+
+#hey { 
+  font-size: 96px;
+  font-weight: normal;
+  color: #FFFFFF;
+  vertical-align: text-top;
+  width: 100%; text-align: center;
+  position: absolute; top: 100;
+}
+
+#tap {
+  font-size: 30px;
+  color: #5F5F55;
+  vertical-align: text-top;
+  width: 100%; text-align: center;
+  position: absolute; top: 550;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* 2nd Screen */
+#wifi-instructions {
+  position: absolute;
+  top: 86; left: 75;  
+}
+
+#wifi-instructions h1 {
+  font-size: 80px;
+  color: #FFFFFF;
+  line-height: 1;
+  font-weight: normal;
+  width: 600px;
+}
+
+#wifi-instructions p {
+  font-size: 30px;
+  color: #5F5F55;
+  line-height: 42px;
+  width: 400px;
+}
+
+.primary-side {
+  position: absolute;
+  top: 175; left: 75;
+}
+.i18n-rtl .primary-side {
+  right: 75; left: auto;
+}
+
+.secondary-side {
+  position: absolute;
+  top: 175; right: 600;
+}
+.i18n-rtl .secondary-side {
+  left: 200; right: auto;
+}
+
+#scan-address {
+  font-size: 80px;
+  color: #FFFFFF;
+  line-height: 1;
+  font-weight: normal;
+  width: 600px;
+}
+
+#hold-qr-code {
+  font-size: 30px;
+  color: #5F5F55;
+  line-height: 42px;
+  width: 400px;
+}
+
+#phones {
+  /* position: absolute; top: 184; left: 861;*/
+  top: 139;
+}
+
+.i18n-rtl #phones { left: 70; }
+
+#phone {
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 70px;
+  padding-right: 200px;
+  background-color: #37E8D7;  /* amazonite */
+}
+
+/* css animation for phone */
+
+@-webkit-keyframes cf3FadeInOut {
+  0% {
+    opacity:1;
+  }
+  45% {
+    opacity:1;
+  }
+  55% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+#phones img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 2s ease-in-out;
+}
+
+#phones img.top {
+  -webkit-animation-name: cf3FadeInOut;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-delay: 1s;
+  -webkit-animation-direction: alternate;
+}
+
+/* 3rd Screen */
+.insert-instructions {
+  position: absolute;
+  top: 175; left: 75;
+}
+
+#insert-bill {
+  font-size: 80px;
+  color: #FFFFFF;
+  line-height: 1;
+  font-weight: normal;
+  width: 600px;
+}
+
+.send-to-your-address {
+  font-size: 30px;
+  color: #5F5F55;
+  line-height: 42px;
+  margin-top: 2em;
+}
+
+.bitcoin-address {
+  font-family: monospace; font-size: 90%;
+}
+
+.btc-rate {
+  font-size: 30px;
+  color: #5F5F55;
+  line-height: 42px;
+  margin-top: 2em;
+}
+
+.btc {
+  font-size: 48px;
+  color: #FFFFFF;
+  padding-right: 20px;
+}
+
+.i18n-rtl .btc {
+  padding-right: 0;
+  padding-left: 20px;
+}
+
+.btc-amount {
+  font-weight: 900;
+}
+
+.bill-slot { position: absolute; margin: 50px 100px; }
+.slot {
+  position: absolute; top: 0; left: 0;
+}
+
+.slot-top {
+  position: absolute; top: 0; left: 40;
+  z-index: 100;
+}
+
+.bill {
+  overflow: hidden;
+  position: absolute; top: 0; left: 40;
+  width: 289px; height: 303px;
+}
+
+.bill img {
+  position: absolute;
+}
+
+/* 4th Screen */
+#send-coins {
+  margin: 0 auto;
+  width: 175px; height: 175px;
+  padding: 30px;
+}
+
+.i18n-long-send-coins #send-coins {
+  font-size: 26px;
+}
+
+.or-circle {
+  fill: #2fdccc;
+}
+
+.or {
+  width: 100%;
+  position: absolute; top: 163; left: 40;
+  text-align: center;
+
+  font-weight: 900;
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.exclaim {
+  background-color: #209f94; color: #ffffff;  
+}
+
+.all-caps {
+  font-size: 80%;
+}
+
+#deposit-side {
+  position: absolute;
+  top: 115; left: 774;
+  width: 500px;
+}
+
+.i18n-rtl #deposit-side {
+  right: 100; left: auto;
+}
+
+#deposit-side strong {
+  font-weight: bold;
+}
+
+#send-side {
+  position: absolute;
+  top: 115; left: 106;  
+}
+
+#tap-complete {
+  font-size: 40px;
+  color: #FFFFFF;
+  text-align: center;
+  width: 500px;
+  line-height: 1.2;
+}
+
+#limit-reached-section {
+  display: none;
+}
+
+#insert-another, #js-i18n-limit-reached {
+  font-size: 40px;
+  color: #FFFFFF;
+  line-height: 1.2;
+  vertical-align: top;
+  margin: 40px 0 10px 0;
+}
+
+#js-i18n-limit-description {
+  vertical-align: top;
+  font-size: 30px;
+  color: #5F5F55;
+  margin: 20px 0 -40px 0;
+  width: 90%;
+}
+
+.deposit-record {
+  margin: 70px 0 0;
+  font-size: 30px;
+  color: #5F5F55;
+  line-height: 42px;
+}
+
+.total {
+  font-size: 48px;
+  color: #FFFFFF;
+  line-height: 64px;
+}
+
+.i18n-latin {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+  font-family: ubuntu, raanan, droidsansfallback;
+}
+
+.i18n-rtl .i18n-latin { text-align: right; }
+
+#networks { text-align: left; }
+.i18n-rtl #more-networks { direction: rtl; unicode-bidi: bidi-override; }
+
+.total .amount strong, #deposit-side .total-deposit strong { 
+  font-weight: 900;
+}
+ 
+.feedback {
+  position: absolute; top: 10; right: 60;
+  font-size: 34px;
+  color: #D0D0C8;   /* sandstone */
+  line-height: 47px;
+  text-align: right;
+}
+
+#js-i18n-just-inserted strong { 
+  font-weight: 900; 
+}
+
+/* 4th Screen */
+#deposit-summary {
+  position: absolute;
+  top: 160; left: 83;
+}
+
+#deposit-summary p {
+  font-size: 30px;
+  color: #5F5F55;
+}
+
+#thanks {
+  font-size: 90px;
+  color: #FFFFFF;
+  line-height: 47px;
+  font-weight: normal;
+}
+
+
+#qr-section {
+  position: absolute; top: 138; left: 823;
+  height: 400px;
+  text-align: left;
+}
+
+#qr-frame {
+}
+
+#qr-content {
+  position: absolute; top: 0; left: 0;
+  margin: 75px;
+  width: 275px; height: 275px;
+}
+
+#qr-caption {
+  font-weight: bold;
+  font-size: 26px;
+  color: #5F5F55;
+  text-align: center;
+} 
+
+/* 5th Screen */
+.goodbye_state .main {
+  width: 1280px; height: 800px;
+  background-color: #FFFFFF;
+  color: #37e8d7;
+  text-align: center;        
+}
+
+.goodbye_state .main p {
+  font-size: 96px;
+  position: absolute;
+  top: 220;
+  width: 100%;
+  text-align: center;        
+}
+
+/* info screen */
+.info {
+  width: 1280; height: 800;
+  text-align: center;
+  background-color: #FFFFFF;
+}
+
+.info .top {
+  height: 620px; width: 1200px;
+  border: solid 40px #37e8d7;
+  border-bottom: none;
+  position: relative;
+
+  /* Vertial and horizontal align */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info .content {
+  margin: 0 30px;
+}
+
+.info .bottom {
+  height: 100px; width: 1200;
+  border: solid 40px #5f5f55;
+  border-top: none;
+}
+
+.info h1 {
+  font-size: 96px;
+  color: #37E8D7;
+  font-weight: normal;
+  line-height: 1;
+  margin-bottom: 0.7em;
+}
+
+.info p {
+  font-size: 30px;
+  color: #5f5f55;
+  line-height: 1.3;
+}
+
+.info p strong {
+  font-weight: bold;
+}
+
+.info .loader {
+  margin: -10px 0 0;
+  padding: 50px 0 40px  
+}
+
+.info .actions {
+  margin-top: 90px;
+}
+
+.info .button {
+  background-color: #D0D0C8;
+  color: #5f5f55;
+  font-weight: 900;
+  font-size: 25px;
+  padding: 22px 48px;
+  border-radius: 18%/50%;
+  width: auto;
+  position: relative;
+  margin-left: 100px;
+}
+
+.info .primary {
+  background-color: #37E8D7;  /* amazonite */
+  color: #ffffff;  
+}
+
+.info .button:first-child {
+  margin-left: 0;
+}
+
+.info .button:active {
+  background-color: #37E8D7;  /* amazonite */
+  color: #ffffff;
+}
+
+.info .primary:active {
+  color: #ffffff;  /* amazonite */
+  background-color: #5f5f55;
+}
+
+/* Specific info screens */
+.trouble, .trouble_state {
+  background: #FFFFFF url('../images/error_bg.png') no-repeat 40px 40px;
+}
+
+.limit_reached_state, .high_bill_state {
+  background: #FFFFFF url('../images/limit_reached.png') no-repeat center 440px;
+}
+
+.limit_reached_state .content, .high_bill_state .content {
+  margin-bottom: 150px;  
+}
+
+.unpaired_state p {
+  width: 70%;
+  margin: 1em auto;
+}
+
+.unpaired_state p.important, .virgin_state p.important {
+  border-radius: 6px;
+  padding: 30px;
+  background-color: #efefef;
+}
+
+.pairing_scan_state .button {
+  top: 70px;
+}
+
+.pairing_state p {
+  width: 70%;
+  margin: 2em auto;
+}
+
+.pairing_state p.fingerprint {
+  width: 1000px;
+  border: solid 3px #E7E7E4;
+  border-radius: 6px;
+  padding: 24px 20px;
+  font-weight: bold;
+}
+
+.pairing_error_state .error {
+  text-align: left;
+  border-radius: 6px;
+  padding: 30px;
+  background-color: #efefef;
+}
+
+/* Bottom Bar */
+
+.bottom-bar { 
+  background-color: #5F5F55; width: 100%; height: 140px; 
+  position: absolute; bottom: 0px;  
+}
+
+.current-btc {
+  font-size: 34px;
+  color: #D0D0C8;
+  line-height: 47px;
+  position: absolute;
+  top: 10;
+  left: 60; 
+}
+.i18n-rtl .current-btc { right: 60px; left: auto; }
+
+.bitcoin-machine {
+  font-weight: 200;
+  font-size: 34px;
+  color: #D0D0C8;
+  line-height: 47px;
+  position: absolute;
+  top: 10;
+  right: 60px; 
+}
+
+.i18n-rtl .bitcoin-machine { left: 60px; right: auto; }
+
+.btc-price { 
+  font-weight: bold;
+}
+
+/* WiFi Screen */
+#networks {
+  position: absolute;
+  top: 86;
+  left: 732;
+  height: 550px;
+}
+
+.wifi-network-button {
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #0e4160;   /* cobalt */
+  padding: 32px;
+  width: 346px;
+  height: 30px;
+  font-size: 34px;
+  line-height: 1;
+  position: relative;
+  left: 0;
+  top: 0;
+  margin-bottom: 8px;
+  -webkit-transition-property: background-color, border-color, color;
+  -webkit-transition-duration: 0.5s;
+}
+
+#networks > .active {
+  color: #ffffff;
+  background-color: #0e4160;   /* cobalt */
+}
+
+.wifi-network-button .icon {
+  width: 50px;
+  height: 37px;
+  position: absolute;
+  top: 26;
+  left: 323;
+  background-size: 50px 37px;
+}
+
+.wifi-network-button .bar1 {
+  background-image: url('../images/wifiicon/1.svg');
+}
+
+.wifi-network-button .bar2 {
+  background-image: url('../images/wifiicon/2.svg');
+}
+
+.wifi-network-button .bar3 {
+  background-image: url('../images/wifiicon/3.svg');
+}
+
+.wifi-network-button .bar4 {
+  background-image: url('../images/wifiicon/4.svg');
+}
+
+#networks .button {
+  background-color: #0e4160;   /* cobalt */
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 25px;
+  padding: 18px 62px;
+  border-radius: 50px;
+  width: auto;
+  position: relative;
+  top: 50px;
+  left: 108px;
+  border: 4px solid #0e4160;
+}
+
+#networks .button:active {
+  border: 4px solid #ffffff;
+  background-color: #37E8D7;  /* amazonite */
+  color: #ffffff;
+}
+
+/* WiFi pass */
+.wifi-network {
+  font-size: 34px;
+}
+
+.wifi-network p {
+  color: #0e4160;
+  font-size: 28px;
+  margin: 20px;
+}
+
+.pass-screen {
+  height: 100%;
+}
+
+.pass-screen .pass-top .ssid-container {
+}
+
+.pass-screen .pass-top {
+  position: relative;
+  height: 205px;
+}
+
+.pass-screen .pass-top .label {
+  position: absolute;
+  top: 50px;
+  left: 80px;
+}
+
+.pass-screen .pass-top h1 {
+  font-size: 55px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.pass-screen .pass-top p {
+  color: #5f5f55;   /* sandstone */
+  margin: -5px 0 0 0;
+  font-size: 30px;
+}
+
+.pass-screen .pass-top .entry {
+  position: absolute;
+  top: 65px;
+  left: 550px;
+}
+
+.pass-screen .pass-top .entry input {
+  border-radius: 10px;
+  border: 4px solid #0e4160;  /* cobalt */
+  color: #0e4160;   /* cobalt */
+  width: 370px;
+  font-size: 30px;
+  padding: 20px 25px;
+  margin: 0;
+  direction: ltr;
+}
+
+.pass-screen .pass-top .entry input::-webkit-input-placeholder {
+  color: #d0d0c8;   /* plate */
+}
+
+.pass-screen .pass-top .entry .backspace {
+  position: absolute;
+  top: 0; left: 380px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 4px solid #ffffff;
+  padding: 1px 0;
+  height: 78px;
+  width: 82px;
+  font-size: 55px;
+  font-weight: normal;
+  text-align: center;
+  color: #0e4160;  /* cobalt */
+}
+
+.pass-screen .pass-top .entry .connect {
+  position: absolute;
+  top: 0; left: 479px;
+  border-radius: 10px;
+  background-color: #0e4160;  /* cobalt */
+  border: 4px solid #0e4160;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 21px 21px;
+}
+
+.pass-screen .pass-top .entry .active {
+  background-color: #37E8D7;  /* amazonite */
+  color: #ffffff;
+  border: 4px solid #ffffff;
+}
+
+.pass-screen .pass-bottom {
+  background-color: #5f5f55;   /* sandstone */
+  height: 595px;
+}
+
+.keyboard-layout {
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 1200px;
+  text-align: center !important;
+}
+
+.keyboard .row {
+  overflow: hidden;
+  text-align: center;  
+  display: inline-block;
+}
+
+.keyboard .key {
+  width: 90px;
+  height: 90px;
+  margin: 6px;
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  background-color: #ffffff;
+  color: #0e4160;
+  border-radius: 10px;
+  float: left;
+  position: relative;
+  border: 4px solid #ffffff;
+  font-weight: bold;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.keyboard .active {
+  background-color: #0e4160;
+  color: #ffffff;
+}
+
+.keyboard .special {
+  width: 180px;
+}
+
+.keyboard .space {
+  width: 800px;
+}
+
+.keyboard-input {
+  overflow: hidden;
+}
+.keyboard-input > div {
+  float: left;
+  height: 60px;
+}
+
+.keyboard-input .key {
+  width: auto;
+  padding: 20px;
+  height: 60px;
+}
+
+.keyboard-input .connect {
+  font-weight: bold;
+}
+
+#wifi-config {
+  padding: 20px;
+  border-radius: 10px;
+  margin: 6px;
+  background-color: #ffffff;
+  width: 50%;
+  border: 4px solid #0e4160;
+  text-align: left;
+  font-family: monospace;
+}
+
+#private-key h1 {
+  font-size: 96px;
+  font-weight: normal;
+  color: #FFFFFF;
+  vertical-align: text-top;
+  width: 100%; text-align: center;
+  position: absolute; top: 250;
+}
+
+.admin {
+  font-size: 48px;
+  color: #FFFFFF;
+}
+
+.admin .button {
+  width: 200px;
+  height: 200px;
+}
+
+.admin .buttons {
+  margin-top: 100px;
+  position: relative;
+}
+
+.fix_transaction_state .buttons {
+  margin: 100px auto 0;
+}
+
+.fix_transaction_state .buttons .button {
+  margin: 0 auto;
+}
+
+#cam-button {
+  left: 300px;
+  position: absolute;
+}
+
+#poweroff-button {
+  left: 700px;
+  position: absolute;
+}
+
+.admin h1 {
+  font-size: 96px;
+  padding: 10px 0 0 0;
+  text-align: center;
+  font-weight: normal;
+}
+.admin strong {
+  font-weight: bold;  
+}
+
+.admin li {
+  list-style-type: none;
+}

@@ -1,0 +1,21 @@
+{
+  "exchanges" : {
+    "settings": {
+      "commission": 1.03
+    },
+    "plugins" : {
+      "current": {
+        "ticker": "bitpay_ticker",
+        "trade": null,
+        "transfer": "blockchain"
+      },
+      "settings": {
+        "blockchain" : {
+          "fromAddress" : "",
+          "password" : "",
+          "guid" : ""
+        }      
+      }
+    }
+  }
+}

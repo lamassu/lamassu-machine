@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+
+'use strict';
+
+// TODO: go through code and take out all evil throws
+
+var path = require('path');
+var nconf = require('nconf');
+var SOFTWARE_CONFIG_PATH = path.resolve(__dirname, '../software_config.json');
+var Brain = require('../lib/brain');
+require('../logging');
+
+var bailed = false;
+
+nconf.argv();
+nconf.file('software', SOFTWARE_CONFIG_PATH);
+nconf.load(loadConfigs);
+
+function heartbeat() {
+  process.send({heartbeat: true});
+}
+setInterval(heartbeat, 1000);
+
+function loadConfigs(err) {
+  if (err) throw err;
+  nconf.file('unit', nconf.get('brain:unitConfigPath'));
+  nconf.file('device', nconf.get('brain:deviceConfigPath'));
+  nconf.load(startBrain);
+}
+
+function bail(err) {
+  if (bailed) return;
+  bailed = true;
+  console.log('brain-child bailing out');
+  console.log(err.stack);
+  setTimeout(function () {
+    process.exit(10);
+    process.abort();  // Make sure we're dead
+  }, 7000);   // Leave some time to connect for browser to set error screen
+}
+
+// If we're not getting messages from parent, we should exit
+function monitorParent() {
+  if (process.connected || bailed) return;
+  bail(new Error('Got disconnected from parent'));
+}
+
+// TODO FIX: rethink this, we shouldn't have to manually add these here
+function startBrain(err) {
+  if (err) throw err;
+  var brain = new Brain({
+    brain: nconf.get('brain'),
+    currency: nconf.get('brain:locale:currency'),
+    wifi: nconf.get('wifi'),
+    mockWifi: nconf.get('mock-wifi'),
+    qr: nconf.get('qrScanner'),
+    mockBTC: nconf.get('mock-btc'),
+    mockPair: nconf.get('mock-pair'),
+    mockTrader: nconf.get('mock-trader'),
+    id003: nconf.get('id003'),
+    id003Device: nconf.get('mock-bv'),
+    trader: nconf.get('trader'),
+    pairing: nconf.get('pairing')
+  });
+  brain.on('error', bail);
+  setInterval(monitorParent, 1000);
+  brain.run();
+}
+
+process.on('uncaughtException', bail);
+process.on('exit', function() { console.log('brain-child exiting'); });

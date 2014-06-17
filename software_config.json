@@ -1,0 +1,77 @@
+{
+  "brain": {
+    "connectingTimeout": 40000,
+    "qrTimeout": 60000,
+    "goodbyeTimeout": 2000,
+    "billTimeout": 60000,
+    "completedTimeout": 60000,
+    "periodicLogInterval": 3600000,
+    "insufficientFundsTimeout": 30000,
+    "deviceConfigPath": "/usr/local/share/sencha/config/device_config.json",
+    "unitConfigPath": "/usr/local/share/sencha/config/unit_config.json",
+    "userConfigPath": "/var/lib/sencha/config/user_config.json",
+    "transactionLogPath": "/var/lib/sencha/log/transaction.log",
+    "infoPath": "/usr/local/share/sencha/config/info.json",
+    "wifiConfigPath": "/var/lib/sencha/wpa.conf",
+    "idleTime": 600000,
+    "checkIdleTime": 10000,
+    "checkPowerTime": 1000,
+    "checkPowerTimeout": 4000,
+    "restartPeriod": 10800000,
+    "locale": {
+      "localeInfo": {
+        "primaryLocale": "en-US",
+        "primaryLocales": ["en-US"]
+      }
+    }
+  },
+  "wifi": {
+    "connectionTimeout": 20000, 
+    "checkInterval": 1000,
+    "scanInterval": 5000, 
+    "minSignal": -100, 
+    "maxSignal": -50, 
+    "truncateLength": 16
+  },
+  "id003": {
+    "timeout": 60000,
+    "transientTimeout": 60000,
+    "resetThrottle": 120000
+  },
+  "updater": {
+    "caFile": "/usr/local/share/sencha/certs/lamassu.pem",
+    "certFile": "/var/lib/sencha/client.pem",
+    "keyFile": "/var/lib/sencha/client.key",
+    "port": 8000,
+    "host": "updates.lamassu.is",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "updateInterval": 30000,
+    "deathInterval": 600000,
+    "extractor": {
+      "lamassuPubKeyFile": "/usr/local/share/sencha/pubkeys/lamassu.pub.key",
+      "sigAlg": "RSA-SHA256",
+      "hashAlg": "sha256"
+    }
+  },
+  "trader": {
+    "cert": "/var/lib/sencha/client.pem",
+    "key": "/var/lib/sencha/client.key",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 3000,
+    "rejectUnauthorized": false,
+    "settings": {
+      "pollInterval": 5000,
+      "tradeInterval": 10000,
+      "retryInterval": 5000,
+      "sendTimeout": 90000,
+      "pollTimeout": 60000
+    }
+    },
+  "pairing": {
+    "certPath": "/var/lib/sencha/client.pem",
+    "keyPath": "/var/lib/sencha/client.key",
+    "connectionInfoPath": "/var/lib/sencha/connection_info.json"
+  }
+}

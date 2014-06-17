@@ -1,0 +1,5 @@
+Instructions for manual update:
+
+1. Copy manual_update.js into /tmp
+2. Copy update.tar package into /tmp
+3. node manual_update.js
