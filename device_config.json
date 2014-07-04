@@ -10,17 +10,13 @@
   },
   "id003": {
     "rs232": {
-      "device": "/dev/pts/4"
+      "device": "/dev/ttys019"
     }
   },
   "qrScanner": {
     "device": "/dev/video0"
   },
   "video": {
-    "device": "/dev/video0",
-    "format": {
-      "width": 1280,
-      "height": 720
-    }
+    "format": {}
   }
 }

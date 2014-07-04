@@ -23,7 +23,6 @@ setInterval(heartbeat, 1000);
 
 function loadConfigs(err) {
   if (err) throw err;
-  nconf.file('unit', nconf.get('brain:unitConfigPath'));
   nconf.file('device', nconf.get('brain:deviceConfigPath'));
   nconf.load(startBrain);
 }
