@@ -7,9 +7,6 @@
     "completedTimeout": 60000,
     "periodicLogInterval": 3600000,
     "insufficientFundsTimeout": 30000,
-    "deviceConfigPath": "./device_config.json",
-    "transactionLogPath": "./transaction.log",
-    "wifiConfigPath": "./wpa.conf",
     "idleTime": 600000,
     "checkIdleTime": 10000,
     "checkPowerTime": 1000,
@@ -20,7 +17,13 @@
         "primaryLocale": "en-US",
         "primaryLocales": ["en-US"]
       }
-    }
+    },
+    "transactionLogPath": "log/transaction.log",
+    "certs": {
+      "certFile": "client.pem",
+      "keyFile": "client.key"
+    },
+    "connectionInfoPath": "connection_info.json"    
   },
   "wifi": {
     "connectionTimeout": 20000, 
@@ -36,24 +39,16 @@
     "resetThrottle": 120000
   },
   "updater": {
-    "caFile": "/usr/local/share/sencha/certs/lamassu.pem",
-    "certFile": "./client.pem",
-    "keyFile": "./client.key",
     "port": 8000,
     "host": "updates.lamassu.is",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "updateInterval": 30000,
     "deathInterval": 600000,
     "extractor": {
-      "lamassuPubKeyFile": "/usr/local/share/sencha/pubkeys/lamassu.pub.key",
       "sigAlg": "RSA-SHA256",
       "hashAlg": "sha256"
     }
   },
   "trader": {
-    "cert": "./client.pem",
-    "key": "./client.key",
     "protocol": "https",
     "host": "localhost",
     "port": 3000,
@@ -65,10 +60,5 @@
       "sendTimeout": 90000,
       "pollTimeout": 60000
     }
-    },
-  "pairing": {
-    "certPath": "./client.pem",
-    "keyPath": "./client.key",
-    "connectionInfoPath": "./connection_info.json"
   }
 }

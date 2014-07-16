@@ -4,20 +4,20 @@ body {
   width: 1200px;
   overflow: hidden;
   direction: ltr;
-  font-family: ubuntu, droidsansfallback;
+  font-family: brandon_text, 'Source Sans Pro', ubuntu, raanan;
 }
 
 body.i18n-he {
-  font-family: raanan, ubuntu, droidsansfallback;
+  font-family: raanan, brandon_text, ubuntu;
   direction: rtl;  
 }
 
 input {
-  font-family: ubuntu, droidsansfallback;    
+  font-family: brandon_text, 'Source Sans Pro', ubuntu;
   direction: ltr;
 }
 .i18n-he input {
-  font-family: raanan, brandon_text, ubuntu, droidsansfallback;  
+  font-family: raanan, brandon_text, 'Source Sans Pro', ubuntu;  
 }
 
 input:focus,
@@ -85,7 +85,7 @@ body  { margin: 0;}
 }
 
 .start-buttons .circle-button {
-  font-family: ubuntu, droidsansfallback;
+  font-family: brandon_text, 'Source Sans Pro', ubuntu;
 }
 
 .start-buttons .circle-button .js-i18n-he-IL { 
@@ -385,7 +385,7 @@ body  { margin: 0;}
 .i18n-latin {
   direction: ltr;
   unicode-bidi: bidi-override;
-  font-family: ubuntu, raanan, droidsansfallback;
+  font-family: brandon_text, 'Source Sans Pro', ubuntu, raanan, droidsansfallback;
 }
 
 .i18n-rtl .i18n-latin { text-align: right; }
@@ -784,6 +784,7 @@ body  { margin: 0;}
   font-weight: normal;
   text-align: center;
   color: #0e4160;  /* cobalt */
+  font-family: brandon_text, 'Source Sans Pro', ubuntu;
 }
 
 .pass-screen .pass-top .entry .connect {

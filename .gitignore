@@ -19,6 +19,7 @@ configfile.js
 rwc
 
 i18n/*.zip
+ui/css/fonts
 
 # compiled dependencies
 node_modules

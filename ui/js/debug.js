@@ -7,12 +7,12 @@ function initDebug() {
 function doInitDebug() {
   var forceLocale = 'en-US'
 //  var forceLocale = 'en-US'
-  var forceCurrency = 'USD'
+  var forceCurrency = 'EUR'
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
-  setPrimaryLocales(['en-US']);
+  setPrimaryLocales(['en-US', 'nl-NL']);
 
 
   setCurrency(forceCurrency);

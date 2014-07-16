@@ -7,6 +7,7 @@
 var path = require('path');
 var nconf = require('nconf');
 var SOFTWARE_CONFIG_PATH = path.resolve(__dirname, '../software_config.json');
+var DEVICE_CONFIG_PATH = path.resolve(__dirname, '../../config/device_config.json');
 var Brain = require('../lib/brain');
 require('../logging');
 
@@ -14,6 +15,7 @@ var bailed = false;
 
 nconf.argv();
 nconf.file('software', SOFTWARE_CONFIG_PATH);
+nconf.file('device', DEVICE_CONFIG_PATH);
 nconf.load(loadConfigs);
 
 function heartbeat() {
@@ -23,7 +25,6 @@ setInterval(heartbeat, 1000);
 
 function loadConfigs(err) {
   if (err) throw err;
-  nconf.file('device', nconf.get('brain:deviceConfigPath'));
   nconf.load(startBrain);
 }
 

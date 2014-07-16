@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'brandon_text';
+  src: url('fonts/brandon_txt_reg-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'brandon_text';
+  src: url('fonts/brandon_txt_med-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'brandon_text';
+  src: url('fonts/brandon_txt_bld-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'brandon_text';
+  src: url('fonts/brandon_txt_light-webfont.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'brandon_text';
+  src: url('fonts/brandon_txt_blk-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('fonts/ubuntu-r-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('fonts/ubuntu-m-webfont.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('fonts/SourceSansPro-Regular.ttf') format('ttf');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('fonts/ubuntu-l-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ubuntu';
+    src: url('fonts/ubuntu-b-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'raanan';
+    src: url('fonts/raananlight-webfont.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raanan';
+    src: url('fonts/raananregular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raanan';
+    src: url('fonts/raananbold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raanan';
+    src: url('fonts/raananblack-webfont.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
