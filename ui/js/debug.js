@@ -16,7 +16,7 @@ function doInitDebug() {
 
 
   setCurrency(forceCurrency);
-  setState('idle');
+  setState('id_code');
   //setState('scan_address');
 
   var counter = 0;

@@ -60,5 +60,8 @@
       "sendTimeout": 90000,
       "pollTimeout": 60000
     }
+  },
+  "scanId": {
+    "timeout": 120000
   }
 }
