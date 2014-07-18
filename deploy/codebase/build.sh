@@ -39,10 +39,8 @@ cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
 cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
-# Remove any locally installed fonts
+# Remove locally installed files
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
-
-# Remove dev device_config.json
 rm $TARGET_MACHINE_DIR/device_config.json
 
 # Natively compiled modules, will be copied from hardware-specific directories

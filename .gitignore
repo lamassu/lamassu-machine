@@ -15,19 +15,19 @@ npm-debug.log
 
 jig/
 scratch/
-configfile.js
 rwc
 
 i18n/*.zip
 ui/css/fonts
 
 # compiled dependencies
-node_modules
+/node_modules
 
 # OS files
 .DS_Store
 
 *.csv#
 
-device_config.json
-data
+/device_config.json
+/data/client.key
+/data/client.pem
