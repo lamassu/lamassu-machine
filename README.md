@@ -1,7 +1,16 @@
 # lamassu-machine
 The software that runs the Lamassu Bitcoin Machine.
 
-# Running
+## Installing
+
+```
+git clone https://github.com/lamassu/lamassu-machine.git
+cd lamassu-machine
+npm install
+./setup.sh
+```
+
+## Running
 
 First, run the mock bill validator in a separate terminal window:
 
@@ -11,33 +20,36 @@ $ ruby fake_id003.rb
 
 The mock validator will output its device path, e.g. ```/dev/ttys009```.
 Use that to run the main program, called sencha-brain, along with a Bitcoin
-address you control:
+address **you control**:
 
 ```
-node bin/sencha-brain --mock-btc '1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8' \ 
+node bin/sencha-brain --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \ 
 --mock-bv '/dev/ttys009' --mock-trader
 ```
 
 This should output something like this:
 
 ```
-2014-06-17T19:18:06.293Z LOG Bitcoin Machine software initialized.
-2014-06-17T19:18:06.296Z LOG new brain state: booting
-2014-06-17T19:18:06.296Z LOG browser not connected
-2014-06-17T19:18:06.296Z LOG new brain state: wifiConnected
-2014-06-17T19:18:06.297Z LOG FSM: start [ none -> Start ]
-2014-06-17T19:18:06.298Z LOG memUse: 30.3 MB, memFree: 37.1%, nodeUptime: 0.00h, osUptime: 105.35h
-2014-06-17T19:18:06.300Z LOG FSM: connect [ Start -> Connected ]
-2014-06-17T19:18:06.403Z LOG FSM: disable [ Connected -> Disable ]
-2014-06-17T19:18:06.404Z LOG FSM: denominations [ Disable -> Denominations ]
-2014-06-17T19:18:06.501Z LOG FSM: initialize [ Denominations -> Initialize ]
-2014-06-17T19:18:06.801Z LOG Bill validator connected.
-2014-06-17T19:18:06.801Z LOG Using mock trader
-2014-06-17T19:18:06.803Z LOG new brain state: pendingIdle
-2014-06-17T19:18:06.803Z LOG new brain state: idle
-2014-06-17T19:18:06.803Z LOG new brain state: pendingIdle
-2014-06-17T19:18:06.803Z LOG new brain state: idle
-2014-06-17T19:18:07.508Z LOG FSM: disable [ Initialize -> Disable ]
+2014-07-18T17:00:15.052Z LOG Bitcoin Machine software initialized.
+2014-07-18T17:00:15.054Z LOG new brain state: booting
+2014-07-18T17:00:15.055Z LOG browser not connected
+2014-07-18T17:00:15.055Z LOG new brain state: wifiConnected
+2014-07-18T17:00:15.056Z LOG FSM: start [ none -> Start ]
+2014-07-18T17:00:15.057Z LOG memUse: 29.4 MB, memFree: 15.0%, nodeUptime: 0.00h, osUptime: 73.63h
+2014-07-18T17:00:15.059Z LOG FSM: connect [ Start -> Connected ]
+2014-07-18T17:00:15.162Z LOG FSM: disable [ Connected -> Disable ]
+2014-07-18T17:00:15.162Z LOG FSM: denominations [ Disable -> Denominations ]
+2014-07-18T17:00:15.261Z LOG FSM: initialize [ Denominations -> Initialize ]
+2014-07-18T17:00:15.375Z LOG connected to browser
+2014-07-18T17:00:15.560Z LOG Bill validator connected.
+2014-07-18T17:00:15.560Z LOG Using mock trader
+2014-07-18T17:00:15.562Z LOG lightOff
+2014-07-18T17:00:15.562Z LOG new brain state: pendingIdle
+2014-07-18T17:00:15.562Z LOG new brain state: idle
+2014-07-18T17:00:15.562Z LOG lightOff
+2014-07-18T17:00:15.562Z LOG new brain state: pendingIdle
+2014-07-18T17:00:15.562Z LOG new brain state: idle
+2014-07-18T17:00:16.267Z LOG FSM: disable [ Initialize -> Disable ]
 ```
 
 Now, open a Chrome or Chromium browser to 
@@ -51,5 +63,22 @@ and you should get this:
 ![Start screen](docs/images/start-screen.png)
 
 When the screen asks you to insert a bill, navigate to the terminal
-where you opened the mock bill validator, and input 1<Enter> to insert
-a one dollar bill.
+where you opened the mock bill validator, and input **1**<kbd>Enter</kbd> 
+to insert a one dollar bill.
+
+## Mocking
+
+In order to easily test **lamassu-server**, you can use the ```mock``` command.
+First, run lamassu-server in its own terminal:
+
+```
+LAMASSU_ENV=debug bin/lamassu-server --http
+```
+
+Now, in a separate terminal, run ```mock```:
+
+```
+node bin/mock.js -a 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8
+```
+
+This will send $1 worth of bitcoins to 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8, via lamassu-server.
