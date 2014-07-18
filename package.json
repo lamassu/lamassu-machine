@@ -17,8 +17,7 @@
     "uuid": "~1.4.1",
     "clim": "*",
     "node-forge": "~0.2.36",
-    "mkpasswd": "~1.0.0",
-    "sha512crypt-node": "~0.1.0"
+    "minimist": "~0.2.0"
   },
   "devDependencies": {},
   "repository": {
