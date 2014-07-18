@@ -42,6 +42,9 @@ cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 # Remove any locally installed fonts
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
 
+# Remove dev device_config.json
+rm $TARGET_MACHINE_DIR/device_config.json
+
 # Natively compiled modules, will be copied from hardware-specific directories
 rm -rf $TARGET_MODULES_DIR/ws
 rm -rf $TARGET_MODULES_DIR/serialport

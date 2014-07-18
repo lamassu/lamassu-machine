@@ -7,7 +7,7 @@
 var path = require('path');
 var nconf = require('nconf');
 var SOFTWARE_CONFIG_PATH = path.resolve(__dirname, '../software_config.json');
-var DEVICE_CONFIG_PATH = path.resolve(__dirname, '../../config/device_config.json');
+var DEVICE_CONFIG_PATH = path.resolve(__dirname, '../device_config.json');
 var Brain = require('../lib/brain');
 require('../logging');
 

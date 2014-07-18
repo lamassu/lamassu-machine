@@ -1,0 +1,21 @@
+{
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "data",
+    "wifiConfigPath": null
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "id003": {
+    "rs232": {
+      "device": null
+    }
+  },
+  "qrScanner": {
+    "device": null
+  }
+}
