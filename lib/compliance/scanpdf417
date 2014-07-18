@@ -1,0 +1,2 @@
+#!/bin/sh
+exec fswebcam --no-banner -r 1280x960 /tmp/scan.jpg -l1 --exec 'manatee /tmp/scan.jpg' 2>&1

@@ -19,6 +19,8 @@ var websocket = null;
 var lockedKeyboard = null;
 var wifiKeyboard = null;
 
+var idKeypad = null;
+
 var previousState = null;
 var onSendOnly = false;
 
@@ -104,7 +106,15 @@ function processData(data) {
     case 'idle':
       setState('idle');
       break;
-    case 'scanStart':
+    case 'scanId':
+      setState('scan_id');
+      break;
+    case 'idCode':
+      confirmBeep.play();
+      idKeypad.reset();
+      setState('id_code');
+      break;
+    case 'scanAddress':
       setState('scan_address');
       break;
     case 'scanned':
@@ -172,6 +182,12 @@ $(document).ready(function () {
 
   lockedKeyboard = new Keyboard('locked-keyboard').init();
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
+
+  idKeypad = new Keypad('id-keypad');
+  idKeypad.read(function(result) {
+    if (currentState !== 'id_code') return;
+    buttonPressed('idCode', result);
+  });
 
   // buffers automatically when created
   confirmBeep = new Audio('sounds/Confirm8-Bit.ogg');
@@ -295,6 +311,8 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
+  setupButton('scan-id-cancel', 'cancelIdScan');
+  setupButton('id-code-cancel', 'cancelIdCode');
 
   initDebug();
 });

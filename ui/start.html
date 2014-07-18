@@ -8,6 +8,7 @@
     <script src="js/jquery.qrcode-0.2.min.js"></script>
     <script src="js/jquery.transit.min.js"></script>
     <script src="js/keyboard.js"></script>
+    <script src="js/keypad.js"></script>
     <script src="js/jed.js"></script>
     <script src="js/locales.js"></script>
     <script src="js/app.js"></script>
@@ -386,6 +387,67 @@
           <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
           <p class="bitcoin-machine js-i18n">The Bitcoin Machine</p>
         </section>
+      </section>
+
+      <section class="viewport scan-id scan_id_state" data-tr-section="scan-id">
+        <section class="main">
+          <h1 class="js-i18n">Please verify your identity</h1>
+          <div class="instructions">
+            <span class="js-i18n">
+            In order to proceed, we are required to verify your identity. 
+            Please press the back of your <strong>driver's license</strong> against the scan window.
+            </span>
+          </div>
+        </section>
+        <div class="scan-id-image">
+          <img src="images/scan-id.png" width="453" height="606" />
+        </div>
+        <section class="bottom-bar">
+          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
+        </section>
+        <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport scan-id id_code_state" data-tr-section="id-code">
+        <section class="main">
+          <h1 class="js-i18n">Identity verification</h1>
+          <div class="instructions">
+            <span class="js-i18n">
+            Please enter the <strong>last 4</strong> digits of your Social Security number.
+            </span>
+          </div>
+        </section>
+        <section id="id-keypad" class="keypad">
+          <section class="entry">
+            <div class="box box-1"></div>
+            <div class="box box-2"></div>
+            <div class="box box-3"></div>
+            <div class="box box-4"></div>
+          </section>
+          <section class="keys">
+            <div class="row">
+              <div class="key numeric">1</div>
+              <div class="key numeric">2</div>
+              <div class="key numeric">3</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">4</div>
+              <div class="key numeric">5</div>
+              <div class="key numeric">6</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">7</div>
+              <div class="key numeric">8</div>
+              <div class="key numeric">9</div>
+            </div>
+            <div class="row">
+              <div class="key clear">Clear</div>
+              <div class="key numeric">0</div>
+              <div class="key enter">Enter</div>
+            </div>
+          </section>
+        </section>
+        <section id="id-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
       <section class="viewport scan_address_state" data-tr-section="scan-address">

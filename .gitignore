@@ -2,7 +2,6 @@ lib-cov
 *.seed
 *.log
 *.csv
-*.dat
 *.out
 *.pid
 *.gz
@@ -31,3 +30,5 @@ ui/css/fonts
 /device_config.json
 /data/client.key
 /data/client.pem
+
+test/compliance/licenses
