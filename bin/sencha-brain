@@ -10,6 +10,7 @@ var TIMEOUT = 5000;
 
 var lastHeartbeat = Date.now();
 var child = null;
+var killVerifyLauncher = null;
 
 function errorHandler(err) {
   console.log('sencha-brain: child process error');
@@ -17,8 +18,12 @@ function errorHandler(err) {
 }
 
 function exitHandler() {
-  console.log('sencha-brain: child process exited, relaunching in 10s...');
   child = null;
+  if (killVerifyLauncher) {
+    clearTimeout(killVerifyLauncher);
+    killVerifyLauncher = null;
+  }
+  console.log('sencha-brain: child process exited, relaunching in 10s...');
   setTimeout(launchChild, 10000);
 }
 
@@ -34,13 +39,18 @@ function launchChild() {
   child.on('exit', exitHandler);
 }
 
-function checkHeartbeat() {
+function verifyKill() {
   if (!child) return;
+  console.log('Child not responding, attempting to kill...');
+  child.kill();
+}
+
+function checkHeartbeat() {
+  if (!child || killVerifyLauncher) return;
   if (Date.now() - lastHeartbeat > TIMEOUT) {
     console.log('sencha-brain: lost heartbeat, disconnecting child process...');
     if (child.connected) child.disconnect();
-    child = null;
-    setTimeout(launchChild, 10000);
+    killVerifyLauncher = setTimeout(verifyKill, 10000);
   }
 }
 

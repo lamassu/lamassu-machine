@@ -2,13 +2,13 @@ lib-cov
 *.seed
 *.log
 *.csv
-*.dat
 *.out
 *.pid
 *.gz
 
 pids
 logs
+log
 results
 
 npm-debug.log
@@ -31,3 +31,5 @@ ui/css/fonts
 /device_config.json
 /data/client.key
 /data/client.pem
+
+test/compliance/licenses

@@ -31,9 +31,10 @@ function loadConfigs(err) {
 function bail(err) {
   if (bailed) return;
   bailed = true;
-  console.log('brain-child bailing out');
+  console.log('brain-child bailing out momentarily...');
   console.log(err.stack);
   setTimeout(function () {
+    console.log('brain-child bailing out');
     process.exit(10);
     process.abort();  // Make sure we're dead
   }, 7000);   // Leave some time to connect for browser to set error screen
