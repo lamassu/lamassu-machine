@@ -31,4 +31,4 @@ cp -a $SYSTEM_DIR $EXPORT_DIR
 
 cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
 
-node $SCRIPT_DIR/../build.js $EXPORT_BASE
+node $SCRIPT_DIR/../build.js $EXPORT_BASE 'fonts', '0.2.0'

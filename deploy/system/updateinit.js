@@ -25,12 +25,27 @@ function poweroff(cb) {
   command('poweroff -d 2', cb);
 }
 
+function updateManifest(cb) {
+  var manifestPath = '/opt/apps/machine/manifest.json';
+  fs.readFile(manifestPath, function (err, data) {
+    if (err && err.code !== 'ENOENT') return cb(err);
+    var manifest = {};
+    if (!err) manifest = JSON.parse(data);
+    manifest.packages = manifest.packages || [];
+    manifest.packages.push('system1');
+    fs.writeFile(manifestPath, JSON.stringify(manifest), function (err) {
+      cb(err);
+    });
+  });
+}
+
 // Make sure code has been deployed already
 if (!fs.existsSync('/opt/apps/machine')) process.exit(1);
 
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
+  async.apply(updateManifest),
   async.apply(command, 'cp -a /tmp/extract/package/system/' + hardwareCode + '/xinitrc /opt/apps/machine/system'),
   async.apply(command, 'cp -a /tmp/extract/package/system/' + hardwareCode + '/inittab /etc'),
   async.apply(poweroff)

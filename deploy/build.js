@@ -7,6 +7,9 @@ var fstream = require('fstream');
 var path = require('path');
 
 var packageBase = process.argv[2];
+var dependencies = process.argv[3] || '';
+var requiredVersion = process.argv[4] || null;
+
 var PACKAGE_DIR = packageBase + '/package';
 var TAR_PATH = packageBase + '/update.tar';
 var INFO_PATH = packageBase + '/info.json';
@@ -29,7 +32,9 @@ function generateInfo() {
   var info = {
     version: version,
     contentSig: '<sig here>',
-    timestamp: timestamp
+    timestamp: timestamp,
+    dependencies: dependencies.split(','),
+    requiredVersion: requiredVersion
   };
   console.log('version: %s', version);
   fs.writeFileSync(INFO_PATH, JSON.stringify(info));
