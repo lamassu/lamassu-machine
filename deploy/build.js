@@ -7,7 +7,7 @@ var fstream = require('fstream');
 var path = require('path');
 
 var packageBase = process.argv[2];
-var dependencies = process.argv[3] || '';
+var dependencies = process.argv[3] || null;
 var requiredVersion = process.argv[4] || null;
 
 var PACKAGE_DIR = packageBase + '/package';
@@ -33,7 +33,7 @@ function generateInfo() {
     version: version,
     contentSig: '<sig here>',
     timestamp: timestamp,
-    dependencies: dependencies.split(','),
+    dependencies: dependencies ? dependencies.split(',') : [],
     requiredVersion: requiredVersion
   };
   console.log('version: %s', version);

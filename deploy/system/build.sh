@@ -26,9 +26,9 @@ mkdir -p $EXPORT_DIR
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR 
 
-# Manatee
+# System files
 cp -a $SYSTEM_DIR $EXPORT_DIR
 
 cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
 
-node $SCRIPT_DIR/../build.js $EXPORT_BASE 'fonts', '0.2.0'
+node $SCRIPT_DIR/../build.js $EXPORT_BASE 'fonts' '0.2.0'

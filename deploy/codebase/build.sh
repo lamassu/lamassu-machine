@@ -33,6 +33,7 @@ cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR
 echo $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
+cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/bin $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
@@ -41,7 +42,6 @@ cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
-rm $TARGET_MACHINE_DIR/device_config.json
 
 # Natively compiled modules, will be copied from hardware-specific directories
 rm -rf $TARGET_MODULES_DIR/ws

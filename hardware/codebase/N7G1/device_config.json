@@ -19,5 +19,13 @@
   },
   "qrScanner": {
     "device": "/dev/video0"
+  },
+  "updater": {
+    "caFile": "/usr/local/share/sencha/certs/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/usr/local/share/sencha/pubkeys/lamassu.pub.key"
+    }
   }
 }
