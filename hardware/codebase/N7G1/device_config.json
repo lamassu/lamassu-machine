@@ -4,13 +4,13 @@
     "powerStatus": null,
     "dataPath": "/var/lib/sencha",
     "powerStatus": "/sys/class/power_supply/battery/status",
-    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
-    "wifiConfigPath": "wpa.conf"
+    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity"
   },
   "wifi": {
     "wpa": {
       "socket": "/tmp/wpa_supplicant"
-    }
+    },
+    "wpaConfigPath": "wpa.conf"
   },
   "id003": {
     "rs232": {
