@@ -1,0 +1,17 @@
+stop sencha-extractor
+stop sencha-updater
+stop sencha-brain
+
+rm /etc/init/sencha-*
+cp /tmp/extract/package/system/aaeon/*.conf /etc/init
+mkdir -p /opt/launchers
+mv /tmp/extract/package/system/aaeon/start-chrome /home/iva
+cp /tmp/extract/package/system/aaeon/start-* /opt/launchers
+
+mv /home/iva/.config/sencha-brain /var/lib/lamassu-machine
+chown -R root:root /var/lib/lamassu-machine
+
+start lamassu-extractor
+start lamassu-updater
+start lamassu-machine
+killall chromium-browser

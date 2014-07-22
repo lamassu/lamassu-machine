@@ -1,0 +1,2 @@
+cp -a /tmp/extract/package/system/N7G1/xinitrc /opt/apps/machine/system
+cp -a /tmp/extract/package/system/N7G1/inittab /etc

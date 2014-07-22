@@ -1,0 +1,31 @@
+{
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "/var/lib/lamassu-machine",
+    "powerStatus": null,
+    "batteryCapacityPath": null
+  },
+  "wifi": {
+    "wpa": {
+      "socket": "/var/run/wpa_supplicant"
+    },
+    "wpaConfigPath": "/etc/wpa_supplicant.conf"
+  },
+  "id003": {
+    "rs232": {
+      "device": ["/dev/ttyUSB0", "/dev/ttyS0"]
+    }
+  },
+  "qrScanner": {
+    "device": "/dev/video0"
+  },
+  "updater": {
+    "caFile": "/var/lib/lamassu-machine/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/var/lib/lamassu-machine/lamassu.pub.key"
+    }
+  }
+}

@@ -19,11 +19,11 @@ $ ruby fake_id003.rb
 ```
 
 The mock validator will output its device path, e.g. ```/dev/ttys009```.
-Use that to run the main program, called sencha-brain, along with a Bitcoin
+Use that to run the main program, called lamassu-machine, along with a Bitcoin
 address **you control**:
 
 ```
-node bin/sencha-brain --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \ 
+node bin/lamassu-machine --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \ 
 --mock-bv '/dev/ttys009' --mock-trader
 ```
 

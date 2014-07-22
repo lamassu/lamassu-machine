@@ -1,4 +1,3 @@
-# /usr/local/share/sencha/xinitrc
 /usr/bin/icewmbg &
 /usr/bin/icewm &
 
