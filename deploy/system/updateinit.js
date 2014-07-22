@@ -47,8 +47,7 @@ async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
-  async.apply(command, 'cp -a /tmp/extract/package/system/' + hardwareCode + '/xinitrc /opt/apps/machine/system'),
-  async.apply(command, 'cp -a /tmp/extract/package/system/' + hardwareCode + '/inittab /etc'),
+  async.apply(command, '/tmp/extract/package/system' + hardwareCode + '/system1'),  
   async.apply(poweroff)
 ], function(err) {
   if (err)

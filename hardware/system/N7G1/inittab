@@ -16,7 +16,7 @@
 ::respawn:/usr/sbin/wpa_supplicant -c/var/lib/sencha/wpa.conf -C/tmp/wpa_supplicant -iwlan0 -Dnl80211
 
 ::respawn:/sbin/getty -w 115200 ttyGS0 vt100
-::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/bin/sencha-brain >> /var/lib/sencha/log/node.log 2>&1
+::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/bin/lamassu-machine >> /var/lib/sencha/log/node.log 2>&1
 ::respawn:/usr/bin/xinit /opt/apps/machine/system/xinitrc -- -nolisten tcp -nocursor -novtswitch vt1
 ::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/watchdog.js >> /var/lib/sencha/log/watchdog.log 2>&1
 ::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/lib/update/updater.js >> /var/lib/sencha/log/updater.log 2>&1
