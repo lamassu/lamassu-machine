@@ -43,6 +43,16 @@ function verifyKill() {
   if (!child) return;
   console.log('Child not responding, attempting to kill...');
   child.kill();
+  setTimeout(function () {
+    if (!killVerifyLauncher || !child) return;
+    console.log('Child did not exit, attempting to kill with SIGINT');
+    child.kill('SIGINT');
+  }, 5000);
+  setTimeout(function () {
+    if (!killVerifyLauncher || !child) return;
+    console.log('Child did not exit, attempting to kill with SIGKILL');
+    child.kill('SIGKILL');
+  }, 10000);
 }
 
 function checkHeartbeat() {
