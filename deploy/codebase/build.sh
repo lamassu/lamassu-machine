@@ -54,6 +54,11 @@ rm -rf $TARGET_MODULES_DIR/clim/example
 rm -rf $TARGET_MODULES_DIR/sha512crypt-node
 
 cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
+
+# Note, this is only needed for early release aaeons
+mkdir -p $EXPORT_DIR/native/aaeon/scripts
+cp $UPDATESCRIPT $EXPORT_DIR/native/aaeon/scripts/updateinit.js
+
 git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.txt
 cat $EXPORT_DIR/revision.txt
 

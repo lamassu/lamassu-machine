@@ -33,4 +33,8 @@ cp -a $FONTS_ROOT/$FONT_PACKAGE $EXPORT_DIR/fonts
 
 cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
 
+# Note, this is only needed for early release aaeons
+mkdir -p $EXPORT_DIR/native/aaeon/scripts
+cp $UPDATESCRIPT $EXPORT_DIR/native/aaeon/scripts/updateinit.js
+
 node $SCRIPT_DIR/../build.js $EXPORT_BASE
