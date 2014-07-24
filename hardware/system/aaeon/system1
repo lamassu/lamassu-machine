@@ -18,4 +18,6 @@ start lamassu-updater
 start lamassu-machine
 killall chromium-browser
 
-(sleep 5 && stop sencha-extractor && start lamassu-extractor && rm /etc/init/sencha-*) &
+stop sencha-extractor
+start lamassu-extractor
+rm /etc/init/sencha-*

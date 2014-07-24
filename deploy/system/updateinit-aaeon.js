@@ -9,9 +9,11 @@ var TIMEOUT = 10000;
 var hardwareCode = 'aaeon';
 
 function command(cmd, cb) {
-  cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
-    cb(err);
-  });
+  cp.exec(cmd, {timeout: TIMEOUT}, cb);
+}
+
+function detached(cmd, cb) {
+  cp.spawn(cmd, [], {detached: true}, cb);
 }
 
 function updateManifest(cb) {
@@ -29,13 +31,18 @@ function updateManifest(cb) {
   });
 }
 
+function sleep(interval, cb) {
+  setTimeout(cb, interval);
+}
+
 // Make sure code has been deployed already
 if (!fs.existsSync('/opt/apps/machine')) process.exit(1);
 
 async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
-  async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1')
+  async.apply(detached, '/tmp/extract/package/system/' + hardwareCode + '/system1'),
+  async.apply(sleep, 20000)  // Give detached process time to run
 ], function(err) {
   if (err)
     console.log('Error: %s', err);

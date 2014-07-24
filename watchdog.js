@@ -21,10 +21,6 @@ process.on('SIGUSR2', function() {
   console.log('Got SIGUSR2. Immune.');
 });
 
-process.on('SIGTERM', function() {
-  // Immune
-});
-
 setInterval(watch, 1000);
 setInterval(function() {
   if (running) return;
