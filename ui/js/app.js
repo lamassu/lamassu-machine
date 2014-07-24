@@ -54,7 +54,6 @@ function processData(data) {
   if (data.transactionHashURL) setTransactionHash(data.transactionHashURL);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
-  if (data.machineInfo) setMachineInfo(data.machineInfo);
   if (data.sendOnly) sendOnly(data.sendOnly);
 
   switch (data.action) {
@@ -130,9 +129,6 @@ function processData(data) {
     case 'goodbye':
       setState('goodbye');
       break;
-    case 'machine':
-      setState('machine');
-      break;
     case 'maintenance':
       setState('maintenance');
       break;
@@ -179,22 +175,8 @@ $(document).ready(function () {
   connect();
   initTranslatePage();
 
-  // TODO: TEMPORARY, switch to mock
-  var lockedViewport = document.getElementById('locked-viewport');
-  lockedViewport.addEventListener('mousedown', function(e) {
-    buttonPressed('locked');
-    e.stopPropagation();
-  }, false);
-
-  var unlockButton = document.getElementById('unlock');
-  unlockButton.addEventListener('mousedown', function(e) {
-    var pass = $('#locked-keyboard input.passphrase').data('content');
-    buttonPressed('unlock', {pass: pass});
-    e.stopPropagation();
-  }, false);
-
   var wifiNetworkButtons = document.getElementById('networks');
-  wifiNetworkButtons.addEventListener('mousedown', function(e) {
+  wifiNetworkButtons.addEventListener('touchstart', function(e) {
     var target = $(e.target);
     if (target.attr('id') === 'more-networks') {
       moreNetworks();
@@ -216,7 +198,7 @@ $(document).ready(function () {
   }, false);
 
   var wifiConnectButton = document.getElementById('wifiConnect');
-  wifiConnectButton.addEventListener('mousedown', function(e) {
+  wifiConnectButton.addEventListener('touchstart', function(e) {
     var wifiConnectButtonJ = $(wifiConnectButton);
     wifiConnectButtonJ.addClass('active');
     window.setTimeout(function() { wifiConnectButtonJ.removeClass('active'); }, 500);
@@ -228,67 +210,30 @@ $(document).ready(function () {
   }, false);
 
   var startButtons = document.getElementById('start-buttons');
-  startButtons.addEventListener('mousedown', function(e) {
+  touchEvent(startButtons, function(e) {
     var startButtonJ = $(e.target).closest('.circle-button');
     if (startButtonJ.length === 0) return;
     var newLocale = startButtonJ.data('locale');
-    startButtonJ.addClass('circle-button-down');
-    window.setTimeout(function() { startButtonJ.removeClass('circle-button-down'); }, 500);
-
-    setState('scan_address', 300, newLocale);
+    setState('scan_address', null, newLocale);
     buttonPressed('start');
-    e.stopPropagation();
-  }, false);
+  });
 
   var sendCoinsButton = document.getElementById('send-coins');
-  sendCoinsButton.addEventListener('mousedown', function() {
-    var sendCoinsButtonJ = $(sendCoinsButton);
-    sendCoinsButtonJ.addClass('circle-button-down');
-    window.setTimeout(function() { sendCoinsButtonJ.removeClass('circle-button-down'); }, 500);
-    setState('sending_coins', 300);
+  touchEvent(sendCoinsButton, function() {
+    setState('sending_coins');
     buttonPressed('sendBitcoins');
-  }, false);
-
-  var lockPassCancelButton = document.getElementById('lockPassCancel');
-  lockPassCancelButton.addEventListener('mousedown', function() {
-    buttonPressed('cancelLockPass');
-  }, false);
-
-  var wifiPassCancelButton = document.getElementById('wifiPassCancel');
-  wifiPassCancelButton.addEventListener('mousedown', function(e) {
-    buttonPressed('cancelWifiPass');
-    e.stopPropagation();
-  }, false);
-
-  var wifiListCancelButton = document.getElementById('wifiListCancel');
-  wifiListCancelButton.addEventListener('mousedown', function(e) {
-    buttonPressed('cancelWifiList');
-    e.stopPropagation();
-  }, false);
-
-  var scanCancelButton = document.getElementById('scanCancel');
-  scanCancelButton.addEventListener('mousedown', function() {
-    buttonPressed('cancelScan');
-  }, false);
+  });
 
   var insertBillCancelButton = document.getElementById('insertBillCancel');
-  insertBillCancelButton.addEventListener('mousedown', function(e) {
+  touchEvent(insertBillCancelButton, function() {
     setBuyerAddress(null);
     buttonPressed('cancelInsertBill');
-    e.stopPropagation();
-  }, false);
+  });
 
-  var fixRestartButton = document.getElementById('fix-restart-button');
-  fixRestartButton.addEventListener('mousedown', function(e) {
-    buttonPressed('abortTransaction');
-    e.stopPropagation();
-  }, false);
-
-  var completedViewport = document.getElementById('completed_viewport');
-  completedViewport.addEventListener('mousedown', function(e) {
-    buttonPressed('completed');
-    e.stopPropagation();
-  }, false);
+  setupButton('wifiPassCancel', 'cancelWifiPass');
+  setupButton('wifiListCancel', 'cancelWifiList');
+  setupButton('scanCancel', 'cancelScan');
+  setupButton('completed_viewport', 'completed');
 
   setupButton('initialize', 'initialize');
   setupButton('test-mode', 'testMode');
@@ -299,12 +244,20 @@ $(document).ready(function () {
   initDebug();
 });
 
+function touchEvent(element, callback) {
+  element.addEventListener('mousedown', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    callback(e);
+  });
+}
+
 function setupButton(buttonClass, buttonAction) {
   var button = document.getElementById(buttonClass);
-  button.addEventListener('mousedown', function(e) {
+  touchEvent(button, function(e) {
     buttonPressed(buttonAction);
     e.stopPropagation();
-  }, false);
+  });
 }
 
 function setScreen(newScreen, oldScreen, newLocale) {
@@ -397,13 +350,6 @@ function setWifiSsid(data) {
       .fetch('<strong>' + data.ssid + '</strong>'));
   t('wifi-connect', locale.translate("You're connecting to the WiFi network %s")
       .fetch('<strong>' + data.ssid + '</strong>'));
-}
-
-function setMachineInfo(data) {
-  $('.machine_state .s-ssn').text(data.ssn);
-  $('.machine_state .s-owner').text(data.owner);
-  var ip = data.ip || 'N/A';
-  $('.machine_state .s-ip').text(ip);
 }
 
 function setPrimaryLocale(l) {
