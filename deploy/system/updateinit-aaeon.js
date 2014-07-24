@@ -6,23 +6,12 @@ var async = require('./async');
 
 var TIMEOUT = 10000;
 
-var hardwareCode = process.argv[2] || 'N7G1';
-
-// This is only relevant to the N7G1
-if (hardwareCode !== 'N7G1') process.exit(0);
+var hardwareCode = 'aaeon';
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
-}
-
-function remountRW(cb) {
-  command('mount -o remount,rw /dev/root', cb);
-}
-
-function poweroff(cb) {
-  command('poweroff -d 2', cb);
 }
 
 function updateManifest(cb) {
@@ -44,11 +33,9 @@ function updateManifest(cb) {
 if (!fs.existsSync('/opt/apps/machine')) process.exit(1);
 
 async.series([
-  async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
-  async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1'),  
-  async.apply(poweroff)
+  async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1')
 ], function(err) {
   if (err)
     console.log('Error: %s', err);

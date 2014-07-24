@@ -14,6 +14,8 @@ var child = null;
 var t0 = null;
 var running = false;
 
+var platform = process.argv[2] || 'N7G1';
+
 process.on('SIGUSR2', function() {
   // USR1 is reserved by node
   console.log('Got SIGUSR2. Immune.');
@@ -62,7 +64,7 @@ function executeScript() {
     return;
   }
   console.log('in execute');
-  child = cp.fork(SCRIPT_PATH);
+  child = cp.fork(SCRIPT_PATH, [platform]);
   child.on('error', function(err) { cleanUp(); console.log(err); });
   child.on('exit', function() { cleanUp(); console.log('done'); }); 
 }
