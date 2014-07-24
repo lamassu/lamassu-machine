@@ -5,10 +5,11 @@ body {
   overflow: hidden;
   direction: ltr;
   font-family: brandon_text, 'Source Sans Pro', ubuntu, raanan;
+  cursor: none;
 }
 
 body.i18n-he {
-  font-family: raanan, brandon_text, ubuntu;
+  font-family: raanan, brandon_text, 'Source Sans Pro', ubuntu;
   direction: rtl;  
 }
 
@@ -81,7 +82,6 @@ body  { margin: 0;}
   font-weight: 900;
   font-size: 36px;
   line-height: 1;
-  cursor: pointer;
 }
 
 .start-buttons .circle-button {
