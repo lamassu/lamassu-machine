@@ -32,7 +32,8 @@ function bail(err) {
   if (bailed) return;
   bailed = true;
   console.log('brain-child bailing out momentarily...');
-  console.log(err.stack);
+  console.log(err);
+  if (err.stack) console.log(err.stack);
   setTimeout(function () {
     console.log('brain-child bailing out');
     process.exit(10);
