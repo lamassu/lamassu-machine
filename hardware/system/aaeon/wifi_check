@@ -7,7 +7,7 @@ while true ; do
     if wpa_cli -i wlan0 signal_poll | grep -q FAIL ; then
         echo "Network connection is down, resetting interface."
         ifdown --force wlan0
-        sleep 5
+        sleep 1
         ifup wlan0
     fi
 done
