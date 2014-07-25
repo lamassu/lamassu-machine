@@ -16,33 +16,9 @@ msgstr ""
 msgid "Your passphrase"
 msgstr "Your passphrase"
 
-#: On screen: locked-password
-msgid "Access passphrase"
-msgstr "Access passphrase"
-
-#: On screen: locked-password
-msgid "Unlock the <strong>Bitcoin Machine</strong>"
-msgstr "Unlock the <strong>Bitcoin Machine</strong>"
-
-#: On screen: locked-password
-msgid "Unlock"
-msgstr "Unlock"
-
 #: On screen: wifi
 msgid "MORE"
 msgstr "MORE"
-
-#: On screen: wifi
-msgid "Select a WiFi network"
-msgstr "Select a WiFi network"
-
-#: On screen: wifi
-msgid "Only secured networks are shown."
-msgstr "Only secured networks are shown."
-
-#: On screen: wifi
-msgid "The Bitcoin Machine"
-msgstr "The Bitcoin Machine"
 
 #. %s is the WiFi network name
 #. example: for HomeNetwork
@@ -53,10 +29,6 @@ msgstr "for %s"
 #: On screen: wifi-password
 msgid "WiFi password"
 msgstr "WiFi password"
-
-#: On screen: wifi-password
-msgid "Connect"
-msgstr "Connect"
 
 #. %s is the Bitcoin price
 #. example: Our current Bitcoin price is $123.45
@@ -73,6 +45,80 @@ msgstr "Loading Bitcoin price..."
 #: On screen: idle
 msgid "LanguageName"
 msgstr "LanguageName"
+
+#. example: per $1 inserted
+#: On screen: insert-bills
+msgid "per %s inserted"
+msgstr "per %s inserted"
+
+#. %s is the bill denomination
+#. example: You inserted a $5 bill
+#: On screen: insert-more-bills
+msgid "You inserted a %s bill"
+msgstr "You inserted a %s bill"
+
+#: On screen: insert-more-bills
+msgid "We're out of bitcoins."
+msgstr "We're out of bitcoins."
+
+#: On screen: insert-more-bills
+msgid "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
+msgstr "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
+
+#: On screen: insert-more-bills
+msgid "Transaction limit reached."
+msgstr "Transaction limit reached."
+
+#. %s is a bill denomination
+#. example: Please insert $10 or less
+#: On screen: high-bill
+msgid "Please insert %s or less."
+msgstr "Please insert %s or less."
+
+#: On screen: high-bill
+msgid "We're a little low."
+msgstr "We're a little low."
+
+#: On screen: wifi-connecting
+msgid "This could take a few moments."
+msgstr "This could take a few moments."
+
+#: On screen: wifi-connecting
+msgid "Connected. Waiting for ticker."
+msgstr "Connected. Waiting for ticker."
+
+#. %s is the WiFi network name
+#: On screen: wifi-connecting
+msgid "You're connecting to the WiFi network %s"
+msgstr "You're connecting to the WiFi network %s"
+
+#: On screen: locked-password
+msgid "Access passphrase"
+msgstr "Access passphrase"
+
+#: On screen: locked-password
+msgid "Unlock the <strong>Bitcoin Machine</strong>"
+msgstr "Unlock the <strong>Bitcoin Machine</strong>"
+
+#: On screen: locked-password
+msgid "Unlock"
+msgstr "Unlock"
+
+#: On screen: wifi
+msgid "Select a WiFi network"
+msgstr "Select a WiFi network"
+
+#: On screen: wifi
+msgid "Only secured networks are shown."
+msgstr "Only secured networks are shown."
+
+#: On screen: wifi
+msgid "The Bitcoin Machine"
+msgstr "The Bitcoin Machine"
+
+#: On screen: wifi-password
+msgid "Connect"
+msgstr "Connect"
 
 #: On screen: idle
 msgid "Hello."
@@ -94,11 +140,6 @@ msgstr "Scan your Bitcoin address"
 msgid "Hold your QR code up to the scan window to proceed."
 msgstr "Hold your QR code up to the scan window to proceed."
 
-#. example: per $1 inserted
-#: On screen: insert-bills
-msgid "per %s inserted"
-msgstr "per %s inserted"
-
 #: On screen: insert-bills
 msgid "Insert a bill"
 msgstr "Insert a bill"
@@ -106,24 +147,6 @@ msgstr "Insert a bill"
 #: On screen: insert-bills
 msgid "Your bitcoins will be sent to:"
 msgstr "Your bitcoins will be sent to:"
-
-#: On screen: insert-bills
-msgid "Address was successfully scanned"
-msgstr "Address was successfully scanned"
-
-#. %s is the bill denomination
-#. example: You inserted a $5 bill
-#: On screen: insert-more-bills
-msgid "You inserted a %s bill"
-msgstr "You inserted a %s bill"
-
-#: On screen: insert-more-bills
-msgid "We're out of bitcoins."
-msgstr "We're out of bitcoins."
-
-#: On screen: insert-more-bills
-msgid "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
-msgstr "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
 
 #: On screen: insert-more-bills
 msgid "Tap to complete purchase"
@@ -181,6 +204,22 @@ msgstr "We're down for the moment."
 msgid "Please contact the operator."
 msgstr "Please contact the operator."
 
+#: On screen: booting
+msgid "Booting up..."
+msgstr "Booting up..."
+
+#: On screen: booting
+msgid "Initializing hardware."
+msgstr "Initializing hardware."
+
+#: On screen: booting
+msgid "We'll be up in a moment."
+msgstr "We'll be up in a moment."
+
+#: On screen: maintenance
+msgid "Maintenance required."
+msgstr "Maintenance required."
+
 #: On screen: locked
 msgid "This machine is locked"
 msgstr "This machine is locked"
@@ -192,29 +231,6 @@ msgstr "Please ask for assistance."
 #: On screen: limit-reached
 msgid "We're all out of bitcoins!"
 msgstr "We're all out of bitcoins!"
-
-#. %s is a bill denomination
-#. example: Please insert $10 or less
-#: On screen: high-bill
-msgid "Please insert %s or less."
-msgstr "Please insert %s or less."
-
-#: On screen: high-bill
-msgid "We're a little low."
-msgstr "We're a little low."
-
-#: On screen: wifi-connecting
-msgid "This could take a few moments."
-msgstr "This could take a few moments."
-
-#: On screen: wifi-connecting
-msgid "Connected. Waiting for ticker."
-msgstr "Connected. Waiting for ticker."
-
-#. %s is the WiFi network name
-#: On screen: wifi-connecting
-msgid "You're connecting to the WiFi network %s"
-msgstr "You're connecting to the WiFi network %s"
 
 #: On screen: wifi-connecting
 msgid "Connecting…"
@@ -236,47 +252,39 @@ msgstr "Please try the <strong>password</strong> again."
 msgid "TRY AGAIN"
 msgstr "TRY AGAIN"
 
-#: On screen: machine
-msgid "Machine Info"
-msgstr "Machine Info"
+#: On screen: unpaired
+msgid "Pair with remote server"
+msgstr "Pair with remote server"
 
-#: On screen: machine
-msgid "SSN"
-msgstr "SSN"
+#: On screen: unpaired
+msgid "Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server."
+msgstr "Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server."
 
-#: On screen: machine
-msgid "OWNER"
-msgstr "OWNER"
+#: On screen: unpaired
+msgid "<strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server."
+msgstr "<strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server."
 
-#: On screen: machine
-msgid "IP"
-msgstr "IP"
+#: On screen: unpaired
+msgid "SCAN"
+msgstr "SCAN"
 
-#: On screen: machine
-msgid "CAM"
-msgstr "CAM"
+#: On screen: pairing-scan
+msgid "Please scan the pairing QR code you got from your remote server."
+msgstr "Please scan the pairing QR code you got from your remote server."
 
-#: On screen: machine
-msgid "OFF"
-msgstr "OFF"
+#: On screen: pairing-scan
+msgid "CANCEL"
+msgstr "CANCEL"
 
-#: On screen: fix-transaction
-msgid "Last Transaction"
-msgstr "Last Transaction"
+#: On screen: pairing
+msgid "Pairing..."
+msgstr "Pairing..."
 
-#: On screen: fix-transaction
-msgid "BTC Address"
-msgstr "BTC Address"
+#: On screen: pairing-error
+msgid "When attempting to pair, we experienced an error:"
+msgstr "When attempting to pair, we experienced an error:"
 
-#: On screen: fix-transaction
-msgid "Fiat"
-msgstr "Fiat"
-
-#: On screen: fix-transaction
-msgid "Bitcoins"
-msgstr "Bitcoins"
-
-#: On screen: fix-transaction
-msgid "RESTART"
-msgstr "RESTART"
+#: On screen: pairing-error
+msgid "OK"
+msgstr "OK"
 

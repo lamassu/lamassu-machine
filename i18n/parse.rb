@@ -43,15 +43,17 @@ app_js = {
 		{ :string => 'You inserted a %s bill', 
 			:comments => [ '%s is the bill denomination', 'example: You inserted a $5 bill' ] }, 
 		"We're out of bitcoins.",
-		"Please touch <strong>Send Bitcoins</strong> to complete your purchase."		
+		"Please touch <strong>Send Bitcoins</strong> to complete your purchase.",
+		'Transaction limit reached.', 'We\'re out of bitcoins.'		
 	],
 	'high-bill' => [
 		{ :string => 'Please insert %s or less.', 
-			:comments => [ '%s is a bill denomination', 'example: Please insert $10 or less' ] }
+			:comments => [ '%s is a bill denomination', 'example: Please insert $10 or less' ] },
+		'Transaction limit reached.', 'We\'re a little low.'
 	],
 	'wifi' => [
 		{ :string => 'MORE', :comments => [] }
-	]
+	],
 }
 
 
@@ -71,9 +73,10 @@ end
 translations = {}
 screens = {}
 doc = Nokogiri::HTML(open('../ui/start.html'));
-doc.css('.js-i18n').each do |node|
-	screen_node = node.ancestors('.viewport').first
-	screen = screen_node.attr('data-tr-section')
+
+doc.css('.viewport').each do |node|
+	screen = node.attr('data-tr-section')
+	next if !screen
 	if !screens[screen]
 		screens[screen] = true
 		app_strings = app_js[screen]
@@ -86,11 +89,16 @@ doc.css('.js-i18n').each do |node|
 				end
 			end
 		end
-		screen_node.css('input[placeholder]').each do |placeholder|
+		node.css('input[placeholder]').each do |placeholder|
 			str = placeholder.attr('placeholder')
 			write_po(str, screen, translations)
 		end
 	end
+end	
+
+doc.css('.js-i18n').each do |node|
+	screen_node = node.ancestors('.viewport').first
+	screen = screen_node.attr('data-tr-section')
 	str = node.inner_html
 	write_po(str, screen, translations)
 end
