@@ -3,7 +3,7 @@ stop sencha-updater
 stop sencha-brain
 stop sencha-extractor
 
-# Make sure we kill old update process which were immune to SIGTERM
+# Make sure we kill old update processes which were immune to SIGTERM
 sleep 5
 killall -q -9 node
 killall -q -9 nodejs
@@ -19,10 +19,10 @@ chmod 755 /usr/local/bin/wifi_check
 mv /home/iva/.config/sencha-brain /var/lib/lamassu-machine
 chown -R root:root /var/lib/lamassu-machine
 
+rm /etc/init/sencha-*
+
 start wifi_check
 start lamassu-updater
+start lamassu-extractor
 start lamassu-machine
 killall chromium-browser
-
-start lamassu-extractor
-rm /etc/init/sencha-*

@@ -4,7 +4,8 @@ while true ; do
     # Allow system some time to establish connection
     sleep 180
 
-    if wpa_cli -i wlan0 signal_poll | grep -q FAIL ; then
+    if $(grep -q ssid /etc/wpa_supplicant.conf) && $(wpa_cli -i wlan0 signal_poll | grep -q FAIL)
+      then
         echo "Network connection is down, resetting interface."
         ifdown --force wlan0
         sleep 1

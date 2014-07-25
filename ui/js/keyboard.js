@@ -6,12 +6,15 @@ var Keyboard = function(keyboardId) {
   this.inputBox = this.keyboard.find('input.passphrase');
   this.keyCase = 'lc';
   this.backspaceTimeout = null;
+  this.active = true;
 };
 
 Keyboard.prototype.init = function init() {
   var keyboard = document.getElementById(this.keyboardId);
   var self = this;
   keyboard.addEventListener('mousedown', function(e) {
+    if (!this.active) return;
+    
     var target = $(e.target);
     if (target.hasClass('shift')) {
       self._toggleShift();
@@ -23,6 +26,7 @@ Keyboard.prototype.init = function init() {
       self._keyPress(target);
     }
   });
+
   this.keyboard.find('.entry .backspace').get(0).addEventListener('mouseup', function(e) {
     var target = $(e.target);
     self._backspaceUp(target);
@@ -33,6 +37,14 @@ Keyboard.prototype.init = function init() {
 
 Keyboard.prototype.reset = function reset() {
   this.inputBox.data('content', '').val('');
+};
+
+Keyboard.prototype.activate = function activate() {
+  this.active = true;
+};
+
+Keyboard.prototype.deactivate = function deactivate() {
+  this.active = false;
 };
 
 Keyboard.prototype._toggleShift = function _toggleShift() {

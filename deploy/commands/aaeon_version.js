@@ -56,7 +56,7 @@ process.on('SIGUSR2', function() {
   console.log('Got SIGUSR2. Immune.');
 });
 
-var detectedVersion = fs.existsSync('/opt/sencha-brain') ? 'Version 64' : 'Not version 64';
+var detectedVersion = fs.existsSync('/opt/sencha-brain') ? 'Version 64 or higher' : 'Not version 64';
 
 async.waterfall([
   async.apply(report, null, detectedVersion)

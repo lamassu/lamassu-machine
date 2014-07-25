@@ -16,11 +16,11 @@ var accepting = false;
 
 var websocket = null;
 
-var lockedKeyboard = null;
 var wifiKeyboard = null;
 
 var previousState = null;
 var onSendOnly = false;
+var buttonActive = true;
 
 function connect() {
   websocket = new WebSocket('ws://localhost:8080/');
@@ -38,6 +38,13 @@ function verifyConnection() {
 }
 
 function buttonPressed(button, data) {
+  if (!buttonActive) return;
+  wifiKeyboard.deactivate();
+  buttonActive = false;
+  setTimeout(function () { 
+    buttonActive = true; 
+    wifiKeyboard.activate();
+  }, 500);
   var res = {button: button};
   if (data) res.data = data;
   websocket.send(JSON.stringify(res));
@@ -57,12 +64,6 @@ function processData(data) {
   if (data.sendOnly) sendOnly(data.sendOnly);
 
   switch (data.action) {
-    case 'locked':
-      setState('locked');
-      break;
-    case 'lockedPass':
-      setState('locked_password');
-      break;
     case 'wifiList':
       setState('wifi');
       break;
@@ -166,7 +167,6 @@ $(document).ready(function () {
   function () { return false; };
 
 
-  lockedKeyboard = new Keyboard('locked-keyboard').init();
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
   // buffers automatically when created
@@ -285,7 +285,6 @@ function setState(state, delay, newLocale) {
   previousState = currentState;
   currentState = state;
 
-  lockedKeyboard.reset();
   wifiKeyboard.reset();
 
   if (state === 'idle') $('#qr-code').empty();
