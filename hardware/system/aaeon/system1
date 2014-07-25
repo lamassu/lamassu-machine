@@ -1,6 +1,12 @@
 #!/bin/bash
 stop sencha-updater
 stop sencha-brain
+stop sencha-extractor
+
+# Make sure we kill old update process which were immune to SIGTERM
+sleep 5
+killall -q -9 node
+killall -q -9 nodejs
 
 cp /tmp/extract/package/system/aaeon/*.conf /etc/init
 mkdir -p /opt/launchers
@@ -18,6 +24,5 @@ start lamassu-updater
 start lamassu-machine
 killall chromium-browser
 
-stop sencha-extractor
 start lamassu-extractor
 rm /etc/init/sencha-*
