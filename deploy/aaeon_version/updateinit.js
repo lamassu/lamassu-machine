@@ -17,8 +17,8 @@ if (fs.existsSync('/opt/sencha-brain')) {
 var deviceConfig = JSON.parse(fs.readFileSync(baseDir + '/sencha-brain/device_config.json'));
 
 var ca = fs.readFileSync(deviceConfig.updater.caFile);
-var cert = fs.readFileSync(deviceConfig.brain.certFile);
-var key = fs.readFileSync(deviceConfig.brain.keyFile);
+var cert = fs.readFileSync(deviceConfig.brain.certs.certFile);
+var key = fs.readFileSync(deviceConfig.brain.certs.keyFile);
 
 function report(err, res, cb) {
   console.log(res);
