@@ -13,7 +13,7 @@ var child = null;
 var killVerifyLauncher = null;
 
 function errorHandler(err) {
-  console.log('sencha-brain: child process error');
+  console.log('lamassu-machine: child process error');
   console.log(err.stack);
 }
 
@@ -23,7 +23,7 @@ function exitHandler() {
     clearTimeout(killVerifyLauncher);
     killVerifyLauncher = null;
   }
-  console.log('sencha-brain: child process exited, relaunching in 10s...');
+  console.log('lamassu-machine: child process exited, relaunching in 10s...');
   setTimeout(launchChild, 10000);
 }
 
@@ -58,7 +58,7 @@ function verifyKill() {
 function checkHeartbeat() {
   if (!child || killVerifyLauncher) return;
   if (Date.now() - lastHeartbeat > TIMEOUT) {
-    console.log('sencha-brain: lost heartbeat, disconnecting child process...');
+    console.log('lamassu-machine: lost heartbeat, disconnecting child process...');
     if (child.connected) child.disconnect();
     killVerifyLauncher = setTimeout(verifyKill, 10000);
   }
