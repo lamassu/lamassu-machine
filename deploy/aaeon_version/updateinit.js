@@ -2,12 +2,23 @@
 
 var https = require('https');
 var fs = require('fs');
-var path = require('path');
 
-var deviceConfig = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
+var detectedVersion = null;
+var baseDir = null;
+
+if (fs.existsSync('/opt/sencha-brain')) {
+  detectedVersion = 'Version 64';
+  baseDir = '/opt';
+} else {
+  detectedVersion = 'Not version 64';
+  baseDir = '/home/iva';
+}
+
+var deviceConfig = JSON.parse(fs.readFileSync(baseDir + '/sencha-brain/device_config.json'));
+
 var ca = fs.readFileSync(deviceConfig.updater.caFile);
-var cert = fs.readFileSync(path.resolve(deviceConfig.brain.dataPath, 'client.pem'));
-var key = fs.readFileSync(path.resolve(deviceConfig.brain.dataPath, 'client.key'));
+var cert = fs.readFileSync(deviceConfig.brain.certFile);
+var key = fs.readFileSync(deviceConfig.brain.keyFile);
 
 function report(err, res, cb) {
   console.log(res);
@@ -55,8 +66,6 @@ process.on('SIGUSR2', function() {
   // TODO: more graceful exit
   console.log('Got SIGUSR2. Immune.');
 });
-
-var detectedVersion = fs.existsSync('/opt/sencha-brain') ? 'Version 64 or higher' : 'Not version 64';
 
 async.waterfall([
   async.apply(report, null, detectedVersion)
