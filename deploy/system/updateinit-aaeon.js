@@ -42,8 +42,8 @@ if (!fs.existsSync('/opt/apps/machine')) process.exit(1);
 async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
-  async.apply(detached, '/tmp/extract/package/system/' + hardwareCode + '/system1'),
   async.apply(report, null, 'finished, restarting lamassu-machine...'),
+  async.apply(detached, '/tmp/extract/package/system/' + hardwareCode + '/system1'),
   async.apply(sleep, 20000)  // Give detached process time to run
 ], function(err) {
   if (err) throw err;
