@@ -3,6 +3,8 @@
 var async = require('./async');
 var cp = require('child_process');
 var fs = require('fs');
+var report = require('report').report;
+
 var TIMEOUT = 10000;
 
 var hardwareCode = process.argv[2] || 'N7G1';
@@ -45,6 +47,8 @@ async.series([
   async.apply(command, 'cp -a /tmp/extract/package/fonts /opt/apps/machine/lamassu-machine/ui/css'),
   async.apply(remountRO)
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) return console.log('Error: %s', err);
+  report(err, 'finished', function() {
+    console.log('finished');
+  });
 });

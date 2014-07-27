@@ -27,6 +27,7 @@ mkdir -p $EXPORT_DIR
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR 
+cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 
 # Fonts
 cp -a $FONTS_ROOT/$FONT_PACKAGE $EXPORT_DIR/fonts
@@ -37,5 +38,6 @@ cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
 cp $SCRIPT_DIR/updateinit-aaeon.js $EXPORT_DIR/native/aaeon/scripts/updateinit.js
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR/native/aaeon/scripts
+cp $SCRIPT_DIR/../report.js $EXPORT_DIR/native/aaeon/scripts
 
 node $SCRIPT_DIR/../build.js $EXPORT_BASE

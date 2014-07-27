@@ -3,24 +3,13 @@
 var async = require('./async');
 var cp = require('child_process');
 var fs = require('fs');
+var report = require('report').report;
 var TIMEOUT = 10000;
-
-var hardwareCode = 'aaeon';
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
-}
-
-function remountRW(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  command('mount -o remount,rw /dev/root', cb);
-}
-
-function remountRO(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  command('mount -o remount,ro /dev/root', cb);
 }
 
 function updateManifest(cb) {
@@ -39,12 +28,13 @@ function updateManifest(cb) {
 }
 
 async.series([
-  async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
   async.apply(command, 'cp -a /tmp/extract/package/fonts /opt/apps/machine/lamassu-machine/ui/css'),
-  async.apply(remountRO)
+  async.apply(command, 'killall -9 -qr node')  
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) return console.log('Error: %s', err);
+  report(err, 'finished', function() {
+    console.log('finished');
+  });
 });

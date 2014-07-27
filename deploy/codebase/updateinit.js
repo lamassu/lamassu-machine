@@ -2,6 +2,8 @@
 
 var async = require('./async');
 var cp = require('child_process');
+var report = require('report').report;
+
 var TIMEOUT = 10000;
 
 var hardwareCode = process.argv[2] || 'N7G1';
@@ -30,6 +32,8 @@ async.series([
   async.apply(command, 'cp /tmp/extract/package/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
   async.apply(poweroff)
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) return console.log('Error: %s', err);
+  report(err, 'finished', function() {
+    console.log('finished');
+  });  
 });

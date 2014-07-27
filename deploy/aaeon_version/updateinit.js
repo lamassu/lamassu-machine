@@ -1,60 +1,19 @@
 'use strict';
 
-var https = require('https');
 var fs = require('fs');
+var cp = require('child_process');
+var report = require('report').report;
 
 var detectedVersion = null;
-var baseDir = null;
 
-if (fs.existsSync('/opt/sencha-brain')) {
-  detectedVersion = 'Version 64';
-  baseDir = '/opt';
-} else {
-  detectedVersion = 'Not version 64';
-  baseDir = '/home/iva';
-}
+var detectedVersion = fs.existsSync('/opt/sencha-brain') ? 
+  'Version 64' :
+  'Not version 64';
 
-var deviceConfig = JSON.parse(fs.readFileSync(baseDir + '/sencha-brain/device_config.json'));
-
-var ca = fs.readFileSync(deviceConfig.updater.caFile);
-var cert = fs.readFileSync(deviceConfig.brain.certs.certFile);
-var key = fs.readFileSync(deviceConfig.brain.certs.keyFile);
-
-function report(err, res, cb) {
-  console.log(res);
-  var data = JSON.stringify({
-    error: err ? err : null,
-    result: res
+function command(cmd, cb) {
+  cp.exec(cmd, {timeout: 20000}, function(err) {
+    cb(err);
   });
-
-  var options = {
-    host: 'updates.lamassu.is',
-    port: 8000,
-    path: '/report',
-    method: 'POST',
-    key: key,
-    cert: cert,
-    ca: ca,
-    ciphers: 'AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH',
-    secureProtocol: 'TLSv1_method',
-    rejectUnauthorized: true,
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': data.length
-    }
-  };
-  options.agent = new https.Agent(options);
-
-  // Set up the request
-  var req = https.request(options, function(res) {
-    res.setEncoding('utf8');
-    res.resume();
-    res.on('end', cb);
-  });
-
-  req.on('error', function(err) { console.log(err); cb(); });
-  req.write(data);
-  req.end();
 }
 
 report(null, 'started', function() {});
@@ -68,7 +27,8 @@ process.on('SIGUSR2', function() {
 });
 
 async.waterfall([
-  async.apply(report, null, detectedVersion)
+  async.apply(report, null, detectedVersion),
+  async.apply(command, 'killall -9 -qr node')
 ], function(err) {
   report(err, 'finished', function() {
     if (err) throw err;

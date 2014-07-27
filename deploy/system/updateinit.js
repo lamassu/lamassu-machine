@@ -3,6 +3,7 @@
 var cp = require('child_process');
 var fs = require('fs');
 var async = require('./async');
+var report = require('report').report;
 
 var TIMEOUT = 10000;
 
@@ -50,6 +51,8 @@ async.series([
   async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1'),  
   async.apply(poweroff)
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) return console.log('Error: %s', err);
+  report(err, 'finished', function() {
+    console.log('finished');
+  });
 });

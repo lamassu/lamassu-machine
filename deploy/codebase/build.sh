@@ -28,9 +28,9 @@ mkdir -p $TARGET_MACHINE_DIR
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR 
+cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 
 # Codebase
-echo $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
@@ -59,6 +59,7 @@ cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
 cp $SCRIPT_DIR/updateinit-aaeon.js $EXPORT_DIR/native/aaeon/scripts/updateinit.js
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR/native/aaeon/scripts
+cp $SCRIPT_DIR/../report.js $EXPORT_DIR/native/aaeon/scripts
 
 git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.txt
 cat $EXPORT_DIR/revision.txt
