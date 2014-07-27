@@ -12,7 +12,7 @@ function loadCerts() {
   // New lamassu-machine
   if (fs.existsSync('/opt/apps/machine/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
-    return {
+    if (fs.existsSync(config.updater.caFile)) return {
       ca: fs.readFileSync(config.updater.caFile),
       cert: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.pem')),
       key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))   
