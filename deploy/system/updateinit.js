@@ -3,7 +3,7 @@
 var cp = require('child_process');
 var fs = require('fs');
 var async = require('./async');
-var report = require('report').report;
+var report = require('./report').report;
 
 var TIMEOUT = 10000;
 

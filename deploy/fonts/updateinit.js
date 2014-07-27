@@ -3,7 +3,7 @@
 var async = require('./async');
 var cp = require('child_process');
 var fs = require('fs');
-var report = require('report').report;
+var report = require('./report').report;
 
 var TIMEOUT = 10000;
 
@@ -45,10 +45,8 @@ async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
   async.apply(command, 'cp -a /tmp/extract/package/fonts /opt/apps/machine/lamassu-machine/ui/css'),
-  async.apply(remountRO)
+  async.apply(remountRO),
+  async.apply(report, null, 'finished.')
 ], function(err) {
-  if (err) return console.log('Error: %s', err);
-  report(err, 'finished', function() {
-    console.log('finished');
-  });
+  if (err) throw err;
 });

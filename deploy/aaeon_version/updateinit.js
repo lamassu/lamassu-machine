@@ -2,7 +2,7 @@
 
 var fs = require('fs');
 var cp = require('child_process');
-var report = require('report').report;
+var report = require('./report').report;
 
 var detectedVersion = null;
 
@@ -30,9 +30,5 @@ async.waterfall([
   async.apply(report, null, detectedVersion),
   async.apply(command, 'killall -9 -qr node')
 ], function(err) {
-  report(err, 'finished', function() {
-    if (err) throw err;
-    console.log('done updatescript');
-    process.exit();    
-  });
+  if (err) throw err;
 });

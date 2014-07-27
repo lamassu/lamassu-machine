@@ -3,7 +3,7 @@
 var cp = require('child_process');
 var fs = require('fs');
 var async = require('./async');
-var report = require('report').report;
+var report = require('./report').report;
 
 var TIMEOUT = 10000;
 
@@ -43,10 +43,8 @@ async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
   async.apply(detached, '/tmp/extract/package/system/' + hardwareCode + '/system1'),
+  async.apply(report, null, 'finished, restarting lamassu-machine...'),
   async.apply(sleep, 20000)  // Give detached process time to run
 ], function(err) {
-  if (err) return console.log('Error: %s', err);
-  report(err, 'finished', function() {
-    console.log('finished');
-  });
+  if (err) throw err;
 });
