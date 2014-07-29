@@ -13,7 +13,7 @@ Keyboard.prototype.init = function init() {
   var keyboard = document.getElementById(this.keyboardId);
   var self = this;
   keyboard.addEventListener('mousedown', function(e) {
-    if (!this.active) return;
+    if (!self.active) return;
     
     var target = $(e.target);
     if (target.hasClass('shift')) {
@@ -122,7 +122,7 @@ Keyboard.prototype._backspaceUp = function _backspaceUp(target) {
             var range = el.createTextRange(); 
             range.move("character", index); 
             range.select(); 
-        } else if (el.selectionStart != null) { 
+        } else if (el.selectionStart !== null) { 
             el.focus(); 
             el.setSelectionRange(index, index); 
         }
@@ -143,7 +143,7 @@ Keyboard.prototype._backspaceUp = function _backspaceUp(target) {
                 return 0;
             }
             return range.text.length;
-        } else if (el.selectionStart != null) {
+        } else if (el.selectionStart !== null) {
             return el.selectionStart;
         }
     };

@@ -176,7 +176,7 @@ $(document).ready(function () {
   initTranslatePage();
 
   var wifiNetworkButtons = document.getElementById('networks');
-  wifiNetworkButtons.addEventListener('touchstart', function(e) {
+  touchEvent(wifiNetworkButtons, function(e) {
     var target = $(e.target);
     if (target.attr('id') === 'more-networks') {
       moreNetworks();
@@ -194,11 +194,10 @@ $(document).ready(function () {
             {ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid});              
       }
     }
-    e.stopPropagation();
-  }, false);
+  });
 
   var wifiConnectButton = document.getElementById('wifiConnect');
-  wifiConnectButton.addEventListener('touchstart', function(e) {
+  touchEvent(wifiConnectButton, function() {
     var wifiConnectButtonJ = $(wifiConnectButton);
     wifiConnectButtonJ.addClass('active');
     window.setTimeout(function() { wifiConnectButtonJ.removeClass('active'); }, 500);
@@ -206,8 +205,7 @@ $(document).ready(function () {
     var ssid = $('#js-i18n-wifi-for-ssid').data('ssid');
     var rawSsid = $('#js-i18n-wifi-for-ssid').data('raw-ssid');
     buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid});
-    e.stopPropagation();
-  }, false);
+  });
 
   var startButtons = document.getElementById('start-buttons');
   touchEvent(startButtons, function(e) {
