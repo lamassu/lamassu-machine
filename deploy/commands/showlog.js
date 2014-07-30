@@ -13,8 +13,6 @@ var logFile = hardwareCode === 'N7G1' ?
   '/var/lib/sencha/log/node.log' :
   '/var/log/upstart/lamassu-machine.log';
 
-report(null, 'started', function() {});
-
 var certs = Report.certs();
 
 function tailFile(file, cb) {
@@ -58,6 +56,7 @@ function tailFile(file, cb) {
 }
 
 async.waterfall([
+  async.apply(report, null, 'started'),
   async.apply(tailFile, logFile)
 ], function(err) {
   report(err, 'finished', function() {
