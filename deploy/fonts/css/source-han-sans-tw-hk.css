@@ -1,0 +1,37 @@
+/* Source Han Sans TWHK [source-han-sans-twhk] */
+@font-face {
+  font-family: 'Source Han Sans TWHK';
+  src: url('fonts/SourceHanSansTWHK-Light.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans TWHK';
+  src: url('fonts/SourceHanSansTWHK-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans TWHK';
+  src: url('fonts/SourceHanSansTWHK-Semibold.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans TWHK';
+  src: url('fonts/SourceHanSansTWHK-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Source Han Sans TWHK';
+  src: url('fonts/SourceHanSansTWHK-Heavy.ttf');
+  font-weight: 900;
+  font-style: normal;
+}
+

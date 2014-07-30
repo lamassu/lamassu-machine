@@ -5,14 +5,14 @@ function initDebug() {
 }
 
 function doInitDebug() {
-  var forceLocale = 'en-US'
+  var forceLocale = 'zh-TW'
 //  var forceLocale = 'en-US'
   var forceCurrency = 'EUR'
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
-  setPrimaryLocales(['en-US', 'nl-NL']);
+//  setPrimaryLocales(['en-US', 'nl-NL']);
 
 
   setCurrency(forceCurrency);

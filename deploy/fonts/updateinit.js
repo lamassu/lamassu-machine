@@ -40,11 +40,13 @@ function updateManifest(cb) {
   });
 }
 
+var fontsCommand = '/tmp/extract/package/install /tmp/extract/package/fonts.css ' + 
+  '/tmp/extract/package/fonts /opt/apps/machine/lamassu-machine';
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
-  async.apply(command, 'cp -a /tmp/extract/package/fonts /opt/apps/machine/lamassu-machine/ui/css'),
+  async.apply(command, fontsCommand),
   async.apply(remountRO),
   async.apply(report, null, 'finished.')
 ], function(err) {

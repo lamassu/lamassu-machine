@@ -33,6 +33,9 @@ cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 cp -a $FONTS_ROOT/$FONT_PACKAGE $EXPORT_DIR/fonts
 
 cp $UPDATESCRIPT $EXPORT_DIR/updatescript.js
+cp $SCRIPT_DIR/fonts_css.js $EXPORT_DIR
+cp $SCRIPT_DIR/install $EXPORT_DIR
+cp $SCRIPT_DIR/css/$FONT_PACKAGE.css $EXPORT_DIR/fonts.css
 
 # Note, this is only needed for early release aaeons
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
