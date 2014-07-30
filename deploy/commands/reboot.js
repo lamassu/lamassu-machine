@@ -15,8 +15,8 @@ report(null, 'started', function() {});
 
 var TIMEOUT = 10000;
 
-function command(cmd, args, cb) {
-  cp.execFile(cmd, args, {timeout: TIMEOUT}, function(err) {
+function command(cmd, cb) {
+  cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
 }
