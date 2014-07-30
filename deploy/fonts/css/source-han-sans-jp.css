@@ -1,0 +1,36 @@
+/* Source Han Sans JP [source-han-sans-jp] */
+@font-face {
+  font-family: 'Source Han Sans JP';
+  src: url('fonts/SourceHanSansJP-Light.ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans JP';
+  src: url('fonts/SourceHanSansJP-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans JP';
+  src: url('fonts/SourceHanSansJP-Semibold.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans JP';
+  src: url('fonts/SourceHanSansJP-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Source Han Sans JP';
+  src: url('fonts/SourceHanSansJP-Heavy.ttf');
+  font-weight: 900;
+  font-style: normal;
+}

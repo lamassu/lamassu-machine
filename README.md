@@ -66,6 +66,16 @@ When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd> 
 to insert a one dollar bill.
 
+## Installing additional fonts
+
+To install a new font family, for instance Japanese, do:
+
+```
+deploy/fonts/install deploy/fonts/css/source-han-sans-jp.css ~/Downloads/fonts/SourceHanSansJP-1.000
+```
+
+```~/Downloads/fonts/SourceHanSansJP-1.000``` is the directory that contains the actual font files.
+
 ## Mocking
 
 In order to easily test **lamassu-server**, you can use the ```mock``` command.

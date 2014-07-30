@@ -19,6 +19,7 @@ rwc
 
 i18n/*.zip
 ui/css/fonts
+ui/css/fonts.css
 
 # compiled dependencies
 /node_modules
