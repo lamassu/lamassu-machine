@@ -78,3 +78,7 @@ module.exports.report = function report(err, res, cb) {
   req.write(data);
   req.end();
 };
+
+module.exports.certs = function certs() {
+  return certs;
+};
