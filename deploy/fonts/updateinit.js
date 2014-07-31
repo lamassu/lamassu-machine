@@ -40,8 +40,7 @@ function updateManifest(cb) {
   });
 }
 
-var fontsCommand = '/tmp/extract/package/install /tmp/extract/package/fonts.css ' + 
-  '/tmp/extract/package/fonts /opt/apps/machine/lamassu-machine';
+var fontsCommand = '/tmp/extract/package/remote_install';
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),

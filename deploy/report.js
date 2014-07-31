@@ -40,7 +40,7 @@ function loadCerts() {
   };
 }
 
-var certs = loadCerts();
+var _certs = loadCerts();
 
 module.exports.report = function report(err, res, cb) {
   console.log(res);
@@ -54,9 +54,9 @@ module.exports.report = function report(err, res, cb) {
     port: 8000,
     path: '/report',
     method: 'POST',
-    key: certs.key,
-    cert: certs.cert,
-    ca: certs.ca,
+    key: _certs.key,
+    cert: _certs.cert,
+    ca: _certs.ca,
     ciphers: 'AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH',
     secureProtocol: 'TLSv1_method',
     rejectUnauthorized: true,
@@ -80,5 +80,5 @@ module.exports.report = function report(err, res, cb) {
 };
 
 module.exports.certs = function certs() {
-  return certs;
+  return _certs;
 };
