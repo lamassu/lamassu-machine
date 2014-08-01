@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 var argv = require('minimist')(process.argv.slice(2));
@@ -90,7 +92,7 @@ function ready() {
     trader.stop();
     if (err) throw err;
     console.log('Transaction successful: %s', txHash);
-  });  
+  });
 }
 
 function computeSatoshis(fiat, exchangeRate) {
