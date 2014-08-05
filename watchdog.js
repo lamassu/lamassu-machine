@@ -47,7 +47,7 @@ function kill() {
 
 function executeScript() {
   // TODO: check sig, and make sure we only run this once to completion
-  if (running) return; 
+  if (running) return;
 
   var exists = fs.existsSync(SCRIPT_PATH);
   if (!exists) {
@@ -62,7 +62,7 @@ function executeScript() {
   console.log('in execute');
   child = cp.fork(SCRIPT_PATH, [platform]);
   child.on('error', function(err) { cleanUp(); console.log(err); });
-  child.on('exit', function() { cleanUp(); console.log('done'); }); 
+  child.on('exit', function() { cleanUp(); console.log('done'); });
 }
 
 function start() {

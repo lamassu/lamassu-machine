@@ -5,7 +5,7 @@ var async = require('./async');
 var report = require('./report').report;
 
 var hardwareCode = process.argv[2] || 'N7G1';
-  
+
 var restartCommand = hardwareCode === 'N7G1' ?
  'poweroff -d 2' :
  'restart lamassu-machine';
@@ -27,11 +27,11 @@ console.log('********** STARTED *************');
 async.waterfall([
   async.apply(report, null, 'started'),
   async.apply(command, restartCommand),
-  async.apply(report, null, 'afterRestart'),  
+  async.apply(report, null, 'afterRestart'),
 ], function(err) {
   report(err, 'finished', function() {
     if (err) throw err;
     console.log('done updatescript');
-    process.exit();    
+    process.exit();
   });
 });

@@ -11,7 +11,7 @@ if [ -z "$EXPORT_ROOT" ]
     echo "Builds a lamassu-machine package file for deploying to a device."
     echo -e "\nUsage:"
     echo -e "build <target directory>\n"
-    echo "You may also set LAMASSU_EXPORT in lieu of <target directory>."    
+    echo "You may also set LAMASSU_EXPORT in lieu of <target directory>."
     exit 1
 fi
 
@@ -27,7 +27,7 @@ mkdir -p $EXPORT_DIR
 mkdir -p $TARGET_MACHINE_DIR
 
 # Needed for updateinit script on target device
-cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR 
+cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR
 cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 
 # Codebase

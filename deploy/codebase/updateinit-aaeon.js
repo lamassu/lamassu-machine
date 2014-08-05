@@ -24,12 +24,12 @@ report(null, 'started', function() {});
 
 
 async.series([
-  async.apply(command, 'mkdir -p /opt/apps/machine'),  
+  async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
   async.apply(report, null, 'finished'),
-  async.apply(command, 'killall -9 -qr node')  
+  async.apply(command, 'killall -9 -qr node')
 ], function(err) {
   if (err) throw err;
 });

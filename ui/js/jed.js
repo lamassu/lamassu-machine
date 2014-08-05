@@ -600,15 +600,15 @@ performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
 
 var $0 = $$.length - 1;
 switch (yystate) {
-case 1: return { type : 'GROUP', expr: $$[$0-1] }; 
+case 1: return { type : 'GROUP', expr: $$[$0-1] };
 break;
-case 2:this.$ = { type: 'TERNARY', expr: $$[$0-4], truthy : $$[$0-2], falsey: $$[$0] }; 
+case 2:this.$ = { type: 'TERNARY', expr: $$[$0-4], truthy : $$[$0-2], falsey: $$[$0] };
 break;
 case 3:this.$ = { type: "OR", left: $$[$0-2], right: $$[$0] };
 break;
 case 4:this.$ = { type: "AND", left: $$[$0-2], right: $$[$0] };
 break;
-case 5:this.$ = { type: 'LT', left: $$[$0-2], right: $$[$0] }; 
+case 5:this.$ = { type: 'LT', left: $$[$0-2], right: $$[$0] };
 break;
 case 6:this.$ = { type: 'LTE', left: $$[$0-2], right: $$[$0] };
 break;
@@ -622,11 +622,11 @@ case 10:this.$ = { type: 'EQ', left: $$[$0-2], right: $$[$0] };
 break;
 case 11:this.$ = { type: 'MOD', left: $$[$0-2], right: $$[$0] };
 break;
-case 12:this.$ = { type: 'GROUP', expr: $$[$0-1] }; 
+case 12:this.$ = { type: 'GROUP', expr: $$[$0-1] };
 break;
-case 13:this.$ = { type: 'VAR' }; 
+case 13:this.$ = { type: 'VAR' };
 break;
-case 14:this.$ = { type: 'NUM', val: Number(yytext) }; 
+case 14:this.$ = { type: 'NUM', val: Number(yytext) };
 break;
 }
 },
@@ -912,7 +912,7 @@ next:function () {
         if (this._input === "") {
             return this.EOF;
         } else {
-            this.parseError('Lexical error on line '+(this.yylineno+1)+'. Unrecognized text.\n'+this.showPosition(), 
+            this.parseError('Lexical error on line '+(this.yylineno+1)+'. Unrecognized text.\n'+this.showPosition(),
                     {text: "", token: null, line: this.yylineno});
         }
     },

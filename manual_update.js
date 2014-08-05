@@ -7,7 +7,7 @@ var softwareConfig = null;
 try {
   softwareConfig = JSON.parse(fs.readFileSync(SOFTWARE_CONFIG_PATH));
 } catch (ex) {
-  softwareConfig = require('/usr/local/share/sencha/config/configfile');  
+  softwareConfig = require('/usr/local/share/sencha/config/configfile');
 }
 
 var config = softwareConfig.updater.extractor;
@@ -16,7 +16,7 @@ var extractor = require('/usr/local/share/sencha/node/sencha-brain/lib/update/ex
 
 var fileInfo = {
   rootPath: '/tmp/extract',
-  filePath: '/tmp/update.tar' 
+  filePath: '/tmp/update.tar'
 };
 
 function triggerWatchdog(cb) {

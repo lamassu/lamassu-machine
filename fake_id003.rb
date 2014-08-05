@@ -30,7 +30,7 @@ class FakeID003
 		:disable	=> [ SYNC, 0x05, 0x1a, 0xf4, 0xe8 ],
 		:enable		=> [ SYNC, 0x05, 0x11, 0x27, 0x56 ],
 		:accepting 	=> [ SYNC, 0x05, 0x12, 0xbc, 0x64 ],
-		:escrows 	=> [ 
+		:escrows 	=> [
 			[ SYNC, 0x06, 0x13, 0x61, 0xb0, 0xfb ], # $1
 			[ SYNC, 0x06, 0x13, 0x62, 0x2b, 0xc9 ],
 			[ SYNC, 0x06, 0x13, 0x63, 0xa2, 0xd8 ], # $5
@@ -51,7 +51,7 @@ class FakeID003
 		:cashbox_out => [ SYNC, 0x05, 0x44, 0x0f, 0x53 ],
 		:acceptor_jam => [ SYNC, 0x05, 0x45, 0x86, 0x42 ],
 		:pause => [ SYNC, 0x05, 0x47, 0x94, 0x61 ],
-		:denominations => "\xfc\x25\x8a\x61\x01\x01\x00\x62\x00\x00\x00\x63\x01\x05\x00\x64\x01\x0a\x00" + 
+		:denominations => "\xfc\x25\x8a\x61\x01\x01\x00\x62\x00\x00\x00\x63\x01\x05\x00\x64\x01\x0a\x00" +
 			"\x65\x01\x14\x00\x66\x01\x32\x00\x67\x01\x64\x00\x68\x00\x00\x00\xf0\x1b"
 	}
 
@@ -79,7 +79,7 @@ class FakeID003
 	def process_command
 		loop do
 			res = IO.select( [ dev, STDIN ] )
-			res.first.each do |io| 
+			res.first.each do |io|
 				case io
 				when STDIN
 					process_user_input!
@@ -98,7 +98,7 @@ class FakeID003
 			return
 		elsif res =~ /^jam/
 			set_state :acceptor_jam
-			return			
+			return
 		end
 
 		number = res.to_i
@@ -124,7 +124,7 @@ class FakeID003
 			payload = dev.read(len - 2)
 			cmd_code = payload[0].ord
 			data = payload[1, len - 5]
-			@incoming = [ SYNC, len ].pack('C*') + payload 
+			@incoming = [ SYNC, len ].pack('C*') + payload
 			p [cmd_code, data] if cmd_code != 0x11
 			execute_command(cmd_code, data)
 		end
@@ -158,7 +158,7 @@ class FakeID003
 			dispatch(bill_handling)
 		when :return
 			set_state :returning
-			dispatch payload(:ack)			
+			dispatch payload(:ack)
 		when :stack1
 			set_state :stacking
 			dispatch payload(:ack)
@@ -187,14 +187,14 @@ class FakeID003
 			set_state @next_state
 			@next_state = nil
 			@t0 = nil
-		end			
+		end
 
 		case @state
 		when :powerUp
 			payload(:powerUp)
 		when :initialize
 			state_timeout :initialize, :disable
-			payload(:initialize)			
+			payload(:initialize)
 		when :enable
 			payload :enable
 		when :disable
@@ -213,7 +213,7 @@ class FakeID003
 			payload(:returning);
 		when :rejecting
 			state_timeout :rejecting, :enable
-			payload(:rejecting)			
+			payload(:rejecting)
 		when :escrow
 			PAYLOADS[:escrows][@escrowed]
 		when :stacking

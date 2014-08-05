@@ -26,7 +26,7 @@ rm -rf $EXPORT_DIR
 mkdir -p $EXPORT_DIR
 
 # Needed for updateinit script on target device
-cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR 
+cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR
 cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 
 # Fonts

@@ -11,7 +11,7 @@ body {
 
 body.i18n-he {
   font-family: raanan, brandon_text, 'Source Sans Pro';
-  direction: rtl;  
+  direction: rtl;
 }
 
 input {
@@ -53,7 +53,7 @@ body  { margin: 0;}
 .i18n-rtl .cancel, .i18n-rtl .wifi-cancel { left: -1; right: auto; -webkit-transform: scaleX(-1); }
 
 .start-buttons {
-  position: absolute; top:250; left: 0; 
+  position: absolute; top:250; left: 0;
   width: 100%;
   justify-content: center;
   display: flex;
@@ -70,28 +70,28 @@ body  { margin: 0;}
 
 .circle-button {
   border-radius: 50%;
-  background-color: #ffffff; border: 29px solid; 
+  background-color: #ffffff; border: 29px solid;
   color: #0e4160;
   text-align: center;
   text-transform:uppercase;
   border-color: #2fdccc;
-  
+
   display:-webkit-box;
   -webkit-box-pack:center;
-  -webkit-box-align:center;  
+  -webkit-box-align:center;
 
   font-weight: 900;
   font-size: 36px;
   line-height: 1;
 }
 
-.start-buttons .circle-button .js-i18n-he-IL { 
-  font-size: 35px; 
+.start-buttons .circle-button .js-i18n-he-IL {
+  font-size: 35px;
   font-family: 'raanan';
 }
 
-.start-buttons .circle-button .js-i18n-he-IL.solo { 
-  font-size: 40px; 
+.start-buttons .circle-button .js-i18n-he-IL.solo {
+  font-size: 40px;
 }
 
 .circle-button-down {
@@ -100,7 +100,7 @@ body  { margin: 0;}
 }
 
 
-#hey { 
+#hey {
   font-size: 96px;
   font-weight: normal;
   color: #FFFFFF;
@@ -126,7 +126,7 @@ body  { margin: 0;}
 /* 2nd Screen */
 #wifi-instructions {
   position: absolute;
-  top: 86; left: 75;  
+  top: 86; left: 75;
 }
 
 #wifi-instructions h1 {
@@ -315,7 +315,7 @@ body  { margin: 0;}
 }
 
 .exclaim {
-  background-color: #209f94; color: #ffffff;  
+  background-color: #209f94; color: #ffffff;
 }
 
 .all-caps {
@@ -338,7 +338,7 @@ body  { margin: 0;}
 
 #send-side {
   position: absolute;
-  top: 115; left: 106;  
+  top: 115; left: 106;
 }
 
 #tap-complete {
@@ -394,10 +394,10 @@ body  { margin: 0;}
 #networks { text-align: left; }
 .i18n-rtl #more-networks { direction: rtl; unicode-bidi: bidi-override; }
 
-.total .amount strong, #deposit-side .total-deposit strong { 
+.total .amount strong, #deposit-side .total-deposit strong {
   font-weight: 900;
 }
- 
+
 .feedback {
   position: absolute; top: 10; right: 60;
   font-size: 34px;
@@ -406,8 +406,8 @@ body  { margin: 0;}
   text-align: right;
 }
 
-#js-i18n-just-inserted strong { 
-  font-weight: 900; 
+#js-i18n-just-inserted strong {
+  font-weight: 900;
 }
 
 /* 4th Screen */
@@ -449,14 +449,14 @@ body  { margin: 0;}
   font-size: 26px;
   color: #5F5F55;
   text-align: center;
-} 
+}
 
 /* 5th Screen */
 .goodbye_state .main {
   width: 1280px; height: 800px;
   background-color: #FFFFFF;
   color: #37e8d7;
-  text-align: center;        
+  text-align: center;
 }
 
 .goodbye_state .main p {
@@ -464,7 +464,7 @@ body  { margin: 0;}
   position: absolute;
   top: 220;
   width: 100%;
-  text-align: center;        
+  text-align: center;
 }
 
 /* info screen */
@@ -516,7 +516,7 @@ body  { margin: 0;}
 
 .info .loader {
   margin: -10px 0 0;
-  padding: 50px 0 40px  
+  padding: 50px 0 40px
 }
 
 .info .actions {
@@ -537,7 +537,7 @@ body  { margin: 0;}
 
 .info .primary {
   background-color: #37E8D7;  /* amazonite */
-  color: #ffffff;  
+  color: #ffffff;
 }
 
 .info .button:first-child {
@@ -564,7 +564,7 @@ body  { margin: 0;}
 }
 
 .limit_reached_state .content, .high_bill_state .content {
-  margin-bottom: 150px;  
+  margin-bottom: 150px;
 }
 
 .unpaired_state p {
@@ -604,9 +604,9 @@ body  { margin: 0;}
 
 /* Bottom Bar */
 
-.bottom-bar { 
-  background-color: #5F5F55; width: 100%; height: 140px; 
-  position: absolute; bottom: 0px;  
+.bottom-bar {
+  background-color: #5F5F55; width: 100%; height: 140px;
+  position: absolute; bottom: 0px;
 }
 
 .current-btc {
@@ -615,7 +615,7 @@ body  { margin: 0;}
   line-height: 47px;
   position: absolute;
   top: 10;
-  left: 60; 
+  left: 60;
 }
 .i18n-rtl .current-btc { right: 60px; left: auto; }
 
@@ -626,12 +626,12 @@ body  { margin: 0;}
   line-height: 47px;
   position: absolute;
   top: 10;
-  right: 60px; 
+  right: 60px;
 }
 
 .i18n-rtl .bitcoin-machine { left: 60px; right: auto; }
 
-.btc-price { 
+.btc-price {
   font-weight: bold;
 }
 
@@ -820,7 +820,7 @@ body  { margin: 0;}
 
 .keyboard .row {
   overflow: hidden;
-  text-align: center;  
+  text-align: center;
   display: inline-block;
 }
 
@@ -932,7 +932,7 @@ body  { margin: 0;}
   font-weight: normal;
 }
 .admin strong {
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .admin li {

@@ -23,7 +23,7 @@ function tailFile(file, cb) {
   fs.exists(file, function(exists) {
     if (!exists) {
       report(file + ' does not exist', null, cb);
-      return;      
+      return;
     }
     fs.stat(file, function(err, stats) {
       if (err) return report(err, null, cb);
@@ -55,7 +55,7 @@ function tailFile(file, cb) {
         res.on('end', cb);
       });
       fs.createReadStream(file, opts).pipe(req);
-    });    
+    });
   });
 }
 
@@ -67,6 +67,6 @@ async.waterfall([
   report(err, 'finished', function() {
     if (err) throw err;
     console.log('done updatescript');
-    process.exit();    
+    process.exit();
   });
 });

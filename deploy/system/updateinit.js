@@ -48,7 +48,7 @@ async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine/system'),
   async.apply(updateManifest),
-  async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1'),  
+  async.apply(command, '/tmp/extract/package/system/' + hardwareCode + '/system1'),
   async.apply(poweroff)
 ], function(err) {
   if (err) return console.log('Error: %s', err);

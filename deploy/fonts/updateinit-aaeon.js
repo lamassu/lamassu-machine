@@ -32,7 +32,7 @@ async.series([
   async.apply(updateManifest),
   async.apply(command, 'cp -a /tmp/extract/package/fonts /opt/apps/machine/lamassu-machine/ui/css'),
   async.apply(report, null, 'finished'),
-  async.apply(command, 'killall -9 -qr node')  
+  async.apply(command, 'killall -9 -qr node')
 ], function(err) {
   if (err) throw err;
 });
