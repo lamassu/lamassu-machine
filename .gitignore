@@ -32,5 +32,6 @@ ui/css/fonts.css
 /device_config.json
 /data/client.key
 /data/client.pem
+/data/connection_info.json
 
 test/compliance/licenses
