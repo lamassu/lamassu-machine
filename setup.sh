@@ -13,4 +13,3 @@ cp device_config.sample.json device_config.json
 cp data/client.sample.key data/client.key
 cp data/client.sample.pem data/client.pem
 echo "Successful installation."
-

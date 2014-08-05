@@ -25,7 +25,7 @@ function doInitDebug() {
     switch (counter) {
       case 0:
         setExchangeRate({xbtToFiat: 123.34, fiatToXbt:  0.0081});
-        break;        
+        break;
       case 1:
         setState('scan_address');
         break;
@@ -43,12 +43,12 @@ function doInitDebug() {
         highBill(10, 'transactionLimit');
         break;
       case 6:
-        setState('insert_bills');          
+        setState('insert_bills');
         setCredit(25, 0.202, 20);
         sendOnly('lowBalance');
         break;
       case 7:
-        setState('insert_bills');          
+        setState('insert_bills');
         setCredit(25, 0.202, 20);
         sendOnly('transactionLimit');
         break;
@@ -56,7 +56,7 @@ function doInitDebug() {
         setState('sending_coins');
         break;
       case 9:
-        setTransactionHash('d9565aa4cb55155feb8730387fb3be67d583c061754adeb98125544bdfc06fbf'); 
+        setTransactionHash('d9565aa4cb55155feb8730387fb3be67d583c061754adeb98125544bdfc06fbf');
         setState('completed');
         break;
       case 10:
@@ -78,7 +78,7 @@ function doInitDebug() {
         break;
       case 15:
         t('wifi-connecting',
-          locale.translate('This could take a few moments.').fetch());    
+          locale.translate('This could take a few moments.').fetch());
         setState('wifi_connecting');
         break;
       case 16:
@@ -92,7 +92,7 @@ function doInitDebug() {
         break;
     }
     counter += 1;
-  });    
+  });
 };
 
 function wifiList() {
