@@ -17,7 +17,7 @@ npm install
 First, run the mock bill validator in a separate terminal window:
 
 ```
-$ ruby fake_id003.rb 
+$ ruby fake_id003.rb
 ```
 
 The mock validator will output its device path, e.g. ```/dev/ttys009```.
@@ -25,7 +25,7 @@ Use that to run the main program, called lamassu-machine, along with a Bitcoin
 address **you control**:
 
 ```
-node bin/lamassu-machine --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \ 
+node bin/lamassu-machine --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \
 --mock-bv '/dev/ttys009' --mock-trader
 ```
 
@@ -54,7 +54,7 @@ This should output something like this:
 2014-07-18T17:00:16.267Z LOG FSM: disable [ Initialize -> Disable ]
 ```
 
-Now, open a Chrome or Chromium browser to 
+Now, open a Chrome or Chromium browser to
 
 ```
 file:///<lamassu-machine path>/ui/start.html
@@ -65,7 +65,7 @@ and you should get this:
 ![Start screen](docs/images/start-screen.png)
 
 When the screen asks you to insert a bill, navigate to the terminal
-where you opened the mock bill validator, and input **1**<kbd>Enter</kbd> 
+where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
 
 ## Installing additional fonts

@@ -6,7 +6,7 @@ var report = require('./report').report;
 
 var detectedVersion = null;
 
-var detectedVersion = fs.existsSync('/opt/sencha-brain') ? 
+var detectedVersion = fs.existsSync('/opt/sencha-brain') ?
   'Version 64' :
   'Not version 64';
 
@@ -14,7 +14,7 @@ function command(cmd, cb) {
   cp.exec(cmd, {timeout: 20000}, function(err) {
     cb(err);
   });
-}
+};
 
 report(null, 'started', function() {});
 

@@ -30,6 +30,6 @@ async.waterfall([
   report(err, 'finished', function() {
     if (err) throw err;
     console.log('done updatescript');
-    process.exit();    
+    process.exit();
   });
 });

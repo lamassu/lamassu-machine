@@ -23,14 +23,14 @@
       "certFile": "client.pem",
       "keyFile": "client.key"
     },
-    "connectionInfoPath": "connection_info.json"    
+    "connectionInfoPath": "connection_info.json"
   },
   "wifi": {
-    "connectionTimeout": 20000, 
+    "connectionTimeout": 20000,
     "checkInterval": 1000,
-    "scanInterval": 5000, 
-    "minSignal": -100, 
-    "maxSignal": -50, 
+    "scanInterval": 5000,
+    "minSignal": -100,
+    "maxSignal": -50,
     "truncateLength": 16
   },
   "id003": {

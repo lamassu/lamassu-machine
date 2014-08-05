@@ -43,8 +43,8 @@ function buttonPressed(button, data) {
   if (!buttonActive) return;
   wifiKeyboard.deactivate();
   buttonActive = false;
-  setTimeout(function () { 
-    buttonActive = true; 
+  setTimeout(function () {
+    buttonActive = true;
     wifiKeyboard.activate();
   }, 500);
   var res = {button: button};
@@ -56,10 +56,10 @@ function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
   if (!locale) return;
   if (data.currency) setCurrency(data.currency);
-  if (data.exchangeRate) setExchangeRate(data.exchangeRate); 
+  if (data.exchangeRate) setExchangeRate(data.exchangeRate);
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
-  if (data.credit) 
-    setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill); 
+  if (data.credit)
+    setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
   if (data.transactionHashURL) setTransactionHash(data.transactionHashURL);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
@@ -74,7 +74,7 @@ function processData(data) {
       break;
     case 'wifiConnecting':
       t('wifi-connecting',
-        locale.translate('This could take a few moments.').fetch());    
+        locale.translate('This could take a few moments.').fetch());
       setState('wifi_connecting');
       break;
     case 'wifiConnected':
@@ -207,7 +207,7 @@ $(document).ready(function () {
         var displaySsid = ssidEl.text();
         var rawSsid = ssidEl.data('raw-ssid');
         buttonPressed('wifiSelect',
-            {ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid});              
+            {ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid});
       }
     }
   });
@@ -287,7 +287,7 @@ function setScreen(newScreen, oldScreen, newLocale) {
   }
 
   var newView = $('.' + newScreen + '_state');
-  
+
   $('.viewport').css({'display': 'none'});
   setLocale(newLocale);
   newView.css({'display': 'block'});
@@ -305,8 +305,8 @@ function setState(state, delay, newLocale) {
 
   if (state === 'idle') $('#qr-code').empty();
 
-  if (delay) window.setTimeout(function() { 
-    setScreen(currentState, previousState, newLocale); 
+  if (delay) window.setTimeout(function() {
+    setScreen(currentState, previousState, newLocale);
   }, delay);
   else setScreen(currentState, previousState, newLocale);
 
@@ -340,8 +340,8 @@ function setWifiList(recs, requestedPage) {
     var rec = recs[i + offset];
     var bars = 'bar' + (Math.floor(rec.strength * 4) + 1);
     var html = '<div class="wifi-network-button">' +
-        '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' + 
-        rec.ssid + '">' + rec.displaySsid + 
+        '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
+        rec.ssid + '">' + rec.displaySsid +
         '</span>' + '<span class="icon ' + bars + '"></span></div>';
     networks.append(html);
   }
@@ -355,7 +355,7 @@ function setWifiList(recs, requestedPage) {
 function moreNetworks() {
   var networks = $('#networks');
   var page = networks.data('page');
-  setWifiList(null, page + 1);    
+  setWifiList(null, page + 1);
 }
 
 function setWifiSsid(data) {
@@ -374,7 +374,7 @@ function setPrimaryLocale(l) {
 function setLocaleInfo(data) {
   setPrimaryLocale(data.primaryLocale);
   setPrimaryLocales(data.primaryLocales);
-  setLocale(data.primaryLocale);  
+  setLocale(data.primaryLocale);
 }
 
 function setLocale(data) {
@@ -409,7 +409,7 @@ function setPrimaryLocales(primaryLocales) {
     var currentLocale = primaryLocales[0];
     var jed = new Jed({'locale_data': {'messages': locales[currentLocale]}});
     var tStart = jed.translate('START').fetch();
-    langCircles.html('<div class="circle-button"><span class="js-i18n-' + 
+    langCircles.html('<div class="circle-button"><span class="js-i18n-' +
       currentLocale + ' solo">' + tStart + '</span></div>');
     langCircles.removeClass('start-multi');
     return;
@@ -419,7 +419,7 @@ function setPrimaryLocales(primaryLocales) {
     $.each(primaryLocales, function(i, l) {
       var jed = new Jed({'locale_data': {'messages': locales[l]}});
       var name = jed.translate('LanguageName').fetch();
-      var html = '<div class="circle-button" data-locale="' + l + 
+      var html = '<div class="circle-button" data-locale="' + l +
           '"><span class="js-i18n-' + l + '">' + name + '</span></div>';
       langCircles.append(html);
       langCircles.addClass('start-multi');
@@ -435,7 +435,7 @@ function setCredit(fiat, bitcoins, lastBill) {
   // TODO: this should go in brain.js
   if (currentState === 'insert_bills') setState('insert_more_bills');
 
-  t('just-inserted', 
+  t('just-inserted',
     locale.translate("You inserted a %s bill").fetch(formatFiat(lastBill)));
   $('.total-deposit').html(formatFiat(fiat));
   updateBitcoins('.total-btc-rec', bitcoins);
@@ -452,7 +452,7 @@ function formatBitcoins(amount) {
   var log = Math.floor(Math.log(amount) / Math.log(10));
   var digits = (log > 0) ? 2 : 2 - log;
   return amount.toLocaleString(jsLocaleCode, {
-    useGrouping: true, 
+    useGrouping: true,
     maximumFractionDigits: digits,
     minimumFractionDigits: digits
   });
@@ -464,19 +464,19 @@ function formatFiat(amount, fractionDigits) {
     case 'DKK:en-US':
     case 'SEK:en-US':
       return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-        useGrouping: true, 
+        useGrouping: true,
         maximumFractionDigits: fractionDigits,
         minimumFractionDigits: fractionDigits
       }) + '</strong> ' + currency;
     default:
       return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-        style: 'currency', 
-        currency: currency, 
-        currencyDisplay: 'symbol', 
-        useGrouping: true, 
+        style: 'currency',
+        currency: currency,
+        currencyDisplay: 'symbol',
+        useGrouping: true,
         maximumFractionDigits: fractionDigits,
         minimumFractionDigits: fractionDigits
-      }) + '</strong>';    
+      }) + '</strong>';
   }
 }
 
@@ -514,7 +514,7 @@ function setAccepting(currentAccepting) {
   if (accepting) {
     $('.bill img').transition({x:0, y: -303}, 1000, 'ease-in');
   } else {
-    $('.bill img').transition({x:0, y: 0}, 1000, 'ease-out');        
+    $('.bill img').transition({x:0, y: 0}, 1000, 'ease-out');
   }
 }
 
@@ -535,11 +535,11 @@ function sendOnly(reason) {
 
   t('or', '!');
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15);
-  var reasonText = reason === 'transactionLimit' ? 
-    'Transaction limit reached.' : 
+  var reasonText = reason === 'transactionLimit' ?
+    'Transaction limit reached.' :
     'We\'re out of bitcoins.';
   t('limit-reached', locale.translate(reasonText).fetch());
-  t('limit-description', 
+  t('limit-description',
     locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch());
   $('#insert-another').css({'display': 'none'});
   $('#limit-reached-section').css({'display': 'block'});

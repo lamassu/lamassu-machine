@@ -7,4 +7,3 @@ var sha512crypt = require('sha512crypt-node');
 var salt = crypto.randomBytes(10).toString('base64');
 var password = process.argv[2];
 console.log(sha512crypt.sha512crypt(password, salt));
-

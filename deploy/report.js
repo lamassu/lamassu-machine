@@ -15,7 +15,7 @@ function loadCerts() {
     if (fs.existsSync(config.updater.caFile)) return {
       ca: fs.readFileSync(config.updater.caFile),
       cert: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.pem')),
-      key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))   
+      key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
     };
   }
 
@@ -25,7 +25,7 @@ function loadCerts() {
     return {
       ca: fs.readFileSync(config.updater.caFile),
       cert: fs.readFileSync(config.updater.certFile),
-      key: fs.readFileSync(config.updater.keyFile)      
+      key: fs.readFileSync(config.updater.keyFile)
     };
   }
 
