@@ -13,6 +13,10 @@ body.i18n-he {
   font-family: raanan, brandon_text, 'Source Sans Pro';
   direction: rtl;
 }
+body.i18n-ar {
+  font-family: raanan, brandon_text, ubuntu;
+  direction: rtl;  
+}
 
 input {
   font-family: brandon_text, 'Source Sans Pro';
@@ -20,6 +24,9 @@ input {
 }
 .i18n-he input {
   font-family: brandon_text, 'Source Sans Pro';
+}
+.i18n-ar input {
+  font-family: raanan, brandon_text, 'Source Sans Pro', ubuntu;  
 }
 
 input:focus,
@@ -92,6 +99,15 @@ body  { margin: 0;}
 
 .start-buttons .circle-button .js-i18n-he-IL.solo {
   font-size: 40px;
+}
+
+.start-buttons .circle-button .js-i18n-ar-SA { 
+  font-size: 35px; 
+  font-family: 'raanan';
+}
+
+.start-buttons .circle-button .js-i18n-ar-SA.solo { 
+  font-size: 40px; 
 }
 
 .circle-button-down {
