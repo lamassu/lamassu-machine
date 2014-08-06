@@ -215,7 +215,7 @@ body  { margin: 0;}
   margin-right: 23px;
   display:-webkit-box;
   -webkit-box-pack:center;
-  -webkit-box-align:center;  
+  -webkit-box-align:center;
 }
 
 .id_code_state .keypad .keys {
@@ -241,7 +241,7 @@ body  { margin: 0;}
   -webkit-box-align:center;
   font-size: 30px;
   color: #0e4160;   /* cobalt */
-  font-weight: 500;  
+  font-weight: 500;
   transition: background-color 0.1s, color 0.1s;
 }
 
@@ -631,6 +631,7 @@ body  { margin: 0;}
 }
 
 .info .button {
+  display: inline-block;
   background-color: #D0D0C8;
   color: #5f5f55;
   font-weight: 900;
@@ -1044,4 +1045,16 @@ body  { margin: 0;}
 
 .admin li {
   list-style-type: none;
+}
+
+.id_code_failed_state .button {
+  width: 6em;
+  height: 30px;
+  border-radius: 100px;
+}
+
+.id_verification_failed_state .button {
+  width: 3em;
+  height: 30px;
+  border-radius: 100px;
 }

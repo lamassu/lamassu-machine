@@ -16,7 +16,7 @@ function doInitDebug() {
 
 
   setCurrency(forceCurrency);
-  setState('id_code');
+  setState('id_verification_failed');
   //setState('scan_address');
 
   var counter = 0;

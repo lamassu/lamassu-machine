@@ -13,6 +13,7 @@
     <script src="js/jed.js"></script>
     <script src="js/locales.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/debug.js"></script>
   </head>
   <body>
     <section id="view">
@@ -395,7 +396,7 @@
           <h1 class="js-i18n">Please verify your identity</h1>
           <div class="instructions">
             <span class="js-i18n">
-            In order to proceed, we are required to verify your identity. 
+            In order to proceed, we are required to verify your identity.
             Please press the back of your <strong>driver's license</strong> against the scan window.
             </span>
           </div>
@@ -449,6 +450,62 @@
           </section>
         </section>
         <section id="id-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport verifying_id_state info" data-tr-section="verifying-id">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Verifying identity…</h1>
+                <div class="loader"><img src="images/loading.gif" /></div>
+               <p>
+                <strong class="js-i18n">Just making sure you're you.</strong><br/>
+                <span>This could take a few seconds.</span>
+               </p>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport id_code_failed_state info" data-tr-section="id-code-failed">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Want to try again?</h1>
+              <p>
+                <span class="js-i18n">The code you entered didn't match.</span><br/>
+                <span>You might want to <strong>give it another shot</strong>.</span>
+              </p>
+              <div class="actions">
+                <span class="button js-i18n">TRY AGAIN</span>
+                <span class="button js-i18n">CANCEL</span>
+              </div>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport id_verification_failed_state info" data-tr-section="id-verification-failed">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Sorry</h1>
+              <p>
+                <span class="js-i18n">Our system indicated an identification problem.</span><br/>
+                <span>Please contact the operator for more information.</span>
+              </p>
+              <div class="actions">
+                <span class="button js-i18n">OK</span>
+              </div>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
       </section>
 
       <section class="viewport scan_address_state" data-tr-section="scan-address">
