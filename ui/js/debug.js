@@ -16,7 +16,7 @@ function doInitDebug() {
 
 
   setCurrency(forceCurrency);
-  setState('id_verification_error');
+  setState('near_limit');
   //setState('scan_address');
 
   var counter = 0;

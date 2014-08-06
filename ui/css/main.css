@@ -6,7 +6,7 @@ body {
   direction: ltr;
   font-family: brandon_text, 'Source Sans Pro', 'Source Han Sans CN', 'Source Han Sans TWJK',
      'Source Han Sans JP', 'Source Han Sans KR', raanan;
-  cursor: none;
+/*  cursor: none; */
 }
 
 body.i18n-he {
@@ -397,10 +397,11 @@ body  { margin: 0;}
 }
 
 /* 4th Screen */
-#send-coins {
+.send-coins {
   margin: 0 auto;
   width: 175px; height: 175px;
   padding: 30px;
+  margin-top: 60px;
 }
 
 .i18n-long-send-coins #send-coins {
@@ -413,7 +414,7 @@ body  { margin: 0;}
 
 .or {
   width: 100%;
-  position: absolute; top: 163; left: 40;
+  position: absolute; top: 125; left: 40;
   text-align: center;
 
   font-weight: 900;
@@ -429,26 +430,26 @@ body  { margin: 0;}
   font-size: 80%;
 }
 
-#deposit-side {
+.deposit-side {
   position: absolute;
-  top: 115; left: 774;
+  top: 80; left: 774;
   width: 500px;
 }
 
-.i18n-rtl #deposit-side {
+.i18n-rtl .deposit-side {
   right: 100; left: auto;
 }
 
-#deposit-side strong {
+.deposit-side strong {
   font-weight: bold;
 }
 
-#send-side {
+.send-side {
   position: absolute;
-  top: 115; left: 106;
+  top: 80; left: 106;
 }
 
-#tap-complete {
+.tap-complete {
   font-size: 40px;
   color: #FFFFFF;
   text-align: center;
@@ -460,7 +461,7 @@ body  { margin: 0;}
   display: none;
 }
 
-#insert-another, #js-i18n-limit-reached {
+#insert-another, #js-i18n-limit-reached, .limit-reached {
   font-size: 40px;
   color: #FFFFFF;
   line-height: 1.2;
@@ -468,12 +469,41 @@ body  { margin: 0;}
   margin: 40px 0 10px 0;
 }
 
-#js-i18n-limit-description {
+#js-i18n-limit-description, .limit-reached-description {
   vertical-align: top;
   font-size: 30px;
   color: #5F5F55;
   margin: 20px 0 -40px 0;
   width: 90%;
+  line-height: 1.2;
+}
+
+.button-reference {
+  font-weight: bold;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  white-space:nowrap;
+}
+
+.send-coins-section .button {
+  height: 35px;
+  border-radius: 100px;
+  background-color: #0e4160;   /* cobalt */
+  color: #ffffff;
+
+  display: inline-block;
+  font-weight: 700;
+  font-size: 25px;
+  padding: 22px 48px;
+  position: relative;
+}
+
+.send-coins-section .button.active {
+  background-color: #082c40;
+}
+
+.send-coins-section .actions {
+  margin-top: 80px;
 }
 
 .deposit-record {
@@ -513,7 +543,7 @@ body  { margin: 0;}
   text-align: right;
 }
 
-#js-i18n-just-inserted strong {
+.js-i18n-just-inserted strong {
   font-weight: 900;
 }
 

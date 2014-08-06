@@ -244,11 +244,16 @@ $(document).ready(function () {
     buttonPressed('start');
   });
 
-  var sendCoinsButton = document.getElementById('send-coins');
-  touchEvent(sendCoinsButton, function() {
+  function sendCoins() {
     setState('sending_coins');
     buttonPressed('sendBitcoins');
-  });
+  }
+
+  var sendCoinsButtons = document.getElementsByClassName('send-coins');
+  for (var i = 0; i < sendCoinsButtons.length; ++i) {
+    var sendCoinsButton = sendCoinsButtons[i];
+    touchEvent(sendCoinsButton, sendCoins);
+  }
 
   var insertBillCancelButton = document.getElementById('insertBillCancel');
   touchEvent(insertBillCancelButton, function() {
@@ -272,6 +277,7 @@ $(document).ready(function () {
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
+  setupButton('near-limit-verify-id', 'nearLimitVerifyId');
 
   initDebug();
 });
