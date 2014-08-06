@@ -16,7 +16,7 @@ Keypad.prototype.read = function read(cb) {
     var target = $(e.target);
     if (target.hasClass('clear')) {
       return self.reset();
-    } 
+    }
 
     if (target.hasClass('enter')) {
       if (self.count !== 4) return;
@@ -25,7 +25,7 @@ Keypad.prototype.read = function read(cb) {
 
     if (target.hasClass('key')) {
       return self._keyPress(target);
-    }    
+    }
   }
 
   keypad.addEventListener('mousedown', keyHandler);
@@ -41,7 +41,7 @@ Keypad.prototype._keyPress = function _keyPress(target) {
   if (this.count > 3) return;
   var numeral = target.text();
   this.count += 1;
-  this.keypad.find('.box-' + this.count).text(numeral);
+  this.keypad.find('.box-' + this.count).text('•');
   this.result = this.result || 0;
   this.result *= 10;
   this.result += parseInt(numeral);

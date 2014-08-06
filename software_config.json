@@ -7,6 +7,7 @@
     "completedTimeout": 60000,
     "periodicLogInterval": 3600000,
     "insufficientFundsTimeout": 30000,
+    "confirmTimeout": 60000,
     "idleTime": 600000,
     "checkIdleTime": 10000,
     "checkPowerTime": 1000,

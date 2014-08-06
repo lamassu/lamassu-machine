@@ -94,7 +94,7 @@ body  { margin: 0;}
   font-size: 40px;
 }
 
-.circle-button-down {
+.circle-button.active {
   border-color: #ffffff;
   background-color: #1fbaac; color: #ffffff;
 }
@@ -643,23 +643,13 @@ body  { margin: 0;}
   margin-left: 100px;
 }
 
-.info .primary {
-  background-color: #37E8D7;  /* amazonite */
-  color: #ffffff;
-}
-
 .info .button:first-child {
   margin-left: 0;
 }
 
-.info .button:active {
+.info .button.active {
   background-color: #37E8D7;  /* amazonite */
   color: #ffffff;
-}
-
-.info .primary:active {
-  color: #ffffff;  /* amazonite */
-  background-color: #5f5f55;
 }
 
 /* Specific info screens */
@@ -1049,12 +1039,18 @@ body  { margin: 0;}
 
 .id_code_failed_state .button {
   width: 6em;
-  height: 30px;
+  height: 35px;
   border-radius: 100px;
 }
 
 .id_verification_failed_state .button {
   width: 3em;
-  height: 30px;
+  height: 35px;
+  border-radius: 100px;
+}
+
+.id_verification_error_state .button {
+  width: 3em;
+  height: 35px;
   border-radius: 100px;
 }

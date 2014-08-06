@@ -110,9 +110,21 @@ function processData(data) {
       setState('scan_id');
       break;
     case 'idCode':
-      confirmBeep.play();
+      if (data.beep) confirmBeep.play();
       idKeypad.reset();
       setState('id_code');
+      break;
+    case 'verifyingId':
+      setState('verifying_id');
+      break;
+    case 'idVerificationFailed':
+      setState('id_verification_failed');
+      break;
+    case 'idCodeFailed':
+      setState('id_code_failed');
+      break;
+    case 'idVerificationError':
+      setState('id_verification_error');
       break;
     case 'scanAddress':
       setState('scan_address');
@@ -256,23 +268,36 @@ $(document).ready(function () {
   setupButton('pairing-error-ok', 'pairingScanCancel');
   setupButton('scan-id-cancel', 'cancelIdScan');
   setupButton('id-code-cancel', 'cancelIdCode');
+  setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
+  setupButton('id-code-failed-retry', 'idCodeFailedRetry');
+  setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
+  setupButton('id-verification-error-ok', 'idVerificationErrorOk');
 
   initDebug();
 });
 
 function touchEvent(element, callback) {
   element.addEventListener('mousedown', function(e) {
+    e.target.classList.add('active');
+
+    // Wait for transition to finish
+    setTimeout(function () {
+      e.target.classList.remove('active');
+    }, 300);
+
+    setTimeout(function () {
+      callback(e);
+    }, 200);
+
     e.stopPropagation();
     e.preventDefault();
-    callback(e);
   });
 }
 
 function setupButton(buttonClass, buttonAction) {
   var button = document.getElementById(buttonClass);
-  touchEvent(button, function(e) {
+  touchEvent(button, function() {
     buttonPressed(buttonAction);
-    e.stopPropagation();
   });
 }
 
