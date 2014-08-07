@@ -3,6 +3,8 @@
 var async = require('./async');
 var cp = require('child_process');
 var fs = require('fs');
+var report = require('./report').report;
+
 var TIMEOUT = 10000;
 
 var hardwareCode = process.argv[2] || 'N7G1';
@@ -30,8 +32,8 @@ function updateManifest(cb) {
     var manifest = {};
     if (!err) manifest = JSON.parse(data);
     manifest.packages = manifest.packages || [];
-    if (manifest.packages.indexOf('manatee') !== -1) return cb();
-    manifest.packages.push('manatee');
+    if (manifest.packages.indexOf('fonts') !== -1) return cb();
+    manifest.packages.push('fonts');
     fs.writeFile(manifestPath, JSON.stringify(manifest), function (err) {
       cb(err);
     });
@@ -42,10 +44,9 @@ async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
-  async.apply(command, 'cp -a /tmp/extract/package/manatee/' + hardwareCode + '/bin /usr'),
-  async.apply(command, 'cp -a /tmp/extract/package/manatee/' + hardwareCode + '/lib /usr'),
-  async.apply(remountRO)
+  async.apply(command, '/tmp/extract/package/install/' + hardwareCode + '/install.sh'),
+  async.apply(remountRO),
+  async.apply(report, null, 'finished.')
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) throw err;
 });
