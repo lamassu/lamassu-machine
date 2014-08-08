@@ -251,23 +251,23 @@ $(document).ready(function () {
   });
 
   var insertBillCancelButton = document.getElementById('insertBillCancel');
-  touchEvent(insertBillCancelButton, function() {
+  touchImmediateEvent(insertBillCancelButton, function() {
     setBuyerAddress(null);
     buttonPressed('cancelInsertBill');
   });
 
-  setupButton('wifiPassCancel', 'cancelWifiPass');
-  setupButton('wifiListCancel', 'cancelWifiList');
-  setupButton('scanCancel', 'cancelScan');
-  setupButton('completed_viewport', 'completed');
+  setupImmediateButton('wifiPassCancel', 'cancelWifiPass');
+  setupImmediateButton('wifiListCancel', 'cancelWifiList');
+  setupImmediateButton('scanCancel', 'cancelScan');
+  setupImmediateButton('completed_viewport', 'completed');
 
   setupButton('initialize', 'initialize');
   setupButton('test-mode', 'testMode');
   setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
-  setupButton('scan-id-cancel', 'cancelIdScan');
-  setupButton('id-code-cancel', 'cancelIdCode');
+  setupImmediateButton('scan-id-cancel', 'cancelIdScan');
+  setupImmediateButton('id-code-cancel', 'cancelIdCode');
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
@@ -276,13 +276,21 @@ $(document).ready(function () {
   initDebug();
 });
 
+function targetButton(element) {
+  var classList = element.classList;
+  if (classList.contains('button') || classList.contains('circle-button'))
+    return element;
+  return targetButton(element.parentNode);
+}
+
 function touchEvent(element, callback) {
   element.addEventListener('mousedown', function(e) {
-    e.target.classList.add('active');
+    var target = targetButton(e.target);
+    target.classList.add('active');
 
     // Wait for transition to finish
     setTimeout(function () {
-      e.target.classList.remove('active');
+      target.classList.remove('active');
     }, 300);
 
     setTimeout(function () {
@@ -291,6 +299,21 @@ function touchEvent(element, callback) {
 
     e.stopPropagation();
     e.preventDefault();
+  });
+}
+
+function touchImmediateEvent(element, callback) {
+  element.addEventListener('mousedown', function(e) {
+    callback(e);
+    e.stopPropagation();
+    e.preventDefault();
+  });
+}
+
+function setupImmediateButton(buttonClass, buttonAction) {
+  var button = document.getElementById(buttonClass);
+  touchImmediateEvent(button, function() {
+    buttonPressed(buttonAction);
   });
 }
 
