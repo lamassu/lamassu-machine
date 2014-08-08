@@ -64,7 +64,8 @@ function startBrain(err) {
     id003Device: nconf.get('mock-bv'),
     trader: nconf.get('trader'),
     pairing: nconf.get('pairing'),
-    scanId: nconf.get('scanId')
+    scanId: nconf.get('scanId'),
+    http: nconf.get('http')
   });
   brain.on('error', bail);
   setInterval(monitorParent, 1000);
