@@ -13,7 +13,6 @@
     <script src="js/jed.js"></script>
     <script src="js/locales.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/debug.js"></script>
   </head>
   <body>
     <section id="view">
@@ -576,16 +575,16 @@
 
       <section class="viewport insert_more_bills_state" data-tr-section="insert-more-bills">
         <section class="main">
-          <section class="send-side">
-            <p class="tap-complete" class="js-i18n">Tap to complete purchase</p>
-            <div class="send-coins" class="circle-button"><span class="js-i18n">SEND BITCOINS</span></div>
+          <section id="send-side">
+            <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
+            <div id="send-coins" class="circle-button"><span class="js-i18n">SEND BITCOINS</span></div>
           </section>
           <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
             <circle cx="680" cy="180" r="30" />
           </svg>
           <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
 
-          <section class="deposit-side">
+          <section id="deposit-side">
             <section id="limit-reached-section">
               <p id="js-i18n-limit-reached"></p>
               <p id="js-i18n-limit-description"></p>
@@ -610,37 +609,6 @@
         </section>
         <section class="bottom-bar">
           <p class="feedback"><span id="js-i18n-just-inserted"></span></p>
-        </section>
-      </section>
-
-      <section class="viewport near_limit_state send-coins-section" data-tr-section="near-limit">
-        <section class="main">
-          <section class="send-side">
-            <p class="tap-complete js-i18n">Tap to complete purchase</p>
-            <div class="send-coins circle-button"><span class="js-i18n">SEND BITCOINS</span></div>
-          </section>
-          <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <circle cx="680" cy="180" r="30" />
-          </svg>
-          <div class="or"><span class="js-i18n">!</span></div>
-
-          <section class="deposit-side">
-            <section class="limit-reached-section">
-              <p class="limit-reached">Limit nearly reached.</p>
-              <div class="limit-reached-description">
-                <p>You can insert up to $10 or complete your transaction
-                by pressing <span class="button-reference">Send Bitcoins</span>.</p>
-                <p>If you'd like to purchase more,
-                just press <span class="button-reference">I Want More</span> to continue with ID verification.</p>
-              </div>
-              <div class="actions">
-                <span id="near-limit-verify-id" class="button js-i18n">I WANT MORE!</span>
-              </div>
-            </section>
-          </section>
-        </section>
-        <section class="bottom-bar">
-          <p class="feedback"><span class="js-i18n-just-inserted"></span></p>
         </section>
       </section>
 

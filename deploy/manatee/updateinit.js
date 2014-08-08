@@ -32,8 +32,8 @@ function updateManifest(cb) {
     var manifest = {};
     if (!err) manifest = JSON.parse(data);
     manifest.packages = manifest.packages || [];
-    if (manifest.packages.indexOf('fonts') !== -1) return cb();
-    manifest.packages.push('fonts');
+    if (manifest.packages.indexOf('manatee') !== -1) return cb();
+    manifest.packages.push('manatee');
     fs.writeFile(manifestPath, JSON.stringify(manifest), function (err) {
       cb(err);
     });
