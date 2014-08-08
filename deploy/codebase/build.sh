@@ -42,6 +42,7 @@ cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
+rm -f $TARGET_MACHINE_DIR/ui/css/fonts.css
 
 # Natively compiled modules, will be copied from hardware-specific directories
 rm -rf $TARGET_MODULES_DIR/ws
