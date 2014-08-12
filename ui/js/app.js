@@ -48,7 +48,7 @@ function buttonPressed(button, data) {
     wifiKeyboard.activate();
   }, 500);
   var res = {button: button};
-  if (data) res.data = data;
+  if (data || data === null) res.data = data;
   websocket.send(JSON.stringify(res));
 }
 
@@ -111,7 +111,7 @@ function processData(data) {
       break;
     case 'idCode':
       if (data.beep) confirmBeep.play();
-      idKeypad.reset();
+      idKeypad.activate();
       setState('id_code');
       break;
     case 'verifyingId':
@@ -191,8 +191,7 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
-  idKeypad = new Keypad('id-keypad');
-  idKeypad.read(function(result) {
+  idKeypad = new Keypad('id-keypad', function(result) {
     if (currentState !== 'id_code') return;
     buttonPressed('idCode', result);
   });
@@ -267,7 +266,9 @@ $(document).ready(function () {
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('id-code-cancel', 'cancelIdCode');
+  setupImmediateButton('id-code-cancel', 'cancelIdCode', function() {
+    idKeypad.deactivate();
+  });
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
@@ -310,9 +311,10 @@ function touchImmediateEvent(element, callback) {
   });
 }
 
-function setupImmediateButton(buttonClass, buttonAction) {
+function setupImmediateButton(buttonClass, buttonAction, callback) {
   var button = document.getElementById(buttonClass);
   touchImmediateEvent(button, function() {
+    if (callback) callback();
     buttonPressed(buttonAction);
   });
 }

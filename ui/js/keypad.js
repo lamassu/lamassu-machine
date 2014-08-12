@@ -1,18 +1,18 @@
 'use strict';
 
-var Keypad = function(keypadId) {
+var TIMEOUT = 60000;
+
+var Keypad = function(keypadId, callback) {
   this.keypadId = keypadId;
   this.keypad = $('#' + keypadId);
   this.result = null;
   this.count = 0;
-};
-
-Keypad.prototype.read = function read(cb) {
-  var keypad = document.getElementById(this.keypadId);
+  this.callback = callback;
+  this.timeoutRef = null;
   var self = this;
 
-  this.reset();
   function keyHandler(e) {
+    self._restartTimeout();
     var target = $(e.target);
     if (target.hasClass('clear')) {
       return self.reset();
@@ -20,7 +20,8 @@ Keypad.prototype.read = function read(cb) {
 
     if (target.hasClass('enter')) {
       if (self.count !== 4) return;
-      return cb(self.result);
+      self.deactivate();
+      return self.callback(self.result);
     }
 
     if (target.hasClass('key')) {
@@ -28,7 +29,26 @@ Keypad.prototype.read = function read(cb) {
     }
   }
 
-  keypad.addEventListener('mousedown', keyHandler);
+  this.keypad.get(0).addEventListener('mousedown', keyHandler);
+};
+
+Keypad.prototype._restartTimeout = function _restartTimeout() {
+  var self = this;
+
+  clearTimeout(this.timeoutRef);
+  this.timeoutRef = setTimeout(function() {
+    self.reset();
+    self.callback(null);
+  }, TIMEOUT);
+};
+
+Keypad.prototype.activate = function activate() {
+  this.reset();
+  this._restartTimeout();
+};
+
+Keypad.prototype.deactivate = function deactivate() {
+  clearTimeout(this.timeoutRef);
 };
 
 Keypad.prototype.reset = function reset() {
