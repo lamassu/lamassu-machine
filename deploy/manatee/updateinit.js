@@ -20,11 +20,6 @@ function remountRW(cb) {
   command('mount -o remount,rw /dev/root', cb);
 }
 
-function remountRO(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  command('mount -o remount,ro /dev/root', cb);
-}
-
 function updateManifest(cb) {
   var manifestPath = '/opt/apps/machine/manifest.json';
   fs.readFile(manifestPath, function (err, data) {
@@ -45,7 +40,6 @@ async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
   async.apply(command, '/tmp/extract/package/install/' + hardwareCode + '/install.sh'),
-  async.apply(remountRO),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
