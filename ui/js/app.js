@@ -279,7 +279,9 @@ $(document).ready(function () {
 
 function targetButton(element) {
   var classList = element.classList;
-  if (classList.contains('button') || classList.contains('circle-button'))
+  if (classList.contains('button') ||
+      classList.contains('circle-button') ||
+      classList.contains('wifi-network-button'))
     return element;
   return targetButton(element.parentNode);
 }

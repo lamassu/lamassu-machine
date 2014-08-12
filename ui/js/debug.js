@@ -5,7 +5,7 @@ function initDebug() {
 }
 
 function doInitDebug() {
-  var forceLocale = 'zh-TW'
+  var forceLocale = 'en-US'
 //  var forceLocale = 'en-US'
   var forceCurrency = 'EUR'
   setPrimaryLocale(forceLocale);
@@ -16,7 +16,7 @@ function doInitDebug() {
 
 
   setCurrency(forceCurrency);
-  setState('id_verification_error');
+  setState('idle');
   //setState('scan_address');
 
   var counter = 0;
@@ -64,9 +64,6 @@ function doInitDebug() {
         break;
       case 11:
         setState('limit_reached');
-        break;
-      case 12:
-        setTrouble(true);
         break;
       case 13:
         setWifiList(wifiList());
