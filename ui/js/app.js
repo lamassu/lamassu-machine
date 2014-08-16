@@ -64,6 +64,7 @@ function processData(data) {
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
+  if (data.beep) confirmBeep.play();
 
   switch (data.action) {
     case 'wifiList':
@@ -110,7 +111,6 @@ function processData(data) {
       setState('scan_id');
       break;
     case 'idCode':
-      if (data.beep) confirmBeep.play();
       idKeypad.activate();
       setState('id_code');
       break;
