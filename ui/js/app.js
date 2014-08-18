@@ -253,22 +253,15 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid});
   });
 
-/*
   var startButtons = document.getElementById('start-buttons');
-  startButtons.addEventListener('touchstart', function(e) {
+  touchEvent(startButtons, function(e) {
     var startButtonJ = $(e.target).closest('.circle-button');
     if (startButtonJ.length === 0) return;
     var newLocale = startButtonJ.data('locale');
-    startButtonJ.addClass('circle-button-down');
-    window.setTimeout(function() { startButtonJ.removeClass('circle-button-down'); }, 500);
-
-    setState('scan_address', 300, newLocale);
+    setState('scan_address', null, newLocale);
     buttonPressed('start');
-    e.stopPropagation();
-  }, false);
-*/
+  });
 
-/*
   var sendCoinsButton = document.getElementById('send-coins');
   touchEvent(sendCoinsButton, function() {
     setState('sending_coins');
@@ -279,15 +272,7 @@ $(document).ready(function () {
   touchImmediateEvent(insertBillCancelButton, function() {
     setBuyerAddress(null);
     buttonPressed('cancelInsertBill');
-    e.stopPropagation();
-  }, false);
-*/
-
-  var fixRestartButton = document.getElementById('fix-restart-button');
-  fixRestartButton.addEventListener('touchstart', function(e) {
-    buttonPressed('abortTransaction');
-    e.stopPropagation();
-  }, false);
+  });
 
   var fiatCompletedViewport = document.getElementById('fiat_completed_viewport');
   fiatCompletedViewport.addEventListener('touchstart', function(e) {
