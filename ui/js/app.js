@@ -110,6 +110,9 @@ function processData(data) {
     case 'idle':
       setState('idle');
       break;
+    case 'dualIdle':
+      setState('dual_idle');
+      break;
     case 'scanId':
       setState('scan_id');
       break;
@@ -290,7 +293,7 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
-  setupButton('want_bitcoin', 'startDigital');
+  setupButton('want_bitcoin', 'start');
   setupButton('want_cash', 'startFiat');
   setupButton('chooseFiatCancel', 'chooseFiatCancel');
   setupButton('depositCancel', 'depositCancel');

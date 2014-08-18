@@ -1046,16 +1046,16 @@ body  { margin: 0;}
   list-style-type: none;
 }
 
-.idle_state .main {
+.dual_idle_state .main {
   position: relative;
 }
 
-.idle_state .sides {
+.dual_idle_state .sides {
   width: 100%;
   height: 100%;
 }
 
-.idle_state .start {
+.dual_idle_state .start {
   width: 50%;
   text-align: center;
   position: absolute;
@@ -1063,24 +1063,24 @@ body  { margin: 0;}
   font-size: 18px;
 }
 
-.idle_state .digital-side {
+.dual_idle_state .digital-side {
   color: #0e4160; /* cobalt */
   background-color: #37e8d7; /* amazonite */
 }
 
-.idle_state .fiat-side {
+.dual_idle_state .fiat-side {
   left: 640;
   color: #37e8d7; /* amazonite */
   background-color: #0e4160; /* cobalt */
 }
 
-.idle_state .start .rate {
+.dual_idle_state .start .rate {
   position: relative;
   top: 112px;
   font-weight: bold;
 }
 
-.idle_state .start .circle-button {
+.dual_idle_state .start .circle-button {
   position: relative;
   padding: 15px;
   width: 220px;
