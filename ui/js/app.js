@@ -57,6 +57,7 @@ function processData(data) {
   if (!locale) return;
   if (data.currency) setCurrency(data.currency);
   if (data.exchangeRate) setExchangeRate(data.exchangeRate);
+  if (data.fiatExchangeRate) setFiatExchangeRate(data.fiatExchangeRate);
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit)
     setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
@@ -64,6 +65,8 @@ function processData(data) {
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
+  if (data.fiatCredit) fiatCredit(data.fiatCredit);
+  if (data.depositInfo) setDepositAddress(data.depositInfo);
   if (data.beep) confirmBeep.play();
 
   switch (data.action) {
@@ -175,6 +178,22 @@ function processData(data) {
     case 'connecting':
       setState('connecting');
       break;
+    case 'chooseFiat':
+      chooseFiat(data.chooseFiat);
+      break;
+    case 'deposit':
+      setState('deposit');
+      deposit(data.tx);
+      break;
+    case 'fiatTimeout':
+      setState('fiat_timeout');
+      break;
+    case 'dispensing':
+      setState('dispensing');
+      break;
+    case 'fiatComplete':
+      fiatComplete(data.tx);
+      break;
   }
 }
 
@@ -234,15 +253,22 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid});
   });
 
+/*
   var startButtons = document.getElementById('start-buttons');
-  touchEvent(startButtons, function(e) {
+  startButtons.addEventListener('touchstart', function(e) {
     var startButtonJ = $(e.target).closest('.circle-button');
     if (startButtonJ.length === 0) return;
     var newLocale = startButtonJ.data('locale');
-    setState('scan_address', null, newLocale);
-    buttonPressed('start');
-  });
+    startButtonJ.addClass('circle-button-down');
+    window.setTimeout(function() { startButtonJ.removeClass('circle-button-down'); }, 500);
 
+    setState('scan_address', 300, newLocale);
+    buttonPressed('start');
+    e.stopPropagation();
+  }, false);
+*/
+
+/*
   var sendCoinsButton = document.getElementById('send-coins');
   touchEvent(sendCoinsButton, function() {
     setState('sending_coins');
@@ -253,7 +279,21 @@ $(document).ready(function () {
   touchImmediateEvent(insertBillCancelButton, function() {
     setBuyerAddress(null);
     buttonPressed('cancelInsertBill');
-  });
+    e.stopPropagation();
+  }, false);
+*/
+
+  var fixRestartButton = document.getElementById('fix-restart-button');
+  fixRestartButton.addEventListener('touchstart', function(e) {
+    buttonPressed('abortTransaction');
+    e.stopPropagation();
+  }, false);
+
+  var fiatCompletedViewport = document.getElementById('fiat_completed_viewport');
+  fiatCompletedViewport.addEventListener('touchstart', function(e) {
+    buttonPressed('completed');
+    e.stopPropagation();
+  }, false);
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass');
   setupImmediateButton('wifiListCancel', 'cancelWifiList');
@@ -265,6 +305,12 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
+  setupButton('want_bitcoin', 'startDigital');
+  setupButton('want_cash', 'startFiat');
+  setupButton('chooseFiatCancel', 'chooseFiatCancel');
+  setupButton('depositCancel', 'depositCancel');
+  setupButton('cash-out-button', 'cashOut');
+  setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
   setupImmediateButton('id-code-cancel', 'cancelIdCode', function() {
     idKeypad.deactivate();
@@ -273,6 +319,23 @@ $(document).ready(function () {
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
+
+  initDebug();
+  var fiatButtons = document.getElementById('js-fiat-buttons');
+
+  var lastTouch = null;
+  fiatButtons.addEventListener('touchstart', function(e) {
+    var now = Date.now();
+    if (lastTouch && now - lastTouch < 100) return;
+    lastTouch = now;
+    var cashButtonJ = $(e.target).closest('.cash-button');
+    if (cashButtonJ.length === 0) return;
+    if (cashButtonJ.hasClass('disabled')) return;
+    if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
+    var denomination = cashButtonJ.attr('data-denomination');
+    buttonPressed('fiatButton', {denomination: denomination});
+    e.stopPropagation();
+  }, false);
 
   initDebug();
 });
@@ -355,7 +418,10 @@ function setState(state, delay, newLocale) {
 
   wifiKeyboard.reset();
 
-  if (state === 'idle') $('#qr-code').empty();
+  if (state === 'idle') {
+    $('#qr-code').empty();
+    $('#qr-code-deposit').empty();
+  }
 
   if (delay) window.setTimeout(function() {
     setScreen(currentState, previousState, newLocale);
@@ -545,6 +611,11 @@ function setExchangeRate(rate) {
   var insertedText = locale.translate("per %s inserted")
     .fetch(singleCurrencyUnit());
   $('#fiat-inserted').html(insertedText);
+  $('.js-digital-rate').text(parseFloat(rate.xbtToFiat).toFixed(2));  // TODO clean up
+}
+
+function setFiatExchangeRate(rate) {
+  $('.js-fiat-rate').text(parseFloat(rate).toFixed(2));  // TODO clean up
 }
 
 function setTransactionHash(url) {
@@ -639,6 +710,105 @@ function loadI18n(localeCode) {
       'messages': messages
     }
   });
+}
+
+function reachFiatLimit(rec) {
+  var msg = null;
+  if (rec.txLimitReached) msg = 'We\'re a little low, please cash out';
+  else if (rec.isEmpty) msg = 'Transaction limit reached, please cash out';
+
+  var el = $('.choose_fiat_state .limit');
+  if (msg) el.html(msg).show();
+  else el.hide();
+}
+
+function chooseFiat(data) {
+  fiatCredit(data);
+  setState('choose_fiat');
+}
+
+function manageFiatButtons(activeDenominations) {
+  Object.keys(activeDenominations).forEach(function (denomination) {
+    var enabled = activeDenominations[denomination];
+    var button = $('.choose_fiat_state .cash-button[data-denomination=' + denomination + ']');
+    if (enabled) button.removeClass('disabled');
+    else button.addClass('disabled');
+  });
+}
+
+function fiatCredit(data) {
+  var credit = data.credit;
+  var activeDenominations = data.activeDenominations;
+  var fiat = credit.fiat;
+  var mbtc = credit.satoshis / 1e5;
+  if (mbtc === 0) $('#js-i18n-choose-digital-amount').hide();
+  else $('#js-i18n-choose-digital-amount').show();
+
+  if (fiat === 0) $('#cash-out-button').hide();
+  else $('#cash-out-button').show();
+
+  manageFiatButtons(activeDenominations.activeMap);
+  $('.choose_fiat_state .fiat-amount').text(fiat);
+  t('choose-digital-amount',
+    locale.translate('You\'ll be sending %s mBTC').fetch(mbtc));
+
+  reachFiatLimit({
+    isEmpty: activeDenominations.isEmpty,
+    txLimitReached: data.txLimitReached
+  });
+}
+
+function satoshisToBitcoins(satoshis) {
+  var bitcoins = satoshis / 1e8;
+  return Number(bitcoins.toFixed(8)).toString();
+}
+
+function satoshisToMilliBitcoins(satoshis) {
+  var millies = satoshis / 1e5;
+  return Number(millies.toFixed(5)).toString();
+}
+
+function setDepositAddress(tx) {
+  var bitcoins = satoshisToBitcoins(tx.satoshis);
+
+  $('.deposit_state .loading').hide();
+  $('.deposit_state .send-notice .bitcoin-address').text(tx.toAddress);
+  $('.deposit_state .send-notice').show();
+
+  $('#qr-code-deposit').empty();
+  $('#qr-code-deposit').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: 'bitcoin:' + tx.toAddress + '?amount=' + bitcoins
+  });
+}
+
+function deposit(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.deposit_state .digital .js-amount').text(millies);
+  $('.deposit_state .fiat .js-amount').text(tx.fiat);
+  $('.deposit_state .send-notice').hide();
+  $('.deposit_state .loading').show();
+
+  setState('deposit');
+}
+
+function fiatComplete(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.fiat_complete_state .digital .js-amount').text(millies);
+  $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
+  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress);
+
+  $('#qr-code-fiat-receipt').empty();
+  $('#qr-code-fiat-receipt').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: JSON.stringify(tx)
+  });
+
+  setState('fiat_complete');
 }
 
 function initDebug() {}

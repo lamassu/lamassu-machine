@@ -62,6 +62,7 @@ function startBrain(err) {
     mockTrader: nconf.get('mock-trader'),
     id003: nconf.get('id003'),
     id003Device: nconf.get('mock-bv'),
+    mockBillDispenser: nconf.get('mock-bd'),
     trader: nconf.get('trader'),
     pairing: nconf.get('pairing'),
     scanId: nconf.get('scanId'),

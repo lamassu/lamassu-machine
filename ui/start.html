@@ -378,15 +378,18 @@
 
       <section class="viewport idle_state" data-tr-section="idle">
         <section class="main">
-          <h1 id="hey" class="js-i18n">Hello.</h1>
-          <section id="start-buttons" class="start-buttons">
-            <div class="circle-button"><span class="js-i18n">START</span></div>
+          <section class="sides">
+            <section class="digital-side start">
+              <div class="rate">1 BTC = <span class="js-digital-rate"></span> GBP</div>
+              <div id="want_bitcoin" class="circle-button"><span class="js-i18n">I want<br/>Bitcoin</span></div>
+            </section>
+            <section class="fiat-side start">
+              <div class="rate">1 BTC = <span class="js-fiat-rate"></span> GBP</div>
+              <div id="want_cash" class="circle-button"><span class="js-i18n">I want<br/>Cash</span></div>
+              <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
+            </section>
           </section>
-          <p id="tap" class="js-i18n">Tap to buy bitcoins in 3 steps</p>
-        </section>
-        <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
-          <p class="bitcoin-machine js-i18n">The Bitcoin Machine</p>
+          <span id="change-language-button">Change language</span>
         </section>
       </section>
 
@@ -832,6 +835,7 @@
           <section class="top">
             <section class="content">
               <h1 class="js-i18n">Pair with remote server</h1>
+               <p class="js-i18n">
                <p class="js-i18n">Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server.</p>
                <p class="important js-i18n"><strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server.</p>
                <div class="actions">
@@ -886,6 +890,146 @@
             </section>
           </section>
           <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
+        <section class="instructions">
+          <h1 class="js-i18n">How much?</h1>
+          <h2>1 BTC is <strong class="js-fiat-rate"></strong> GBP</h2>
+          <section class="sums">
+            <div class="fiat"><strong class="fiat-amount"></strong> GBP</div>
+            <div class="digital js-18n" id="js-i18n-choose-digital-amount"></div>
+          </section>
+        </section>
+        <span id="cash-out-button" class="circle-button" style="display: none;">Cash out</span>
+        <div class="limit"></div>
+        <section id="js-fiat-buttons" class="cash-buttons">
+          <span class="cash-button" data-denomination="5"><span class="plus">+</span> 5 GBP</span>
+          <span class="cash-button" data-denomination="10"><span class="plus">+</span> 10 GBP</span>
+          <span class="cash-button" data-denomination="20"><span class="plus">+</span> 20 GBP</span>
+          <span id="js-fiat-clear" class="cash-button clear">Clear</span>
+        </section>
+        <section id="chooseFiatCancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport deposit_state fiat-side" data-tr-section="deposit">
+        <section class="instructions">
+          <h1 class="js-i18n">Send Bitcoins</h1>
+          <h2>Please scan the QR code to send us your bitcoins.</h2>
+          <section class="sums">
+            <div class="digital">
+              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div>will be sent</div>
+            </div>
+            <div class="fiat">
+              <div class="amount"><strong class="js-amount"></strong> GBP</div>
+              <div>will be dispensed</div>
+            </div>
+          </section>
+        </section>
+        <section class="qr-section">
+          <img class="qr-frame" src="images/qr_code_fiat.png" />
+          <div id="qr-code-deposit"></div>
+          <div class="loading">Generating address...</div>
+          <div class="send-notice">
+            Your bitcoins will be sent to:<br/>
+            <span class="bitcoin-address"></span>
+          </div>
+        </section>
+        <section id="depositCancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
+        <section class="instructions">
+          <h1>Dispensing...</h1>
+          <h2>Please take your cash.</h2>
+        </section>
+        <img class="dispensing-bill" src="images/dispensing-bill.png" />
+      </section>
+
+      <section id="fiat_completed_viewport" class="viewport fiat_complete_state fiat-side" data-tr-section="fiat-complete">
+        <section class="instructions">
+          <h1 class="js-i18n">Thank you!</h1>
+          <section class="sums">
+            <div class="digital">
+              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div>were sent by you</div>
+            </div>
+            <div class="fiat">
+              <div class="amount"><strong class="js-amount"></strong> GBP</div>
+              <div>were dispensed to you</div>
+            </div>
+          </section>
+          <div class="sent-coins">
+            Your bitcoins were sent to:<br/>
+            <span class="bitcoin-address"></span>
+          </div>
+        </section>
+
+        <section class="qr-section">
+          <img class="qr-frame" src="images/qr_code_fiat.png" />
+          <div id="qr-code-fiat-receipt"></div>
+          <div class="send-notice-section">
+            <img class="camera" src="images/camera.png" />
+            <div class="send-notice">Take a photo of the screen for your electronic receipt.</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="viewport fiat_timeout_state fiat-side" data-tr-section="fiat-timeout">
+        <section class="info">
+          <h1>This is taking a while...</h1>
+          <section class="description">
+            <p>We still haven't received anything.</p>
+            <p><strong>Have you sent your bitcoins yet?</strong></p>
+          </section>
+          <section class="actions">
+            <span class="button">Yes, I have</span>
+            <span class="button cancel">No, I haven't</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport fiat_cancel_state fiat-side" data-tr-section="fiat-cancel">
+        <section class="info">
+          <h1>Want to cancel?</h1>
+          <section class="description">
+            <p>We still haven't received anything.</p>
+            <p><strong>Have you sent your bitcoins yet?</strong></p>
+          </section>
+          <section class="actions">
+            <span class="button">Yes, I have</span>
+            <span class="button cancel">No, I haven't</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport out_of_cash_state fiat-side" data-tr-section="out-of-cash">
+        <section class="info">
+          <div class="flying-bills"><img src="images/flying-bills.png"/></div>
+          <h1>Out of cash</h1>
+          <section class="description">
+            <p><strong>Sorry, but we're all out of cash!</strong></p>
+            <p>Please contact the operator for assistance.</p>
+          </section>
+          <section class="actions">
+            <span class="button cancel">Close</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport out_of_cash_partial_state fiat-side" data-tr-section="out-of-cash-partial">
+        <section class="info">
+          <h1>Out of cash</h1>
+          <section class="description">
+            <p><strong>Sorry, we seem to have run out of dough.</strong></p>
+            <p>We will refund 5362 mBTC to your address:</p>
+            <p class="bitcoin-address">1Fpg5odR1GQJnvDgzzqxhFFvSMZ4TFTvvN</p>
+          </section>
+          <section class="actions">
+            <span class="button cancel">Refund bitcoins</span>
           </section>
         </section>
       </section>
