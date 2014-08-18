@@ -277,16 +277,11 @@ $(document).ready(function () {
     buttonPressed('cancelInsertBill');
   });
 
-  var fiatCompletedViewport = document.getElementById('fiat_completed_viewport');
-  fiatCompletedViewport.addEventListener('touchstart', function(e) {
-    buttonPressed('completed');
-    e.stopPropagation();
-  }, false);
-
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass');
   setupImmediateButton('wifiListCancel', 'cancelWifiList');
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
+  setupImmediateButton('fiat_completed_viewport', 'completed');
 
   setupButton('initialize', 'initialize');
   setupButton('test-mode', 'testMode');
@@ -308,11 +303,9 @@ $(document).ready(function () {
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
 
-  initDebug();
   var fiatButtons = document.getElementById('js-fiat-buttons');
-
   var lastTouch = null;
-  fiatButtons.addEventListener('touchstart', function(e) {
+  touchImmediateEvent(fiatButtons, function(e) {
     var now = Date.now();
     if (lastTouch && now - lastTouch < 100) return;
     lastTouch = now;
@@ -322,8 +315,7 @@ $(document).ready(function () {
     if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
     var denomination = cashButtonJ.attr('data-denomination');
     buttonPressed('fiatButton', {denomination: denomination});
-    e.stopPropagation();
-  }, false);
+  });
 
   initDebug();
 });
