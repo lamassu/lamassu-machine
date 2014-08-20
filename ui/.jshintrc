@@ -5,5 +5,9 @@
   "devel": true,
   "unused": "last-param",
   "quotmark": false,
-  "globals": {"Jed": false, "Keyboard": false, "locales": false}
+  "globals": {
+    "Jed": false,
+    "Keyboard": false,
+    "Keypad": false,
+    "locales": false}
 }

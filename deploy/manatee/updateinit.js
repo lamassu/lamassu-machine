@@ -3,6 +3,8 @@
 var async = require('./async');
 var cp = require('child_process');
 var fs = require('fs');
+var report = require('./report').report;
+
 var TIMEOUT = 10000;
 
 var hardwareCode = process.argv[2] || 'N7G1';
@@ -16,11 +18,6 @@ function command(cmd, cb) {
 function remountRW(cb) {
   if (hardwareCode !== 'N7G1') return cb();
   command('mount -o remount,rw /dev/root', cb);
-}
-
-function remountRO(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  command('mount -o remount,ro /dev/root', cb);
 }
 
 function updateManifest(cb) {
@@ -42,10 +39,8 @@ async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(updateManifest),
-  async.apply(command, 'cp -a /tmp/extract/package/manatee/' + hardwareCode + '/bin /usr'),
-  async.apply(command, 'cp -a /tmp/extract/package/manatee/' + hardwareCode + '/lib /usr'),
-  async.apply(remountRO)
+  async.apply(command, '/tmp/extract/package/install/' + hardwareCode + '/install.sh'),
+  async.apply(report, null, 'finished.')
 ], function(err) {
-  if (err)
-    console.log('Error: %s', err);
+  if (err) throw err;
 });

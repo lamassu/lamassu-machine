@@ -56,13 +56,16 @@ function startBrain(err) {
     wifi: nconf.get('wifi'),
     mockWifi: nconf.get('mock-wifi'),
     qr: nconf.get('qrScanner'),
+    mockScanId: nconf.get('mock-scan-id'),
     mockBTC: nconf.get('mock-btc'),
     mockPair: nconf.get('mock-pair'),
     mockTrader: nconf.get('mock-trader'),
     id003: nconf.get('id003'),
     id003Device: nconf.get('mock-bv'),
     trader: nconf.get('trader'),
-    pairing: nconf.get('pairing')
+    pairing: nconf.get('pairing'),
+    scanId: nconf.get('scanId'),
+    http: nconf.get('http')
   });
   brain.on('error', bail);
   setInterval(monitorParent, 1000);

@@ -10,6 +10,8 @@ npm install
 ./setup.sh
 ```
 
+**Prerequisites**: You'll need Node.js and Ruby installed on your machine. There packages for these on most operating systems. You'll also need compiling tools. See here: https://github.com/TooTallNate/node-gyp#installation.
+
 ## Running
 
 First, run the mock bill validator in a separate terminal window:
