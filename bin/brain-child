@@ -4,6 +4,7 @@
 
 // TODO: go through code and take out all evil throws
 
+var fs = require('fs');
 var path = require('path');
 var nconf = require('nconf');
 var SOFTWARE_CONFIG_PATH = path.resolve(__dirname, '../software_config.json');
@@ -50,23 +51,40 @@ function monitorParent() {
 // TODO FIX: rethink this, we shouldn't have to manually add these here
 function startBrain(err) {
   if (err) throw err;
-  var brain = new Brain({
+
+  var config = {
     brain: nconf.get('brain'),
     currency: nconf.get('brain:locale:currency'),
     wifi: nconf.get('wifi'),
     mockWifi: nconf.get('mock-wifi'),
     qr: nconf.get('qrScanner'),
-    mockScanId: nconf.get('mock-scan-id'),
-    mockBTC: nconf.get('mock-btc'),
+    mockCam: nconf.get('mock-cam'),
     mockPair: nconf.get('mock-pair'),
     mockTrader: nconf.get('mock-trader'),
     id003: nconf.get('id003'),
     id003Device: nconf.get('mock-bv'),
     trader: nconf.get('trader'),
     pairing: nconf.get('pairing'),
-    scanId: nconf.get('scanId'),
     http: nconf.get('http')
-  });
+  };
+  if (config.mockCam) {
+    var fakeLicense = fs.readFileSync(path.join(__dirname,
+        '../mock_data/compliance/license.jpg'));
+    var pdf417Data = fs.readFileSync(path.join(__dirname,
+        '../mock_data/compliance/nh.dat'));
+    var mockCamConfig = {
+      pairingData: config.mockPair,
+      qrData: config.brain.mockQR || config.mockBTC,
+      pdf417Data: pdf417Data,
+      fakeLicense: fakeLicense
+    };
+    config.scanner = {
+      mock: {
+        data: mockCamConfig
+      }
+    };
+  }
+  var brain = new Brain(config);
   brain.on('error', bail);
   setInterval(monitorParent, 1000);
   brain.run();

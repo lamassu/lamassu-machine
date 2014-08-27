@@ -14,9 +14,11 @@ function doInitDebug() {
 //  setPrimaryLocale('pt-PT');
 //  setPrimaryLocales(['en-US', 'nl-NL']);
 
+  setLocale(forceLocale);
 
   setCurrency(forceCurrency);
-  setState('idle');
+  setCredit(25, 0.202, 20);
+  setState('insert_more_bills');
   //setState('scan_address');
 
   var counter = 0;
