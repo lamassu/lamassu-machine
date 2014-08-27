@@ -7,7 +7,7 @@ function initDebug() {
 function doInitDebug() {
   var forceLocale = 'en-US'
 //  var forceLocale = 'en-US'
-  var forceCurrency = 'EUR'
+  var forceCurrency = 'SAR'
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
@@ -18,8 +18,9 @@ function doInitDebug() {
 
   setCurrency(forceCurrency);
   setCredit(25, 0.202, 20);
-  setState('insert_more_bills');
+  //setState('insert_more_bills');
   //setState('scan_address');
+  setState('idle');
 
   var counter = 0;
 
@@ -86,7 +87,6 @@ function doInitDebug() {
         break;
       case 17:
         setState('idle');
-        setTrouble(false);
         counter = 0;
         break;
     }
