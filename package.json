@@ -17,7 +17,9 @@
     "clim": "*",
     "node-forge": "~0.2.36",
     "minimist": "~0.2.0",
-    "jpeg": "~2.0.0"
+    "jpeg": "~2.0.0",
+    "supyo": "~0.2.0",
+    "manatee": "~0.2.0"
   },
   "devDependencies": {},
   "repository": {
