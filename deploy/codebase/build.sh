@@ -44,9 +44,18 @@ cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
 rm -f $TARGET_MACHINE_DIR/ui/css/fonts.css
 
+# Copy back basic fonts
+cp $MACHINE_DIR/ui/css/fonts/brandon_txt* $TARGET_MACHINE_DIR/ui/css/fonts
+cp $MACHINE_DIR/ui/css/fonts/SourceCodePro-Regular.ttf $TARGET_MACHINE_DIR/ui/css/fonts
+cp $MACHINE_DIR/ui/css/fonts/NotoKufiArabic* $TARGET_MACHINE_DIR/ui/css/fonts
+
 # Natively compiled modules, will be copied from hardware-specific directories
 rm -rf $TARGET_MODULES_DIR/ws
 rm -rf $TARGET_MODULES_DIR/serialport
+rm -rf $TARGET_MODULES_DIR/seret
+rm -rf $TARGET_MODULES_DIR/manatee
+rm -rf $TARGET_MODULES_DIR/supyo
+rm -rf $TARGET_MODULES_DIR/jpeg
 
 # Reduce package size, these are unneeded
 rm -rf $TARGET_MODULES_DIR/jsonquest/node_modules/xml2js

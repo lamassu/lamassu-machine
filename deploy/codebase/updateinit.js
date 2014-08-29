@@ -25,6 +25,7 @@ async.series([
   async.apply(command, 'cp -a /tmp/extract/package/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
+  async.apply(command, 'cp /tmp/extract/package/hardware/' + hardwareCode + '/lib/* /usr/local/lib'),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
