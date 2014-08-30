@@ -21,6 +21,8 @@ i18n/*.zip
 ui/css/fonts
 ui/css/fonts.css
 
+libBarcodeScanner.*
+
 # compiled dependencies
 /node_modules
 
