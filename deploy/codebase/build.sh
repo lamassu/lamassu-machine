@@ -41,7 +41,7 @@ cp -r $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
 cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
-rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
+rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
 rm -f $TARGET_MACHINE_DIR/ui/css/fonts.css
 
 # Copy back basic fonts

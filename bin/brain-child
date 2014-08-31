@@ -57,7 +57,7 @@ function startBrain(err) {
     currency: nconf.get('brain:locale:currency'),
     wifi: nconf.get('wifi'),
     mockWifi: nconf.get('mock-wifi'),
-    qr: nconf.get('qrScanner'),
+    scanner: nconf.get('scanner'),
     mockCam: nconf.get('mock-cam'),
     mockPair: nconf.get('mock-pair'),
     mockTrader: nconf.get('mock-trader'),
