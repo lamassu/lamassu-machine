@@ -33,6 +33,7 @@ cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 # Codebase
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
+cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/bin $TARGET_MACHINE_DIR
@@ -41,12 +42,20 @@ cp -r $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
 cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
-rm -rf $TARGET_MACHINE_DIR/ui/css/fonts
-rm -f $TARGET_MACHINE_DIR/ui/css/fonts.css
+rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
+
+# Copy back basic fonts
+cp $MACHINE_DIR/ui/css/fonts/brandon_txt* $TARGET_MACHINE_DIR/ui/css/fonts
+cp $MACHINE_DIR/ui/css/fonts/SourceCodePro-Regular.ttf $TARGET_MACHINE_DIR/ui/css/fonts
+cp $MACHINE_DIR/ui/css/fonts/NotoKufiArabic* $TARGET_MACHINE_DIR/ui/css/fonts
 
 # Natively compiled modules, will be copied from hardware-specific directories
 rm -rf $TARGET_MODULES_DIR/ws
 rm -rf $TARGET_MODULES_DIR/serialport
+rm -rf $TARGET_MODULES_DIR/seret
+rm -rf $TARGET_MODULES_DIR/manatee
+rm -rf $TARGET_MODULES_DIR/supyo
+rm -rf $TARGET_MODULES_DIR/jpeg
 
 # Reduce package size, these are unneeded
 rm -rf $TARGET_MODULES_DIR/jsonquest/node_modules/xml2js
