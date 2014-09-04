@@ -21,6 +21,7 @@ i18n/*.zip
 ui/css/fonts
 ui/css/fonts.css
 
+/licenses.json
 libBarcodeScanner.*
 
 # compiled dependencies
