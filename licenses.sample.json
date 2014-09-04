@@ -1,0 +1,16 @@
+{
+  "scanner": {
+    "manatee": {
+      "license": {
+        "qr": {
+          "name": "",
+          "key": ""
+        },
+        "pdf417": {
+          "name": "",
+          "key": ""
+        }
+      }
+    }
+  }
+}
