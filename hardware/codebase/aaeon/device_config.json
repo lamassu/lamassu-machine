@@ -21,7 +21,11 @@
   "scanner": {
     "device": "/dev/video0",
     "width": 1280,
-    "height": 720
+    "height": 720,
+    "contrast": 25,
+    "lowExposure": 15,
+    "highExposure": 50,
+    "exposureAdjustTime": 200
   },
   "updater": {
     "caFile": "/var/lib/lamassu-machine/lamassu.pem",

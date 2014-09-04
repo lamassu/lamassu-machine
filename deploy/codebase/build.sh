@@ -33,6 +33,7 @@ cp $SCRIPT_DIR/../report.js $EXPORT_DIR
 # Codebase
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
+cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/bin $TARGET_MACHINE_DIR
@@ -42,7 +43,6 @@ cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
-rm -f $TARGET_MACHINE_DIR/ui/css/fonts.css
 
 # Copy back basic fonts
 cp $MACHINE_DIR/ui/css/fonts/brandon_txt* $TARGET_MACHINE_DIR/ui/css/fonts
