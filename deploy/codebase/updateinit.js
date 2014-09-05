@@ -24,7 +24,7 @@ function remountRW(cb) {
 
 function untar(tarball, outPath, cb) {
   var fileIn = fs.createReadStream(tarball);
-  fileIn.pipe(zlib.createDeflate()).pipe(tar.Extract(outPath))
+  fileIn.pipe(zlib.createGunzip()).pipe(tar.Extract(outPath))
   .on('error', cb)
   .on('end', cb);   // success
 }
