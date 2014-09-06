@@ -62,8 +62,6 @@ rm -rf $TARGET_MODULES_DIR/supyo
 rm -rf $TARGET_MODULES_DIR/jpeg
 
 # Reduce package size, these are unneeded
-rm -rf $TARGET_MODULES_DIR/jsonquest/node_modules/xml2js
-rm -rf $TARGET_MODULES_DIR/jsonquest/node_modules/mocha
 rm -rf $TARGET_MODULES_DIR/clim/example
 rm -rf $TARGET_MODULES_DIR/sha512crypt-node
 
