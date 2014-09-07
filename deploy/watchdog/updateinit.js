@@ -28,7 +28,6 @@ function remountRW(cb) {
 
 async.series([
   async.apply(remountRW),
-  async.apply(command, 'cp -a /tmp/extract/package/update /opt/apps/machine/lamassu-machine/lib'),
   async.apply(command, 'cp -a /tmp/extract/package/watchdog.js /opt/apps/machine/lamassu-machine'),
   async.apply(reboot),
   async.apply(report, null, 'finished.')
