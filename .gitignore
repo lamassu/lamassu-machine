@@ -6,6 +6,8 @@ lib-cov
 *.pid
 *.gz
 
+sftp-config.json
+
 pids
 logs
 log
