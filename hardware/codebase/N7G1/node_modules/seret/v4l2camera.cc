@@ -345,11 +345,17 @@ namespace {
 
   v8::Handle<v8::Value> Camera::ToGrey(const v8::Arguments& args) {
     v8::HandleScope scope;
+
+    if (args.Length() < 1) return throwTypeError("argument required: buffer");
+
     auto thisObj = args.This();
     auto camera = node::ObjectWrap::Unwrap<Camera>(thisObj)->camera;
     auto grey = yuyv2grey(camera->head.start, camera->width, camera->height);
-    int length = camera->width * camera->height;
-    auto buffer = makeBuffer(grey, length);
+
+    v8::Local<v8::Object> buffer = args[0]->ToObject();
+    char* bufferData   = node::Buffer::Data(buffer);
+    size_t bufferLength = node::Buffer::Length(buffer);
+    memcpy(bufferData, grey, bufferLength);
     free(grey);
     return scope.Close(buffer);
   }
