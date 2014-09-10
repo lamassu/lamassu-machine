@@ -35,3 +35,8 @@ ui/css/fonts.css
 /data/connection_info.json
 
 test/compliance/licenses
+
+/hardware/codebase/N7G1/node_modules/manatee/
+/hardware/codebase/aaeon/lib/
+/licenses.json
+/sftp-config.json
