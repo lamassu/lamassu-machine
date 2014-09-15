@@ -93,9 +93,9 @@ Handle<Value> CaptureFrame(const Arguments& args) {
   char* bufferData   = node::Buffer::Data(buffer);
   size_t bufferLength = node::Buffer::Length(buffer);
 
-  capture_frame(fd, bufferData, bufferLength);
+  int result = capture_frame(fd, bufferData, bufferLength);
 
-  return scope.Close(Null());
+  return scope.Close(Integer::New(result));
 }
 
 Handle<Value> ControlSet(const Arguments& args) {
