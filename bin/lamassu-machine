@@ -8,7 +8,7 @@ require('../logging');
 
 var childPath = path.resolve(__dirname, './brain-child');
 
-var TIMEOUT = 5000;
+var TIMEOUT = 20000;
 
 var lastHeartbeat = Date.now();
 var child = null;
