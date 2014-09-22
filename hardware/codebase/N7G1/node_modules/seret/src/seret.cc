@@ -15,18 +15,17 @@ using namespace node;
 Handle<Value> CameraOn(const Arguments& args) {
   HandleScope scope;
 
-  if (args.Length() != 4) {
+  if (args.Length() != 3) {
     return ThrowException(
-      Exception::TypeError(String::New("cameraOn requires 4 arguments"))
+      Exception::TypeError(String::New("cameraOn requires 3 arguments"))
     );
   }
 
   String::AsciiValue deviceString(args[0]->ToString());
   uint32_t width = args[1]->IntegerValue();
   uint32_t height = args[2]->IntegerValue();
-  uint32_t fps = args[3]->IntegerValue();
 
-  int fd = camera_on(*deviceString, width, height, fps);
+  int fd = camera_on(*deviceString, width, height);
 
   return scope.Close(Integer::New(fd));
 }
@@ -97,7 +96,6 @@ Handle<Value> CaptureFrame(const Arguments& args) {
   v8::Local<v8::Object> buffer = args[1]->ToObject();
   char* bufferData   = node::Buffer::Data(buffer);
   size_t bufferLength = node::Buffer::Length(buffer);
-
   int result = capture_frame(fd, bufferData, bufferLength);
 
   return scope.Close(Integer::New(result));
