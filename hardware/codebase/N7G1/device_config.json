@@ -19,7 +19,7 @@
   },
   "scanner": {
     "device": "/dev/video0",
-    "width": 960,
+    "width": 1280,
     "height": 720,
     "contrast": 25,
     "lowExposure": 15,
