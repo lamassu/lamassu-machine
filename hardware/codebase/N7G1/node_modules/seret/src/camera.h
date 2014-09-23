@@ -1,5 +1,5 @@
 extern "C" {
-  int camera_on(char *dev_name, uint32_t width, uint32_t height);
+  int camera_on(char *dev_name, uint32_t width, uint32_t height, uint32_t fps);
   void camera_off(int fd);
   int start_capturing(int fd);
   void stop_capturing(int fd);

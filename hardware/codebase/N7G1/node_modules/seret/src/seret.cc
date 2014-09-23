@@ -15,17 +15,18 @@ using namespace node;
 Handle<Value> CameraOn(const Arguments& args) {
   HandleScope scope;
 
-  if (args.Length() != 3) {
+  if (args.Length() != 4) {
     return ThrowException(
-      Exception::TypeError(String::New("cameraOn requires 3 arguments"))
+      Exception::TypeError(String::New("cameraOn requires 4 arguments"))
     );
   }
 
   String::AsciiValue deviceString(args[0]->ToString());
   uint32_t width = args[1]->IntegerValue();
   uint32_t height = args[2]->IntegerValue();
+  uint32_t fps = args[3]->IntegerValue();
 
-  int fd = camera_on(*deviceString, width, height);
+  int fd = camera_on(*deviceString, width, height, fps);
 
   return scope.Close(Integer::New(fd));
 }
