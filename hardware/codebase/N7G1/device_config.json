@@ -1,10 +1,13 @@
 {
+  "mockTrader": true,
   "brain": {
     "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "/var/lib/sencha",
     "powerStatus": "/sys/class/power_supply/battery/status",
-    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity"
+    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
+    "scanLightOnInterval": 1800,
+    "scanLightOffInterval": 300
   },
   "wifi": {
     "wpa": {

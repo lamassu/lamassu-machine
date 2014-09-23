@@ -7,7 +7,7 @@ var buffer = null;
 var width = null;
 var height = null;
 
-var FPS = 4;
+var FPS = 6;
 var DELAY = 1000 / FPS;
 var TIMEOUT = 5000;
 
