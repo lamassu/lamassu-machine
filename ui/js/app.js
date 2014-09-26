@@ -176,6 +176,9 @@ function processData(data) {
     case 'connecting':
       setState('connecting');
       break;
+    case 'restart':
+      setState('restart');
+      break;
   }
 }
 

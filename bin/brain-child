@@ -20,11 +20,6 @@ require('../logging');
 
 var bailed = false;
 
-function heartbeat() {
-  process.send({heartbeat: true});
-}
-setInterval(heartbeat, 1000);
-
 function bail(err) {
   if (bailed) return;
   bailed = true;
@@ -36,12 +31,6 @@ function bail(err) {
     process.exit(10);
     process.abort();  // Make sure we're dead
   }, 7000);   // Leave some time to connect for browser to set error screen
-}
-
-// If we're not getting messages from parent, we should exit
-function monitorParent() {
-  if (process.connected || bailed) return;
-  bail(new Error('Got disconnected from parent'));
 }
 
 function loadConfig() {
@@ -81,7 +70,6 @@ function startBrain() {
 
   var brain = new Brain(config);
   brain.on('error', bail);
-  setInterval(monitorParent, 1000);
   brain.run();
 }
 
