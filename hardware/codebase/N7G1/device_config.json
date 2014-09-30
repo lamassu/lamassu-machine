@@ -1,10 +1,13 @@
 {
+  "mockTrader": true,
   "brain": {
     "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "/var/lib/sencha",
     "powerStatus": "/sys/class/power_supply/battery/status",
-    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity"
+    "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
+    "scanLightOnInterval": 1800,
+    "scanLightOffInterval": 300
   },
   "wifi": {
     "wpa": {
@@ -17,8 +20,14 @@
       "device": "/dev/ttyUSB0"
     }
   },
-  "qrScanner": {
-    "device": "/dev/video0"
+  "scanner": {
+    "device": "/dev/video0",
+    "width": 1280,
+    "height": 960,
+    "contrast": 25,
+    "lowExposure": 15,
+    "highExposure": 50,
+    "exposureAdjustTime": 200
   },
   "updater": {
     "caFile": "/usr/local/share/sencha/certs/lamassu.pem",

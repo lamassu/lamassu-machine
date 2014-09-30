@@ -108,6 +108,7 @@ function processData(data) {
       if (currentState !== 'maintenance') setState('booting');
       break;
     case 'idle':
+    case 'fakeIdle':
       setState('idle');
       break;
     case 'dualIdle':
@@ -196,6 +197,9 @@ function processData(data) {
       break;
     case 'fiatComplete':
       fiatComplete(data.tx);
+      break;
+    case 'restart':
+      setState('restart');
       break;
   }
 }
@@ -481,10 +485,24 @@ function setLocale(data) {
   jsLocaleCode = data;
   if (jsLocaleCode === 'fr-QC') jsLocaleCode = 'fr-CA';
 
-  if (jsLocaleCode === 'he-IL')
-    $('body').addClass('i18n-he i18n-rtl');
+  var isArabic = jsLocaleCode.startsWith('ar-');
+  var isHebrew = jsLocaleCode.startsWith('he-');
+  var isRTL = isArabic || isHebrew;
+
+  if (isRTL)
+    $('body').addClass('i18n-rtl');
   else
-    $('body').removeClass('i18n-he i18n-rtl');
+    $('body').removeClass('i18n-rtl');
+
+  if (isArabic)
+    $('body').addClass('i18n-ar');
+  else
+    $('body').removeClass('i18n-ar');
+
+  if (isHebrew)
+    $('body').addClass('i18n-he');
+  else
+    $('body').removeClass('i18n-he');
 
   locale = loadI18n(localeCode);
   try { translatePage(); } catch (ex) {}
@@ -691,6 +709,22 @@ function loadI18n(localeCode) {
     }
   });
 }
+
+function initDebug() {}
+
+// Polyfill
+if (!String.prototype.startsWith) {
+  Object.defineProperty(String.prototype, 'startsWith', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: function (searchString, position) {
+      position = position || 0;
+      return this.lastIndexOf(searchString, position) === position;
+    }
+  });
+}
+
 
 function reachFiatLimit(rec) {
   var msg = null;

@@ -5,12 +5,17 @@ body {
   overflow: hidden;
   direction: ltr;
   font-family: brandon_text, 'Source Sans Pro', 'Source Han Sans CN', 'Source Han Sans TWJK',
-     'Source Han Sans JP', 'Source Han Sans KR', raanan;
+     'Source Han Sans JP', 'Source Han Sans KR';
   cursor: none;
 }
 
 body.i18n-he {
   font-family: raanan, brandon_text, 'Source Sans Pro';
+  direction: rtl;
+}
+
+body.i18n-ar {
+  font-family: 'Noto Kufi Arabic';
   direction: rtl;
 }
 
@@ -115,7 +120,7 @@ body  { margin: 0;}
   color: #FFFFFF;
   vertical-align: text-top;
   width: 100%; text-align: center;
-  position: absolute; top: 100;
+  position: absolute; top: 75;
 }
 
 #tap {
@@ -417,6 +422,8 @@ body  { margin: 0;}
 }
 
 .or-circle {
+  width: 100%;
+  height: 100%;
   fill: #2fdccc;
 }
 
@@ -498,7 +505,7 @@ body  { margin: 0;}
   line-height: 64px;
 }
 
-.i18n-latin {
+.i18n-he .i18n-latin {
   direction: ltr;
   unicode-bidi: bidi-override;
   font-family: brandon_text, 'Source Sans Pro', 'Source Han Sans CN', 'Source Han Sans TWJK',

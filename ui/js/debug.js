@@ -7,17 +7,20 @@ function initDebug() {
 function doInitDebug() {
   var forceLocale = 'en-US'
 //  var forceLocale = 'en-US'
-  var forceCurrency = 'EUR'
+  var forceCurrency = 'SAR'
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
 //  setPrimaryLocales(['en-US', 'nl-NL']);
 
+  setLocale(forceLocale);
 
   setCurrency(forceCurrency);
-  setState('idle');
+  setCredit(25, 0.202, 20);
+  //setState('insert_more_bills');
   //setState('scan_address');
+  setState('restart');
 
   var counter = 0;
 
@@ -84,7 +87,6 @@ function doInitDebug() {
         break;
       case 17:
         setState('idle');
-        setTrouble(false);
         counter = 0;
         break;
     }

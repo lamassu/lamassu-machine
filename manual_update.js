@@ -1,18 +1,22 @@
 'use strict';
 
 var fs = require('fs');
-var SOFTWARE_CONFIG_PATH = '/usr/local/share/sencha/node/sencha-brain/software_config.json';
-var softwareConfig = null;
+var path = require('path');
+var _ = require('lodash');
 
-try {
-  softwareConfig = JSON.parse(fs.readFileSync(SOFTWARE_CONFIG_PATH));
-} catch (ex) {
-  softwareConfig = require('/usr/local/share/sencha/config/configfile');
-}
+var codeRoot = __dirname;
+var SOFTWARE_CONFIG_PATH = path.resolve(codeRoot, 'software_config.json');
+var DEVICE_CONFIG_PATH = path.resolve(codeRoot, 'device_config.json');
 
-var config = softwareConfig.updater.extractor;
+var softwareConfig = JSON.parse(fs.readFileSync(SOFTWARE_CONFIG_PATH));
+var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH));
+
+var masterConfig = softwareConfig;
+_.merge(masterConfig, deviceConfig);
+var config = masterConfig.updater.extractor;
+
 config.skipVerify = true;
-var extractor = require('/usr/local/share/sencha/node/sencha-brain/lib/update/extractor').factory(config);
+var extractor = require(codeRoot + '/lib/update/extractor').factory(config);
 
 var fileInfo = {
   rootPath: '/tmp/extract',

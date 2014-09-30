@@ -5,5 +5,4 @@ if [ $? -ne 0 ]; then
 fi
 
 TARGET_FONTS_DIR=/opt/apps/machine/lamassu-machine/ui/css/fonts
-mkdir -p $TARGET_FONTS_DIR
 cp /tmp/extract/package/fonts/* $TARGET_FONTS_DIR
