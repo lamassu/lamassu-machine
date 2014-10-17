@@ -44,7 +44,6 @@ function loadConfig() {
 
   if (config.mockBv) config.id003.rs232.device = config.mockBv;
 
-
   return config;
 }
 
