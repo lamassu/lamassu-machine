@@ -40,3 +40,6 @@ libBarcodeScanner.*
 /data/connection_info.json
 
 test/compliance/licenses
+
+cli.txt
+
