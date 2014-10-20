@@ -25,6 +25,7 @@ ui/css/fonts
 /licenses.json
 libBarcodeScanner.*
 /hardware/codebase/N7G1/node_modules/manatee/build
+/hardware/codebase/aaeon/node_modules/manatee/build
 
 # compiled dependencies
 /node_modules
