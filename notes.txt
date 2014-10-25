@@ -1,0 +1,20 @@
+- Unconfirmed BTC transactions or out of cash
+
+Need to wait for confirmation.
+- collect phone number
+- ask user to photograph screen
+
+
+- setbilllengths -- generalize
+- take debug out of puloon file
+
+- handle limits -- e.g., no more than 20 bills at a time, etc
+- For example, don't allow withdrawal of > 20 bills per tx. (in fiatResponse)
+
+- process number of bills dispensed, number of bills rejected
+- report error (puloon)
+- log error (just code for now)
+- get rid of debug (puloon)
+
+- handle protocol timeouts
+- handle NAK correctly (same as timeout)
