@@ -60,7 +60,7 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit)
     setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
-  if (data.transactionHashURL) setTransactionHash(data.transactionHashURL);
+  if (data.transactionId) setTransactionId(data.transactionId);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
@@ -564,13 +564,13 @@ function setExchangeRate(rate) {
   $('#fiat-inserted').html(insertedText);
 }
 
-function setTransactionHash(url) {
+function setTransactionId(txId) {
   $('#qr-code').empty();
   $('#qr-code').qrcode({
     render: 'canvas',
     width: 225,
     height: 225,
-    text: url
+    text: txId
   });
 }
 
