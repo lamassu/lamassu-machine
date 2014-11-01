@@ -29,6 +29,12 @@ function untar(tarball, outPath, cb) {
   .on('end', cb);   // success
 }
 
+function installBarcodeLib(cb) {
+  if (hardwareCode !== 'aaeon') return cb();
+  var cmd = 'cp -p /tmp/extract/package/subpackage/hardware/aaeon/lib/libBarcodeScanner.so /usr/lib';
+  command(cmd, cb);
+}
+
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
@@ -36,6 +42,7 @@ async.series([
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
+  async.apply(installBarcodeLib),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
