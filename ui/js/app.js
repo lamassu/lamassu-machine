@@ -60,11 +60,12 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit)
     setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
-  if (data.transactionHashURL) setTransactionHash(data.transactionHashURL);
+  if (data.transactionId) setTransactionId(data.transactionId);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
   if (data.beep) confirmBeep.play();
+  if (data.sent && data.total) setPartialSend(data.sent, data.total);
 
   switch (data.action) {
     case 'wifiList':
@@ -155,8 +156,10 @@ function processData(data) {
     case 'maintenance':
       setState('maintenance');
       break;
-    case 'networkDown':
     case 'withdrawFailure':
+      setState('partial_send');
+      break;
+    case 'networkDown':
       setState('trouble');
       break;
     case 'balanceLow':
@@ -561,13 +564,13 @@ function setExchangeRate(rate) {
   $('#fiat-inserted').html(insertedText);
 }
 
-function setTransactionHash(url) {
+function setTransactionId(txId) {
   $('#qr-code').empty();
   $('#qr-code').qrcode({
     render: 'canvas',
     width: 225,
     height: 225,
-    text: url
+    text: txId
   });
 }
 
@@ -609,6 +612,11 @@ function sendOnly(reason) {
     locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch());
   $('#insert-another').css({'display': 'none'});
   $('#limit-reached-section').css({'display': 'block'});
+}
+
+function setPartialSend(sent, total) {
+  $('#already-sent').text(formatFiat(sent.fiat));
+  $('#pending-sent').text(formatFiat(total.fiat - sent.fiat));
 }
 
 function t(id, str) {
