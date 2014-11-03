@@ -8,11 +8,11 @@
     "periodicLogInterval": 3600000,
     "insufficientFundsTimeout": 30000,
     "confirmTimeout": 60000,
+    "checkIdle": 10000,
     "idleTime": 600000,
-    "checkIdleTime": 10000,
+    "exitTime": 10800000,
     "checkPowerTime": 1000,
     "checkPowerTimeout": 4000,
-    "restartPeriod": 10800000,
     "locale": {
       "localeInfo": {
         "primaryLocale": "en-US",

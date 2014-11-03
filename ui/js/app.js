@@ -106,6 +106,7 @@ function processData(data) {
       if (currentState !== 'maintenance') setState('booting');
       break;
     case 'idle':
+    case 'fakeIdle':
       setState('idle');
       break;
     case 'scanId':
@@ -177,6 +178,9 @@ function processData(data) {
       break;
     case 'connecting':
       setState('connecting');
+      break;
+    case 'restart':
+      setState('restart');
       break;
   }
 }

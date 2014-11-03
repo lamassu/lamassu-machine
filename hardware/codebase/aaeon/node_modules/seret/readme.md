@@ -105,6 +105,10 @@ cd ../..
 - Ubuntu raring armhf on BeagleBone Black with USB Buffalo BSW13K10H
 - Ubuntu raring amd64 on Acer Aspire One with its screen facecam
 
+## Notes
+
+This is a nice resource for understanding how v4l2 works: http://www.jayrambhia.com/blog/capture-v4l2/
+
 ## Licenses
 
 [MIT](http://opensource.org/licenses/MIT) and 
