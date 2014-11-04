@@ -5,7 +5,9 @@
     "dataPath": "/var/lib/lamassu-machine",
     "powerStatus": null,
     "batteryCapacityPath": null,
-    "tempSensorPath": "/sys/class/hwmon/hwmon1/device/temp2_input"
+    "tempSensorPath": "/sys/class/hwmon/hwmon1/device/temp2_input",
+    "scanLightOnInterval": null,
+    "scanLightOffInterval": 1000
   },
   "wifi": {
     "wpa": {
@@ -21,10 +23,10 @@
   "scanner": {
     "device": "/dev/video0",
     "width": 1280,
-    "height": 720,
+    "height": 960,
     "contrast": 25,
-    "lowExposure": 15,
-    "highExposure": 50,
+    "lowExposure": null,
+    "highExposure": null,
     "exposureAdjustTime": 200
   },
   "updater": {
