@@ -1,0 +1,1 @@
+node bin/lamassu-machine --mockBv /dev/ttys004 --mockBillDispenser --mockCam --mockTrader

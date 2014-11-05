@@ -1,5 +1,4 @@
 {
-  "mockTrader": true,
   "brain": {
     "freeMemRatio": 0.01,
     "powerStatus": null,
