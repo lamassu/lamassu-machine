@@ -394,11 +394,11 @@
         <section class="main">
           <section class="sides">
             <section class="digital-side start">
-              <div class="rate">1 BTC = <span class="js-digital-rate"></span> GBP</div>
+              <div class="rate">1 BTC = <span class="js-digital-rate"></span> <span class="js-currency"/></div>
               <div id="want_bitcoin" class="circle-button"><span class="js-i18n">I want<br/>Bitcoin</span></div>
             </section>
             <section class="fiat-side start">
-              <div class="rate">1 BTC = <span class="js-fiat-rate"></span> GBP</div>
+              <div class="rate">1 BTC = <span class="js-fiat-rate"></span> <span class="js-currency"/></div>
               <div id="want_cash" class="circle-button"><span class="js-i18n">I want<br/>Cash</span></div>
               <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
             </section>
@@ -922,18 +922,24 @@
       <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
         <section class="instructions">
           <h1 class="js-i18n">How much?</h1>
-          <h2>1 BTC is <strong class="js-fiat-rate"></strong> GBP</h2>
+          <h2>1 BTC is <strong class="js-fiat-rate"></strong> <span class="js-currency"/></h2>
           <section class="sums">
-            <div class="fiat"><strong class="fiat-amount"></strong> GBP</div>
+            <div class="fiat"><strong class="fiat-amount"></strong> <span class="js-currency"/></div>
             <div class="digital js-18n" id="js-i18n-choose-digital-amount"></div>
           </section>
         </section>
         <span id="cash-out-button" class="circle-button" style="display: none;">Cash out</span>
         <div class="limit"></div>
         <section id="js-fiat-buttons" class="cash-buttons">
-          <span class="cash-button" data-denomination="5"><span class="plus">+</span> 5 GBP</span>
-          <span class="cash-button" data-denomination="10"><span class="plus">+</span> 10 GBP</span>
-          <span class="cash-button" data-denomination="20"><span class="plus">+</span> 20 GBP</span>
+          <span class="cash-button" data-denomination-index="0">
+            <span class="plus">+</span> <span class="js-denomination"></span>
+          </span>
+          <span class="cash-button" data-denomination-index="1">
+            <span class="plus">+</span> <span class="js-denomination"></span>
+          </span>
+          <span class="cash-button" data-denomination-index="2">
+            <span class="plus">+</span> <span class="js-denomination"></span>
+          </span>
           <span id="js-fiat-clear" class="cash-button clear">Clear</span>
         </section>
         <section id="chooseFiatCancel" class="cancel"><img src="images/cancel.png" /></section>
@@ -949,7 +955,7 @@
               <div>will be sent</div>
             </div>
             <div class="fiat">
-              <div class="amount"><strong class="js-amount"></strong> GBP</div>
+              <div class="amount"><strong class="js-amount"></strong> </div>
               <div>will be dispensed</div>
             </div>
           </section>
@@ -983,7 +989,7 @@
               <div>were sent by you</div>
             </div>
             <div class="fiat">
-              <div class="amount"><strong class="js-amount"></strong> GBP</div>
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
               <div>were dispensed to you</div>
             </div>
           </section>

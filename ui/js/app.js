@@ -23,6 +23,7 @@ var idKeypad = null;
 var previousState = null;
 var onSendOnly = false;
 var buttonActive = true;
+var cartridges = null;
 
 function connect() {
   websocket = new WebSocket('ws://localhost:8080/');
@@ -67,6 +68,7 @@ function processData(data) {
   if (data.sendOnly) sendOnly(data.sendOnly);
   if (data.fiatCredit) fiatCredit(data.fiatCredit);
   if (data.depositInfo) setDepositAddress(data.depositInfo);
+  if (data.cartridges) setupCartridges(data.cartridges);
   if (data.beep) confirmBeep.play();
 
   switch (data.action) {
@@ -317,8 +319,9 @@ $(document).ready(function () {
     if (cashButtonJ.length === 0) return;
     if (cashButtonJ.hasClass('disabled')) return;
     if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
-    var denomination = cashButtonJ.attr('data-denomination');
-    buttonPressed('fiatButton', {denomination: denomination});
+    var denominationIndex = cashButtonJ.attr('data-denomination-index');
+    var denominationRec = cartridges[denominationIndex];
+    buttonPressed('fiatButton', {denomination: denominationRec.denomination});
   });
 
   initDebug();
@@ -545,6 +548,7 @@ function setPrimaryLocales(primaryLocales) {
 
 function setCurrency(data) {
   currency = data;
+  $('.js-currency').text(currency);
 }
 
 function setCredit(fiat, bitcoins, lastBill) {
@@ -555,6 +559,15 @@ function setCredit(fiat, bitcoins, lastBill) {
     locale.translate("You inserted a %s bill").fetch(formatFiat(lastBill)));
   $('.total-deposit').html(formatFiat(fiat));
   updateBitcoins('.total-btc-rec', bitcoins);
+}
+
+function setupCartridges(_cartridges) {
+  cartridges = _cartridges;
+  for (var i = 0; i < cartridges.length; i++) {
+    var cartridge = cartridges[i];
+    var denomination = cartridge.denomination;
+    $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
+  }
 }
 
 function updateBitcoins(selector, bitcoins) {
@@ -742,12 +755,14 @@ function chooseFiat(data) {
 }
 
 function manageFiatButtons(activeDenominations) {
-  Object.keys(activeDenominations).forEach(function (denomination) {
+  for (var i = 0; i < cartridges.length; i++) {
+    var cartridge = cartridges[0];
+    var denomination = cartridge.denomination;
     var enabled = activeDenominations[denomination];
-    var button = $('.choose_fiat_state .cash-button[data-denomination=' + denomination + ']');
+    var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
     if (enabled) button.removeClass('disabled');
     else button.addClass('disabled');
-  });
+  }
 }
 
 function fiatCredit(data) {
