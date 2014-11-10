@@ -288,6 +288,8 @@ $(document).ready(function () {
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
   setupImmediateButton('fiat_completed_viewport', 'completed');
+  setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
+  setupImmediateButton('depositCancel', 'depositCancel');
 
   setupButton('initialize', 'initialize');
   setupButton('test-mode', 'testMode');
@@ -296,8 +298,6 @@ $(document).ready(function () {
   setupButton('pairing-error-ok', 'pairingScanCancel');
   setupButton('want_bitcoin', 'start');
   setupButton('want_cash', 'startFiat');
-  setupButton('chooseFiatCancel', 'chooseFiatCancel');
-  setupButton('depositCancel', 'depositCancel');
   setupButton('cash-out-button', 'cashOut');
   setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
