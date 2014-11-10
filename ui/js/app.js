@@ -47,7 +47,7 @@ function buttonPressed(button, data) {
   setTimeout(function () {
     buttonActive = true;
     wifiKeyboard.activate();
-  }, 500);
+  }, 300);
   var res = {button: button};
   if (data || data === null) res.data = data;
   websocket.send(JSON.stringify(res));
@@ -756,7 +756,7 @@ function chooseFiat(data) {
 
 function manageFiatButtons(activeDenominations) {
   for (var i = 0; i < cartridges.length; i++) {
-    var cartridge = cartridges[0];
+    var cartridge = cartridges[i];
     var denomination = cartridge.denomination;
     var enabled = activeDenominations[denomination];
     var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
