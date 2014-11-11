@@ -114,6 +114,7 @@ function processData(data) {
       setState('idle');
       break;
     case 'dualIdle':
+    case 'fakeDualIdle':
       setState('dual_idle');
       break;
     case 'scanId':
