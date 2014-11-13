@@ -10,12 +10,12 @@ device.on('close', console.log);
 device.on('connected', console.log);
 
 var cartridges = [
-    {denomination: 50, count: 220},
-    {denomination: 100, count: 250}
+    {denomination: 50, count: 100},
+    {denomination: 100, count: 0}
   ];
 
 var virtualCartridges = [100];
-var currency = 'EUR';
+var currency = 'USD';
 var data = {
     cartridges: cartridges,
     virtualCartridges: virtualCartridges,
@@ -44,7 +44,7 @@ function initializeDevice(cb) {
 
 billDispenser._setup(data);
 initializeDevice(function() {
-  billDispenser.dispense(50, function() {console.log('DONE'); });
+  billDispenser.dispense(200, function() {console.log('DONE'); });
 });
 
 /*
