@@ -819,6 +819,7 @@ function deposit(tx) {
   $('.deposit_state .digital .js-amount').text(millies);
   $('.deposit_state .fiat .js-amount').text(tx.fiat);
   $('.deposit_state .send-notice').hide();
+  $('#qr-code-deposit').empty();
   $('.deposit_state .loading').show();
 
   setState('deposit');
