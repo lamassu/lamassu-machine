@@ -16,11 +16,11 @@
   },
   "id003": {
     "rs232": {
-      "device": "/dev/ttyUSB0"
+      "device": "/sys/bus/usb/devices/2-1.2:1.0"
     }
   },
   "billDispenser": {
-    "device": "/dev/ttyUSB1"
+    "device": "/sys/bus/usb/devices/2-1.5:1.0"
   },
   "scanner": {
     "device": "/dev/video0",
