@@ -972,6 +972,39 @@
         <section id="depositCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
+      <section class="viewport pending_deposit_state fiat-side" data-tr-section="pending-deposit">
+        <section class="instructions">
+          <h1>Bitcoins received!</h1>
+          <h2>We've received your payment.</h2>
+          <h2>Please wait for confirmation.</h2>
+        </section>
+      </section>
+
+      <section class="viewport insufficient_deposit_state fiat-side" data-tr-section="insufficient-deposit">
+        <section class="instructions">
+          <h1>Partial Payment</h1>
+          <h2>We've received a payment, but it was not for the full amount.</h2>
+          <h2>Please contact the operator.</h2>
+        </section>
+      </section>
+
+      <section class="viewport deposit_timeout_state fiat-side" data-tr-section="deposit-timeout">
+        <section class="instructions">
+          <h1>No bitcoins received</h1>
+          <h2>Sorry, we haven't received any bitcoins. If you haven't sent any yet,
+          you can start a new transaction.</h2>
+          <h2>If you've just sent us bitcoins, please contact the operator.</h2>
+        </section>
+      </section>
+
+      <section class="viewport rejected_deposit_state fiat-side" data-tr-section="rejeceted-deposit">
+        <section class="instructions">
+          <h1>Unconfirmed payment</h1>
+          <h2>We've received a payment, but we could not confirm it.</h2>
+          <h2>Please contact the operator.</h2>
+        </section>
+      </section>
+
       <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
         <section class="instructions">
           <h1>Dispensing...</h1>
