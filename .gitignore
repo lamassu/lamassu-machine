@@ -44,4 +44,5 @@ libBarcodeScanner.*
 test/compliance/licenses
 
 cli.txt
+*~
 

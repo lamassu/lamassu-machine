@@ -55,7 +55,7 @@ function pollUpdate() {
   ready();
 }
 
-var _sessionId = uuid.v4();
+var _txId = uuid.v4();
 var _satoshis = 0;
 var _fiat = 0;
 
@@ -64,7 +64,7 @@ function insertBill(denomination) {
   var satoshis = computeSatoshis(denomination, exchangeRate);
   var tradeRec = {
     currency: _currency,
-    sessionId: _sessionId,
+    txId: _txId,
     exchangeRate: exchangeRate,
     fiat: denomination,
     satoshis: satoshis
@@ -76,7 +76,7 @@ function insertBill(denomination) {
 
 function sendCoins(callback) {
   var tx = {
-    txId: _sessionId,
+    txId: _txId,
     toAddress: _coinAddress,
     currencyCode: _currency,
     fiat: _fiat,
