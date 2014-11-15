@@ -16,7 +16,7 @@
   },
   "id003": {
     "rs232": {
-      "device": "/sys/bus/usb/devices/2-1.2:1.0"
+      "device": "/sys/bus/usb/devices/2-1.3:1.0"
     }
   },
   "billDispenser": {
