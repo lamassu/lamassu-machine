@@ -195,8 +195,17 @@ function processData(data) {
       setState('deposit');
       deposit(data.tx);
       break;
-    case 'fiatTimeout':
-      setState('fiat_timeout');
+    case 'depositTimeout':
+      setState('deposit_timeout');
+      break;
+    case 'pendingDeposit':
+      setState('pending_deposit');
+      break;
+    case 'insufficientDeposit':
+      setState('insufficient_deposit');
+      break;
+    case 'rejectedDeposit':
+      setState('deposit_timeout');
       break;
     case 'dispensing':
       setState('dispensing');
@@ -312,6 +321,10 @@ $(document).ready(function () {
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
+
+  setupButton('insufficient-deposit-ok', 'idle');
+  setupButton('deposit-timeout-ok', 'idle');
+  setupButton('rejected-deposit-ok', 'idle');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;

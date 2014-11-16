@@ -1387,7 +1387,7 @@ body  { margin: 0;}
 
 .fiat-side .info h1 {
   position: absolute;
-  top: 214px;
+  top: 200px;
   left: 0;
   font-size: 70px;
   width: 100%;
@@ -1395,20 +1395,22 @@ body  { margin: 0;}
 
 .fiat-side .info .description {
   position: absolute;
-  top: 368px;
+  top: 340px;
   left: 0;
   width: 100%;
   font-size: 30px;
 }
 
 .fiat-side .info p {
-  margin: 0;
+  margin: 0 auto 1em;
   font-weight: normal;
+  width: 60%;
+  text-align: center;
 }
 
 .fiat-side .info .actions {
   position: absolute;
-  top: 510px;
+  top: 580px;
   left: 0;
   width: 100%;
   margin: 0;
