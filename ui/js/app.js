@@ -210,6 +210,9 @@ function processData(data) {
     case 'dispensing':
       setState('dispensing');
       break;
+    case 'outOfCash':
+      setState('out_of_cash');
+      break;
     case 'fiatComplete':
       fiatComplete(data.tx);
       break;
@@ -325,6 +328,7 @@ $(document).ready(function () {
   setupButton('insufficient-deposit-ok', 'idle');
   setupButton('deposit-timeout-ok', 'idle');
   setupButton('rejected-deposit-ok', 'idle');
+  setupButton('out-of-cash-ok', 'idle');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
