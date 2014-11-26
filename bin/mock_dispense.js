@@ -17,6 +17,11 @@ var currency = argv.c || 'USD';
 var connected = false;
 var sessionId = uuid.v4();
 
+var tx = {
+  currencyCode: currency,
+  fiat: amountToDispense
+};
+
 var traderConfig = {
   protocol: 'http',
   settings: {
@@ -46,6 +51,16 @@ var connectTimeout = setTimeout(function () {
 
 trader.on('error', function(err) { console.log(err.stack); });
 trader.on('pollUpdate', pollUpdate);
+trader.on('dispenseUpdate', function(status) {
+  if (status === 'authorized') {
+    console.log('Dispensing...');
+    tx.billDistribution = [
+      {actualDispense: 1, rejected: 1},
+      {actualDispense: 2, rejected: 0}
+    ];
+    trader.dispenseAck(tx);
+  }
+});
 
 function pollUpdate() {
   if (connected) return;
@@ -66,12 +81,9 @@ function ready() {
   console.log('READY\n');
   trader.sessionId = sessionId;
 
-  var tx = {
-    currencyCode: currency,
-    satoshis: computeSatoshis(amountToDispense, trader.exchangeRate),
-    fiat: amountToDispense
-  };
+  tx.satoshis = computeSatoshis(amountToDispense, trader.exchangeRate);
   trader.cashOut(tx, function(err, address) {
+    tx.toAddress = address;
     console.log(address);
   });
 }
