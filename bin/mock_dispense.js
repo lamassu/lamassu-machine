@@ -52,6 +52,12 @@ var connectTimeout = setTimeout(function () {
 trader.on('error', function(err) { console.log(err.stack); });
 trader.on('pollUpdate', pollUpdate);
 trader.on('dispenseUpdate', function(status) {
+  console.log(status);
+  if (status === 'rejected') {
+    console.log('rejected');
+    process.exit(0);
+  }
+
   if (status === 'authorized') {
     console.log('Dispensing...');
     tx.billDistribution = [

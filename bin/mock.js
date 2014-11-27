@@ -55,7 +55,7 @@ function pollUpdate() {
   ready();
 }
 
-var _txId = uuid.v4();
+var _sessionId = uuid.v4();
 var _satoshis = 0;
 var _fiat = 0;
 
@@ -64,19 +64,23 @@ function insertBill(denomination) {
   var satoshis = computeSatoshis(denomination, exchangeRate);
   var tradeRec = {
     currency: _currency,
-    txId: _txId,
+    uuid: uuid.v4(),
+    deviceTime: Date.now(),
+    toAddress: _coinAddress,
     exchangeRate: exchangeRate,
     fiat: denomination,
     satoshis: satoshis
   };
   _satoshis += satoshis;
   _fiat += denomination;
-  trader.trade(tradeRec);
+  trader.trade(tradeRec, function(err, result) {
+    if (err) console.log(err);
+    else console.dir(result);
+  });
 }
 
 function sendCoins(callback) {
   var tx = {
-    txId: _txId,
     toAddress: _coinAddress,
     currencyCode: _currency,
     fiat: _fiat,
@@ -86,13 +90,17 @@ function sendCoins(callback) {
 }
 
 function ready() {
+  trader.sessionId = _sessionId;
   insertBill(1);
+
+/*
   console.log('Sending coins...');
   sendCoins(function (err, txHash) {
     trader.stop();
     if (err) throw err;
     console.log('Transaction successful: %s', txHash);
   });
+*/
 }
 
 function computeSatoshis(fiat, exchangeRate) {
