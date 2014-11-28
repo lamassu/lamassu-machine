@@ -12,6 +12,7 @@ pids
 logs
 log
 results
+/build
 
 npm-debug.log
 
