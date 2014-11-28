@@ -53,8 +53,8 @@ trader.on('error', function(err) { console.log(err.stack); });
 trader.on('pollUpdate', pollUpdate);
 trader.on('dispenseUpdate', function(status) {
   console.log(status);
-  if (status === 'rejected') {
-    console.log('rejected');
+  if (status === 'rejected' || status === 'insufficentFunds') {
+    console.log(status);
     process.exit(0);
   }
 
