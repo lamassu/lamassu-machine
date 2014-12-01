@@ -659,6 +659,10 @@ body  { margin: 0;}
   margin-left: 100px;
 }
 
+.info .button.ok {
+  width: 5em;
+}
+
 .info .button:first-child {
   margin-left: 0;
 }
