@@ -768,8 +768,8 @@ if (!String.prototype.startsWith) {
 
 function reachFiatLimit(rec) {
   var msg = null;
-  if (rec.txLimitReached) msg = 'We\'re a little low, please cash out';
-  else if (rec.isEmpty) msg = 'Transaction limit reached, please cash out';
+  if (rec.isEmpty) msg = 'We\'re a little low, please cash out';
+  else if (rec.txLimitReached) msg = 'Transaction limit reached, please cash out';
 
   var el = $('.choose_fiat_state .limit');
   if (msg) el.html(msg).show();
@@ -808,10 +808,7 @@ function fiatCredit(data) {
   t('choose-digital-amount',
     locale.translate('You\'ll be sending %s mBTC').fetch(mbtc));
 
-  reachFiatLimit({
-    isEmpty: activeDenominations.isEmpty,
-    txLimitReached: data.txLimitReached
-  });
+  reachFiatLimit(activeDenominations);
 }
 
 function satoshisToBitcoins(satoshis) {
