@@ -20,6 +20,9 @@
       "device": ["/dev/ttyUSB0", "/dev/ttyS0"]
     }
   },
+  "billDispenser": {
+    "device": "/dev/ttyS1"
+  },
   "scanner": {
     "device": "/dev/video0",
     "width": 1280,

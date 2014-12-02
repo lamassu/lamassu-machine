@@ -12,6 +12,7 @@ pids
 logs
 log
 results
+/build
 
 npm-debug.log
 
@@ -41,4 +42,7 @@ libBarcodeScanner.*
 /data/connection_info.json
 
 test/compliance/licenses
+
+cli.txt
 *~
+

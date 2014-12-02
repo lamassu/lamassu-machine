@@ -1,6 +1,9 @@
 {
-  "trailing": false,
+  "trailing": true,
   "node": true,
   "unused": "last-param",
-  "globalstrict": false
+  "globalstrict": false,
+  "latedef": "nofunc",
+  "indent": 2,
+  "quotmark": "single"
 }

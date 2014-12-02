@@ -68,16 +68,6 @@ When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
 
-## Installing additional fonts
-
-To install a new font family, for instance Japanese, do:
-
-```
-deploy/fonts/install deploy/fonts/css/source-han-sans-jp.css ~/Downloads/fonts/SourceHanSansJP-1.000
-```
-
-```~/Downloads/fonts/SourceHanSansJP-1.000``` is the directory that contains the actual font files.
-
 ## Mocking
 
 In order to easily test **lamassu-server**, you can use the ```mock``` command.
@@ -94,3 +84,11 @@ node bin/mock.js -a 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8
 ```
 
 This will send $1 worth of bitcoins to 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8, via lamassu-server.
+
+Here's how to run it with a mock bill validator, a mock camera, currency forced to USD,
+a mock bill dispenser, and using an HTTP connection to a local server. First, set
+```brain.mockBTC``` to a bitcoin address in device_config.json. Then:
+
+```
+node bin/lamassu-machine --mockBv /dev/ttys009 --mockCam --fiat USD --mockBillDispenser --http
+```

@@ -1,0 +1,49 @@
+'use strict';
+
+var cp = require('child_process');
+var path = require('path');
+require('../logging');
+
+var childPath = path.resolve(__dirname, './brain-child');
+
+var TIMEOUT = 5000;
+
+var lastHeartbeat = Date.now();
+var child = null;
+
+function errorHandler(err) {
+  console.log('sencha-brain: child process error');
+  console.log(err.stack);
+}
+
+function exitHandler() {
+  console.log('sencha-brain: child process exited, relaunching in 10s...');
+  child = null;
+  setTimeout(launchChild, 10000);
+}
+
+function launchChild() {
+  if (child !== null) return;
+  lastHeartbeat = Date.now();
+  child = cp.fork(childPath, process.argv);
+
+  child.on('message', function (msg) {
+    if (msg.heartbeat) lastHeartbeat = Date.now();
+  });
+  child.on('error', errorHandler);
+  child.on('exit', exitHandler);
+}
+
+function checkHeartbeat() {
+  if (!child) return;
+  if (Date.now() - lastHeartbeat > TIMEOUT) {
+    console.log('sencha-brain: lost heartbeat, disconnecting child process...');
+    if (child.connected) child.disconnect();
+    child = null;
+    setTimeout(launchChild, 10000);
+  }
+}
+
+launchChild();
+setInterval(checkHeartbeat, 2000);
+

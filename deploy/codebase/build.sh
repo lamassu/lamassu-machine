@@ -3,8 +3,8 @@ set -e
 
 SUB_DIR=codebase
 SCRIPT_DIR=$(dirname $0)
-
-EXPORT_ROOT=${1-$LAMASSU_EXPORT}
+MACHINE_DIR=$SCRIPT_DIR/../..
+EXPORT_ROOT=$MACHINE_DIR/build
 
 if [ -z "$EXPORT_ROOT" ]
   then
@@ -18,7 +18,6 @@ fi
 EXPORT_BASE=$EXPORT_ROOT/$SUB_DIR
 EXPORT_DIR=$EXPORT_BASE/subpackage
 EXPORT_SCRIPT_DIR=$EXPORT_BASE/package
-MACHINE_DIR=$SCRIPT_DIR/../..
 TARGET_MACHINE_DIR=$EXPORT_DIR/lamassu-machine
 HARDWARE_DIR=$MACHINE_DIR/hardware/codebase
 UPDATESCRIPT=$SCRIPT_DIR/updateinit.js
@@ -75,3 +74,5 @@ git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.tx
 cat $EXPORT_DIR/revision.txt
 
 node $SCRIPT_DIR/../build.js $EXPORT_BASE
+
+rm -rf $EXPORT_DIR
