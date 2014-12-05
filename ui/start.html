@@ -631,8 +631,8 @@
 
      <section id="completed_viewport" class="viewport completed_state" data-tr-section="completed">
         <section class="main">
-          <section id="deposit-summary">
-            <h1 id="thanks" class="js-i18n">Thank you!</h1>
+          <section class="deposit-summary">
+            <h1 class="thanks" class="js-i18n">Thank you!</h1>
             <div class="deposit-record">
               <p>
                 <span class="total-btc-rec total i18n-latin">
@@ -646,10 +646,10 @@
             <p><span class="js-i18n">Your bitcoins are on their way to:</span><br/>
             <span class="bitcoin-address">1Kjrv5PrQQaArvQc2B3D72J7zEGDJFBi5A</span></p>
           </section>
-          <section id="qr-section">
-            <img id="qr-frame" src="images/qr_code.png" />
-            <div id="qr-content"/><div id="qr-code"></div></div>
-            <p id="qr-caption" class="js-i18n">View your transaction</p>
+          <section class="qr-section">
+            <img class="qr-frame" src="images/qr_code.png" />
+            <div class="qr-content"/><div class="qr-code"></div></div>
+            <p class="qr-caption" class="js-i18n">Take a photo of this screen</p>
           </section>
         </section>
         <section class="bottom-bar">
@@ -657,10 +657,12 @@
         </section>
       </section>
 
-      <section id="partial_viewport" class="viewport partial_send_state" data-tr-section="partial_send">
+     <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state" data-tr-section="withdraw_failure">
         <section class="main">
-          <section id="deposit-summary">
-            <h1 id="thanks" class="js-i18n">Thank you!</h1>
+          <section class="deposit-summary">
+            <h1 class="thanks" class="js-i18n">We got this.</h1>
+            <p class="relax">Our Internet was down for a bit. You'll get all your coins but
+            you might receive them in two separate batches.</p>
             <div class="deposit-record">
               <p>
                 <span class="total-btc-rec total i18n-latin">
@@ -672,12 +674,12 @@
               </p>
             </div>
             <p><span class="js-i18n">Your bitcoins are on their way to:</span><br/>
-            <span class="bitcoin-address">1Kjrv5PrQQaArvQc2B3D72J7zEGDJFBi5</span></p>
+            <span class="bitcoin-address">1Kjrv5PrQQaArvQc2B3D72J7zEGDJFBi5A</span></p>
           </section>
-          <section id="qr-section">
-            <img id="qr-frame" src="images/qr_code.png" />
-            <div id="qr-content"/><div id="qr-code"></div></div>
-            <p id="qr-caption" class="js-i18n">View your transaction</p>
+          <section class="qr-section">
+            <img class="qr-frame" src="images/qr_code.png" />
+            <div class="qr-content"/><div class="qr-code"></div></div>
+            <p class="qr-caption" class="js-i18n">Take a photo of this screen</p>
           </section>
         </section>
         <section class="bottom-bar">
