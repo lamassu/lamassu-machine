@@ -109,7 +109,7 @@ body  { margin: 0;}
   background-color: #1fbaac; color: #ffffff;
 }
 
-.fiat-side .circle-button.active {
+.fiat-section .circle-button.active, .fiat-side .circle-button.active {
   background-color: #082c40;
   color: #ffffff;
 }
@@ -557,19 +557,19 @@ body  { margin: 0;}
 }
 
 
-.qr-section {
+.digital-side .qr-section {
   position: absolute; top: 138; left: 823;
   height: 400px;
   text-align: left;
 }
 
-.qr-content {
+.digital-side .qr-content {
   position: absolute; top: 0; left: 0;
   margin: 75px;
   width: 275px; height: 275px;
 }
 
-.qr-caption {
+.digital-side .qr-caption {
   font-weight: bold;
   font-size: 26px;
   color: #5F5F55;
@@ -1076,12 +1076,12 @@ body  { margin: 0;}
   font-size: 18px;
 }
 
-.dual_idle_state .digital-side {
+.dual_idle_state .digital-section {
   color: #0e4160; /* cobalt */
   background-color: #37e8d7; /* amazonite */
 }
 
-.dual_idle_state .fiat-side {
+.dual_idle_state .fiat-section {
   left: 640;
   color: #37e8d7; /* amazonite */
   background-color: #0e4160; /* cobalt */
@@ -1104,16 +1104,16 @@ body  { margin: 0;}
   font-size: 30px;
 }
 
-.digital-side .circle-button {
+.digital-section .circle-button, .digital-side .circle-button {
   border-color: #2fdccc;
 }
 
-.fiat-side {
+.fiat-section, .fiat-side {
   background-color: #0e4160; /* cobalt */
   color: #ffffff;
 }
 
-.fiat-side .circle-button {
+.fiat-section .circle-button, .fiat-side .circle-button {
   border-color: #0a354e;
 }
 
