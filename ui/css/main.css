@@ -534,17 +534,22 @@ body  { margin: 0;}
 }
 
 /* 4th Screen */
-#deposit-summary {
+.deposit-summary {
   position: absolute;
   top: 160; left: 83;
 }
 
-#deposit-summary p {
+.deposit-summary p {
   font-size: 30px;
   color: #5F5F55;
 }
 
-#thanks {
+.deposit-summary p.relax {
+  margin: 1em 0 -1em;
+  width: 55%;
+}
+
+.thanks {
   font-size: 90px;
   color: #FFFFFF;
   line-height: 47px;
@@ -552,22 +557,19 @@ body  { margin: 0;}
 }
 
 
-#qr-section {
+.qr-section {
   position: absolute; top: 138; left: 823;
   height: 400px;
   text-align: left;
 }
 
-#qr-frame {
-}
-
-#qr-content {
+.qr-content {
   position: absolute; top: 0; left: 0;
   margin: 75px;
   width: 275px; height: 275px;
 }
 
-#qr-caption {
+.qr-caption {
   font-weight: bold;
   font-size: 26px;
   color: #5F5F55;

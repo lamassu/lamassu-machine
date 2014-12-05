@@ -20,7 +20,7 @@ function doInitDebug() {
   setCredit(25, 0.202, 20);
   //setState('insert_more_bills');
   //setState('scan_address');
-  setState('limit_reached');
+  setState('withdraw_failure');
 
   var counter = 0;
 

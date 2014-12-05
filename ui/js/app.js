@@ -62,7 +62,7 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit)
     setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
-  if (data.transactionId) setTransactionId(data.transactionId);
+  if (data.sessionId) setSessionId(data.sessionId);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
@@ -167,7 +167,7 @@ function processData(data) {
       setState('maintenance');
       break;
     case 'withdrawFailure':
-      setState('partial_send');
+      setState('withdraw_failure');
       break;
     case 'networkDown':
       setState('trouble');
@@ -303,6 +303,7 @@ $(document).ready(function () {
   setupImmediateButton('wifiListCancel', 'cancelWifiList');
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
+  setupImmediateButton('withdraw_failure_viewport', 'completed');
   setupImmediateButton('fiat_completed_viewport', 'completed');
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
   setupImmediateButton('depositCancel', 'depositCancel');
@@ -428,8 +429,8 @@ function setState(state, delay, newLocale) {
   wifiKeyboard.reset();
 
   if (state === 'idle') {
-    $('#qr-code').empty();
-    $('#qr-code-deposit').empty();
+    $('.qr-code').empty();
+    $('.qr-code-deposit').empty();
   }
 
   if (delay) window.setTimeout(function() {
@@ -651,13 +652,13 @@ function setFiatExchangeRate(rate) {
   $('.js-fiat-rate').text(parseFloat(rate).toFixed(2));  // TODO clean up
 }
 
-function setTransactionId(txId) {
-  $('#qr-code').empty();
-  $('#qr-code').qrcode({
+function setSessionId(sessionId) {
+  $('.qr-code').empty();
+  $('.qr-code').qrcode({
     render: 'canvas',
     width: 225,
     height: 225,
-    text: txId
+    text: sessionId
   });
 }
 
