@@ -69,13 +69,14 @@ to insert a one dollar bill.
 
 ## Installing additional fonts
 
-To install a new font family, for instance Japanese, do:
+[adobe-fonts](https://github.com/adobe-fonts/) is a recommeded repository for additional fonts.
+
+To install a new font family, download the fonts to your local machine. Extract the archive, 
+and copy the font files to 
 
 ```
-deploy/fonts/install deploy/fonts/css/source-han-sans-jp.css ~/Downloads/fonts/SourceHanSansJP-1.000
+<lamassu-machine-path>/ui/css/fonts
 ```
-
-```~/Downloads/fonts/SourceHanSansJP-1.000``` is the directory that contains the actual font files.
 
 ## Mocking
 
