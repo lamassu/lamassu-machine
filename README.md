@@ -25,8 +25,8 @@ Use that to run the main program, called lamassu-machine, along with a Bitcoin
 address **you control**:
 
 ```
-node bin/lamassu-machine --mock-btc 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \
---mock-bv '/dev/ttys009' --mock-trader
+node bin/lamassu-machine --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \
+--mockBv /dev/ttys009 --mockTrader --mockCam
 ```
 
 This should output something like this:
