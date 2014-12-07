@@ -393,11 +393,11 @@
       <section class="viewport dual_idle_state" data-tr-section="dual-idle">
         <section class="main">
           <section class="sides">
-            <section class="digital-side start">
+            <section class="digital-section start">
               <div class="rate">1 BTC = <span class="js-digital-rate"></span> <span class="js-currency"/></div>
               <div id="want_bitcoin" class="circle-button"><span class="js-i18n">I want<br/>Bitcoin</span></div>
             </section>
-            <section class="fiat-side start">
+            <section class="fiat-section start">
               <div class="rate">1 BTC = <span class="js-fiat-rate"></span> <span class="js-currency"/></div>
               <div id="want_cash" class="circle-button"><span class="js-i18n">I want<br/>Cash</span></div>
 <!--               <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
@@ -543,7 +543,7 @@
         </section>
       </section>
 
-      <section class="viewport scan_address_state" data-tr-section="scan-address">
+      <section class="viewport scan_address_state digital-side" data-tr-section="scan-address">
         <section class="main">
           <section id="scan-instructions" class="primary-side">
             <h1 id="scan-address" class="js-i18n">Scan your Bitcoin address</h1>
@@ -562,7 +562,7 @@
         <section id="scanCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
-      <section class="viewport insert_bills_state" data-tr-section="insert-bills">
+      <section class="viewport insert_bills_state digital-side" data-tr-section="insert-bills">
         <section class="main">
           <section class="primary-side">
             <h1 id="insert-bill" class="js-i18n">Insert a bill</h1>
@@ -590,7 +590,7 @@
         <section id="insertBillCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
-      <section class="viewport insert_more_bills_state" data-tr-section="insert-more-bills">
+      <section class="viewport insert_more_bills_state digital-side" data-tr-section="insert-more-bills">
         <section class="main">
           <section id="send-side">
             <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
@@ -629,7 +629,7 @@
         </section>
       </section>
 
-     <section id="completed_viewport" class="viewport completed_state" data-tr-section="completed">
+     <section id="completed_viewport" class="viewport completed_state digital-side" data-tr-section="completed">
         <section class="main">
           <section class="deposit-summary">
             <h1 class="thanks" class="js-i18n">Thank you!</h1>
@@ -657,7 +657,7 @@
         </section>
       </section>
 
-     <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state" data-tr-section="withdraw_failure">
+     <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state digital-side" data-tr-section="withdraw_failure">
         <section class="main">
           <section class="deposit-summary">
             <h1 class="thanks" class="js-i18n">We got this.</h1>
