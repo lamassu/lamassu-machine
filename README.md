@@ -6,7 +6,6 @@ The software that runs the Lamassu Bitcoin Machine.
 ```
 git clone https://github.com/lamassu/lamassu-machine.git
 cd lamassu-machine
-npm install
 ./setup.sh
 ```
 
