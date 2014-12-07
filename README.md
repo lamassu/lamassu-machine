@@ -26,7 +26,7 @@ address **you control**:
 
 ```
 node bin/lamassu-machine --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \
---mockBv '/dev/ttys009' --mockTrader --mockCam
+--mockBv /dev/ttys009 --mockTrader --mockCam
 ```
 
 This should output something like this:
