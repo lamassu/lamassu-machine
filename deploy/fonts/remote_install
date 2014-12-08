@@ -1,8 +1,0 @@
-node /tmp/extract/package/fonts_css.js /tmp/extract/package/fonts.css /opt/apps/machine/lamassu-machine
-
-if [ $? -ne 0 ]; then
-  exit 0
-fi
-
-TARGET_FONTS_DIR=/opt/apps/machine/lamassu-machine/ui/css/fonts
-cp /tmp/extract/package/fonts/* $TARGET_FONTS_DIR
