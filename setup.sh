@@ -23,6 +23,16 @@ else
     echo "jasmine has already been installed. skipping.."
 fi
 
+if [ ! -e "/usr/local/bin/istanbul" ]; then
+    if [ "$(id -u)" != "0" ]; then
+        echo "istanbul.js is used for unit testing. You are not logged in as root, so to install it, you will need to manually run 'sudo npm install -g istanbul'" 
+    else
+        npm install -g istanbul 
+    fi
+else
+    echo "istanbul has already been installed. skipping.."
+fi
+
 echo "Downloading fonts..."
 curl -# -L https://github.com/adobe-fonts/source-sans-pro/archive/2.010R-ro/1.065R-it.zip > /tmp/lamassu-fonts/source-sans-pro.zip
 curl -# -L https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip > /tmp/lamassu-fonts/source-code-pro.zip
