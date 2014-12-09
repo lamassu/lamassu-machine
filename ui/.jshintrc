@@ -1,4 +1,5 @@
 {
+  "globalstrict": true,
   "trailing": false,
   "jquery": true,
   "browser": true,

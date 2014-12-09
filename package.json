@@ -24,5 +24,8 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:lamassu/lamassu-machine.git"
+  },
+  "scripts": {
+    "pretest": "jshint bin lib ui/js/app.js"
   }
 }

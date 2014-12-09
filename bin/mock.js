@@ -93,14 +93,12 @@ function ready() {
   trader.sessionId = _sessionId;
   insertBill(1);
 
-/*
   console.log('Sending coins...');
   sendCoins(function (err, txHash) {
     trader.stop();
     if (err) throw err;
     console.log('Transaction successful: %s', txHash);
   });
-*/
 }
 
 function computeSatoshis(fiat, exchangeRate) {
