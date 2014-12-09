@@ -13,6 +13,16 @@ else
     echo "node_modules folder found. skipping dependency install."
 fi
 
+if [ ! -e "/usr/local/bin/jasmine" ]; then
+    if [ "$(id -u)" != "0" ]; then
+        echo "jasmine.js is used for unit testing. You are not logged in as root, so to install it, you will need to manually run 'sudo npm install -g jasmine'" 
+    else
+        npm install -g jasmine
+    fi
+else
+    echo "jasmine has already been installed. skipping.."
+fi
+
 echo "Downloading fonts..."
 curl -# -L https://github.com/adobe-fonts/source-sans-pro/archive/2.010R-ro/1.065R-it.zip > /tmp/lamassu-fonts/source-sans-pro.zip
 curl -# -L https://github.com/adobe-fonts/source-code-pro/archive/1.017R.zip > /tmp/lamassu-fonts/source-code-pro.zip
