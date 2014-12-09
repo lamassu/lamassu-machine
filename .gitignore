@@ -40,6 +40,7 @@ libBarcodeScanner.*
 /data/client.key
 /data/client.pem
 /data/connection_info.json
+/coverage
 
 test/compliance/licenses
 
