@@ -3,20 +3,11 @@
 'use strict';
 
 // TODO: go through code and take out all evil throws
-
-var fs = require('fs');
-var path = require('path');
+require('../logging');
 
 var minimist = require('minimist');
-var _ = require('lodash');
-
 var Brain = require('../lib/brain');
-
-var SOFTWARE_CONFIG = require('../software_config.json');
-var DEVICE_CONFIG = require('../device_config.json');
-var LICENSES = require('../licenses.json');
-
-require('../logging');
+var Configuration = require('../lib/configuration.js');
 
 var bailed = false;
 
@@ -33,39 +24,10 @@ function bail(err) {
   }, 7000);   // Leave some time to connect for browser to set error screen
 }
 
-function loadConfig() {
-  var config = SOFTWARE_CONFIG;
-  var commandLine = minimist(process.argv.slice(2));
-
-  _.merge(config, DEVICE_CONFIG);
-  _.merge(config, commandLine);
-  _.merge(config, LICENSES);
-  delete config._;
-
-  if (config.mockBv) config.id003.rs232.device = config.mockBv;
-
-  return config;
-}
-
 function startBrain() {
-  var config = loadConfig();
-  if (config.mockCam) {
-    var fakeLicense = fs.readFileSync(path.join(__dirname,
-        '../mock_data/compliance/license.jpg'));
-    var pdf417Data = fs.readFileSync(path.join(__dirname,
-        '../mock_data/compliance/nh.dat'));
-    var mockCamConfig = {
-      pairingData: config.mockPair,
-      qrData: config.brain.mockQR || config.mockBTC,
-      pdf417Data: pdf417Data,
-      fakeLicense: fakeLicense
-    };
-    config.scanner = {
-      mock: {
-        data: mockCamConfig
-      }
-    };
-  }
+  var commandLine = minimist(process.argv.slice(2));
+  
+  var config = Configuration.loadConfig(commandLine);
 
   var brain = new Brain(config);
   brain.on('error', bail);
