@@ -56,13 +56,15 @@ function pollUpdate() {
 }
 
 var _sessionId = uuid.v4();
+console.log('New sessionId: %s', _sessionId);
 var _satoshis = 0;
 var _fiat = 0;
+var _tradeRec;
 
-function insertBill(denomination) {
+function insertBillMachine(denomination) {
   var exchangeRate = trader.exchangeRate;
   var satoshis = computeSatoshis(denomination, exchangeRate);
-  var tradeRec = {
+  _tradeRec = {
     currency: _currency,
     uuid: uuid.v4(),
     deviceTime: Date.now(),
@@ -73,10 +75,18 @@ function insertBill(denomination) {
   };
   _satoshis += satoshis;
   _fiat += denomination;
-  trader.trade(tradeRec, function(err, result) {
+}
+
+function insertBillTrader() {
+  trader.trade(_tradeRec, function(err, result) {
     if (err) console.log(err);
     else console.dir(result);
   });
+}
+
+function insertBill(denomination) {
+  insertBillMachine(denomination);
+  insertBillTrader();
 }
 
 function sendCoins(callback) {
@@ -92,13 +102,21 @@ function sendCoins(callback) {
 function ready() {
   trader.sessionId = _sessionId;
   insertBill(1);
+  insertBillMachine(1);
 
   console.log('Sending coins...');
-  sendCoins(function (err, txHash) {
-    trader.stop();
-    if (err) throw err;
-    console.log('Transaction successful: %s', txHash);
-  });
+
+  setTimeout(function() {
+    insertBillTrader();
+  }, 8000);
+
+  setTimeout(function() {
+    sendCoins(function (err, txHash) {
+      trader.stop();
+      if (err) throw err;
+      console.log('Transaction successful: %s', txHash);
+    });
+  }, 12000);
 }
 
 function computeSatoshis(fiat, exchangeRate) {
