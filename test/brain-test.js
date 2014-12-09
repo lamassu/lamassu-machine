@@ -1,10 +1,10 @@
 'use strict';
 
-var Configuration = require('../lib/configuration.js');
+var Configuration = require("../lib/configuration.js");
 var Brain = require("../lib/brain");
+var State = require("../lib/constants/state.js");
 
-// sample test spec
-describe("A suite", function() {
+describe("Brain", function() {
 	var config = null;
 	
 	beforeAll(function () {
@@ -12,9 +12,13 @@ describe("A suite", function() {
 	  config = Configuration.loadConfig(commandLine);
 	});
 	
-  it("contains spec with an expectation", function() {
+  it("can be configured with default values", function() {
 	  var brain = new Brain(config);
-	  
-	  expect(true).toBe(true);
+	  expect(brain).toBeDefined();
+  });
+  
+  it("starts off in the state 'start'", function () {
+	  var brain = new Brain(config);
+	  expect(brain.state).toBe(State.START);
   });
 });
