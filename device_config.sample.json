@@ -3,7 +3,8 @@
     "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
-    "wifiConfigPath": null
+    "wifiConfigPath": null,
+    "mockQR": null
   },
   "wifi": {
     "wpa": {
@@ -15,7 +16,7 @@
       "device": null
     }
   },
-  "qrScanner": {
+  "billDispenser": {
     "device": null
   }
 }
