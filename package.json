@@ -2,6 +2,8 @@
   "name": "lamassu-machine",
   "version": "0.3.4",
   "dependencies": {
+    "jasmine":"~2.1.0",
+    "istanbul":"~0.3.5",
     "async": "~0.2.9",
     "bitcoin-address": "~0.1.0",
     "findit": "~1.1.0",
