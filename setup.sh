@@ -9,8 +9,12 @@ echo
 if [ ! -d "node_modules" ]; then
     echo "node.js dependencies not yet installed.. installing them now."
     npm install
-    ln -s ./node_modules/jasmine/bin/jasmine.js jasmine
-    ln -s ./node_modules/istanbul/lib/cli.js istanbul
+    if [ ! -e "jasmine" ]; then 
+        ln -s ./node_modules/jasmine/bin/jasmine.js jasmine 
+    fi
+    if [ ! -e "istanbul" ]; then 
+        ln -s ./node_modules/istanbul/lib/cli.js istanbul 
+    fi
 else
     echo "node_modules folder found. skipping dependency install."
 fi
