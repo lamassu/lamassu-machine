@@ -30,6 +30,8 @@ libBarcodeScanner.*
 
 # compiled dependencies
 /node_modules
+jasmine
+istanbul
 
 # OS files
 .DS_Store
@@ -46,4 +48,6 @@ test/compliance/licenses
 
 cli.txt
 *~
+
+.project
 
