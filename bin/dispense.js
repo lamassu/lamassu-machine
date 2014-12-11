@@ -3,7 +3,7 @@
 var argv = require('minimist')(process.argv.slice(2));
 var _ = require('lodash');
 
-var billDispenser = require('../lib/billDispenser').
+var billDispenser = require('../lib/billdispenser').
   factory({device: '/dev/ttyS1'});
 
 var denominations = _.map(argv._.slice(0, 2),
