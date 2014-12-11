@@ -9,10 +9,10 @@ echo
 if [ ! -d "node_modules" ]; then
     echo "node.js dependencies not yet installed.. installing them now."
     npm install
-    if [ ! -e "jasmine" ]; then 
+    if [ ! -h "jasmine" ]; then 
         ln -s ./node_modules/jasmine/bin/jasmine.js jasmine 
     fi
-    if [ ! -e "istanbul" ]; then 
+    if [ ! -h "istanbul" ]; then 
         ln -s ./node_modules/istanbul/lib/cli.js istanbul 
     fi
 else
