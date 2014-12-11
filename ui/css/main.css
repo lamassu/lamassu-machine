@@ -428,8 +428,8 @@ body  { margin: 0;}
 }
 
 .or {
-  width: 100%;
-  position: absolute; top: 163; left: 40;
+  width: 1200px;
+  position: absolute; top: 163; left: 80;
   text-align: center;
 
   font-weight: 900;
