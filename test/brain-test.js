@@ -10,7 +10,7 @@ describe('Brain', function() {
 	var brain = null;
 	
 	beforeEach(function () {
-	  var commandLine = JSON.parse("{'_':[],'mockBTC':'1EyE2nE4hf8JVjV51Veznz9t9vTFv8uRU5','mockBv':'/dev/pts/7','mockTrader':true,'mockCam':true,'mockBillDispenser':true}");
+	  var commandLine = JSON.parse('{"_":[],"mockBTC":"1EyE2nE4hf8JVjV51Veznz9t9vTFv8uRU5","mockBv":"/dev/pts/7","mockTrader":true,"mockCam":true,"mockBillDispenser":true}');
 	  config = Configuration.loadConfig(commandLine);
 	  
 	  brain = new Brain(config);
