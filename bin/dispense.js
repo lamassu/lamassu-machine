@@ -8,6 +8,7 @@ var billDispenser;
 var denominations = _.map(argv._.slice(0, 2),
   function(item) { return parseInt(item, 10); });
 var currency = argv.c || 'EUR';
+var device = argv.d || '/dev/ttyS1';
 
 if (denominations.length !== 2) {
   console.log('dispense [-c EUR] 5 10\n' +
@@ -21,9 +22,9 @@ var cartridges = [
   {denomination: denominations[1], count: 250}
 ];
 
-var data = {currency: currency};
+var data = {cartridges: cartridges, currency: currency};
 
-billDispenser = require('../lib/billdispenser').factory({device: '/dev/ttyS1'});
+billDispenser = require('../lib/billdispenser').factory({device: device});
 billDispenser.init(data, function() {
   billDispenser.dispense(dispenseAmount, cartridges, function (err, result) {
     if (err) throw err;
