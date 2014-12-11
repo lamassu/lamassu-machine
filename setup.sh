@@ -9,28 +9,14 @@ echo
 if [ ! -d "node_modules" ]; then
     echo "node.js dependencies not yet installed.. installing them now."
     npm install
+    if [ ! -h "jasmine" ]; then 
+        ln -s ./node_modules/jasmine/bin/jasmine.js jasmine 
+    fi
+    if [ ! -h "istanbul" ]; then 
+        ln -s ./node_modules/istanbul/lib/cli.js istanbul 
+    fi
 else
     echo "node_modules folder found. skipping dependency install."
-fi
-
-if [ ! -e "/usr/local/bin/jasmine" ]; then
-    if [ "$(id -u)" != "0" ]; then
-        echo "jasmine.js is used for unit testing. You are not logged in as root, so to install it, you will need to manually run 'sudo npm install -g jasmine'" 
-    else
-        npm install -g jasmine
-    fi
-else
-    echo "jasmine has already been installed. skipping.."
-fi
-
-if [ ! -e "/usr/local/bin/istanbul" ]; then
-    if [ "$(id -u)" != "0" ]; then
-        echo "istanbul.js is used for unit testing. You are not logged in as root, so to install it, you will need to manually run 'sudo npm install -g istanbul'" 
-    else
-        npm install -g istanbul 
-    fi
-else
-    echo "istanbul has already been installed. skipping.."
 fi
 
 echo "Downloading fonts..."
