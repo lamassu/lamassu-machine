@@ -1,6 +1,6 @@
 {
   "name": "lamassu-machine",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "dependencies": {
     "async": "~0.2.9",
     "bitcoin-address": "~0.1.0",
@@ -21,8 +21,8 @@
     "manatee": "~0.2.0"
   },
   "devDependencies": {
-    "jasmine":"~2.1.0",
-    "istanbul":"~0.3.5"
+    "jasmine": "~2.1.0",
+    "istanbul": "~0.3.5"
   },
   "repository": {
     "type": "git",
