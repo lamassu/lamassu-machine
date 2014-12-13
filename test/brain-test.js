@@ -1,5 +1,7 @@
 'use strict';
 
+/*global jasmine:false */
+
 var _ = require('lodash');
 var Brain = require('../lib/brain');
 var Configuration = require('../lib/configuration.js');
@@ -10,19 +12,7 @@ describe('Brain', function() {
   var brain = null;
 
   beforeEach(function() {
-    var overrides = JSON.parse('{ \
-			  	"_":[], \
-			  	"mockBTC":"1EyE2nE4hf8JVjV51Veznz9t9vTFv8uRU5", \
-			  	"mockBv":"/dev/pts/7", \
-			  	"mockTrader":true, \
-			  	"mockCam":true, \
-			  	"mockBillDispenser":true, \
-			  	"brain": { \
-			  	"checkIdle":2000, \
-			  	"idleTime":10000, \
-			  	"exitTime":20000 \
-			  	} \
-			  }');
+    var overrides = JSON.parse('{"_":[], "mockBTC":"1EyE2nE4hf8JVjV51Veznz9t9vTFv8uRU5", "mockBv":"/dev/pts/7", "mockTrader":true, "mockCam":true, "mockBillDispenser":true, "brain": { "checkIdle":2000, "idleTime":10000, "exitTime":20000} }');
     config = Configuration.loadConfig(overrides);
 
     brain = new Brain(config);
