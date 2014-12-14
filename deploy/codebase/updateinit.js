@@ -1,4 +1,4 @@
-'use strict';
+]'use strict';
 
 var fs = require('fs');
 var zlib = require('zlib');
@@ -35,6 +35,11 @@ function installBarcodeLib(cb) {
   command(cmd, cb);
 }
 
+function remountRW(cb) {
+  if (hardwareCode !== 'N7G1') return cb();
+  command('cp -p /tmp/extract/package/subpackage/hardware/N7G1/node /usr/bin', cb);
+}
+
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
@@ -43,6 +48,7 @@ async.series([
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
   async.apply(installBarcodeLib),
+  async.apply(installNode),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
