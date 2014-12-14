@@ -1,4 +1,4 @@
-]'use strict';
+'use strict';
 
 var fs = require('fs');
 var zlib = require('zlib');
@@ -35,7 +35,7 @@ function installBarcodeLib(cb) {
   command(cmd, cb);
 }
 
-function remountRW(cb) {
+function installNode(cb) {
   if (hardwareCode !== 'N7G1') return cb();
   command('cp -p /tmp/extract/package/subpackage/hardware/N7G1/node /usr/bin', cb);
 }
