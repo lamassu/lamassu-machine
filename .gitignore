@@ -5,6 +5,7 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.swp
 
 sftp-config.json
 
