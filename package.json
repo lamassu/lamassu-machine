@@ -1,6 +1,6 @@
 {
   "name": "lamassu-machine",
-  "version": "0.2.22",
+  "version": "0.3.11",
   "dependencies": {
     "async": "~0.2.9",
     "bitcoin-address": "~0.1.0",
@@ -20,9 +20,15 @@
     "supyo": "~0.2.0",
     "manatee": "~0.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jasmine": "~2.1.0",
+    "istanbul": "~0.3.5"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:lamassu/lamassu-machine.git"
+  },
+  "scripts": {
+    "pretest": "jshint bin lib ui/js/app.js"
   }
 }

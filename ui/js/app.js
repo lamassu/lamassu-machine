@@ -23,6 +23,7 @@ var idKeypad = null;
 var previousState = null;
 var onSendOnly = false;
 var buttonActive = true;
+var cartridges = null;
 
 function connect() {
   websocket = new WebSocket('ws://localhost:8080/');
@@ -46,7 +47,7 @@ function buttonPressed(button, data) {
   setTimeout(function () {
     buttonActive = true;
     wifiKeyboard.activate();
-  }, 500);
+  }, 300);
   var res = {button: button};
   if (data || data === null) res.data = data;
   websocket.send(JSON.stringify(res));
@@ -57,14 +58,19 @@ function processData(data) {
   if (!locale) return;
   if (data.currency) setCurrency(data.currency);
   if (data.exchangeRate) setExchangeRate(data.exchangeRate);
+  if (data.fiatExchangeRate) setFiatExchangeRate(data.fiatExchangeRate);
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit)
     setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill);
-  if (data.transactionHashURL) setTransactionHash(data.transactionHashURL);
+  if (data.sessionId) setSessionId(data.sessionId);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.sendOnly);
+  if (data.fiatCredit) fiatCredit(data.fiatCredit);
+  if (data.depositInfo) setDepositAddress(data.depositInfo);
+  if (data.cartridges) setupCartridges(data.cartridges);
   if (data.beep) confirmBeep.play();
+  if (data.sent && data.total) setPartialSend(data.sent, data.total);
 
   switch (data.action) {
     case 'wifiList':
@@ -105,7 +111,12 @@ function processData(data) {
       if (currentState !== 'maintenance') setState('booting');
       break;
     case 'idle':
+    case 'fakeIdle':
       setState('idle');
+      break;
+    case 'dualIdle':
+    case 'fakeDualIdle':
+      setState('dual_idle');
       break;
     case 'scanId':
       setState('scan_id');
@@ -155,8 +166,10 @@ function processData(data) {
     case 'maintenance':
       setState('maintenance');
       break;
-    case 'networkDown':
     case 'withdrawFailure':
+      setState('withdraw_failure');
+      break;
+    case 'networkDown':
       setState('trouble');
       break;
     case 'balanceLow':
@@ -174,6 +187,37 @@ function processData(data) {
       break;
     case 'connecting':
       setState('connecting');
+      break;
+    case 'chooseFiat':
+      chooseFiat(data.chooseFiat);
+      break;
+    case 'deposit':
+      setState('deposit');
+      deposit(data.tx);
+      break;
+    case 'depositTimeout':
+      setState('deposit_timeout');
+      break;
+    case 'pendingDeposit':
+      setState('pending_deposit');
+      break;
+    case 'insufficientDeposit':
+      setState('insufficient_deposit');
+      break;
+    case 'rejectedDeposit':
+      setState('deposit_timeout');
+      break;
+    case 'dispensing':
+      setState('dispensing');
+      break;
+    case 'outOfCash':
+      setState('out_of_cash');
+      break;
+    case 'fiatComplete':
+      fiatComplete(data.tx);
+      break;
+    case 'restart':
+      setState('restart');
       break;
   }
 }
@@ -259,12 +303,20 @@ $(document).ready(function () {
   setupImmediateButton('wifiListCancel', 'cancelWifiList');
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
+  setupImmediateButton('withdraw_failure_viewport', 'completed');
+  setupImmediateButton('fiat_completed_viewport', 'completed');
+  setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
+  setupImmediateButton('depositCancel', 'depositCancel');
 
   setupButton('initialize', 'initialize');
   setupButton('test-mode', 'testMode');
   setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingScanCancel');
+  setupButton('want_bitcoin', 'start');
+  setupButton('want_cash', 'startFiat');
+  setupButton('cash-out-button', 'cashOut');
+  setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
   setupImmediateButton('id-code-cancel', 'cancelIdCode', function() {
     idKeypad.deactivate();
@@ -273,6 +325,27 @@ $(document).ready(function () {
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
+
+  setupButton('limit-reached-ok', 'idle');
+  setupButton('insufficient-deposit-ok', 'idle');
+  setupButton('deposit-timeout-ok', 'idle');
+  setupButton('rejected-deposit-ok', 'idle');
+  setupButton('out-of-cash-ok', 'idle');
+
+  var fiatButtons = document.getElementById('js-fiat-buttons');
+  var lastTouch = null;
+  touchImmediateEvent(fiatButtons, function(e) {
+    var now = Date.now();
+    if (lastTouch && now - lastTouch < 100) return;
+    lastTouch = now;
+    var cashButtonJ = $(e.target).closest('.cash-button');
+    if (cashButtonJ.length === 0) return;
+    if (cashButtonJ.hasClass('disabled')) return;
+    if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
+    var denominationIndex = cashButtonJ.attr('data-denomination-index');
+    var denominationRec = cartridges[denominationIndex];
+    buttonPressed('fiatButton', {denomination: denominationRec.denomination});
+  });
 
   initDebug();
 });
@@ -355,7 +428,10 @@ function setState(state, delay, newLocale) {
 
   wifiKeyboard.reset();
 
-  if (state === 'idle') $('#qr-code').empty();
+  if (state === 'idle') {
+    $('.qr-code').empty();
+    $('.qr-code-deposit').empty();
+  }
 
   if (delay) window.setTimeout(function() {
     setScreen(currentState, previousState, newLocale);
@@ -495,6 +571,7 @@ function setPrimaryLocales(primaryLocales) {
 
 function setCurrency(data) {
   currency = data;
+  $('.js-currency').text(currency);
 }
 
 function setCredit(fiat, bitcoins, lastBill) {
@@ -505,6 +582,15 @@ function setCredit(fiat, bitcoins, lastBill) {
     locale.translate("You inserted a %s bill").fetch(formatFiat(lastBill)));
   $('.total-deposit').html(formatFiat(fiat));
   updateBitcoins('.total-btc-rec', bitcoins);
+}
+
+function setupCartridges(_cartridges) {
+  cartridges = _cartridges;
+  for (var i = 0; i < cartridges.length; i++) {
+    var cartridge = cartridges[i];
+    var denomination = cartridge.denomination;
+    $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
+  }
 }
 
 function updateBitcoins(selector, bitcoins) {
@@ -559,15 +645,20 @@ function setExchangeRate(rate) {
   var insertedText = locale.translate("per %s inserted")
     .fetch(singleCurrencyUnit());
   $('#fiat-inserted').html(insertedText);
+  $('.js-digital-rate').text(parseFloat(rate.xbtToFiat).toFixed(2));  // TODO clean up
 }
 
-function setTransactionHash(url) {
-  $('#qr-code').empty();
-  $('#qr-code').qrcode({
+function setFiatExchangeRate(rate) {
+  $('.js-fiat-rate').text(parseFloat(rate).toFixed(2));  // TODO clean up
+}
+
+function setSessionId(sessionId) {
+  $('.qr-code').empty();
+  $('.qr-code').qrcode({
     render: 'canvas',
     width: 225,
     height: 225,
-    text: url
+    text: sessionId
   });
 }
 
@@ -609,6 +700,11 @@ function sendOnly(reason) {
     locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch());
   $('#insert-another').css({'display': 'none'});
   $('#limit-reached-section').css({'display': 'block'});
+}
+
+function setPartialSend(sent, total) {
+  $('#already-sent').text(formatFiat(sent.fiat));
+  $('#pending-sent').text(formatFiat(total.fiat - sent.fiat));
 }
 
 function t(id, str) {
@@ -669,3 +765,105 @@ if (!String.prototype.startsWith) {
     }
   });
 }
+
+
+function reachFiatLimit(rec) {
+  var msg = null;
+  if (rec.isEmpty) msg = 'We\'re a little low, please cash out';
+  else if (rec.txLimitReached) msg = 'Transaction limit reached, please cash out';
+
+  var el = $('.choose_fiat_state .limit');
+  if (msg) el.html(msg).show();
+  else el.hide();
+}
+
+function chooseFiat(data) {
+  fiatCredit(data);
+  setState('choose_fiat');
+}
+
+function manageFiatButtons(activeDenominations) {
+  for (var i = 0; i < cartridges.length; i++) {
+    var cartridge = cartridges[i];
+    var denomination = cartridge.denomination;
+    var enabled = activeDenominations[denomination];
+    var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
+    if (enabled) button.removeClass('disabled');
+    else button.addClass('disabled');
+  }
+}
+
+function fiatCredit(data) {
+  var credit = data.credit;
+  var activeDenominations = data.activeDenominations;
+  var fiat = credit.fiat;
+  var mbtc = credit.satoshis / 1e5;
+  if (mbtc === 0) $('#js-i18n-choose-digital-amount').hide();
+  else $('#js-i18n-choose-digital-amount').show();
+
+  if (fiat === 0) $('#cash-out-button').hide();
+  else $('#cash-out-button').show();
+
+  manageFiatButtons(activeDenominations.activeMap);
+  $('.choose_fiat_state .fiat-amount').text(fiat);
+  t('choose-digital-amount',
+    locale.translate('You\'ll be sending %s mBTC').fetch(mbtc));
+
+  reachFiatLimit(activeDenominations);
+}
+
+function satoshisToBitcoins(satoshis) {
+  var bitcoins = satoshis / 1e8;
+  return Number(bitcoins.toFixed(8)).toString();
+}
+
+function satoshisToMilliBitcoins(satoshis) {
+  var millies = satoshis / 1e5;
+  return Number(millies.toFixed(5)).toString();
+}
+
+function setDepositAddress(tx) {
+  var bitcoins = satoshisToBitcoins(tx.satoshis);
+
+  $('.deposit_state .loading').hide();
+  $('.deposit_state .send-notice .bitcoin-address').text(tx.toAddress);
+  $('.deposit_state .send-notice').show();
+
+  $('#qr-code-deposit').empty();
+  $('#qr-code-deposit').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: 'bitcoin:' + tx.toAddress + '?amount=' + bitcoins
+  });
+}
+
+function deposit(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.deposit_state .digital .js-amount').text(millies);
+  $('.deposit_state .fiat .js-amount').text(tx.fiat);
+  $('.deposit_state .send-notice').hide();
+  $('#qr-code-deposit').empty();
+  $('.deposit_state .loading').show();
+
+  setState('deposit');
+}
+
+function fiatComplete(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.fiat_complete_state .digital .js-amount').text(millies);
+  $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
+  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress);
+
+  $('#qr-code-fiat-receipt').empty();
+  $('#qr-code-fiat-receipt').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: JSON.stringify(tx)
+  });
+
+  setState('fiat_complete');
+}
+
+function initDebug() {}

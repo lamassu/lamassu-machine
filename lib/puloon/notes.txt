@@ -1,0 +1,9 @@
+- Use machina as FSM
+- Test to make sure NAK doesn't happen on rapid dispense
+- Try to get near end working by setting status
+
+
+Note:
+
+There is no way to know if hopper is full. Machine will still operate,
+but notes will fly out the front.

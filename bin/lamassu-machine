@@ -2,70 +2,39 @@
 
 'use strict';
 
-var cp = require('child_process');
-var path = require('path');
+// TODO: go through code and take out all evil throws
 require('../logging');
 
-var childPath = path.resolve(__dirname, './brain-child');
+var minimist = require('minimist');
+var Brain = require('../lib/brain');
+var Configuration = require('../lib/configuration.js');
 
-var TIMEOUT = 5000;
+var bailed = false;
 
-var lastHeartbeat = Date.now();
-var child = null;
-var killVerifyLauncher = null;
-
-function errorHandler(err) {
-  console.log('lamassu-machine: child process error');
-  console.log(err.stack);
-}
-
-function exitHandler() {
-  child = null;
-  if (killVerifyLauncher) {
-    clearTimeout(killVerifyLauncher);
-    killVerifyLauncher = null;
-  }
-  console.log('lamassu-machine: child process exited, relaunching in 10s...');
-  setTimeout(launchChild, 10000);
-}
-
-function launchChild() {
-  if (child !== null) return;
-  lastHeartbeat = Date.now();
-  child = cp.fork(childPath, process.argv);
-
-  child.on('message', function (msg) {
-    if (msg.heartbeat) lastHeartbeat = Date.now();
-  });
-  child.on('error', errorHandler);
-  child.on('exit', exitHandler);
-}
-
-function verifyKill() {
-  if (!child) return;
-  console.log('Child not responding, attempting to kill...');
-  child.kill();
+function bail(err) {
+  if (bailed) return;
+  bailed = true;
+  console.log('lamassu-machine bailing out momentarily...');
+  console.log(err);
+  if (err.stack) console.log(err.stack);
   setTimeout(function () {
-    if (!killVerifyLauncher || !child) return;
-    console.log('Child did not exit, attempting to kill with SIGINT');
-    child.kill('SIGINT');
-  }, 5000);
-  setTimeout(function () {
-    if (!killVerifyLauncher || !child) return;
-    console.log('Child did not exit, attempting to kill with SIGKILL');
-    child.kill('SIGKILL');
-  }, 10000);
+    console.log('lamassu-machine bailing out');
+    process.exit(10);
+    process.abort();  // Make sure we're dead
+  }, 7000);   // Leave some time to connect for browser to set error screen
 }
 
-function checkHeartbeat() {
-  if (!child || killVerifyLauncher) return;
-  if (Date.now() - lastHeartbeat > TIMEOUT) {
-    console.log('lamassu-machine: lost heartbeat, disconnecting child process...');
-    if (child.connected) child.disconnect();
-    killVerifyLauncher = setTimeout(verifyKill, 10000);
-  }
+function startBrain() {
+  var commandLine = minimist(process.argv.slice(2));
+  
+  var config = Configuration.loadConfig(commandLine);
+
+  var brain = new Brain(config);
+  brain.on('error', bail);
+  brain.run();
 }
 
-launchChild();
-setInterval(checkHeartbeat, 2000);
+process.on('uncaughtException', bail);
+process.on('exit', function() { console.log('lamassu-machine exiting'); });
 
+startBrain();

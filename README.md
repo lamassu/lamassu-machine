@@ -6,6 +6,7 @@ The software that runs the Lamassu Bitcoin Machine.
 ```
 git clone https://github.com/lamassu/lamassu-machine.git
 cd lamassu-machine
+npm install
 ./setup.sh
 ```
 
@@ -67,17 +68,6 @@ When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
 
-## Installing additional fonts
-
-[adobe-fonts](https://github.com/adobe-fonts/) is a recommeded repository for additional fonts.
-
-To install a new font family, download the fonts to your local machine. Extract the archive, 
-and copy the font files to 
-
-```
-<lamassu-machine-path>/ui/css/fonts
-```
-
 ## Mocking
 
 In order to easily test **lamassu-server**, you can use the ```mock``` command.
@@ -94,3 +84,11 @@ node bin/mock.js -a 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8
 ```
 
 This will send $1 worth of bitcoins to 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8, via lamassu-server.
+
+Here's how to run it with a mock bill validator, a mock camera, currency forced to USD,
+a mock bill dispenser, and using an HTTP connection to a local server. First, set
+```brain.mockBTC``` to a bitcoin address in device_config.json. Then:
+
+```
+node bin/lamassu-machine --mockBv /dev/ttys009 --mockCam --fiat USD --mockBillDispenser --http
+```

@@ -12,6 +12,7 @@ pids
 logs
 log
 results
+/build
 
 npm-debug.log
 
@@ -25,9 +26,12 @@ ui/css/fonts
 /licenses.json
 libBarcodeScanner.*
 /hardware/codebase/N7G1/node_modules/manatee/build
+/hardware/codebase/aaeon/node_modules/manatee/build
 
 # compiled dependencies
 /node_modules
+jasmine
+istanbul
 
 # OS files
 .DS_Store
@@ -38,5 +42,12 @@ libBarcodeScanner.*
 /data/client.key
 /data/client.pem
 /data/connection_info.json
+/coverage
 
 test/compliance/licenses
+
+cli.txt
+*~
+
+.project
+

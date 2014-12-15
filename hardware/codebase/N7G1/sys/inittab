@@ -1,0 +1,25 @@
+::sysinit:/sbin/syslogd -K -D
+::sysinit:/bin/mkdir /dev/pts /dev/shm
+::sysinit:/bin/mount -a -t devpts,proc,sysfs,tmpfs,ext4
+::sysinit:/bin/mkdir -p /var/lib/sencha/log
+::sysinit:/usr/local/share/sencha/nv.sh
+::sysinit:/sbin/sysctl -p
+
+::wait:/sbin/ip link set dev lo up
+::wait:/sbin/ip link set dev eth0 up
+
+::once:/usr/bin/amixer -q set 'Int Spk' unmute
+
+::respawn:/sbin/zcip -f -r 169.254.83.110 usb0 /usr/local/share/sencha/zcip.sh
+::respawn:/sbin/udhcpc -f -i wlan0 -s /usr/local/share/sencha/udhcpc.sh
+::respawn:/sbin/udhcpc -f -i eth0 -s /usr/local/share/sencha/udhcpc.sh
+::respawn:/usr/sbin/wpa_supplicant -c/var/lib/sencha/wpa.conf -C/tmp/wpa_supplicant -iwlan0 -Dnl80211
+
+::respawn:/sbin/getty -w 115200 ttyGS0 vt100
+::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/bin/lamassu-machine >> /var/lib/sencha/log/node.log 2>&1
+::respawn:/usr/bin/xinit /opt/apps/machine/system/xinitrc -- -nolisten tcp -nocursor -novtswitch vt1
+::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/watchdog.js >> /var/lib/sencha/log/watchdog.log 2>&1
+::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/lib/update/updater.js >> /var/lib/sencha/log/updater.log 2>&1
+
+::shutdown:/usr/sbin/killall5
+::shutdown:/bin/mount -o remount,ro /
