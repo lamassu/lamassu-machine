@@ -26,26 +26,44 @@ describe('Brain', function() {
     expect(brain.state).toBe(State.START);
   });
 
-  it('calls a callback function once the exitOnIdle time has passed', function() {
-    var callback = jasmine.createSpy('callback');
-    jasmine.clock().install();
+  describe('calls a callback function once the exitOnIdle time has passed', function() {
+	  var EXPECT_TO_PASS = true;
+	  var EXPECT_TO_FAIL = false;
+	  
+	  var theTest = function(brainState, expectation) {
+		    var callback = jasmine.createSpy('callback');
+		    jasmine.clock().install();
 
-    expect(callback).not.toHaveBeenCalled();
+		    expect(callback).not.toHaveBeenCalled();
 
-    jasmine.clock().mockDate();
+		    jasmine.clock().mockDate();
 
-    brain.state = State.IDLE;
-    brain._executeCallbackAfterASufficientIdlePeriod(callback);
+		    brain.state = brainState;
+		    brain._executeCallbackAfterASufficientIdlePeriod(callback);
 
-    jasmine.clock().tick(brain.config.idleTime);
-    jasmine.clock().tick(brain.config.idleTime);
-    jasmine.clock().tick(brain.config.idleTime);
+		    jasmine.clock().tick(brain.config.idleTime);
+		    jasmine.clock().tick(brain.config.idleTime);
+		    jasmine.clock().tick(brain.config.idleTime);
 
-    expect(callback).toHaveBeenCalled();
+		    if (expectation === undefined || expectation === EXPECT_TO_PASS)
+		    	expect(callback).toHaveBeenCalled();
+		    else 
+		    	expect(callback).not.toHaveBeenCalled();
 
-    jasmine.clock().uninstall();
+		    jasmine.clock().uninstall();
+	  };
+	  
+	  // test each of the states in Brain.STATIC_STATES
+	  it('when state is State.IDLE', function() {
+		    theTest(State.IDLE);
+	  });
+	  
+	  it('when state is State.PENDING_IDLE', function() {
+		    theTest(State.PENDING_IDLE);
+	  });
+
   });
-
+  
   describe('initializes', function() {
 
     var func = function(arr, testFunc, testObj) {
