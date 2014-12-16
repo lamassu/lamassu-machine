@@ -195,5 +195,29 @@ describe('Brain', function() {
     });
 
   }); /* initializes */
+  
+  describe(' stores and retrieves the correct object using getters and setters for ', function() {
+	  var obj = undefined;
+	  var obj2 = undefined;
+	  
+	  beforeAll(function() {
+		  obj = jasmine.createSpy('obj');
+		  obj2 = jasmine.createSpy('obj2');		  
+	  });
+	  
+	  it(' BillValidator', function() {
+		  brain.setBillValidator(obj);
+		  expect(brain.getBillValidator()).toBe(obj);
+		  brain.setBillValidator(obj2);
+		  expect(brain.getBillValidator()).toBe(obj2);
+	  }); 
+
+	  it(' Browser', function() {
+		  brain.setBrowser(obj);
+		  expect(brain.getBrowser()).toBe(obj);
+		  brain.setBrowser(obj2);
+		  expect(brain.getBrowser()).toBe(obj2);
+	  }); 
+  }); /* getters and setters */
 
 }); /* Brain */
