@@ -26,6 +26,51 @@ describe('Brain', function() {
     expect(brain.state).toBe(State.START);
   });
   
+  describe(', when _billJam is called', function () {
+	 it(', then a State.NETWORK_DOWN msg is sent to the browser', function() {
+		 var callback = jasmine.createSpyObj('callback', ['send']);
+		 
+		 spyOn(brain, 'getBrowser').and.returnValue(callback);
+		 
+		 brain._billJam();
+		 
+		 expect(callback.send).toHaveBeenCalledWith({action: State.NETWORK_DOWN});
+	 });
+  });
+  
+  describe(', when _forceNetworkDown is called', function() {
+	  it(', and brain.hasConnected is true, state becomes State.NETWORK_DOWN', function() {
+		  brain.hasConnected = true;
+		  
+		  brain._forceNetworkDown();
+		  
+		  expect(brain.state).toBe(State.NETWORK_DOWN);
+	  });
+  });
+  
+  describe(', when _networkUp is called', function () {
+	  describe(', and state is State.NETWORK_DOWN', function() {
+		  it(', then _restart() is called', function() {
+			  spyOn(brain, '_restart');
+			  spyOn(brain, 'getBillValidator').and.callFake(function() {
+				  var rtn = {};
+
+				  rtn.hasDenominations = function() {
+					  return true;
+				  };
+				  
+				  return rtn;
+			  });
+			  
+			  brain.state = State.NETWORK_DOWN;
+			  
+			  brain._networkUp();
+			  
+			  expect(brain._restart).toHaveBeenCalled();
+		  });
+	  });
+  });
+  
   describe(', when _idle() is called', function() {
 	  it(', state becomes State.PENDING_IDLE', function () {
 		  spyOn(brain, '_setState');
@@ -107,6 +152,10 @@ describe('Brain', function() {
 		    theTest(State.PENDING_IDLE);
 	  });
 
+	  it('when state is State.NETWORK_DOWN', function() {
+		    theTest(State.NETWORK_DOWN);
+	  });
+
   });
   
   describe('initializes', function() {
@@ -121,7 +170,7 @@ describe('Brain', function() {
     };
 
     it('its trader correctly', function() {
-      var events = [State.POLL_UPDATE, 'networkDown', 'networkUp', 'dispenseUpdate', 'error', 'unpair'];
+      var events = [State.POLL_UPDATE, State.NETWORK_DOWN, 'networkUp', 'dispenseUpdate', 'error', 'unpair'];
       func(events, brain._initTraderEvents, brain.trader);
     });
 
