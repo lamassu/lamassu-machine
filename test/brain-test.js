@@ -33,6 +33,40 @@ describe('Brain', function() {
 		  brain._idle();
 		  
 		  expect(brain._setState).toHaveBeenCalledWith(State.PENDING_IDLE);
+	  });
+	  
+	  it(', and trader.twoWayMode is true, don\'t expect state to become State.IDLE', function() {
+		  brain.networkDown = false;
+		  brain.trader.twoWayMode = true;
+		  
+		  spyOn(brain, '_setState');
+		  
+		  brain._idle();
+		  
+		  expect(brain._setState).not.toHaveBeenCalledWith(State.IDLE);
+	  });
+
+	  it(', and trader.twoWayMode is false, expect state to become State.IDLE', function() {
+		  brain.networkDown = false;
+		  brain.trader.twoWayMode = false;
+		  
+		  spyOn(brain, '_setState');
+		  spyOn(brain, '_idleOneWay').and.callThrough();
+
+		  brain._idle();
+		  
+		  expect(brain._idleOneWay).toHaveBeenCalled();
+		  expect(brain._setState).toHaveBeenCalledWith(State.IDLE);
+	  });
+  });
+  
+  describe(', when _idleOneWay is called', function() {
+	  it(', state becomes State.IDLE', function() {
+		  spyOn(brain, '_setState');
+		  
+		  brain._idleOneWay();
+		  
+		  expect(brain._setState).toHaveBeenCalledWith(State.IDLE);
 		  expect(brain._setState.calls.count()).toEqual(1);
 	  });
   });
