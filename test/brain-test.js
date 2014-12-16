@@ -25,6 +25,17 @@ describe('Brain', function() {
   it('starts off in the state \'start\'', function() {
     expect(brain.state).toBe(State.START);
   });
+  
+  describe(', when _idle() is called', function() {
+	  it(', state becomes State.PENDING_IDLE', function () {
+		  spyOn(brain, '_setState');
+		  
+		  brain._idle();
+		  
+		  expect(brain._setState).toHaveBeenCalledWith(State.PENDING_IDLE);
+		  expect(brain._setState.calls.count()).toEqual(1);
+	  });
+  });
 
   describe('calls a callback function once the exitOnIdle time has passed', function() {
 	  var EXPECT_TO_PASS = true;
