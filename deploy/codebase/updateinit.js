@@ -35,10 +35,20 @@ function installBarcodeLib(cb) {
   command(cmd, cb);
 }
 
+function installSys(cb) {
+  if (hardwareCode !== 'N7G1') return cb();
+  async.series([
+    async.apply(command, 'cp -p /tmp/extract/package/subpackage/hardware/N7G1/sys/xinitrc /opt/apps/machine/system'),
+    async.apply(command, 'cp -p /tmp/extract/package/subpackage/hardware/N7G1/sys/inittab /etc')
+  ], cb);
+}
+
+
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
+  async.apply(installSys),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),

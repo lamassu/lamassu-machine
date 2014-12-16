@@ -1,0 +1,6 @@
+/usr/bin/icewmbg &
+/usr/bin/icewm &
+
+/bin/mkdir -p /tmp/.config/chromium
+> '/tmp/.config/chromium/First Run'
+HOME=/tmp exec /usr/lib/chromium-browser/chrome --disable-translate --kiosk --user-data-dir file:/opt/apps/machine/lamassu-machine/ui/start.html > /tmp/chromium.log 2>&1
