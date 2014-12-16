@@ -18,7 +18,7 @@ describe('Brain', function() {
     brain = new Brain(config);
   });
 
-  it('can be configured with default values', function() {
+  it('is created when given common dev command line overrides', function() {
     expect(brain).toBeDefined();
   });
 
