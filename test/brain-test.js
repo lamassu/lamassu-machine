@@ -243,6 +243,13 @@ describe('Brain', function() {
 		  brain.setBrowser(obj2);
 		  expect(brain.browser()).toBe(obj2);
 	  }); 
+
+	  it(' Trader', function() {
+		  brain.setTrader(obj);
+		  expect(brain.trader()).toBe(obj);
+		  brain.setTrader(obj2);
+		  expect(brain.trader()).toBe(obj2);
+	  }); 
   }); /* getters and setters */
 
 }); /* Brain */
