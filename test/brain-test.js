@@ -177,10 +177,21 @@ describe('Brain', function() {
 		    theTest(State.PENDING_IDLE);
 	  });
 
+	  it('when state is State.DUAL_IDLE', function() {
+		    theTest(State.DUAL_IDLE);
+	  });
+
 	  it('when state is State.NETWORK_DOWN', function() {
 		    theTest(State.NETWORK_DOWN);
 	  });
+	  
+	  it('when state is State.UNPAIRED', function() {
+		    theTest(State.UNPAIRED);
+	  });
 
+	  it('when state is "foo"', function() {
+		    theTest('foo', EXPECT_TO_FAIL);
+	  });
   });
   
   describe('initializes', function() {
