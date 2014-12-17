@@ -43,6 +43,39 @@ describe('Brain', function() {
 	  });
   });
   
+  describe('when _unpair is called', function() {
+	  it('then trader is stopped', function() {
+		  var callback = jasmine.createSpyObj('callback', ['stop']);
+		  
+		  spyOn(brain, 'trader').and.returnValue(callback);
+		  
+		  brain._unpair();
+		  
+		  expect(callback.stop).toHaveBeenCalled();
+	  });
+	  
+	  describe('then on the pairing object', function() {
+		  it('.unpair is called', function() {
+			  var traderCallback = jasmine.createSpyObj('traderCallback', ['stop']);
+			  var pairingCallback = jasmine.createSpyObj('pairingCallback', ['unpair']);
+			  
+			  spyOn(brain, 'trader').and.returnValue(traderCallback);
+			  spyOn(brain, 'pairing').and.returnValue(pairingCallback);
+			  
+			  brain._unpair();
+			  
+			  expect(traderCallback.stop).toHaveBeenCalled();
+			  expect(pairingCallback.unpair).toHaveBeenCalled();
+		  });
+		  
+		  it('.unpair calls the callback', function() {
+			  // TODO: verify that the callback is called, and that it 
+			  //	1 sets the brain state to UNPAIRED
+			  //	2 sends a msg to the browser saying 'UNPAIRED'
+		  });
+	  });
+  });
+  
   describe('when _billJam is called', function () {
 	 it('then a State.NETWORK_DOWN msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
