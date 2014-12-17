@@ -26,8 +26,8 @@ describe('Brain', function() {
     expect(brain.state).toBe(State.START);
   });
   
-  describe(', when _unpaired is called', function() {
-	  it(', then a State.UNPAIRED msg is sent to the browser', function() {
+  describe('when _unpaired is called', function() {
+	  it('then a State.UNPAIRED msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
 		 
 		 spyOn(brain, 'browser').and.returnValue(callback);
@@ -43,8 +43,8 @@ describe('Brain', function() {
 	  });
   });
   
-  describe(', when _billJam is called', function () {
-	 it(', then a State.NETWORK_DOWN msg is sent to the browser', function() {
+  describe('when _billJam is called', function () {
+	 it('then a State.NETWORK_DOWN msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
 		 
 		 spyOn(brain, 'browser').and.returnValue(callback);
@@ -54,7 +54,7 @@ describe('Brain', function() {
 		 expect(callback.send).toHaveBeenCalledWith({action: State.NETWORK_DOWN});
 	 });
 	 
-	 it(', the Brain state is not changed', function () {
+	 it('the Brain state is not changed', function () {
 		 var state = brain.state;
 		 
 		 brain._billJam();
@@ -63,8 +63,8 @@ describe('Brain', function() {
 	 });
   });
   
-  describe(', when _forceNetworkDown is called', function() {
-	  it(', and brain.hasConnected is true, state becomes State.NETWORK_DOWN', function() {
+  describe('when _forceNetworkDown is called', function() {
+	  it('and brain.hasConnected is true, state becomes State.NETWORK_DOWN', function() {
 		  brain.hasConnected = true;
 		  
 		  brain._forceNetworkDown();
@@ -73,9 +73,9 @@ describe('Brain', function() {
 	  });
   });
   
-  describe(', when _networkUp is called', function () {
-	  describe(', and state is State.NETWORK_DOWN', function() {
-		  it(', then _restart() is called', function() {
+  describe('when _networkUp is called', function () {
+	  describe('and state is State.NETWORK_DOWN', function() {
+		  it('then _restart() is called', function() {
 			  spyOn(brain, '_restart');
 			  spyOn(brain, 'getBillValidator').and.callFake(function() {
 				  var rtn = {};
@@ -96,8 +96,8 @@ describe('Brain', function() {
 	  });
   });
   
-  describe(', when _idle() is called', function() {
-	  it(', state becomes State.PENDING_IDLE', function () {
+  describe('when _idle() is called', function() {
+	  it('state becomes State.PENDING_IDLE', function () {
 		  spyOn(brain, '_setState');
 		  
 		  brain._idle();
@@ -105,7 +105,7 @@ describe('Brain', function() {
 		  expect(brain._setState).toHaveBeenCalledWith(State.PENDING_IDLE);
 	  });
 	  
-	  it(', and trader.twoWayMode is true, don\'t expect state to become State.IDLE', function() {
+	  it('and trader.twoWayMode is true, don\'t expect state to become State.IDLE', function() {
 		  brain.networkDown = false;
 		  brain.trader().twoWayMode = true;
 		  
@@ -116,7 +116,7 @@ describe('Brain', function() {
 		  expect(brain._setState).not.toHaveBeenCalledWith(State.IDLE);
 	  });
 
-	  it(', and trader.twoWayMode is false, expect state to become State.IDLE', function() {
+	  it('and trader.twoWayMode is false, expect state to become State.IDLE', function() {
 		  brain.networkDown = false;
 		  brain.trader().twoWayMode = false;
 		  
@@ -130,8 +130,8 @@ describe('Brain', function() {
 	  });
   });
   
-  describe(', when _idleOneWay is called', function() {
-	  it(', state becomes State.IDLE', function() {
+  describe('when _idleOneWay is called', function() {
+	  it('state becomes State.IDLE', function() {
 		  spyOn(brain, '_setState');
 		  
 		  brain._idleOneWay();
