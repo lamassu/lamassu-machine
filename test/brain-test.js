@@ -26,6 +26,23 @@ describe('Brain', function() {
     expect(brain.state).toBe(State.START);
   });
   
+  describe(', when _unpaired is called', function() {
+	  it(', then a State.UNPAIRED msg is sent to the browser', function() {
+		 var callback = jasmine.createSpyObj('callback', ['send']);
+		 
+		 spyOn(brain, 'browser').and.returnValue(callback);
+		 
+		 brain._unpaired();
+		 
+		 expect(callback.send).toHaveBeenCalledWith({action: State.UNPAIRED});
+	  });
+	  
+	  it(', then the state is set to State.UNPAIRED', function() {
+		 brain._unpaired();
+		 expect(brain.state).toBe(State.UNPAIRED);
+	  });
+  });
+  
   describe(', when _billJam is called', function () {
 	 it(', then a State.NETWORK_DOWN msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
@@ -35,6 +52,14 @@ describe('Brain', function() {
 		 brain._billJam();
 		 
 		 expect(callback.send).toHaveBeenCalledWith({action: State.NETWORK_DOWN});
+	 });
+	 
+	 it(', the Brain state is not changed', function () {
+		 var state = brain.state;
+		 
+		 brain._billJam();
+		 
+		 expect(brain.state).toBe(state);
 	 });
   });
   
