@@ -250,6 +250,13 @@ describe('Brain', function() {
 		  brain.setTrader(obj2);
 		  expect(brain.trader()).toBe(obj2);
 	  }); 
+
+	  it('Pairing', function() {
+		  brain.setPairing(obj);
+		  expect(brain.pairing()).toBe(obj);
+		  brain.setPairing(obj2);
+		  expect(brain.pairing()).toBe(obj2);
+	  }); 
   }); /* getters and setters */
 
 }); /* Brain */
