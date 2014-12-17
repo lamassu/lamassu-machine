@@ -30,7 +30,7 @@ describe('Brain', function() {
 	 it(', then a State.NETWORK_DOWN msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
 		 
-		 spyOn(brain, 'getBrowser').and.returnValue(callback);
+		 spyOn(brain, 'browser').and.returnValue(callback);
 		 
 		 brain._billJam();
 		 
@@ -176,7 +176,7 @@ describe('Brain', function() {
 
     it('its browser correctly', function() {
       var events = ['connected', 'message', 'closed', 'messageError', 'error'];
-      func(events, brain._initBrowserEvents, brain.browser);
+      func(events, brain._initBrowserEvents, brain.browser());
     });
 
     it('its wifi correctly', function() {
@@ -186,7 +186,7 @@ describe('Brain', function() {
 
     it('its billValidator correctly', function() {
       var events = ['error', 'disconnected', 'billAccepted', 'billRead', 'billValid', 'billRejected', 'timeout', 'standby', 'jam', 'stackerOpen', 'enabled'];
-      func(events, brain._initBillValidatorEvents, brain.billValidator);
+      func(events, brain._initBillValidatorEvents, brain.getBillValidator());
     });
 
     it('its own event listeners correctly', function() {
@@ -214,9 +214,9 @@ describe('Brain', function() {
 
 	  it(' Browser', function() {
 		  brain.setBrowser(obj);
-		  expect(brain.getBrowser()).toBe(obj);
+		  expect(brain.browser()).toBe(obj);
 		  brain.setBrowser(obj2);
-		  expect(brain.getBrowser()).toBe(obj2);
+		  expect(brain.browser()).toBe(obj2);
 	  }); 
   }); /* getters and setters */
 
