@@ -107,7 +107,7 @@ describe('Brain', function() {
 	  
 	  it(', and trader.twoWayMode is true, don\'t expect state to become State.IDLE', function() {
 		  brain.networkDown = false;
-		  brain.trader.twoWayMode = true;
+		  brain.trader().twoWayMode = true;
 		  
 		  spyOn(brain, '_setState');
 		  
@@ -118,7 +118,7 @@ describe('Brain', function() {
 
 	  it(', and trader.twoWayMode is false, expect state to become State.IDLE', function() {
 		  brain.networkDown = false;
-		  brain.trader.twoWayMode = false;
+		  brain.trader().twoWayMode = false;
 		  
 		  spyOn(brain, '_setState');
 		  spyOn(brain, '_idleOneWay').and.callThrough();
@@ -196,7 +196,7 @@ describe('Brain', function() {
 
     it('its trader correctly', function() {
       var events = [State.POLL_UPDATE, State.NETWORK_DOWN, 'networkUp', 'dispenseUpdate', 'error', 'unpair'];
-      func(events, brain._initTraderEvents, brain.trader);
+      func(events, brain._initTraderEvents, brain.trader());
     });
 
     it('its browser correctly', function() {
