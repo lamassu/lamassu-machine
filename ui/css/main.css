@@ -201,27 +201,30 @@ body  { margin: 0;}
   top: 54;
 }
 
-.id_code_state .keypad {
-  background-color: #5f5f55;   /* sandstone */
+.fiat-section .instructions {
+   color: #37E8D7;  /* amazonite */
+}
+
+.keypad {
   position: absolute;
   left: 713;
   height: 800px;
   width: 567px;
 }
 
-.id_code_state .keypad .entry {
+.keypad .entry {
   overflow: auto;
   position: absolute;
   top: 102;
   left: 53;
 }
 
-.id_code_state .keypad .box {
+.keypad .box {
   float: left;
   border-radius: 10px;
-  border: 4px solid #d0d0c8;
-  background-color: #edede1;
-  color: #303030;
+  border: 4px solid #ffffff;
+  background-color: #ffffff;
+  color: #0e4160;
   width: 90px;
   height: 90px;
   font-size: 40px;
@@ -232,22 +235,27 @@ body  { margin: 0;}
   -webkit-box-align:center;
 }
 
-.id_code_state .keypad .keys {
+.keypad .full-box {
+  width: 453px;
+}
+
+.keypad .keys {
   position: absolute;
   left: 53;
   top: 234;
 }
 
-.id_code_state .keys .row {
+.keypad .keys .row {
   margin-bottom: 16px;
   overflow: auto;
 }
 
-.id_code_state .key {
-  width: 143px;
-  height: 116px;
+.keypad .key {
+  width: 137px;
+  height: 110px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #37E8D7;
+  border: 3px solid #37E8D7;
   margin-right: 16px;
   float: left;
   display:-webkit-box;
@@ -259,26 +267,36 @@ body  { margin: 0;}
   transition: background-color 0.1s, color 0.1s;
 }
 
-.id_code_state .keys .clear {
+.keypad .keys .clear {
   text-transform:uppercase;
   font-weight: 900;
   font-size: 24px;
 }
 
-.id_code_state .keys .enter {
+.keypad .keys .plus {
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.keypad .keys .enter {
   font-weight: 900;
   text-transform:uppercase;
-  background-color: #303030;
-  color: #ffffff;
+  background-color: #0e4160;
+  border-color: #37E8D7;
+  color: #37E8D7;
   font-size: 24px;
 }
 
-.id_code_state .key:active {
-  background-color: #eeeeee;
+.keypad .key:active {
+  border-color: #17c2b2;
+  background-color: #17c2b2;
+  color: #0e4160;
 }
 
-.id_code_state .keys .enter:active {
-  background-color: #1f1f1f;
+.keypad .keys .enter:active {
+  border-color: #17c2b2;
+  background-color: #082c40;
+  color: #17c2b2;
 }
 
 #scan-address {

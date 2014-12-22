@@ -18,7 +18,8 @@ var websocket = null;
 
 var wifiKeyboard = null;
 
-var idKeypad = null;
+var phoneKeypad = null;
+var securityKeypad = null;
 
 var previousState = null;
 var onSendOnly = false;
@@ -121,9 +122,9 @@ function processData(data) {
     case 'scanId':
       setState('scan_id');
       break;
-    case 'idCode':
-      idKeypad.activate();
-      setState('id_code');
+    case 'phoneNumber':
+      phoneKeypad.activate();
+      setState('phone_number');
       break;
     case 'verifyingId':
       setState('verifying_id');
@@ -235,9 +236,16 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
-  idKeypad = new Keypad('id-keypad', function(result) {
-    if (currentState !== 'id_code') return;
-    buttonPressed('idCode', result);
+  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber'}, function(result) {
+    if (currentState !== 'phone_number') return;
+    console.log(result);
+    buttonPressed('phoneNumber', result);
+  });
+
+  securityKeypad = new Keypad('security-keypad', {type: 'code'}, function(result) {
+    if (currentState !== 'security_code') return;
+    console.log(result);
+    buttonPressed('securityCode', result);
   });
 
   // buffers automatically when created
@@ -318,8 +326,8 @@ $(document).ready(function () {
   setupButton('cash-out-button', 'cashOut');
   setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('id-code-cancel', 'cancelIdCode', function() {
-    idKeypad.deactivate();
+  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', function() {
+    phoneKeypad.deactivate();
   });
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');

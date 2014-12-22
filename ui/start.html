@@ -9,10 +9,12 @@
     <script src="js/jquery.qrcode-0.2.min.js"></script>
     <script src="js/jquery.transit.min.js"></script>
     <script src="js/keyboard.js"></script>
+    <script src="js/phoneformat.js"></script>
     <script src="js/keypad.js"></script>
     <script src="js/jed.js"></script>
     <script src="js/locales.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/debug.js"></script>
   </head>
   <body>
     <section id="view">
@@ -426,21 +428,57 @@
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
-      <section class="viewport scan-id id_code_state" data-tr-section="id-code">
+      <section class="viewport scan-id fiat-section phone_number_state" data-tr-section="phone-number">
         <section class="main">
-          <h1 class="js-i18n">Identity verification</h1>
+          <h1 class="js-i18n">Phone Number</h1>
           <div class="instructions">
             <span class="js-i18n">
-            Please enter the <strong>last 4</strong> digits of your Social Security number.
+            Please enter your mobile number so we can text you when your order is confirmed.
             </span>
           </div>
         </section>
-        <section id="id-keypad" class="keypad">
+        <section id="phone-keypad" class="keypad">
           <section class="entry">
-            <div class="box box-1"></div>
-            <div class="box box-2"></div>
-            <div class="box box-3"></div>
-            <div class="box box-4"></div>
+            <div class="box full-box"></div>
+          </section>
+          <section class="keys">
+            <div class="row">
+              <div class="key numeric">1</div>
+              <div class="key numeric">2</div>
+              <div class="key numeric">3</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">4</div>
+              <div class="key numeric">5</div>
+              <div class="key numeric">6</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">7</div>
+              <div class="key numeric">8</div>
+              <div class="key numeric">9</div>
+            </div>
+            <div class="row">
+              <div class="key clear">Clear</div>
+              <div class="key numeric">0</div>
+              <div class="key plus enter-plus">+</div>
+            </div>
+          </section>
+        </section>
+        <section id="phone-number-cancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport scan-id fiat-section security_code_state" data-tr-section="security-code">
+        <section class="main">
+          <h1 class="js-i18n">Security Code</h1>
+          <div class="instructions">
+            <span class="js-i18n">
+            We've texted you a security code. When you get it, enter it here.
+            </span>
+          </div>
+        </section>
+        <section id="security-keypad" class="keypad">
+          <section class="entry">
+            <div class="box full-box"></div>
           </section>
           <section class="keys">
             <div class="row">
@@ -465,7 +503,7 @@
             </div>
           </section>
         </section>
-        <section id="id-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
+        <section id="security-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
       <section class="viewport verifying_id_state info" data-tr-section="verifying-id">
