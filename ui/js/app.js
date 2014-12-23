@@ -122,9 +122,13 @@ function processData(data) {
     case 'scanId':
       setState('scan_id');
       break;
-    case 'phoneNumber':
+    case 'registerPhone':
       phoneKeypad.activate();
       setState('phone_number');
+      break;
+    case 'registerCode':
+      securityKeypad.activate();
+      setState('security_code');
       break;
     case 'verifyingId':
       setState('verifying_id');
@@ -236,7 +240,7 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
-  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber'}, function(result) {
+  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function(result) {
     if (currentState !== 'phone_number') return;
     console.log(result);
     buttonPressed('phoneNumber', result);
