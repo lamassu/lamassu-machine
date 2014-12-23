@@ -110,7 +110,7 @@ describe('Brain', function() {
 	  describe('and state is State.NETWORK_DOWN', function() {
 		  it('then _restart() is called', function() {
 			  spyOn(brain, '_restart');
-			  spyOn(brain, 'getBillValidator').and.callFake(function() {
+			  spyOn(brain, 'billValidator').and.callFake(function() {
 				  var rtn = {};
 
 				  rtn.hasDenominations = function() {
@@ -255,7 +255,7 @@ describe('Brain', function() {
 
     it('its billValidator correctly', function() {
       var events = ['error', 'disconnected', 'billAccepted', 'billRead', 'billValid', 'billRejected', 'timeout', 'standby', 'jam', 'stackerOpen', 'enabled'];
-      func(events, brain._initBillValidatorEvents, brain.getBillValidator());
+      func(events, brain._initBillValidatorEvents, brain.billValidator());
     });
 
     it('its own event listeners correctly', function() {
@@ -276,9 +276,9 @@ describe('Brain', function() {
 	  
 	  it(' BillValidator', function() {
 		  brain.setBillValidator(obj);
-		  expect(brain.getBillValidator()).toBe(obj);
+		  expect(brain.billValidator()).toBe(obj);
 		  brain.setBillValidator(obj2);
-		  expect(brain.getBillValidator()).toBe(obj2);
+		  expect(brain.billValidator()).toBe(obj2);
 	  }); 
 
 	  it(' Browser', function() {
