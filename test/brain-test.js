@@ -76,6 +76,23 @@ describe('Brain', function() {
 	  });
   });
   
+  describe('when _billInserted is called', function() {
+	  it('then a State.ACCEPTING_BILL msg is sent to the browser', function() {
+		 var callback = jasmine.createSpyObj('callback', ['send']);
+		 
+		 spyOn(brain, 'browser').and.returnValue(callback);
+		 
+		 brain._billInserted();
+		 
+		 expect(callback.send).toHaveBeenCalledWith({action: State.ACCEPTING_BILL});
+	  });
+	  
+	  it('state becomes State.BILL_INSERTED', function() {
+		  brain._billInserted();
+		  expect(brain.state).toBe(State.BILL_INSERTED);
+	  });
+  });
+  
   describe('when _billJam is called', function () {
 	 it('then a State.NETWORK_DOWN msg is sent to the browser', function() {
 		 var callback = jasmine.createSpyObj('callback', ['send']);
