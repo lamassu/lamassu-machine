@@ -330,9 +330,8 @@ $(document).ready(function () {
   setupButton('cash-out-button', 'cashOut');
   setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', function() {
-    phoneKeypad.deactivate();
-  });
+  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber');
+  setupImmediateButton('security-code-cancel', 'cancelSecurityCode');
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
