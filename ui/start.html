@@ -466,6 +466,56 @@
         <section id="phone-number-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
+      <section class="viewport bad_phone_number_state fiat-side" data-tr-section="bad-phone-number">
+        <section class="info">
+          <h1>Try Again</h1>
+          <section class="description long">
+            <p>
+            The phone number you entered didn't work. If you have an international
+            number, please prefix it with <strong>+</strong> and your country's calling code.</p>
+            <p>
+            For instance, Belgium's calling code is +32, so a Belgian number would look like:
+            +32 455 12 34 56
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button" id="bad-phone-number-ok">Try Again</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport bad_security_code_state fiat-side" data-tr-section="bad-security-code">
+        <section class="info">
+          <h1>Try Again</h1>
+          <section class="description">
+            <p>
+            The code you entered was incorrect.
+            <p>
+            Please make sure you are entering the six digit code you receive from us.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button" id="bad-phone-number-ok">Resend Code</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport max_phone_retries_state fiat-side" data-tr-section="max-phone-retries">
+        <section class="info">
+          <h1>Oops, this isn't working</h1>
+          <section class="description">
+            <p>
+            You've hit the maximum number of retries.
+            <p>
+            Please contact the operator to sort this out,<br/> or try again later.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button" id="max-phone-retries-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
       <section class="viewport scan-id fiat-section security_code_state" data-tr-section="security-code">
         <section class="main">
           <h1 class="js-i18n">Security Code</h1>
@@ -1100,7 +1150,36 @@
         <img class="dispensing-bill" src="images/dispensing-bill.png" />
       </section>
 
-      <section id="fiat_completed_viewport" class="viewport fiat_complete_state fiat-side" data-tr-section="fiat-complete">
+      <section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">
+        <section class="instructions">
+          <h1 class="js-i18n">Your Receipt</h1>
+          <section class="sums">
+            <div class="digital">
+              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div>were sent by you</div>
+            </div>
+            <div class="fiat">
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
+              <div>pending confirmation</div>
+            </div>
+          </section>
+          <div class="sent-coins">
+            Your bitcoins were sent to:<br/>
+            <span class="bitcoin-address"></span>
+          </div>
+        </section>
+
+        <section class="qr-section">
+          <img class="qr-frame" src="images/qr_code_fiat.png" />
+          <div id="qr-code-fiat-receipt"></div>
+          <div class="send-notice-section">
+            <img class="camera" src="images/camera.png" />
+            <div class="send-notice">Take a photo of the screen for your electronic receipt.</div>
+          </div>
+        </section>
+      </section>
+
+      <section id="fiat_complete_viewport" class="viewport fiat_receipt fiat_complete_state fiat-side" data-tr-section="fiat-complete">
         <section class="instructions">
           <h1 class="js-i18n">Thank you!</h1>
           <section class="sums">

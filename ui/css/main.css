@@ -1348,47 +1348,47 @@ body  { margin: 0;}
   left: 804px;
 }
 
-.fiat_complete_state .sums {
+.fiat_receipt .sums {
   position: relative;
   top: 50px;
   font-size: 30px;
   color: #37e8d7; /* amazonite */;
 }
 
-.fiat_complete_state .sums strong {
+.fiat_receipt .sums strong {
   font-weight: 900;
 }
 
-.fiat_complete_state .sums .digital {
+.fiat_receipt .sums .digital {
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
-.fiat_complete_state .sums .amount {
+.fiat_receipt .sums .amount {
   font-size: 48px;
   font-weight: regular;
   color: #ffffff;
 }
 
-.fiat_complete_state .qr-frame {
+.fiat_receipt .qr-frame {
   position: absolute;
   top: 137px;
   left: 775px;
 }
 
-.fiat_complete_state .send-notice-section {
+.fiat_receipt .send-notice-section {
   position: absolute;
   top: 655px;
   left: 890px;
 }
 
-.fiat_complete_state .camera {
+.fiat_receipt .camera {
   position: absolute;
   left: -75px;
   top: 15px;
 }
 
-.fiat_complete_state .send-notice {
+.fiat_receipt .send-notice {
   text-align: left;
   font-size: 22px;
   color: #37e8d7; /* amazonite */;
@@ -1396,7 +1396,7 @@ body  { margin: 0;}
   font-weight: bold;
 }
 
-.fiat_complete_state .sent-coins {
+.fiat_receipt .sent-coins {
   position: relative;
   top: 130px;
   font-size: 30px;
@@ -1406,23 +1406,25 @@ body  { margin: 0;}
 .fiat-side .info {
   width: 1200px;
   height: 720px;
-  border: 40px solid #0e4160;   /* cobalt */
+  background-color: #0e4160;   /* cobalt */
 }
 
 .fiat-side .info h1 {
   position: absolute;
-  top: 200px;
+  top: 125px;
   left: 0;
   font-size: 70px;
   width: 100%;
+  color: #ffffff;
 }
 
 .fiat-side .info .description {
   position: absolute;
-  top: 340px;
+  top: 250px;
   left: 0;
   width: 100%;
   font-size: 30px;
+  color: #37e8d7; /* amazonite */;
 }
 
 .fiat-side .info p {
@@ -1430,6 +1432,11 @@ body  { margin: 0;}
   font-weight: normal;
   width: 60%;
   text-align: center;
+  color: #37e8d7; /* amazonite */;
+}
+
+.fiat-side .info .long p {
+  text-align: left;
 }
 
 .fiat-side .info .actions {
@@ -1446,8 +1453,8 @@ body  { margin: 0;}
   width: 200px;
   border-radius: 15%/60%;
   font-weight: bold;
-  color: #37e8d7; /* amazonite */;
-  background-color: #0e4160;   /* cobalt */
+  color: #0e4160; /* cobalt */;
+  background-color: #37e8d7;   /* amazonite */
 }
 
 .fiat-side .info .actions .cancel {
@@ -1456,13 +1463,13 @@ body  { margin: 0;}
 }
 
 .fiat-side .info .actions .button:active {
-  background-color: #082c40;
-  color: #37e8d7;
+  border-color: #17c2b2;
+  background-color: #17c2b2;
 }
 
 .fiat-side .info .actions .cancel:active {
+  border-color: #17c2b2;
   background-color: #17c2b2;
-  color: #0e4160;
 }
 
 .flying-bills {
