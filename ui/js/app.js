@@ -168,10 +168,7 @@ function processData(data) {
       setState('restart');
       break;
     default:
-      if (!data.action) break;
-      var snakeState = window.snakecase(data.action);
-      console.log('DEBUG: %s', snakeState);
-      setState(snakeState);
+      if (data.action) setState(window.snakecase(data.action));
   }
 }
 
@@ -297,6 +294,7 @@ $(document).ready(function () {
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
   setupButton('redeem-later-ok', 'idle');
+  setupButton('pre-receipt-ok', 'fiatReceipt');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
@@ -813,6 +811,23 @@ function deposit(tx) {
   $('.deposit_state .loading').show();
 
   setState('deposit');
+}
+
+function fiatReceipt(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.fiat_receipt_state .digital .js-amount').text(millies);
+  $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat);
+  $('.fiat_receipt_state .sent-coins .bitcoin-address').text(tx.toAddress);
+
+  $('#qr-code-fiat-receipt').empty();
+  $('#qr-code-fiat-receipt').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: tx.sessionId
+  });
+
+  setState('fiat_receipt');
 }
 
 function fiatComplete(tx) {
