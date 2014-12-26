@@ -90,15 +90,6 @@ function processData(data) {
         locale.translate('Connected. Waiting for ticker.').fetch());
       setState('wifi_connecting');  // in case we didn't go through wifi-connecting
       break;
-    case 'virgin':
-      setState('virgin');
-      break;
-    case 'unpaired':
-      setState('unpaired');
-      break;
-    case 'pairingScan':
-      setState('pairing_scan');
-      break;
     case 'pairing':
       confirmBeep.play();
       setState('pairing');
@@ -119,9 +110,6 @@ function processData(data) {
     case 'fakeDualIdle':
       setState('dual_idle');
       break;
-    case 'scanId':
-      setState('scan_id');
-      break;
     case 'registerPhone':
       phoneKeypad.activate();
       setState('phone_number');
@@ -129,30 +117,6 @@ function processData(data) {
     case 'registerCode':
       securityKeypad.activate();
       setState('security_code');
-      break;
-    case 'badPhoneNumber':
-      setState('bad_phone_number');
-      break;
-    case 'badSecurityCode':
-      setState('bad_security_code');
-      break;
-    case 'maxPhoneRetries':
-      setState('max_phone_retries');
-      break;
-    case 'verifyingId':
-      setState('verifying_id');
-      break;
-    case 'idVerificationFailed':
-      setState('id_verification_failed');
-      break;
-    case 'idCodeFailed':
-      setState('id_code_failed');
-      break;
-    case 'idVerificationError':
-      setState('id_verification_error');
-      break;
-    case 'scanAddress':
-      setState('scan_address');
       break;
     case 'scanned':
       confirmBeep.play();
@@ -174,15 +138,6 @@ function processData(data) {
       confirmBeep.play();
       setState('completed');
       break;
-    case 'goodbye':
-      setState('goodbye');
-      break;
-    case 'maintenance':
-      setState('maintenance');
-      break;
-    case 'withdrawFailure':
-      setState('withdraw_failure');
-      break;
     case 'networkDown':
       setState('trouble');
       break;
@@ -190,17 +145,8 @@ function processData(data) {
     case 'insufficientFunds':
       setState('limit_reached');
       break;
-    case 'fixTransaction':
-      setState('fix_transaction');
-      break;
     case 'highBill':
       highBill(data.highestBill, data.reason);
-      break;
-    case 'initializing':
-      setState('initializing');
-      break;
-    case 'connecting':
-      setState('connecting');
       break;
     case 'chooseFiat':
       chooseFiat(data.chooseFiat);
@@ -209,23 +155,8 @@ function processData(data) {
       setState('deposit');
       deposit(data.tx);
       break;
-    case 'depositTimeout':
-      setState('deposit_timeout');
-      break;
-    case 'pendingDeposit':
-      setState('pending_deposit');
-      break;
-    case 'insufficientDeposit':
-      setState('insufficient_deposit');
-      break;
     case 'rejectedDeposit':
       setState('deposit_timeout');
-      break;
-    case 'dispensing':
-      setState('dispensing');
-      break;
-    case 'outOfCash':
-      setState('out_of_cash');
       break;
     case 'fiatReceipt':
       fiatReceipt(data.tx);
@@ -236,6 +167,11 @@ function processData(data) {
     case 'restart':
       setState('restart');
       break;
+    default:
+      if (!data.action) break;
+      var snakeState = window.snakecase(data.action);
+      console.log('DEBUG: %s', snakeState);
+      setState(snakeState);
   }
 }
 
@@ -360,6 +296,7 @@ $(document).ready(function () {
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
+  setupButton('redeem-later-ok', 'idle');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
