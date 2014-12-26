@@ -130,6 +130,15 @@ function processData(data) {
       securityKeypad.activate();
       setState('security_code');
       break;
+    case 'badPhoneNumber':
+      setState('bad_phone_number');
+      break;
+    case 'badSecurityCode':
+      setState('bad_security_code');
+      break;
+    case 'maxPhoneRetries':
+      setState('max_phone_retries');
+      break;
     case 'verifyingId':
       setState('verifying_id');
       break;
@@ -217,6 +226,9 @@ function processData(data) {
       break;
     case 'outOfCash':
       setState('out_of_cash');
+      break;
+    case 'fiatReceipt':
+      fiatReceipt(data.tx);
       break;
     case 'fiatComplete':
       fiatComplete(data.tx);
@@ -330,8 +342,10 @@ $(document).ready(function () {
   setupButton('cash-out-button', 'cashOut');
   setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber');
-  setupImmediateButton('security-code-cancel', 'cancelSecurityCode');
+  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
+    phoneKeypad.deactivate.bind(phoneKeypad));
+  setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
+    securityKeypad.deactivate.bind(securityKeypad));
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
@@ -342,6 +356,10 @@ $(document).ready(function () {
   setupButton('deposit-timeout-ok', 'idle');
   setupButton('rejected-deposit-ok', 'idle');
   setupButton('out-of-cash-ok', 'idle');
+
+  setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
+  setupButton('bad-security-code-ok', 'badSecurityCodeOk');
+  setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
@@ -866,12 +884,12 @@ function fiatComplete(tx) {
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
   $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress);
 
-  $('#qr-code-fiat-receipt').empty();
-  $('#qr-code-fiat-receipt').qrcode({
+  $('#qr-code-fiat-complete').empty();
+  $('#qr-code-fiat-complete').qrcode({
     render: 'canvas',
     width: 275,
     height: 275,
-    text: JSON.stringify(tx)
+    text: tx.sessionId
   });
 
   setState('fiat_complete');

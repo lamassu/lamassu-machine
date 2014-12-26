@@ -1313,7 +1313,7 @@ body  { margin: 0;}
   left: 848px;
 }
 
-#qr-code-fiat-receipt {
+.qr-code-fiat-receipt {
   position: absolute;
   top: 212px;
   left: 848px;
