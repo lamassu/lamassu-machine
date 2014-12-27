@@ -18,7 +18,9 @@
     "minimist": "~0.2.0",
     "jpeg": "~2.0.0",
     "supyo": "~0.2.0",
-    "manatee": "~0.2.0"
+    "manatee": "~0.2.0",
+    "bluebird": "~2.4.2",
+    "wreck": "~5.1.0"
   },
   "devDependencies": {
     "jasmine": "~2.1.0",
