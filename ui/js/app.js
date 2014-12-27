@@ -54,6 +54,16 @@ function buttonPressed(button, data) {
   websocket.send(JSON.stringify(res));
 }
 
+function swaperoo(s1, s2, indicator) {
+  if (indicator === true) {
+    $(s1).show();
+    $(s2).hide();
+  } else if (indicator === false) {
+    $(s2).show();
+    $(s1).hide();
+  }
+}
+
 function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
   if (!locale) return;
@@ -72,6 +82,7 @@ function processData(data) {
   if (data.cartridges) setupCartridges(data.cartridges);
   if (data.beep) confirmBeep.play();
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
+  swaperoo('.js-redeem', '.js-deposit', data.redeem);
 
   switch (data.action) {
     case 'wifiList':
@@ -298,6 +309,8 @@ $(document).ready(function () {
   setupButton('pre-receipt-ok', 'fiatReceipt');
 
   setupButton('redeem-button', 'redeem');
+  setupButton('unknown-phone-number-ok', 'idle');
+  setupButton('unconfirmed-deposit-ok', 'idle');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;

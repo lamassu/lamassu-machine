@@ -432,8 +432,11 @@
         <section class="main">
           <h1 class="js-i18n">Phone Number</h1>
           <div class="instructions">
-            <span class="js-i18n">
+            <span class="js-i18n js-deposit">
             Please enter your mobile number so we can text you when your order is confirmed.
+            </span>
+            <span class="js-i18n js-redeem">
+            Please enter the mobile number you used when you placed your order.
             </span>
           </div>
         </section>
@@ -481,6 +484,34 @@
           </section>
           <section class="actions">
             <span class="button" id="bad-phone-number-ok">Try Again</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport unknown_phone_number_state fiat-side" data-tr-section="unknown-phone-number">
+        <section class="info">
+          <h1>All set</h1>
+          <section class="description long">
+            <p>We don't see any open orders associated with your phone. If you have another
+            phone you may have used, you can try redeeming again with that number.</p>
+            <p>If you're sure you have an open order associated with this phone, please
+            contact the operator.</p>
+          </section>
+          <section class="actions">
+            <span class="button" id="unknown-phone-number-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport unconfirmed_deposit_state fiat-side" data-tr-section="unconfirmed-deposit">
+        <section class="info">
+          <h1>Almost there</h1>
+          <section class="description long">
+            <p>Your order is in the system, but it hasn't yet been confirmed on the blockchain.</p>
+            <p>Please wait until you receive a text message from us, then come back for your cash.</p>
+          </section>
+          <section class="actions">
+            <span class="button" id="unconfirmed-deposit-ok">OK</span>
           </section>
         </section>
       </section>
