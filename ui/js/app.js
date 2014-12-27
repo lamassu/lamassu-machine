@@ -311,6 +311,7 @@ $(document).ready(function () {
   setupButton('redeem-button', 'redeem');
   setupButton('unknown-phone-number-ok', 'idle');
   setupButton('unconfirmed-deposit-ok', 'idle');
+  setupButton('wrong-dispenser-currency-ok', 'idle');
 
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
