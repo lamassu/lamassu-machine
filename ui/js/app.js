@@ -261,6 +261,7 @@ $(document).ready(function () {
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
   setupImmediateButton('withdraw_failure_viewport', 'completed');
+  setupImmediateButton('fiat_receipt_viewport', 'completed');
   setupImmediateButton('fiat_complete_viewport', 'completed');
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
   setupImmediateButton('depositCancel', 'depositCancel');
