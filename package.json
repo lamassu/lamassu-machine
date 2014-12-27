@@ -20,7 +20,8 @@
     "supyo": "~0.2.0",
     "manatee": "~0.2.0",
     "bluebird": "~2.4.2",
-    "wreck": "~5.1.0"
+    "wreck": "~5.1.0",
+    "boom": "~2.6.1"
   },
   "devDependencies": {
     "jasmine": "~2.1.0",
