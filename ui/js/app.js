@@ -297,6 +297,8 @@ $(document).ready(function () {
   setupButton('redeem-later-ok', 'idle');
   setupButton('pre-receipt-ok', 'fiatReceipt');
 
+  setupButton('redeem-button', 'redeem');
+
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
   touchImmediateEvent(fiatButtons, function(e) {

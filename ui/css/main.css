@@ -1146,6 +1146,12 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
+#redeem-button:active {
+  border-color: #17c2b2;
+  background-color: #082c40;
+  color: #17c2b2;
+}
+
 #change-language-button {
   position: absolute;
   top: 664px;
