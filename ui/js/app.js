@@ -298,7 +298,8 @@ $(document).ready(function () {
 
   setupButton('limit-reached-ok', 'idle');
   setupButton('insufficient-deposit-ok', 'idle');
-  setupButton('deposit-timeout-ok', 'idle');
+  setupButton('deposit-timeout-sent-yes', 'idle');
+  setupButton('deposit-timeout-sent-no', 'idle');
   setupButton('rejected-deposit-ok', 'idle');
   setupButton('out-of-cash-ok', 'idle');
 
