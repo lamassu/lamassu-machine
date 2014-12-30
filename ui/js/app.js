@@ -123,7 +123,7 @@ function processData(data) {
       break;
     case 'registerPhone':
       phoneKeypad.activate();
-      setState('phone_number');
+      setState('register_phone');
       break;
     case 'registerCode':
       securityKeypad.activate();
@@ -197,7 +197,7 @@ $(document).ready(function () {
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
   phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function(result) {
-    if (currentState !== 'phone_number') return;
+    if (currentState !== 'register_phone') return;
     console.log(result);
     buttonPressed('phoneNumber', result);
   });
@@ -298,8 +298,8 @@ $(document).ready(function () {
 
   setupButton('limit-reached-ok', 'idle');
   setupButton('insufficient-deposit-ok', 'idle');
-  setupButton('deposit-timeout-sent-yes', 'idle');
-  setupButton('deposit-timeout-sent-no', 'idle');
+  setupButton('deposit-timeout-sent-yes', 'depositTimeout');
+  setupButton('deposit-timeout-sent-no', 'cashOut');
   setupButton('rejected-deposit-ok', 'idle');
   setupButton('out-of-cash-ok', 'idle');
 
