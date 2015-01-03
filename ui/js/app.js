@@ -198,7 +198,7 @@ $(document).ready(function () {
 
   phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function(result) {
     if (currentState !== 'register_phone') return;
-    console.log(result);
+    console.log('phoneKeypad: %s', result);
     buttonPressed('phoneNumber', result);
   });
 
