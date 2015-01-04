@@ -297,10 +297,8 @@ $(document).ready(function () {
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
 
   setupButton('limit-reached-ok', 'idle');
-  setupButton('insufficient-deposit-ok', 'idle');
   setupButton('deposit-timeout-sent-yes', 'depositTimeout');
   setupButton('deposit-timeout-sent-no', 'cashOut');
-  setupButton('rejected-deposit-ok', 'idle');
   setupButton('out-of-cash-ok', 'idle');
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
@@ -308,6 +306,8 @@ $(document).ready(function () {
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
   setupButton('redeem-later-ok', 'idle');
   setupButton('pre-receipt-ok', 'fiatReceipt');
+  setupButton('fiat-error-ok', 'idle');
+  setupButton('fiat-transaction-error-ok', 'fiatReceipt');
 
   setupButton('redeem-button', 'redeem');
   setupButton('unknown-phone-number-ok', 'idle');
