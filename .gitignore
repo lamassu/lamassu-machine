@@ -40,9 +40,7 @@ istanbul
 *.csv#
 
 /device_config.json
-/data/client.key
-/data/client.pem
-/data/connection_info.json
+/data
 /coverage
 
 test/compliance/licenses
