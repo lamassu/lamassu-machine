@@ -3,7 +3,7 @@ require('json')
 locales = []
 rec = {}
 
-Dir.glob(File.join('locales', '*', 'ui', '*.po')).each {|f|
+Dir.glob(File.join('build', '*', 'ui', '*.po')).each {|f|
 	lines = IO.readlines(f)
 
 	last_key = nil
@@ -28,4 +28,4 @@ Dir.glob(File.join('locales', '*', 'ui', '*.po')).each {|f|
 	rec[locale] = json
 }
 
-File.write('i18n.js', 'var locales = ' + JSON.dump(rec) + ';')
+File.write('../ui/js/locales.js', 'var locales = ' + JSON.dump(rec) + ';')
