@@ -1,0 +1,2 @@
+ruby parse.rb > ui/lbm-ui_en-US.po
+crowdin-cli upload sources
