@@ -92,6 +92,11 @@ msgstr "Connected. Waiting for ticker."
 msgid "You're connecting to the WiFi network %s"
 msgstr "You're connecting to the WiFi network %s"
 
+#. %s is amount of Bitcoins that user is sending
+#: On screen: choose-fiat
+msgid "You'll be sending %s mBTC"
+msgstr "You'll be sending %s mBTC"
+
 #: On screen: locked-password
 msgid "Access passphrase"
 msgstr "Access passphrase"

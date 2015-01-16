@@ -54,6 +54,10 @@ app_js = {
 	'wifi' => [
 		{ :string => 'MORE', :comments => [] }
 	],
+	'choose-fiat' => [
+		{ :string => 'You\'ll be sending %s mBTC',
+			:comments => [ '%s is amount of Bitcoins that user is sending'] }
+	]
 }
 
 
