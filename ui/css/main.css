@@ -1478,18 +1478,21 @@ body  { margin: 0;}
   background-color: #17c2b2;
 }
 
+.out_of_cash_state .info h1 {
+  color: #0e4160;
+}
+
+.out_of_cash_state .info p {
+  color: #37E8D7;
+}
+
+.out_of_cash_state, .out_of_cash_state .info {
+  background-color: #ffffff;
+}
+
 .flying-bills {
   position: absolute;
   bottom: 40px;
-}
-
-.out_of_cash_partial_state .description {
-  top: 340px;
-}
-
-.out_of_cash_partial_state .button {
-  width: 280px;
-  border-radius: 12%/60%;
 }
 
 .id_code_failed_state .button {

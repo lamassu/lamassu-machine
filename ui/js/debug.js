@@ -5,9 +5,8 @@ function initDebug() {
 }
 
 function doInitDebug() {
-  var forceLocale = 'ach-UG'
-//  var forceLocale = 'en-US'
-  var forceCurrency = 'SAR'
+  var forceLocale = 'en-US'
+  var forceCurrency = 'USD'
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
@@ -20,7 +19,7 @@ function doInitDebug() {
   setCredit(25, 0.202, 20);
   //setState('insert_more_bills');
   //setState('scan_address');
-  setState('dual_idle');
+  setState('out_of_cash');
 //  setState('choose_fiat');
 
   var counter = 0;
