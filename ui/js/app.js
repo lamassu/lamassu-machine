@@ -66,6 +66,7 @@ function swaperoo(s1, s2, indicator) {
 
 function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
+  if (data.locale) setLocale(data.locale);
   if (!locale) return;
   if (data.currency) setCurrency(data.currency);
   if (data.exchangeRate) setExchangeRate(data.exchangeRate);
@@ -314,9 +315,20 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle');
   setupButton('wrong-dispenser-currency-ok', 'idle');
 
-  var fiatButtons = document.getElementById('js-fiat-buttons');
+  setupButton('change-language-button', 'changeLanguage');
+
   var lastTouch = null;
-  touchImmediateEvent(fiatButtons, function(e) {
+
+  var languageButtons = document.getElementById('languages');
+  touchEvent(languageButtons, function(e) {
+    var languageButtonJ = $(e.target).closest('li');
+    if (languageButtonJ.length === 0) return;
+    var newLocale = languageButtonJ.attr('data-locale');
+    buttonPressed('setLocale', {locale: newLocale});
+  });
+
+  var fiatButtons = document.getElementById('js-fiat-buttons');
+ touchImmediateEvent(fiatButtons, function(e) {
     var now = Date.now();
     if (lastTouch && now - lastTouch < 100) return;
     lastTouch = now;
@@ -336,7 +348,8 @@ function targetButton(element) {
   var classList = element.classList;
   if (classList.contains('button') ||
       classList.contains('circle-button') ||
-      classList.contains('wifi-network-button'))
+      classList.contains('wifi-network-button') ||
+      classList.contains('square-button'))
     return element;
   return targetButton(element.parentNode);
 }
@@ -383,11 +396,9 @@ function setupButton(buttonClass, buttonAction) {
   });
 }
 
-function setScreen(newScreen, oldScreen, newLocale) {
+function setScreen(newScreen, oldScreen) {
   if (newScreen === oldScreen) return;
   var publicScreens = ['idle','trouble','limit_reached'];
-  if (!newLocale && publicScreens.indexOf(newScreen) !== -1)
-    newLocale = primaryLocale;
 
   if (newScreen === 'insert_bills') {
     $('.bill img').css({'-webkit-transform': 'none', top: 0, left: 0});
@@ -396,11 +407,10 @@ function setScreen(newScreen, oldScreen, newLocale) {
   var newView = $('.' + newScreen + '_state');
 
   $('.viewport').css({'display': 'none'});
-  setLocale(newLocale);
   newView.css({'display': 'block'});
 }
 
-function setState(state, delay, newLocale) {
+function setState(state, delay) {
   if (state === currentState) return;
 
   onSendOnly = false;
@@ -416,9 +426,9 @@ function setState(state, delay, newLocale) {
   }
 
   if (delay) window.setTimeout(function() {
-    setScreen(currentState, previousState, newLocale);
+    setScreen(currentState, previousState);
   }, delay);
-  else setScreen(currentState, previousState, newLocale);
+  else setScreen(currentState, previousState);
 
   if (state === 'insert_more_bills') {
     $('#limit-reached-section').css({'display': 'none'});
@@ -529,25 +539,25 @@ function setPrimaryLocales(primaryLocales) {
   if (areArraysEqual(primaryLocales, _primaryLocales)) return;
   _primaryLocales = primaryLocales;
   var langCircles = $('.start-buttons');
-  if (primaryLocales.length === 1) {
-    var currentLocale = primaryLocales[0];
-    var jed = new Jed({'locale_data': {'messages': locales[currentLocale]}});
-    var tStart = jed.translate('START').fetch();
-    langCircles.html('<div class="circle-button"><span class="js-i18n-' +
-      currentLocale + ' solo">' + tStart + '</span></div>');
-    langCircles.removeClass('start-multi');
-    return;
-  }
-  if (primaryLocales.length > 1) {
-    langCircles.empty();
-    $.each(primaryLocales, function(i, l) {
-      var jed = new Jed({'locale_data': {'messages': locales[l]}});
-      var name = jed.translate('LanguageName').fetch();
-      var html = '<div class="circle-button" data-locale="' + l +
-          '"><span class="js-i18n-' + l + '">' + name + '</span></div>';
-      langCircles.append(html);
-      langCircles.addClass('start-multi');
-    });
+  var currentLocale = primaryLocales[0];
+  var jed = new Jed({'locale_data': {'messages': locales[currentLocale]}});
+  var tStart = jed.translate('START').fetch();
+  langCircles.html('<div class="circle-button"><span class="js-i18n-' +
+    currentLocale + ' solo">' + tStart + '</span></div>');
+
+  var langMap = window.languageMappingList;
+
+  var languages = $('.languages');
+  for (var i = 0; i < primaryLocales.length; i++) {
+    var l = primaryLocales[i];
+    var lang = l.split('-')[0];
+    var englishName = langMap[lang].englishName;
+    var nativeName = langMap[lang].nativeName;
+    var li = nativeName === englishName ?
+      '<li class="square-button" data-locale="' + l + '">' + nativeName + '</li>' :
+      '<li class="square-button" data-locale="' + l + '">' + nativeName +
+        '<span class="english">' + englishName + '</span> </li>';
+    languages.append(li);
   }
 }
 

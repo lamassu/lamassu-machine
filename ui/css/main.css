@@ -6,8 +6,8 @@ body {
   direction: ltr;
   font-family: brandon_text, 'Source Sans Pro', 'Source Han Sans CN', 'Source Han Sans TWJK',
      'Source Han Sans JP', 'Source Han Sans KR';
-  cursor: none;
-}
+/*  cursor: none;
+*/}
 
 body.i18n-he {
   font-family: raanan, brandon_text, 'Source Sans Pro';
@@ -1557,3 +1557,67 @@ body  { margin: 0;}
     -webkit-transform: scale(1.0);
   }
 }
+
+.languages {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.languages li {
+  color: #0e4160;
+  height: 200px;
+  overflow: hidden;
+  margin: 0 auto 60px;
+  width: 800px;
+  font-size: 60px;
+  padding: 0 80px;
+  line-height: 200px;
+}
+
+.languages li .english {
+  float: right;
+  color: #5f5f55;
+  font-weight: 500;
+}
+
+.square-button {
+  background-color: #ffffff;
+  width: 462px;
+  height: 26px;
+  line-height: 26px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #081D40;
+  margin-bottom: 10px;
+  padding: 34px;
+  border-radius: 15px;
+
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.square-button:active, .square-button.active {
+  background-color: #0e4160;
+  color: #ffffff;
+}
+
+.square-button:active .english, .square-button.active .english {
+  color: #ffffff;
+}
+
+.square-button .flag-icon-background {
+  border-radius: 4px;
+  width: 80px;
+  height: 60px;
+  float: right;
+  padding: 0;
+  margin-top: -20px;
+  margin-right: 0px;
+  background-size: contain;
+  border: 4px solid rgba(0, 0, 0, .05);
+}
+
