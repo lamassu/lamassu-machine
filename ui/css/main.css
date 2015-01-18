@@ -1165,6 +1165,11 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
+#change-language-button:active, #change-language-button.active {
+  background-color: #eeeeee;
+  border-color: #eeeeee;
+}
+
 .fiat-side h1 {
   font-size: 86px;
   font-weight: normal;

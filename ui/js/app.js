@@ -568,6 +568,8 @@ function setPrimaryLocales(primaryLocales) {
   }
 
   if (primaryLocales.length === 1) $('#change-language-button').hide();
+  else $('#change-language-button').show();
+
   if (primaryLocales.length === 2) languages.addClass('n2');
   else languages.removeClass('n2');
 }
