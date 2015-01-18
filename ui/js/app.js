@@ -548,18 +548,28 @@ function setPrimaryLocales(primaryLocales) {
   var langMap = window.languageMappingList;
 
   var languages = $('.languages');
-  for (var i = 0; i < primaryLocales.length; i++) {
-    var l = primaryLocales[i];
+  languages.empty();
+  var sortedPrimaryLocales = primaryLocales.slice(0).sort(function(a, b) {
+    var langA = a.split('-')[0];
+    var langB = b.split('-')[0];
+    return langMap[langA].englishName.localeCompare(langMap[langB].englishName);
+  });
+
+  for (var i = 0; i < sortedPrimaryLocales.length; i++) {
+    var l = sortedPrimaryLocales[i];
     var lang = l.split('-')[0];
     var englishName = langMap[lang].englishName;
     var nativeName = langMap[lang].nativeName;
     var li = nativeName === englishName ?
-      '<li class="square-button" data-locale="' + l + '">' + nativeName + '</li>' :
-      '<li class="square-button" data-locale="' + l + '">' + nativeName +
-        '<span class="english">' + englishName + '</span> </li>';
+      '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
+      '<li class="square-button" data-locale="' + l + '">' + englishName +
+        '<span class="english">' + nativeName + '</span> </li>';
     languages.append(li);
   }
+
   if (primaryLocales.length === 1) $('#change-language-button').hide();
+  if (primaryLocales.length === 2) languages.addClass('n2');
+  else languages.removeClass('n2');
 }
 
 function setCurrency(data) {

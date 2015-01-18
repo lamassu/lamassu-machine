@@ -11,6 +11,7 @@ function doInitDebug() {
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
+  setPrimaryLocales(['fr-QC', 'en-US']);
 //  setPrimaryLocales(['en-US', 'nl-NL']);
 
   setLocale(forceLocale);
