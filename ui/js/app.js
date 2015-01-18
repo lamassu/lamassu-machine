@@ -559,6 +559,7 @@ function setPrimaryLocales(primaryLocales) {
         '<span class="english">' + englishName + '</span> </li>';
     languages.append(li);
   }
+  if (primaryLocales.length === 1) $('#change-language-button').hide();
 }
 
 function setCurrency(data) {
