@@ -721,15 +721,15 @@
     },
     'zh-CN': {
       nativeName: "中文(简体)",
-      englishName: "Simplified Chinese (China)"
+      englishName: "Chinese"
     },
     'zh-HK': {
       nativeName: "中文(香港)",
-      englishName: "Traditional Chinese (Hong Kong)"
+      englishName: "Chinese"
     },
     'zh-TW': {
       nativeName: "中文(台灣)",
-      englishName: "Traditional Chinese (Taiwan)"
+      englishName: "Chinese"
     },
     'zu-ZA': {
       nativeName: "isiZulu",

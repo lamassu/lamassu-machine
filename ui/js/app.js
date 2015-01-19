@@ -535,6 +535,13 @@ function areArraysEqual(arr1, arr2) {
   return true;
 }
 
+function lookupLocaleNames(locale) {
+  var langMap = window.languageMappingList;
+  var language = locale.split('-')[0];
+  var localeNames = langMap[language];
+  return localeNames || langMap[locale];
+}
+
 function setPrimaryLocales(primaryLocales) {
   if (areArraysEqual(primaryLocales, _primaryLocales)) return;
   _primaryLocales = primaryLocales;
@@ -549,17 +556,17 @@ function setPrimaryLocales(primaryLocales) {
 
   var languages = $('.languages');
   languages.empty();
-  var sortedPrimaryLocales = primaryLocales.slice(0).sort(function(a, b) {
-    var langA = a.split('-')[0];
-    var langB = b.split('-')[0];
-    return langMap[langA].englishName.localeCompare(langMap[langB].englishName);
+  var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function(a, b) {
+    var langA = lookupLocaleNames(a);
+    var langB = lookupLocaleNames(b);
+    return langA.englishName.localeCompare(langB.englishName);
   });
 
   for (var i = 0; i < sortedPrimaryLocales.length; i++) {
     var l = sortedPrimaryLocales[i];
-    var lang = l.split('-')[0];
-    var englishName = langMap[lang].englishName;
-    var nativeName = langMap[lang].nativeName;
+    var lang = lookupLocaleNames(l);
+    var englishName = lang.englishName;
+    var nativeName = lang.nativeName;
     var li = nativeName === englishName ?
       '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
       '<li class="square-button" data-locale="' + l + '">' + englishName +

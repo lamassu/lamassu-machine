@@ -4,8 +4,7 @@ body {
   width: 1200px;
   overflow: hidden;
   direction: ltr;
-  font-family: brandon_text, 'Source Sans Pro', 'Source Han Sans CN', 'Source Han Sans TWJK',
-     'Source Han Sans JP', 'Source Han Sans KR';
+  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP';
 /*  cursor: none;
 */}
 
