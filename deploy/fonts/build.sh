@@ -31,6 +31,8 @@ mkdir -p $TARGET_MACHINE_DIR
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
+mkdir -p $EXPORT_SCRIPT_DIR/node_modules
+cp -a $MACHINE_DIR/node_modules/fs-extra $EXPORT_SCRIPT_DIR/node_modules
 cp $SCRIPT_DIR/../report.js $EXPORT_SCRIPT_DIR
 cp $UPDATESCRIPT $EXPORT_SCRIPT_DIR/updatescript.js
 

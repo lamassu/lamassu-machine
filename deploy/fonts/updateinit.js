@@ -1,6 +1,6 @@
 'use strict';
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var zlib = require('zlib');
 var async = require('./async');
 var cp = require('child_process');
@@ -30,19 +30,24 @@ function untar(tarball, outPath, cb) {
 }
 
 function copyFonts(cb) {
-  if (hardwareCode !== 'N7G1') {
-    var fontDir = fs.readdirSync('/tmp/extract/package/subpackage')[0];
-    try { fs.mkdirSync('/var/lib/sencha/fonts'); } catch(ex) {}
-    command('cp -a /tmp/extract/package/subpackage/' + fontDir +
-        ' /var/lib/sencha/fonts', function() {
-      fs.symlinkSync('/tmp/extract/package/subpackage/' + fontDir,
-        '/opt/apps/machine/lamassu-machine/ui/css/fonts' + fontDir);
-      cb();
-    });
+  var fontDir = fs.readdirSync('/tmp/extract/package/subpackage')[0];
+  if (hardwareCode === 'N7G1') {
+    fs.ensureDirSync('/var/lib/sencha/fonts');
+    fs.copySync('/tmp/extract/package/subpackage/' + fontDir,
+      '/var/lib/sencha/fonts/' + fontDir, {
+        clobber: false,
+        stopOnErr: true
+      });
+    fs.symlink('/var/lib/sencha/fonts/' + fontDir,
+      '/opt/apps/machine/lamassu-machine/ui/css/fonts/' + fontDir,
+      cb
+    );
   } else {
-    var cmd = 'cp -a /tmp/extract/package/subpackage/* ' +
-      '/opt/apps/machine/lamassu-machine/ui/css/fonts';
-    command(cmd, cb);
+    fs.copy('/tmp/extract/package/subpackage/' + fontDir,
+      '/opt/apps/machine/lamassu-machine/ui/css/fonts/' + fontDir, {
+        clobber: false,
+        stopOnErr: true
+      }, cb);
   }
 }
 
