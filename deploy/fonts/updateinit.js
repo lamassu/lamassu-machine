@@ -29,11 +29,28 @@ function untar(tarball, outPath, cb) {
   .on('end', cb);   // success
 }
 
+function copyFonts(cb) {
+  if (hardwareCode !== 'N7G1') {
+    var fontDir = fs.readdirSync('/tmp/extract/package/subpackage')[0];
+    try { fs.mkdirSync('/var/lib/sencha/fonts'); } catch(ex) {}
+    command('cp -a /tmp/extract/package/subpackage/' + fontDir +
+        ' /var/lib/sencha/fonts', function() {
+      fs.symlinkSync('/tmp/extract/package/subpackage/' + fontDir,
+        '/opt/apps/machine/lamassu-machine/ui/css/fonts' + fontDir);
+      cb();
+    });
+  } else {
+    var cmd = 'cp -a /tmp/extract/package/subpackage/* ' +
+      '/opt/apps/machine/lamassu-machine/ui/css/fonts';
+    command(cmd, cb);
+  }
+}
+
 async.series([
   async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
-  async.apply(command, 'cp -a /tmp/extract/package/subpackage/* /opt/apps/machine/ui/css/fonts'),
+  async.apply(copyFonts),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
