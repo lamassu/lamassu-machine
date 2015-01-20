@@ -26,6 +26,9 @@ var onSendOnly = false;
 var buttonActive = true;
 var cartridges = null;
 
+var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
+  'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
+
 function connect() {
   websocket = new WebSocket('ws://localhost:8080/');
   websocket.onmessage = function (event) {
@@ -502,6 +505,8 @@ function setLocale(data) {
   if (!data || data === localeCode) return;
   localeCode = data;
   jsLocaleCode = data;
+  var lang = localeCode.split('-')[0];
+
   if (jsLocaleCode === 'fr-QC') jsLocaleCode = 'fr-CA';
 
   var isArabic = jsLocaleCode.startsWith('ar-');
@@ -522,6 +527,9 @@ function setLocale(data) {
     $('body').addClass('i18n-he');
   else
     $('body').removeClass('i18n-he');
+
+  if (BRANDON.indexOf(lang) !== -1) $('body').addClass('brandon');
+  else $('body').removeClass('brandon');
 
   locale = loadI18n(localeCode);
   try { translatePage(); } catch (ex) {}

@@ -4,9 +4,13 @@ body {
   width: 1200px;
   overflow: hidden;
   direction: ltr;
-  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP';
+  font-family: 'Source Sans Pro', 'Noto Sans CJK JP';
 /*  cursor: none;
 */}
+
+.brandon {
+  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP';
+}
 
 body.i18n-he {
   font-family: raanan, brandon_text, 'Source Sans Pro';
