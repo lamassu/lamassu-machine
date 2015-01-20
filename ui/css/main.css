@@ -1169,6 +1169,24 @@ body  { margin: 0;}
   border-color: #eeeeee;
 }
 
+#digital-change-language-button {
+  position: absolute;
+  top: 30px;
+  left: 950px;
+  font-weight: bold;
+  background-color: #D0D0C8;
+  color: #5f5f55;
+  font-size: 20px;
+  border-radius: 38px/50%;
+  border: solid 3px #D0D0C8;
+  padding: 23px 60px;
+}
+
+#digital-change-language-button:active, #digital-change-language-button.active {
+  background-color: #B9B9AC;
+  border-color: #B9B9AC;
+}
+
 .fiat-side h1 {
   font-size: 86px;
   font-weight: normal;

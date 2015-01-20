@@ -316,6 +316,7 @@ $(document).ready(function () {
   setupButton('wrong-dispenser-currency-ok', 'idle');
 
   setupButton('change-language-button', 'changeLanguage');
+  setupButton('digital-change-language-button', 'changeLanguage');
 
   var lastTouch = null;
 
@@ -547,10 +548,6 @@ function setPrimaryLocales(primaryLocales) {
   _primaryLocales = primaryLocales;
   var langCircles = $('.start-buttons');
   var currentLocale = primaryLocales[0];
-  var jed = new Jed({'locale_data': {'messages': locales[currentLocale]}});
-  var tStart = jed.translate('START').fetch();
-  langCircles.html('<div class="circle-button"><span class="js-i18n-' +
-    currentLocale + ' solo">' + tStart + '</span></div>');
 
   var langMap = window.languageMappingList;
 
