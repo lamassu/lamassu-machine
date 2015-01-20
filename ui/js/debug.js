@@ -5,13 +5,13 @@ function initDebug() {
 }
 
 function doInitDebug() {
-  var forceLocale = 'zh-CN';
+  var forceLocale = 'en-US';
   var forceCurrency = 'USD';
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
-//  setPrimaryLocales(['fr-QC', 'en-US', 'es-MX', 'nl-NL']);
+  setPrimaryLocales(['ru-RU', 'en-US', 'fr-QC']);
 //  setPrimaryLocales(['en-US', 'nl-NL']);
 
   setLocale(forceLocale);

@@ -726,7 +726,7 @@ function t(id, str) {
 function initTranslatePage() {
   $('.js-i18n').each(function() {
     var el = $(this);
-    el.data('baseTranslation', el.html());
+    el.data('baseTranslation', el.html().trim());
   });
   $('input[placeholder]').each(function() {
     var el = $(this);
