@@ -575,7 +575,7 @@ function setPrimaryLocales(primaryLocales) {
     var li = nativeName === englishName ?
       '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
       '<li class="square-button" data-locale="' + l + '">' + englishName +
-        '<span class="english">' + nativeName + '</span> </li>';
+        '<span class="native">' + nativeName + '</span> </li>';
     languages.append(li);
   }
 

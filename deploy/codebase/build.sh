@@ -50,7 +50,7 @@ rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
 # Copy back basic fonts
 cp $MACHINE_DIR/ui/css/fonts/brandon_txt* $TARGET_MACHINE_DIR/ui/css/fonts
 cp $MACHINE_DIR/ui/css/fonts/SourceCodePro-Regular.ttf $TARGET_MACHINE_DIR/ui/css/fonts
-cp $MACHINE_DIR/ui/css/fonts/NotoKufiArabic* $TARGET_MACHINE_DIR/ui/css/fonts
+cp $MACHINE_DIR/ui/css/fonts/Noto* $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $MACHINE_DIR/ui/css/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
 
 # Natively compiled modules, will be copied from hardware-specific directories

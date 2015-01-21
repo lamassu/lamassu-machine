@@ -50,6 +50,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Noto Sans Hebrew';
+  src: url('fonts/NotoSansHebrew-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Sans Hebrew';
+  src: url('fonts/NotoSansHebrew-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* Source Code Pro [source-code-pro] */
 @font-face {
   font-family: 'Source Code Pro';
@@ -93,7 +107,6 @@
   font-weight: 500;
   font-style: normal;
 }
-
 
 /* Supplemental fonts */
 

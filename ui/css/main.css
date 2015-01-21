@@ -4,20 +4,21 @@ body {
   width: 1200px;
   overflow: hidden;
   direction: ltr;
-  font-family: 'Source Sans Pro', 'Noto Sans CJK JP';
-/*  cursor: none;
-*/}
-
-.brandon {
-  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP';
+  font-family: 'Source Sans Pro', 'Noto Sans CJK JP', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  cursor: none;
 }
 
-body.i18n-he {
-  font-family: raanan, brandon_text, 'Source Sans Pro';
+.brandon {
+  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  direction: ltr;
+}
+
+.i18n-he {
+  font-family: 'Noto Sans Hebrew';
   direction: rtl;
 }
 
-body.i18n-ar {
+.i18n-ar {
   font-family: 'Noto Kufi Arabic';
   direction: rtl;
 }
@@ -1098,6 +1099,7 @@ body  { margin: 0;}
 }
 
 .dual_idle_state .digital-section {
+  left: 0;
   color: #0e4160; /* cobalt */
   background-color: #37e8d7; /* amazonite */
 }
@@ -1613,10 +1615,10 @@ body  { margin: 0;}
   line-height: 200px;
 }
 
-.languages li .english {
+.languages li .native {
   float: right;
   color: #5f5f55;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .square-button {
@@ -1641,7 +1643,7 @@ body  { margin: 0;}
   color: #ffffff;
 }
 
-.square-button:active .english, .square-button.active .english {
+.languages li:active .native, .languages li.active .native {
   color: #ffffff;
 }
 
