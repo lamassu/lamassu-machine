@@ -59,6 +59,10 @@ Keypad.prototype.deactivate = function deactivate() {
   clearTimeout(this.timeoutRef);
 };
 
+Keypad.prototype.setCountry = function setCountry(country) {
+  if (country) this.opts.country = country;
+};
+
 Keypad.prototype.reset = function reset() {
   this.keypad.find('.box').text('');
   this.count = 0;

@@ -496,6 +496,7 @@ function setPrimaryLocale(l) {
 }
 
 function setLocaleInfo(data) {
+  phoneKeypad.setCountry(data.country);
   setPrimaryLocale(data.primaryLocale);
   setPrimaryLocales(data.primaryLocales);
   setLocale(data.primaryLocale);
