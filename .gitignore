@@ -42,6 +42,7 @@ istanbul
 /device_config.json
 /data
 /coverage
+/fonts
 
 test/compliance/licenses
 
