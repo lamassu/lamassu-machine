@@ -530,6 +530,11 @@ function setLocale(data) {
   else
     $('body').removeClass('i18n-he');
 
+  if (jsLocaleCode === 'ar-SA')
+    $('body').addClass('i18n-ar i18n-rtl');
+  else
+    $('body').removeClass('i18n-ar i18n-rtl');
+
   locale = loadI18n(localeCode);
   try { translatePage(); } catch (ex) {}
   if (lastRate) setExchangeRate(lastRate);
