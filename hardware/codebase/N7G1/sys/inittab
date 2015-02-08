@@ -20,6 +20,7 @@
 ::respawn:/usr/bin/xinit /opt/apps/machine/system/xinitrc -- -nolisten tcp -nocursor -novtswitch vt1
 ::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/watchdog.js >> /var/lib/sencha/log/watchdog.log 2>&1
 ::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/lib/update/updater.js >> /var/lib/sencha/log/updater.log 2>&1
+::respawn:/usr/bin/node /opt/apps/machine/lamassu-machine/lib/reaper.js >> /var/lib/sencha/log/reaper.log 2>&1
 
 ::shutdown:/usr/sbin/killall5
 ::shutdown:/bin/mount -o remount,ro /
