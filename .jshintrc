@@ -5,5 +5,6 @@
   "globalstrict": false,
   "latedef": "nofunc",
   "indent": 2,
-  "quotmark": "single"
+  "quotmark": "single",
+  "maxlen": 85
 }

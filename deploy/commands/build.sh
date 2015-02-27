@@ -4,7 +4,8 @@ set -e
 SCRIPT_DIR=$(dirname $0)
 
 SCRIPT=$1
-EXPORT_ROOT=${2-$LAMASSU_EXPORT}
+MACHINE_DIR=$SCRIPT_DIR/../..
+EXPORT_ROOT=$MACHINE_DIR/build
 
 if [ -z "$SCRIPT" -o -z "$EXPORT_ROOT" ]
   then

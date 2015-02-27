@@ -18,12 +18,16 @@ var websocket = null;
 
 var wifiKeyboard = null;
 
-var idKeypad = null;
+var phoneKeypad = null;
+var securityKeypad = null;
 
 var previousState = null;
 var onSendOnly = false;
 var buttonActive = true;
 var cartridges = null;
+
+var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
+  'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
 function connect() {
   websocket = new WebSocket('ws://localhost:8080/');
@@ -53,8 +57,19 @@ function buttonPressed(button, data) {
   websocket.send(JSON.stringify(res));
 }
 
+function swaperoo(s1, s2, indicator) {
+  if (indicator === true) {
+    $(s1).show();
+    $(s2).hide();
+  } else if (indicator === false) {
+    $(s2).show();
+    $(s1).hide();
+  }
+}
+
 function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
+  if (data.locale) setLocale(data.locale);
   if (!locale) return;
   if (data.currency) setCurrency(data.currency);
   if (data.exchangeRate) setExchangeRate(data.exchangeRate);
@@ -71,6 +86,7 @@ function processData(data) {
   if (data.cartridges) setupCartridges(data.cartridges);
   if (data.beep) confirmBeep.play();
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
+  swaperoo('.js-redeem', '.js-deposit', data.redeem);
 
   switch (data.action) {
     case 'wifiList':
@@ -88,15 +104,6 @@ function processData(data) {
       t('wifi-connecting',
         locale.translate('Connected. Waiting for ticker.').fetch());
       setState('wifi_connecting');  // in case we didn't go through wifi-connecting
-      break;
-    case 'virgin':
-      setState('virgin');
-      break;
-    case 'unpaired':
-      setState('unpaired');
-      break;
-    case 'pairingScan':
-      setState('pairing_scan');
       break;
     case 'pairing':
       confirmBeep.play();
@@ -118,27 +125,13 @@ function processData(data) {
     case 'fakeDualIdle':
       setState('dual_idle');
       break;
-    case 'scanId':
-      setState('scan_id');
+    case 'registerPhone':
+      phoneKeypad.activate();
+      setState('register_phone');
       break;
-    case 'idCode':
-      idKeypad.activate();
-      setState('id_code');
-      break;
-    case 'verifyingId':
-      setState('verifying_id');
-      break;
-    case 'idVerificationFailed':
-      setState('id_verification_failed');
-      break;
-    case 'idCodeFailed':
-      setState('id_code_failed');
-      break;
-    case 'idVerificationError':
-      setState('id_verification_error');
-      break;
-    case 'scanAddress':
-      setState('scan_address');
+    case 'registerCode':
+      securityKeypad.activate();
+      setState('security_code');
       break;
     case 'scanned':
       confirmBeep.play();
@@ -160,15 +153,6 @@ function processData(data) {
       confirmBeep.play();
       setState('completed');
       break;
-    case 'goodbye':
-      setState('goodbye');
-      break;
-    case 'maintenance':
-      setState('maintenance');
-      break;
-    case 'withdrawFailure':
-      setState('withdraw_failure');
-      break;
     case 'networkDown':
       setState('trouble');
       break;
@@ -176,17 +160,8 @@ function processData(data) {
     case 'insufficientFunds':
       setState('limit_reached');
       break;
-    case 'fixTransaction':
-      setState('fix_transaction');
-      break;
     case 'highBill':
       highBill(data.highestBill, data.reason);
-      break;
-    case 'initializing':
-      setState('initializing');
-      break;
-    case 'connecting':
-      setState('connecting');
       break;
     case 'chooseFiat':
       chooseFiat(data.chooseFiat);
@@ -195,23 +170,11 @@ function processData(data) {
       setState('deposit');
       deposit(data.tx);
       break;
-    case 'depositTimeout':
-      setState('deposit_timeout');
-      break;
-    case 'pendingDeposit':
-      setState('pending_deposit');
-      break;
-    case 'insufficientDeposit':
-      setState('insufficient_deposit');
-      break;
     case 'rejectedDeposit':
       setState('deposit_timeout');
       break;
-    case 'dispensing':
-      setState('dispensing');
-      break;
-    case 'outOfCash':
-      setState('out_of_cash');
+    case 'fiatReceipt':
+      fiatReceipt(data.tx);
       break;
     case 'fiatComplete':
       fiatComplete(data.tx);
@@ -219,6 +182,8 @@ function processData(data) {
     case 'restart':
       setState('restart');
       break;
+    default:
+      if (data.action) setState(window.snakecase(data.action));
   }
 }
 
@@ -235,9 +200,16 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
-  idKeypad = new Keypad('id-keypad', function(result) {
-    if (currentState !== 'id_code') return;
-    buttonPressed('idCode', result);
+  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function(result) {
+    if (currentState !== 'register_phone') return;
+    console.log('phoneKeypad: %s', result);
+    buttonPressed('phoneNumber', result);
+  });
+
+  securityKeypad = new Keypad('security-keypad', {type: 'code'}, function(result) {
+    if (currentState !== 'security_code') return;
+    console.log(result);
+    buttonPressed('securityCode', result);
   });
 
   // buffers automatically when created
@@ -304,7 +276,8 @@ $(document).ready(function () {
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
   setupImmediateButton('withdraw_failure_viewport', 'completed');
-  setupImmediateButton('fiat_completed_viewport', 'completed');
+  setupImmediateButton('fiat_receipt_viewport', 'completed');
+  setupImmediateButton('fiat_complete_viewport', 'completed');
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
   setupImmediateButton('depositCancel', 'depositCancel');
 
@@ -318,23 +291,48 @@ $(document).ready(function () {
   setupButton('cash-out-button', 'cashOut');
   setupButton('send-coins', 'sendBitcoins');
   setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('id-code-cancel', 'cancelIdCode', function() {
-    idKeypad.deactivate();
-  });
+  setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
+    phoneKeypad.deactivate.bind(phoneKeypad));
+  setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
+    securityKeypad.deactivate.bind(securityKeypad));
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
 
   setupButton('limit-reached-ok', 'idle');
-  setupButton('insufficient-deposit-ok', 'idle');
-  setupButton('deposit-timeout-ok', 'idle');
-  setupButton('rejected-deposit-ok', 'idle');
+  setupButton('deposit-timeout-sent-yes', 'depositTimeout');
+  setupButton('deposit-timeout-sent-no', 'cashOut');
   setupButton('out-of-cash-ok', 'idle');
 
-  var fiatButtons = document.getElementById('js-fiat-buttons');
+  setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
+  setupButton('bad-security-code-ok', 'badSecurityCodeOk');
+  setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
+  setupButton('redeem-later-ok', 'idle');
+  setupButton('pre-receipt-ok', 'fiatReceipt');
+  setupButton('fiat-error-ok', 'idle');
+  setupButton('fiat-transaction-error-ok', 'fiatReceipt');
+
+  setupButton('redeem-button', 'redeem');
+  setupButton('unknown-phone-number-ok', 'idle');
+  setupButton('unconfirmed-deposit-ok', 'idle');
+  setupButton('wrong-dispenser-currency-ok', 'idle');
+
+  setupButton('change-language-button', 'changeLanguage');
+  setupButton('digital-change-language-button', 'changeLanguage');
+
   var lastTouch = null;
-  touchImmediateEvent(fiatButtons, function(e) {
+
+  var languageButtons = document.getElementById('languages');
+  touchEvent(languageButtons, function(e) {
+    var languageButtonJ = $(e.target).closest('li');
+    if (languageButtonJ.length === 0) return;
+    var newLocale = languageButtonJ.attr('data-locale');
+    buttonPressed('setLocale', {locale: newLocale});
+  });
+
+  var fiatButtons = document.getElementById('js-fiat-buttons');
+ touchImmediateEvent(fiatButtons, function(e) {
     var now = Date.now();
     if (lastTouch && now - lastTouch < 100) return;
     lastTouch = now;
@@ -354,7 +352,8 @@ function targetButton(element) {
   var classList = element.classList;
   if (classList.contains('button') ||
       classList.contains('circle-button') ||
-      classList.contains('wifi-network-button'))
+      classList.contains('wifi-network-button') ||
+      classList.contains('square-button'))
     return element;
   return targetButton(element.parentNode);
 }
@@ -401,11 +400,9 @@ function setupButton(buttonClass, buttonAction) {
   });
 }
 
-function setScreen(newScreen, oldScreen, newLocale) {
+function setScreen(newScreen, oldScreen) {
   if (newScreen === oldScreen) return;
   var publicScreens = ['idle','trouble','limit_reached'];
-  if (!newLocale && publicScreens.indexOf(newScreen) !== -1)
-    newLocale = primaryLocale;
 
   if (newScreen === 'insert_bills') {
     $('.bill img').css({'-webkit-transform': 'none', top: 0, left: 0});
@@ -414,11 +411,10 @@ function setScreen(newScreen, oldScreen, newLocale) {
   var newView = $('.' + newScreen + '_state');
 
   $('.viewport').css({'display': 'none'});
-  setLocale(newLocale);
   newView.css({'display': 'block'});
 }
 
-function setState(state, delay, newLocale) {
+function setState(state, delay) {
   if (state === currentState) return;
 
   onSendOnly = false;
@@ -434,9 +430,9 @@ function setState(state, delay, newLocale) {
   }
 
   if (delay) window.setTimeout(function() {
-    setScreen(currentState, previousState, newLocale);
+    setScreen(currentState, previousState);
   }, delay);
-  else setScreen(currentState, previousState, newLocale);
+  else setScreen(currentState, previousState);
 
   if (state === 'insert_more_bills') {
     $('#limit-reached-section').css({'display': 'none'});
@@ -500,6 +496,7 @@ function setPrimaryLocale(l) {
 }
 
 function setLocaleInfo(data) {
+  phoneKeypad.setCountry(data.country);
   setPrimaryLocale(data.primaryLocale);
   setPrimaryLocales(data.primaryLocales);
   setLocale(data.primaryLocale);
@@ -509,6 +506,8 @@ function setLocale(data) {
   if (!data || data === localeCode) return;
   localeCode = data;
   jsLocaleCode = data;
+  var lang = localeCode.split('-')[0];
+
   if (jsLocaleCode === 'fr-QC') jsLocaleCode = 'fr-CA';
 
   var isArabic = jsLocaleCode.startsWith('ar-');
@@ -530,6 +529,9 @@ function setLocale(data) {
   else
     $('body').removeClass('i18n-he');
 
+  if (BRANDON.indexOf(lang) !== -1) $('body').addClass('brandon');
+  else $('body').removeClass('brandon');
+
   locale = loadI18n(localeCode);
   try { translatePage(); } catch (ex) {}
   if (lastRate) setExchangeRate(lastRate);
@@ -543,30 +545,46 @@ function areArraysEqual(arr1, arr2) {
   return true;
 }
 
+function lookupLocaleNames(locale) {
+  var langMap = window.languageMappingList;
+  var language = locale.split('-')[0];
+  var localeNames = langMap[language];
+  return localeNames || langMap[locale];
+}
+
 function setPrimaryLocales(primaryLocales) {
   if (areArraysEqual(primaryLocales, _primaryLocales)) return;
   _primaryLocales = primaryLocales;
   var langCircles = $('.start-buttons');
-  if (primaryLocales.length === 1) {
-    var currentLocale = primaryLocales[0];
-    var jed = new Jed({'locale_data': {'messages': locales[currentLocale]}});
-    var tStart = jed.translate('START').fetch();
-    langCircles.html('<div class="circle-button"><span class="js-i18n-' +
-      currentLocale + ' solo">' + tStart + '</span></div>');
-    langCircles.removeClass('start-multi');
-    return;
+  var currentLocale = primaryLocales[0];
+
+  var langMap = window.languageMappingList;
+
+  var languages = $('.languages');
+  languages.empty();
+  var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function(a, b) {
+    var langA = lookupLocaleNames(a);
+    var langB = lookupLocaleNames(b);
+    return langA.englishName.localeCompare(langB.englishName);
+  });
+
+  for (var i = 0; i < sortedPrimaryLocales.length; i++) {
+    var l = sortedPrimaryLocales[i];
+    var lang = lookupLocaleNames(l);
+    var englishName = lang.englishName;
+    var nativeName = lang.nativeName;
+    var li = nativeName === englishName ?
+      '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
+      '<li class="square-button" data-locale="' + l + '">' + englishName +
+        '<span class="native">' + nativeName + '</span> </li>';
+    languages.append(li);
   }
-  if (primaryLocales.length > 1) {
-    langCircles.empty();
-    $.each(primaryLocales, function(i, l) {
-      var jed = new Jed({'locale_data': {'messages': locales[l]}});
-      var name = jed.translate('LanguageName').fetch();
-      var html = '<div class="circle-button" data-locale="' + l +
-          '"><span class="js-i18n-' + l + '">' + name + '</span></div>';
-      langCircles.append(html);
-      langCircles.addClass('start-multi');
-    });
-  }
+
+  if (primaryLocales.length === 1) $('#change-language-button').hide();
+  else $('#change-language-button').show();
+
+  if (primaryLocales.length === 2) languages.addClass('n2');
+  else languages.removeClass('n2');
 }
 
 function setCurrency(data) {
@@ -714,7 +732,7 @@ function t(id, str) {
 function initTranslatePage() {
   $('.js-i18n').each(function() {
     var el = $(this);
-    el.data('baseTranslation', el.html());
+    el.data('baseTranslation', el.html().trim());
   });
   $('input[placeholder]').each(function() {
     var el = $(this);
@@ -849,18 +867,35 @@ function deposit(tx) {
   setState('deposit');
 }
 
-function fiatComplete(tx) {
+function fiatReceipt(tx) {
   var millies = satoshisToMilliBitcoins(tx.satoshis);
-  $('.fiat_complete_state .digital .js-amount').text(millies);
-  $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
-  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress);
+  $('.fiat_receipt_state .digital .js-amount').text(millies);
+  $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat);
+  $('.fiat_receipt_state .sent-coins .bitcoin-address').text(tx.toAddress);
 
   $('#qr-code-fiat-receipt').empty();
   $('#qr-code-fiat-receipt').qrcode({
     render: 'canvas',
     width: 275,
     height: 275,
-    text: JSON.stringify(tx)
+    text: tx.sessionId
+  });
+
+  setState('fiat_receipt');
+}
+
+function fiatComplete(tx) {
+  var millies = satoshisToMilliBitcoins(tx.satoshis);
+  $('.fiat_complete_state .digital .js-amount').text(millies);
+  $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
+  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress);
+
+  $('#qr-code-fiat-complete').empty();
+  $('#qr-code-fiat-complete').qrcode({
+    render: 'canvas',
+    width: 275,
+    height: 275,
+    text: tx.sessionId
   });
 
   setState('fiat_complete');

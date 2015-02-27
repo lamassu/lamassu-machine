@@ -1,12 +1,18 @@
 'use strict';
 
 var TIMEOUT = 60000;
+var LENGTHS = {
+  phoneNumber: 15,
+  code: 10
+};
 
-var Keypad = function(keypadId, callback) {
+var Keypad = function(keypadId, opts, callback) {
   this.keypadId = keypadId;
   this.keypad = $('#' + keypadId);
-  this.result = null;
+  this.result = '';
   this.count = 0;
+  this.type = opts.type;
+  this.opts = opts;
   this.callback = callback;
   this.timeoutRef = null;
   var self = this;
@@ -19,9 +25,11 @@ var Keypad = function(keypadId, callback) {
     }
 
     if (target.hasClass('enter')) {
-      if (self.count !== 4) return;
       self.deactivate();
-      return self.callback(self.result);
+      var result = self.type === 'phoneNumber' ?
+        formatE164(self.opts.country, self.result) :
+        self.result;
+      return self.callback(result);
     }
 
     if (target.hasClass('key')) {
@@ -51,18 +59,28 @@ Keypad.prototype.deactivate = function deactivate() {
   clearTimeout(this.timeoutRef);
 };
 
+Keypad.prototype.setCountry = function setCountry(country) {
+  if (country) this.opts.country = country;
+};
+
 Keypad.prototype.reset = function reset() {
   this.keypad.find('.box').text('');
   this.count = 0;
-  this.result = null;
+  this.result = '';
+  if (this.type === 'phoneNumber') {
+    this.keypad.find('.enter-plus').removeClass('enter').addClass('plus').text('+');
+  }
 };
 
 Keypad.prototype._keyPress = function _keyPress(target) {
-  if (this.count > 3) return;
+  if (this.result.replace('+', '').length >= LENGTHS[this.type]) return;
+  if (this.result.length > 0 && this.type === 'phoneNumber') {
+    this.keypad.find('.enter-plus').addClass('enter').removeClass('plus').text('Enter');
+  }
   var numeral = target.text();
-  this.count += 1;
-  this.keypad.find('.box-' + this.count).text('•');
-  this.result = this.result || 0;
-  this.result *= 10;
-  this.result += parseInt(numeral);
+  this.result += numeral;
+  var display = this.type === 'phoneNumber' ?
+    formatInternational(this.opts.country, this.result) :
+    this.result;
+  this.keypad.find('.box').text(display);
 };

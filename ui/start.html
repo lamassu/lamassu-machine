@@ -2,6 +2,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="flag-icon-css/css/flag-icon.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/main.css">
 
@@ -9,9 +10,12 @@
     <script src="js/jquery.qrcode-0.2.min.js"></script>
     <script src="js/jquery.transit.min.js"></script>
     <script src="js/keyboard.js"></script>
+    <script src="js/phoneformat.js"></script>
     <script src="js/keypad.js"></script>
     <script src="js/jed.js"></script>
     <script src="js/locales.js"></script>
+    <script src="js/snake_case.js"></script>
+    <script src="js/langmap.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body>
@@ -386,7 +390,7 @@
         </section>
         <section class="bottom-bar">
           <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
-          <p class="bitcoin-machine js-i18n">The Bitcoin Machine</p>
+          <span id="digital-change-language-button" class="button">Change language</span>
         </section>
       </section>
 
@@ -400,11 +404,18 @@
             <section class="fiat-section start">
               <div class="rate">1 BTC = <span class="js-fiat-rate"></span> <span class="js-currency"/></div>
               <div id="want_cash" class="circle-button"><span class="js-i18n">I want<br/>Cash</span></div>
-<!--               <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
- -->            </section>
+              <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
+            </section>
           </section>
-<!--           <span id="change-language-button">Change language</span>
- -->        </section>
+          <span id="change-language-button" class="button brandon">Change language</span>
+        </section>
+      </section>
+
+      <section class="viewport change_language_state brandon" data-tr-section="change-language">
+        <section class="main">
+          <ul id="languages" class="languages">
+          </ul>
+        </section>
       </section>
 
       <section class="viewport scan-id scan_id_state" data-tr-section="scan-id">
@@ -426,21 +437,21 @@
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
-      <section class="viewport scan-id id_code_state" data-tr-section="id-code">
+      <section class="viewport scan-id fiat-section register_phone_state" data-tr-section="register-phone">
         <section class="main">
-          <h1 class="js-i18n">Identity verification</h1>
+          <h1 class="js-i18n">Phone Number</h1>
           <div class="instructions">
-            <span class="js-i18n">
-            Please enter the <strong>last 4</strong> digits of your Social Security number.
+            <span class="js-i18n js-deposit">
+            Please enter your mobile number so we can text you when your order is confirmed.
+            </span>
+            <span class="js-i18n js-redeem">
+            Please enter the mobile number you used when you placed your order.
             </span>
           </div>
         </section>
-        <section id="id-keypad" class="keypad">
+        <section id="phone-keypad" class="keypad">
           <section class="entry">
-            <div class="box box-1"></div>
-            <div class="box box-2"></div>
-            <div class="box box-3"></div>
-            <div class="box box-4"></div>
+            <div class="box full-box"></div>
           </section>
           <section class="keys">
             <div class="row">
@@ -459,13 +470,205 @@
               <div class="key numeric">9</div>
             </div>
             <div class="row">
-              <div class="key clear">Clear</div>
+              <div class="key clear js-i18n">Clear</div>
               <div class="key numeric">0</div>
-              <div class="key enter">Enter</div>
+              <div class="key plus enter-plus">+</div>
             </div>
           </section>
         </section>
-        <section id="id-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
+        <section id="phone-number-cancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
+      <section class="viewport bad_phone_number_state fiat-side" data-tr-section="bad-phone-number">
+        <section class="info">
+          <h1 class="js-i18n">Try Again</h1>
+          <section class="description long">
+            <p class="js-i18n">
+            The phone number you entered didn't work. If you have an international
+            number, please prefix it with <strong>+</strong> and your country's calling code.</p>
+            <p class="js-i18n">
+            For instance, Belgium's calling code is +32, so a Belgian number would look like:
+            +32 455 12 34 56
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="bad-phone-number-ok">Try Again</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport unknown_phone_number_state fiat-side" data-tr-section="unknown-phone-number">
+        <section class="info">
+          <h1 class="js-i18n">All set</h1>
+          <section class="description long">
+            <p class="js-i18n">We don't see any open orders associated with your phone. If you have another
+            phone you may have used, you can try redeeming again with that number.</p>
+            <p class="js-i18n">If you're sure you have an open order associated with this phone, please
+            contact the operator.</p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="unknown-phone-number-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport unconfirmed_deposit_state fiat-side" data-tr-section="unconfirmed-deposit">
+        <section class="info">
+          <h1 class="js-i18n">Almost there</h1>
+          <section class="description long">
+            <p class="js-i18n">Your order is in the system, but it hasn't yet been confirmed on the blockchain.</p>
+            <p class="js-i18n">Please wait until you receive a text message from us, then come back for your cash.</p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="unconfirmed-deposit-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport wrong_dispenser_currency_state fiat-side" data-tr-section="wrong-dispenser-currency">
+        <section class="info">
+          <h1 class="js-i18n">Oops!</h1>
+          <section class="description">
+            <p class="js-i18n">This machine does not handle the currency you requested.</p>
+            <p class="js-i18n">Please cash out at a machine that handles your currency.</p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="wrong-dispenser-currency-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport fiat_error_state fiat-side" data-tr-section="fiat-error">
+        <section class="info">
+          <h1 class="js-i18n">Oops!</h1>
+          <section class="description">
+            <p class="js-i18n">We're having some difficulties.</p>
+            <p><strong class="js-i18n">Please contact the operator.</strong></p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="fiat-error-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport fiat_transaction_error_state fiat-side" data-tr-section="fiat-transaction-error">
+        <section class="info">
+          <h1 class="js-i18n">Oops!</h1>
+          <section class="description">
+            <p class="js-i18n">We're having some difficulties.</p>
+            <p><strong class="js-i18n">Please snap a photo of your receipt.</strong></p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="fiat-transaction-error-ok">Show Receipt</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport bad_security_code_state fiat-side" data-tr-section="bad-security-code">
+        <section class="info">
+          <h1 class="js-i18n">Try Again</h1>
+          <section class="description">
+            <p class="js-i18n">
+            The code you entered was incorrect.
+            <p class="js-i18n">
+            Please make sure you are entering the six digit code you receive from us.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="bad-security-code-ok">Resend Code</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport max_phone_retries_state fiat-side" data-tr-section="max-phone-retries">
+        <section class="info">
+          <h1 class="js-i18n">Oops, this isn't working</h1>
+          <section class="description">
+            <p class="js-i18n">
+            You've hit the maximum number of retries.
+            <p class="js-i18n">
+            Please contact the operator to sort this out, or try again later.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="max-phone-retries-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport pre_receipt_state fiat-side" data-tr-section="pre-receipt">
+        <section class="info">
+          <h1 class="js-i18n">What next?</h1>
+          <section class="description long">
+            <p class="js-i18n">
+            We weren't able to verify your phone number, so we may not be able
+            to contact you when your cash is ready.
+            <p class="js-i18n">
+            Please snap a photo of the <strong>next screen</strong> for your electronic receipt,
+            then contact the operator.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="pre-receipt-ok">Show Receipt</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport redeem_later_state fiat-side" data-tr-section="redeem-later">
+        <section class="info">
+          <h1 class="js-i18n">Thank You!</h1>
+          <section class="description long">
+            <p class="js-i18n">
+            We're waiting for your deposit to confirm on the blockchain.
+            <p class="js-i18n">
+            You will soon receive a text message
+            notifying you that your transaction has confirmed.
+            When that happens, please come back to this machine and press the <strong>Redeem</strong> button.
+            </p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="redeem-later-ok">OK</span>
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport scan-id fiat-section security_code_state" data-tr-section="security-code">
+        <section class="main">
+          <h1 class="js-i18n">Security Code</h1>
+          <div class="instructions">
+            <span class="js-i18n">
+            We've texted you a security code. When you get it, enter it here.
+            </span>
+          </div>
+        </section>
+        <section id="security-keypad" class="keypad">
+          <section class="entry">
+            <div class="box full-box"></div>
+          </section>
+          <section class="keys">
+            <div class="row">
+              <div class="key numeric">1</div>
+              <div class="key numeric">2</div>
+              <div class="key numeric">3</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">4</div>
+              <div class="key numeric">5</div>
+              <div class="key numeric">6</div>
+            </div>
+            <div class="row">
+              <div class="key numeric">7</div>
+              <div class="key numeric">8</div>
+              <div class="key numeric">9</div>
+            </div>
+            <div class="row">
+              <div class="key clear js-i18n">Clear</div>
+              <div class="key numeric">0</div>
+              <div class="key enter js-i18n">Enter</div>
+            </div>
+          </section>
+        </section>
+        <section id="security-code-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
       <section class="viewport verifying_id_state info" data-tr-section="verifying-id">
@@ -476,7 +679,7 @@
                 <div class="loader"><img src="images/loading.gif" /></div>
                <p>
                 <strong class="js-i18n">Just making sure you're you.</strong><br/>
-                <span>This could take a few seconds.</span>
+                <span class="js-i18n">This could take a few seconds.</span>
                </p>
             </section>
           </section>
@@ -492,11 +695,11 @@
               <h1 class="js-i18n">Want to try again?</h1>
               <p>
                 <span class="js-i18n">The code you entered did not match.</span><br/>
-                <span>You might want to <strong>give it another shot</strong>.</span>
+                <span class="js-i18n">You might want to <strong>give it another shot</strong>.</span>
               </p>
               <div class="actions">
-                <span id="id-code-failed-retry" class="button js-i18n">TRY AGAIN</span>
-                <span id="id-code-failed-cancel" class="button js-i18n">CANCEL</span>
+                <span id="id-code-failed-retry" class="button js-i18n">Try Again</span>
+                <span id="id-code-failed-cancel" class="button js-i18n">Cancel</span>
               </div>
             </section>
           </section>
@@ -512,7 +715,7 @@
               <h1 class="js-i18n">Sorry.</h1>
               <p>
                 <span class="js-i18n">Our system indicated an identification problem.</span><br/>
-                <span>Please contact the operator for more information.</span>
+                <span class="js-i18n">Please contact the operator for more information.</span>
               </p>
               <div class="actions">
                 <span id="id-verification-failed-ok" class="button js-i18n">OK</span>
@@ -531,7 +734,7 @@
               <h1 class="js-i18n">It's us, not you.</h1>
               <p>
                 <strong class="js-i18n">Our system experienced an error.</strong><br/>
-                <span>Please feel free to try again, or contact the operator.</span>
+                <span class="js-i18n">Please feel free to try again, or contact the operator.</span>
               </p>
               <div class="actions">
                 <span id="id-verification-error-ok" class="button js-i18n">OK</span>
@@ -661,8 +864,7 @@
         <section class="main">
           <section class="deposit-summary">
             <h1 class="thanks" class="js-i18n">We got this.</h1>
-            <p class="relax">Our Internet was down for a bit. You'll get all your coins but
-            you might receive them in two separate batches.</p>
+            <p class="relax js-i18n">Our Internet was down for a bit. You'll get all your coins but you might receive them in two separate batches.</p>
             <div class="deposit-record">
               <p>
                 <span class="total-btc-rec total i18n-latin">
@@ -753,7 +955,7 @@
         <section class="main">
           <section class="top">
             <section class="content">
-              <h1 class="sorry">Connecting...</h1>
+              <h1 class="sorry js-i18n">Connecting...</h1>
             </section>
           </section>
           <section class="bottom">
@@ -765,7 +967,7 @@
         <section class="main">
           <section class="top">
             <section class="content">
-              <h1 class="sorry">The Bitcoin Machine</h1>
+              <h1 class="sorry js-i18n">The Bitcoin Machine</h1>
             </section>
           </section>
           <section class="bottom">
@@ -956,13 +1158,13 @@
       <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
         <section class="instructions">
           <h1 class="js-i18n">How much?</h1>
-          <h2>1 BTC is <strong class="js-fiat-rate"></strong> <span class="js-currency"/></h2>
+          <h2><span class="js-i18n">1 BTC is</span> <strong class="js-fiat-rate"></strong> <span class="js-currency"/></h2>
           <section class="sums">
             <div class="fiat"><strong class="fiat-amount"></strong> <span class="js-currency"/></div>
             <div class="digital js-18n" id="js-i18n-choose-digital-amount"></div>
           </section>
         </section>
-        <span id="cash-out-button" class="circle-button" style="display: none;">Cash out</span>
+        <span id="cash-out-button" class="circle-button js-i18n" style="display: none;">Cash out</span>
         <div class="limit"></div>
         <section id="js-fiat-buttons" class="cash-buttons">
           <span class="cash-button" data-denomination-index="0">
@@ -974,7 +1176,7 @@
           <span class="cash-button" data-denomination-index="2">
             <span class="plus">+</span> <span class="js-denomination"></span>
           </span>
-          <span id="js-fiat-clear" class="cash-button clear">Clear</span>
+          <span id="js-fiat-clear" class="cash-button clear js-i18n">Clear</span>
         </section>
         <section id="chooseFiatCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -982,24 +1184,24 @@
       <section class="viewport deposit_state fiat-side" data-tr-section="deposit">
         <section class="instructions">
           <h1 class="js-i18n">Send Bitcoins</h1>
-          <h2>Please scan the QR code to send us your bitcoins.</h2>
+          <h2 class="js-i18n">Please scan the QR code to send us your bitcoins.</h2>
           <section class="sums">
             <div class="digital">
               <div class="amount"><strong class="js-amount"></strong> mBTC</div>
-              <div>will be sent</div>
+              <div class="js-i18n">will be sent</div>
             </div>
             <div class="fiat">
               <div class="amount"><strong class="js-amount"></strong> </div>
-              <div>will be dispensed</div>
+              <div class="js-i18n">will be dispensed</div>
             </div>
           </section>
         </section>
         <section class="qr-section">
           <img class="qr-frame" src="images/qr_code_fiat.png" />
           <div id="qr-code-deposit"></div>
-          <div class="loading">Generating address...</div>
+          <div class="loading js-i18n">Generating address...</div>
           <div class="send-notice">
-            Your bitcoins will be sent to:<br/>
+            <span class="js-i18n">Your bitcoins will be sent to:</span><br/>
             <span class="bitcoin-address"></span>
           </div>
         </section>
@@ -1008,142 +1210,111 @@
 
       <section class="viewport pending_deposit_state fiat-side" data-tr-section="pending-deposit">
         <section class="info">
-          <h1>Bitcoins received!</h1>
+          <h1 class="js-i18n">Bitcoins received!</h1>
           <section class="description">
-            <p>We've received your payment.<br/>Please wait for confirmation.</p>
-          </section>
-        </section>
-      </section>
-
-      <section class="viewport insufficient_deposit_state fiat-side" data-tr-section="insufficient-deposit">
-        <section class="info">
-          <h1>Partial Payment</h1>
-          <section class="description">
-            <p>We've received a payment,<br/> but it was not for the full amount.</p>
-            <p><strong>Please contact the operator.</strong></p>
-          </section>
-          <section class="actions">
-            <span class="button" id="insufficient-deposit-ok">OK</span>
+            <p class="js-i18n">We've received your payment.</p>
+            <p><strong class="js-i18n">Authorizing...</strong></p>
+            <p>
+              <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+            </p>
           </section>
         </section>
       </section>
 
       <section class="viewport deposit_timeout_state fiat-side" data-tr-section="deposit-timeout">
         <section class="info">
-          <h1>No bitcoins received</h1>
+          <h1 class="js-i18n">Nothing yet...</h1>
           <section class="description">
-            <p>Sorry, we haven't received any bitcoins. If you haven't sent any yet,
-            you can start a new transaction.</p>
-            <p>If you've just sent us bitcoins, please contact the operator.</p>
+            <p class="js-i18n">No bitcoins are showing up.</p>
+            <p><strong class="js-i18n">Have you sent the bitcoins yet?</strong></p>
           </section>
           <section class="actions">
-            <span class="button" id="deposit-timeout-ok">OK</span>
-          </section>
-        </section>
-      </section>
-
-      <section class="viewport rejected_deposit_state fiat-side" data-tr-section="rejeceted-deposit">
-        <section class="info">
-          <h1>Unconfirmed payment</h1>
-          <section class="description">
-            <p>We've received a payment, but we could not confirm it.</p>
-            <p><strong>Please contact the operator.</strong></p>
-          </section>
-          <section class="actions">
-            <span class="button" id="rejected-deposit-ok">OK</span>
+            <span class="button js-i18n" id="deposit-timeout-sent-yes">Yes, I have</span>
+            <span class="button js-i18n" id="deposit-timeout-sent-no">No, I haven't</span>
           </section>
         </section>
       </section>
 
       <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
         <section class="instructions">
-          <h1>Dispensing...</h1>
-          <h2>Please take your cash.</h2>
+          <h1 class="js-i18n">Dispensing...</h1>
+          <h2 class="js-i18n">Please take your cash.</h2>
         </section>
         <img class="dispensing-bill" src="images/dispensing-bill.png" />
       </section>
 
-      <section id="fiat_completed_viewport" class="viewport fiat_complete_state fiat-side" data-tr-section="fiat-complete">
+      <section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">
         <section class="instructions">
-          <h1 class="js-i18n">Thank you!</h1>
+          <h1 class="js-i18n">Your Receipt</h1>
           <section class="sums">
             <div class="digital">
               <div class="amount"><strong class="js-amount"></strong> mBTC</div>
-              <div>were sent by you</div>
+              <div class="js-i18n">were sent by you</div>
             </div>
             <div class="fiat">
               <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
-              <div>were dispensed to you</div>
+              <div class="js-i18n">pending confirmation</div>
             </div>
           </section>
           <div class="sent-coins">
-            Your bitcoins were sent to:<br/>
+            <span class="js-i18n">Your bitcoins were sent to:</span><br/>
             <span class="bitcoin-address"></span>
           </div>
         </section>
 
         <section class="qr-section">
           <img class="qr-frame" src="images/qr_code_fiat.png" />
-          <div id="qr-code-fiat-receipt"></div>
+          <div class="qr-code-fiat-receipt" id="qr-code-fiat-receipt"></div>
           <div class="send-notice-section">
             <img class="camera" src="images/camera.png" />
-            <div class="send-notice">Take a photo of the screen for your electronic receipt.</div>
+            <div class="send-notice js-i18n">Take a photo of the screen for your electronic receipt.</div>
           </div>
         </section>
       </section>
 
-      <section class="viewport fiat_timeout_state fiat-side" data-tr-section="fiat-timeout">
-        <section class="info">
-          <h1>This is taking a while...</h1>
-          <section class="description">
-            <p>We still haven't received anything.</p>
-            <p><strong>Have you sent your bitcoins yet?</strong></p>
+      <section id="fiat_complete_viewport" class="viewport fiat_receipt fiat_complete_state fiat-side" data-tr-section="fiat-complete">
+        <section class="instructions">
+          <h1 class="js-i18n">Thank you!</h1>
+          <section class="sums">
+            <div class="digital">
+              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div class="js-i18n">were sent by you</div>
+            </div>
+            <div class="fiat">
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
+              <div class="js-i18n">were dispensed to you</div>
+            </div>
           </section>
-          <section class="actions">
-            <span class="button">Yes, I have</span>
-            <span class="button cancel">No, I haven't</span>
-          </section>
+          <div class="sent-coins">
+            <span class="js-i18n">Your bitcoins were sent to:</span><br/>
+            <span class="bitcoin-address"></span>
+          </div>
         </section>
-      </section>
 
-      <section class="viewport fiat_cancel_state fiat-side" data-tr-section="fiat-cancel">
-        <section class="info">
-          <h1>Want to cancel?</h1>
-          <section class="description">
-            <p>We still haven't received anything.</p>
-            <p><strong>Have you sent your bitcoins yet?</strong></p>
-          </section>
-          <section class="actions">
-            <span class="button">Yes, I have</span>
-            <span class="button cancel">No, I haven't</span>
-          </section>
+        <section class="qr-section">
+          <img class="qr-frame" src="images/qr_code_fiat.png" />
+          <div class="qr-code-fiat-receipt" id="qr-code-fiat-complete"></div>
+          <div class="send-notice-section">
+            <img class="camera" src="images/camera.png" />
+            <div class="send-notice js-i18n">Take a photo of the screen for your electronic receipt.</div>
+          </div>
         </section>
       </section>
 
       <section class="viewport out_of_cash_state fiat-side" data-tr-section="out-of-cash">
         <section class="info">
           <div class="flying-bills"><img src="images/flying-bills.png"/></div>
-          <h1>Out of cash</h1>
+          <h1 class="js-i18n">Out of cash</h1>
           <section class="description">
-            <p><strong>Sorry, but we're all out of cash!</strong></p>
-            <p>Please contact the operator for assistance.</p>
+            <p><strong class="js-i18n">Sorry, but we're all out of cash!</strong></p>
+            <p class="js-i18n">Please contact the operator for assistance.</p>
           </section>
           <section class="actions">
             <span class="button cancel" id="out-of-cash-ok">OK</span>
-          </section>
-        </section>
-      </section>
-
-      <section class="viewport out_of_cash_partial_state fiat-side" data-tr-section="out-of-cash-partial">
-        <section class="info">
-          <h1>Out of cash</h1>
-          <section class="description">
-            <p><strong>Sorry, we seem to have run out of dough.</strong></p>
-            <p>We will refund 5362 mBTC to your address:</p>
-            <p class="bitcoin-address">1Fpg5odR1GQJnvDgzzqxhFFvSMZ4TFTvvN</p>
-          </section>
-          <section class="actions">
-            <span class="button cancel">Refund bitcoins</span>
           </section>
         </section>
       </section>

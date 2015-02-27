@@ -5,6 +5,7 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.swp
 
 sftp-config.json
 
@@ -39,10 +40,9 @@ istanbul
 *.csv#
 
 /device_config.json
-/data/client.key
-/data/client.pem
-/data/connection_info.json
+/data
 /coverage
+/fonts
 
 test/compliance/licenses
 
@@ -50,4 +50,4 @@ cli.txt
 *~
 
 .project
-
+crowdin.yaml

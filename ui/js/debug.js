@@ -5,13 +5,13 @@ function initDebug() {
 }
 
 function doInitDebug() {
-  var forceLocale = 'en-US'
-//  var forceLocale = 'en-US'
-  var forceCurrency = 'SAR'
+  var forceLocale = 'en-US';
+  var forceCurrency = 'USD';
   setPrimaryLocale(forceLocale);
   setPrimaryLocales([forceLocale]);
 
 //  setPrimaryLocale('pt-PT');
+  setPrimaryLocales(['ru-RU', 'en-US', 'fr-QC']);
 //  setPrimaryLocales(['en-US', 'nl-NL']);
 
   setLocale(forceLocale);
@@ -20,7 +20,8 @@ function doInitDebug() {
   setCredit(25, 0.202, 20);
   //setState('insert_more_bills');
   //setState('scan_address');
-  setState('deposit');
+  setState('change_language');
+//  setState('choose_fiat');
 
   var counter = 0;
 

@@ -1,0 +1,619 @@
+#. extracted from Lamassu source code
+msgid ""
+msgstr ""
+"Project-Id-Version: lamassu-bitcoin-machine-ui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-31 15:34-0400\n"
+"PO-Revision-Date: 2015-01-19 17:40-0500\n"
+"Last-Translator: joshmh <josh@lamassubtc.com>\n"
+"Language-Team: Acholi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: crowdin.com\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: lamassu-bitcoin-machine-ui\n"
+"X-Crowdin-File: /ui/lbm-ui_en-US.po\n"
+"Language: ach_UG\n"
+
+#: On screen: locked-password
+msgid "Your passphrase"
+msgstr "crwdns156:0crwdne156:0"
+
+#: On screen: wifi
+msgid "MORE"
+msgstr "crwdns155:0crwdne155:0"
+
+#. %s is the WiFi network name
+#. example: for HomeNetwork
+#: On screen: wifi-password
+msgid "for %s"
+msgstr "crwdns93:0%scrwdne93:0"
+
+#: On screen: wifi-password
+msgid "WiFi password"
+msgstr "crwdns94:0crwdne94:0"
+
+#. %s is the Bitcoin price
+#. example: Our current Bitcoin price is $123.45
+#: On screen: idle
+msgid "Our current Bitcoin price is %s"
+msgstr "crwdns96:0%scrwdne96:0"
+
+#: On screen: idle
+msgid "Loading Bitcoin price..."
+msgstr "crwdns97:0crwdne97:0"
+
+#. The name of the language you're translating.
+#. e.g., français, español
+#: On screen: idle
+msgid "LanguageName"
+msgstr "crwdns159:0crwdne159:0"
+
+#. example: per $1 inserted
+#: On screen: insert-bills
+msgid "per %s inserted"
+msgstr "crwdns158:0%scrwdne158:0"
+
+#. %s is the bill denomination
+#. example: You inserted a $5 bill
+#: On screen: insert-more-bills
+msgid "You inserted a %s bill"
+msgstr "crwdns106:0%scrwdne106:0"
+
+#: On screen: insert-more-bills
+msgid "We're out of bitcoins."
+msgstr "crwdns107:0crwdne107:0"
+
+#: On screen: insert-more-bills
+msgid "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
+msgstr "crwdns108:0crwdne108:0"
+
+#: On screen: insert-more-bills
+msgid "Transaction limit reached."
+msgstr "crwdns161:0crwdne161:0"
+
+#. %s is a bill denomination
+#. example: Please insert $10 or less
+#: On screen: high-bill
+msgid "Please insert %s or less."
+msgstr "crwdns127:0%scrwdne127:0"
+
+#: On screen: high-bill
+msgid "We're a little low."
+msgstr "crwdns128:0crwdne128:0"
+
+#: On screen: wifi-connecting
+msgid "This could take a few moments."
+msgstr "crwdns129:0crwdne129:0"
+
+#: On screen: wifi-connecting
+msgid "Connected. Waiting for ticker."
+msgstr "crwdns130:0crwdne130:0"
+
+#. %s is the WiFi network name
+#: On screen: wifi-connecting
+msgid "You're connecting to the WiFi network %s"
+msgstr "crwdns131:0%scrwdne131:0"
+
+#. %s is amount of Bitcoins that user is sending
+#: On screen: choose-fiat
+msgid "You'll be sending %s mBTC"
+msgstr "crwdns694:0%scrwdne694:0"
+
+#: On screen: locked-password
+msgid "Access passphrase"
+msgstr "crwdns88:0crwdne88:0"
+
+#: On screen: locked-password
+msgid "Unlock the <strong>Bitcoin Machine</strong>"
+msgstr "crwdns150:0crwdne150:0"
+
+#: On screen: locked-password
+msgid "Unlock"
+msgstr "crwdns90:0crwdne90:0"
+
+#: On screen: wifi
+msgid "Select a WiFi network"
+msgstr "crwdns149:0crwdne149:0"
+
+#: On screen: wifi
+msgid "Only secured networks are shown."
+msgstr "crwdns92:0crwdne92:0"
+
+#: On screen: wifi
+msgid "The Bitcoin Machine"
+msgstr "crwdns152:0crwdne152:0"
+
+#: On screen: wifi-password
+msgid "Connect"
+msgstr "crwdns95:0crwdne95:0"
+
+#: On screen: idle
+msgid "Hello."
+msgstr "crwdns98:0crwdne98:0"
+
+#: On screen: idle
+msgid "START"
+msgstr "crwdns99:0crwdne99:0"
+
+#: On screen: idle
+msgid "Tap to buy bitcoins in 3 steps"
+msgstr "crwdns100:0crwdne100:0"
+
+#: On screen: dual-idle
+msgid "I want<br>Bitcoin"
+msgstr "crwdns613:0crwdne613:0"
+
+#: On screen: dual-idle
+msgid "I want<br>Cash"
+msgstr "crwdns614:0crwdne614:0"
+
+#: On screen: dual-idle
+msgid "Redeem"
+msgstr "crwdns615:0crwdne615:0"
+
+#: On screen: scan-id
+msgid "Please verify your identity"
+msgstr "crwdns616:0crwdne616:0"
+
+#: On screen: scan-id
+msgid "In order to proceed, we are required to verify your identity. Please press the back of your <strong>driver's license</strong> against the scan window."
+msgstr "crwdns617:0crwdne617:0"
+
+#: On screen: register-phone
+msgid "Phone Number"
+msgstr "crwdns618:0crwdne618:0"
+
+#: On screen: register-phone
+msgid "Please enter your mobile number so we can text you when your order is confirmed."
+msgstr "crwdns619:0crwdne619:0"
+
+#: On screen: register-phone
+msgid "Please enter the mobile number you used when you placed your order."
+msgstr "crwdns620:0crwdne620:0"
+
+#: On screen: register-phone
+msgid "Clear"
+msgstr "crwdns621:0crwdne621:0"
+
+#: On screen: bad-phone-number
+msgid "Try Again"
+msgstr "crwdns622:0crwdne622:0"
+
+#: On screen: bad-phone-number
+msgid "The phone number you entered didn't work. If you have an international number, please prefix it with <strong>+</strong> and your country's calling code."
+msgstr "crwdns623:0crwdne623:0"
+
+#: On screen: bad-phone-number
+msgid "For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12 34 56"
+msgstr "crwdns624:0crwdne624:0"
+
+#: On screen: unknown-phone-number
+msgid "All set"
+msgstr "crwdns625:0crwdne625:0"
+
+#: On screen: unknown-phone-number
+msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
+msgstr "crwdns626:0crwdne626:0"
+
+#: On screen: unknown-phone-number
+msgid "If you're sure you have an open order associated with this phone, please contact the operator."
+msgstr "crwdns627:0crwdne627:0"
+
+#: On screen: unknown-phone-number
+msgid "OK"
+msgstr "crwdns174:0crwdne174:0"
+
+#: On screen: unconfirmed-deposit
+msgid "Almost there"
+msgstr "crwdns628:0crwdne628:0"
+
+#: On screen: unconfirmed-deposit
+msgid "Your order is in the system, but it hasn't yet been confirmed on the blockchain."
+msgstr "crwdns629:0crwdne629:0"
+
+#: On screen: unconfirmed-deposit
+msgid "Please wait until you receive a text message from us, then come back for your cash."
+msgstr "crwdns630:0crwdne630:0"
+
+#: On screen: wrong-dispenser-currency
+msgid "Oops!"
+msgstr "crwdns631:0crwdne631:0"
+
+#: On screen: wrong-dispenser-currency
+msgid "This machine does not handle the currency you requested."
+msgstr "crwdns632:0crwdne632:0"
+
+#: On screen: wrong-dispenser-currency
+msgid "Please cash out at a machine that handles your currency."
+msgstr "crwdns633:0crwdne633:0"
+
+#: On screen: fiat-error
+msgid "We're having some difficulties."
+msgstr "crwdns634:0crwdne634:0"
+
+#: On screen: fiat-error
+msgid "Please contact the operator."
+msgstr "crwdns122:0crwdne122:0"
+
+#: On screen: fiat-transaction-error
+msgid "Please snap a photo of your receipt."
+msgstr "crwdns635:0crwdne635:0"
+
+#: On screen: fiat-transaction-error
+msgid "Show Receipt"
+msgstr "crwdns636:0crwdne636:0"
+
+#: On screen: bad-security-code
+msgid "The code you entered was incorrect."
+msgstr "crwdns637:0crwdne637:0"
+
+#: On screen: bad-security-code
+msgid "Please make sure you are entering the six digit code you receive from us."
+msgstr "crwdns638:0crwdne638:0"
+
+#: On screen: bad-security-code
+msgid "Resend Code"
+msgstr "crwdns639:0crwdne639:0"
+
+#: On screen: max-phone-retries
+msgid "Oops, this isn't working"
+msgstr "crwdns640:0crwdne640:0"
+
+#: On screen: max-phone-retries
+msgid "You've hit the maximum number of retries."
+msgstr "crwdns641:0crwdne641:0"
+
+#: On screen: max-phone-retries
+msgid "Please contact the operator to sort this out, or try again later."
+msgstr "crwdns642:0crwdne642:0"
+
+#: On screen: pre-receipt
+msgid "What next?"
+msgstr "crwdns643:0crwdne643:0"
+
+#: On screen: pre-receipt
+msgid "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
+msgstr "crwdns644:0crwdne644:0"
+
+#: On screen: pre-receipt
+msgid "Please snap a photo of the <strong>next screen</strong> for your electronic receipt, then contact the operator."
+msgstr "crwdns645:0crwdne645:0"
+
+#: On screen: redeem-later
+msgid "Thank You!"
+msgstr "crwdns646:0crwdne646:0"
+
+#: On screen: redeem-later
+msgid "We're waiting for your deposit to confirm on the blockchain."
+msgstr "crwdns647:0crwdne647:0"
+
+#: On screen: redeem-later
+msgid "You will soon receive a text message notifying you that your transaction has confirmed. When that happens, please come back to this machine and press the <strong>Redeem</strong> button."
+msgstr "crwdns648:0crwdne648:0"
+
+#: On screen: security-code
+msgid "Security Code"
+msgstr "crwdns649:0crwdne649:0"
+
+#: On screen: security-code
+msgid "We've texted you a security code. When you get it, enter it here."
+msgstr "crwdns650:0crwdne650:0"
+
+#: On screen: security-code
+msgid "Enter"
+msgstr "crwdns651:0crwdne651:0"
+
+#: On screen: verifying-id
+msgid "Verifying identity…"
+msgstr "crwdns652:0crwdne652:0"
+
+#: On screen: verifying-id
+msgid "Just making sure you're you."
+msgstr "crwdns653:0crwdne653:0"
+
+#: On screen: verifying-id
+msgid "This could take a few seconds."
+msgstr "crwdns654:0crwdne654:0"
+
+#: On screen: id-code-failed
+msgid "Want to try again?"
+msgstr "crwdns655:0crwdne655:0"
+
+#: On screen: id-code-failed
+msgid "The code you entered did not match."
+msgstr "crwdns656:0crwdne656:0"
+
+#: On screen: id-code-failed
+msgid "You might want to <strong>give it another shot</strong>."
+msgstr "crwdns657:0crwdne657:0"
+
+#: On screen: id-code-failed
+msgid "Cancel"
+msgstr "crwdns658:0crwdne658:0"
+
+#: On screen: id-verification-failed
+msgid "Sorry."
+msgstr "crwdns659:0crwdne659:0"
+
+#: On screen: id-verification-failed
+msgid "Our system indicated an identification problem."
+msgstr "crwdns660:0crwdne660:0"
+
+#: On screen: id-verification-failed
+msgid "Please contact the operator for more information."
+msgstr "crwdns661:0crwdne661:0"
+
+#: On screen: id-verification-error
+msgid "It's us, not you."
+msgstr "crwdns662:0crwdne662:0"
+
+#: On screen: id-verification-error
+msgid "Our system experienced an error."
+msgstr "crwdns663:0crwdne663:0"
+
+#: On screen: id-verification-error
+msgid "Please feel free to try again, or contact the operator."
+msgstr "crwdns664:0crwdne664:0"
+
+#: On screen: scan-address
+msgid "Scan your Bitcoin address"
+msgstr "crwdns101:0crwdne101:0"
+
+#: On screen: scan-address
+msgid "Hold your QR code up to the scan window to proceed."
+msgstr "crwdns102:0crwdne102:0"
+
+#: On screen: insert-bills
+msgid "Insert a bill"
+msgstr "crwdns103:0crwdne103:0"
+
+#: On screen: insert-bills
+msgid "Your bitcoins will be sent to:"
+msgstr "crwdns104:0crwdne104:0"
+
+#: On screen: insert-more-bills
+msgid "Tap to complete purchase"
+msgstr "crwdns109:0crwdne109:0"
+
+#: On screen: insert-more-bills
+msgid "SEND BITCOINS"
+msgstr "crwdns110:0crwdne110:0"
+
+#: On screen: insert-more-bills
+msgid "OR"
+msgstr "crwdns160:0crwdne160:0"
+
+#: On screen: insert-more-bills
+msgid "Insert another bill"
+msgstr "crwdns111:0crwdne111:0"
+
+#: On screen: insert-more-bills
+msgid "deposited so far"
+msgstr "crwdns112:0crwdne112:0"
+
+#: On screen: insert-more-bills
+msgid "total bitcoins purchased"
+msgstr "crwdns115:0crwdne115:0"
+
+#: On screen: completed
+msgid "Your bitcoins are on their way to:"
+msgstr "crwdns134:0crwdne134:0"
+
+#: On screen: completed
+msgid "Tap anywhere when you're done."
+msgstr "crwdns118:0crwdne118:0"
+
+#: On screen: withdraw_failure
+msgid "Our Internet was down for a bit. You'll get all your coins but you might receive them in two separate batches."
+msgstr "crwdns665:0crwdne665:0"
+
+#: On screen: goodbye
+msgid "See You!"
+msgstr "crwdns119:0crwdne119:0"
+
+#: On screen: trouble
+msgid "Sorry!"
+msgstr "crwdns120:0crwdne120:0"
+
+#: On screen: trouble
+msgid "We're down for the moment."
+msgstr "crwdns121:0crwdne121:0"
+
+#: On screen: booting
+msgid "Booting up..."
+msgstr "crwdns162:0crwdne162:0"
+
+#: On screen: booting
+msgid "Initializing hardware."
+msgstr "crwdns163:0crwdne163:0"
+
+#: On screen: booting
+msgid "We'll be up in a moment."
+msgstr "crwdns164:0crwdne164:0"
+
+#: On screen: maintenance
+msgid "Maintenance required."
+msgstr "crwdns165:0crwdne165:0"
+
+#: On screen: connecting
+msgid "Connecting..."
+msgstr "crwdns666:0crwdne666:0"
+
+#: On screen: locked
+msgid "This machine is locked"
+msgstr "crwdns123:0crwdne123:0"
+
+#: On screen: locked
+msgid "Please ask for assistance."
+msgstr "crwdns126:0crwdne126:0"
+
+#: On screen: limit-reached
+msgid "We're all out of bitcoins!"
+msgstr "crwdns125:0crwdne125:0"
+
+#: On screen: wifi-connecting
+msgid "Connecting…"
+msgstr "crwdns132:0crwdne132:0"
+
+#: On screen: sending-coins
+msgid "Sending bitcoins…"
+msgstr "crwdns133:0crwdne133:0"
+
+#: On screen: wifi-failed
+msgid "WiFi failed to connect…"
+msgstr "crwdns135:0crwdne135:0"
+
+#: On screen: wifi-failed
+msgid "Please try the <strong>password</strong> again."
+msgstr "crwdns151:0crwdne151:0"
+
+#: On screen: wifi-failed
+msgid "TRY AGAIN"
+msgstr "crwdns137:0crwdne137:0"
+
+#: On screen: unpaired
+msgid "Pair with remote server"
+msgstr "crwdns166:0crwdne166:0"
+
+#: On screen: unpaired
+msgid "Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server."
+msgstr "crwdns167:0crwdne167:0"
+
+#: On screen: unpaired
+msgid "<strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server."
+msgstr "crwdns168:0crwdne168:0"
+
+#: On screen: unpaired
+msgid "SCAN"
+msgstr "crwdns169:0crwdne169:0"
+
+#: On screen: pairing-scan
+msgid "Please scan the pairing QR code you got from your remote server."
+msgstr "crwdns170:0crwdne170:0"
+
+#: On screen: pairing-scan
+msgid "CANCEL"
+msgstr "crwdns171:0crwdne171:0"
+
+#: On screen: pairing
+msgid "Pairing..."
+msgstr "crwdns172:0crwdne172:0"
+
+#: On screen: pairing-error
+msgid "When attempting to pair, we experienced an error:"
+msgstr "crwdns173:0crwdne173:0"
+
+#: On screen: choose-fiat
+msgid "How much?"
+msgstr "crwdns667:0crwdne667:0"
+
+#: On screen: choose-fiat
+msgid "1 BTC is"
+msgstr "crwdns668:0crwdne668:0"
+
+#: On screen: choose-fiat
+msgid "Cash out"
+msgstr "crwdns669:0crwdne669:0"
+
+#: On screen: deposit
+msgid "Send Bitcoins"
+msgstr "crwdns670:0crwdne670:0"
+
+#: On screen: deposit
+msgid "Please scan the QR code to send us your bitcoins."
+msgstr "crwdns671:0crwdne671:0"
+
+#: On screen: deposit
+msgid "will be sent"
+msgstr "crwdns672:0crwdne672:0"
+
+#: On screen: deposit
+msgid "will be dispensed"
+msgstr "crwdns673:0crwdne673:0"
+
+#: On screen: deposit
+msgid "Generating address..."
+msgstr "crwdns674:0crwdne674:0"
+
+#: On screen: pending-deposit
+msgid "Bitcoins received!"
+msgstr "crwdns675:0crwdne675:0"
+
+#: On screen: pending-deposit
+msgid "We've received your payment."
+msgstr "crwdns676:0crwdne676:0"
+
+#: On screen: pending-deposit
+msgid "Authorizing..."
+msgstr "crwdns677:0crwdne677:0"
+
+#: On screen: deposit-timeout
+msgid "Nothing yet..."
+msgstr "crwdns678:0crwdne678:0"
+
+#: On screen: deposit-timeout
+msgid "No bitcoins are showing up."
+msgstr "crwdns679:0crwdne679:0"
+
+#: On screen: deposit-timeout
+msgid "Have you sent the bitcoins yet?"
+msgstr "crwdns680:0crwdne680:0"
+
+#: On screen: deposit-timeout
+msgid "Yes, I have"
+msgstr "crwdns681:0crwdne681:0"
+
+#: On screen: deposit-timeout
+msgid "No, I haven't"
+msgstr "crwdns682:0crwdne682:0"
+
+#: On screen: dispensing
+msgid "Dispensing..."
+msgstr "crwdns683:0crwdne683:0"
+
+#: On screen: dispensing
+msgid "Please take your cash."
+msgstr "crwdns684:0crwdne684:0"
+
+#: On screen: fiat-receipt
+msgid "Your Receipt"
+msgstr "crwdns685:0crwdne685:0"
+
+#: On screen: fiat-receipt
+msgid "were sent by you"
+msgstr "crwdns686:0crwdne686:0"
+
+#: On screen: fiat-receipt
+msgid "pending confirmation"
+msgstr "crwdns687:0crwdne687:0"
+
+#: On screen: fiat-receipt
+msgid "Your bitcoins were sent to:"
+msgstr "crwdns688:0crwdne688:0"
+
+#: On screen: fiat-receipt
+msgid "Take a photo of the screen for your electronic receipt."
+msgstr "crwdns689:0crwdne689:0"
+
+#: On screen: fiat-complete
+msgid "Thank you!"
+msgstr "crwdns114:0crwdne114:0"
+
+#: On screen: fiat-complete
+msgid "were dispensed to you"
+msgstr "crwdns690:0crwdne690:0"
+
+#: On screen: out-of-cash
+msgid "Out of cash"
+msgstr "crwdns691:0crwdne691:0"
+
+#: On screen: out-of-cash
+msgid "Sorry, but we're all out of cash!"
+msgstr "crwdns692:0crwdne692:0"
+
+#: On screen: out-of-cash
+msgid "Please contact the operator for assistance."
+msgstr "crwdns693:0crwdne693:0"
+

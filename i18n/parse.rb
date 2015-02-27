@@ -19,7 +19,7 @@ msgstr ""
 }
 
 # Do app.js manually for now
-app_js = { 
+app_js = {
 	'wifi-connecting' => [
 			'This could take a few moments.',
 			'Connected. Waiting for ticker.',
@@ -29,7 +29,7 @@ app_js = {
 			{ :string => 'for %s', :comments => [ '%s is the WiFi network name', 'example: for HomeNetwork' ] }
 	],
 	'idle' => [
-		{ :string => 'Our current Bitcoin price is %s', 
+		{ :string => 'Our current Bitcoin price is %s',
 			:comments => [ '%s is the Bitcoin price', 'example: Our current Bitcoin price is $123.45' ] },
 		'Loading Bitcoin price...',
 		{ :string => 'LanguageName',
@@ -40,20 +40,24 @@ app_js = {
 			:comments => ['example: per $1 inserted']}
 	],
 	'insert-more-bills' => [
-		{ :string => 'You inserted a %s bill', 
-			:comments => [ '%s is the bill denomination', 'example: You inserted a $5 bill' ] }, 
+		{ :string => 'You inserted a %s bill',
+			:comments => [ '%s is the bill denomination', 'example: You inserted a $5 bill' ] },
 		"We're out of bitcoins.",
 		"Please touch <strong>Send Bitcoins</strong> to complete your purchase.",
-		'Transaction limit reached.', 'We\'re out of bitcoins.'		
+		'Transaction limit reached.', 'We\'re out of bitcoins.'
 	],
 	'high-bill' => [
-		{ :string => 'Please insert %s or less.', 
+		{ :string => 'Please insert %s or less.',
 			:comments => [ '%s is a bill denomination', 'example: Please insert $10 or less' ] },
 		'Transaction limit reached.', 'We\'re a little low.'
 	],
 	'wifi' => [
 		{ :string => 'MORE', :comments => [] }
 	],
+	'choose-fiat' => [
+		{ :string => 'You\'ll be sending %s mBTC',
+			:comments => [ '%s is amount of Bitcoins that user is sending'] }
+	]
 }
 
 
@@ -81,7 +85,7 @@ doc.css('.viewport').each do |node|
 		screens[screen] = true
 		app_strings = app_js[screen]
 		if app_strings
-			app_strings.each do |as| 
+			app_strings.each do |as|
 				if as.is_a? String
 					write_po(as, screen, translations)
 				else
@@ -94,11 +98,11 @@ doc.css('.viewport').each do |node|
 			write_po(str, screen, translations)
 		end
 	end
-end	
+end
 
 doc.css('.js-i18n').each do |node|
 	screen_node = node.ancestors('.viewport').first
 	screen = screen_node.attr('data-tr-section')
-	str = node.inner_html
+	str = node.inner_html.strip.gsub(/\s+/, ' ')
 	write_po(str, screen, translations)
 end
