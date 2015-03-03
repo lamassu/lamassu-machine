@@ -6,7 +6,7 @@ var fs = require('fs');
 var argv = process.argv.slice(2);
 var fontDir = argv[0];
 var fontName = argv[1];
-var root = 'ui/css/fonts';
+var root = 'fonts';
 
 var NOTO_WEIGHTS = {
   black: 900,

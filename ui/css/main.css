@@ -4,12 +4,12 @@ body {
   width: 1200px;
   overflow: hidden;
   direction: ltr;
-  font-family: 'Source Sans Pro', 'Noto Sans CJK JP', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
   cursor: none;
 }
 
 .brandon {
-  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK JP', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
   direction: ltr;
 }
 
