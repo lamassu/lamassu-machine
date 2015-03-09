@@ -24,12 +24,14 @@
   },
   "scanner": {
     "device": "/dev/video0",
-    "width": 1280,
-    "height": 960,
-    "contrast": 25,
-    "lowExposure": null,
-    "highExposure": null,
-    "exposureAdjustTime": 200
+    "qr": {
+      "width": 640,
+      "height": 480,
+      "contrast": 30,
+      "lowExposure": 75,
+      "highExposure": null,
+      "exposureAdjustTime": 200
+    }
   },
   "updater": {
     "caFile": "/usr/local/share/sencha/certs/lamassu.pem",
