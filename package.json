@@ -35,5 +35,22 @@
   },
   "scripts": {
     "pretest": "jshint bin lib ui/js/app.js"
+  },
+  "standard": {
+    "ignore": [
+      "lib/id003/contrib/**",
+      "hardware/**",
+      "ui/js/vendor/**",
+      "ui/js/locales.js",
+      "ui/js/debug.js",
+      "ui/js/keyboard.js",
+      "ui/flag-icon-css/**",
+      "tools/**",
+      "test/**",
+      "scratch/**",
+      "i18n/**",
+      "deploy/**",
+      "build/**"
+    ]
   }
 }
