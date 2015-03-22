@@ -63,7 +63,8 @@ rm -rf $TARGET_MODULES_DIR/jpeg
 
 # Reduce package size, these are unneeded
 rm -rf $TARGET_MODULES_DIR/clim/example
-rm -rf $TARGET_MODULES_DIR/sha512crypt-node
+rm -rf $TARGET_MODULES_DIR/istanbul
+rm -rf $TARGET_MODULES_DIR/jasmine
 
 # Note, this is only needed for early release aaeons
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
