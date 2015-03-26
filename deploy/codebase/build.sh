@@ -65,6 +65,7 @@ rm -rf $TARGET_MODULES_DIR/jpeg
 rm -rf $TARGET_MODULES_DIR/clim/example
 rm -rf $TARGET_MODULES_DIR/istanbul
 rm -rf $TARGET_MODULES_DIR/jasmine
+rm -rf $TARGET_MODULES_DIR/mocha
 
 # Note, this is only needed for early release aaeons
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
