@@ -32,6 +32,14 @@
       "lowExposure": 75,
       "highExposure": null,
       "exposureAdjustTime": 200
+    },
+    "photoId": {
+      "width": 1280,
+      "height": 960,
+      "contrast": 25,
+      "lowExposure": null,
+      "highExposure": null,
+      "exposureAdjustTime": 200
     }
   },
   "updater": {
