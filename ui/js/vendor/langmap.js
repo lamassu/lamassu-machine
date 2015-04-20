@@ -729,7 +729,7 @@
     },
     'zh-TW': {
       nativeName: "中文(台灣)",
-      englishName: "Chinese (Taiwan)"
+      englishName: "Chinese"
     },
     'zu-ZA': {
       nativeName: "isiZulu",
