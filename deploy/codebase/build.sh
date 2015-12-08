@@ -26,7 +26,7 @@ rm -rf $EXPORT_SCRIPT_DIR
 rm -rf $EXPORT_DIR
 mkdir -p $EXPORT_DIR
 mkdir -p $EXPORT_SCRIPT_DIR
-mkdir -p $TARGET_MACHINE_DIR
+mkdir -p $TARGET_MODULES_DIR
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
@@ -41,7 +41,7 @@ cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/bin $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
-cp -r $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
+$MACHINE_DIR/deploy/copy-modules.js $MACHINE_DIR/node_modules $TARGET_MODULES_DIR
 cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
@@ -53,19 +53,8 @@ cp $MACHINE_DIR/ui/css/fonts/SourceCodePro-Regular.ttf $TARGET_MACHINE_DIR/ui/cs
 cp $MACHINE_DIR/ui/css/fonts/Noto* $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $MACHINE_DIR/ui/css/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
 
-# Natively compiled modules, will be copied from hardware-specific directories
-rm -rf $TARGET_MODULES_DIR/ws
-rm -rf $TARGET_MODULES_DIR/serialport
-rm -rf $TARGET_MODULES_DIR/seret
-rm -rf $TARGET_MODULES_DIR/manatee
-rm -rf $TARGET_MODULES_DIR/supyo
-rm -rf $TARGET_MODULES_DIR/jpeg
-
 # Reduce package size, these are unneeded
 rm -rf $TARGET_MODULES_DIR/clim/example
-rm -rf $TARGET_MODULES_DIR/istanbul
-rm -rf $TARGET_MODULES_DIR/jasmine
-rm -rf $TARGET_MODULES_DIR/mocha
 
 # Note, this is only needed for early release aaeons
 mkdir -p $EXPORT_DIR/native/aaeon/scripts
