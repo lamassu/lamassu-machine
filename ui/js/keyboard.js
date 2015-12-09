@@ -99,8 +99,9 @@ Keyboard.prototype._backspace = function _backspace (target) {
   }, 1000)
 }
 
-Keyboard.prototype._backspaceUp = function backspaceUp (target) {
+Keyboard.prototype._backspaceUp = function _backspaceUp (target) {
   window.clearTimeout(this.backspaceTimeout)
+  if (!target) return
   target.removeClass('active')
 
   var inputBox = this.inputBox

@@ -248,8 +248,6 @@ $(document).ready(function () {
   touchEvent(startButtons, function (e) {
     var startButtonJ = $(e.target).closest('.circle-button')
     if (startButtonJ.length === 0) return
-    var newLocale = startButtonJ.data('locale')
-    setState('scan_address', null, newLocale)
     buttonPressed('start')
   })
 
