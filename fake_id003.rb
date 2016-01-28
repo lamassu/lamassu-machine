@@ -109,6 +109,7 @@ class FakeID003
 			@escrowed = 5
 			@rejecting = :refuse
 		elsif number == 4
+			@escrowed = 1
 			@rejecting = :reject
 		else
 			@escrowed = i
