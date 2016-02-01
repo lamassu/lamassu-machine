@@ -1,0 +1,7 @@
+- go to quick highestBill or rejectedBill screen
+- what to do if send bitcoins pressed as bill is being read?
+  - return bill and send bitcoins
+- handle case where we run out of funds as bill is being inserted
+- put in real three dots graphics
+- actually disable send bitcoin button
+- don't go back to displaying btc press on first bill page after bill insert

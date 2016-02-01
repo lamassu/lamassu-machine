@@ -5,7 +5,7 @@ body {
   overflow: hidden;
   direction: ltr;
   font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
-  cursor: none;
+  /*cursor: none;*/
 }
 
 .brandon {
@@ -1658,4 +1658,3 @@ body  { margin: 0;}
   background-size: contain;
   border: 4px solid rgba(0, 0, 0, .05);
 }
-

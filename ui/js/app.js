@@ -82,6 +82,8 @@ function processData (data) {
   if (data.cartridges) setupCartridges(data.cartridges)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
+  if (data.readingBill) readingBill(data.readingBill)
+
   swaperoo('.js-redeem', '.js-deposit', data.redeem)
 
   switch (data.action) {
@@ -685,6 +687,12 @@ function highBill (highestBill, reason) {
     .fetch(formatFiat(highestBill)))
   setScreen('high_bill')
   window.setTimeout(revertScreen, 3000)
+}
+
+function readingBill (bill) {
+  $('#send-coins span').html('...')
+  $('.insert_bills_state .js-i18n-current-bitcoin-price').html('Processing ' + formatFiat(bill) + '...')
+  $('#js-i18n-just-inserted').html('Processing ' + formatFiat(bill) + '...')
 }
 
 function sendOnly (reason) {
