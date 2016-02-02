@@ -795,7 +795,16 @@
         <section class="main">
           <section id="send-side">
             <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
-            <div id="send-coins" class="circle-button"><span class="js-i18n">SEND BITCOINS</span></div>
+            <div id="send-coins" class="send-coins circle-button js-send-bitcoins-enable">
+              <span class="js-i18n js-send-bitcoins-enable">SEND BITCOINS</span>
+            </div>
+            <div class="send-coins circle-button js-send-bitcoins-disable">
+              <div class="js-send-bitcoins-disable spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+            </div>
           </section>
           <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
             <circle cx="680" cy="180" r="30" />

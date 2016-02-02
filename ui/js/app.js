@@ -587,6 +587,9 @@ function setCredit (fiat, bitcoins, lastBill) {
     locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill)))
   $('.total-deposit').html(formatFiat(fiat))
   updateBitcoins('.total-btc-rec', bitcoins)
+
+  $('.js-send-bitcoins-disable').hide()
+  $('.js-send-bitcoins-enable').show()
 }
 
 function setupCartridges (_cartridges) {
@@ -690,7 +693,8 @@ function highBill (highestBill, reason) {
 }
 
 function readingBill (bill) {
-  $('#send-coins span').html('...')
+  $('.js-send-bitcoins-enable').hide()
+  $('.js-send-bitcoins-disable').show()
   $('.insert_bills_state .js-i18n-current-bitcoin-price').html('Processing ' + formatFiat(bill) + '...')
   $('#js-i18n-just-inserted').html('Processing ' + formatFiat(bill) + '...')
 }

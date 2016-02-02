@@ -433,13 +433,23 @@ body  { margin: 0;}
 }
 
 /* 4th Screen */
-#send-coins {
+.send-coins {
   margin: 0 auto;
   width: 175px; height: 175px;
   padding: 30px;
 }
 
-.i18n-long-send-coins #send-coins {
+.js-send-bitcoins-disable .spinner {
+  display: none;
+  margin: 0;
+  width: 100px;
+}
+
+.js-send-bitcoins-disable .spinner > div {
+  background-color: #0e4160;
+}
+
+.i18n-long-send-coins .send-coins {
   font-size: 26px;
 }
 
