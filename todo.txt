@@ -4,7 +4,8 @@ v don't go back to displaying "our current btc price" on first bill page after b
 v blank screen when rejecting bill (3 in fake_id003)
 v stop stating "handling bill" when bill was rejected
 v go to quick highestBill or rejectedBill screen
-- what to do if send bitcoins pressed as bill is being read?
-  - return bill and send bitcoins
+v what to do if send bitcoins pressed as bill is being read?
+  v return bill and send bitcoins
 - handle case where we run out of funds as bill is being inserted
 v make right hand side line up with right pane on bottom bar, so text doesn't shift
+v ignore rejected action if not in bill accepting screens

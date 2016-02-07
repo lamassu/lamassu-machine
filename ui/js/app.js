@@ -143,6 +143,9 @@ function processData (data) {
       break
     case 'acceptingBills':
       // effectively a return from rejected bill
+      if (currentState === 'sending_coins') {
+        setState('insert_more_bills')
+      }
       break
     case 'acceptingBill':
       setAccepting(true)
@@ -289,7 +292,6 @@ $(document).ready(function () {
   setupButton('want_bitcoin', 'start')
   setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
-  setupButton('send-coins', 'sendBitcoins')
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
