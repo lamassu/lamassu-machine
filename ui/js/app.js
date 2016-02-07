@@ -583,10 +583,11 @@ function setCredit (fiat, bitcoins, lastBill) {
   // TODO: this should go in brain.js
   if (currentState === 'insert_bills') setState('insert_more_bills')
 
-  t('just-inserted',
-    locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill)))
   $('.total-deposit').html(formatFiat(fiat))
   updateBitcoins('.total-btc-rec', bitcoins)
+
+  var inserted = locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
+  $('.js-processing-bill').html(inserted)
 
   $('.js-send-bitcoins-disable').hide()
   $('.js-send-bitcoins-enable').show()
@@ -693,10 +694,9 @@ function highBill (highestBill, reason) {
 }
 
 function readingBill (bill) {
+  $('.js-processing-bill').html('Processing ' + formatFiat(bill) + '...')
   $('.js-send-bitcoins-enable').hide()
   $('.js-send-bitcoins-disable').show()
-  $('.insert_bills_state .js-i18n-current-bitcoin-price').html('Processing ' + formatFiat(bill) + '...')
-  $('#js-i18n-just-inserted').html('Processing ' + formatFiat(bill) + '...')
 }
 
 function sendOnly (reason) {

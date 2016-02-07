@@ -554,7 +554,10 @@ body  { margin: 0;}
 }
 
 .feedback {
-  position: absolute; top: 10; right: 60;
+  position: absolute;
+  top: 10;
+/*  left: 66%; */
+  left: 774px;
   font-size: 34px;
   color: #D0D0C8;   /* sandstone */
   line-height: 47px;
