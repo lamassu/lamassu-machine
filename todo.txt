@@ -3,7 +3,7 @@ v actually disable send bitcoin button
 v don't go back to displaying "our current btc price" on first bill page after bill insert
 v blank screen when rejecting bill (3 in fake_id003)
 v stop stating "handling bill" when bill was rejected
-- go to quick highestBill or rejectedBill screen
+v go to quick highestBill or rejectedBill screen
 - what to do if send bitcoins pressed as bill is being read?
   - return bill and send bitcoins
 - handle case where we run out of funds as bill is being inserted

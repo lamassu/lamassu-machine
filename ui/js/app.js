@@ -594,7 +594,7 @@ function setCredit (fiat, bitcoins, lastBill) {
 
   var inserted = lastBill
   ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
-  : ''
+  : locale.translate('The Bitcoin Machine').fetch()
 
   $('.js-processing-bill').html(inserted)
 
