@@ -71,7 +71,8 @@ function processData (data) {
   if (data.fiatExchangeRate) setFiatExchangeRate(data.fiatExchangeRate)
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
-    setCredit(data.credit.fiat, data.credit.bitcoins, data.credit.lastBill)
+    var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
+    setCredit(data.credit.fiat, data.credit.bitcoins, lastBill)
   }
   if (data.sessionId) setSessionId(data.sessionId)
   if (data.wifiList) setWifiList(data.wifiList)
@@ -136,7 +137,12 @@ function processData (data) {
       setState('insert_bills')
       break
     case 'acceptingFirstBill':
+      $('.js-send-bitcoins-disable').hide()
+      $('.js-send-bitcoins-enable').show()
       setState('insert_bills')
+      break
+    case 'acceptingBills':
+      // effectively a return from rejected bill
       break
     case 'acceptingBill':
       setAccepting(true)
@@ -586,7 +592,10 @@ function setCredit (fiat, bitcoins, lastBill) {
   $('.total-deposit').html(formatFiat(fiat))
   updateBitcoins('.total-btc-rec', bitcoins)
 
-  var inserted = locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
+  var inserted = lastBill
+  ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
+  : ''
+
   $('.js-processing-bill').html(inserted)
 
   $('.js-send-bitcoins-disable').hide()
