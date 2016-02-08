@@ -45,3 +45,10 @@ or add migration:
 3. Update tables
 4. Script to read db tables, clear out old entries
 5. Notify on any alerts
+
+
+-----------------------
+
+- pruning:
+  - add state change to ping; make ping and state change identical records; figure it out on the notification side; prune after 10m without worries
+  - need to do selects for each machine and prune last x records
