@@ -1,11 +1,47 @@
-v put in real three dots graphics
-v actually disable send bitcoin button
-v don't go back to displaying "our current btc price" on first bill page after bill insert
-v blank screen when rejecting bill (3 in fake_id003)
-v stop stating "handling bill" when bill was rejected
-v go to quick highestBill or rejectedBill screen
-v what to do if send bitcoins pressed as bill is being read?
-  v return bill and send bitcoins
-- handle case where we run out of funds as bill is being inserted
-v make right hand side line up with right pane on bottom bar, so text doesn't shift
-v ignore rejected action if not in bill accepting screens
+Notifications
+
+id                 | uuid                        | not null
+device_fingerprint | text                        | not null
+event_type         | text                        | not null
+note               | text                        |
+device_time        | bigint                      | not null
+created            | timestamp without time zone | not null default now()
+
+But they don't know what it is, so they say 'reboot it'. Anyway, either SMS or email. They want to know when it's stuck on a screen, acceptor jam, not scanning QR codes (an infrequent) possibility with the Douro I can elaborate on later), or low Bitcoins. (Or of course networkDown or maintenance screens.)"
+
+Also, when machine isn't successfully pinging server.
+
+- stuck on screen
+- acceptor jam, need to enter special state
+- not scanning qr codes?
+- low bitcoins
+- network down
+- maintenance
+- machine isn't pinging server
+
+- many of these can be handled by alerting if state hasn't changed and isn't idle for > 3m.
+
+if we don't add any tables:
+
+- use machine_events
+- record every screen change
+- record every ping
+- clear out old records once in a while
+- no indexes, so need to clear old records frequently
+
+or add migration:
+
+- requires running migration
+
+
+--------------------
+
+- no premature optimization, go with option 1
+
+--------------------
+
+1. Add logic in brain, trader to record every state change
+2. Add logic in server to record ping from machine poll
+3. Update tables
+4. Script to read db tables, clear out old entries
+5. Notify on any alerts
