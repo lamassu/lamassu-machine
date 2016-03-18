@@ -20,177 +20,6 @@
   </head>
   <body>
     <section id="view">
-      <section class="viewport locked_password_state"
-          data-tr-section="locked-password" id="locked-password">
-        <section id="locked-keyboard" class="wifi-network pass-screen">
-          <section class="pass-top">
-            <div class="label">
-              <h1><span class="js-i18n">Access passphrase</span></h1>
-              <p><span class="js-i18n">Unlock the <strong>Bitcoin Machine</strong></span></p>
-            </div>
-            <div class="entry">
-              <input class="passphrase" type="password" autofocus="autofocus"
-                  placeholder="Your passphrase" data-content=""/>
-              <div class="button backspace">←</div>
-              <div id="unlock" class="button connect"><span class="js-i18n">Unlock</span></div>
-            </div>
-          </section>
-
-          <section class="pass-bottom">
-            <div class="keyboard-layout" data-case="lc">
-              <div class="keyboard keyboard-lc">
-                <div class="row">
-                  <div class="key" data-ascii="49">1</div>
-                  <div class="key" data-ascii="50">2</div>
-                  <div class="key" data-ascii="51">3</div>
-                  <div class="key" data-ascii="52">4</div>
-                  <div class="key" data-ascii="53">5</div>
-                  <div class="key" data-ascii="54">6</div>
-                  <div class="key" data-ascii="55">7</div>
-                  <div class="key" data-ascii="56">8</div>
-                  <div class="key" data-ascii="57">9</div>
-                  <div class="key" data-ascii="48">0</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="113">q</div>
-                  <div class="key" data-ascii="119">w</div>
-                  <div class="key" data-ascii="101">e</div>
-                  <div class="key" data-ascii="114">r</div>
-                  <div class="key" data-ascii="116">t</div>
-                  <div class="key" data-ascii="121">y</div>
-                  <div class="key" data-ascii="117">u</div>
-                  <div class="key" data-ascii="105">i</div>
-                  <div class="key" data-ascii="111">o</div>
-                  <div class="key" data-ascii="112">p</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="97">a</div>
-                  <div class="key" data-ascii="115">s</div>
-                  <div class="key" data-ascii="100">d</div>
-                  <div class="key" data-ascii="102">f</div>
-                  <div class="key" data-ascii="103">g</div>
-                  <div class="key" data-ascii="104">h</div>
-                  <div class="key" data-ascii="106">j</div>
-                  <div class="key" data-ascii="107">k</div>
-                  <div class="key" data-ascii="108">l</div>
-                </div>
-                <div class="row">
-                  <div class="key shift special">Shift</div>
-                  <div class="key" data-ascii="122">z</div>
-                  <div class="key" data-ascii="120">x</div>
-                  <div class="key" data-ascii="99">c</div>
-                  <div class="key" data-ascii="118">v</div>
-                  <div class="key" data-ascii="98">b</div>
-                  <div class="key" data-ascii="110">n</div>
-                  <div class="key" data-ascii="109">m</div>
-                  <div class="key sym special" data-sym-key>Sym</div>
-                </div>
-                <div class="row">
-                  <div class="key space" data-ascii="32">Space</div>
-                </div>
-              </div>
-              <div class="keyboard keyboard-uc" style="display:none">
-                <div class="row">
-                  <div class="key" data-ascii="49">1</div>
-                  <div class="key" data-ascii="50">2</div>
-                  <div class="key" data-ascii="51">3</div>
-                  <div class="key" data-ascii="52">4</div>
-                  <div class="key" data-ascii="53">5</div>
-                  <div class="key" data-ascii="54">6</div>
-                  <div class="key" data-ascii="55">7</div>
-                  <div class="key" data-ascii="56">8</div>
-                  <div class="key" data-ascii="57">9</div>
-                  <div class="key" data-ascii="48">0</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="81">Q</div>
-                  <div class="key" data-ascii="87">W</div>
-                  <div class="key" data-ascii="69">E</div>
-                  <div class="key" data-ascii="82">R</div>
-                  <div class="key" data-ascii="84">T</div>
-                  <div class="key" data-ascii="89">Y</div>
-                  <div class="key" data-ascii="85">U</div>
-                  <div class="key" data-ascii="73">I</div>
-                  <div class="key" data-ascii="79">O</div>
-                  <div class="key" data-ascii="80">P</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="65">A</div>
-                  <div class="key" data-ascii="83">S</div>
-                  <div class="key" data-ascii="68">D</div>
-                  <div class="key" data-ascii="70">F</div>
-                  <div class="key" data-ascii="71">G</div>
-                  <div class="key" data-ascii="72">H</div>
-                  <div class="key" data-ascii="74">J</div>
-                  <div class="key" data-ascii="75">K</div>
-                  <div class="key" data-ascii="76">L</div>
-                </div>
-                <div class="row">
-                  <div class="key shift active special">Shift</div>
-                  <div class="key" data-ascii="90">Z</div>
-                  <div class="key" data-ascii="88">X</div>
-                  <div class="key" data-ascii="67">C</div>
-                  <div class="key" data-ascii="86">V</div>
-                  <div class="key" data-ascii="66">B</div>
-                  <div class="key" data-ascii="78">N</div>
-                  <div class="key" data-ascii="77">M</div>
-                  <div class="key sym special">Sym</div>
-                </div>
-                <div class="row">
-                  <div class="key space" data-ascii="32">Space</div>
-                </div>
-              </div>
-              <div class="keyboard keyboard-sym" style="display:none">
-                <div class="row">
-                  <div class="key" data-ascii="126">~</div>
-                  <div class="key" data-ascii="33">!</div>
-                  <div class="key" data-ascii="64">@</div>
-                  <div class="key" data-ascii="35">#</div>
-                  <div class="key" data-ascii="36">$</div>
-                  <div class="key" data-ascii="37">%</div>
-                  <div class="key" data-ascii="94">^</div>
-                  <div class="key" data-ascii="38">&amp;</div>
-                  <div class="key" data-ascii="42">*</div>
-                  <div class="key" data-ascii="61">=</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="45">-</div>
-                  <div class="key" data-ascii="95">_</div>
-                  <div class="key" data-ascii="43">+</div>
-                  <div class="key" data-ascii="92">\</div>
-                  <div class="key" data-ascii="40">(</div>
-                  <div class="key" data-ascii="41">)</div>
-                  <div class="key" data-ascii="91">[</div>
-                  <div class="key" data-ascii="93">]</div>
-                  <div class="key" data-ascii="123">{</div>
-                  <div class="key" data-ascii="125">}</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="124">|</div>
-                  <div class="key" data-ascii="59">;</div>
-                  <div class="key" data-ascii="58">:</div>
-                  <div class="key" data-ascii="39">'</div>
-                  <div class="key" data-ascii="34">"</div>
-                  <div class="key" data-ascii="44">,</div>
-                  <div class="key" data-ascii="46">.</div>
-                </div>
-                <div class="row">
-                  <div class="key" data-ascii="60">&lt;</div>
-                  <div class="key" data-ascii="62">&gt;</div>
-                  <div class="key" data-ascii="47">/</div>
-                  <div class="key" data-ascii="63">?</div>
-                  <div class="key sym special">ABC</div>
-                </div>
-                <div class="row">
-                  <div class="key space" data-ascii="32">Space</div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-          <section id="lockPassCancel" class="wifi-cancel"><img src="images/cancel.png" /></section>
-        </section>
-      </section>
 
       <section id="wifi-viewport" class="viewport wifi_state" data-tr-section="wifi">
         <section class="main">
@@ -204,7 +33,7 @@
           </div>
         </section>
         <section class="bottom-bar">
-          <p class="feedback js-i18n">The Bitcoin Machine</p>
+          <p class="feedback js-i18n">Lamassu Cryptomat</p>
         </section>
         <section id="wifiListCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -380,25 +209,11 @@
         </section>
       </section>
 
-      <section class="viewport idle_state" data-tr-section="idle">
-        <section class="main">
-          <h1 id="hey" class="js-i18n">Hello.</h1>
-          <section id="start-buttons" class="start-buttons">
-            <div class="circle-button"><span class="js-i18n">START</span></div>
-          </section>
-          <p id="tap" class="js-i18n">Tap to buy bitcoins in 3 steps</p>
-        </section>
-        <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
-          <span id="digital-change-language-button" class="button">Change language</span>
-        </section>
-      </section>
-
       <section class="viewport dual_idle_state" data-tr-section="dual-idle">
         <section class="main">
           <section class="sides">
             <section class="digital-section start">
-              <div id="want_bitcoin" class="circle-button"><span class="js-i18n">I want<br/>Bitcoin</span></div>
+              <div id="want_bitcoin" class="circle-button"><span class="js-i18n">I want<br/>%s</span></div>
             </section>
             <section class="fiat-section start">
               <div id="want_cash" class="circle-button"><span class="js-i18n">I want<br/>Cash</span></div>
@@ -430,7 +245,7 @@
           <img src="images/scan-id.png" width="453" height="606" />
         </div>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
+          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading %s price..</p>
         </section>
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -747,7 +562,7 @@
       <section class="viewport scan_address_state digital-side" data-tr-section="scan-address">
         <section class="main">
           <section id="scan-instructions" class="primary-side">
-            <h1 id="scan-address" class="js-i18n">Scan your Bitcoin address</h1>
+            <h1 id="scan-address" class="js-i18n">Scan your %s address</h1>
             <p id="hold-qr-code">
               <span class="js-i18n">Hold your QR code up to the scan window to proceed.</span>
             </p>
@@ -758,7 +573,7 @@
           </div>
         </section>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading Bitcoin price...</p>
+          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading %s price...</p>
         </section>
         <section id="scanCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -767,12 +582,12 @@
         <section class="main">
           <section class="primary-side">
             <h1 id="insert-bill" class="js-i18n">Insert a bill</h1>
-            <p class="send-to-your-address"><span class="js-i18n">Your bitcoins will be sent to:</span><br/>
-            <span class="bitcoin-address"></span></p>
+            <p class="send-to-your-address"><span class="js-i18n">Your %s will be sent to:</span><br/>
+            <span class="crypto-address"></span></p>
             <p class="btc-rate">
               <span class="btc reverse-exchange-rate i18n-latin">
                 <span class="btc-amount i18n-latin"></span>
-                <span class="bitcoin-units i18n-latin">BTC</span>
+                <span class="crypto-units i18n-latin"></span>
               </span>
               <span id="fiat-inserted"></span>
             </p>
@@ -786,7 +601,7 @@
           </section>
         </section>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc js-send-bitcoins-enable">Loading Bitcoin price...</p>
+          <p class="js-i18n js-i18n-current-crypto-price current-btc js-send-bitcoins-enable"></p>
           <p class="current-btc js-processing-bill js-send-bitcoins-disable"></p>
         </section>
         <section id="insertBillCancel" class="cancel"><img src="images/cancel.png" /></section>
@@ -797,7 +612,7 @@
           <section id="send-side">
             <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
             <div id="send-coins" class="send-coins circle-button js-send-bitcoins-enable">
-              <span class="js-i18n js-send-bitcoins-enable">SEND BITCOINS</span>
+              <span class="js-i18n js-send-bitcoins-enable">SEND %s</span>
             </div>
             <div class="send-coins circle-button js-send-bitcoins-disable">
               <div class="js-send-bitcoins-disable spinner">
@@ -828,9 +643,9 @@
               <p>
                 <span class="total-btc-rec total">
                   <span class="btc-amount total-btc amount i18n-latin"></span>
-                  <span class="bitcoin-units i18n-latin">BTC</span>
+                  <span class="crypto-units i18n-latin"></span>
                 </span><br/>
-                <span class="js-i18n">total bitcoins purchased</span>
+                <span class="js-i18n">total %s purchased</span>
               </p>
             </div>
           </section>
@@ -848,14 +663,14 @@
               <p>
                 <span class="total-btc-rec total i18n-latin">
                 <span class="btc-amount total-btc amount i18n-latin"></span>
-                <span class="bitcoin-units i18n-latin">BTC</span>
+                <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
-                <span class="js-i18n">total bitcoins purchased</span>
+                <span class="js-i18n">total %s purchased</span>
               </p>
             </div>
-            <p><span class="js-i18n">Your bitcoins are on their way to:</span><br/>
-            <span class="bitcoin-address">1Kjrv5PrQQaArvQc2B3D72J7zEGDJFBi5A</span></p>
+            <p><span class="js-i18n">Your %s are on their way to:</span><br/>
+            <span class="crypto-address"></span></p>
           </section>
           <section class="qr-section">
             <img class="qr-frame" src="images/qr_code.png" />
@@ -877,14 +692,14 @@
               <p>
                 <span class="total-btc-rec total i18n-latin">
                 <span class="btc-amount total-btc amount i18n-latin"></span>
-                <span class="bitcoin-units i18n-latin">BTC</span>
+                <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
-                <span class="js-i18n">total bitcoins purchased</span>
+                <span class="js-i18n">total %s purchased</span>
               </p>
             </div>
-            <p><span class="js-i18n">Your bitcoins are on their way to:</span><br/>
-            <span class="bitcoin-address">1Kjrv5PrQQaArvQc2B3D72J7zEGDJFBi5A</span></p>
+            <p><span class="js-i18n">Your %s are on their way to:</span><br/>
+            <span class="crypto-address"></span></p>
           </section>
           <section class="qr-section">
             <img class="qr-frame" src="images/qr_code.png" />
@@ -975,7 +790,7 @@
         <section class="main">
           <section class="top">
             <section class="content">
-              <h1 class="sorry js-i18n">The Bitcoin Machine</h1>
+              <h1 class="sorry js-i18n">Lamassu Cryptomat</h1>
             </section>
           </section>
           <section class="bottom">
@@ -1000,7 +815,7 @@
         <section class="main">
           <section class="top">
             <section class="content">
-                <h1 class="js-i18n">We're all out of bitcoins!</h1>
+                <h1 class="js-i18n">We're all out of %s!</h1>
                 <p><strong class="js-i18n">Please ask for assistance.</strong></p>
                 <div class="actions">
                 <span id="limit-reached-ok" display="inline-block" class="button ok js-i18n">OK</span>
@@ -1046,10 +861,10 @@
         <section class="main">
           <section class="top">
             <section class="content">
-              <h1 class="js-i18n">Sending bitcoins…</h1>
+              <h1 class="js-i18n">Sending %s…</h1>
                 <div class="loader"><img src="images/loading.gif" /></div>
                <p>
-                <strong class="js-i18n">Your bitcoins are on their way to:</strong><br/>
+                <strong class="js-i18n">Your %s are on their way to:</strong><br/>
                 <span class="bitcoin-address"></span>
                </span>
                </p>
@@ -1166,7 +981,7 @@
       <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
         <section class="instructions">
           <h1 class="js-i18n">How much?</h1>
-          <h2><span class="js-i18n">1 BTC is</span> <strong class="js-fiat-rate"></strong> <span class="js-currency"/></h2>
+          <h2><span class="js-i18n">1 %s is</span> <strong class="js-fiat-rate"></strong> <span class="js-currency"/></h2>
           <section class="sums">
             <div class="fiat"><strong class="fiat-amount"></strong> <span class="js-currency"/></div>
             <div class="digital js-18n" id="js-i18n-choose-digital-amount"></div>
@@ -1191,11 +1006,11 @@
 
       <section class="viewport deposit_state fiat-side" data-tr-section="deposit">
         <section class="instructions">
-          <h1 class="js-i18n">Send Bitcoins</h1>
-          <h2 class="js-i18n">Please scan the QR code to send us your bitcoins.</h2>
+          <h1 class="js-i18n">Send %s</h1>
+          <h2 class="js-i18n">Please scan the QR code to send us your %s.</h2>
           <section class="sums">
             <div class="digital">
-              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-amount-crypto-units"></span></div>
               <div class="js-i18n">will be sent</div>
             </div>
             <div class="fiat">
@@ -1209,8 +1024,8 @@
           <div id="qr-code-deposit"></div>
           <div class="loading js-i18n">Generating address...</div>
           <div class="send-notice">
-            <span class="js-i18n">Your bitcoins will be sent to:</span><br/>
-            <span class="bitcoin-address"></span>
+            <span class="js-i18n">Your %s will be sent to:</span><br/>
+            <span class="crypto-address"></span>
           </div>
         </section>
         <section id="depositCancel" class="cancel"><img src="images/cancel.png" /></section>
@@ -1218,7 +1033,7 @@
 
       <section class="viewport pending_deposit_state fiat-side" data-tr-section="pending-deposit">
         <section class="info">
-          <h1 class="js-i18n">Bitcoins received!</h1>
+          <h1 class="js-i18n">%s received!</h1>
           <section class="description">
             <p class="js-i18n">We've received your payment.</p>
             <p><strong class="js-i18n">Authorizing...</strong></p>
@@ -1252,8 +1067,8 @@
         <section class="info">
           <h1 class="js-i18n">Nothing yet...</h1>
           <section class="description">
-            <p class="js-i18n">No bitcoins are showing up.</p>
-            <p><strong class="js-i18n">Have you sent the bitcoins yet?</strong></p>
+            <p class="js-i18n">No %s are showing up.</p>
+            <p><strong class="js-i18n">Have you sent the %s yet?</strong></p>
           </section>
           <section class="actions">
             <span class="button js-i18n" id="deposit-timeout-sent-yes">Yes, I have</span>
@@ -1275,7 +1090,7 @@
           <h1 class="js-i18n">Your Receipt</h1>
           <section class="sums">
             <div class="digital">
-              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-amount-crypto-units"></span></div>
               <div class="js-i18n">were sent by you</div>
             </div>
             <div class="fiat">
@@ -1284,8 +1099,8 @@
             </div>
           </section>
           <div class="sent-coins">
-            <span class="js-i18n">Your bitcoins were sent to:</span><br/>
-            <span class="bitcoin-address"></span>
+            <span class="js-i18n">Your %s were sent to:</span><br/>
+            <span class="crypto-address"></span>
           </div>
         </section>
 
@@ -1304,7 +1119,7 @@
           <h1 class="js-i18n">Thank you!</h1>
           <section class="sums">
             <div class="digital">
-              <div class="amount"><strong class="js-amount"></strong> mBTC</div>
+              <div class="amount"><strong class="js-amount"></strong> <span class="js-amount-crypto-units"></span></div>
               <div class="js-i18n">were sent by you</div>
             </div>
             <div class="fiat">
@@ -1313,8 +1128,8 @@
             </div>
           </section>
           <div class="sent-coins">
-            <span class="js-i18n">Your bitcoins were sent to:</span><br/>
-            <span class="bitcoin-address"></span>
+            <span class="js-i18n">Your %s were sent to:</span><br/>
+            <span class="crypto-address"></span>
           </div>
         </section>
 

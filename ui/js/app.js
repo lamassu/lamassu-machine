@@ -255,13 +255,6 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid})
   })
 
-  var startButtons = document.getElementById('start-buttons')
-  touchEvent(startButtons, function (e) {
-    var startButtonJ = $(e.target).closest('.circle-button')
-    if (startButtonJ.length === 0) return
-    buttonPressed('start')
-  })
-
   var sendCoinsButton = document.getElementById('send-coins')
   touchEvent(sendCoinsButton, function () {
     setState('sending_coins')
@@ -321,7 +314,6 @@ $(document).ready(function () {
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
   setupButton('change-language-button', 'changeLanguage')
-  setupButton('digital-change-language-button', 'changeLanguage')
 
   var lastTouch = null
 
