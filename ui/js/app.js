@@ -675,7 +675,7 @@ function setSessionId (sessionId) {
 }
 
 function setBuyerAddress (address) {
-  $('.bitcoin-address').html(address)
+  $('.crypto-address').html(address)
 }
 
 function setAccepting (currentAccepting) {
@@ -744,12 +744,12 @@ function translatePage () {
   $('.js-i18n').each(function () {
     var el = $(this)
     var base = el.data('baseTranslation')
-    el.html(locale.translate(base).fetch())
+    el.html(locale.translate(base).fetch('ETH'))
   })
   $('input[placeholder]').each(function () {
     var el = $(this)
     var base = el.data('baseTranslation')
-    el.attr('placeholder', locale.translate(base).fetch())
+    el.attr('placeholder', locale.translate(base).fetch('ETH'))
   })
 
   // Adjust send coins button
@@ -830,7 +830,7 @@ function setDepositAddress (tx) {
   var bitcoins = satoshisToBitcoins(tx.satoshis)
 
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .bitcoin-address').text(tx.toAddress)
+  $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
 
   $('#qr-code-deposit').empty()
@@ -857,7 +857,7 @@ function fiatReceipt (tx) {
   var millies = satoshisToMilliBitcoins(tx.satoshis)
   $('.fiat_receipt_state .digital .js-amount').text(millies)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_receipt_state .sent-coins .bitcoin-address').text(tx.toAddress)
+  $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
 
   $('#qr-code-fiat-receipt').empty()
   $('#qr-code-fiat-receipt').qrcode({
@@ -874,7 +874,7 @@ function fiatComplete (tx) {
   var millies = satoshisToMilliBitcoins(tx.satoshis)
   $('.fiat_complete_state .digital .js-amount').text(millies)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress)
+  $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
   $('#qr-code-fiat-complete').empty()
   $('#qr-code-fiat-complete').qrcode({
