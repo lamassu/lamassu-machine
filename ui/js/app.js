@@ -339,6 +339,8 @@ $(document).ready(function () {
     buttonPressed('fiatButton', {denomination: denominationRec.denomination})
   })
 
+  $('.js-amount-crypto-units').html('ETH')
+
   initDebug()
 })
 
@@ -811,7 +813,7 @@ function fiatCredit (data) {
   manageFiatButtons(activeDenominations.activeMap)
   $('.choose_fiat_state .fiat-amount').text(fiat)
   t('choose-digital-amount',
-    locale.translate("You'll be sending %s mBTC").fetch(mbtc))
+    locale.translate("You'll be sending %s %s").fetch(mbtc, 'ETH'))
 
   reachFiatLimit(activeDenominations)
 }
