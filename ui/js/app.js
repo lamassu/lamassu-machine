@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber */
 'use strict'
 
 var currency = null
@@ -6,7 +6,7 @@ var locale = null
 var localeCode = null
 var jsLocaleCode = null  // Sometimes slightly different than localeCode
 var _primaryLocales = []
-var lastRate = null
+var lastRates = null
 
 var currentState
 
@@ -67,8 +67,7 @@ function processData (data) {
   if (data.locale) setLocale(data.locale)
   if (!locale) return
   if (data.currency) setCurrency(data.currency)
-  if (data.exchangeRate) setExchangeRate(data.exchangeRate)
-  if (data.fiatExchangeRate) setFiatExchangeRate(data.fiatExchangeRate)
+  if (data.rates) setExchangeRate(data.rates)
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
@@ -202,6 +201,8 @@ $(document).ready(function () {
         window.onmousemove =
           window.onmouseup =
             function () { return false }
+
+  BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
@@ -527,7 +528,7 @@ function setLocale (data) {
 
   locale = loadI18n(localeCode)
   try { translatePage() } catch (ex) {}
-  if (lastRate) setExchangeRate(lastRate)
+  if (lastRates) setExchangeRate(lastRates)
 }
 
 function areArraysEqual (arr1, arr2) {
@@ -650,20 +651,25 @@ function singleCurrencyUnit () {
   return formatFiat(1)
 }
 
-function setExchangeRate (rate) {
-  lastRate = rate
-  var rateStr = formatFiat(rate.xbtToFiat, 2)
-  var translated = locale.translate('Our current Bitcoin price is %s').fetch(rateStr)
+function setExchangeRate (_rates) {
+  lastRates = _rates
+  var coin = _rates.coin
+  var rates = _rates.rates
+
+  var coinUnitFactor = Math.pow(10, coin.unitScale)
+  var coinDisplayFactor = Math.pow(10, coin.displayScale)
+
+  var cashIn = new BigNumber(rates[coin.code].cashIn)
+  var cryptoToFiat = cashIn.div(coinUnitFactor)
+  var fiatToCrypto = new BigNumber(1).div(cashIn.div(coinDisplayFactor)).truncated().toString()
+
+  var rateStr = formatFiat(cryptoToFiat.round(4).toNumber(), 2)
+  var translated = locale.translate('Our current %s price is %s').fetch(coin.code, rateStr)
   $('.js-i18n-current-bitcoin-price').html(translated)
-  updateBitcoins('.reverse-exchange-rate', rate.fiatToXbt)
+  updateBitcoins('.reverse-exchange-rate', fiatToCrypto)
   var insertedText = locale.translate('per %s inserted')
     .fetch(singleCurrencyUnit())
   $('#fiat-inserted').html(insertedText)
-  $('.js-digital-rate').text(parseFloat(rate.xbtToFiat).toFixed(2))  // TODO clean up
-}
-
-function setFiatExchangeRate (rate) {
-  $('.js-fiat-rate').text(parseFloat(rate).toFixed(2))  // TODO clean up
 }
 
 function setSessionId (sessionId) {
