@@ -563,9 +563,9 @@ function setPrimaryLocales (primaryLocales) {
     var lang = lookupLocaleNames(l)
     var englishName = lang.englishName
     var nativeName = lang.nativeName
-    var li = nativeName === englishName ?
-      '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
-      '<li class="square-button" data-locale="' + l + '">' + englishName +
+    var li = nativeName === englishName
+    ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
+    : '<li class="square-button" data-locale="' + l + '">' + englishName +
       '<span class="native">' + nativeName + '</span> </li>'
     languages.append(li)
   }
@@ -631,19 +631,19 @@ function formatFiat (amount, fractionDigits) {
     case 'DKK:en-US':
     case 'SEK:en-US':
       return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-            useGrouping: true,
-            maximumFractionDigits: fractionDigits,
-            minimumFractionDigits: fractionDigits
-          }) + '</strong> ' + currency
+        useGrouping: true,
+        maximumFractionDigits: fractionDigits,
+        minimumFractionDigits: fractionDigits
+      }) + '</strong> ' + currency
     default:
       return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-            style: 'currency',
-            currency: currency,
-            currencyDisplay: 'symbol',
-            useGrouping: true,
-            maximumFractionDigits: fractionDigits,
-            minimumFractionDigits: fractionDigits
-          }) + '</strong>'
+        style: 'currency',
+        currency: currency,
+        currencyDisplay: 'symbol',
+        useGrouping: true,
+        maximumFractionDigits: fractionDigits,
+        minimumFractionDigits: fractionDigits
+      }) + '</strong>'
   }
 }
 
@@ -718,9 +718,9 @@ function sendOnly (reason) {
 
   t('or', '!')
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
-  var reasonText = reason === 'transactionLimit' ?
-    'Transaction limit reached.' :
-    "We're out of bitcoins."
+  var reasonText = reason === 'transactionLimit'
+  ? 'Transaction limit reached.'
+  : "We're out of bitcoins."
   t('limit-reached', locale.translate(reasonText).fetch())
   t('limit-description',
     locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch())
@@ -770,14 +770,12 @@ function loadI18n (localeCode) {
   var messages = locales[localeCode] || locales['en-US']
 
   return new Jed({
-      'missing_key_callback': function () {},
-      'locale_data': {
-        'messages': messages
-      }
-    })
+    'missing_key_callback': function () {},
+    'locale_data': {
+      'messages': messages
+    }
+  })
 }
-
-function initDebug () {}
 
 function reachFiatLimit (rec) {
   var msg = null
