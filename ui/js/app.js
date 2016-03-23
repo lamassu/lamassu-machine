@@ -71,7 +71,7 @@ function processData (data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
-    setCredit(data.credit.fiat, data.credit.bitcoins, lastBill)
+    setCredit(data.credit.fiat, data.credit.cryptoUnits, lastBill, data.credit.coin)
   }
   if (data.sessionId) setSessionId(data.sessionId)
   if (data.wifiList) setWifiList(data.wifiList)
@@ -136,8 +136,8 @@ function processData (data) {
       setState('insert_bills')
       break
     case 'acceptingFirstBill':
-      $('.js-send-bitcoins-disable').hide()
-      $('.js-send-bitcoins-enable').show()
+      $('.js-send-crypto-disable').hide()
+      $('.js-send-crypto-enable').show()
       setState('insert_bills')
       break
     case 'acceptingBills':
@@ -152,10 +152,10 @@ function processData (data) {
     case 'rejectedBill':
       setAccepting(false)
       break
-    case 'bitcoinTransferPending':
+    case 'cryptoTransferPending':
       setState('sending_coins')
       break
-    case 'bitcoinTransferComplete':
+    case 'cryptoTransferComplete':
       confirmBeep.play()
       setState('completed')
       break
@@ -259,7 +259,7 @@ $(document).ready(function () {
   var sendCoinsButton = document.getElementById('send-coins')
   touchEvent(sendCoinsButton, function () {
     setState('sending_coins')
-    buttonPressed('sendBitcoins')
+    buttonPressed('sendCoins')
   })
 
   var insertBillCancelButton = document.getElementById('insertBillCancel')
@@ -283,7 +283,7 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
-  setupButton('want_bitcoin', 'start')
+  setupButton('cash-in', 'start')
   setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
@@ -582,21 +582,24 @@ function setCurrency (data) {
   $('.js-currency').text(currency)
 }
 
-function setCredit (fiat, bitcoins, lastBill) {
+function setCredit (fiat, crypto, lastBill, coin) {
   // TODO: this should go in brain.js
   if (currentState === 'insert_bills') setState('insert_more_bills')
 
   $('.total-deposit').html(formatFiat(fiat))
-  updateBitcoins('.total-btc-rec', bitcoins)
+  var scale = Math.pow(10, coin.displayScale)
+  var cryptoAmount = new BigNumber(crypto).div(scale).round(3).toNumber()
+  var cryptoUnit = coin.displayCode
+  updateCrypto('.total-crypto-rec', cryptoAmount, cryptoUnit)
 
   var inserted = lastBill
   ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
-  : locale.translate('The Bitcoin Machine').fetch()
+  : locale.translate('Lamassu Cryptomat').fetch()
 
   $('.js-processing-bill').html(inserted)
 
-  $('.js-send-bitcoins-disable').hide()
-  $('.js-send-bitcoins-enable').show()
+  $('.js-send-crypto-disable').hide()
+  $('.js-send-crypto-enable').show()
 }
 
 function setupCartridges (_cartridges) {
@@ -608,20 +611,16 @@ function setupCartridges (_cartridges) {
   }
 }
 
-function updateBitcoins (selector, bitcoins) {
-  var units = 'mBTC'
-  var adjustedValue = bitcoins * 1000
-  $(selector).find('.btc-amount').html(formatBitcoins(adjustedValue))
-  $(selector).find('.bitcoin-units').html(units)
+function updateCrypto (selector, cryptoAmount, cryptoUnits) {
+  $(selector).find('.crypto-amount').html(formatCrypto(cryptoAmount))
+  $(selector).find('.crypto-units').html(cryptoUnits)
 }
 
-function formatBitcoins (amount) {
-  var log = Math.floor(Math.log(amount) / Math.log(10))
-  var digits = (log > 0) ? 2 : 2 - log
+function formatCrypto (amount) {
   return amount.toLocaleString(jsLocaleCode, {
     useGrouping: true,
-    maximumFractionDigits: digits,
-    minimumFractionDigits: digits
+    maximumFractionDigits: 3,
+    minimumFractionDigits: 3
   })
 }
 
@@ -659,14 +658,14 @@ function setExchangeRate (_rates) {
   var coinUnitFactor = Math.pow(10, coin.unitScale)
   var coinDisplayFactor = Math.pow(10, coin.displayScale)
 
-  var cashIn = new BigNumber(rates[coin.code].cashIn)
-  var cryptoToFiat = cashIn.div(coinUnitFactor)
-  var fiatToCrypto = new BigNumber(1).div(cashIn.div(coinDisplayFactor)).truncated().toString()
+  var cashIn = new BigNumber(rates.cashIn)
+  var cryptoToFiat = cashIn.mul(coinUnitFactor)
+  var fiatToCrypto = new BigNumber(1).div(cashIn.mul(coinDisplayFactor)).round(3).toString()
 
   var rateStr = formatFiat(cryptoToFiat.round(4).toNumber(), 2)
-  var translated = locale.translate('Our current %s price is %s').fetch(coin.code, rateStr)
-  $('.js-i18n-current-bitcoin-price').html(translated)
-  updateBitcoins('.reverse-exchange-rate', fiatToCrypto)
+  var translated = locale.translate('Our current %s price is %s').fetch(coin.unitCode, rateStr)
+  $('.js-i18n-current-crypto-price').html(translated)
+  updateCrypto('.reverse-exchange-rate', fiatToCrypto, coin.displayCode)
   var insertedText = locale.translate('per %s inserted')
     .fetch(singleCurrencyUnit())
   $('#fiat-inserted').html(insertedText)
@@ -706,8 +705,8 @@ function highBill (highestBill, reason) {
 
 function readingBill (bill) {
   $('.js-processing-bill').html('Processing ' + formatFiat(bill) + '...')
-  $('.js-send-bitcoins-enable').hide()
-  $('.js-send-bitcoins-disable').show()
+  $('.js-send-crypto-enable').hide()
+  $('.js-send-crypto-disable').show()
 }
 
 function sendOnly (reason) {
@@ -720,10 +719,10 @@ function sendOnly (reason) {
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
   var reasonText = reason === 'transactionLimit'
   ? 'Transaction limit reached.'
-  : "We're out of bitcoins."
-  t('limit-reached', locale.translate(reasonText).fetch())
+  : "We're out of %s."
+  t('limit-reached', locale.translate(reasonText).fetch('ETH'))
   t('limit-description',
-    locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch())
+    locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
   $('#insert-another').css({'display': 'none'})
   $('#limit-reached-section').css({'display': 'block'})
 }
@@ -820,16 +819,6 @@ function fiatCredit (data) {
     locale.translate("You'll be sending %s %s").fetch(mbtc, 'ETH'))
 
   reachFiatLimit(activeDenominations)
-}
-
-function satoshisToBitcoins (satoshis) {
-  var bitcoins = satoshis / 1e8
-  return Number(bitcoins.toFixed(8)).toString()
-}
-
-function satoshisToMilliBitcoins (satoshis) {
-  var millies = satoshis / 1e5
-  return Number(millies.toFixed(5)).toString()
 }
 
 function setDepositAddress (tx) {

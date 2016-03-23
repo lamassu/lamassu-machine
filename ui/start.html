@@ -214,7 +214,7 @@
         <section class="main">
           <section class="sides">
             <section class="digital-section start">
-              <div id="want_bitcoin" class="circle-button"><span class="js-i18n">Cash<br/>In</span></div>
+              <div id="cash-in" class="circle-button"><span class="js-i18n">Cash<br/>In</span></div>
             </section>
             <section class="fiat-section start">
               <div id="want_cash" class="circle-button"><span class="js-i18n">Cash<br/>Out</span></div>
@@ -246,7 +246,7 @@
           <img src="images/scan-id.png" width="453" height="606" />
         </div>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading %s price..</p>
+          <p class="js-i18n js-i18n-current-crypto-price current-crypto">Loading %s price..</p>
         </section>
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -574,7 +574,7 @@
           </div>
         </section>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-bitcoin-price current-btc">Loading %s price...</p>
+          <p class="js-i18n js-i18n-current-crypto-price current-crypto">Loading %s price...</p>
         </section>
         <section id="scanCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -585,9 +585,9 @@
             <h1 id="insert-bill" class="js-i18n">Insert a bill</h1>
             <p class="send-to-your-address"><span class="js-i18n">Your %s will be sent to:</span><br/>
             <span class="crypto-address"></span></p>
-            <p class="btc-rate">
-              <span class="btc reverse-exchange-rate i18n-latin">
-                <span class="btc-amount i18n-latin"></span>
+            <p class="crypto-rate">
+              <span class="crypto reverse-exchange-rate i18n-latin">
+                <span class="crypto-amount i18n-latin"></span>
                 <span class="crypto-units i18n-latin"></span>
               </span>
               <span id="fiat-inserted"></span>
@@ -602,8 +602,8 @@
           </section>
         </section>
         <section class="bottom-bar">
-          <p class="js-i18n-current-crypto-price current-btc js-send-bitcoins-enable"></p>
-          <p class="current-btc js-processing-bill js-send-bitcoins-disable"></p>
+          <p class="js-i18n-current-crypto-price current-crypto js-send-crypto-enable"></p>
+          <p class="current-crypto js-processing-bill js-send-crypto-disable"></p>
         </section>
         <section id="insertBillCancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -612,11 +612,11 @@
         <section class="main">
           <section id="send-side">
             <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
-            <div id="send-coins" class="send-coins circle-button js-send-bitcoins-enable">
-              <span class="js-i18n js-send-bitcoins-enable">SEND COINS</span>
+            <div id="send-coins" class="send-coins circle-button js-send-crypto-enable">
+              <span class="js-i18n js-send-crypto-enable">SEND COINS</span>
             </div>
-            <div class="send-coins circle-button js-send-bitcoins-disable">
-              <div class="js-send-bitcoins-disable spinner">
+            <div class="send-coins circle-button js-send-crypto-disable">
+              <div class="js-send-crypto-disable spinner">
                 <div class="bounce1"></div>
                 <div class="bounce2"></div>
                 <div class="bounce3"></div>
@@ -642,8 +642,8 @@
                 <span class="js-i18n">deposited so far</span>
               </p>
               <p>
-                <span class="total-btc-rec total">
-                  <span class="btc-amount total-btc amount i18n-latin"></span>
+                <span class="total-crypto-rec total">
+                  <span class="crypto-amount total-crypto amount i18n-latin"></span>
                   <span class="crypto-units i18n-latin"></span>
                 </span><br/>
                 <span class="js-i18n">total %s purchased</span>
@@ -662,8 +662,8 @@
             <h1 class="thanks" class="js-i18n">Thank you!</h1>
             <div class="deposit-record">
               <p>
-                <span class="total-btc-rec total i18n-latin">
-                <span class="btc-amount total-btc amount i18n-latin"></span>
+                <span class="total-crypto-rec total i18n-latin">
+                <span class="crypto-amount total-crypto amount i18n-latin"></span>
                 <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
@@ -680,7 +680,7 @@
           </section>
         </section>
         <section class="bottom-bar">
-          <p class="current-btc js-i18n">Tap anywhere when you're done.</p>
+          <p class="current-crypto js-i18n">Tap anywhere when you're done.</p>
         </section>
       </section>
 
@@ -691,8 +691,8 @@
             <p class="relax js-i18n">Our Internet was down for a bit. You'll get all your coins but you might receive them in two separate batches.</p>
             <div class="deposit-record">
               <p>
-                <span class="total-btc-rec total i18n-latin">
-                <span class="btc-amount total-btc amount i18n-latin"></span>
+                <span class="total-crypto-rec total i18n-latin">
+                <span class="crypto-amount total-crypto amount i18n-latin"></span>
                 <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
@@ -709,7 +709,7 @@
           </section>
         </section>
         <section class="bottom-bar">
-          <p class="current-btc js-i18n">Tap anywhere when you're done.</p>
+          <p class="current-crypto js-i18n">Tap anywhere when you're done.</p>
         </section>
       </section>
 
@@ -900,7 +900,7 @@
           <section class="top">
             <section class="content">
               <h1>Congratulations!</h1>
-               <p class="important">Welcome to your new Bitcoin Machine.</p>
+               <p class="important">Welcome to your new Lamassu Cryptomat.</p>
                <p>
                Press <strong>INIT</strong> to generate a secure cryptographic certificate for your machine.<br />
                This could take about fifteen minutes.

@@ -390,25 +390,25 @@ body  { margin: 0;}
   font-family: 'Source Code Pro', monospace; font-size: 90%;
 }
 
-.btc-rate {
+.crypto-rate {
   font-size: 30px;
   color: #5F5F55;
   line-height: 42px;
   margin-top: 2em;
 }
 
-.btc {
+.crypto {
   font-size: 48px;
   color: #FFFFFF;
   padding-right: 20px;
 }
 
-.i18n-rtl .btc {
+.i18n-rtl .crypto {
   padding-right: 0;
   padding-left: 20px;
 }
 
-.btc-amount {
+.crypto-amount {
   font-weight: 900;
 }
 
@@ -439,13 +439,13 @@ body  { margin: 0;}
   padding: 30px;
 }
 
-.js-send-bitcoins-disable .spinner {
+.js-send-crypto-disable .spinner {
   display: none;
   margin: 0;
   width: 100px;
 }
 
-.js-send-bitcoins-disable .spinner > div {
+.js-send-crypto-disable .spinner > div {
   background-color: #0e4160;
 }
 
@@ -764,7 +764,7 @@ body  { margin: 0;}
   position: absolute; bottom: 0px;
 }
 
-.current-btc {
+.current-crypto {
   font-size: 34px;
   color: #D0D0C8;
   line-height: 47px;
@@ -772,9 +772,9 @@ body  { margin: 0;}
   top: 10;
   left: 60;
 }
-.i18n-rtl .current-btc { right: 60px; left: auto; }
+.i18n-rtl .current-crypto { right: 60px; left: auto; }
 
-.bitcoin-machine {
+.cryptomat {
   font-weight: 200;
   font-size: 34px;
   color: #D0D0C8;
@@ -784,9 +784,9 @@ body  { margin: 0;}
   right: 60px;
 }
 
-.i18n-rtl .bitcoin-machine { left: 60px; right: auto; }
+.i18n-rtl .cryptomat { left: 60px; right: auto; }
 
-.btc-price {
+.crypto-price {
   font-weight: bold;
 }
 
