@@ -13,3 +13,5 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
 - cashOut
 - add in selection screen
 - better handling of big price swings as far as precision
+- use only BigNumber nums for cashIn
+- crypto url

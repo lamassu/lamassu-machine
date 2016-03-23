@@ -699,8 +699,11 @@ function setExchangeRate (_rates) {
   var coinDisplayFactor = Math.pow(10, coin.displayScale)
 
   var cashIn = new BigNumber(rates.cashIn)
+  var cashOut = new BigNumber(rates.cashOut)
+
   var cryptoToFiat = cashIn.mul(coinUnitFactor)
   var fiatToCrypto = new BigNumber(1).div(cashIn.mul(coinDisplayFactor)).round(3).toString()
+  var cashOutCryptoToFiat = formatCrypto(cashOut.mul(coinUnitFactor).round(4).toNumber())
 
   var rateStr = formatFiat(cryptoToFiat.round(4).toNumber(), 2)
   var translated = locale.translate('Our current %s price is %s').fetch(coin.unitCode, rateStr)
@@ -709,6 +712,11 @@ function setExchangeRate (_rates) {
   var insertedText = locale.translate('per %s inserted')
     .fetch(singleCurrencyUnit())
   $('#fiat-inserted').html(insertedText)
+
+  var localizedCashOutCryptoToFiat =
+    locale.translate('1 %s is %s %s').fetch(coin.unitCode, cashOutCryptoToFiat, currency)
+  $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
+  $('.js-crypto-display-units').text(coin.displayCode)
 }
 
 function setSessionId (sessionId) {
@@ -842,12 +850,24 @@ function manageFiatButtons (activeDenominations) {
   }
 }
 
+function displayCrypto (cryptoUnits, coin) {
+  var scale = Math.pow(10, coin.displayScale)
+  var cryptoAmount = new BigNumber(cryptoUnits).div(scale).round(3).toNumber()
+  var cryptoDisplay = formatCrypto(cryptoAmount)
+
+  return cryptoDisplay
+}
+
 function fiatCredit (data) {
   var credit = data.credit
+  var coin = credit.coin
   var activeDenominations = data.activeDenominations
   var fiat = credit.fiat
-  var mbtc = credit.satoshis / 1e5
-  if (mbtc === 0) $('#js-i18n-choose-digital-amount').hide()
+  var cryptoUnits = new BigNumber(credit.cryptoUnits)
+  var cryptoDisplay = displayCrypto(cryptoUnits, coin)
+  var cryptoUnit = coin.displayCode
+
+  if (cryptoUnits.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
   if (fiat === 0) $('#cash-out-button').hide()
@@ -856,13 +876,14 @@ function fiatCredit (data) {
   manageFiatButtons(activeDenominations.activeMap)
   $('.choose_fiat_state .fiat-amount').text(fiat)
   t('choose-digital-amount',
-    locale.translate("You'll be sending %s %s").fetch(mbtc, 'ETH'))
+    locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoUnit))
 
   reachFiatLimit(activeDenominations)
 }
 
 function setDepositAddress (tx) {
-  var bitcoins = satoshisToBitcoins(tx.satoshis)
+  var scale = Math.pow(10, tx.coin.unitScale)
+  var crypto = new BigNumber(tx.cryptoUnits).div(scale).toString()
 
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
@@ -873,13 +894,15 @@ function setDepositAddress (tx) {
     render: 'canvas',
     width: 275,
     height: 275,
-    text: 'bitcoin:' + tx.toAddress + '?amount=' + bitcoins
+    text: 'bitcoin:' + tx.toAddress + '?amount=' + crypto
   })
 }
 
 function deposit (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.deposit_state .digital .js-amount').text(millies)
+  var coin = tx.coin
+  var display = displayCrypto(tx.cryptoUnits, coin)
+
+  $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
   $('.deposit_state .send-notice').hide()
   $('#qr-code-deposit').empty()
@@ -889,8 +912,10 @@ function deposit (tx) {
 }
 
 function fiatReceipt (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.fiat_receipt_state .digital .js-amount').text(millies)
+  var coin = tx.coin
+  var display = displayCrypto(tx.cryptoUnits, coin)
+
+  $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
 
@@ -906,8 +931,10 @@ function fiatReceipt (tx) {
 }
 
 function fiatComplete (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.fiat_complete_state .digital .js-amount').text(millies)
+  var coin = tx.coin
+  var display = displayCrypto(tx.cryptoUnits, coin)
+
+  $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
