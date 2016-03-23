@@ -616,34 +616,74 @@ function updateCrypto (selector, cryptoAmount, cryptoUnits) {
   $(selector).find('.crypto-units').html(cryptoUnits)
 }
 
-function formatCrypto (amount) {
-  return amount.toLocaleString(jsLocaleCode, {
+function lookupDecimalChar (localeCode) {
+  var num = 1.1
+  var localized = num.toLocaleString(jsLocaleCode, {
+    useGrouping: true,
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 1
+  })
+
+  return localized[1]
+}
+
+function splitNumber (localize, localeCode) {
+  var decimalChar = lookupDecimalChar(localeCode)
+  var split = localize.split(decimalChar)
+
+  if (split.length === 1) {
+    return ['<span class="integer">', split[0], '</span>'].join('')
+  }
+
+  return [
+    '<span class="integer">', split[0], '</span><span class="decimal-char">',
+    decimalChar, '</span><span class="decimal">', split[1], '</span>'
+  ].join('')
+}
+
+function formatNumber (num) {
+  var localized = num.toLocaleString(jsLocaleCode, {
     useGrouping: true,
     maximumFractionDigits: 3,
     minimumFractionDigits: 3
   })
+
+  return splitNumber(localized, jsLocaleCode)
+}
+
+function formatCrypto (amount) {
+  return formatNumber(amount)
 }
 
 function formatFiat (amount, fractionDigits) {
   if (!fractionDigits) fractionDigits = 0
+  var localized = null
+  var _localized = null
+
   switch (currency + ':' + jsLocaleCode) {
     case 'DKK:en-US':
     case 'SEK:en-US':
-      return '<strong>' + amount.toLocaleString(jsLocaleCode, {
+      _localized = amount.toLocaleString(jsLocaleCode, {
         useGrouping: true,
         maximumFractionDigits: fractionDigits,
         minimumFractionDigits: fractionDigits
-      }) + '</strong> ' + currency
+      })
+      localized = splitNumber(_localized, jsLocaleCode) + currency
+      break
     default:
-      return '<strong>' + amount.toLocaleString(jsLocaleCode, {
+      _localized = amount.toLocaleString(jsLocaleCode, {
         style: 'currency',
         currency: currency,
         currencyDisplay: 'symbol',
         useGrouping: true,
         maximumFractionDigits: fractionDigits,
         minimumFractionDigits: fractionDigits
-      }) + '</strong>'
+      })
+      localized = splitNumber(_localized, jsLocaleCode)
+      break
   }
+
+  return localized
 }
 
 function singleCurrencyUnit () {

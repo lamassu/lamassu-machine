@@ -408,10 +408,6 @@ body  { margin: 0;}
   padding-left: 20px;
 }
 
-.crypto-amount {
-  font-weight: 900;
-}
-
 .bill-slot { position: absolute; margin: 50px 100px; }
 .slot {
   position: absolute; top: 0; left: 0;
@@ -1670,4 +1666,18 @@ body  { margin: 0;}
   margin-right: 0px;
   background-size: contain;
   border: 4px solid rgba(0, 0, 0, .05);
+}
+
+.decimal {
+  font-weight: normal;
+  font-size: 65%;
+}
+
+.integer {
+  font-weight: 900;
+}
+
+.decimal-char {
+  font-weight: normal;
+  font-size: 65%;
 }
