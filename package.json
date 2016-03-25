@@ -9,6 +9,7 @@
     "boom": "~2.6.1",
     "bunyan": "~0.22.1",
     "clim": "*",
+    "ethereumjs-icap": "^0.3.0",
     "findit": "~1.1.0",
     "fs-extra": "^0.14.0",
     "fstream": "~0.1.24",

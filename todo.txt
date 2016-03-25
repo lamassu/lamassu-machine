@@ -9,9 +9,7 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
   - need to know display unit
   - truncate to max (3 past dot or 3 digits after 0 if less than 1)
 
-- delay in loading price
-- cashOut
-- add in selection screen
-- better handling of big price swings as far as precision
+- unhardcode all ETH
 - use only BigNumber nums for cashIn
-- crypto url
+- better handling of big price swings as far as precision
+- delay in loading price - probably goes away after selection screen

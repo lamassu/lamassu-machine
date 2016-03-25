@@ -1,0 +1,1 @@
+browserify lib/browser/url-utils.js -o ui/js/url-utils.js

@@ -1681,3 +1681,16 @@ body  { margin: 0;}
   font-weight: normal;
   font-size: 65%;
 }
+
+.coin-selection {
+  text-align: center;
+  width: 100%;
+  font-size: 300%;
+  font-weight: bold;
+  margin-top: 5em;
+  list-style: none;
+}
+
+.coin {
+  margin-bottom: 3em;
+}

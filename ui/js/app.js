@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, cryptoUrl */
 'use strict'
 
 var currency = null
@@ -286,6 +286,14 @@ $(document).ready(function () {
   setupButton('cash-in', 'start')
   setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
+
+  var button = document.getElementById('js-coin-selection')
+  touchEvent(button, function (e) {
+    var coinCode = e.target.dataset.coin
+    translateCoin(coinCode)
+    buttonPressed('chooseCoin', coinCode)
+  })
+
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
@@ -339,8 +347,6 @@ $(document).ready(function () {
     var denominationRec = cartridges[denominationIndex]
     buttonPressed('fiatButton', {denomination: denominationRec.denomination})
   })
-
-  $('.js-amount-crypto-units').html('ETH')
 
   initDebug()
 })
@@ -757,7 +763,7 @@ function readingBill (bill) {
   $('.js-send-crypto-disable').show()
 }
 
-function sendOnly (reason) {
+function sendOnly (reason, coinCode) {
   // TODO: sendOnly should be made into its own state.
   // Remove all instances of onSendOnly when doing this.
   if (onSendOnly) return
@@ -768,7 +774,7 @@ function sendOnly (reason) {
   var reasonText = reason === 'transactionLimit'
   ? 'Transaction limit reached.'
   : "We're out of %s."
-  t('limit-reached', locale.translate(reasonText).fetch('ETH'))
+  t('limit-reached', locale.translate(reasonText).fetch(coinCode))
   t('limit-description',
     locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
   $('#insert-another').css({'display': 'none'})
@@ -782,6 +788,19 @@ function setPartialSend (sent, total) {
 
 function t (id, str) {
   $('#js-i18n-' + id).html(str)
+}
+
+function tc (className, str, coinCode) {
+  $('.js-i18n-' + className).html(locale.translate(str).fetch(coinCode))
+}
+
+function translateCoin (coinCode) {
+  tc('total-purchased', 'total %s purchased', coinCode)
+  tc('please-scan', 'Please scan the QR code to send us your %s.', coinCode)
+  tc('did-send-coins', 'Have you sent the %s yet?', coinCode)
+  tc('loading-price', 'Loading %s price...', coinCode)
+  tc('scan-address', 'Scan your %s address', coinCode)
+  tc('coins-to-address', 'Your %s will be sent to:', coinCode)
 }
 
 function initTranslatePage () {
@@ -799,12 +818,12 @@ function translatePage () {
   $('.js-i18n').each(function () {
     var el = $(this)
     var base = el.data('baseTranslation')
-    el.html(locale.translate(base).fetch('ETH'))
+    el.html(locale.translate(base).fetch())
   })
   $('input[placeholder]').each(function () {
     var el = $(this)
     var base = el.data('baseTranslation')
-    el.attr('placeholder', locale.translate(base).fetch('ETH'))
+    el.attr('placeholder', locale.translate(base).fetch())
   })
 
   // Adjust send coins button
@@ -883,18 +902,19 @@ function fiatCredit (data) {
 
 function setDepositAddress (tx) {
   var scale = Math.pow(10, tx.coin.unitScale)
-  var crypto = new BigNumber(tx.cryptoUnits).div(scale).toString()
+  var cryptoAmount = new BigNumber(tx.cryptoUnits).div(scale).toString()
 
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
 
   $('#qr-code-deposit').empty()
+  var url = cryptoUrl(tx.coin.unitCode, tx.toAddress, cryptoAmount)
   $('#qr-code-deposit').qrcode({
     render: 'canvas',
     width: 275,
     height: 275,
-    text: 'bitcoin:' + tx.toAddress + '?amount=' + crypto
+    text: url
   })
 }
 

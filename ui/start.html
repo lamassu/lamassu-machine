@@ -17,6 +17,7 @@
     <script src="js/vendor/snake_case.js"></script>
     <script src="js/vendor/langmap.js"></script>
     <script src="../node_modules/bignumber.js/bignumber.min.js"></script>
+    <script src="js/url-utils.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body>
@@ -246,7 +247,7 @@
           <img src="images/scan-id.png" width="453" height="606" />
         </div>
         <section class="bottom-bar">
-          <p class="js-i18n js-i18n-current-crypto-price current-crypto">Loading %s price..</p>
+          <p class="js-i18n-loading-price js-i18n-current-crypto-price current-crypto"></p>
         </section>
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
@@ -563,7 +564,7 @@
       <section class="viewport scan_address_state digital-side" data-tr-section="scan-address">
         <section class="main">
           <section id="scan-instructions" class="primary-side">
-            <h1 id="scan-address" class="js-i18n">Scan your %s address</h1>
+            <h1 id="scan-address" class="js-i18n-scan-address"></h1>
             <p id="hold-qr-code">
               <span class="js-i18n">Hold your QR code up to the scan window to proceed.</span>
             </p>
@@ -583,7 +584,7 @@
         <section class="main">
           <section class="primary-side">
             <h1 id="insert-bill" class="js-i18n">Insert a bill</h1>
-            <p class="send-to-your-address"><span class="js-i18n">Your %s will be sent to:</span><br/>
+            <p class="send-to-your-address"><span class="js-i18n-coins-to-address"></span><br/>
             <span class="crypto-address"></span></p>
             <p class="crypto-rate">
               <span class="crypto reverse-exchange-rate i18n-latin">
@@ -646,7 +647,7 @@
                   <span class="crypto-amount total-crypto amount i18n-latin"></span>
                   <span class="crypto-units i18n-latin"></span>
                 </span><br/>
-                <span class="js-i18n">total %s purchased</span>
+                <span class="js-i18n-total-purchased"></span>
               </p>
             </div>
           </section>
@@ -667,7 +668,7 @@
                 <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
-                <span class="js-i18n">total %s purchased</span>
+                <span class="js-i18n-total-purchased"></span>
               </p>
             </div>
             <p><span class="js-i18n">Your coins are on their way to:</span><br/>
@@ -696,7 +697,7 @@
                 <span class="crypto-units i18n-latin"></span>
                 </span>
                 <br/>
-                <span class="js-i18n">total %s purchased</span>
+                <span class="js-i18n-total-purchased"></span>
               </p>
             </div>
             <p><span class="js-i18n">Your coins are on their way to:</span><br/>
@@ -1008,7 +1009,7 @@
       <section class="viewport deposit_state fiat-side" data-tr-section="deposit">
         <section class="instructions">
           <h1 class="js-i18n">Send Coins</h1>
-          <h2 class="js-i18n">Please scan the QR code to send us your %s.</h2>
+          <h2 class="js-i18n-please-scan"></h2>
           <section class="sums">
             <div class="digital">
               <div class="amount"><strong class="js-amount"></strong> <span class="js-crypto-display-units"></span></div>
@@ -1069,7 +1070,7 @@
           <h1 class="js-i18n">Nothing yet...</h1>
           <section class="description">
             <p class="js-i18n">No coins are showing up.</p>
-            <p><strong class="js-i18n">Have you sent the %s yet?</strong></p>
+            <p><strong class="js-i18n-did-send-coins"></strong></p>
           </section>
           <section class="actions">
             <span class="button js-i18n" id="deposit-timeout-sent-yes">Yes, I have</span>
@@ -1155,6 +1156,15 @@
           <section class="actions">
             <span class="button cancel" id="out-of-cash-ok">OK</span>
           </section>
+        </section>
+      </section>
+
+      <section class="viewport choose_coin_state" data-tr-section="choose_coin">
+        <section class="main">
+          <ul id="js-coin-selection" class="coin-selection">
+            <li class="coin button" data-coin="BTC">BTC</li>
+            <li class="coin button" data-coin="ETH">ETH</li>
+          </ul>
         </section>
       </section>
 
