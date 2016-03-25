@@ -799,7 +799,6 @@ function translateCoin (coinCode) {
   tc('total-purchased', 'total %s purchased', coinCode)
   tc('please-scan', 'Please scan the QR code to send us your %s.', coinCode)
   tc('did-send-coins', 'Have you sent the %s yet?', coinCode)
-  tc('loading-price', 'Loading %s price...', coinCode)
   tc('scan-address', 'Scan your %s address', coinCode)
   tc('coins-to-address', 'Your %s will be sent to:', coinCode)
 }
