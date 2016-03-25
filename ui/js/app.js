@@ -270,6 +270,7 @@ $(document).ready(function () {
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('wifiListCancel', 'cancelWifiList')
+  setupImmediateButton('dual-idle-cancel', 'completed')
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
@@ -322,7 +323,7 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-  setupButton('change-language-button', 'changeLanguage')
+//  setupButton('change-language-button', 'changeLanguage')
 
   var lastTouch = null
 
