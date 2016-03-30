@@ -12,6 +12,36 @@ npm install
 
 **Prerequisites**: You'll need Node.js and Ruby installed on your machine. There packages for these on most operating systems. You'll also need compiling tools. See here: https://github.com/TooTallNate/node-gyp#installation.
 
+### Mac OS X local install for testing and development
+
+```
+git clone https://github.com/lamassu/lamassu-machine.git
+cd lamassu-machine
+
+brew install nvm
+# then following brew's install notes on nvm
+nvm install 0.10
+nvm use 0.10
+rm -rf ./node_modules
+# remove jpeg and manatee from package.json
+# comment out in lib/brain.js around line 850: this._ensureRaqiaRegistration so that it goes to _idleTwoWay without requiring a raqia registration
+npm install --no-optional
+npm install mv
+
+./setup
+
+cp licenses.sample.json licenses.json
+
+# in a separate window start a fake bill validator, and use the outputted ttys number on the next command, like /dev/ttys008
+ruby fake_id003.rb
+
+node bin/lamassu-machine --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 --mockBv /dev/ttys008 --mockTrader --mockCam --mockBillDispenser
+
+open ui/start.html
+```
+
+To get a cursor comment out `body { cursor: none }` in ui/css/main.css
+
 ## Running
 
 First, run the mock bill validator in a separate terminal window:
