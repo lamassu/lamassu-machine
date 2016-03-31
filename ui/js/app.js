@@ -608,7 +608,12 @@ function setupCartridges (_cartridges) {
   cartridges = _cartridges
   for (var i = 0; i < cartridges.length; i++) {
     var cartridge = cartridges[i]
-    var denomination = cartridge.denomination
+    var denomination = cartridge.denomination.toLocaleString(jsLocaleCode, {
+            useGrouping: true,
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+          });
+    console.log(denomination);
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
   }
 }
@@ -808,7 +813,11 @@ function manageFiatButtons (activeDenominations) {
 function fiatCredit (data) {
   var credit = data.credit
   var activeDenominations = data.activeDenominations
-  var fiat = credit.fiat
+  var fiat = credit.fiat.toLocaleString(jsLocaleCode, {
+            useGrouping: true,
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+          });
   var mbtc = credit.satoshis / 1e5
   if (mbtc === 0) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
