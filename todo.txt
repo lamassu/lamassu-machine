@@ -10,3 +10,6 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
   - truncate to max (3 past dot or 3 digits after 0 if less than 1)
 
 - better handling of big price swings as far as precision
+
+- l-s: price, wallet, trading [stage 2]
+- don't do raqia at this point
