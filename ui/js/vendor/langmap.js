@@ -716,8 +716,8 @@
       englishName: "Yiddish"
     },
     'yi-DE': {
-      nativeName: "ייִדיש (German)",
-      englishName: "Yiddish (German)"
+      nativeName: "ייִדיש (Germany)",
+      englishName: "Yiddish (Germany)"
     },
     'zh-CN': {
       nativeName: "中文(简体)",
