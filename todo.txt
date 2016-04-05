@@ -1,4 +1,4 @@
-- change everything to cryptoUnits
+- change everything to cryptoAtoms
 - no full bitcoins in brain
 - truncate to reasonable precision on final price
 

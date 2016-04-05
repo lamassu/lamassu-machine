@@ -71,7 +71,7 @@ function processData (data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
-    setCredit(data.credit.fiat, data.credit.cryptoUnits, lastBill, data.credit.coin)
+    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.coin)
   }
   if (data.sessionId) setSessionId(data.sessionId)
   if (data.wifiList) setWifiList(data.wifiList)
@@ -596,8 +596,8 @@ function setCredit (fiat, crypto, lastBill, coin) {
   $('.total-deposit').html(formatFiat(fiat))
   var scale = Math.pow(10, coin.displayScale)
   var cryptoAmount = new BigNumber(crypto).div(scale).round(3).toNumber()
-  var cryptoUnit = coin.displayCode
-  updateCrypto('.total-crypto-rec', cryptoAmount, cryptoUnit)
+  var cryptoDisplayCode = coin.displayCode
+  updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
 
   var inserted = lastBill
   ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
@@ -623,9 +623,9 @@ function setupCartridges (_cartridges) {
   }
 }
 
-function updateCrypto (selector, cryptoAmount, cryptoUnits) {
+function updateCrypto (selector, cryptoAmount, cryptoDisplayCode) {
   $(selector).find('.crypto-amount').html(formatCrypto(cryptoAmount))
-  $(selector).find('.crypto-units').html(cryptoUnits)
+  $(selector).find('.crypto-units').html(cryptoDisplayCode)
 }
 
 function lookupDecimalChar (localeCode) {
@@ -874,9 +874,9 @@ function manageFiatButtons (activeDenominations) {
   }
 }
 
-function displayCrypto (cryptoUnits, coin) {
+function displayCrypto (cryptoAtoms, coin) {
   var scale = Math.pow(10, coin.displayScale)
-  var cryptoAmount = new BigNumber(cryptoUnits).div(scale).round(3).toNumber()
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(3).toNumber()
   var cryptoDisplay = formatCrypto(cryptoAmount)
 
   return cryptoDisplay
@@ -893,12 +893,12 @@ function fiatCredit (data) {
     minimumFractionDigits: 0
   })
 
-  var cryptoUnits = new BigNumber(credit.cryptoUnits)
-  var cryptoDisplay = displayCrypto(cryptoUnits, coin)
+  var cryptoAtoms = new BigNumber(credit.cryptoAtoms)
+  var cryptoDisplay = displayCrypto(cryptoAtoms, coin)
 
-  var cryptoUnit = coin.displayCode
+  var cryptoDisplayCode = coin.displayCode
 
-  if (cryptoUnits.eq(0)) $('#js-i18n-choose-digital-amount').hide()
+  if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
   if (fiat === 0) $('#cash-out-button').hide()
@@ -907,14 +907,14 @@ function fiatCredit (data) {
   manageFiatButtons(activeDenominations.activeMap)
   $('.choose_fiat_state .fiat-amount').text(fiat)
   t('choose-digital-amount',
-    locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoUnit))
+    locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode))
 
   reachFiatLimit(activeDenominations)
 }
 
 function setDepositAddress (tx) {
   var scale = Math.pow(10, tx.coin.unitScale)
-  var cryptoAmount = new BigNumber(tx.cryptoUnits).div(scale).toString()
+  var cryptoAmount = new BigNumber(tx.cryptoAtoms).div(scale).toString()
 
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
@@ -932,7 +932,7 @@ function setDepositAddress (tx) {
 
 function deposit (tx) {
   var coin = tx.coin
-  var display = displayCrypto(tx.cryptoUnits, coin)
+  var display = displayCrypto(tx.cryptoAtoms, coin)
 
   $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
@@ -945,7 +945,7 @@ function deposit (tx) {
 
 function fiatReceipt (tx) {
   var coin = tx.coin
-  var display = displayCrypto(tx.cryptoUnits, coin)
+  var display = displayCrypto(tx.cryptoAtoms, coin)
 
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
@@ -964,7 +964,7 @@ function fiatReceipt (tx) {
 
 function fiatComplete (tx) {
   var coin = tx.coin
-  var display = displayCrypto(tx.cryptoUnits, coin)
+  var display = displayCrypto(tx.cryptoAtoms, coin)
 
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
