@@ -1,4 +1,3 @@
-- change everything to cryptoAtoms
 - no full bitcoins in brain
 - truncate to reasonable precision on final price
 
@@ -13,3 +12,5 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
 
 - l-s: price, wallet, trading [stage 2]
 - don't do raqia at this point
+
+- investigate weird adding/rounding (probably because of higher precision exchange rate)

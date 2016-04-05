@@ -291,7 +291,7 @@ $(document).ready(function () {
 
   var button = document.getElementById('js-coin-selection')
   touchEvent(button, function (e) {
-    var coinCode = e.target.dataset.coinCode
+    var coinCode = e.target.dataset.coin
     translateCoin(coinCode)
     buttonPressed('chooseCoin', coinCode)
   })
