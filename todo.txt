@@ -15,3 +15,4 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
 
 - investigate weird adding/rounding (probably because of higher precision exchange rate)
 - we're out of X (for eth)
+- allow configuration of coins

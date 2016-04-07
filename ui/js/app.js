@@ -88,7 +88,7 @@ function processData (data) {
   if (data.sessionId) setSessionId(data.sessionId)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
-  if (data.sendOnly) sendOnly(data.sendOnly)
+  if (data.sendOnly) sendOnly(data.sendOnly, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo)
   if (data.cartridges) setupCartridges(data.cartridges)
@@ -791,7 +791,9 @@ function sendOnly (reason, cryptoCode) {
 
   t('or', '!')
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
-  var reasonText = reason === 'transactionLimit'
+  var reasonText = reason === 'transactionLimit' ||
+    reason === 'validatorError' ||
+    reason === 'networkDown'
   ? 'Transaction limit reached.'
   : "We're out of %s."
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
