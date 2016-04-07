@@ -7,7 +7,18 @@ var localeCode = null
 var jsLocaleCode = null  // Sometimes slightly different than localeCode
 var _primaryLocales = []
 var lastRates = null
-var coins = null
+var coins = {
+  BTC: {
+    unitScale: 8,
+    displayScale: 5,
+    displayCode: 'mBTC'
+  },
+  ETH: {
+    unitScale: 18,
+    displayScale: 15,
+    displayCode: 'mETH'
+  }
+}
 
 var currentState
 
@@ -707,7 +718,6 @@ function singleCurrencyUnit () {
 
 function setExchangeRate (_rates) {
   lastRates = _rates
-  coins = _rates.coins
   var cryptoCode = _rates.cryptoCode
   var rates = _rates.rates
 
