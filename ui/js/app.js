@@ -95,6 +95,7 @@ function processData (data) {
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
+  if (data.cryptoCode) translateCoin(data.cryptoCode)
 
   swaperoo('.js-redeem', '.js-deposit', data.redeem)
 
@@ -303,7 +304,6 @@ $(document).ready(function () {
   var button = document.getElementById('js-coin-selection')
   touchEvent(button, function (e) {
     var cryptoCode = e.target.dataset.coin
-    translateCoin(cryptoCode)
     buttonPressed('chooseCoin', cryptoCode)
   })
 

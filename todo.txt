@@ -14,5 +14,4 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
 - don't do raqia at this point
 
 - investigate weird adding/rounding (probably because of higher precision exchange rate)
-- we're out of X (for eth)
-- allow configuration of coins
+- allow configuration of coins [fix logic]
