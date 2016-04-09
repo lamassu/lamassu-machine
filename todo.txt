@@ -14,5 +14,3 @@ either base integer unit (wei, satoshi) or regular unit (btc, eth) -- integer un
 - don't do raqia at this point
 
 - investigate weird adding/rounding (probably because of higher precision exchange rate)
-- allow configuration of coins [fix logic]
-- instead of checking for idle state, use function to return whether we're idling (specifically for needsRefresh)
