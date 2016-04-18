@@ -1166,7 +1166,7 @@ body  { margin: 0;}
   color: #17c2b2;
 }
 
-#change-language-button {
+#two-way-change-language-button {
   position: absolute;
   top: 664px;
   left: 506px;
@@ -1179,12 +1179,12 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
-#change-language-button:active, #change-language-button.active {
+#two-way-change-language-button:active, #two-way-change-language-button.active {
   background-color: #eeeeee;
   border-color: #eeeeee;
 }
 
-#digital-change-language-button {
+#one-way-change-language-button {
   position: absolute;
   top: 30px;
   left: 950px;
@@ -1197,7 +1197,7 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
-#digital-change-language-button:active, #digital-change-language-button.active {
+#one-way-change-language-button:active, #one-way-change-language-button.active {
   background-color: #B9B9AC;
   border-color: #B9B9AC;
 }
@@ -1693,4 +1693,8 @@ body  { margin: 0;}
 
 .coin {
   margin-bottom: 3em;
+}
+
+#dual-idle-cancel {
+  display: none;
 }

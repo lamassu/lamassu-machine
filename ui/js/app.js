@@ -96,6 +96,7 @@ function processData (data) {
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
+  if (data.coins) handleCoins(data.coins)
 
   swaperoo('.js-redeem', '.js-deposit', data.redeem)
 
@@ -298,6 +299,7 @@ $(document).ready(function () {
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
   setupButton('cash-in', 'start')
+  setupButton('one-way-cash-in', 'start')
   setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
 
@@ -335,7 +337,8 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-//  setupButton('change-language-button', 'changeLanguage')
+  setupButton('one-way-change-language-button', 'changeLanguage')
+  setupButton('two-way-change-language-button', 'changeLanguage')
 
   var lastTouch = null
 
@@ -998,6 +1001,19 @@ function fiatComplete (tx) {
   })
 
   setState('fiat_complete')
+}
+
+function handleCoins (coins) {
+  if (coins.length === 1) {
+    $('#dual-idle-cancel').hide()
+    $('#redeem-button').show()
+    $('#two-way-change-language-button').show()
+    return
+  }
+
+  $('#dual-idle-cancel').show()
+  $('#redeem-button').hide()
+  $('#two-way-change-language-button').hide()
 }
 
 function initDebug () {}
