@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, cryptoUrl */
 'use strict'
 
 var currency = null
@@ -6,7 +6,19 @@ var locale = null
 var localeCode = null
 var jsLocaleCode = null  // Sometimes slightly different than localeCode
 var _primaryLocales = []
-var lastRate = null
+var lastRates = null
+var coins = {
+  BTC: {
+    unitScale: 8,
+    displayScale: 5,
+    displayCode: 'mBTC'
+  },
+  ETH: {
+    unitScale: 18,
+    displayScale: 15,
+    displayCode: 'mETH'
+  }
+}
 
 var currentState
 
@@ -67,23 +79,24 @@ function processData (data) {
   if (data.locale) setLocale(data.locale)
   if (!locale) return
   if (data.currency) setCurrency(data.currency)
-  if (data.exchangeRate) setExchangeRate(data.exchangeRate)
-  if (data.fiatExchangeRate) setFiatExchangeRate(data.fiatExchangeRate)
+  if (data.rates) setExchangeRate(data.rates)
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
-    setCredit(data.credit.fiat, data.credit.bitcoins, lastBill)
+    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode)
   }
   if (data.sessionId) setSessionId(data.sessionId)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
-  if (data.sendOnly) sendOnly(data.sendOnly)
+  if (data.sendOnly) sendOnly(data.sendOnly, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo)
   if (data.cartridges) setupCartridges(data.cartridges)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
+  if (data.cryptoCode) translateCoin(data.cryptoCode)
+  if (data.coins) handleCoins(data.coins)
 
   swaperoo('.js-redeem', '.js-deposit', data.redeem)
 
@@ -137,8 +150,8 @@ function processData (data) {
       setState('insert_bills')
       break
     case 'acceptingFirstBill':
-      $('.js-send-bitcoins-disable').hide()
-      $('.js-send-bitcoins-enable').show()
+      $('.js-send-crypto-disable').hide()
+      $('.js-send-crypto-enable').show()
       setState('insert_bills')
       break
     case 'acceptingBills':
@@ -153,10 +166,10 @@ function processData (data) {
     case 'rejectedBill':
       setAccepting(false)
       break
-    case 'bitcoinTransferPending':
+    case 'cryptoTransferPending':
       setState('sending_coins')
       break
-    case 'bitcoinTransferComplete':
+    case 'cryptoTransferComplete':
       confirmBeep.play()
       setState('completed')
       break
@@ -202,6 +215,8 @@ $(document).ready(function () {
         window.onmousemove =
           window.onmouseup =
             function () { return false }
+
+  BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
@@ -255,17 +270,10 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid})
   })
 
-  var startButtons = document.getElementById('start-buttons')
-  touchEvent(startButtons, function (e) {
-    var startButtonJ = $(e.target).closest('.circle-button')
-    if (startButtonJ.length === 0) return
-    buttonPressed('start')
-  })
-
   var sendCoinsButton = document.getElementById('send-coins')
   touchEvent(sendCoinsButton, function () {
     setState('sending_coins')
-    buttonPressed('sendBitcoins')
+    buttonPressed('sendCoins')
   })
 
   var insertBillCancelButton = document.getElementById('insertBillCancel')
@@ -276,6 +284,7 @@ $(document).ready(function () {
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('wifiListCancel', 'cancelWifiList')
+  setupImmediateButton('dual-idle-cancel', 'completed')
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
@@ -289,9 +298,17 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
-  setupButton('want_bitcoin', 'start')
+  setupButton('cash-in', 'start')
+  setupButton('one-way-cash-in', 'start')
   setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
+
+  var button = document.getElementById('js-coin-selection')
+  touchEvent(button, function (e) {
+    var cryptoCode = e.target.dataset.coin
+    buttonPressed('chooseCoin', cryptoCode)
+  })
+
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
@@ -320,8 +337,8 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-  setupButton('change-language-button', 'changeLanguage')
-  setupButton('digital-change-language-button', 'changeLanguage')
+  setupButton('one-way-change-language-button', 'changeLanguage')
+  setupButton('two-way-change-language-button', 'changeLanguage')
 
   var lastTouch = null
 
@@ -533,7 +550,7 @@ function setLocale (data) {
 
   locale = loadI18n(localeCode)
   try { translatePage() } catch (ex) {}
-  if (lastRate) setExchangeRate(lastRate)
+  if (lastRates) setExchangeRate(lastRates)
 }
 
 function areArraysEqual (arr1, arr2) {
@@ -568,9 +585,9 @@ function setPrimaryLocales (primaryLocales) {
     var lang = lookupLocaleNames(l)
     var englishName = lang.englishName
     var nativeName = lang.nativeName
-    var li = nativeName === englishName ?
-      '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>' :
-      '<li class="square-button" data-locale="' + l + '">' + englishName +
+    var li = nativeName === englishName
+    ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
+    : '<li class="square-button" data-locale="' + l + '">' + englishName +
       '<span class="native">' + nativeName + '</span> </li>'
     languages.append(li)
   }
@@ -587,89 +604,148 @@ function setCurrency (data) {
   $('.js-currency').text(currency)
 }
 
-function setCredit (fiat, bitcoins, lastBill) {
+function setCredit (fiat, crypto, lastBill, cryptoCode) {
   // TODO: this should go in brain.js
   if (currentState === 'insert_bills') setState('insert_more_bills')
 
+  var coin = coins[cryptoCode]
+
   $('.total-deposit').html(formatFiat(fiat))
-  updateBitcoins('.total-btc-rec', bitcoins)
+  var scale = new BigNumber(10).pow(coin.displayScale)
+  var cryptoAmount = new BigNumber(crypto).div(scale).toNumber()
+  var cryptoDisplayCode = coin.displayCode
+  updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
 
   var inserted = lastBill
   ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
-  : locale.translate('The Bitcoin Machine').fetch()
+  : locale.translate('Lamassu Cryptomat').fetch()
 
   $('.js-processing-bill').html(inserted)
 
-  $('.js-send-bitcoins-disable').hide()
-  $('.js-send-bitcoins-enable').show()
+  $('.js-send-crypto-disable').hide()
+  $('.js-send-crypto-enable').show()
 }
 
 function setupCartridges (_cartridges) {
   cartridges = _cartridges
   for (var i = 0; i < cartridges.length; i++) {
     var cartridge = cartridges[i]
-    var denomination = cartridge.denomination
+    var denomination = cartridge.denomination.toLocaleString(jsLocaleCode, {
+      useGrouping: true,
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0
+    })
+    console.log(denomination)
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
   }
 }
 
-function updateBitcoins (selector, bitcoins) {
-  var units = 'mBTC'
-  var adjustedValue = bitcoins * 1000
-  $(selector).find('.btc-amount').html(formatBitcoins(adjustedValue))
-  $(selector).find('.bitcoin-units').html(units)
+function updateCrypto (selector, cryptoAmount, cryptoDisplayCode) {
+  $(selector).find('.crypto-amount').html(formatCrypto(cryptoAmount))
+  $(selector).find('.crypto-units').html(cryptoDisplayCode)
 }
 
-function formatBitcoins (amount) {
-  var log = Math.floor(Math.log(amount) / Math.log(10))
-  var digits = (log > 0) ? 2 : 2 - log
-  return amount.toLocaleString(jsLocaleCode, {
+function lookupDecimalChar (localeCode) {
+  var num = 1.1
+  var localized = num.toLocaleString(jsLocaleCode, {
     useGrouping: true,
-    maximumFractionDigits: digits,
-    minimumFractionDigits: digits
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 1
   })
+
+  return localized[1]
+}
+
+function splitNumber (localize, localeCode) {
+  var decimalChar = lookupDecimalChar(localeCode)
+  var split = localize.split(decimalChar)
+
+  if (split.length === 1) {
+    return ['<span class="integer">', split[0], '</span>'].join('')
+  }
+
+  return [
+    '<span class="integer">', split[0], '</span><span class="decimal-char">',
+    decimalChar, '</span><span class="decimal">', split[1], '</span>'
+  ].join('')
+}
+
+function formatNumber (num) {
+  var localized = num.toLocaleString(jsLocaleCode, {
+    useGrouping: true,
+    maximumFractionDigits: 3,
+    minimumFractionDigits: 3
+  })
+
+  return splitNumber(localized, jsLocaleCode)
+}
+
+function formatCrypto (amount) {
+  return formatNumber(amount)
 }
 
 function formatFiat (amount, fractionDigits) {
   if (!fractionDigits) fractionDigits = 0
+  var localized = null
+  var _localized = null
+
   switch (currency + ':' + jsLocaleCode) {
     case 'DKK:en-US':
     case 'SEK:en-US':
-      return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-            useGrouping: true,
-            maximumFractionDigits: fractionDigits,
-            minimumFractionDigits: fractionDigits
-          }) + '</strong> ' + currency
+      _localized = amount.toLocaleString(jsLocaleCode, {
+        useGrouping: true,
+        maximumFractionDigits: fractionDigits,
+        minimumFractionDigits: fractionDigits
+      })
+      localized = splitNumber(_localized, jsLocaleCode) + currency
+      break
     default:
-      return '<strong>' + amount.toLocaleString(jsLocaleCode, {
-            style: 'currency',
-            currency: currency,
-            currencyDisplay: 'symbol',
-            useGrouping: true,
-            maximumFractionDigits: fractionDigits,
-            minimumFractionDigits: fractionDigits
-          }) + '</strong>'
+      _localized = amount.toLocaleString(jsLocaleCode, {
+        style: 'currency',
+        currency: currency,
+        currencyDisplay: 'symbol',
+        useGrouping: true,
+        maximumFractionDigits: fractionDigits,
+        minimumFractionDigits: fractionDigits
+      })
+      localized = splitNumber(_localized, jsLocaleCode)
+      break
   }
+
+  return localized
 }
 
 function singleCurrencyUnit () {
   return formatFiat(1)
 }
 
-function setExchangeRate (rate) {
-  lastRate = rate
-  var rateStr = formatFiat(rate.xbtToFiat, 2)
-  var translated = locale.translate('Our current Bitcoin price is %s').fetch(rateStr)
-  $('.js-i18n-current-bitcoin-price').html(translated)
-  updateBitcoins('.reverse-exchange-rate', rate.fiatToXbt)
+function setExchangeRate (_rates) {
+  lastRates = _rates
+  var cryptoCode = _rates.cryptoCode
+  var rates = _rates.rates
+
+  var coin = coins[cryptoCode]
+  var displayCode = coin.displayCode
+  var coinDisplayFactor = new BigNumber(10).pow(coin.unitScale - coin.displayScale)
+
+  var cryptoToFiat = new BigNumber(rates.cashIn)
+  var cashOut = new BigNumber(rates.cashOut)
+
+  var fiatToCrypto = new BigNumber(1).div(cryptoToFiat.div(coinDisplayFactor)).round(3).toString()
+  var cashOutCryptoToFiat = formatCrypto(cashOut.round(3).toNumber())
+
+  var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
+  var translated = locale.translate('Our current %s price is %s').fetch(cryptoCode, rateStr)
+  $('.js-i18n-current-crypto-price').html(translated)
+  updateCrypto('.reverse-exchange-rate', fiatToCrypto, displayCode)
   var insertedText = locale.translate('per %s inserted')
     .fetch(singleCurrencyUnit())
   $('#fiat-inserted').html(insertedText)
-  $('.js-digital-rate').text(parseFloat(rate.xbtToFiat).toFixed(2))  // TODO clean up
-}
 
-function setFiatExchangeRate (rate) {
-  $('.js-fiat-rate').text(parseFloat(rate).toFixed(2))  // TODO clean up
+  var localizedCashOutCryptoToFiat =
+    locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, currency)
+  $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
+  $('.js-crypto-display-units').text(displayCode)
 }
 
 function setSessionId (sessionId) {
@@ -683,7 +759,7 @@ function setSessionId (sessionId) {
 }
 
 function setBuyerAddress (address) {
-  $('.bitcoin-address').html(address)
+  $('.crypto-address').html(address)
 }
 
 function setAccepting (currentAccepting) {
@@ -706,11 +782,11 @@ function highBill (highestBill, reason) {
 
 function readingBill (bill) {
   $('.js-processing-bill').html('Processing ' + formatFiat(bill) + '...')
-  $('.js-send-bitcoins-enable').hide()
-  $('.js-send-bitcoins-disable').show()
+  $('.js-send-crypto-enable').hide()
+  $('.js-send-crypto-disable').show()
 }
 
-function sendOnly (reason) {
+function sendOnly (reason, cryptoCode) {
   // TODO: sendOnly should be made into its own state.
   // Remove all instances of onSendOnly when doing this.
   if (onSendOnly) return
@@ -718,12 +794,14 @@ function sendOnly (reason) {
 
   t('or', '!')
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
-  var reasonText = reason === 'transactionLimit' ?
-    'Transaction limit reached.' :
-    "We're out of bitcoins."
-  t('limit-reached', locale.translate(reasonText).fetch())
+  var reasonText = reason === 'transactionLimit' ||
+    reason === 'validatorError' ||
+    reason === 'networkDown'
+  ? 'Transaction limit reached.'
+  : "We're out of %s."
+  t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
   t('limit-description',
-    locale.translate('Please touch <strong>Send Bitcoins</strong> to complete your purchase.').fetch())
+    locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
   $('#insert-another').css({'display': 'none'})
   $('#limit-reached-section').css({'display': 'block'})
 }
@@ -735,6 +813,18 @@ function setPartialSend (sent, total) {
 
 function t (id, str) {
   $('#js-i18n-' + id).html(str)
+}
+
+function tc (className, str, cryptoCode) {
+  $('.js-i18n-' + className).html(locale.translate(str).fetch(cryptoCode))
+}
+
+function translateCoin (cryptoCode) {
+  tc('total-purchased', 'total %s purchased', cryptoCode)
+  tc('please-scan', 'Please scan the QR code to send us your %s.', cryptoCode)
+  tc('did-send-coins', 'Have you sent the %s yet?', cryptoCode)
+  tc('scan-address', 'Scan your %s address', cryptoCode)
+  tc('coins-to-address', 'Your %s will be sent to:', cryptoCode)
 }
 
 function initTranslatePage () {
@@ -770,14 +860,12 @@ function loadI18n (localeCode) {
   var messages = locales[localeCode] || locales['en-US']
 
   return new Jed({
-      'missing_key_callback': function () {},
-      'locale_data': {
-        'messages': messages
-      }
-    })
+    'missing_key_callback': function () {},
+    'locale_data': {
+      'messages': messages
+    }
+  })
 }
-
-function initDebug () {}
 
 function reachFiatLimit (rec) {
   var msg = null
@@ -805,12 +893,33 @@ function manageFiatButtons (activeDenominations) {
   }
 }
 
+function displayCrypto (cryptoAtoms, cryptoCode) {
+  var coin = coins[cryptoCode]
+  var scale = new BigNumber(10).pow(coin.displayScale)
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(3).toNumber()
+  var cryptoDisplay = formatCrypto(cryptoAmount)
+
+  return cryptoDisplay
+}
+
 function fiatCredit (data) {
   var credit = data.credit
+  var cryptoCode = credit.cryptoCode
   var activeDenominations = data.activeDenominations
-  var fiat = credit.fiat
-  var mbtc = credit.satoshis / 1e5
-  if (mbtc === 0) $('#js-i18n-choose-digital-amount').hide()
+  var coin = coins[cryptoCode]
+
+  var fiat = credit.fiat.toLocaleString(jsLocaleCode, {
+    useGrouping: true,
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  })
+
+  var cryptoAtoms = new BigNumber(credit.cryptoAtoms)
+  var cryptoDisplay = displayCrypto(cryptoAtoms, cryptoCode)
+
+  var cryptoDisplayCode = coin.displayCode
+
+  if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
   if (fiat === 0) $('#cash-out-button').hide()
@@ -819,40 +928,35 @@ function fiatCredit (data) {
   manageFiatButtons(activeDenominations.activeMap)
   $('.choose_fiat_state .fiat-amount').text(fiat)
   t('choose-digital-amount',
-    locale.translate("You'll be sending %s mBTC").fetch(mbtc))
+    locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode))
 
   reachFiatLimit(activeDenominations)
 }
 
-function satoshisToBitcoins (satoshis) {
-  var bitcoins = satoshis / 1e8
-  return Number(bitcoins.toFixed(8)).toString()
-}
-
-function satoshisToMilliBitcoins (satoshis) {
-  var millies = satoshis / 1e5
-  return Number(millies.toFixed(5)).toString()
-}
-
 function setDepositAddress (tx) {
-  var bitcoins = satoshisToBitcoins(tx.satoshis)
+  var coin = coins[tx.cryptoCode]
+  var scale = new BigNumber(10).pow(coin.unitScale)
+  var cryptoAmount = new BigNumber(tx.cryptoAtoms).div(scale).toString()
 
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .bitcoin-address').text(tx.toAddress)
+  $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
 
   $('#qr-code-deposit').empty()
+  var url = cryptoUrl(tx.cryptoCode, tx.toAddress, cryptoAmount)
   $('#qr-code-deposit').qrcode({
     render: 'canvas',
     width: 275,
     height: 275,
-    text: 'bitcoin:' + tx.toAddress + '?amount=' + bitcoins
+    text: url
   })
 }
 
 function deposit (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.deposit_state .digital .js-amount').text(millies)
+  var cryptoCode = tx.cryptoCode
+  var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
+
+  $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
   $('.deposit_state .send-notice').hide()
   $('#qr-code-deposit').empty()
@@ -862,10 +966,12 @@ function deposit (tx) {
 }
 
 function fiatReceipt (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.fiat_receipt_state .digital .js-amount').text(millies)
+  var cryptoCode = tx.cryptoCode
+  var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
+
+  $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_receipt_state .sent-coins .bitcoin-address').text(tx.toAddress)
+  $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
 
   $('#qr-code-fiat-receipt').empty()
   $('#qr-code-fiat-receipt').qrcode({
@@ -879,10 +985,12 @@ function fiatReceipt (tx) {
 }
 
 function fiatComplete (tx) {
-  var millies = satoshisToMilliBitcoins(tx.satoshis)
-  $('.fiat_complete_state .digital .js-amount').text(millies)
+  var cryptoCode = tx.cryptoCode
+  var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
+
+  $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_complete_state .sent-coins .bitcoin-address').text(tx.toAddress)
+  $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
   $('#qr-code-fiat-complete').empty()
   $('#qr-code-fiat-complete').qrcode({
@@ -893,6 +1001,19 @@ function fiatComplete (tx) {
   })
 
   setState('fiat_complete')
+}
+
+function handleCoins (coins) {
+  if (coins.length === 1) {
+    $('#dual-idle-cancel').hide()
+    $('#redeem-button').show()
+    $('#two-way-change-language-button').show()
+    return
+  }
+
+  $('#dual-idle-cancel').show()
+  $('#redeem-button').hide()
+  $('#two-way-change-language-button').hide()
 }
 
 function initDebug () {}

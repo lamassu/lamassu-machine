@@ -52,3 +52,5 @@ or add migration:
 - pruning:
   - add state change to ping; make ping and state change identical records; figure it out on the notification side; prune after 10m without worries
   - need to do selects for each machine and prune last x records
+
+- investigate weird adding/rounding (probably because of higher precision exchange rate)

@@ -5,7 +5,7 @@ body {
   overflow: hidden;
   direction: ltr;
   font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
-  /*cursor: none;*/
+/*  cursor: none; */
 }
 
 .brandon {
@@ -386,30 +386,26 @@ body  { margin: 0;}
   margin-top: 2em;
 }
 
-.bitcoin-address {
+.crypto-address {
   font-family: 'Source Code Pro', monospace; font-size: 90%;
 }
 
-.btc-rate {
+.crypto-rate {
   font-size: 30px;
   color: #5F5F55;
   line-height: 42px;
   margin-top: 2em;
 }
 
-.btc {
+.crypto {
   font-size: 48px;
   color: #FFFFFF;
   padding-right: 20px;
 }
 
-.i18n-rtl .btc {
+.i18n-rtl .crypto {
   padding-right: 0;
   padding-left: 20px;
-}
-
-.btc-amount {
-  font-weight: 900;
 }
 
 .bill-slot { position: absolute; margin: 50px 100px; }
@@ -439,13 +435,13 @@ body  { margin: 0;}
   padding: 30px;
 }
 
-.js-send-bitcoins-disable .spinner {
+.js-send-crypto-disable .spinner {
   display: none;
   margin: 0;
   width: 100px;
 }
 
-.js-send-bitcoins-disable .spinner > div {
+.js-send-crypto-disable .spinner > div {
   background-color: #0e4160;
 }
 
@@ -764,7 +760,7 @@ body  { margin: 0;}
   position: absolute; bottom: 0px;
 }
 
-.current-btc {
+.current-crypto {
   font-size: 34px;
   color: #D0D0C8;
   line-height: 47px;
@@ -772,9 +768,9 @@ body  { margin: 0;}
   top: 10;
   left: 60;
 }
-.i18n-rtl .current-btc { right: 60px; left: auto; }
+.i18n-rtl .current-crypto { right: 60px; left: auto; }
 
-.bitcoin-machine {
+.cryptomat {
   font-weight: 200;
   font-size: 34px;
   color: #D0D0C8;
@@ -784,9 +780,9 @@ body  { margin: 0;}
   right: 60px;
 }
 
-.i18n-rtl .bitcoin-machine { left: 60px; right: auto; }
+.i18n-rtl .cryptomat { left: 60px; right: auto; }
 
-.btc-price {
+.crypto-price {
   font-weight: bold;
 }
 
@@ -1170,7 +1166,7 @@ body  { margin: 0;}
   color: #17c2b2;
 }
 
-#change-language-button {
+#two-way-change-language-button {
   position: absolute;
   top: 664px;
   left: 506px;
@@ -1183,12 +1179,12 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
-#change-language-button:active, #change-language-button.active {
+#two-way-change-language-button:active, #two-way-change-language-button.active {
   background-color: #eeeeee;
   border-color: #eeeeee;
 }
 
-#digital-change-language-button {
+#one-way-change-language-button {
   position: absolute;
   top: 30px;
   left: 950px;
@@ -1201,7 +1197,7 @@ body  { margin: 0;}
   padding: 23px 60px;
 }
 
-#digital-change-language-button:active, #digital-change-language-button.active {
+#one-way-change-language-button:active, #one-way-change-language-button.active {
   background-color: #B9B9AC;
   border-color: #B9B9AC;
 }
@@ -1670,4 +1666,35 @@ body  { margin: 0;}
   margin-right: 0px;
   background-size: contain;
   border: 4px solid rgba(0, 0, 0, .05);
+}
+
+.decimal {
+  font-weight: normal;
+  font-size: 65%;
+}
+
+.integer {
+  font-weight: 900;
+}
+
+.decimal-char {
+  font-weight: normal;
+  font-size: 65%;
+}
+
+.coin-selection {
+  text-align: center;
+  width: 100%;
+  font-size: 300%;
+  font-weight: bold;
+  margin-top: 5em;
+  list-style: none;
+}
+
+.coin {
+  margin-bottom: 3em;
+}
+
+#dual-idle-cancel {
+  display: none;
 }
