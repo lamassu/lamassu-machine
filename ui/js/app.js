@@ -922,7 +922,7 @@ function fiatCredit (data) {
   if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
-  if (fiat === 0) $('#cash-out-button').hide()
+  if (credit.fiat === 0) $('#cash-out-button').hide()
   else $('#cash-out-button').show()
 
   manageFiatButtons(activeDenominations.activeMap)
