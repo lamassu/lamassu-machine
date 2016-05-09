@@ -1,56 +1,21 @@
-Notifications
-
-id                 | uuid                        | not null
-device_fingerprint | text                        | not null
-event_type         | text                        | not null
-note               | text                        |
-device_time        | bigint                      | not null
-created            | timestamp without time zone | not null default now()
-
-But they don't know what it is, so they say 'reboot it'. Anyway, either SMS or email. They want to know when it's stuck on a screen, acceptor jam, not scanning QR codes (an infrequent) possibility with the Douro I can elaborate on later), or low Bitcoins. (Or of course networkDown or maintenance screens.)"
-
-Also, when machine isn't successfully pinging server.
-
-- stuck on screen
-- acceptor jam, need to enter special state
-- not scanning qr codes?
-- low bitcoins
-- network down
-- maintenance
-- machine isn't pinging server
-
-- many of these can be handled by alerting if state hasn't changed and isn't idle for > 3m.
-
-if we don't add any tables:
-
-- use machine_events
-- record every screen change
-- record every ping
-- clear out old records once in a while
-- no indexes, so need to clear old records frequently
-
-or add migration:
-
-- requires running migration
+2016-05-09T16:01:05.352Z LOG TypeError: Cannot read property '_events' of undefined
+    at emit (events.js:122:16)
+    at /Users/josh/projects/lamassu-machine/lib/jsonquest.js:58:7
+    at IncomingMessage.<anonymous> (/Users/josh/projects/lamassu-machine/lib/jsonquest.js:153:16)
+    at emitNone (events.js:72:20)
+    at IncomingMessage.emit (events.js:166:7)
+    at endReadableNT (_stream_readable.js:913:12)
+    at nextTickCallbackWith2Args (node.js:442:9)
+    at process._tickCallback (node.js:356:17)
 
 
---------------------
+------------
 
-- no premature optimization, go with option 1
+look into weirdness when booting up, cash-out button doesn't work sometimes
 
---------------------
+--------
 
-1. Add logic in brain, trader to record every state change
-2. Add logic in server to record ping from machine poll
-3. Update tables
-4. Script to read db tables, clear out old entries
-5. Notify on any alerts
+2016-05-09T16:19:53.935Z LOG DEBUG20: Error: Invalid json
+2016-05-09T16:19:53.935Z LOG DEBUG22
 
-
------------------------
-
-- pruning:
-  - add state change to ping; make ping and state change identical records; figure it out on the notification side; prune after 10m without worries
-  - need to do selects for each machine and prune last x records
-
-- investigate weird adding/rounding (probably because of higher precision exchange rate)
+on registerRedeem
