@@ -1,18 +1,2 @@
-2016-05-09T16:01:05.352Z LOG TypeError: Cannot read property '_events' of undefined
-    at emit (events.js:122:16)
-    at /Users/josh/projects/lamassu-machine/lib/jsonquest.js:58:7
-    at IncomingMessage.<anonymous> (/Users/josh/projects/lamassu-machine/lib/jsonquest.js:153:16)
-    at emitNone (events.js:72:20)
-    at IncomingMessage.emit (events.js:166:7)
-    at endReadableNT (_stream_readable.js:913:12)
-    at nextTickCallbackWith2Args (node.js:442:9)
-    at process._tickCallback (node.js:356:17)
-
-take emit out of here, use something else
-
-------------
-
 look into weirdness when booting up, cash-out button doesn't work sometimes
 - hard to reproduce, need to try harder
-- does not always immediately show cash out price
-- does not recover back to network up because of jsonrequest event issues
