@@ -1,4 +1,4 @@
 look into weirdness when booting up, cash-out button doesn't work sometimes
 - hard to reproduce, need to try harder
 
-- have you sent the btc? no, i haven't -- not working, button doesn't do anything
+- consider adding timer, with tap for more time (low priority)
