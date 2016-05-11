@@ -434,6 +434,7 @@ function setScreen (newScreen, oldScreen) {
 
 function setState (state, delay) {
   if (state === currentState) return
+  console.log('DEBUG6: ' + state)
 
   onSendOnly = false
 

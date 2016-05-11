@@ -8,14 +8,11 @@
     at nextTickCallbackWith2Args (node.js:442:9)
     at process._tickCallback (node.js:356:17)
 
+take emit out of here, use something else
 
 ------------
 
 look into weirdness when booting up, cash-out button doesn't work sometimes
-
---------
-
-2016-05-09T16:19:53.935Z LOG DEBUG20: Error: Invalid json
-2016-05-09T16:19:53.935Z LOG DEBUG22
-
-on registerRedeem
+- hard to reproduce, need to try harder
+- does not always immediately show cash out price
+- does not recover back to network up because of jsonrequest event issues
