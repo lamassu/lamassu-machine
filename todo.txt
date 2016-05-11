@@ -1,2 +1,5 @@
 look into weirdness when booting up, cash-out button doesn't work sometimes
 - hard to reproduce, need to try harder
+
+- not always waiting enough time for deposit
+- phone code not sending when updating phone after deposit timeout
