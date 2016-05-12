@@ -27,6 +27,7 @@ rm -rf $EXPORT_DIR
 mkdir -p $EXPORT_DIR
 mkdir -p $EXPORT_SCRIPT_DIR
 mkdir -p $TARGET_MODULES_DIR
+mkdir -p $TARGET_MACHINE_DIR/bin
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
@@ -39,10 +40,11 @@ cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
-cp -r $MACHINE_DIR/bin $TARGET_MACHINE_DIR
+cp $MACHINE_DIR/bin/lamassu-machine $TARGET_MACHINE_DIR/bin
+
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
 $MACHINE_DIR/deploy/copy-modules.js $MACHINE_DIR/node_modules $TARGET_MODULES_DIR
-cp -r $HARDWARE_DIR $EXPORT_DIR/hardware
+cp -a $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Remove locally installed files
 rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
