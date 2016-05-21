@@ -6,7 +6,8 @@
     "powerStatus": "/sys/class/power_supply/battery/status",
     "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
     "scanLightOnInterval": null,
-    "scanLightOffInterval": 1000
+    "scanLightOffInterval": 1000,
+    "resetBasePath": "/sys/bus/usb/devices/2-1"
   },
   "wifi": {
     "wpa": {

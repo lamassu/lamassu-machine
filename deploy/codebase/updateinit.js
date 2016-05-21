@@ -51,6 +51,7 @@ async.series([
   async.apply(installSys),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
+  async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/bin /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
   async.apply(installBarcodeLib),
   async.apply(report, null, 'finished.')

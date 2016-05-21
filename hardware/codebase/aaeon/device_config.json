@@ -7,7 +7,8 @@
     "batteryCapacityPath": null,
     "tempSensorPath": "/sys/class/hwmon/hwmon1/device/temp2_input",
     "scanLightOnInterval": null,
-    "scanLightOffInterval": 1000
+    "scanLightOffInterval": 1000,
+    "resetBasePath": "/sys/bus/usb/devices"
   },
   "wifi": {
     "wpa": {
