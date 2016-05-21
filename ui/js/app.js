@@ -202,9 +202,21 @@ function processData (data) {
     case 'restart':
       setState('restart')
       break
+    case 'chooseCoin':
+      chooseCoin(data.coins)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
+}
+
+function chooseCoin (coins) {
+  $('#js-coin-selection').empty()
+  coins.forEach(function (coin) {
+    var el = '<li class="coin button" data-coin="' + coin + '">' + coin + '</li>'
+    $('#js-coin-selection').append(el)
+  })
+  setState('choose-coin')
 }
 
 $(document).ready(function () {

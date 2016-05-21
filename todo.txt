@@ -1,8 +1,1 @@
-- look more carefully into _resetCartridges, cartridgeWasReset
-- check changes in master of app.js, manually apply if necessary
-
-- implement changes for request caching for dispense
-- look into taking off only coin that's having issues
-
-
 - consider adding timer, with tap for more time (low priority)
