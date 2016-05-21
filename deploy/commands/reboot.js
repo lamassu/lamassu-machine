@@ -8,7 +8,7 @@ var hardwareCode = process.argv[2] || 'N7G1';
 
 var restartCommand = hardwareCode === 'N7G1' ?
  'poweroff -d 2' :
- 'restart lamassu-machine';
+ 'restart lamassu-machine; killall chromium-browser';
 
 
 report(null, 'started', function() {});
