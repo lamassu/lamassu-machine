@@ -216,7 +216,7 @@ function chooseCoin (coins) {
     var el = '<li class="coin button" data-coin="' + coin + '">' + coin + '</li>'
     $('#js-coin-selection').append(el)
   })
-  setState('choose-coin')
+  setState('choose_coin')
 }
 
 $(document).ready(function () {
