@@ -213,7 +213,7 @@ function processData (data) {
 function chooseCoin (coins) {
   $('#js-coin-selection').empty()
   coins.forEach(function (coin) {
-    var el = '<li class="coin button" data-coin="' + coin + '">' + coin + '</li>'
+    var el = '<li class="button coin coin-' + coin.toLowerCase() + ' button" data-coin="' + coin + '"></li>'
     $('#js-coin-selection').append(el)
   })
   setState('choose_coin')

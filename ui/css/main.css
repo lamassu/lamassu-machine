@@ -1698,3 +1698,32 @@ body  { margin: 0;}
 #dual-idle-cancel {
   display: none;
 }
+
+.choose_coin_state {
+  background-color: #fff;
+}
+
+.coin {
+  width: 395px;
+  height: 395px;
+  position: absolute;
+  top: 203px;
+}
+
+.coin-btc {
+  left: 179px;
+  background: #FFFFFF url('../images/choose-btc.png') no-repeat;
+}
+
+.coin-btc:active {
+  background: #FFFFFF url('../images/choose-btc-selected.png') no-repeat;
+}
+
+.coin-eth {
+  left: 705px;
+  background: #FFFFFF url('../images/choose-eth.png') no-repeat;
+}
+
+.coin-eth:active {
+  background: #FFFFFF url('../images/choose-eth-selected.png') no-repeat;
+}
