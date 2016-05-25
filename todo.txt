@@ -1,1 +1,13 @@
 - consider adding timer, with tap for more time (low priority)
+
+{
+  dispense: {},
+  pendingTx: tx
+}
+
+For use with jsonquest:
+
+v On sendCoins, register tx in db
+v Remove from db on: idle
+- On startup, if there's a pending tx, handle that first before going to idle state
+- reject double spend on server (go by sessionId in tx, not header in l-s)
