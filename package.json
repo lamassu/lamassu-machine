@@ -1,6 +1,6 @@
 {
   "name": "lamassu-machine",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "dependencies": {
     "async": "~0.2.9",
     "bignumber.js": "^2.3.0",
