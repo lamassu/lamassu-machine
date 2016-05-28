@@ -1700,30 +1700,30 @@ body  { margin: 0;}
 }
 
 .choose_coin_state {
-  background-color: #fff;
+  background: #FFFFFF url('../images/choose-coin-bg.png') no-repeat;
 }
 
 .coin {
-  width: 395px;
-  height: 395px;
+  width: 403px;
+  height: 403px;
   position: absolute;
-  top: 203px;
+  margin: 0;
 }
 
 .coin-btc {
-  left: 179px;
-  background: #FFFFFF url('../images/choose-btc.png') no-repeat;
+  top: 180px;
+  left: 176px;
 }
 
 .coin-btc:active {
-  background: #FFFFFF url('../images/choose-btc-selected.png') no-repeat;
+  background: url('../images/choose-btc-selected.png') no-repeat;
 }
 
 .coin-eth {
-  left: 705px;
-  background: #FFFFFF url('../images/choose-eth.png') no-repeat;
+  top: 189px;
+  left: 709px;
 }
 
 .coin-eth:active {
-  background: #FFFFFF url('../images/choose-eth-selected.png') no-repeat;
+  background: url('../images/choose-eth-selected.png') no-repeat;
 }
