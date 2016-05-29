@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "dependencies": {
     "async": "~0.2.9",
     "bignumber.js": "^2.3.0",
@@ -30,8 +30,7 @@
     "wreck": "~5.1.0",
     "ws": "~0.4.31"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git@github.com:lamassu/lamassu-machine.git"
