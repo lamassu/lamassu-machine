@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "0.7.14",
+  "version": "1.0.0",
   "dependencies": {
     "async": "~0.2.9",
     "bignumber.js": "^2.3.0",
