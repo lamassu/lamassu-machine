@@ -1,12 +1,12 @@
 {
   "name": "lamassu-machine",
+  "license": "Unlicense",
   "version": "0.5.26",
   "dependencies": {
     "async": "~0.2.9",
     "bitcoin-address": "~0.1.0",
     "bluebird": "~2.4.2",
     "boom": "~2.6.1",
-    "bunyan": "~0.22.1",
     "clim": "*",
     "findit": "~1.1.0",
     "fs-extra": "^0.14.0",
@@ -18,8 +18,8 @@
     "manatee": "~0.2.0",
     "minimist": "~0.2.0",
     "nconf": "~0.6.9",
-    "node-forge": "~0.2.36",
-    "node-uuid": "~1.4.2",
+    "node-forge": "^0.6.39",
+    "node-uuid": "^1.4.7",
     "ramda": "^0.19.1",
     "serialport": "^1.4.10",
     "supyo": "~0.2.0",
@@ -28,10 +28,6 @@
     "ws": "~0.4.31"
   },
   "devDependencies": {
-    "change-case": "^2.2.0",
-    "istanbul": "~0.3.5",
-    "jasmine": "~2.1.0",
-    "mocha": "^2.2.1"
   },
   "repository": {
     "type": "git",
