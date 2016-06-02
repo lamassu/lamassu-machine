@@ -1727,3 +1727,15 @@ body  { margin: 0;}
 .coin-eth:active {
   background: url('../images/choose-eth-selected.png') no-repeat;
 }
+
+.authorizing-note {
+  opacity: 0.6;
+  margin-top: 6em;
+  line-height: 1.4;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.authorizing-note strong {
+  opacity: 1;
+}

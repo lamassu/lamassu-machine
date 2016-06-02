@@ -838,6 +838,10 @@ function translateCoin (cryptoCode) {
   tc('did-send-coins', 'Have you sent the %s yet?', cryptoCode)
   tc('scan-address', 'Scan your %s address', cryptoCode)
   tc('coins-to-address', 'Your %s will be sent to:', cryptoCode)
+
+  if (cryptoCode === 'ETH') {
+    tc('authorizing-note', 'This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.')
+  }
 }
 
 function initTranslatePage () {
@@ -1029,4 +1033,5 @@ function handleCoins (coins) {
   $('#two-way-change-language-button').hide()
 }
 
-function initDebug () {}
+function initDebug () {
+}
