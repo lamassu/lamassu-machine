@@ -446,7 +446,6 @@ function setScreen (newScreen, oldScreen) {
 
 function setState (state, delay) {
   if (state === currentState) return
-  console.log('DEBUG6: ' + state)
 
   onSendOnly = false
 
@@ -648,7 +647,6 @@ function setupCartridges (_cartridges) {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0
     })
-    console.log(denomination)
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
   }
 }
