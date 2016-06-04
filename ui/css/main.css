@@ -1735,3 +1735,20 @@ body  { margin: 0;}
 .authorizing-note strong {
   opacity: 1;
 }
+
+#coin-redeem {
+  position: absolute;
+  top: 698px;
+  left: 1040px;
+  font-weight: bold;
+  border-radius: 38px/50%;
+  color: #ffffff;
+  background-color: #37e8d7;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+#coin-redeem:active {
+  background-color: #2ec1b2;
+}

@@ -96,7 +96,7 @@ function processData (data) {
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
-  if (data.coins) handleCoins(data.coins)
+  if (data.coins) handleCoins(data.coins, data.twoWayMode)
 
   swaperoo('.js-redeem', '.js-deposit', data.redeem)
 
@@ -345,6 +345,7 @@ $(document).ready(function () {
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
   setupButton('redeem-button', 'redeem')
+  setupButton('coin-redeem', 'redeem')
   setupButton('unknown-phone-number-ok', 'idle')
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
@@ -1018,13 +1019,16 @@ function fiatComplete (tx) {
   setState('fiat_complete')
 }
 
-function handleCoins (coins) {
+function handleCoins (coins, twoWayMode) {
   if (coins.length === 1) {
     $('#dual-idle-cancel').hide()
     $('#redeem-button').show()
     $('#two-way-change-language-button').show()
     return
   }
+
+  if (twoWayMode) $('#coin-redeem').show()
+  else $('#coin-redeem').hide()
 
   $('#dual-idle-cancel').show()
   $('#redeem-button').hide()
