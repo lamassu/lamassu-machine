@@ -1695,10 +1695,6 @@ body  { margin: 0;}
   margin-bottom: 3em;
 }
 
-#dual-idle-cancel {
-  display: none;
-}
-
 .choose_coin_state {
   background: #FFFFFF url('../images/choose-coin-bg.png') no-repeat;
 }
