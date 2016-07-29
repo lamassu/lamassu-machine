@@ -85,7 +85,7 @@ function processData (data) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
     setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode)
   }
-  if (data.sessionId) setSessionId(data.sessionId)
+  if (data.txId) setTxId(data.txId)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.sendOnly, data.cryptoCode)
@@ -760,13 +760,13 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function setSessionId (sessionId) {
+function setTxId (txId) {
   $('.qr-code').empty()
   $('.qr-code').qrcode({
     render: 'canvas',
     width: 225,
     height: 225,
-    text: sessionId
+    text: txId
   })
 }
 
