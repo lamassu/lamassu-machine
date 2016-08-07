@@ -1,1 +1,9 @@
 - reject double spend on server (go by sessionId in tx, not header in l-s)
+
+- update unpair (lamassu-scripts), so we can continue testing
+- go through other scripts for fingerprint
+
+- two issues:
+  - 1. l-m thinks connection is down, no errors
+  - 2. l-s with config error, might be fixed in latest code
+  - 3. socket hang up error in l-m
