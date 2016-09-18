@@ -43,6 +43,7 @@ istanbul
 /data
 /coverage
 /fonts
+/certs 
 
 test/compliance/licenses
 
