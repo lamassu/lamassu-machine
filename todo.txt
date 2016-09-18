@@ -2,3 +2,24 @@
 
 - update unpair (lamassu-scripts), so we can continue testing
 - go through other scripts for fingerprint
+
+------------------------
+
+compliance flow:
+
+if compliance stage is on, immediately go to sms confirmation, then go back to where we were
+
+idleOneWay, idleTwoWay -> chooseCoinScreen -> chooseCoin -> startScreen -> idle, dualIdle, start
+
+
+o register_phone_state
+v security_code_state
+v bad_security_code_state
+v bad_phone_number_state
+
+register_phone_state -> phoneNumber -> _phoneNumber() -> _processPhoneNumber() + _registerCode()
+
+registerCode() -> registerCode ->
+_processPhoneNumber() -> _sendSecurityCode() -> badPhoneNumber, fiatError
+
+

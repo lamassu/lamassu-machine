@@ -43,7 +43,7 @@ istanbul
 /data
 /coverage
 /fonts
-/certs 
+/certs
 
 test/compliance/licenses
 
@@ -56,3 +56,4 @@ crowdin.yaml
 ne*.txt
 
 mock_data/compliance/NY_ID.png
+node_modules_old/
