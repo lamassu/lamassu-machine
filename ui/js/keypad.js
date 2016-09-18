@@ -28,6 +28,7 @@ var Keypad = function (keypadId, opts, callback) {
       var result = self.type === 'phoneNumber'
       ? formatE164(self.opts.country, self.result)
       : self.result
+      self.reset()
       return self.callback(result)
     }
 
