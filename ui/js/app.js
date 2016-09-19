@@ -64,16 +64,6 @@ function buttonPressed (button, data) {
   websocket.send(JSON.stringify(res))
 }
 
-function swaperoo (s1, s2, indicator) {
-  if (indicator === true) {
-    $(s1).show()
-    $(s2).hide()
-  } else if (indicator === false) {
-    $(s2).show()
-    $(s1).hide()
-  }
-}
-
 function processData (data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
@@ -98,7 +88,10 @@ function processData (data) {
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.coins) handleCoins(data.coins, data.twoWayMode)
 
-  swaperoo('.js-redeem', '.js-deposit', data.redeem)
+  if (data.context) {
+    $('.js-context').hide()
+    $('.js-context-' + data.context).show()
+  }
 
   switch (data.action) {
     case 'wifiList':
