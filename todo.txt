@@ -22,4 +22,7 @@ register_phone_state -> phoneNumber -> _phoneNumber() -> _processPhoneNumber() +
 registerCode() -> registerCode ->
 _processPhoneNumber() -> _sendSecurityCode() -> badPhoneNumber, fiatError
 
+---------------------------
+
+TODO: redo jsonquest stuff, use regular TLS with l-s
 
