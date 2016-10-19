@@ -1,5 +1,4 @@
 /* globals $, formatE164, formatInternational */
-var TIMEOUT = 60000
 var LENGTHS = {
   phoneNumber: 15,
   code: 10
@@ -12,6 +11,7 @@ var Keypad = function (keypadId, opts, callback) {
   this.count = 0
   this.type = opts.type
   this.opts = opts
+  this.opts.timeout = this.opts.timeout || 60000
   this.callback = callback
   this.timeoutRef = null
   var self = this
@@ -25,9 +25,9 @@ var Keypad = function (keypadId, opts, callback) {
 
     if (target.hasClass('enter')) {
       self.deactivate()
-      var result = self.type === 'phoneNumber' ?
-        formatE164(self.opts.country, self.result) :
-        self.result
+      var result = self.type === 'phoneNumber'
+      ? formatE164(self.opts.country, self.result)
+      : self.result
       return self.callback(result)
     }
 
@@ -46,7 +46,7 @@ Keypad.prototype._restartTimeout = function _restartTimeout () {
   this.timeoutRef = setTimeout(function () {
     self.reset()
     self.callback(null)
-  }, TIMEOUT)
+  }, this.opts.timeout)
 }
 
 Keypad.prototype.activate = function activate () {
@@ -78,8 +78,10 @@ Keypad.prototype._keyPress = function _keyPress (target) {
   }
   var numeral = target.text()
   this.result += numeral
-  var display = this.type === 'phoneNumber' ?
-    formatInternational(this.opts.country, this.result) :
-    this.result
+
+  var display = this.type === 'phoneNumber'
+  ? formatInternational(this.opts.country, this.result)
+  : this.result
+
   this.keypad.find('.box').text(display)
 }

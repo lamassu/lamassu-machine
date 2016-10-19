@@ -205,13 +205,15 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
-  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
+  var phoneOpts = {type: 'phoneNumber', country: 'US', timeout: 120000}
+  phoneKeypad = new Keypad('phone-keypad', phoneOpts, function (result) {
     if (currentState !== 'register_phone') return
     console.log('phoneKeypad: %s', result)
     buttonPressed('phoneNumber', result)
   })
 
-  securityKeypad = new Keypad('security-keypad', {type: 'code'}, function (result) {
+  var securityOpts = {type: 'code', timeout: 180000}
+  securityKeypad = new Keypad('security-keypad', securityOpts, function (result) {
     if (currentState !== 'security_code') return
     console.log(result)
     buttonPressed('securityCode', result)
