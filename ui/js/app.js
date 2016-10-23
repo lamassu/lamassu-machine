@@ -47,6 +47,7 @@ function connect () {
 
 function verifyConnection () {
   if (websocket.readyState === websocket.CLOSED) {
+    console.log('DEBUG1')
     connect()
   }
 }
