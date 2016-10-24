@@ -24,5 +24,6 @@ _processPhoneNumber() -> _sendSecurityCode() -> badPhoneNumber, fiatError
 
 ---------------------------
 
-TODO: redo jsonquest stuff, use regular TLS with l-s
+- go to pair screen, if necessary
+
 
