@@ -28,8 +28,6 @@ _processPhoneNumber() -> _sendSecurityCode() -> badPhoneNumber, fiatError
 - improve send coins handling when network down -- what happens on timeout?
   - possibly just send failed tx to server when network up
 - bill validator seem to go to disable when network down, but no screen indication
-- do global idempotency for all requests, based on requestId; no special handling
-  - discard old responses
 - test mode
 - admin mode
 
