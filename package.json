@@ -6,7 +6,6 @@
     "async": "~0.2.9",
     "bignumber.js": "^2.3.0",
     "bitcoin-address": "^0.3.0",
-    "boom": "~2.6.1",
     "clim": "*",
     "crypto-js": "^3.1.6",
     "ethereumjs-icap": "^0.3.1",
@@ -19,14 +18,11 @@
     "lodash": "~2.4.1",
     "machina": "^2.0.0",
     "minimist": "~0.2.0",
-    "nconf": "~0.6.9",
     "node-forge": "^0.6.39",
     "node-uuid": "^1.4.7",
     "ramda": "^0.19.1",
-    "retry": "^0.9.0",
     "serialport": "^4.0.1",
     "tar": "~0.1.8",
-    "wreck": "~5.1.0",
     "ws": "~0.4.31"
   },
   "optionalDependencies": {
