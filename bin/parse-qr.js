@@ -26,7 +26,7 @@ console.log('version 1.0.3')
 scanner.config(config)
 try {
   console.log('DEBUG1')
-  scanner.scanMainQR(this.cryptoCode, function (err, address) {
+  scanner.scanMainQR('BTC', function (err, address) {
     console.log('DEBUG2')
     if (err) console.log('scanMainQR error: %s', err)
     if (address) console.log(address)

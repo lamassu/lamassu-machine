@@ -3,7 +3,7 @@ const v4l2camera = require('v4l2camera')
 const cam = new v4l2camera.Camera(process.argv[2])
 
 const interval = 100
-const runs = 12
+const runs = 2
 
 const format = cam.formats.filter(f => f.formatName === 'MJPG' && f.width === 1280)[0]
 cam.configSet(format)
@@ -15,7 +15,7 @@ let capturing = false
 
 let series = 0
 
-setInterval(run, (runs + 5) * interval)
+// setInterval(run, (runs + 5) * interval)
 run()
 
 function run () {
@@ -59,9 +59,9 @@ function run () {
       const frame = Buffer.from(cam.frameRaw())
       console.log('DEBUG7: %s', frame.slice(0, 10).toString('hex'))
 
-      if (count === 10) fs.writeFileSync('test' + series + '-' + count + '.jpg', frame, {encoding: null})
+      if (count === 2) fs.writeFileSync('test' + series + '-' + count + '.jpg', frame, {encoding: null})
       capturing = false
-      console.log('%s, %d', success, frame.length)
+      console.log('Wrote: ' + 'test' + series + '-' + count + '.jpg')
     })
   }
 }
