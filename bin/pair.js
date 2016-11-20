@@ -6,10 +6,16 @@ const Haikunator = require('haikunator')
 const lamassuAdminServerPairing = require(path.resolve(lamassuAdminServerRoot, 'lib', 'pairing'))
 const pairing = require('../lib/pairing')
 
+const suppliedTotem = process.argv[2]
+
+const fetchTotem = suppliedTotem
+? Promise.resolve(suppliedTotem)
+: lamassuAdminServerPairing.totem('localhost', name)
+
 const haikunator = new Haikunator()
 const name = haikunator.haikunate({tokenLength: 0})
 
-lamassuAdminServerPairing.totem('localhost', name)
+fetchTotem
 .then(totem => {
   const clientCert = pairing.getCert(path.resolve(lamassuMachineRoot, 'data', 'cert.json'))
   const connectionInfoPath = path.resolve(lamassuMachineRoot, 'data', 'connection_info.json')
