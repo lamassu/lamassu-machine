@@ -19,10 +19,10 @@
     "machina": "^2.0.0",
     "minimist": "~0.2.0",
     "node-forge": "^0.6.39",
-    "node-uuid": "^1.4.7",
     "ramda": "^0.19.1",
     "serialport": "^4.0.1",
     "tar": "~0.1.8",
+    "uuid": "^3.0.0",
     "ws": "~0.4.31"
   },
   "optionalDependencies": {
@@ -30,7 +30,9 @@
     "manatee": "https://github.com/lamassu/node-manatee/tarball/nan",
     "v4l2camera": "^1.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "haikunator": "^2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:lamassu/lamassu-machine.git"
