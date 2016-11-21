@@ -1,34 +1,35 @@
 # lamassu-machine
 The software that runs the Lamassu Bitcoin Machine.
 
-### Mac OS X environment setup
+## Mac OS X environment setup
 
 ```
-**>** curl -L https://git.io/n-install | bash -s -- -y lts
-**>** . ~/.bash_profile
-**>** npm install yarn -g
+> curl -L https://git.io/n-install | bash -s -- -y lts
+> . ~/.bash_profile
+> npm install yarn -g
 ```
 
 ## Installing
 
 ```
-**>** git clone -b https --single-branch https://github.com/lamassu/lamassu-machine.git
-**>** cd lamassu-machine
-**>** ./setup.sh
+> git clone -b https --single-branch https://github.com/lamassu/lamassu-machine.git
+> cd lamassu-machine
+> ./setup.sh
 ```
 
 ## Running
 
-# in a separate window start a fake bill validator, and use the outputted ttys number on the next command, like /dev/ttys008
+In a separate window start a fake bill validator, and use the outputted ttys number on the next command, like
+``/dev/ttys008``.
 
 ```
-ruby fake_id003.rb
+> ruby fake_id003.rb
 ```
 
 # run lamassu-machine
 
 ```
-node bin/lamassu-machine --mockTrader --mockCam --mockBillDispenser \
+> node bin/lamassu-machine --mockTrader --mockCam --mockBillDispenser \
 --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 --mockBv /dev/ttys008
 ```
 
@@ -37,7 +38,7 @@ Replace ``--mockBTC`` with one of your BTC addresses, and ``--mockBv`` with the 
 Now, in a new terminal:
 
 ```
-open ui/start.html
+> open ui/start.html
 ```
 
 and you should get this:
