@@ -4,9 +4,7 @@
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,
-    "mockCryptoQR": {
-      "BTC": "<your-address-here>"
-    }
+    "mockCryptoQR": {}
   },
   "wifi": {
     "wpa": {

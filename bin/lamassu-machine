@@ -1,40 +1,40 @@
 #!/usr/bin/env node
 
-'use strict';
+'use strict'
 
 // TODO: go through code and take out all evil throws
-require('../logging');
+require('../logging')
 
-var minimist = require('minimist');
-var Brain = require('../lib/brain');
-var Configuration = require('../lib/configuration.js');
+var minimist = require('minimist')
+var Brain = require('../lib/brain')
+var Configuration = require('../lib/configuration.js')
 
-var bailed = false;
+var bailed = false
 
-function bail(err) {
-  if (bailed) return;
-  bailed = true;
-  console.log('lamassu-machine bailing out momentarily...');
-  console.log(err);
-  if (err.stack) console.log(err.stack);
+function bail (err) {
+  if (bailed) return
+  bailed = true
+  console.log('lamassu-machine bailing out momentarily...')
+  console.log(err)
+  if (err.stack) console.log(err.stack)
   setTimeout(function () {
-    console.log('lamassu-machine bailing out');
-    process.exit(10);
-    process.abort();  // Make sure we're dead
-  }, 7000);   // Leave some time to connect for browser to set error screen
+    console.log('lamassu-machine bailing out')
+    process.exit(10)
+    process.abort()   // Make sure we're dead
+  }, 7000) // Leave some time to connect for browser to set error screen
 }
 
-function startBrain() {
-  var commandLine = minimist(process.argv.slice(2));
-  
-  var config = Configuration.loadConfig(commandLine);
+function startBrain () {
+  var commandLine = minimist(process.argv.slice(2))
 
-  var brain = new Brain(config);
-  brain.on('error', bail);
-  brain.run();
+  var config = Configuration.loadConfig(commandLine)
+
+  var brain = new Brain(config)
+  brain.on('error', bail)
+  brain.run()
 }
 
-process.on('uncaughtException', bail);
-process.on('exit', function() { console.log('lamassu-machine exiting'); });
+process.on('uncaughtException', bail)
+process.on('exit', function () { console.log('lamassu-machine exiting') })
 
-startBrain();
+startBrain()
