@@ -6,7 +6,6 @@ The software that runs the Lamassu Bitcoin Machine.
 ```
 git clone https://github.com/lamassu/lamassu-machine.git
 cd lamassu-machine
-npm install
 ./setup.sh
 ```
 
@@ -18,16 +17,9 @@ npm install
 git clone https://github.com/lamassu/lamassu-machine.git
 cd lamassu-machine
 
-brew install nvm
-# then following brew's install notes on nvm
-nvm install 0.10
-nvm use 0.10
-rm -rf ./node_modules
-# remove jpeg and manatee from package.json
-# comment out in lib/brain.js around line 850: this._ensureRaqiaRegistration so that it goes to _idleTwoWay without requiring a raqia registration
-npm install --no-optional
-npm install mv
-
+curl -L https://git.io/n-install | bash -s -- -y lts
+. ~/.bash_profile
+npm install yarn -n
 ./setup
 
 cp licenses.sample.json licenses.json
@@ -37,26 +29,6 @@ ruby fake_id003.rb
 
 node bin/lamassu-machine --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 --mockBv /dev/ttys008 --mockTrader --mockCam --mockBillDispenser
 
-open ui/start.html
-```
-
-To get a cursor comment out `body { cursor: none }` in ui/css/main.css
-
-## Running
-
-First, run the mock bill validator in a separate terminal window:
-
-```
-$ ruby fake_id003.rb
-```
-
-The mock validator will output its device path, e.g. ```/dev/ttys009```.
-Use that to run the main program, called lamassu-machine, along with a Bitcoin
-address **you control**:
-
-```
-node bin/lamassu-machine --mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 \
---mockBv /dev/ttys009 --mockTrader --mockCam
 ```
 
 This should output something like this:
@@ -84,10 +56,10 @@ This should output something like this:
 2014-07-18T17:00:16.267Z LOG FSM: disable [ Initialize -> Disable ]
 ```
 
-Now, open a Chrome or Chromium browser to
+Now:
 
 ```
-file:///<lamassu-machine path>/ui/start.html
+open ui/start.html
 ```
 
 and you should get this:
@@ -104,7 +76,7 @@ In order to easily test **lamassu-server**, you can use the ```mock``` command.
 First, run lamassu-server in its own terminal:
 
 ```
-LAMASSU_ENV=debug bin/lamassu-server --http
+LAMASSU_ENV=debug bin/lamassu-server --dev
 ```
 
 Now, in a separate terminal, run ```mock```:
