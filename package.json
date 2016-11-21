@@ -27,7 +27,6 @@
   },
   "optionalDependencies": {
     "jpeg-turbo": "^0.4.0",
-    "manatee": "https://github.com/lamassu/node-manatee/tarball/nan",
     "v4l2camera": "^1.0.4"
   },
   "devDependencies": {

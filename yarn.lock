@@ -579,10 +579,6 @@ machina@^2.0.0:
   dependencies:
     lodash "3.x"
 
-"manatee@https://github.com/lamassu/node-manatee/tarball/nan":
-  version "0.2.1"
-  resolved "https://github.com/lamassu/node-manatee/tarball/nan#a7b32e6ea949711cae72bf0a0342d6afa92e1749"
-
 mime-db@~1.24.0:
   version "1.24.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.24.0.tgz#e2d13f939f0016c6e4e9ad25a8652f126c467f0c"
