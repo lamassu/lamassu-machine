@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, cryptoUrl */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber */
 'use strict'
 
 var currency = null
@@ -81,7 +81,7 @@ function processData (data) {
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.sendOnly, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
-  if (data.depositInfo) setDepositAddress(data.depositInfo)
+  if (data.depositInfo) setDepositAddress(data.depositInfo, data.depositUrl)
   if (data.cartridges) setupCartridges(data.cartridges)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
@@ -943,17 +943,12 @@ function fiatCredit (data) {
   reachFiatLimit(activeDenominations)
 }
 
-function setDepositAddress (tx) {
-  var coin = coins[tx.cryptoCode]
-  var scale = new BigNumber(10).pow(coin.unitScale)
-  var cryptoAmount = new BigNumber(tx.cryptoAtoms).div(scale).toString()
-
+function setDepositAddress (tx, url) {
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
 
   $('#qr-code-deposit').empty()
-  var url = cryptoUrl(tx.cryptoCode, tx.toAddress, cryptoAmount)
   $('#qr-code-deposit').qrcode({
     render: 'canvas',
     width: 275,
