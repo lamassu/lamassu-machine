@@ -1,7 +1,7 @@
 /* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber */
 'use strict'
 
-var currency = null
+var fiatCode = null
 var locale = null
 var localeCode = null
 var jsLocaleCode = null  // Sometimes slightly different than localeCode
@@ -69,7 +69,7 @@ function processData (data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
   if (!locale) return
-  if (data.currency) setCurrency(data.currency)
+  if (data.fiatCode) setFiatCode(data.fiatCode)
   if (data.rates) setExchangeRate(data.rates)
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress)
   if (data.credit) {
@@ -606,9 +606,9 @@ function setPrimaryLocales (primaryLocales) {
   else languages.removeClass('n2')
 }
 
-function setCurrency (data) {
-  currency = data
-  $('.js-currency').text(currency)
+function setFiatCode (data) {
+  fiatCode = data
+  $('.js-currency').text(fiatCode)
 }
 
 function setCredit (fiat, crypto, lastBill, cryptoCode) {
@@ -695,7 +695,7 @@ function formatFiat (amount, fractionDigits) {
   var localized = null
   var _localized = null
 
-  switch (currency + ':' + jsLocaleCode) {
+  switch (fiatCode + ':' + jsLocaleCode) {
     case 'DKK:en-US':
     case 'SEK:en-US':
       _localized = amount.toLocaleString(jsLocaleCode, {
@@ -703,12 +703,12 @@ function formatFiat (amount, fractionDigits) {
         maximumFractionDigits: fractionDigits,
         minimumFractionDigits: fractionDigits
       })
-      localized = splitNumber(_localized, jsLocaleCode) + currency
+      localized = splitNumber(_localized, jsLocaleCode) + fiatCode
       break
     default:
       _localized = amount.toLocaleString(jsLocaleCode, {
-        style: 'currency',
-        currency: currency,
+        style: 'fiatCode',
+        currency: fiatCode,
         currencyDisplay: 'symbol',
         useGrouping: true,
         maximumFractionDigits: fractionDigits,
@@ -749,7 +749,7 @@ function setExchangeRate (_rates) {
   $('#fiat-inserted').html(insertedText)
 
   var localizedCashOutCryptoToFiat =
-    locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, currency)
+    locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
   $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
   $('.js-crypto-display-units').text(displayCode)
 }
