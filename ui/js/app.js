@@ -707,7 +707,7 @@ function formatFiat (amount, fractionDigits) {
       break
     default:
       _localized = amount.toLocaleString(jsLocaleCode, {
-        style: 'fiatCode',
+        style: 'currency',
         currency: fiatCode,
         currencyDisplay: 'symbol',
         useGrouping: true,
