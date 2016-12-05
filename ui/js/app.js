@@ -735,10 +735,8 @@ function setExchangeRate (_rates) {
   var coinDisplayFactor = new BigNumber(10).pow(coin.unitScale - coin.displayScale)
 
   var cryptoToFiat = new BigNumber(rates.cashIn)
-  var cashOut = new BigNumber(rates.cashOut)
 
   var fiatToCrypto = new BigNumber(1).div(cryptoToFiat.div(coinDisplayFactor)).round(3).toString()
-  var cashOutCryptoToFiat = formatCrypto(cashOut.round(3).toNumber())
 
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
   var translated = locale.translate('Our current %s price is %s').fetch(cryptoCode, rateStr)
@@ -748,9 +746,15 @@ function setExchangeRate (_rates) {
     .fetch(singleCurrencyUnit())
   $('#fiat-inserted').html(insertedText)
 
-  var localizedCashOutCryptoToFiat =
-    locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
-  $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
+  if (rates.cashOut) {
+    var cashOut = new BigNumber(rates.cashOut)
+    var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
+
+    var localizedCashOutCryptoToFiat =
+      locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
+    $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
+  }
+
   $('.js-crypto-display-units').text(displayCode)
 }
 
