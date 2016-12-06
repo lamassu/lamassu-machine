@@ -42,12 +42,11 @@ function connect () {
     var data = $.parseJSON(event.data)
     processData(data)
   }
-  setInterval(verifyConnection, 3000)
+  setInterval(verifyConnection, 1000)
 }
 
 function verifyConnection () {
   if (websocket.readyState === websocket.CLOSED) {
-    console.log('DEBUG1')
     connect()
   }
 }
