@@ -3,7 +3,6 @@
 echo "Setting up, takes a few minutes..."
 mkdir -p data/log
 mkdir -p ui/css/fonts
-touch data/db.json
 
 yarn install
 
