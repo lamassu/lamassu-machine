@@ -13,6 +13,7 @@
     "fs-extra": "^0.14.0",
     "fstream": "~0.1.24",
     "got": "^6.6.3",
+    "immutable": "^3.8.1",
     "json-patch": "^0.5.0",
     "left-pad": "^1.1.0",
     "lodash": "^4.17.2",
