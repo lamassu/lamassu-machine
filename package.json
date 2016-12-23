@@ -21,7 +21,7 @@
     "minimist": "~0.2.0",
     "node-forge": "^0.6.39",
     "ramda": "^0.19.1",
-    "serialport": "^4.0.1",
+    "serialport": "^4.0.7",
     "tar": "~0.1.8",
     "uuid": "^3.0.0",
     "ws": "~0.4.31"
