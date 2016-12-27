@@ -1,5 +1,6 @@
 {
   "brain": {
+    "wsPort": 8080,
     "connectingTimeout": 40000,
     "qrTimeout": 60000,
     "goodbyeTimeout": 2000,
