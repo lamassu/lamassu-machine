@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT */
 'use strict'
 
 var fiatCode = null
@@ -37,7 +37,7 @@ var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
-  websocket = new WebSocket('ws://localhost:8080/')
+  websocket = new WebSocket('ws://localhost:' + PORT + '/')
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
     processData(data)
