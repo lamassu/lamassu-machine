@@ -20,6 +20,7 @@
     "machina": "^2.0.0",
     "minimist": "~0.2.0",
     "node-forge": "^0.6.39",
+    "pify": "^2.3.0",
     "ramda": "^0.19.1",
     "serialport": "^4.0.7",
     "tar": "~0.1.8",
