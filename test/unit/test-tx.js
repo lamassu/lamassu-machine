@@ -46,3 +46,35 @@ test('different misc value', t => {
 test('same misc value', t => {
   t.true(Tx.eq({id: 'xx', x: 1}, {id: 'xx', x: 1}))
 })
+
+test('same bills', t => {
+  t.true(Tx.eq({id: 'xx', bills: []}, {id: 'xx', bills: []}))
+})
+
+test('same bills', t => {
+  t.true(Tx.eq(
+    {id: 'xx', bills: [{id: 'yy', cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]},
+    {id: 'xx', bills: [{id: 'yy', cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]}
+  ))
+})
+
+test('different bills', t => {
+  t.false(Tx.eq(
+    {id: 'xx', bills: [{id: 'yy', cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]},
+    {id: 'xx', bills: [{id: 'yz', cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]}
+  ))
+})
+
+test('second missing id bills', t => {
+  t.false(Tx.eq(
+    {id: 'xx', bills: [{id: 'yy', cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]},
+    {id: 'xx', bills: [{cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]}
+  ))
+})
+
+test('both missing id bills', t => {
+  t.false(Tx.eq(
+    {id: 'xx', bills: [{cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]},
+    {id: 'xx', bills: [{cryptoCode: 'USD', fiat: BN(1), cryptoAtoms: BN('0.1')}]}
+  ))
+})
