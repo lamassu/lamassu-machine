@@ -915,19 +915,22 @@ function displayCrypto (cryptoAtoms, cryptoCode) {
   return cryptoDisplay
 }
 
+function BN (s) { return new BigNumber(s) }
+
 function fiatCredit (data) {
-  var credit = data.credit
-  var cryptoCode = credit.cryptoCode
+  var tx = data.tx
+  var cryptoCode = tx.cryptoCode
   var activeDenominations = data.activeDenominations
   var coin = coins[cryptoCode]
+  const fiat = BN(tx.fiat)
 
-  var fiat = credit.fiat.toLocaleString(jsLocaleCode, {
+  var fiatDisplay = BN(tx.fiat).toNumber().toLocaleString(jsLocaleCode, {
     useGrouping: true,
     maximumFractionDigits: 0,
     minimumFractionDigits: 0
   })
 
-  var cryptoAtoms = new BigNumber(credit.cryptoAtoms)
+  var cryptoAtoms = BN(tx.cryptoAtoms)
   var cryptoDisplay = displayCrypto(cryptoAtoms, cryptoCode)
 
   var cryptoDisplayCode = coin.displayCode
@@ -935,11 +938,11 @@ function fiatCredit (data) {
   if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
-  if (credit.fiat === 0) $('#cash-out-button').hide()
+  if (fiat.eq(0)) $('#cash-out-button').hide()
   else $('#cash-out-button').show()
 
   manageFiatButtons(activeDenominations.activeMap)
-  $('.choose_fiat_state .fiat-amount').text(fiat)
+  $('.choose_fiat_state .fiat-amount').text(fiatDisplay)
   t('choose-digital-amount',
     locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode))
 
