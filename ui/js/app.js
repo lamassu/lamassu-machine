@@ -1,6 +1,7 @@
 /* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT */
 'use strict'
 
+console.log('DEBUG11')
 var fiatCode = null
 var locale = null
 var localeCode = null
@@ -950,6 +951,7 @@ function fiatCredit (data) {
 }
 
 function setDepositAddress (tx, url) {
+  console.log('DEBUG22: %s', [tx, url])
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
@@ -967,6 +969,9 @@ function deposit (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
+  console.log('DEBUG88')
+  console.log('DEBUG89: %s', display)
+
   $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
   $('.deposit_state .send-notice').hide()
@@ -980,6 +985,7 @@ function fiatReceipt (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
+  console.log('DEBUG99: %s', display)
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
@@ -998,6 +1004,9 @@ function fiatReceipt (tx) {
 function fiatComplete (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
+
+  console.log('DEBUG78')
+  console.log('DEBUG79: %s', display)
 
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
