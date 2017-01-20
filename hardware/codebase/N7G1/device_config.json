@@ -1,7 +1,6 @@
 {
   "brain": {
     "freeMemRatio": 0.01,
-    "powerStatus": null,
     "dataPath": "/var/lib/sencha",
     "powerStatus": "/sys/class/power_supply/battery/status",
     "batteryCapacityPath": "/sys/class/power_supply/battery/capacity",
