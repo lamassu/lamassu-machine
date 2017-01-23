@@ -1,6 +1,6 @@
 {
   "name": "lamassu-machine",
-  "version": "0.5.20-7",
+  "version": "0.5.20-8",
   "dependencies": {
     "async": "~0.2.9",
     "bitcoin-address": "~0.1.0",
