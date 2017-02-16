@@ -3,7 +3,7 @@ require('json')
 locales = []
 rec = {}
 
-Dir.glob(File.join('build', '*', 'ui', '*.po')).each {|f|
+Dir.glob(File.join('locales', 'build', '*', 'ui', '*.po')).each {|f|
 	lines = IO.readlines(f)
 
 	last_key = nil
