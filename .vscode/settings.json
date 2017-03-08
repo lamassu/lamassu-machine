@@ -3,5 +3,6 @@
   "editor.tabSize": 2,
   "files.exclude": {
     "**/build": true
-  }
+  },
+  "vsicons.presets.angular": false
 }
