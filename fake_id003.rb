@@ -108,7 +108,7 @@ class FakeID003
 		bills = [ 1, nil, 5, 10, 20, 50, 100 ]
 		i = bills.index number
 		if number == 3
-			@escrowed = 5
+			@escrowed = 1
 			@rejecting = :refuse
 		elsif number == 4
 			@escrowed = 1
