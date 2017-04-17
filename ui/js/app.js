@@ -599,8 +599,8 @@ function setPrimaryLocales (primaryLocales) {
     languages.append(li)
   }
 
-  if (primaryLocales.length === 1) $('#change-language-button').hide()
-  else $('#change-language-button').show()
+  if (primaryLocales.length === 1) $('.change-language-button').hide()
+  else $('.change-language-button').show()
 
   if (primaryLocales.length === 2) languages.addClass('n2')
   else languages.removeClass('n2')
@@ -1024,7 +1024,6 @@ function handleCoins (coins, twoWayMode) {
   if (coins.length === 1) {
     $('#dual-idle-cancel').hide()
     $('#redeem-button').show()
-    $('#two-way-change-language-button').show()
     return
   }
 
@@ -1033,7 +1032,6 @@ function handleCoins (coins, twoWayMode) {
 
   $('#dual-idle-cancel').show()
   $('#redeem-button').hide()
-  $('#two-way-change-language-button').hide()
 }
 
 function initDebug () {
