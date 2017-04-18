@@ -81,7 +81,7 @@ function processData (data) {
   if (data.txId) setTxId(data.txId)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
-  if (data.sendOnly) sendOnly(data.sendOnly, data.cryptoCode)
+  if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo, data.depositUrl)
   if (data.cartridges) setupCartridges(data.cartridges)
@@ -806,6 +806,7 @@ function sendOnly (reason, cryptoCode) {
     reason === 'networkDown'
   ? 'Transaction limit reached.'
   : "We're out of %s."
+  console.log('DEBUG111: %s, %s', reason, reasonText)
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
   t('limit-description',
     locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
