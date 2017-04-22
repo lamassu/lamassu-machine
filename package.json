@@ -4,6 +4,7 @@
   "version": "2.3.0",
   "dependencies": {
     "async": "~0.2.9",
+    "base-x": "^3.0.0",
     "bignumber.js": "^4.0.1",
     "bitcoin-address": "^0.3.0",
     "clim": "*",

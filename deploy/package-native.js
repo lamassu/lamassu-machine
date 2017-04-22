@@ -2,7 +2,7 @@
 
 /*
 
-Use npm@2 on a target device to build all node_modules.
+Use ``npm install --global-style`` on a target device to build all node_modules.
 
 Then use this script to package native_modules.tgz and
 decompress to hardware/codebase/<device>

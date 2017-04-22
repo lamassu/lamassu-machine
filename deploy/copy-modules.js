@@ -1,20 +1,21 @@
 #!/usr/local/bin/node
 
-var fs = require('fs-extra')
-var path = require('path')
+const fs = require('fs-extra')
+const path = require('path')
+const _ = require('lodash/fp')
 
-var pkg = require('../package.json')
+const pkg = require('../package.json')
 
-var deps = Object.getOwnPropertyNames(pkg.dependencies)
+const deps = _.keys(pkg.dependencies)
 
-var srcBase = process.argv[2]
-var destBase = process.argv[3]
+const srcBase = process.argv[2]
+const destBase = process.argv[3]
 
 const isNative = m => fs.existsSync(path.resolve(srcBase, m, 'build', 'Release'))
 
 deps.forEach(m => {
   if (isNative(m)) return
-  var src = path.resolve(path.join(srcBase, m))
-  var dest = path.resolve(path.join(destBase, m))
+  const src = path.resolve(path.join(srcBase, m))
+  const dest = path.resolve(path.join(destBase, m))
   fs.copySync(src, dest)
 })
