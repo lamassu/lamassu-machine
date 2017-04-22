@@ -49,16 +49,14 @@ function generateInfo () {
   }
   console.log('version: %s', version)
   fs.writeFileSync(INFO_PATH, JSON.stringify(info))
-  console.log('success')
 }
 
 if (fs.existsSync(TAR_PATH)) fs.unlinkSync(TAR_PATH)
 
 if (!fs.existsSync(SUBPACKAGE_DIR)) {
   makeTar(TAR_PATH, PACKAGE_DIR, generateInfo)
-  process.exit(0)
+} else {
+  makeZippedTar(PACKAGE_DIR + '/subpackage.tgz', SUBPACKAGE_DIR, function () {
+    makeTar(TAR_PATH, PACKAGE_DIR, generateInfo)
+  })
 }
-
-makeZippedTar(PACKAGE_DIR + '/subpackage.tgz', SUBPACKAGE_DIR, function () {
-  makeTar(TAR_PATH, PACKAGE_DIR, generateInfo)
-})
