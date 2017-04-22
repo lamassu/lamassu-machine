@@ -28,7 +28,7 @@
   },
   "optionalDependencies": {
     "jpeg-turbo": "0.4.0",
-    "manatee": "2.0.1",
+    "manatee": "2.0.2",
     "v4l2camera": "1.0.4"
   },
   "devDependencies": {
