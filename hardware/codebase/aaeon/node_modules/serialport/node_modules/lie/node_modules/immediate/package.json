@@ -1,0 +1,85 @@
+{
+  "name": "immediate",
+  "version": "3.0.6",
+  "description": "A cross browser microtask library",
+  "contributors": [
+    {
+      "name": "Domenic Denicola",
+      "email": "domenic@domenicdenicola.com",
+      "url": "http://domenicdenicola.com"
+    },
+    {
+      "name": "Donavon West",
+      "email": "github@donavon.com",
+      "url": "http://donavon.com"
+    },
+    {
+      "name": "Yaffle"
+    },
+    {
+      "name": "Calvin Metcalf",
+      "email": "calvin.metcalf@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/calvinmetcalf/immediate.git"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/calvinmetcalf/immediate/issues"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "npm run build-node && npm run build-js && npm run uglify",
+    "build-node": "browserify-transform-cli inline-process-browser unreachable-branch-transform < ./lib/index.js > ./lib/browser.js",
+    "uglify": "uglifyjs dist/immediate.js -mc > dist/immediate.min.js",
+    "build-js": "browserify -s immediate ./lib/browser.js | derequire > dist/immediate.js",
+    "test": "jshint lib/*.js && node test/tests.js"
+  },
+  "browser": {
+    "./lib/index.js": "./lib/browser.js"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "browserify-transform-cli": "^1.1.1",
+    "derequire": "^2.0.0",
+    "inline-process-browser": "^2.0.0",
+    "jshint": "^2.5.1",
+    "tape": "^4.0.0",
+    "uglify-js": "^2.4.13",
+    "unreachable-branch-transform": "^0.5.1"
+  },
+  "gitHead": "cba16a641397af7071dda0d7aee8b06c89a9926d",
+  "_id": "immediate@3.0.6",
+  "_shasum": "9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b",
+  "_from": "immediate@>=3.0.5 <3.1.0",
+  "_npmVersion": "3.8.6",
+  "_nodeVersion": "5.12.0",
+  "_npmUser": {
+    "name": "cwmma",
+    "email": "calvin.metcalf@gmail.com"
+  },
+  "dist": {
+    "shasum": "9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b",
+    "tarball": "https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "cwmma",
+      "email": "calvin.metcalf@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/immediate-3.0.6.tgz_1469708719595_0.6643407943192869"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz",
+  "readme": "ERROR: No README data found!",
+  "homepage": "https://github.com/calvinmetcalf/immediate#readme"
+}

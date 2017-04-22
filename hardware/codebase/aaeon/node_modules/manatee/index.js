@@ -35,6 +35,6 @@ exports.scanQR = function scanQR(image, width, height) {
   return exports.scan(image, width, height, 'qr');
 };
 
-exports.scanPDF417 = function scanQR(image, width, height) {
+exports.scanPDF417 = function scanPDF417(image, width, height) {
   return exports.scan(image, width, height, 'pdf417');
 };
