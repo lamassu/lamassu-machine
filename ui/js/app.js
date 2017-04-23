@@ -32,7 +32,7 @@ var securityKeypad = null
 var previousState = null
 var onSendOnly = false
 var buttonActive = true
-var cartridges = null
+var cassettes = null
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -84,7 +84,7 @@ function processData (data) {
   if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo, data.depositUrl)
-  if (data.cartridges) setupCartridges(data.cartridges)
+  if (data.cassettes) setupCassettes(data.cassettes)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
@@ -366,7 +366,7 @@ $(document).ready(function () {
     if (cashButtonJ.hasClass('disabled')) return
     if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat')
     var denominationIndex = cashButtonJ.attr('data-denomination-index')
-    var denominationRec = cartridges[denominationIndex]
+    var denominationRec = cassettes[denominationIndex]
     buttonPressed('fiatButton', {denomination: denominationRec.denomination})
   })
 
@@ -630,11 +630,11 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   $('.js-send-crypto-enable').show()
 }
 
-function setupCartridges (_cartridges) {
-  cartridges = _cartridges
-  for (var i = 0; i < cartridges.length; i++) {
-    var cartridge = cartridges[i]
-    var denomination = cartridge.denomination.toLocaleString(jsLocaleCode, {
+function setupCassettes (_cassettes) {
+  cassettes = _cassettes
+  for (var i = 0; i < cassettes.length; i++) {
+    var cassette = cassettes[i]
+    var denomination = cassette.denomination.toLocaleString(jsLocaleCode, {
       useGrouping: true,
       maximumFractionDigits: 0,
       minimumFractionDigits: 0
@@ -895,9 +895,9 @@ function chooseFiat (data) {
 }
 
 function manageFiatButtons (activeDenominations) {
-  for (var i = 0; i < cartridges.length; i++) {
-    var cartridge = cartridges[i]
-    var denomination = cartridge.denomination
+  for (var i = 0; i < cassettes.length; i++) {
+    var cassette = cassettes[i]
+    var denomination = cassette.denomination
     var enabled = activeDenominations[denomination]
     var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']')
     if (enabled) button.removeClass('disabled')
