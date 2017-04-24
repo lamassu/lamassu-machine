@@ -61,8 +61,8 @@ trader.on('dispenseUpdate', function (dispenseStatus) {
   if (status === 'authorized') {
     console.log('Dispensing...')
     tx.billDistribution = [
-      {actualDispense: 1, rejected: 1},
-      {actualDispense: 2, rejected: 0}
+      {dispensed: 1, rejected: 1},
+      {dispensed: 2, rejected: 0}
     ]
     trader.dispenseAck(tx)
   }
