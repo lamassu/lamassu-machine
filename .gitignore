@@ -59,3 +59,5 @@ mock_data/compliance/NY_ID.png
 node_modules_old/
 .vagrant
 hardware/binaries/
+hardware/codebase/aaeon/node_modules
+native_modules.tgz
