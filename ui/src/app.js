@@ -326,7 +326,7 @@ $(document).ready(function () {
 
   setupButton('limit-reached-ok', 'idle')
   setupButton('deposit-timeout-sent-yes', 'depositTimeout')
-  setupButton('deposit-timeout-sent-no', 'cashOut')
+  setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent')
   setupButton('out-of-cash-ok', 'idle')
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk')
@@ -335,6 +335,7 @@ $(document).ready(function () {
   setupButton('redeem-later-ok', 'idle')
   setupButton('pre-receipt-ok', 'fiatReceipt')
   setupButton('fiat-error-ok', 'idle')
+  setupButton('network-down-ok', 'idle')
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
   setupButton('redeem-button', 'redeem')
