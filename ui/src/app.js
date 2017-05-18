@@ -90,6 +90,7 @@ function processData (data) {
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.coins) handleCoins(data.coins, data.twoWayMode)
+  if (data.tx) setFixedFee(data.tx.cashInFee)
 
   if (data.context) {
     $('.js-context').hide()
@@ -175,6 +176,9 @@ function processData (data) {
       break
     case 'highBill':
       highBill(data.highestBill, data.reason)
+      break
+    case 'minimumTx':
+      minimumTx(data.lowestBill)
       break
     case 'chooseFiat':
       chooseFiat(data.chooseFiat)
@@ -612,6 +616,11 @@ function setFiatCode (data) {
   $('.js-currency').text(fiatCode)
 }
 
+function setFixedFee (fee) {
+  const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee))
+  $('.js-i18n-fixed-fee').html(fixedFee)
+}
+
 function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var coin = coins[cryptoCode]
 
@@ -785,6 +794,13 @@ function highBill (highestBill, reason) {
   t('highest-bill', locale.translate('Please insert %s or less.')
     .fetch(formatFiat(highestBill)))
   setScreen('high_bill')
+  window.setTimeout(revertScreen, 3000)
+}
+
+function minimumTx (lowestBill) {
+  t('lowest-bill', locale.translate('Please insert %s or more.')
+    .fetch(formatFiat(lowestBill)))
+  setScreen('minimum_tx')
   window.setTimeout(revertScreen, 3000)
 }
 

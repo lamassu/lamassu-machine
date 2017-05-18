@@ -390,11 +390,20 @@ body  { margin: 0;}
   font-family: 'Source Code Pro', monospace; font-size: 90%;
 }
 
+.crypto-amounts {
+  margin-top: 2em;
+}
+
 .crypto-rate {
   font-size: 30px;
   color: #5F5F55;
   line-height: 42px;
-  margin-top: 2em;
+}
+
+.tx-fee {
+  color: #5F5F55;
+  font-size: 30px;
+  margin-top: 0.3em;
 }
 
 .crypto {
@@ -710,7 +719,7 @@ body  { margin: 0;}
   background: #FFFFFF url('../images/error_bg.png') no-repeat 40px 40px;
 }
 
-.limit_reached_state, .high_bill_state {
+.limit_reached_state, .high_bill_state, .minimum_tx_state {
   background: #FFFFFF url('../images/limit_reached.png') no-repeat center 440px;
 }
 

@@ -604,13 +604,16 @@
             <h1 id="insert-bill" class="js-i18n">Insert a bill</h1>
             <p class="send-to-your-address"><span class="js-i18n-coins-to-address"></span><br/>
             <span class="crypto-address"></span></p>
-            <p class="crypto-rate">
-              <span class="crypto reverse-exchange-rate i18n-latin">
-                <span class="crypto-amount i18n-latin"></span>
-                <span class="crypto-units i18n-latin"></span>
-              </span>
-              <span id="fiat-inserted"></span>
-            </p>
+            <section class="crypto-amounts">
+              <section class="crypto-rate">
+                <span class="crypto reverse-exchange-rate i18n-latin">
+                  <span class="crypto-amount i18n-latin"></span>
+                  <span class="crypto-units i18n-latin"></span>
+                </span>
+                <span id="fiat-inserted"></span>
+              </section>
+              <section class="tx-fee js-i18n-fixed-fee"></section>
+            </section>
           </section>
           <section class="secondary-side">
             <section class="bill-slot">
@@ -852,6 +855,19 @@
            <section class="content">
               <h1 id="js-i18n-high-bill-header"></h1>
               <p><strong id="js-i18n-highest-bill"></strong></p>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport minimum_tx_state info" data-tr-section="minimum-tx">
+        <section class="main">
+          <section class="top">
+           <section class="content">
+              <h1 class="js-i18n">More, Please.</h1>
+              <p><strong id="js-i18n-lowest-bill"></strong></p>
             </section>
           </section>
           <section class="bottom">
