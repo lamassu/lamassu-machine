@@ -89,7 +89,7 @@ function processData(data) {
   if (data.readingBill) readingBill(data.readingBill);
   if (data.cryptoCode) translateCoin(data.cryptoCode);
   if (data.coins) handleCoins(data.coins, data.twoWayMode);
-  if (data.tx) setFixedFee(data.tx.cashInFee);
+  if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee);
 
   if (data.context) {
     $('.js-context').hide();
