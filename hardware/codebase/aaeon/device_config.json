@@ -31,7 +31,7 @@
       "width": 640,
       "height": 480,
       "contrast": 30,
-      "lowExposure": 75,
+      "lowExposure": null,
       "highExposure": null,
       "exposureAdjustTime": 200
     },
