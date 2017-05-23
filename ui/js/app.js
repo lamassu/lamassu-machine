@@ -605,9 +605,15 @@ function setFiatCode(data) {
   $('.js-currency').text(fiatCode);
 }
 
-function setFixedFee(fee) {
-  var fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee));
-  $('.js-i18n-fixed-fee').html(fixedFee);
+function setFixedFee(_fee) {
+  var fee = parseFloat(_fee);
+
+  if (fee > 0) {
+    var fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee));
+    $('.js-i18n-fixed-fee').html(fixedFee);
+  } else {
+    $('.js-i18n-fixed-fee').html('');
+  }
 }
 
 function setCredit(fiat, crypto, lastBill, cryptoCode) {
