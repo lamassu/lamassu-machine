@@ -109,16 +109,16 @@ function processData(data) {
       break;
     case 'wifiConnected':
       t('wifi-connecting', locale.translate('Connected. Waiting for ticker.').fetch());
-      setState('wifi_connecting'); // in case we didn't go through wifi-connecting
-      break;
+      setState('wifi_connecting' // in case we didn't go through wifi-connecting
+      );break;
     case 'pairing':
       confirmBeep.play();
       setState('pairing');
       break;
     case 'pairingError':
-      $('.js-pairing-error').text(data.err);
+      $('.js-pairing-error').text(data.err
       // Give it some time to update text in background
-      setTimeout(function () {
+      );setTimeout(function () {
         setState('pairing_error');
       }, 500);
       break;
@@ -387,10 +387,10 @@ function targetButton(element) {
 function touchEvent(element, callback) {
   element.addEventListener('mousedown', function (e) {
     var target = targetButton(e.target);
-    target.classList.add('active');
+    target.classList.add('active'
 
     // Wait for transition to finish
-    setTimeout(function () {
+    );setTimeout(function () {
       target.classList.remove('active');
     }, 300);
 
@@ -858,10 +858,10 @@ function translatePage() {
     var el = $(this);
     var base = el.data('baseTranslation');
     el.attr('placeholder', locale.translate(base).fetch());
-  });
+  }
 
   // Adjust send coins button
-  var length = $('#send-coins span').text().length;
+  );var length = $('#send-coins span').text().length;
   if (length > 17) $('body').addClass('i18n-long-send-coins');else $('body').removeClass('i18n-long-send-coins');
 }
 
