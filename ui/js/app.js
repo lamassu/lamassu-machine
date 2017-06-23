@@ -18,6 +18,11 @@ var coins = {
     unitScale: 18,
     displayScale: 15,
     displayCode: 'mETH'
+  },
+  ZEC: {
+    unitScale: 8,
+    displayScale: 5,
+    displayCode: 'mZEC'
   }
 };
 
