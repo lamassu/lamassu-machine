@@ -23,6 +23,16 @@ var coins = {
     unitScale: 8,
     displayScale: 5,
     displayCode: 'mZEC'
+  },
+  LTC: {
+    unitScale: 8,
+    displayScale: 5,
+    displayCode: 'mLTC'
+  },
+  DASH: {
+    unitScale: 8,
+    displayScale: 5,
+    displayCode: 'mDASH'
   }
 }
 
