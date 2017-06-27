@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script>const PORT=8080</script>
-    <script src="js/vendor/jquery-2.0.3.js"></script>
-    <script src="js/vendor/jquery.qrcode-0.2.min.js"></script>
+    <script src="js/vendor/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/vendor/kjua-0.1.1.min.js"></script>
     <script src="js/vendor/jquery.transit.min.js"></script>
     <script src="js/keyboard.js"></script>
     <script src="js/vendor/phoneformat.js"></script>
@@ -1206,13 +1206,16 @@
       </section>
 
       <section class="viewport choose_coin_state" data-tr-section="choose_coin">
+        <section class="change-language">Change language</section>
         <section class="main">
-          <ul id="js-coin-selection" class="coin-selection">
-          </ul>
+          <div class="cash-in crypto-button">Buy<br/>Bitcoin</div>
+          <div class="cash-out crypto-button">Sell<br/>Bitcoin</div>
         </section>
-        <section class="buttons">
-          <div id="coin-redeem" class="button"><span class="js-i18n">Redeem</span></div>
-          <!-- <div id="coin-change-language"></div> -->
+        <section class="choose-coin-buttons">
+          <section class="crypto-buttons"></section>
+          <section id="coin-redeem" class="coin-redeem">
+            <div class="choose-coin-button coin-redeem-button"><span class="js-i18n">Redeem</span></div>
+          </section>
         </section>
       </section>
 

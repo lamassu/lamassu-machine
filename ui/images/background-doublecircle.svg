@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280px" height="800px" viewBox="0 0 1280 800" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Two-way with Currencies Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="1280" height="800"></rect>
+    </defs>
+    <g id="v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Two-way-with-Currencies-Copy">
+            <g id="Group">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Rectangle-4"></g>
+                <circle id="Oval-1" fill="#07D2BF" mask="url(#mask-2)" cx="328.253357" cy="733.253357" r="609.693359"></circle>
+                <circle id="Oval-1" fill="#0E4160" mask="url(#mask-2)" cx="1046.25" cy="147.75" r="467.933594"></circle>
+                <path d="M923.192468,599.334382 C733.645156,547.804249 591.939632,380.121517 579.243974,177.454268 C751.409477,255.324043 880.946022,410.837776 923.192453,599.334312 Z" id="Combined-Shape" fill="#003547" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

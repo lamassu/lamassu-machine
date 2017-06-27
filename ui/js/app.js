@@ -222,12 +222,36 @@ function processData(data) {
 }
 
 function chooseCoin(coins) {
-  $('#js-coin-selection').empty();
+  $('.crypto-buttons').empty();
   coins.forEach(function (coin) {
-    var el = '<li class="button coin coin-' + coin.toLowerCase() + ' button" data-coin="' + coin + '"></li>';
-    $('#js-coin-selection').append(el);
+    var activeClass = coin.cryptoCode === 'BTC' ? 'choose-coin-button-active' : '';
+    var el = '<div class="choose-coin-button coin-' + coin.cryptoCode.toLowerCase() + ' ' + activeClass + '" data-coin="' + coin.cryptoCode + '">' + coin.display + '</div>';
+    $('.crypto-buttons').append(el);
   });
   setState('choose_coin');
+}
+
+function switchCoin(coin) {
+  var cashIn = $('.cash-in');
+  var cashOut = $('.cash-out');
+
+  cashIn.addClass('crypto-switch');
+  setTimeout(function () {
+    return cashIn.html('Buy<br/>' + coin.display);
+  }, 100);
+  setTimeout(function () {
+    return cashIn.removeClass('crypto-switch');
+  }, 1000);
+
+  setTimeout(function () {
+    cashOut.addClass('crypto-switch');
+    setTimeout(function () {
+      return cashOut.html('Sell<br/>' + coin.display);
+    }, 100);
+    setTimeout(function () {
+      return cashOut.removeClass('crypto-switch');
+    }, 1000);
+  }, 80);
 }
 
 $(document).ready(function () {
@@ -324,15 +348,15 @@ $(document).ready(function () {
   setupButton('cash-in', 'start');
   setupButton('one-way-cash-in', 'start');
   setupButton('want_cash', 'startFiat');
-  setupButton('cash-out-button', 'cashOut');
+  setupButton('cash-out-button', 'cashOut'
 
-  var button = document.getElementById('js-coin-selection');
-  touchEvent(button, function (e) {
-    var cryptoCode = e.target.dataset.coin;
-    buttonPressed('chooseCoin', cryptoCode);
-  });
+  // var button = document.getElementById('js-coin-selection')
+  // touchEvent(button, function (e) {
+  //   var cryptoCode = e.target.dataset.coin
+  //   buttonPressed('chooseCoin', cryptoCode)
+  // })
 
-  setupImmediateButton('scan-id-cancel', 'cancelIdScan');
+  );setupImmediateButton('scan-id-cancel', 'cancelIdScan');
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', phoneKeypad.deactivate.bind(phoneKeypad));
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode', securityKeypad.deactivate.bind(securityKeypad));
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
@@ -1030,7 +1054,8 @@ function fiatComplete(tx) {
 }
 
 function handleCoins(coins, twoWayMode) {
-  if (coins.length === 1) {
+  var cryptoCodes = Object.keys(coins);
+  if (cryptoCodes.length === 1) {
     $('#dual-idle-cancel').hide();
     $('#redeem-button').show();
     return;

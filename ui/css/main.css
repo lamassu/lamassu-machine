@@ -1705,7 +1705,7 @@ body  { margin: 0;}
 }
 
 .choose_coin_state {
-  background: #FFFFFF url('../images/choose-coin-bg.png') no-repeat;
+  background-image: url('../images/background-doublecircle.svg');
 }
 
 .coin {
@@ -1745,19 +1745,106 @@ body  { margin: 0;}
   opacity: 1;
 }
 
-#coin-redeem {
+.change-language {
   position: absolute;
-  top: 698px;
-  left: 1040px;
+  top: 20px;
+  left: 20px;
+  padding-left: 2em;
+  background-image: url(../images/arrow.svg);
+  background-repeat: no-repeat;
   font-weight: bold;
+  font-size: 130%;
+  background-position: left;
+}
+
+.choose_coin_state .main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%
+}
+
+.crypto-button {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 36px;
+  color: #0e4160;
+  line-height: 1.1;
+}
+
+.crypto-switch {
+  animation:
+    pulse-out 0.2s ease-out,
+    pulse-in 0.2s ease-out 0.05s;
+}
+
+.choose-coin-buttons {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.crypto-buttons {
+  display: flex;
+  margin: 0 20px;
+}
+
+.choose-coin-button {
+  font-weight: 500;
+  border: 3px solid #ffffff;
   border-radius: 38px/50%;
   color: #ffffff;
-  background-color: #37e8d7;
   padding: 20px 40px;
-  text-transform: uppercase;
-  font-size: 20px;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.choose-coin-button-active {
+  background-color: #0e4160;
+  border-color: #0e4160;
+}
+
+.coin-redeem {
+  margin: 0 20px;
+}
+
+.coin-redeem-button {
+  border-color: #0e4160;
+  color: #0e4160;
 }
 
 #coin-redeem:active {
   background-color: #2ec1b2;
+}
+
+@keyframes pulse-out {
+  0% {
+  }
+  100% {
+    transform: scale(.3);
+    opacity: 0.3;
+  }
+}
+
+@keyframes pulse-in {
+  0% {
+    transform: scale(.3);
+    opacity: 0.3;
+  }
+  100% {
+  }
 }
