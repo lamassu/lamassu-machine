@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
 
     <script>const PORT=8080</script>
+    <script src="js/vendor/fastclick.min.js"></script>
     <script src="js/vendor/jquery-3.2.1.slim.min.js"></script>
     <script src="js/vendor/kjua-0.1.1.min.js"></script>
     <script src="js/vendor/jquery.transit.min.js"></script>
@@ -209,36 +210,6 @@
           </section>
           <section id="wifiPassCancel" class="wifi-cancel"><img src="images/cancel.png" /></section>
         </section>
-      </section>
-
-      <section class="viewport idle_state" data-tr-section="idle">
-         <section class="main">
-           <h1 id="hey" class="js-i18n">Hello.</h1>
-           <section id="start-buttons" class="start-buttons">
-             <div id="one-way-cash-in" class="circle-button"><span class="js-i18n">START</span></div>
-           </section>
-           <p id="tap" class="js-i18n">Tap to buy bitcoins in 3 steps</p>
-         </section>
-         <section class="bottom-bar">
-           <p class="js-i18n js-i18n-current-crypto-price current-crypto">Loading Bitcoin price...</p>
-           <span id="one-way-change-language-button" class="change-language-button button">Change language</span>
-         </section>
-       </section>
-
-      <section class="viewport dual_idle_state" data-tr-section="dual-idle">
-        <section class="main">
-          <section class="sides">
-            <section class="digital-section start">
-              <div id="cash-in" class="circle-button"><span class="js-i18n">Cash<br/>In</span></div>
-            </section>
-            <section class="fiat-section start">
-              <div id="want_cash" class="circle-button"><span class="js-i18n">Cash<br/>Out</span></div>
-              <span id="redeem-button" class="button subtle"><span class="js-i18n">Redeem</span></span>
-            </section>
-          </section>
-          <span id="two-way-change-language-button" class="change-language-button button brandon">Change language</span>
-        </section>
-        <section id="dual-idle-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
       <section class="viewport change_language_state brandon" data-tr-section="change-language">
@@ -579,7 +550,8 @@
         </section>
       </section>
 
-      <section class="viewport scan_address_state digital-side" data-tr-section="scan-address">
+      <section class="viewport scan_address_state digital-side cash-in-fade" data-tr-section="scan-address">
+        <section class="cash-in-fade"></section>
         <section class="main">
           <section id="scan-instructions" class="primary-side">
             <h1 id="scan-address" class="js-i18n-scan-address"></h1>
@@ -695,8 +667,7 @@
             <span class="crypto-address"></span></p>
           </section>
           <section class="qr-section">
-            <img class="qr-frame" src="images/qr_code.png" />
-            <div class="qr-content"/><div class="qr-code"></div></div>
+            <div id="cash-in-qr-code" class="qr-code"></div>
             <p class="qr-caption" class="js-i18n">Take a photo of this screen</p>
           </section>
         </section>
@@ -724,8 +695,7 @@
             <span class="crypto-address"></span></p>
           </section>
           <section class="qr-section">
-            <img class="qr-frame" src="images/qr_code.png" />
-            <div class="qr-content"/><div class="qr-code"></div></div>
+            <div id="cash-in-fail-qr-code" class="qr-code"></div>
             <p class="qr-caption" class="js-i18n">Take a photo of this screen</p>
           </section>
         </section>
@@ -1014,6 +984,7 @@
       </section>
 
       <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
+        <section class="cash-out-fade"></section>
         <section class="instructions">
           <h1 class="js-i18n">How much?</h1>
           <h2 class="js-fiat-crypto-rate"></h2>
@@ -1055,9 +1026,7 @@
           </section>
         </section>
         <section class="qr-section">
-          <img class="qr-frame" src="images/qr_code_fiat.png" />
           <div id="qr-code-deposit"></div>
-          <div class="loading js-i18n">Generating address...</div>
           <div class="send-notice">
             <span class="js-i18n">Your coins will be sent to:</span><br/>
             <span class="crypto-address"></span>
@@ -1154,7 +1123,6 @@
         </section>
 
         <section class="qr-section">
-          <img class="qr-frame" src="images/qr_code_fiat.png" />
           <div class="qr-code-fiat-receipt" id="qr-code-fiat-receipt"></div>
           <div class="send-notice-section">
             <img class="camera" src="images/camera.png" />
@@ -1183,7 +1151,6 @@
         </section>
 
         <section class="qr-section">
-          <img class="qr-frame" src="images/qr_code_fiat.png" />
           <div class="qr-code-fiat-receipt" id="qr-code-fiat-complete"></div>
           <div class="send-notice-section">
             <img class="camera" src="images/camera.png" />
@@ -1208,8 +1175,14 @@
       <section class="viewport choose_coin_state" data-tr-section="choose_coin">
         <section class="change-language">Change language</section>
         <section class="main">
-          <div class="cash-in crypto-button">Buy<br/>Bitcoin</div>
-          <div class="cash-out crypto-button">Sell<br/>Bitcoin</div>
+          <section class="crypto-button-box cash-in-box">
+            <div class="crypto-button-ball"></div>
+            <div class="cash-in crypto-button">Buy<br/>Bitcoin</div>
+          </section>
+          <section class="crypto-button-box cash-out-box">
+            <div class="crypto-button-ball"></div>
+            <div class="cash-out crypto-button">Sell<br/>Bitcoin</div>
+          </section>
         </section>
         <section class="choose-coin-buttons">
           <section class="crypto-buttons"></section>

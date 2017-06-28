@@ -50,12 +50,18 @@ strong {
 h1 { margin: 0;}
 body  { margin: 0;}
 #view { background-color: #37E8D7; width: 1280px; height: 800px; position: relative; }
+
 .viewport {
   position: absolute;
   top: 0; left: 0;
   width: 1280px;
   height: 800px;
   display: none;
+  overflow: hidden;
+}
+
+.viewport-active {
+  display: block;
 }
 
 .viewport.invisible {
@@ -1363,12 +1369,22 @@ body  { margin: 0;}
   position: absolute;
   top: 212px;
   left: 848px;
+  background-color: #fff;
+  width: 330;
+  height: 330;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .qr-code-fiat-receipt {
   position: absolute;
   top: 212px;
   left: 848px;
+  background-color: #fff;
+  width: 330;
+  height: 330;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .deposit_state .send-notice {
@@ -1704,33 +1720,11 @@ body  { margin: 0;}
   margin-bottom: 3em;
 }
 
-.choose_coin_state {
-  background-image: url('../images/background-doublecircle.svg');
-}
-
 .coin {
   width: 403px;
   height: 403px;
   position: absolute;
   margin: 0;
-}
-
-.coin-btc {
-  top: 180px;
-  left: 176px;
-}
-
-.coin-btc:active {
-  background: url('../images/choose-btc-selected.png') no-repeat;
-}
-
-.coin-eth {
-  top: 189px;
-  left: 709px;
-}
-
-.coin-eth:active {
-  background: url('../images/choose-eth-selected.png') no-repeat;
 }
 
 .authorizing-note {
@@ -1757,12 +1751,25 @@ body  { margin: 0;}
   background-position: left;
 }
 
+.choose-coin-two-way {
+  background-image: url('../images/background-doublecircle.svg');
+}
+
+.choose-coin-cash-in {
+  background-image: url('../images/background-singlecircle.svg');
+}
+
+.choose-coin-cash-in .cash-out-box, .choose-coin-cash-in .coin-redeem {
+  display: none;
+}
+
 .choose_coin_state .main {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 100%
+  width: 100%;
+  position: relative;
 }
 
 .crypto-button {
@@ -1782,10 +1789,41 @@ body  { margin: 0;}
   line-height: 1.1;
 }
 
+.crypto-button-box {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.crypto-button-ball {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 100;
+}
+
+.cash-in-box .crypto-button-ball {
+  background-color: #37E8D7;  /* amazonite */
+}
+
+.cash-out-box .crypto-button-ball {
+  background-color: #0e4160;   /* cobalt */
+}
+
+.switch-screen .crypto-button-ball {
+  animation: fadeblow 0.5s ease-in 0.2s forwards;
+}
+
+.switch-screen .crypto-button {
+  animation: push-pop 0.3s ease-out;
+}
+
 .crypto-switch {
   animation:
-    pulse-out 0.2s ease-out,
-    pulse-in 0.2s ease-out 0.05s;
+    pulse-out 0.4s ease-in,
+    pulse-in 0.4s ease-in 0.1s;
 }
 
 .choose-coin-buttons {
@@ -1827,8 +1865,45 @@ body  { margin: 0;}
   color: #0e4160;
 }
 
-#coin-redeem:active {
-  background-color: #2ec1b2;
+#coin-redeem-button:active {
+  background-color: #0e4160;
+  color: #ffffff;
+}
+
+.cash-in-fade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #37E8D7;
+  opacity: 1;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.viewport-active .cash-in-fade {
+  animation: fade-in 0.7s forwards;
+}
+
+.cash-out-fade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #0e4160;
+  opacity: 1;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.viewport-active .cash-out-fade {
+  animation: fade-in 0.7s forwards;
+}
+
+.qr-code {
+  width: 300;
+  height: 300;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 10px;
 }
 
 @keyframes pulse-out {
@@ -1845,6 +1920,38 @@ body  { margin: 0;}
     transform: scale(.3);
     opacity: 0.3;
   }
-  100% {
+  90% {
+    transform: scale(1.1)
   }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes push-pop {
+  0% {
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeblow {
+  0% {
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(15);
+  }
+}
+
+@keyframes fade-in {
+  0% {}
+  100% { opacity: 0; }
 }

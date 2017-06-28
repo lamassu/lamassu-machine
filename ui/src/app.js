@@ -1,4 +1,4 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT */
+/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict'
 
 console.log('DEBUG11')
@@ -48,6 +48,7 @@ var previousState = null
 var onSendOnly = false
 var buttonActive = true
 var cassettes = null
+let currentCryptoCode = null
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -104,7 +105,6 @@ function processData (data) {
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
-  if (data.coins) handleCoins(data.coins, data.twoWayMode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
 
   if (data.context) {
@@ -215,26 +215,50 @@ function processData (data) {
       setState('restart')
       break
     case 'chooseCoin':
-      chooseCoin(data.coins)
+      chooseCoin(data.coins, data.twoWayMode)
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
 }
 
-function chooseCoin (coins) {
+function chooseCoin (coins, twoWayMode) {
+  if (twoWayMode) {
+    $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
+  } else {
+    $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
+  }
+
+  const defaultCoin = coins[0]
+
+  currentCryptoCode = defaultCoin.cryptoCode
+
+  const cashIn = $('.cash-in')
+  const cashOut = $('.cash-out')
+
+  cashIn.html(`Buy<br/>${defaultCoin.display}`)
+  cashOut.html(`Sell<br/>${defaultCoin.display}`)
+
   $('.crypto-buttons').empty()
   coins.forEach(function (coin) {
-    const activeClass = coin.cryptoCode === 'BTC' ? 'choose-coin-button-active' : ''
-    const el = `<div class="choose-coin-button coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-coin="${coin.cryptoCode}">${coin.display}</div>`
+    const activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : ''
+    const el = `<div class="choose-coin-button coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-crypto-code="${coin.cryptoCode}">${coin.display}</div>`
     $('.crypto-buttons').append(el)
   })
+
   setState('choose_coin')
 }
 
 function switchCoin (coin) {
   const cashIn = $('.cash-in')
   const cashOut = $('.cash-out')
+  const cryptoCode = coin.cryptoCode
+
+  if (currentCryptoCode === cryptoCode) return
+
+  $(`.coin-${currentCryptoCode.toLowerCase()}`).removeClass('choose-coin-button-active')
+  $(`.coin-${cryptoCode.toLowerCase()}`).addClass('choose-coin-button-active')
+  currentCryptoCode = cryptoCode
 
   cashIn.addClass('crypto-switch')
   setTimeout(() => cashIn.html(`Buy<br/>${coin.display}`), 100)
@@ -248,6 +272,9 @@ function switchCoin (coin) {
 }
 
 $(document).ready(function () {
+  const attachFastClick = Origami.fastclick
+  attachFastClick(document.body)
+
   // Matt's anti-drag hack
   window.onclick =
     window.oncontextmenu =
@@ -324,7 +351,6 @@ $(document).ready(function () {
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('wifiListCancel', 'cancelWifiList')
-  setupImmediateButton('dual-idle-cancel', 'completed')
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
@@ -338,9 +364,6 @@ $(document).ready(function () {
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
-  setupButton('cash-in', 'start')
-  setupButton('one-way-cash-in', 'start')
-  setupButton('want_cash', 'startFiat')
   setupButton('cash-out-button', 'cashOut')
 
   // var button = document.getElementById('js-coin-selection')
@@ -373,14 +396,39 @@ $(document).ready(function () {
   setupButton('network-down-ok', 'idle')
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
-  setupButton('redeem-button', 'redeem')
-  setupButton('coin-redeem', 'redeem')
   setupButton('unknown-phone-number-ok', 'idle')
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-  setupButton('one-way-change-language-button', 'changeLanguage')
-  setupButton('two-way-change-language-button', 'changeLanguage')
+  $('.crypto-buttons').click(event => {
+    const el = $(event.target)
+    const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
+    switchCoin(coin)
+  })
+
+  $('.coin-redeem-button').click(() => buttonPressed('redeem'))
+
+  const cashInBox = $('.cash-in-box')
+  cashInBox.click(() => {
+    cashInBox.addClass('switch-screen')
+
+    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'}), 600)
+
+    setTimeout(() => {
+      cashInBox.removeClass('switch-screen')
+    }, 1000)
+  })
+
+  const cashOutBox = $('.cash-out-box')
+  cashOutBox.click(() => {
+    cashOutBox.addClass('switch-screen')
+
+    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'}), 600)
+
+    setTimeout(() => {
+      cashOutBox.removeClass('switch-screen')
+    }, 1000)
+  })
 
   var lastTouch = null
 
@@ -471,8 +519,8 @@ function setScreen (newScreen, oldScreen) {
 
   var newView = $('.' + newScreen + '_state')
 
-  $('.viewport').css({'display': 'none'})
-  newView.css({'display': 'block'})
+  $('.viewport').removeClass('viewport-active')
+  newView.addClass('viewport-active')
 }
 
 function setState (state, delay) {
@@ -802,14 +850,21 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function setTxId (txId) {
-  $('.qr-code').empty()
-  $('.qr-code').qrcode({
+function qrize (text, target, size) {
+  const el = kjua({
+    text,
+    size,
     render: 'canvas',
-    width: 225,
-    height: 225,
-    text: txId
+    rounded: 50,
+    quiet: 1
   })
+
+  target.empty().append(el)
+}
+
+function setTxId (txId) {
+  qrize(txId, $('#cash-in-qr-code'), 300)
+  qrize(txId, $('cash-in-fail-qr-code'), 300)
 }
 
 function setBuyerAddress (address) {
@@ -1008,13 +1063,7 @@ function setDepositAddress (tx, url) {
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
 
-  $('#qr-code-deposit').empty()
-  $('#qr-code-deposit').qrcode({
-    render: 'canvas',
-    width: 275,
-    height: 275,
-    text: url
-  })
+  qrize(url, $('#qr-code-deposit'), 330)
 }
 
 function deposit (tx) {
@@ -1042,14 +1091,7 @@ function fiatReceipt (tx) {
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
 
-  $('#qr-code-fiat-receipt').empty()
-  $('#qr-code-fiat-receipt').qrcode({
-    render: 'canvas',
-    width: 275,
-    height: 275,
-    text: tx.sessionId
-  })
-
+  qrize(tx.sessionId, $('#qr-code-fiat-receipt'), 330)
   setState('fiat_receipt')
 }
 
@@ -1064,30 +1106,9 @@ function fiatComplete (tx) {
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
-  $('#qr-code-fiat-complete').empty()
-  $('#qr-code-fiat-complete').qrcode({
-    render: 'canvas',
-    width: 275,
-    height: 275,
-    text: tx.sessionId
-  })
+  qrize(tx.sessionId, $('#qr-code-fiat-complete'), 330)
 
   setState('fiat_complete')
-}
-
-function handleCoins (coins, twoWayMode) {
-  const cryptoCodes = Object.keys(coins)
-  if (cryptoCodes.length === 1) {
-    $('#dual-idle-cancel').hide()
-    $('#redeem-button').show()
-    return
-  }
-
-  if (twoWayMode) $('#coin-redeem').show()
-  else $('#coin-redeem').hide()
-
-  $('#dual-idle-cancel').show()
-  $('#redeem-button').hide()
 }
 
 function initDebug () {

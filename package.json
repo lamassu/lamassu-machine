@@ -6,7 +6,7 @@
     "async": "~0.2.9",
     "base-x": "^3.0.0",
     "bignumber.js": "^4.0.1",
-    "bitcoin-address": "^0.3.0",
+    "bs58check": "^2.0.2",
     "clim": "*",
     "crypto-js": "^3.1.9-1",
     "ethereumjs-icap": "^0.3.1",
