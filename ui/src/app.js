@@ -54,13 +54,11 @@ var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
-//  websocket = new WebSocket('ws://192.168.1.113:' + PORT + '/')
   websocket = new WebSocket('ws://localhost:' + PORT + '/')
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
     processData(data)
   }
-  setInterval(verifyConnection, 1000)
 }
 
 function verifyConnection () {
@@ -303,6 +301,7 @@ $(document).ready(function () {
   confirmBeep = new Audio('sounds/Confirm8-Bit.ogg')
 
   connect()
+  setInterval(verifyConnection, 1000)
   initTranslatePage()
 
   var wifiNetworkButtons = document.getElementById('networks')
