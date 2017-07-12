@@ -237,11 +237,14 @@ function chooseCoin(coins, twoWayMode) {
   cashOut.html('Sell<br/>' + defaultCoin.display);
 
   $('.crypto-buttons').empty();
-  coins.forEach(function (coin) {
-    var activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : '';
-    var el = '<div class="choose-coin-button coin-' + coin.cryptoCode.toLowerCase() + ' ' + activeClass + '" data-crypto-code="' + coin.cryptoCode + '">' + coin.display + '</div>';
-    $('.crypto-buttons').append(el);
-  });
+
+  if (coins.length > 1) {
+    coins.forEach(function (coin) {
+      var activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : '';
+      var el = '<div class="choose-coin-button coin-' + coin.cryptoCode.toLowerCase() + ' ' + activeClass + '" data-crypto-code="' + coin.cryptoCode + '">' + coin.display + '</div>';
+      $('.crypto-buttons').append(el);
+    });
+  }
 
   setState('choose_coin');
 }
