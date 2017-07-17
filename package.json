@@ -47,7 +47,8 @@
   "scripts": {
     "pretest": "jshint bin lib ui/js/app.js",
     "test": "ava",
-    "build": "babel ui/src/app.js -s -o ui/js/app.js"
+    "build": "babel ui/src/app.js -s -o ui/js/app.js",
+    "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css"
   },
   "standard": {
     "ignore": [
@@ -65,5 +66,8 @@
       "deploy/**",
       "build/**"
     ]
-  }
+  },
+  "browserslist": [
+    "Chrome >= 29"
+  ]
 }
