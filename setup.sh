@@ -1,10 +1,8 @@
 #!/bin/sh
 
-echo "Setting up, takes a few minutes..."
+echo "Setting up..."
 mkdir -p data/log
 mkdir -p ui/css/fonts
-
-yarn install
 
 cp device_config.sample.json device_config.json
 
