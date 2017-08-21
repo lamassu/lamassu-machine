@@ -516,6 +516,31 @@ body  { margin: 0;}
   width: 500px;
 }
 
+#sms-verification-side {
+  position: absolute;
+  top: 115; 
+  left: 674;
+  width: 500px;
+}
+
+.section-main-title {
+    font-size: 28px;
+    color: #FFFFFF;
+    text-align: center;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#deposit-side {
+    position: absolute;
+    top: 115;
+    left: 774;
+    width: 500px;
+}
+
 .i18n-rtl #deposit-side {
   right: 100; left: auto;
 }

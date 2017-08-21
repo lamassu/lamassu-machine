@@ -215,9 +215,17 @@ function processData (data) {
     case 'chooseCoin':
       chooseCoin(data.coins, data.twoWayMode)
       break
+    case 'smsVerification':
+      smsVerification(data.threshold)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
+}
+
+function smsVerification(threshold) {
+  console.log('sms threshold to be displayed', threshold)
+  setScreen('sms_verification')
 }
 
 function chooseCoin (coins, twoWayMode) {
@@ -343,6 +351,17 @@ $(document).ready(function () {
   touchEvent(sendCoinsButton, function () {
     setState('sending_coins')
     buttonPressed('sendCoins')
+  })
+
+  var sendCoinsButton = document.getElementById('send-coins-sms')
+  touchEvent(sendCoinsButton, function () {
+    setState('sending_coins')
+    buttonPressed('sendCoins')
+  })
+  
+  var smsCompliance = document.getElementById('sms-start-verification')
+  touchEvent(smsCompliance, function () {
+    buttonPressed('smsCompliance')
   })
 
   var insertBillCancelButton = document.getElementById('insertBillCancel')
