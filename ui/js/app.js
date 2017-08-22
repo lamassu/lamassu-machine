@@ -354,15 +354,16 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
-  var sendCoinsButton = document.getElementById('send-coins-sms')
-  touchEvent(sendCoinsButton, function () {
+  // TODO: add this to setupButton
+  var sendCoinsButtonSms = document.getElementById('send-coins-sms')
+  touchEvent(sendCoinsButtonSms, function () {
     setState('sending_coins')
     buttonPressed('sendCoins')
   })
   
+  // TODO: add this to setupButton
   var smsCompliance = document.getElementById('sms-start-verification')
   touchEvent(smsCompliance, function () {
-    console.log('clicked')
     buttonPressed('smsCompliance')
   })
 
