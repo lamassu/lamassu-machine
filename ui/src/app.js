@@ -354,7 +354,7 @@ $(document).ready(function () {
   })
 
   // TODO: add this to setupButton
-  var sendCoinsButtonSms = document.getElementById('send-coins-sms')
+  const sendCoinsButtonSms = document.getElementById('send-coins-sms')
   touchEvent(sendCoinsButtonSms, function () {
     setState('sending_coins')
     buttonPressed('sendCoins')
