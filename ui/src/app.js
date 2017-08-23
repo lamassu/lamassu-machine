@@ -51,7 +51,7 @@ var cassettes = null
 let currentCryptoCode = null
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
-'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
+  'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
   websocket = new WebSocket('ws://localhost:' + PORT + '/')
@@ -223,7 +223,7 @@ function processData (data) {
   }
 }
 
-function smsVerification(threshold) {
+function smsVerification (threshold) {
   console.log('sms threshold to be displayed', threshold)
   setScreen('sms_verification')
 }
@@ -359,7 +359,7 @@ $(document).ready(function () {
     setState('sending_coins')
     buttonPressed('sendCoins')
   })
-  
+
   // TODO: add this to setupButton
   var smsCompliance = document.getElementById('sms-start-verification')
   touchEvent(smsCompliance, function () {
