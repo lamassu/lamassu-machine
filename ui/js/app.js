@@ -862,7 +862,7 @@ function qrize(text, target, size) {
 
 function setTxId(txId) {
   qrize(txId, $('#cash-in-qr-code'), 300);
-  qrize(txId, $('cash-in-fail-qr-code'), 300);
+  qrize(txId, $('#cash-in-fail-qr-code'), 300);
 }
 
 function setBuyerAddress(address) {
