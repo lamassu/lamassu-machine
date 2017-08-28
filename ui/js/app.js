@@ -155,7 +155,6 @@ function processData(data) {
       setState('security_code');
       break;
     case 'scanned':
-      confirmBeep.play();
       setState('insert_bills');
       break;
     case 'acceptingFirstBill':
