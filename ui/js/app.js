@@ -703,7 +703,7 @@ function setFixedFee(_fee) {
   var fee = parseFloat(_fee);
 
   if (fee > 0) {
-    var fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee));
+    var fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee, 2));
     $('.js-i18n-fixed-fee').html(fixedFee);
   } else {
     $('.js-i18n-fixed-fee').html('');

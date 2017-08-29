@@ -700,7 +700,7 @@ function setFixedFee (_fee) {
   const fee = parseFloat(_fee)
 
   if (fee > 0) {
-    const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee))
+    const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee, 2))
     $('.js-i18n-fixed-fee').html(fixedFee)
   } else {
     $('.js-i18n-fixed-fee').html('')
