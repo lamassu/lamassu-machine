@@ -77,8 +77,8 @@ function pollUpdate () {
   var locale = trader.locale.localeInfo.primaryLocale
   currency = trader.locale.currency
   var fiatBalance = trader.balance.toFixed(2) + ' ' + currency
-  console.log('Exchange rate: %d, Fiat balance: %s, Locale: %s, TxLimit: %d',
-    trader.exchangeRate.toFixed(2), fiatBalance, locale, trader.txLimit)
+  console.log('Exchange rate: %d, Fiat balance: %s, Locale: %s, HardLimitVerificationThreshold: %d',
+    trader.exchangeRate.toFixed(2), fiatBalance, locale, trader.hardLimitVerificationThreshold)
   ready()
 }
 
