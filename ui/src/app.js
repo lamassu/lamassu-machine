@@ -356,8 +356,15 @@ $(document).ready(function () {
   // TODO: add this to setupButton
   const sendCoinsButtonSms = document.getElementById('send-coins-sms')
   touchEvent(sendCoinsButtonSms, function () {
-    setState('sending_coins')
-    buttonPressed('sendCoins')
+    /**
+     * Don't set a screen here.
+     *
+     * Machine will decided which screent to set.
+     * It depends from the transaction's fiat amount inserted
+     * If the user has zero bills inserted machine will show
+     * the "chooseCoin" screen, else the sendCoins screen
+     */
+    buttonPressed('finishBeforeSms')
   })
 
   // TODO: add this to setupButton

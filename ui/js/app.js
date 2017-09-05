@@ -52,7 +52,7 @@ var cassettes = null
 let currentCryptoCode = null
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
-'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
+  'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
   websocket = new WebSocket('ws://localhost:' + PORT + '/')
@@ -224,7 +224,7 @@ function processData (data) {
   }
 }
 
-function smsVerification(threshold) {
+function smsVerification (threshold) {
   console.log('sms threshold to be displayed', threshold)
   setScreen('sms_verification')
 }
@@ -355,12 +355,19 @@ $(document).ready(function () {
   })
 
   // TODO: add this to setupButton
-  var sendCoinsButtonSms = document.getElementById('send-coins-sms')
+  const sendCoinsButtonSms = document.getElementById('send-coins-sms')
   touchEvent(sendCoinsButtonSms, function () {
-    setState('sending_coins')
-    buttonPressed('sendCoins')
+    /**
+     * Don't set a screen here.
+     *
+     * Machine will decided which screent to set.
+     * It depends from the transaction's fiat amount inserted
+     * If the user has zero bills inserted machine will show
+     * the "chooseCoin" screen, else the sendCoins screen
+     */
+    buttonPressed('finishBeforeSms')
   })
-  
+
   // TODO: add this to setupButton
   var smsCompliance = document.getElementById('sms-start-verification')
   touchEvent(smsCompliance, function () {
