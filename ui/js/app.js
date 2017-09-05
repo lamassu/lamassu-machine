@@ -941,11 +941,15 @@ function sendOnly (reason, cryptoCode) {
 
   t('or', '!')
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
-  var reasonText = reason === 'transactionLimit' ||
-    reason === 'validatorError' ||
-    reason === 'networkDown'
-  ? 'Transaction limit reached.'
-  : "We're out of %s."
+  const errorMessages = {
+    'transactionLimit': 'Transaction limit reached.',
+    'validatorError': 'Error in validation.',
+    'networkDown': 'Network connection problem',
+    'lowBalance': "We're out of %s"
+  }
+  // If no reason provided defaults to lowBalance
+  const reasonText = errorMessages[reason] || errorMessages.lowBalance
+
   console.log('DEBUG111: %s, %s', reason, reasonText)
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
   t('limit-description',
