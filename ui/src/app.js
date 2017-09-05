@@ -943,7 +943,7 @@ function sendOnly (reason, cryptoCode) {
   const errorMessages = {
     'transactionLimit': 'Transaction limit reached.',
     'validatorError': 'Error in validation.',
-    'networkDown': 'Network connection problem',
+    'networkDown': 'Network connection error',
     'lowBalance': "We're out of %s"
   }
   // If no reason provided defaults to lowBalance
