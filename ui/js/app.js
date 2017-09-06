@@ -213,9 +213,17 @@ function processData(data) {
     case 'chooseCoin':
       chooseCoin(data.coins, data.twoWayMode);
       break;
+    case 'smsVerification':
+      smsVerification(data.threshold);
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
+}
+
+function smsVerification(threshold) {
+  console.log('sms threshold to be displayed', threshold);
+  setScreen('sms_verification');
 }
 
 function chooseCoin(coins, twoWayMode) {
@@ -349,6 +357,26 @@ $(document).ready(function () {
   touchEvent(sendCoinsButton, function () {
     setState('sending_coins');
     buttonPressed('sendCoins');
+  }
+
+  // TODO: add this to setupButton
+  );var sendCoinsButtonSms = document.getElementById('send-coins-sms');
+  touchEvent(sendCoinsButtonSms, function () {
+    /**
+     * Don't set a screen here.
+     *
+     * Machine will decided which screent to set.
+     * It depends from the transaction's fiat amount inserted
+     * If the user has zero bills inserted machine will show
+     * the "chooseCoin" screen, else the sendCoins screen
+     */
+    buttonPressed('finishBeforeSms');
+  }
+
+  // TODO: add this to setupButton
+  );var smsCompliance = document.getElementById('sms-start-verification');
+  touchEvent(smsCompliance, function () {
+    buttonPressed('smsCompliance');
   });
 
   var insertBillCancelButton = document.getElementById('insertBillCancel');
@@ -905,7 +933,14 @@ function sendOnly(reason, cryptoCode) {
 
   t('or', '!');
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15);
-  var reasonText = reason === 'transactionLimit' || reason === 'validatorError' || reason === 'networkDown' ? 'Transaction limit reached.' : "We're out of %s.";
+  var errorMessages = {
+    'transactionLimit': 'Transaction limit reached.',
+    'validatorError': 'Error in validation.',
+    'networkDown': 'Network connection error',
+    'lowBalance': "We're out of %s"
+    // If no reason provided defaults to lowBalance
+  };var reasonText = errorMessages[reason] || errorMessages.lowBalance;
+
   console.log('DEBUG111: %s, %s', reason, reasonText);
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode));
   t('limit-description', locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch());
