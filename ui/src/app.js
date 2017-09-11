@@ -1,5 +1,13 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict'
+
+const DEBUG_MODE = debugMode()
+
+function debugMode () {
+  const queryString = window.location.search
+  const params = new URLSearchParams(queryString.substring(1))
+  return params.get('debug')
+}
 
 console.log('DEBUG11')
 var fiatCode = null
@@ -310,8 +318,11 @@ $(document).ready(function () {
   // buffers automatically when created
   confirmBeep = new Audio('sounds/Confirm8-Bit.ogg')
 
-  connect()
-  setInterval(verifyConnection, 1000)
+  if (DEBUG_MODE !== 'demo') {
+    connect()
+    setInterval(verifyConnection, 1000)
+  }
+
   initTranslatePage()
 
   var wifiNetworkButtons = document.getElementById('networks')
@@ -1145,4 +1156,19 @@ function fiatComplete (tx) {
 }
 
 function initDebug () {
+  if (DEBUG_MODE === 'dev') {
+    $('body').css('cursor', 'default')
+    return
+  }
+
+  if (DEBUG_MODE === 'demo') {
+    setLocale('en-US')
+    $('body').css('cursor', 'default')
+
+    chooseCoin([
+      {display: 'Bitcoin', cryptoCode: 'BTC'},
+      {display: 'Ethereum', cryptoCode: 'ETH'},
+      {display: 'ZCash', cryptoCode: 'ZEC'}
+    ], true)
+  }
 }
