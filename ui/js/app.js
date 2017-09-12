@@ -1,13 +1,10 @@
 /* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict';
 
-var DEBUG_MODE = debugMode();
-
-function debugMode() {
-  var queryString = window.location.search;
-  var params = new URLSearchParams(queryString.substring(1));
-  return params.get('debug');
-}
+var queryString = window.location.search;
+var params = new URLSearchParams(queryString.substring(1));
+var SCREEN = params.get('screen');
+var DEBUG_MODE = SCREEN ? 'demo' : params.get('debug');
 
 console.log('DEBUG11');
 var fiatCode = null;
@@ -1152,7 +1149,11 @@ function initDebug() {
     setLocale('en-US');
     $('body').css('cursor', 'default');
 
-    chooseCoin([{ display: 'Bitcoin', cryptoCode: 'BTC' }, { display: 'Ethereum', cryptoCode: 'ETH' }, { display: 'ZCash', cryptoCode: 'ZEC' }], true);
+    if (!SCREEN) {
+      return chooseCoin([{ display: 'Bitcoin', cryptoCode: 'BTC' }, { display: 'Ethereum', cryptoCode: 'ETH' }, { display: 'ZCash', cryptoCode: 'ZEC' }], true);
+    }
+
+    setState(SCREEN);
   }
 }
 

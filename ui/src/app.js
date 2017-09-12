@@ -1,13 +1,10 @@
 /* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict'
 
-const DEBUG_MODE = debugMode()
-
-function debugMode () {
-  const queryString = window.location.search
-  const params = new URLSearchParams(queryString.substring(1))
-  return params.get('debug')
-}
+const queryString = window.location.search
+const params = new URLSearchParams(queryString.substring(1))
+const SCREEN = params.get('screen')
+const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 
 console.log('DEBUG11')
 var fiatCode = null
@@ -1165,10 +1162,14 @@ function initDebug () {
     setLocale('en-US')
     $('body').css('cursor', 'default')
 
-    chooseCoin([
-      {display: 'Bitcoin', cryptoCode: 'BTC'},
-      {display: 'Ethereum', cryptoCode: 'ETH'},
-      {display: 'ZCash', cryptoCode: 'ZEC'}
-    ], true)
+    if (!SCREEN) {
+      return chooseCoin([
+        {display: 'Bitcoin', cryptoCode: 'BTC'},
+        {display: 'Ethereum', cryptoCode: 'ETH'},
+        {display: 'ZCash', cryptoCode: 'ZEC'}
+      ], true)
+    }
+
+    setState(SCREEN)
   }
 }
