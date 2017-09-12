@@ -1,5 +1,13 @@
-/* globals $, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict'
+
+const DEBUG_MODE = debugMode()
+
+function debugMode () {
+  const queryString = window.location.search
+  const params = new URLSearchParams(queryString.substring(1))
+  return params.get('debug')
+}
 
 console.log('DEBUG11')
 var fiatCode = null
@@ -156,7 +164,6 @@ function processData (data) {
       setState('security_code')
       break
     case 'scanned':
-      confirmBeep.play()
       setState('insert_bills')
       break
     case 'acceptingFirstBill':
@@ -311,8 +318,11 @@ $(document).ready(function () {
   // buffers automatically when created
   confirmBeep = new Audio('sounds/Confirm8-Bit.ogg')
 
-  connect()
-  setInterval(verifyConnection, 1000)
+  if (DEBUG_MODE !== 'demo') {
+    connect()
+    setInterval(verifyConnection, 1000)
+  }
+
   initTranslatePage()
 
   var wifiNetworkButtons = document.getElementById('networks')
@@ -729,7 +739,7 @@ function setFixedFee (_fee) {
   const fee = parseFloat(_fee)
 
   if (fee > 0) {
-    const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee))
+    const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee, 2))
     $('.js-i18n-fixed-fee').html(fixedFee)
   } else {
     $('.js-i18n-fixed-fee').html('')
@@ -894,7 +904,7 @@ function qrize (text, target, size) {
 
 function setTxId (txId) {
   qrize(txId, $('#cash-in-qr-code'), 300)
-  qrize(txId, $('cash-in-fail-qr-code'), 300)
+  qrize(txId, $('#cash-in-fail-qr-code'), 300)
 }
 
 function setBuyerAddress (address) {
@@ -1146,4 +1156,19 @@ function fiatComplete (tx) {
 }
 
 function initDebug () {
+  if (DEBUG_MODE === 'dev') {
+    $('body').css('cursor', 'default')
+    return
+  }
+
+  if (DEBUG_MODE === 'demo') {
+    setLocale('en-US')
+    $('body').css('cursor', 'default')
+
+    chooseCoin([
+      {display: 'Bitcoin', cryptoCode: 'BTC'},
+      {display: 'Ethereum', cryptoCode: 'ETH'},
+      {display: 'ZCash', cryptoCode: 'ZEC'}
+    ], true)
+  }
 }
