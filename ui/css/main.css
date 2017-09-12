@@ -518,7 +518,7 @@ body  { margin: 0;}
 
 #sms-verification-side {
   position: absolute;
-  top: 115; 
+  top: 115;
   left: 674;
   width: 500px;
 }
@@ -1516,9 +1516,11 @@ body  { margin: 0;}
 }
 
 .fiat-side .info {
-  width: 1200px;
-  height: 720px;
   background-color: #0e4160;   /* cobalt */
+}
+
+.cash-in-style .info {
+  background-color: #37e8d7; /* amazonite */;
 }
 
 .fiat-side .info h1 {
@@ -1639,6 +1641,10 @@ body  { margin: 0;}
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   animation-fill-mode: both;
+}
+
+.cash-in-style .spinner > div {
+  background-color: #0e4160;   /* cobalt */
 }
 
 .spinner .bounce1 {
