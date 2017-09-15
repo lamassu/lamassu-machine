@@ -54,3 +54,8 @@ crowdin.yaml
 
 ne*.txt
 certs/
+
+hardware/codebase/aaeon/node_modules
+*.tgz
+
+.vagrant
