@@ -7,7 +7,7 @@ var cp = require('child_process');
 var report = require('./report').report;
 var tar = require('/opt/apps/machine/lamassu-machine/node_modules/tar');
 
-var TIMEOUT = 10000;
+var TIMEOUT = 120000;
 
 var hardwareCode = process.argv[2] || 'N7G1';
 
