@@ -1,3 +1,4 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
 'use strict'
 
@@ -6,6 +7,7 @@ const params = new URLSearchParams(queryString.substring(1))
 const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 
+console.log('DEBUG11')
 var fiatCode = null
 var locale = null
 var localeCode = null
@@ -85,6 +87,7 @@ function buttonPressed (button, data) {
 }
 
 function processData (data) {
+  console.log('DEBUG400: %j', data)
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
   if (!locale) return
@@ -95,7 +98,7 @@ function processData (data) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
     setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode)
   }
-  if (data.tx) setTx(data.tx)
+  if (data.txId) setTxId(data.txId)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
@@ -366,10 +369,31 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
+  // TODO: add this to setupButton
+  const sendCoinsButtonSms = document.getElementById('send-coins-sms')
+  touchEvent(sendCoinsButtonSms, function () {
+    /**
+     * Don't set a screen here.
+     *
+     * Machine will decided which screent to set.
+     * It depends from the transaction's fiat amount inserted
+     * If the user has zero bills inserted machine will show
+     * the "chooseCoin" screen, else the sendCoins screen
+     */
+    buttonPressed('finishBeforeSms')
+  })
+
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
   touchEvent(blockedCustomerOk, function () {
     buttonPressed('blockedCustomerOk')
   })
+
+  // TODO: add this to setupButton
+  var smsCompliance = document.getElementById('sms-start-verification')
+  touchEvent(smsCompliance, function () {
+    buttonPressed('smsCompliance')
+  })
+
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
     setBuyerAddress(null)
@@ -392,6 +416,12 @@ $(document).ready(function () {
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
   setupButton('cash-out-button', 'cashOut')
+
+  // var button = document.getElementById('js-coin-selection')
+  // touchEvent(button, function (e) {
+  //   var cryptoCode = e.target.dataset.coin
+  //   buttonPressed('chooseCoin', cryptoCode)
+  // })
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
@@ -428,8 +458,6 @@ $(document).ready(function () {
   })
 
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
-  $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
-  $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
@@ -885,22 +913,9 @@ function qrize (text, target, size) {
   target.empty().append(el)
 }
 
-function setTx (tx) {
-  const txId = tx.id
-  const hasBills = tx.bills && tx.bills.length > 0
-
-  if (hasBills) {
-    $('.js-inserted-notes').show()
-    $('.js-no-inserted-notes').hide()
-  } else {
-    $('.js-inserted-notes').hide()
-    $('.js-no-inserted-notes').show()
-  }
-
+function setTxId (txId) {
   qrize(txId, $('#cash-in-qr-code'), 300)
   qrize(txId, $('#cash-in-fail-qr-code'), 300)
-  qrize(txId, $('#qr-code-fiat-receipt'), 330)
-  qrize(txId, $('#qr-code-fiat-complete'), 330)
 }
 
 function setBuyerAddress (address) {
@@ -956,6 +971,7 @@ function sendOnly (reason, cryptoCode) {
   // If no reason provided defaults to lowBalance
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
 
+  console.log('DEBUG111: %s, %s', reason, reasonText)
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
   t('limit-description',
     locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
@@ -1101,6 +1117,7 @@ function fiatCredit (data) {
 }
 
 function setDepositAddress (tx, url) {
+  console.log('DEBUG22: %s', [tx, url])
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
   $('.deposit_state .send-notice').show()
@@ -1111,6 +1128,9 @@ function setDepositAddress (tx, url) {
 function deposit (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
+
+  console.log('DEBUG88')
+  console.log('DEBUG89: %s', display)
 
   $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
@@ -1125,10 +1145,12 @@ function fiatReceipt (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
+  console.log('DEBUG99: %s', display)
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
 
+  qrize(tx.sessionId, $('#qr-code-fiat-receipt'), 330)
   setState('fiat_receipt')
 }
 
@@ -1136,9 +1158,14 @@ function fiatComplete (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
+  console.log('DEBUG78')
+  console.log('DEBUG79: %s', display)
+
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
+
+  qrize(tx.sessionId, $('#qr-code-fiat-complete'), 330)
 
   setState('fiat_complete')
 }
@@ -1164,3 +1191,5 @@ function initDebug () {
     setState(SCREEN)
   }
 }
+
+},{}]},{},[1]);

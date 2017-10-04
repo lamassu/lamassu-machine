@@ -52,6 +52,25 @@ h1 { margin: 0;}
 body  { margin: 0;}
 #view { background-color: #37E8D7; width: 1280px; height: 800px; position: relative; }
 
+.center {
+    text-align: center;
+    margin: 150px auto;
+    max-width: 500px;
+}
+
+.blocked-customer-top {
+  display: none;
+}
+
+.blocked-customer-top-inner {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    top: 45px;
+    left: 30px;
+    right: 30px;
+}
+
 .viewport {
   position: absolute;
   top: 0; left: 0;
