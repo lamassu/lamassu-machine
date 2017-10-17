@@ -19,6 +19,7 @@ function diskLog (level, timestamp, msg) {
     msg
   }) + '\n'
   fs.appendFile(LOG_FILE, line, () => {})
+  fs.appendFile(getLogFile(), line, () => {})
 }
 
 clim.logWrite = function (level, prefixes, msg) {
@@ -28,6 +29,22 @@ clim.logWrite = function (level, prefixes, msg) {
   if (prefixes.length > 0) line += ' ' + prefixes.join(' ')
   line += ' ' + msg
   process.stderr.write(line + '\n')
+}
+
+/**
+ * Get file by current date
+ *
+ * Returns a file name (full path)
+ * ending on current ymd in format yy-mm-dd
+ *
+ * @name getLogFile
+ * @function
+ *
+ * @returns {string} Log file path ending in yy-mm-dd format
+ */
+function getLogFile () {
+  const ymd = new Date().toISOString().slice(0, 10)
+  return path.resolve(dataPath, 'log', `${ymd}.log`)
 }
 
 clim(console, true)
