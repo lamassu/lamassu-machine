@@ -6,7 +6,6 @@ var params = new URLSearchParams(queryString.substring(1));
 var SCREEN = params.get('screen');
 var DEBUG_MODE = SCREEN ? 'demo' : params.get('debug');
 
-console.log('DEBUG11');
 var fiatCode = null;
 var locale = null;
 var localeCode = null;
@@ -85,7 +84,6 @@ function buttonPressed(button, data) {
 }
 
 function processData(data) {
-  console.log('DEBUG400: %j', data);
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
   if (data.locale) setLocale(data.locale);
   if (!locale) return;
@@ -96,7 +94,7 @@ function processData(data) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill;
     setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode);
   }
-  if (data.txId) setTxId(data.txId);
+  if (data.tx) setTxId(data.tx.id);
   if (data.wifiList) setWifiList(data.wifiList);
   if (data.wifiSsid) setWifiSsid(data.wifiSsid);
   if (data.sendOnly) sendOnly(data.reason, data.cryptoCode);
@@ -898,6 +896,8 @@ function qrize(text, target, size) {
 function setTxId(txId) {
   qrize(txId, $('#cash-in-qr-code'), 300);
   qrize(txId, $('#cash-in-fail-qr-code'), 300);
+  qrize(txId, $('#qr-code-fiat-receipt'), 330);
+  qrize(txId, $('#qr-code-fiat-complete'), 330);
 }
 
 function setBuyerAddress(address) {
@@ -949,7 +949,6 @@ function sendOnly(reason, cryptoCode) {
     // If no reason provided defaults to lowBalance
   };var reasonText = errorMessages[reason] || errorMessages.lowBalance;
 
-  console.log('DEBUG111: %s, %s', reason, reasonText);
   t('limit-reached', locale.translate(reasonText).fetch(cryptoCode));
   t('limit-description', locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch());
   $('#insert-another').css({ 'display': 'none' });
@@ -1086,7 +1085,6 @@ function fiatCredit(data) {
 }
 
 function setDepositAddress(tx, url) {
-  console.log('DEBUG22: %s', [tx, url]);
   $('.deposit_state .loading').hide();
   $('.deposit_state .send-notice .crypto-address').text(tx.toAddress);
   $('.deposit_state .send-notice').show();
@@ -1097,9 +1095,6 @@ function setDepositAddress(tx, url) {
 function deposit(tx) {
   var cryptoCode = tx.cryptoCode;
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode);
-
-  console.log('DEBUG88');
-  console.log('DEBUG89: %s', display);
 
   $('.deposit_state .digital .js-amount').html(display);
   $('.deposit_state .fiat .js-amount').text(tx.fiat);
@@ -1114,12 +1109,10 @@ function fiatReceipt(tx) {
   var cryptoCode = tx.cryptoCode;
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode);
 
-  console.log('DEBUG99: %s', display);
   $('.fiat_receipt_state .digital .js-amount').html(display);
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat);
   $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress);
 
-  qrize(tx.sessionId, $('#qr-code-fiat-receipt'), 330);
   setState('fiat_receipt');
 }
 
@@ -1127,14 +1120,9 @@ function fiatComplete(tx) {
   var cryptoCode = tx.cryptoCode;
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode);
 
-  console.log('DEBUG78');
-  console.log('DEBUG79: %s', display);
-
   $('.fiat_complete_state .digital .js-amount').html(display);
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat);
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress);
-
-  qrize(tx.sessionId, $('#qr-code-fiat-complete'), 330);
 
   setState('fiat_complete');
 }
