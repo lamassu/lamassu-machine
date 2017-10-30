@@ -95,7 +95,7 @@ function processData (data) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill
     setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode)
   }
-  if (data.tx) setTxId(data.tx.id)
+  if (data.tx) setTx(data.tx)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
@@ -358,26 +358,6 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
-  // TODO: add this to setupButton
-  const sendCoinsButtonSms = document.getElementById('send-coins-sms')
-  touchEvent(sendCoinsButtonSms, function () {
-    /**
-     * Don't set a screen here.
-     *
-     * Machine will decided which screent to set.
-     * It depends from the transaction's fiat amount inserted
-     * If the user has zero bills inserted machine will show
-     * the "chooseCoin" screen, else the sendCoins screen
-     */
-    buttonPressed('finishBeforeSms')
-  })
-
-  // TODO: add this to setupButton
-  var smsCompliance = document.getElementById('sms-start-verification')
-  touchEvent(smsCompliance, function () {
-    buttonPressed('smsCompliance')
-  })
-
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
     setBuyerAddress(null)
@@ -400,12 +380,6 @@ $(document).ready(function () {
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingScanCancel')
   setupButton('cash-out-button', 'cashOut')
-
-  // var button = document.getElementById('js-coin-selection')
-  // touchEvent(button, function (e) {
-  //   var cryptoCode = e.target.dataset.coin
-  //   buttonPressed('chooseCoin', cryptoCode)
-  // })
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
@@ -442,6 +416,8 @@ $(document).ready(function () {
   })
 
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
+  $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
+  $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
@@ -897,7 +873,18 @@ function qrize (text, target, size) {
   target.empty().append(el)
 }
 
-function setTxId (txId) {
+function setTx (tx) {
+  const txId = tx.id
+  const hasBills = tx.bills && tx.bills.length > 0
+
+  if (hasBills) {
+    $('.js-inserted-notes').show()
+    $('.js-no-inserted-notes').hide()
+  } else {
+    $('.js-inserted-notes').hide()
+    $('.js-no-inserted-notes').show()
+  }
+
   qrize(txId, $('#cash-in-qr-code'), 300)
   qrize(txId, $('#cash-in-fail-qr-code'), 300)
   qrize(txId, $('#qr-code-fiat-receipt'), 330)

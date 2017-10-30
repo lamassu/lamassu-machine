@@ -1519,10 +1519,6 @@ body  { margin: 0;}
   background-color: #0e4160;   /* cobalt */
 }
 
-.cash-in-style .info {
-  background-color: #37e8d7; /* amazonite */;
-}
-
 .fiat-side .info h1 {
   position: absolute;
   top: 125px;
@@ -1571,6 +1567,10 @@ body  { margin: 0;}
   background-color: #37e8d7;   /* amazonite */
 }
 
+.fiat-side .info .actions .wide {
+  width: 230px;
+}
+
 .fiat-side .info .actions .cancel {
   color: #0e4160;   /* cobalt */
   background-color: #37e8d7; /* amazonite */;
@@ -1584,6 +1584,19 @@ body  { margin: 0;}
 .fiat-side .info .actions .cancel:active {
   border-color: #17c2b2;
   background-color: #17c2b2;
+}
+
+.cash-in-style .info {
+  background-color: #37e8d7; /* amazonite */;
+}
+
+.cash-in-style .info p {
+  color: #0e4160; /* cobalt */;
+}
+
+.cash-in-style .info .actions .button {
+  color: #fff;
+  background-color: #0e4160;
 }
 
 .out_of_cash_state .info h1 {

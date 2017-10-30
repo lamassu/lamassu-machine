@@ -651,47 +651,23 @@
         </section>
       </section>
 
-      <section class="viewport sms_verification_state digital-side" data-tr-section="sms-verification">
-
-        <section class="main">
-          <h3 class="section-main-title">You reached the daily transaction limit. In order to continue, you need to verify with SMS</h3>
-          <section id="send-side">
-            <p id="tap-complete" class="js-i18n">Complete current transaction</p>
-            <div id="send-coins-sms" class="send-coins circle-button js-send-crypto-enable">
-              <span class="js-i18n js-send-crypto-enable">FINISH</span> </div>
-            <div class="send-coins circle-button js-send-crypto-disable">
-              <div class="js-send-crypto-disable spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-              </div>
-            </div>
+      <section class="viewport sms_verification_state fiat-side cash-in-style" data-tr-section="sms-verification">
+        <section class="info">
+          <h1 class="js-i18n">ID Verification</h1>
+          <section class="description">
+            <p class="js-i18n">
+              If you'd like to make a larger purchase, we'll need to make sure you're you by asking
+              for your mobile phone number. We'll then send you an SMS code.
+            </p>
+            <p>
+              <strong class="js-i18n">Would you like to insert more bills?</strong>
+            </p>
           </section>
-          <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <circle cx="680" cy="180" r="30" />
-          </svg>
-          <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
-
-          <section id="sms-verification-side">
-            <p id="tap-complete" class="js-i18n">Verify with SMS</p>
-            <div id="sms-start-verification" class="send-coins circle-button js-send-crypto-enable">
-              <span class="js-i18n js-send-crypto-enable">SMS ID</span>
-            </div>
-            <div class="send-coins circle-button js-send-crypto-disable">
-              <div class="js-send-crypto-disable spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-              </div>
-            </div>
+          <section class="actions">
+            <span class="button wide js-i18n sms-start-verification">Yes, verify ID</span>
+            <span class="button wide js-i18n js-inserted-notes send-coins-sms">No, send coins</span>
+            <span class="button wide js-i18n js-no-inserted-notes send-coins-sms">No, cancel</span>
           </section>
-        </section>
-        <section class="bottom-bar">
-          <p class="feedback"><span class="js-processing-bill"></span></p>
-        </section>
-
-        <section class="bottom-bar">
-          <p class="feedback"><span class="js-processing-bill"></span></p>
         </section>
       </section>
 
