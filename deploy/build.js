@@ -22,19 +22,17 @@ var version = packageJson.version
 var timestamp = new Date()
 
 function makeTar (tarPath, rootPath, cb) {
-  var reader = fstream.Reader({path: rootPath, type: 'Directory'})
   var writer = fstream.Writer({path: tarPath})
-  var packer = tar.Pack()
-  reader.pipe(packer).pipe(writer)
+  var packer = tar.c({}, [rootPath])
+  packer.pipe(writer)
 
   writer.on('close', cb)
 }
 
 function makeZippedTar (tarPath, rootPath, cb) {
-  var reader = fstream.Reader({path: rootPath, type: 'Directory'})
   var writer = fstream.Writer({path: tarPath})
-  var packer = tar.Pack()
-  reader.pipe(packer).pipe(zlib.createGzip()).pipe(writer)
+  var packer = tar.c({gzip: true}, [rootPath])
+  packer.pipe(zlib.createGzip()).pipe(writer)
 
   writer.on('close', cb)
 }
