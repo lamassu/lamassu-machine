@@ -9,6 +9,7 @@
 ::wait:/sbin/ip link set dev eth0 up
 
 ::once:/usr/bin/amixer -q set 'Int Spk' unmute
+::once:/bin/busybox ntpd -p pool.ntp.org
 
 ::respawn:/sbin/zcip -f -r 169.254.83.110 usb0 /usr/local/share/sencha/zcip.sh
 ::respawn:/sbin/udhcpc -f -i wlan0 -s /usr/local/share/sencha/udhcpc.sh
