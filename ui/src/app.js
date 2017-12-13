@@ -167,6 +167,7 @@ function processData (data) {
       setState('insert_bills')
       break
     case 'acceptingBills':
+      $('.blocked-customer-top').hide()
       setState('insert_more_bills')
       break
     case 'acceptingBill':
@@ -220,6 +221,9 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
+    case 'blockedCustomer':
+      blockedCustomer()
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -228,6 +232,10 @@ function processData (data) {
 function smsVerification (threshold) {
   console.log('sms threshold to be displayed', threshold)
   setScreen('sms_verification')
+}
+
+function blockedCustomer () {
+  return setScreen('blocked_customer')
 }
 
 function chooseCoin (coins, twoWayMode) {
@@ -358,6 +366,10 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
+  const blockedCustomerOk = document.getElementById('blocked-customer-ok')
+  touchEvent(blockedCustomerOk, function () {
+    buttonPressed('blockedCustomerOk')
+  })
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
     setBuyerAddress(null)
@@ -938,7 +950,8 @@ function sendOnly (reason, cryptoCode) {
     'transactionLimit': 'Transaction limit reached.',
     'validatorError': 'Error in validation.',
     'networkDown': 'Network connection error',
-    'lowBalance': "We're out of %s"
+    'lowBalance': "We're out of %s",
+    'blockedCustomer': ' '
   }
   // If no reason provided defaults to lowBalance
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
@@ -948,6 +961,9 @@ function sendOnly (reason, cryptoCode) {
     locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
   $('#insert-another').css({'display': 'none'})
   $('#limit-reached-section').css({'display': 'block'})
+
+  if (reason === 'blockedCustomer') $('.blocked-customer-top').show()
+  else $('.blocked-customer-top').hide()
 }
 
 function setPartialSend (sent, total) {
