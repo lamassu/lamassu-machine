@@ -7,14 +7,29 @@ const dataPath = require('./lib/data-path')
 
 const LOG_FILE = path.resolve(dataPath, 'machine.log')
 
+let lastTimestamp = null
+let serial = 0
+
 clim.getTime = function () {
   return new Date().toISOString()
+}
+
+// WARNING: This method has side effects
+function getSerial (timestamp) {
+  if (lastTimestamp === timestamp) {
+    return ++serial
+  }
+
+  lastTimestamp = timestamp
+  serial = 0
+  return serial
 }
 
 function diskLog (level, timestamp, msg) {
   const line = JSON.stringify({
     id: uuid.v4(),
     timestamp,
+    serial: getSerial(timestamp),
     level,
     msg
   }) + '\n'
