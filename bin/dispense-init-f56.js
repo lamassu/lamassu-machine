@@ -11,6 +11,7 @@ f56.create(process.argv[2])
 .then(res => console.dir(res))
 .then(() => process.exit(0))
 .catch(e => {
+  console.log('DEBUG1')
   console.log(e)
   process.exit(1)
 })
