@@ -812,33 +812,13 @@ function formatCrypto (amount) {
 
 function formatFiat (amount, fractionDigits) {
   if (!fractionDigits) fractionDigits = 0
-  var localized = null
-  var _localized = null
 
-  switch (fiatCode + ':' + jsLocaleCode) {
-    case 'DKK:en-US':
-    case 'SEK:en-US':
-      _localized = amount.toLocaleString(jsLocaleCode, {
-        useGrouping: true,
-        maximumFractionDigits: fractionDigits,
-        minimumFractionDigits: fractionDigits
-      })
-      localized = splitNumber(_localized, jsLocaleCode) + fiatCode
-      break
-    default:
-      _localized = amount.toLocaleString(jsLocaleCode, {
-        style: 'currency',
-        currency: fiatCode,
-        currencyDisplay: 'symbol',
-        useGrouping: true,
-        maximumFractionDigits: fractionDigits,
-        minimumFractionDigits: fractionDigits
-      })
-      localized = splitNumber(_localized, jsLocaleCode)
-      break
-  }
-
-  return localized
+  const localized = amount.toLocaleString(jsLocaleCode, {
+    useGrouping: true,
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits
+  })
+  return splitNumber(localized, jsLocaleCode) + fiatCode
 }
 
 function singleCurrencyUnit () {
