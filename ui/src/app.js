@@ -426,6 +426,9 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
+  setupButton('lightning-yes', 'lightningYes')
+  setupButton('lightning-no', 'lightningNo')
+
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}

@@ -2006,6 +2006,10 @@ body  { margin: 0;}
   padding: 10px;
 }
 
+.force-center {
+  text-align: center !important;
+}
+
 @-webkit-keyframes pulse-out {
   0% {
   }
