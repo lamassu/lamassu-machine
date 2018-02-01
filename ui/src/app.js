@@ -395,7 +395,7 @@ $(document).ready(function () {
   setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
-  setupButton('pairing-error-ok', 'pairingScanCancel')
+  setupButton('pairing-error-ok', 'pairingErrorOk')
   setupButton('cash-out-button', 'cashOut')
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
