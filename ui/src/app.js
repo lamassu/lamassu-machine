@@ -818,7 +818,7 @@ function formatFiat (amount, fractionDigits) {
     maximumFractionDigits: fractionDigits,
     minimumFractionDigits: fractionDigits
   })
-  return splitNumber(localized, jsLocaleCode) + fiatCode
+  return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode
 }
 
 function singleCurrencyUnit () {
