@@ -24,6 +24,7 @@ In second terminal window:
 node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam \
 --mockPair '<totem-from-admin>'
 ```
+Click on ``Init``, then ``Scan``. You should see the start screen.
 
 For subsequent runs, you don't need the ``--mockPair`` flag.
 

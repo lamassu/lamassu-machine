@@ -27,7 +27,8 @@
     "serialport": "^6.0.0-beta1",
     "tar": "~0.1.8",
     "uuid": "^3.1.0",
-    "ws": "^3.1.0"
+    "ws": "^3.1.0",
+    "xstate": "^3.0.3"
   },
   "optionalDependencies": {
     "jpeg-turbo": "lamassu/node-jpeg-turbo",
