@@ -1,19 +1,24 @@
+const process = require('process')
+
 const actionEmitter = require('../lib/action-emitter')
 
 const doorManager = require('../lib/ssuboard/door-manager')
+const u2f = require('../lib/ssuboard/u2f')
 
-doorManager.run()
+u2f.run()
+.then(doorManager.run)
+.then(() => console.log('All set up.'))
 
-actionEmitter.on('doorManager', console.log)
+actionEmitter.on('fob', console.log)
 
-console.log('opening door...')
-actionEmitter.emit('fob', {action: 'authorized'})
-setTimeout(() => actionEmitter.emit('door', {action: 'doorNotSecured'}), 3500)
+actionEmitter.on('doorManager', r => {
+  console.log(r)
 
-setTimeout(() => {
-  console.log('closing door')
-  actionEmitter.emit('door', {action: 'doorSecured'})
-}, 15000)
+  if (r.action === 'popDoor') {
+    console.log('*** Door popped ***')
+    setTimeout(() => actionEmitter.emit('door', {action: 'doorNotSecured'}), 500)
+    setTimeout(() => actionEmitter.emit('door', {action: 'doorSecured'}), 2000)
+  }
+})
 
-// Todo: conflicts are causing errors
-// instead of complaining on conflicts, ledControl should kill previous stuff and start anew
+process.on('unhandledRejection', e => console.log(e.trace))
