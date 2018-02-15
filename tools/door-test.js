@@ -3,10 +3,12 @@ const process = require('process')
 const actionEmitter = require('../lib/action-emitter')
 
 const doorManager = require('../lib/ssuboard/door-manager')
+const ledManager = require('../lib/ssuboard/led-manager')
 const u2f = require('../lib/ssuboard/u2f')
 const io = require('../lib/ssuboard/io')
 
 doorManager.run()
+.then(ledManager.run)
 .then(u2f.run)
 .then(io.run)
 .then(() => console.log('All set up.'))
