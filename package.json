@@ -19,6 +19,7 @@
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
     "minimist": "^1.2.0",
+    "nfc-pcsc": "^0.6.1",
     "node-forge": "^0.7.1",
     "p-any": "^1.1.0",
     "p-do-whilst": "^0.1.0",
