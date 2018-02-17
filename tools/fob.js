@@ -1,9 +1,11 @@
 const actionEmitter = require('../lib/action-emitter')
-const u2f = require('../lib/ssuboard/u2f')
+const fobManager = require('../lib/ssuboard/fob-manager')
 
 actionEmitter.on('fob', console.log)
 
-u2f.run()
+fobManager.run()
 .then(() => {
   console.log('DEBUG100')
 })
+
+// setTimeout(() => {}, 60000)
