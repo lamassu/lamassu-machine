@@ -1881,6 +1881,10 @@ body  { margin: 0;}
   line-height: 1.1;
 }
 
+.crypto-button:hover {
+  background-color: #eef;
+}
+
 .crypto-button-box {
   display: flex;
   justify-content: center;
@@ -1888,6 +1892,7 @@ body  { margin: 0;}
 }
 
 .crypto-button-ball {
+  display: none;
   position: absolute;
   width: 200px;
   height: 200px;
@@ -1905,22 +1910,22 @@ body  { margin: 0;}
 }
 
 .switch-screen .crypto-button-ball {
-  -webkit-animation: fadeblow 0.5s ease-in 0.2s forwards;
-          animation: fadeblow 0.5s ease-in 0.2s forwards;
+  /* -webkit-animation: fadeblow 0.5s ease-in 0.2s forwards;
+          animation: fadeblow 0.5s ease-in 0.2s forwards; */
 }
 
 .switch-screen .crypto-button {
-  -webkit-animation: push-pop 0.3s ease-out;
-          animation: push-pop 0.3s ease-out;
+  /* -webkit-animation: push-pop 0.3s ease-out;
+          animation: push-pop 0.3s ease-out; */
 }
 
 .crypto-switch {
-  -webkit-animation:
+  /* -webkit-animation:
     pulse-out 0.1s ease-in,
     pulse-in 0.4s ease-in 0.1s;
           animation:
     pulse-out 0.1s ease-in,
-    pulse-in 0.4s ease-in 0.1s;
+    pulse-in 0.4s ease-in 0.1s; */
 }
 
 .choose-coin-buttons {

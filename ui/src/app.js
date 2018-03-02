@@ -67,6 +67,7 @@ function connect () {
   websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
+    console.log(data)
     processData(data)
   }
   websocket.onerror = err => console.log(err)
@@ -440,24 +441,12 @@ $(document).ready(function () {
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
-    cashInBox.addClass('switch-screen')
-
-    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'}), 600)
-
-    setTimeout(() => {
-      cashInBox.removeClass('switch-screen')
-    }, 1000)
+    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'})
   })
 
   const cashOutBox = $('.cash-out-box')
   cashOutBox.click(() => {
-    cashOutBox.addClass('switch-screen')
-
-    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'}), 600)
-
-    setTimeout(() => {
-      cashOutBox.removeClass('switch-screen')
-    }, 1000)
+    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'})
   })
 
   var lastTouch = null
