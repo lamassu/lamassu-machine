@@ -37,6 +37,7 @@ function startBrain () {
 }
 
 process.on('uncaughtException', bail)
+process.on('unhandledRejection', bail)
 process.on('exit', function () { console.log('lamassu-machine exiting') })
 
 startBrain()

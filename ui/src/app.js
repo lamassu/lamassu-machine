@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua */
 'use strict'
 
 const queryString = window.location.search
@@ -63,11 +63,13 @@ var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
-  websocket = new WebSocket('ws://localhost:' + PORT + '/')
+  console.log(`ws://${HOST}:${PORT}/`)
+  websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
     processData(data)
   }
+  websocket.onerror = err => console.log(err)
 }
 
 function verifyConnection () {
