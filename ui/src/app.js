@@ -89,7 +89,7 @@ function buttonPressed (button, data) {
   }, 300)
   var res = {button: button}
   if (data || data === null) res.data = data
-  websocket.send(JSON.stringify(res))
+  if (websocket) websocket.send(JSON.stringify(res))
 }
 
 function processData (data) {

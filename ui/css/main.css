@@ -1879,10 +1879,15 @@ body  { margin: 0;}
   font-size: 36px;
   color: #0e4160;
   line-height: 1.1;
+  border: solid 1px #ffffff;
 }
 
-.crypto-button:hover {
-  background-color: #eef;
+.cash-in-box .crypto-button:hover {
+  border-color: #44e7d7;
+}
+
+.cash-out-box .crypto-button:hover {
+  border-color: #11425e;
 }
 
 .crypto-button-box {
