@@ -310,6 +310,8 @@ $(document).ready(function () {
           window.onmouseup =
             function () { return false }
 
+  document.documentElement.webkitRequestFullscreen()
+
   BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
