@@ -257,8 +257,8 @@ function chooseCoin (coins, twoWayMode) {
   const cashIn = $('.cash-in')
   const cashOut = $('.cash-out')
 
-  cashIn.html(`Buy<br/>${defaultCoin.display}`)
-  cashOut.html(`Sell<br/>${defaultCoin.display}`)
+  cashIn.find('[class$=coinname]').html(defaultCoin.display)
+  cashOut.find('[class$=coinname]').html(defaultCoin.display)
 
   $('.crypto-buttons').empty()
 
@@ -285,12 +285,12 @@ function switchCoin (coin) {
   currentCryptoCode = cryptoCode
 
   cashIn.addClass('crypto-switch')
-  setTimeout(() => cashIn.html(`Buy<br/>${coin.display}`), 100)
+  setTimeout(() => cashIn.find('[class$=coinname]').html(`Buy<br/>${coin.display}`), 100)
   setTimeout(() => cashIn.removeClass('crypto-switch'), 1000)
 
   setTimeout(() => {
     cashOut.addClass('crypto-switch')
-    setTimeout(() => cashOut.html(`Sell<br/>${coin.display}`), 100)
+    setTimeout(() => cashOut.find('[class$=coinname]').html(`Sell<br/>${coin.display}`), 100)
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
 }
