@@ -1,10 +1,13 @@
-const path = require('path')
-const playSound = require('../lib/ssuboard/play-sound')
+const soundManager = require('../lib/ssuboard/sound-manager')
+const actionEmitter = require('../lib/action-emitter')
 
-const filePath = process.argv[2]
+function play () {
+  actionEmitter.emit('brain', {action: 'playSound'})
+}
 
-console.log(filePath)
-
-setInterval(() => playSound.play(filePath), 1000)
-setTimeout(() => process.exit(0), 6000)
+soundManager.run()
+  .then(() => {
+    setInterval(play, 1000)
+    setTimeout(() => process.exit(0), 6000)
+  })
 
