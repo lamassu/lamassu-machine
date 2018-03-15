@@ -1141,24 +1141,24 @@ function fiatComplete (tx) {
   setState('fiat_complete')
 }
 
-function initDebug () {
-  if (DEBUG_MODE === 'dev') {
-    $('body').css('cursor', 'default')
-    return
-  }
+// function initDebug () {
+//   if (DEBUG_MODE === 'dev') {
+//     $('body').css('cursor', 'default')
+//     return
+//   }
 
-  if (DEBUG_MODE === 'demo') {
-    setLocale('en-US')
-    $('body').css('cursor', 'default')
+//   if (DEBUG_MODE === 'demo') {
+//     setLocale('en-US')
+//     $('body').css('cursor', 'default')
 
-    if (!SCREEN) {
-      return chooseCoin([
-        {display: 'Bitcoin', cryptoCode: 'BTC'},
-        {display: 'Ethereum', cryptoCode: 'ETH'},
-        {display: 'ZCash', cryptoCode: 'ZEC'}
-      ], true)
-    }
+//     if (!SCREEN) {
+//       return chooseCoin([
+//         {display: 'Bitcoin', cryptoCode: 'BTC'},
+//         {display: 'Ethereum', cryptoCode: 'ETH'},
+//         {display: 'ZCash', cryptoCode: 'ZEC'}
+//       ], true)
+//     }
 
-    setState(SCREEN)
-  }
-}
+//     setState(SCREEN)
+//   }
+// }

@@ -1,3 +1,7 @@
+html * {
+  cursor:none;
+}
+
 body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -6,7 +10,6 @@ body {
   overflow: hidden;
   direction: ltr;
   font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
-  cursor: none;
 }
 
 .brandon {
@@ -1882,11 +1885,11 @@ body  { margin: 0;}
   border: solid 1px #ffffff;
 }
 
-.cash-in-box .crypto-button:hover {
+.cash-in-box .crypto-button:active {
   border-color: #44e7d7;
 }
 
-.cash-out-box .crypto-button:hover {
+.cash-out-box .crypto-button:active {
   border-color: #11425e;
 }
 

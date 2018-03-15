@@ -24,6 +24,25 @@ autorestart=true
 stderr_logfile=/var/log/supervisor/lamassu-machine.err.log
 stdout_logfile=/var/log/supervisor/lamassu-machine.out.log
 
+[program:lamassu-audio]
+command=/opt/audio-setup.sh
+autostart=true
+autorestart=false
+stderr_logfile=/var/log/supervisor/lamassu-audio.err.log
+stdout_logfile=/var/log/supervisor/lamassu-audio.out.log
+
+/opt/audio-setup.sh
+#!/bin/bash
+echo 91 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio91/direction
+echo 1 > /sys/class/gpio/gpio91/value
+
+echo 66 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio66/direction
+echo 1 > /sys/class/gpio/gpio66/value
+
+amixer set PCM 75%
+
 /opt/fullscreen.sh:
 #!/usr/bin/env bash
 
