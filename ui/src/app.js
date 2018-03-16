@@ -9,7 +9,7 @@ const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 var fiatCode = null
 var locale = null
 var localeCode = null
-var jsLocaleCode = null  // Sometimes slightly different than localeCode
+var jsLocaleCode = null // Sometimes slightly different than localeCode
 var _primaryLocales = []
 var lastRates = null
 var coins = {
@@ -136,7 +136,7 @@ function processData (data) {
     case 'wifiConnected':
       t('wifi-connecting',
         locale.translate('Connected. Waiting for ticker.').fetch())
-      setState('wifi_connecting')  // in case we didn't go through wifi-connecting
+      setState('wifi_connecting') // in case we didn't go through wifi-connecting
       break
     case 'pairing':
       confirmBeep.play()
@@ -699,8 +699,8 @@ function setPrimaryLocales (primaryLocales) {
     var englishName = lang.englishName
     var nativeName = lang.nativeName
     var li = nativeName === englishName
-    ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
-    : '<li class="square-button" data-locale="' + l + '">' + englishName +
+      ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
+      : '<li class="square-button" data-locale="' + l + '">' + englishName +
       '<span class="native">' + nativeName + '</span> </li>'
     languages.append(li)
   }
@@ -738,8 +738,8 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
 
   var inserted = lastBill
-  ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
-  : locale.translate('Lamassu Cryptomat').fetch()
+    ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
+    : locale.translate('Lamassu Cryptomat').fetch()
 
   $('.js-processing-bill').html(inserted)
 
@@ -1122,24 +1122,24 @@ function fiatComplete (tx) {
   setState('fiat_complete')
 }
 
-// function initDebug () {
-//   if (DEBUG_MODE === 'dev') {
-//     $('body').css('cursor', 'default')
-//     return
-//   }
+function initDebug () {
+  if (DEBUG_MODE === 'dev') {
+    $('body').css('cursor', 'default')
+    return
+  }
 
-//   if (DEBUG_MODE === 'demo') {
-//     setLocale('en-US')
-//     $('body').css('cursor', 'default')
+  if (DEBUG_MODE === 'demo') {
+    setLocale('en-US')
+    $('body').css('cursor', 'default')
 
-//     if (!SCREEN) {
-//       return chooseCoin([
-//         {display: 'Bitcoin', cryptoCode: 'BTC'},
-//         {display: 'Ethereum', cryptoCode: 'ETH'},
-//         {display: 'ZCash', cryptoCode: 'ZEC'}
-//       ], true)
-//     }
+    if (!SCREEN) {
+      return chooseCoin([
+        {display: 'Bitcoin', cryptoCode: 'BTC'},
+        {display: 'Ethereum', cryptoCode: 'ETH'},
+        {display: 'ZCash', cryptoCode: 'ZEC'}
+      ], true)
+    }
 
-//     setState(SCREEN)
-//   }
-// }
+    setState(SCREEN)
+  }
+}
