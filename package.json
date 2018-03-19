@@ -7,6 +7,7 @@
     "base-x": "^3.0.0",
     "bignumber.js": "^4.0.1",
     "bs58check": "^2.0.2",
+    "cashaddrjs": "~0.2.8",
     "clim": "*",
     "crypto-js": "^3.1.9-1",
     "ethereumjs-icap": "^0.3.1",
