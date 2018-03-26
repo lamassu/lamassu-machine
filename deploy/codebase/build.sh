@@ -31,7 +31,7 @@ mkdir -p $TARGET_MODULES_DIR
 mkdir -p $TARGET_MACHINE_DIR/bin
 
 # Compile app.js
-npm run build
+npm run build > /dev/null
 
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
