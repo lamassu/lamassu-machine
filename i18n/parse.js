@@ -5,7 +5,7 @@ const x = Xray({
   filters: {strip}
 })
 
-const html = fs.readFileSync('./start.html')
+const html = fs.readFileSync('./start.html', {encoding: 'utf8'})
 
 function strip (s) {
   return s.trim().replace(/[\n ]+/g, ' ')
@@ -14,4 +14,7 @@ function strip (s) {
 x(html, '.viewport', [{
   screen: '@data-tr-section',
   str: ['.js-i18n | strip']
-}])((err, r) => console.log(r))
+}])((err, r) => {
+  console.log(err)
+  console.log(r)
+})
