@@ -1,6 +1,10 @@
-const leds = require('../lib/leds/leds')
+const tc = require('tinycolor2')
+const leds = require('../lib/ssuboard/leds')
+const ledControl = require('../lib/ssuboard/led-control')
 
-const colors = process.argv.slice(2, 5).map(s => parseInt(s, 10))
-leds.color(colors)
+const color = tc(process.argv[2]).toRgb()
+
+leds.open()
+.then(ledP => ledControl.lightAll(ledP, color))
 
 setTimeout(() => process.exit(0), 20000)

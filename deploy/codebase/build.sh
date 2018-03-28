@@ -30,6 +30,9 @@ mkdir -p $EXPORT_SCRIPT_DIR
 mkdir -p $TARGET_MODULES_DIR
 mkdir -p $TARGET_MACHINE_DIR/bin
 
+# Compile app.js
+npm run build > /dev/null
+
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
 cp $SCRIPT_DIR/../report.js $EXPORT_SCRIPT_DIR
@@ -41,6 +44,7 @@ cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
+cp -a $MACHINE_DIR/exec $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/bin/lamassu-machine $TARGET_MACHINE_DIR/bin
 
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR

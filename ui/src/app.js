@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua */
 'use strict'
 
 const queryString = window.location.search
@@ -9,7 +9,7 @@ const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 var fiatCode = null
 var locale = null
 var localeCode = null
-var jsLocaleCode = null  // Sometimes slightly different than localeCode
+var jsLocaleCode = null // Sometimes slightly different than localeCode
 var _primaryLocales = []
 var lastRates = null
 var coins = {
@@ -63,11 +63,14 @@ var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
-  websocket = new WebSocket('ws://localhost:' + PORT + '/')
+  console.log(`ws://${HOST}:${PORT}/`)
+  websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
+    console.log(data)
     processData(data)
   }
+  websocket.onerror = err => console.log(err)
 }
 
 function verifyConnection () {
@@ -86,7 +89,7 @@ function buttonPressed (button, data) {
   }, 300)
   var res = {button: button}
   if (data || data === null) res.data = data
-  websocket.send(JSON.stringify(res))
+  if (websocket) websocket.send(JSON.stringify(res))
 }
 
 function processData (data) {
@@ -133,7 +136,7 @@ function processData (data) {
     case 'wifiConnected':
       t('wifi-connecting',
         locale.translate('Connected. Waiting for ticker.').fetch())
-      setState('wifi_connecting')  // in case we didn't go through wifi-connecting
+      setState('wifi_connecting') // in case we didn't go through wifi-connecting
       break
     case 'pairing':
       confirmBeep.play()
@@ -307,6 +310,8 @@ $(document).ready(function () {
           window.onmouseup =
             function () { return false }
 
+  document.documentElement.webkitRequestFullscreen()
+
   BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
@@ -395,7 +400,7 @@ $(document).ready(function () {
   setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
-  setupButton('pairing-error-ok', 'pairingScanCancel')
+  setupButton('pairing-error-ok', 'pairingErrorOk')
   setupButton('cash-out-button', 'cashOut')
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
@@ -404,11 +409,13 @@ $(document).ready(function () {
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
     securityKeypad.deactivate.bind(securityKeypad))
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
+  setupButton('id-scan-failed-ok', 'idVerificationFailedOk')
   setupButton('id-code-failed-retry', 'idCodeFailedRetry')
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
 
   setupButton('limit-reached-ok', 'idle')
+  setupButton('hard-limit-reached-ok', 'idle')
   setupButton('deposit-timeout-sent-yes', 'depositTimeout')
   setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent')
   setupButton('out-of-cash-ok', 'idle')
@@ -441,24 +448,12 @@ $(document).ready(function () {
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
-    cashInBox.addClass('switch-screen')
-
-    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'}), 600)
-
-    setTimeout(() => {
-      cashInBox.removeClass('switch-screen')
-    }, 1000)
+    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'})
   })
 
   const cashOutBox = $('.cash-out-box')
   cashOutBox.click(() => {
-    cashOutBox.addClass('switch-screen')
-
-    setTimeout(() => buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'}), 600)
-
-    setTimeout(() => {
-      cashOutBox.removeClass('switch-screen')
-    }, 1000)
+    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'})
   })
 
   var lastTouch = null
@@ -708,8 +703,8 @@ function setPrimaryLocales (primaryLocales) {
     var englishName = lang.englishName
     var nativeName = lang.nativeName
     var li = nativeName === englishName
-    ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
-    : '<li class="square-button" data-locale="' + l + '">' + englishName +
+      ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
+      : '<li class="square-button" data-locale="' + l + '">' + englishName +
       '<span class="native">' + nativeName + '</span> </li>'
     languages.append(li)
   }
@@ -747,8 +742,8 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
 
   var inserted = lastBill
-  ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
-  : locale.translate('Lamassu Cryptomat').fetch()
+    ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
+    : locale.translate('Lamassu Cryptomat').fetch()
 
   $('.js-processing-bill').html(inserted)
 
@@ -815,33 +810,13 @@ function formatCrypto (amount) {
 
 function formatFiat (amount, fractionDigits) {
   if (!fractionDigits) fractionDigits = 0
-  var localized = null
-  var _localized = null
 
-  switch (fiatCode + ':' + jsLocaleCode) {
-    case 'DKK:en-US':
-    case 'SEK:en-US':
-      _localized = amount.toLocaleString(jsLocaleCode, {
-        useGrouping: true,
-        maximumFractionDigits: fractionDigits,
-        minimumFractionDigits: fractionDigits
-      })
-      localized = splitNumber(_localized, jsLocaleCode) + fiatCode
-      break
-    default:
-      _localized = amount.toLocaleString(jsLocaleCode, {
-        style: 'currency',
-        currency: fiatCode,
-        currencyDisplay: 'symbol',
-        useGrouping: true,
-        maximumFractionDigits: fractionDigits,
-        minimumFractionDigits: fractionDigits
-      })
-      localized = splitNumber(_localized, jsLocaleCode)
-      break
-  }
-
-  return localized
+  const localized = amount.toLocaleString(jsLocaleCode, {
+    useGrouping: true,
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits
+  })
+  return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode
 }
 
 function singleCurrencyUnit () {

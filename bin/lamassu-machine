@@ -22,7 +22,6 @@ function bail (err) {
   setTimeout(function () {
     console.log('lamassu-machine bailing out')
     process.exit(10)
-    process.abort()   // Make sure we're dead
   }, 7000) // Leave some time to connect for browser to set error screen
 }
 
@@ -37,6 +36,7 @@ function startBrain () {
 }
 
 process.on('uncaughtException', bail)
+process.on('unhandledRejection', console.log)
 process.on('exit', function () { console.log('lamassu-machine exiting') })
 
 startBrain()
