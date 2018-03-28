@@ -415,6 +415,7 @@ $(document).ready(function () {
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
 
   setupButton('limit-reached-ok', 'idle')
+  setupButton('hard-limit-reached-ok', 'idle')
   setupButton('deposit-timeout-sent-yes', 'depositTimeout')
   setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent')
   setupButton('out-of-cash-ok', 'idle')
