@@ -162,7 +162,7 @@ function processData (data) {
       phoneKeypad.activate()
       setState('register_phone')
       break
-    case 'registerCode':
+    case 'securityCode':
       securityKeypad.activate()
       setState('security_code')
       break
@@ -310,21 +310,17 @@ $(document).ready(function () {
           window.onmouseup =
             function () { return false }
 
-  document.documentElement.webkitRequestFullscreen()
-
   BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
   phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
     if (currentState !== 'register_phone') return
-    console.log('phoneKeypad: %s', result)
     buttonPressed('phoneNumber', result)
   })
 
   securityKeypad = new Keypad('security-keypad', {type: 'code'}, function (result) {
     if (currentState !== 'security_code') return
-    console.log(result)
     buttonPressed('securityCode', result)
   })
 
