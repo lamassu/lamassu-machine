@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./built",
+        "target": "es6",
+        "module": "commonjs",
+        "allowJs": true,
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true
+    },
+    "include": [
+        "./lib/**/*"
+    ]
+}
