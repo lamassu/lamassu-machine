@@ -896,8 +896,11 @@ function setAccepting (currentAccepting) {
 }
 
 function highBill (highestBill, reason) {
-  var reasonText = reason === 'transactionLimit' ? 'Transaction limit reached.' : "We're a little low."
-  t('high-bill-header', locale.translate(reasonText).fetch())
+  var reasonText = reason === 'transactionLimit'
+    ? locale.translate('Transaction limit reached.').fetch()
+    : locale.translate("We're a little low.").fetch()
+
+  t('high-bill-header', reasonText)
   t('highest-bill', locale.translate('Please insert %s or less.')
     .fetch(formatFiat(highestBill)))
   setScreen('high_bill')
@@ -926,16 +929,17 @@ function sendOnly (reason, cryptoCode) {
   t('or', '!')
   $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
   const errorMessages = {
-    'transactionLimit': 'Transaction limit reached.',
-    'validatorError': 'Error in validation.',
-    'networkDown': 'Network connection error',
-    'lowBalance': "We're out of %s",
-    'blockedCustomer': ' '
+    transactionLimit: locale.translate('Transaction limit reached.').fetch(),
+    validatorError: locale.translate('Error in validation.').fetch(),
+    networkDown: locale.translate('Network connection error').fetch(),
+    lowBalance: locale.translate("We're out of %s").fetch(cryptoCode),
+    blockedCustomer: locale.translate('Transaction limit reached.')
   }
+
   // If no reason provided defaults to lowBalance
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
 
-  t('limit-reached', locale.translate(reasonText).fetch(cryptoCode))
+  t('limit-reached', reasonText)
   t('limit-description',
     locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
   $('#insert-another').css({'display': 'none'})
@@ -954,19 +958,16 @@ function t (id, str) {
   $('#js-i18n-' + id).html(str)
 }
 
-function tc (className, str, cryptoCode) {
-  $('.js-i18n-' + className).html(locale.translate(str).fetch(cryptoCode))
-}
-
 function translateCoin (cryptoCode) {
-  tc('total-purchased', 'total %s purchased', cryptoCode)
-  tc('please-scan', 'Please scan the QR code to send us your %s.', cryptoCode)
-  tc('did-send-coins', 'Have you sent the %s yet?', cryptoCode)
-  tc('scan-address', 'Scan your %s address', cryptoCode)
-  tc('coins-to-address', 'Your %s will be sent to:', cryptoCode)
+  $('.js-i18n-total-purchased').html(locale.translate('total %s purchased').fetch(cryptoCode))
+
+  $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code to send us your %s.').fetch(cryptoCode))
+  $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
+  $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
+  $('.js-i18n-coins-to-address').html(locale.translate('Your %s will be sent to:').fetch(cryptoCode))
 
   if (cryptoCode === 'ETH') {
-    tc('authorizing-note', 'This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.')
+    $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode))
   }
 }
 

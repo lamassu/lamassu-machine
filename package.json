@@ -51,6 +51,7 @@
     "benchmark": "^2.1.4",
     "microtime": "^2.1.7",
     "p-whilst": "^1.0.0",
+    "parse5": "^4.0.0",
     "standard": "^11.0.1",
     "x-ray": "^2.3.2"
   },
