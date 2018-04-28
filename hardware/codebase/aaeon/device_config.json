@@ -18,7 +18,7 @@
     },
     "wpaConfigPath": "/etc/wpa_supplicant.conf"
   },
-  "id003": {
+  "billValidator": {
     "rs232": {
       "device": ["/dev/ttyUSB0", "/dev/ttyS0"]
     }
