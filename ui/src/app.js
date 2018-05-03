@@ -410,6 +410,7 @@ $(document).ready(function () {
   setupButton('id-code-failed-cancel', 'idCodeFailedCancel')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
 
+  setupButton('sanctions-failure-ok', 'idle')
   setupButton('limit-reached-ok', 'idle')
   setupButton('hard-limit-reached-ok', 'idle')
   setupButton('deposit-timeout-sent-yes', 'depositTimeout')
