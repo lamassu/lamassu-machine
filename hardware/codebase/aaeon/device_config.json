@@ -20,7 +20,7 @@
   },
   "billValidator": {
     "rs232": {
-      "device": ["/dev/ttyUSB0", "/dev/ttyS0"]
+      "device": "/dev/ttyS0"
     }
   },
   "billDispenser": {
