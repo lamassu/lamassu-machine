@@ -1,4 +1,4 @@
-# Installation on Ubuntu 16.04
+# Installation
 
 This assumes nodejs 8 and npm are already installed. When running ``npm install``, don't worry about warnings or skipped optional dependencies.
 
