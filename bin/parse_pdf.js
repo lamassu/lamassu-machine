@@ -13,5 +13,5 @@ data = data.replace('&', '\r')
 
 // const data = 'SIMPSON|MICHAEL|M|RSA|6512395184073|28 NOV 1976|RSA|CITIZEN|02 OCT 2018|87555|115641856|123456789112345678901234567890123456789013345678901234567894123456789012345678901234567890123456789012345678'
 console.log(data)
-var result = parser.parse(data)
+var result = parser.parse(Buffer.from(data))
 console.log(util.inspect(result, {depth: null, colors: true}))
