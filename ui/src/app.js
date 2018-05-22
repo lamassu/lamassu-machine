@@ -276,6 +276,22 @@ function chooseCoin (coins, twoWayMode) {
   setState('choose_coin')
 }
 
+function setCryptoBuy (coin) {
+  const cashIn = $('.cash-in')
+  const translatedCoin = locale.translate(coin.display).fetch()
+  const buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin)
+
+  cashIn.html(buyStr)
+}
+
+function setCryptoSell (coin) {
+  const cashOut = $('.cash-out')
+  const translatedCoin = locale.translate(coin.display).fetch()
+  const sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin)
+
+  cashOut.html(sellStr)
+}
+
 function switchCoin (coin) {
   const cashIn = $('.cash-in')
   const cashOut = $('.cash-out')
@@ -288,12 +304,12 @@ function switchCoin (coin) {
   currentCryptoCode = cryptoCode
 
   cashIn.addClass('crypto-switch')
-  setTimeout(() => cashIn.html(`Buy<br/>${coin.display}`), 100)
+  setTimeout(() => setCryptoBuy(coin), 100)
   setTimeout(() => cashIn.removeClass('crypto-switch'), 1000)
 
   setTimeout(() => {
     cashOut.addClass('crypto-switch')
-    setTimeout(() => cashOut.html(`Sell<br/>${coin.display}`), 100)
+    setTimeout(() => setCryptoSell(coin), 100)
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
 }

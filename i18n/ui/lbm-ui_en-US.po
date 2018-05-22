@@ -286,6 +286,22 @@ msgstr "Please contact the operator for more information."
 msgid "OK"
 msgstr "OK"
 
+#: On screen: sanctions-failure
+msgid "Sorry."
+msgstr "Sorry."
+
+#: On screen: sanctions-failure
+msgid "We are unable to process your transaction."
+msgstr "We are unable to process your transaction."
+
+#: On screen: sanctions-failure
+msgid "Please contact the operator for more information."
+msgstr "Please contact the operator for more information."
+
+#: On screen: sanctions-failure
+msgid "OK"
+msgstr "OK"
+
 #: On screen: id-verification-error
 msgid "It's us, not you."
 msgstr "It's us, not you."
@@ -699,6 +715,14 @@ msgid "Connected. Waiting for ticker."
 msgstr "Connected. Waiting for ticker."
 
 #: On screen: dynamic
+msgid "Buy<br/>%s"
+msgstr "Buy<br/>%s"
+
+#: On screen: dynamic
+msgid "Sell<br/>%s"
+msgstr "Sell<br/>%s"
+
+#: On screen: dynamic
 msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
 
@@ -797,4 +821,28 @@ msgstr "This should take <strong>15 seconds</strong> on average.<br/>Occasionall
 #: On screen: dynamic
 msgid "You'll be sending %s %s"
 msgstr "You'll be sending %s %s"
+
+#: On screen: coins
+msgid "Bitcoin"
+msgstr "Bitcoin"
+
+#: On screen: coins
+msgid "Ethereum"
+msgstr "Ethereum"
+
+#: On screen: coins
+msgid "Zcash"
+msgstr "Zcash"
+
+#: On screen: coins
+msgid "Litecoin"
+msgstr "Litecoin"
+
+#: On screen: coins
+msgid "Dash"
+msgstr "Dash"
+
+#: On screen: coins
+msgid "Bitcoin Cash"
+msgstr "Bitcoin Cash"
 

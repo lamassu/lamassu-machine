@@ -59,13 +59,17 @@ function toPo (res) {
 const appPath = path.resolve(uiPath, 'src', 'app.js')
 const app = fs.readFileSync(appPath, {encoding: 'utf8'})
 
-const pp = require('../lib/pp')
 const outPath = path.resolve(__dirname, '../i18n/ui/lbm-ui_en-US.po')
+
+const coins = [
+  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash'
+]
 
 parseHtml(html)
   .then(htmlResults => {
     const appResults = parseJs(app)
     htmlResults.push({screen: 'dynamic', str: appResults})
+    htmlResults.push({screen: 'coins', str: coins})
     fs.writeFileSync(outPath, toPo(htmlResults))
   })
 
