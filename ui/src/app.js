@@ -443,6 +443,11 @@ $(document).ready(function () {
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
+  $('.change-language').mousedown(() => {
+    if (_primaryLocales.length === 2) return setLocale(otherLocale())
+    setState('select_locale')
+  })
+
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
     buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'})
@@ -460,7 +465,8 @@ $(document).ready(function () {
     var languageButtonJ = $(e.target).closest('li')
     if (languageButtonJ.length === 0) return
     var newLocale = languageButtonJ.attr('data-locale')
-    buttonPressed('setLocale', {locale: newLocale})
+    setLocale(newLocale)
+    setState('choose_coin')
   })
 
   var fiatButtons = document.getElementById('js-fiat-buttons')
@@ -629,6 +635,15 @@ function setLocaleInfo (data) {
   setLocale(data.primaryLocale)
 }
 
+function otherLanguageName () {
+  const lang = lookupLocaleNames(otherLocale())
+  return lang && lang.nativeName
+}
+
+function otherLocale () {
+  return _primaryLocales.find(c => c !== localeCode)
+}
+
 function setLocale (data) {
   if (!data || data === localeCode) return
   localeCode = data
@@ -664,6 +679,9 @@ function setLocale (data) {
 
   locale = loadI18n(localeCode)
   try { translatePage() } catch (ex) {}
+
+  $('.js-two-language').html(otherLanguageName())
+
   if (lastRates) setExchangeRate(lastRates)
 }
 
@@ -676,6 +694,7 @@ function areArraysEqual (arr1, arr2) {
 }
 
 function lookupLocaleNames (locale) {
+  if (!locale) return
   var langMap = window.languageMappingList
   var language = locale.split('-')[0]
   var localeNames = langMap[language]
@@ -701,16 +720,25 @@ function setPrimaryLocales (primaryLocales) {
     var nativeName = lang.nativeName
     var li = nativeName === englishName
       ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
-      : '<li class="square-button" data-locale="' + l + '">' + englishName +
-      '<span class="native">' + nativeName + '</span> </li>'
+      : '<li class="square-button" data-locale="' + l + '">' + nativeName +
+      '<span class="english">' + englishName + '</span> </li>'
     languages.append(li)
   }
 
-  if (primaryLocales.length === 1) $('.change-language-button').hide()
-  else $('.change-language-button').show()
+  if (primaryLocales.length === 1) {
+    $('.js-multi-language').hide()
+    $('.js-two-language').hide()
+  }
 
-  if (primaryLocales.length === 2) languages.addClass('n2')
-  else languages.removeClass('n2')
+  if (primaryLocales.length === 2) {
+    $('.js-multi-language').hide()
+    $('.js-two-language').show()
+  }
+
+  if (primaryLocales.length > 2) {
+    $('.js-multi-language').show()
+    $('.js-two-language').hide()
+  }
 }
 
 function setFiatCode (data) {
@@ -1131,7 +1159,8 @@ function initDebug () {
   }
 
   if (DEBUG_MODE === 'demo') {
-    setLocale('en-US')
+    setPrimaryLocales(['en-US'])
+    setLocale('fr-FR')
     $('body').css('cursor', 'default')
 
     if (!SCREEN) {

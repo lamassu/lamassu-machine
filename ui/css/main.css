@@ -1740,7 +1740,7 @@ body  { margin: 0;}
   line-height: 200px;
 }
 
-.languages li .native {
+.languages li .english {
   float: right;
   color: #5f5f55;
   font-weight: 400;
@@ -1768,7 +1768,7 @@ body  { margin: 0;}
   color: #ffffff;
 }
 
-.languages li:active .native, .languages li.active .native {
+.languages li:active .english, .languages li.active .english {
   color: #ffffff;
 }
 
@@ -1831,10 +1831,17 @@ body  { margin: 0;}
 }
 
 .change-language {
-  display: none;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 0;
+  left: 0;
+  padding-left: 20px;
+  padding-top: 20px;
+  width: 500;
+  height: 150;
+  z-index: 1000;
+}
+
+.change-language > div {
   padding-left: 2em;
   background-image: url(../images/arrow.svg);
   background-repeat: no-repeat;
