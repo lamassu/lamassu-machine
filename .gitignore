@@ -37,6 +37,8 @@ istanbul
 # OS files
 .DS_Store
 
+.idea
+
 *.csv#
 
 /device_config.json

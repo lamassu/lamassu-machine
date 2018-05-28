@@ -67,7 +67,6 @@ function connect () {
   websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
-    console.log(data)
     processData(data)
   }
   websocket.onerror = err => console.log(err)
@@ -115,6 +114,7 @@ function processData (data) {
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
+  if (data.terms) setTermsScreen(data.terms)
 
   if (data.context) {
     $('.js-context').hide()
@@ -232,6 +232,9 @@ function processData (data) {
     case 'blockedCustomer':
       blockedCustomer()
       break
+    case 'termsScreen':
+      termsScreen(data)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -244,6 +247,10 @@ function smsVerification (threshold) {
 
 function blockedCustomer () {
   return setScreen('blocked_customer')
+}
+
+function termsScreen () {
+  return setScreen('terms_screen')
 }
 
 function chooseCoin (coins, twoWayMode) {
@@ -448,6 +455,8 @@ $(document).ready(function () {
 
   $('#deposit-qr').click(toggleLayer2)
 
+  setupButton('terms-ok', 'termsOk')
+
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
@@ -627,6 +636,38 @@ function setWifiList (recs, requestedPage) {
   if (recs.length > 4) {
     networks.append(button)
   }
+}
+
+/**
+ *
+ * @param {{
+ *           active: boolean,
+ *           title: string,
+ *           text: string,
+ *           accept: string,
+ *           cancel: string
+ * }} data
+ */
+function setTermsScreen (data) {
+  const $screen = $('.js-terms-screen')
+  const updateOrReset = (elem, label) => {
+    // assign data-default
+    if (!elem.data('default')) elem.data('default', elem.html())
+    label = label || elem.data('default')
+    // replace **text** with <b>text</b>
+    let matches = label.match(/(\*\*.[^*]*\*\*)/g);
+    matches && matches.forEach(function (match) {
+      label = label.replace(match, match
+        .replace('**', '<b>')
+        .replace('**', '</b>'))
+    })
+    elem.html(label)
+  }
+
+  updateOrReset($screen.find('.js-terms-title'), data.title)
+  updateOrReset($screen.find('.js-terms-text'), data.text)
+  updateOrReset($screen.find('.js-terms-accept-button'), data.accept)
+  updateOrReset($screen.find('.js-terms-cancel-button'), data.cancel)
 }
 
 function moreNetworks () {
