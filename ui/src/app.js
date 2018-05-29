@@ -233,7 +233,7 @@ function processData (data) {
       blockedCustomer()
       break
     case 'termsScreen':
-      termsScreen(data)
+      showTermsScreen()
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -249,7 +249,7 @@ function blockedCustomer () {
   return setScreen('blocked_customer')
 }
 
-function termsScreen () {
+function showTermsScreen () {
   return setScreen('terms_screen')
 }
 
@@ -455,7 +455,8 @@ $(document).ready(function () {
 
   $('#deposit-qr').click(toggleLayer2)
 
-  setupButton('terms-ok', 'termsOk')
+  setupButton('terms-ok', 'termsAccepted')
+  setupButton('terms-ko', 'idle')
 
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
@@ -555,10 +556,10 @@ function setupImmediateButton (buttonClass, buttonAction, callback) {
   })
 }
 
-function setupButton (buttonClass, buttonAction) {
+function setupButton (buttonClass, buttonAction, actionData) {
   var button = document.getElementById(buttonClass)
   touchEvent(button, function () {
-    buttonPressed(buttonAction)
+    buttonPressed(buttonAction, actionData)
   })
 }
 
