@@ -232,10 +232,8 @@ function processData (data) {
     case 'blockedCustomer':
       blockedCustomer()
       break
-    case 'termsScreen':
-      showTermsScreen()
-      break
     default:
+      console.log('action', data.action, window.snakecase(data.action))
       if (data.action) setState(window.snakecase(data.action))
   }
 }
@@ -247,10 +245,6 @@ function smsVerification (threshold) {
 
 function blockedCustomer () {
   return setScreen('blocked_customer')
-}
-
-function showTermsScreen () {
-  return setScreen('terms_screen')
 }
 
 function chooseCoin (coins, twoWayMode) {
@@ -651,24 +645,11 @@ function setWifiList (recs, requestedPage) {
  */
 function setTermsScreen (data) {
   const $screen = $('.js-terms-screen')
-  const updateOrReset = (elem, label) => {
-    // assign data-default
-    if (!elem.data('default')) elem.data('default', elem.html())
-    label = label || elem.data('default')
-    // replace **text** with <b>text</b>
-    let matches = label.match(/(\*\*.[^*]*\*\*)/g);
-    matches && matches.forEach(function (match) {
-      label = label.replace(match, match
-        .replace('**', '<b>')
-        .replace('**', '</b>'))
-    })
-    elem.html(label)
-  }
 
-  updateOrReset($screen.find('.js-terms-title'), data.title)
-  updateOrReset($screen.find('.js-terms-text'), data.text)
-  updateOrReset($screen.find('.js-terms-accept-button'), data.accept)
-  updateOrReset($screen.find('.js-terms-cancel-button'), data.cancel)
+  $screen.find('.js-terms-title').html(data.title)
+  $screen.find('.js-terms-text').html(data.text)
+  $screen.find('.js-terms-accept-button').html(data.accept)
+  $screen.find('.js-terms-cancel-button').html(data.cancel)
 }
 
 function moreNetworks () {
