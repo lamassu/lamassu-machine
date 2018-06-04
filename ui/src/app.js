@@ -108,7 +108,7 @@ function processData (data) {
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
-  if (data.depositInfo) setDepositAddress(data.depositInfo, data.depositUrl)
+  if (data.depositInfo) setDepositAddress(data.depositInfo)
   if (data.cassettes) setupCassettes(data.cassettes)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
@@ -446,8 +446,7 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-  setupButton('lightning-yes', 'lightningYes')
-  setupButton('lightning-no', 'lightningNo')
+  $('#deposit-qr').click(toggleLayer2)
 
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
@@ -897,14 +896,26 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function qrize (text, target, size) {
-  const el = kjua({
+function qrize (text, target, size, lightning) {
+  const image = document.getElementById('bolt-img')
+  const opts = {
+    crisp: true,
     text,
     size,
     render: 'canvas',
     rounded: 50,
-    quiet: 1
-  })
+    quiet: 1,
+    mPosX: 50,
+    mPosY: 50,
+    mSize: 30,
+    image
+  }
+
+  if (lightning) {
+    opts.mode = 'image'
+  }
+
+  const el = kjua(opts)
 
   target.empty().append(el)
 }
@@ -1125,23 +1136,52 @@ function fiatCredit (data) {
   reachFiatLimit(activeDenominations)
 }
 
-function setDepositAddress (tx, url) {
+function setDepositAddress (depositInfo) {
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .crypto-address').text(tx.toAddress)
+  $('.deposit_state .send-notice .crypto-address').text(depositInfo.toAddress)
   $('.deposit_state .send-notice').show()
 
-  qrize(url, $('#qr-code-deposit'), 330)
+  if (depositInfo.layer2Url) $('#toggle-address').show()
+
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), 330)
+  qrize(depositInfo.layer2Url, $('#qr-code-layer2'), 330, true)
+}
+
+function toggleLayer2 () {
+  const isLayer2 = $('.qr-section').data('layer2')
+
+  if (isLayer2) {
+    $('.qr-section').data('layer2', false)
+    $('#qr-code-deposit').show()
+    $('#qr-code-layer2').hide()
+    $('.js-wallet-address').show()
+    $('.js-layer-2-address').hide()
+    return
+  }
+
+  $('.qr-section').data('layer2', true)
+  $('#qr-code-deposit').hide()
+  $('#qr-code-layer2').show()
+  $('.js-wallet-address').hide()
+  $('.js-layer-2-address').show()
 }
 
 function deposit (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
+  $('#qr-code-layer2').hide()
+  $('#toggle-address').hide()
+
+  $('.js-wallet-address').show()
+  $('.js-layer-2-address').hide()
+
   $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
   $('.deposit_state .send-notice').hide()
   $('#qr-code-deposit').empty()
   $('.deposit_state .loading').show()
+  $('#qr-code-deposit').show()
 
   setState('deposit')
 }
@@ -1176,7 +1216,7 @@ function initDebug () {
 
   if (DEBUG_MODE === 'demo') {
     setPrimaryLocales(['en-US'])
-    setLocale('fr-FR')
+    setLocale('en-US')
     $('body').css('cursor', 'default')
 
     if (!SCREEN) {

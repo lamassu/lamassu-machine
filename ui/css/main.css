@@ -1428,7 +1428,17 @@ body  { margin: 0;}
   font-size: 22px;
 }
 
-#qr-code-deposit {
+#toggle-address {
+  position: absolute;
+  top: 170px;
+  left: 848px;
+  font-size: 20px;
+  width: 330;
+  text-align: center;
+  color: #37e8d7; /* amazonite */;
+}
+
+.qr-code-deposit {
   position: absolute;
   top: 212px;
   left: 848px;
