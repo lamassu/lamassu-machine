@@ -29,11 +29,27 @@ In a separate window start a fake bill validator, and use the outputted ttys num
 # run lamassu-machine
 
 ```
-> node bin/lamassu-machine --mockTrader --mockCam --mockBillDispenser \
---mockBTC 1KAkLnhU1BpvgjQUgLk1HF4PEgh4asFNS8 --mockBv /dev/ttys008
+> node bin/lamassu-machine --mockTrader --mockCam --mockBillDispenser --mockBv /dev/ttys008
 ```
 
-Replace ``--mockBTC`` with one of your BTC addresses, and ``--mockBv`` with the value you got above.
+Replace ``--mockBv`` with the value you got above.
+
+The camera scanner mock reads the wallet addresses from your ``device_config.json``,
+you need to add a property under brain.mockCryptoQR
+where the key is the cryptoCode and the value is the address to be returned by the mocked camera.
+
+Example
+
+```
+{
+  "brain": {
+    ...
+    "mockCryptoQR": {
+      "BTC": "XXXXXXX"
+    }
+  },
+  ...
+```
 
 Now, in a new terminal:
 
