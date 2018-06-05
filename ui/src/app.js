@@ -67,7 +67,6 @@ function connect () {
   websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
-    console.log(data)
     processData(data)
   }
   websocket.onerror = err => console.log(err)
@@ -115,6 +114,7 @@ function processData (data) {
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
+  if (data.terms) setTermsScreen(data.terms)
 
   if (data.context) {
     $('.js-context').hide()
@@ -448,6 +448,9 @@ $(document).ready(function () {
 
   $('#deposit-qr').click(toggleLayer2)
 
+  setupButton('terms-ok', 'termsAccepted')
+  setupButton('terms-ko', 'idle')
+
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
@@ -546,10 +549,10 @@ function setupImmediateButton (buttonClass, buttonAction, callback) {
   })
 }
 
-function setupButton (buttonClass, buttonAction) {
+function setupButton (buttonClass, buttonAction, actionData) {
   var button = document.getElementById(buttonClass)
   touchEvent(button, function () {
-    buttonPressed(buttonAction)
+    buttonPressed(buttonAction, actionData)
   })
 }
 
@@ -627,6 +630,24 @@ function setWifiList (recs, requestedPage) {
   if (recs.length > 4) {
     networks.append(button)
   }
+}
+
+/**
+ *
+ * @param {Object} data
+ * @param {boolean} data.active
+ * @param {String} data.title
+ * @param {String} data.text
+ * @param {String} data.accept
+ * @param {String} data.cancel
+ */
+function setTermsScreen (data) {
+  const $screen = $('.js-terms-screen')
+
+  $screen.find('.js-terms-title').html(data.title)
+  $screen.find('.js-terms-text').html(data.text)
+  $screen.find('.js-terms-accept-button').html(data.accept)
+  $screen.find('.js-terms-cancel-button').html(data.cancel)
 }
 
 function moreNetworks () {
