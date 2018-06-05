@@ -233,7 +233,6 @@ function processData (data) {
       blockedCustomer()
       break
     default:
-      console.log('action', data.action, window.snakecase(data.action))
       if (data.action) setState(window.snakecase(data.action))
   }
 }
@@ -635,13 +634,12 @@ function setWifiList (recs, requestedPage) {
 
 /**
  *
- * @param {{
- *           active: boolean,
- *           title: string,
- *           text: string,
- *           accept: string,
- *           cancel: string
- * }} data
+ * @param {Object} data
+ * @param {boolean} data.active
+ * @param {String} data.title
+ * @param {String} data.text
+ * @param {String} data.accept
+ * @param {String} data.cancel
  */
 function setTermsScreen (data) {
   const $screen = $('.js-terms-screen')
