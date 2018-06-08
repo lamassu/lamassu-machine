@@ -1162,10 +1162,12 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(depositInfo.toAddress)
   $('.deposit_state .send-notice').show()
 
-  if (depositInfo.layer2Url) $('#toggle-address').show()
-
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), 330)
-  qrize(depositInfo.layer2Url, $('#qr-code-layer2'), 330, true)
+
+  if (depositInfo.layer2Url) {
+    $('#toggle-address').show()
+    qrize(depositInfo.layer2Url, $('#qr-code-layer2'), 330, true)
+  }
 }
 
 function toggleLayer2 () {
