@@ -24,8 +24,8 @@ puloon._send = function (cmd, name, cb) {
 
 describe('PuloonRs232', function () {
   it('dispenses small amount', function (done) {
-    puloon.dispense([45, 23], function (err, res) {
-      done()
-    })
+    puloon.dispense([45, 23])
+      .then(() => done())
+      .catch(() => done())
   })
 })

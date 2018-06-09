@@ -20,20 +20,20 @@ if (notes.length !== 2) {
 
 leds.flashValidator()
 billDispenser = require('../lib/billdispenser').factory({device: device})
-billDispenser.open(err => {
-  if (err) {
-    console.log(err)
-    process.exit(1)
-  }
-
-  billDispenser.dispense(notes, function (err, result) {
-    if (err) {
+billDispenser.open()
+  .then(
+    () => billDispenser.dispense(notes),
+    err => {
+      console.log(err)
+      process.exit(1)
+    })
+  .then(
+    result => {
+      leds.off()
+      console.dir(result.bills)
+      setTimeout(() => process.exit(0), 500)
+    },
+    err => {
       console.log(err)
       process.exit(2)
-    }
-
-    leds.off()
-    console.dir(result.bills)
-    setTimeout(() => process.exit(0), 500)
-  })
-})
+    })
