@@ -1,12 +1,9 @@
-'use strict'
+const fs = require('fs')
+const util = require('util')
+const parser = require('../lib/compliance/parsepdf417')
 
-var fs = require('fs')
-var util = require('util')
-var parser = require('../lib/compliance/parsepdf417')
-
-var licensePath = 'mock_data/compliance/fl.dat'
-// var licensePath = 'mock_data/compliance/ny.dat'
-// var licensePath = 'scratch/mn.dat'
+// const licensePath = 'mock_data/compliance/fl.dat'
+const licensePath = 'scratch/nv.dat'
 
 var data = fs.readFileSync(licensePath, 'utf8')
 data = data.replace('&', '\r')
