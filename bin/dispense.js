@@ -32,8 +32,8 @@ billDispenser.open()
       leds.off()
       console.dir(result.bills)
       setTimeout(() => process.exit(0), 500)
-    },
-    err => {
-      console.log(err)
-      process.exit(2)
     })
+  .catch(err => {
+    console.log(err)
+    process.exit(2)
+  })

@@ -6,6 +6,7 @@
     "async": "~0.2.9",
     "base-x": "^3.0.0",
     "bignumber.js": "^4.0.1",
+    "bluebird": "^3.5.1",
     "bs58check": "^2.0.2",
     "cashaddrjs": "~0.2.8",
     "clim": "*",
