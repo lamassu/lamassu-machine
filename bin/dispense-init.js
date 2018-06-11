@@ -24,12 +24,12 @@ var cartridges = [
 var data = {cartridges: cartridges, currency: currency}
 
 billDispenser = require('../lib/billdispenser').factory({device: device})
-billDispenser.init(data, function (err) {
-  if (err) {
+billDispenser.init(data)
+  .then(() => {
+    console.log('Success.')
+    process.exit(0)
+  })
+  .catch(err => {
     console.log(err)
     process.exit(1)
-  }
-
-  console.log('Success.')
-  process.exit(0)
-})
+  })

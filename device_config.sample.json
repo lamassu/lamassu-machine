@@ -17,6 +17,19 @@
     }
   },
   "billDispenser": {
-    "device": null
+    "device": null,
+    "mockedBalance": {
+      "cassettes": [
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        }
+      ]
+    },
+    "mockedError": {
+      "0x51": [0, 4]
+    }
   }
 }
