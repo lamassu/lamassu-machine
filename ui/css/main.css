@@ -9,6 +9,10 @@ body {
   cursor: none;
 }
 
+.hide {
+  display: none;
+}
+
 .brandon {
   font-family: brandon_text, 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
   direction: ltr;
@@ -1852,11 +1856,14 @@ body  { margin: 0;}
 }
 
 .change-language > div {
-  padding-left: 2em;
-  background-image: url(../images/arrow.svg);
-  background-repeat: no-repeat;
   font-weight: bold;
   font-size: 130%;
+  padding-left: 2em;
+}
+
+.change-language > div.multiple-language {
+  background-image: url(../images/arrow.svg);
+  background-repeat: no-repeat;
   background-position: left;
 }
 
