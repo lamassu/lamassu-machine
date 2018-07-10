@@ -1166,11 +1166,16 @@ function setDepositAddress (depositInfo) {
 
   if (depositInfo.layer2Url) {
     $('#toggle-address').show()
+    $('qr-code-layer2').data('layer2', true)
     qrize(depositInfo.layer2Url, $('#qr-code-layer2'), 330, true)
+  } else {
+    $('qr-code-layer2').data('layer2', false)
   }
 }
 
 function toggleLayer2 () {
+  if (!$('qr-code-layer2').data('layer2')) return
+
   const isLayer2 = $('.qr-section').data('layer2')
 
   if (isLayer2) {
