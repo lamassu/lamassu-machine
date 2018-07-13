@@ -505,7 +505,7 @@ $(document).ready(function () {
 })
 
 function targetButton (element) {
-  var classList = element.classList
+  var classList = element.classList || []
   var special = classList.contains('button') ||
     classList.contains('circle-button') ||
     classList.contains('wifi-network-button') ||
@@ -517,6 +517,7 @@ function targetButton (element) {
 function touchEvent (element, callback) {
   element.addEventListener('mousedown', function (e) {
     var target = targetButton(e.target)
+
     target.classList.add('active')
 
     // Wait for transition to finish
@@ -761,20 +762,9 @@ function setPrimaryLocales (primaryLocales) {
     languages.append(li)
   }
 
-  if (primaryLocales.length === 1) {
-    $('.js-multi-language').hide()
-    $('.js-two-language').hide()
-  }
-
-  if (primaryLocales.length === 2) {
-    $('.js-multi-language').hide()
-    $('.js-two-language').show()
-  }
-
-  if (primaryLocales.length > 2) {
-    $('.js-multi-language').show()
-    $('.js-two-language').hide()
-  }
+  $('.js-menu-language').toggleClass('hide', sortedPrimaryLocales.length <= 1)
+  $('.js-multi-language').toggleClass('hide', sortedPrimaryLocales.length === 2)
+  $('.js-two-language').toggleClass('hide', sortedPrimaryLocales.length > 2)
 }
 
 function setFiatCode (data) {
