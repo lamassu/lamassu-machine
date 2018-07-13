@@ -446,8 +446,6 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
-  $('#deposit-qr').click(toggleLayer2)
-
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
@@ -1153,46 +1151,13 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice').show()
 
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), 330)
-
-  if (depositInfo.layer2Url) {
-    $('#toggle-address').show()
-    $('qr-code-layer2').data('layer2', true)
-    qrize(depositInfo.layer2Url, $('#qr-code-layer2'), 330, true)
-  } else {
-    $('qr-code-layer2').data('layer2', false)
-  }
-}
-
-function toggleLayer2 () {
-  if (!$('qr-code-layer2').data('layer2')) return
-
-  const isLayer2 = $('.qr-section').data('layer2')
-
-  if (isLayer2) {
-    $('.qr-section').data('layer2', false)
-    $('#qr-code-deposit').show()
-    $('#qr-code-layer2').hide()
-    $('.js-wallet-address').show()
-    $('.js-layer-2-address').hide()
-    return
-  }
-
-  $('.qr-section').data('layer2', true)
-  $('#qr-code-deposit').hide()
-  $('#qr-code-layer2').show()
-  $('.js-wallet-address').hide()
-  $('.js-layer-2-address').show()
 }
 
 function deposit (tx) {
   var cryptoCode = tx.cryptoCode
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode)
 
-  $('#qr-code-layer2').hide()
-  $('#toggle-address').hide()
-
   $('.js-wallet-address').show()
-  $('.js-layer-2-address').hide()
 
   $('.deposit_state .digital .js-amount').html(display)
   $('.deposit_state .fiat .js-amount').text(tx.fiat)
