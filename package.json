@@ -67,6 +67,7 @@
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
     "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css"
   },
+  "gypfile": true,
   "standard": {
     "ignore": [
       "lib/id003/contrib/**",
