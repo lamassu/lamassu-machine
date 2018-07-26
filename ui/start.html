@@ -243,6 +243,25 @@
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
+      <section class="viewport scan-photo scan-photo-card scan_photo_state" data-tr-section="scan-photo">
+        <section class="main">
+          <h1 class="js-i18n">Please verify your identity</h1>
+          <div class="instructions">
+            <span class="js-i18n">
+            In order to proceed, we are required to verify your identity.
+            Please press the front of your <strong>driver's license</strong> against the scan window.
+            </span>
+          </div>
+        </section>
+        <div class="scan-photo-image">
+          <img src="images/scan-photo.jpg" width="453" />
+        </div>
+        <section class="bottom-bar">
+          <p class="js-i18n-current-crypto-price current-crypto"></p>
+        </section>
+        <section id="scan-photo-cancel" class="cancel"><img src="images/cancel.png" /></section>
+      </section>
+
       <section class="viewport scan-id fiat-section register_phone_state" data-tr-section="register-phone">
         <section class="main">
           <h1 class="js-i18n">Phone Number</h1>
@@ -497,6 +516,23 @@
         </section>
       </section>
 
+      <section class="viewport verifying_photo_state info" data-tr-section="verifying-photo">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Verifying photo card…</h1>
+                <div class="loader"><img src="images/loading.gif" /></div>
+               <p>
+                <strong class="js-i18n">Just making sure you're you.</strong><br/>
+                <span class="js-i18n">This could take a few seconds.</span>
+               </p>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
       <section class="viewport id_code_failed_state info" data-tr-section="id-code-failed">
         <section class="main">
           <section class="top">
@@ -517,6 +553,26 @@
         </section>
       </section>
 
+      <section class="viewport photo_scan_failed_state info" data-tr-section="photo-scan-failed">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Want to try again?</h1>
+              <p>
+                <span class="js-i18n">The document you've shown did not match.</span><br/>
+                <span class="js-i18n">You might want to <strong>give it another shot</strong>.</span>
+              </p>
+              <div class="actions">
+                <span id="photo-scan-failed-retry" class="button js-i18n">Try Again</span>
+                <span id="photo-scan-failed-cancel" class="button js-i18n">Cancel</span>
+              </div>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
       <section class="viewport id_verification_failed_state info" data-tr-section="id-verification-failed">
         <section class="main">
           <section class="top">
@@ -528,6 +584,25 @@
               </p>
               <div class="actions">
                 <span id="id-verification-failed-ok" class="button js-i18n">OK</span>
+              </div>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport photo_verification_failed_state info" data-tr-section="photo-verification-failed">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Sorry.</h1>
+              <p>
+                <span class="js-i18n">Our system indicated an identification problem.</span><br/>
+                <span class="js-i18n">Please contact the operator for more information.</span>
+              </p>
+              <div class="actions">
+                <span id="photo-verification-failed-ok" class="button js-i18n">OK</span>
               </div>
             </section>
           </section>

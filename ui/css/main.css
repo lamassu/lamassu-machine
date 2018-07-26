@@ -208,31 +208,40 @@ body  { margin: 0;}
   left: 200; right: auto;
 }
 
-.scan-id .main {
+.scan-id .main,
+.scan-photo .main {
   position: absolute;
-  top: 145;
-  left: 80;
-  width: 510;
+  top: 145px;
+  left: 80px;
+  width: 510px;
 }
 
-.scan-id h1 {
+.scan-id h1,
+.scan-photo h1 {
   color: #ffffff;
   font-size: 90;
   line-height: 1;
   font-weight: normal;
 }
 
-.scan-id .instructions {
+.scan-id .instructions,
+.scan-photo .instructions {
   margin-top: 70px;
   font-size: 30px;
   line-height: 1.4;
   color: #5f5f55;   /* sandstone */
 }
 
-.scan-id-image {
+.scan-id .scan-id-image {
   position: absolute;
-  left: 721;
-  top: 54;
+  left: 721px;
+  top: 54px;
+}
+
+.scan-photo .scan-photo-image {
+  position: absolute;
+  left: 721px;
+  top: 150px;
 }
 
 .fiat-section .instructions {

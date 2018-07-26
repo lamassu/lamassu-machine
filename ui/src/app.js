@@ -416,6 +416,7 @@ $(document).ready(function () {
   setupButton('cash-out-button', 'cashOut')
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
+  setupImmediateButton('scan-photo-cancel', 'cancelIdScan')
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
@@ -423,8 +424,11 @@ $(document).ready(function () {
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
   setupButton('id-scan-failed-ok', 'idVerificationFailedOk')
   setupButton('id-code-failed-retry', 'idCodeFailedRetry')
-  setupButton('id-code-failed-cancel', 'idCodeFailedCancel')
+  setupButton('id-code-failed-cancel', 'cancelIdScan')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
+  setupButton('photo-scan-failed-retry', 'retryPhotoScan')
+  setupButton('photo-scan-failed-cancel', 'cancelIdScan')
+  setupButton('photo-verification-failed-ok', 'cancelIdScan')
 
   setupButton('sanctions-failure-ok', 'idle')
   setupButton('limit-reached-ok', 'idle')
