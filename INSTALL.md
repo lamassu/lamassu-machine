@@ -10,7 +10,7 @@ sudo apt-get install build-essential cmake libgtk2.0-dev pkg-config libavcodec-d
 
 ## OpenCV
 
-Download the OpenCV source archive and unpack it. In source folder run following:
+Download the OpenCV source archive from https://opencv.org/releases.html and unpack it. In source folder run following:
 
 ```
 mkdir build && cd build
