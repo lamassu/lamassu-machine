@@ -1,3 +1,35 @@
+# Preliminaries for Ubuntu 16.04
+Installation for other distros may be slightly different.
+
+## Packages
+
+```
+sudo apt-get update
+sudo apt-get install build-essential cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev
+```
+
+## OpenCV
+
+Download the OpenCV source archive from https://opencv.org/releases.html and unpack it. In source folder run following:
+
+```
+mkdir build && cd build
+cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make -j7
+sudo make install
+```
+
+# Preliminaries for MacOS
+
+## OpenCV
+
+Using Brew install OpenCV
+
+```
+brew install opencv
+brew install pkg-config
+```
+
 # Installation
 
 ## Mac OS X NodeJS setup
