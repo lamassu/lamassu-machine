@@ -4,7 +4,8 @@
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,
-    "mockCryptoQR": {}
+    "mockCryptoQR": {},
+    "mockCameraImage": "mock_data/compliance/license.jpg"
   },
   "wifi": {
     "wpa": {
