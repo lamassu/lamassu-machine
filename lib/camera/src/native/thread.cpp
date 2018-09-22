@@ -20,8 +20,8 @@
 #include <opencv2/video/video.hpp>
 
 // OpenCV face deps
-#include <opencv2/features2d.hpp>
-#include <opencv2/objdetect.hpp>
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
 
 #include <vector>
 

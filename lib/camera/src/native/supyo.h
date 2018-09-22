@@ -5,6 +5,7 @@
 #ifndef CAMERA_WRAPPER_SUPYO_H
 #define CAMERA_WRAPPER_SUPYO_H
 
+#include <cstring>
 #include "types.h"
 #include "pico/picort.h"
 

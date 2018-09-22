@@ -7,7 +7,7 @@
                 "lib/camera/src/native/types.cpp",
                 "lib/camera/src/native/thread.cpp",
                 "lib/camera/src/native/supyo.cpp",
-                "lib/camera/src/native/pico/picort.cpp",
+                "lib/camera/src/native/pico/picort.cpp"
             ],
             "link_settings": {
                 "libraries": [
@@ -15,6 +15,8 @@
                      "-lopencv_highgui",
                      "-lopencv_imgproc",
                      "-lopencv_video",
+                     "-lopencv_features2d",
+                     "-lopencv_objdetect"
                  ]
             },
             "cflags": [
@@ -50,6 +52,6 @@
                     }
                 }]
             ]
-    }
+        }
     ]
 }
