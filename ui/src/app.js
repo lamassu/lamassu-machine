@@ -455,6 +455,8 @@ $(document).ready(function () {
     switchCoin(coin)
   })
 
+  $('#are-you-sure-cancel-transaction').click(() => buttonPressed('cancelTransaction', previousState))
+  $('#are-you-sure-continue-transaction').click(() => buttonPressed('continueTransaction', previousState))
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
