@@ -53,6 +53,7 @@ void updateAsync(uv_async_t* req, int status)
 
     // https://github.com/bellbind/node-v4l2camera/blob/master/v4l2camera.cc#L328
     Local<Value> argv[] = {
+        NULL,
         arr,
         Boolean::New(isolate, asyncMessage->faceDetected)
     };

@@ -35,10 +35,16 @@
                 }],
                 ['OS=="mac"', {
                     'include_dirs': [
-                        '/opt/local/include'
-                        ],
+                        '/opt/local/include',
+                        '/usr/local/opt/opencv\@2/include',
+                        '/usr/local/include'
+                    ],
                     'link_settings': {
-                        'library_dirs': ['/opt/local/lib']
+                        'library_dirs': [
+                            '/opt/local/lib',
+                            '/usr/local/opt/opencv\@2/lib',
+                            '/usr/local/lib'
+                        ]
                     },
                     'xcode_settings': {
                         'MACOSX_DEPLOYMENT_TARGET' : '10.7',

@@ -132,7 +132,9 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     }
 
     // https://stackoverflow.com/questions/27496698
-    bag->capture->set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV);
+    // This is only available since OpenCV 3.4
+    // https://github.com/opencv/opencv/commit/d84d3a519b62d4c7e38a1f509b9bb4ce9abb18ce#diff-ffd98ce8cebb3ca8525b8f368cbdd8d1
+    // bag->capture->set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV);
 
 #ifdef DEBUG_WINDOW
     cv::waitKey(10);
