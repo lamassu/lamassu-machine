@@ -1956,9 +1956,10 @@ body  { margin: 0;}
   width: 100%;
 }
 
-.crypto-buttons {
+.crypto-buttons,
+.coin-redeem {
   display: flex;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 .choose-coin-button {
@@ -1975,10 +1976,6 @@ body  { margin: 0;}
 .choose-coin-button-active {
   background-color: #0e4160;
   border-color: #0e4160;
-}
-
-.coin-redeem {
-  margin: 0 20px;
 }
 
 .coin-redeem-button {
