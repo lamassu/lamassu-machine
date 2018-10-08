@@ -7,8 +7,8 @@ cam.openCamera({
   width: 640,
   height: 480,
   singleShot: true,
-  onFrame: frame => {
-    console.log(cam.getFrameSize(), frame)
+  onFrame: (err, frame) => {
+    console.log(err, cam.getFrameSize(), frame)
     require('fs').createWriteStream('result.jpg').end(frame)
   }
 })
