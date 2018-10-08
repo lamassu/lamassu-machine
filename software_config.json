@@ -67,5 +67,9 @@
   },
   "photoId": {
     "timeout": 30000
+  },
+  "photoCard": {
+    "width": 640,
+    "height": 480
   }
 }
