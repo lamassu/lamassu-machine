@@ -53,13 +53,13 @@ void updateAsync(uv_async_t* req, int status)
 
     // https://github.com/bellbind/node-v4l2camera/blob/master/v4l2camera.cc#L328
     Local<Value> argv[] = {
-        NULL,
+        Null(isolate),
         arr,
         Boolean::New(isolate, asyncMessage->faceDetected)
     };
 
     Local<Function> callBack = Local<Function>::New(isolate, bag->callback);
-    callBack->Call(isolate->GetCurrentContext()->Global(), 2, argv);
+    callBack->Call(isolate->GetCurrentContext()->Global(), 3, argv);
 
 #ifdef DEBUG_TIMES
     if (time2frame > 0) { // log only the first time
