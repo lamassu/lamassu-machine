@@ -115,6 +115,7 @@ function processData (data) {
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
+  if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
 
   if (data.context) {
     $('.js-context').hide()
@@ -1191,6 +1192,11 @@ function fiatComplete (tx) {
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
   setState('fiat_complete')
+}
+
+function dispenseBatch (data) {
+  $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
+  $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
 
 function initDebug () {
