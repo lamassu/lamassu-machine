@@ -62,13 +62,7 @@
       "pollTimeout": 60000
     }
   },
-  "scanId": {
-    "timeout": 30000
-  },
-  "photoId": {
-    "timeout": 30000
-  },
-  "photoCard": {
+  "scanner": {
     "timeout": 30000
   }
 }
