@@ -69,7 +69,6 @@
     "timeout": 30000
   },
   "photoCard": {
-    "width": 640,
-    "height": 480
+    "timeout": 30000
   }
 }
