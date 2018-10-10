@@ -1,14 +1,15 @@
-const cam = require('../lib/camera')
+// const scanner = require('../lib/scanner')
+const scanner = require('../lib/mocks/scanner')
+const configuration = require('../lib/configuration')
+const fs = require('fs')
 
-cam.openCamera({
-  verbose: true,
-  input: '/dev/video0',
-  codec: '.jpg',
-  width: 640,
-  height: 480,
-  singleShot: true,
-  onFrame: (err, frame) => {
-    console.log(err, cam.getFrameSize(), frame)
-    require('fs').createWriteStream('result.jpg').end(frame)
-  }
+console.log('configure scanner')
+scanner.config(configuration)
+
+console.log('starting camera-wrapper')
+scanner.scanPhotoCard(function (err, frame) {
+  console.log('scanPhotoCard callback', {err, frame})
+
+  console.log('writing result.jpg')
+  fs.createWriteStream('result.jpg').end(frame)
 })
