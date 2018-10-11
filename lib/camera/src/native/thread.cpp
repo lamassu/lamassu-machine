@@ -138,7 +138,12 @@ void cameraLoop(uv_work_t* req) {
             // Actually, YUV420 can be provide direct access to its grey-channel without any copying.
             // https://it.wikipedia.org/wiki/YUV
             split(tmp, channels);
-            msg->faceDetected = detect(/* greyFrame */ channels[0]);
+
+            if (message->cutoff > 0) {
+                msg->faceDetected = detect(/* greyFrame */ channels[0], message->cutoff);
+            } else {
+                msg->faceDetected = detect(/* greyFrame */ channels[0]/*, CUTOFF_THRES*/);
+            }
         }
 
         // Encode to jpg

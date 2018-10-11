@@ -8,8 +8,9 @@
 /**
  * @param {cvFrame}  greyFrame - byte array of the greyscale image
  * @param {boolean}  verbose - print debug messages to stdout
+ * @param {float}    cutoffThres - quality threshold (see CUTOFF_THRES)
  */
-bool detect(cv::Mat greyFrame) {
+bool detect(cv::Mat greyFrame, float cutoffThres) {
   // image width
   int32_t ncols = greyFrame.cols;
   // image height
@@ -81,9 +82,9 @@ bool detect(cv::Mat greyFrame) {
 
   for (i = 0; i < ndetections; ++i) {
     // check the confidence threshold
-    if(rcsq[4*i+3] >= CUTOFF_THRES) {
+    if(rcsq[4*i+3] >= cutoffThres) {
 #ifdef DEBUG_MESSAGE
-        printf("supyo :: face detected at (x=%d, y=%d, r=%d) confidence %f\n", (int)rcsq[4*i+0], (int)rcsq[4*i+1], (int)rcsq[4*i+2], rcsq[4*i+3]);
+        printf("supyo :: face detected at (x=%d, y=%d, r=%d) confidence %f < threshold (%f)\n", (int)rcsq[4*i+0], (int)rcsq[4*i+1], (int)rcsq[4*i+2], rcsq[4*i+3], cutoffThres);
 #endif
 
       detected = true;
@@ -91,7 +92,7 @@ bool detect(cv::Mat greyFrame) {
     }
 #ifdef DEBUG_MESSAGE
     else {
-      printf("supyo :: result confidence %f < threshold (%f)\n", rcsq[4*i+3], CUTOFF_THRES);
+      printf("supyo :: result confidence %f < threshold (%f)\n", rcsq[4*i+3], cutoffThres);
     }
 #endif
   }
@@ -102,4 +103,12 @@ bool detect(cv::Mat greyFrame) {
 #endif
 
   return detected;
+}
+
+/**
+ * @param {cvFrame}  greyFrame - byte array of the greyscale image
+ * @param {boolean}  verbose - print debug messages to stdout
+ */
+bool detect(cv::Mat greyFrame) {
+    return detect(greyFrame, CUTOFF_THRES);
 }

@@ -61,9 +61,9 @@ struct TMessage {
 
     // facedetect face minSize (pixels)
     int32_t minsize;
-    
+
     // facedetect quality threshold;
-    float cutoff;
+    double cutoff;
 
     // frame callback function
     Persistent<Function> callback;

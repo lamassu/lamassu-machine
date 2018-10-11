@@ -92,6 +92,16 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     printf("camera :: opts { faceDetect : %i }\n", bag->faceDetect);
 #endif
 
+    // accept opts { cutoff : boolean }
+    if (params->Has(String::NewFromUtf8(isolate, "threshold"))) {
+        bag->cutoff = params->Get(String::NewFromUtf8(isolate, "threshold"))->NumberValue();
+    } else {
+        bag->cutoff = 0.0;
+    }
+#ifdef DEBUG_MESSAGE
+    printf("camera :: opts { threshold : %f }\n", bag->cutoff);
+#endif
+
     if (params->Has(String::NewFromUtf8(isolate, "frameCallback"))) {
         Local<Value> callback = params->Get(String::NewFromUtf8(isolate, "frameCallback"));
         if (!callback->IsFunction()) {
