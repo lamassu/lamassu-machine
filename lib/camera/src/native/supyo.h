@@ -62,7 +62,7 @@
 #define CUTOFF_THRES 6.5
 #endif
 
-bool detect(cv::Mat greyFrame, float cutoffThres);
+bool detect(cv::Mat greyFrame, float cutoffThres, int minFaceSize);
 bool detect(cv::Mat greyFrame);
 
 #endif //CAMERA_WRAPPER_SUPYO_H

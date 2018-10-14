@@ -9,8 +9,9 @@
  * @param {cvFrame}  greyFrame - byte array of the greyscale image
  * @param {boolean}  verbose - print debug messages to stdout
  * @param {float}    cutoffThres - quality threshold (see CUTOFF_THRES)
+ * @param {integer}  minFaceSize - minimum face size in pixels (see MIN_SIZE)
  */
-bool detect(cv::Mat greyFrame, float cutoffThres) {
+bool detect(cv::Mat greyFrame, float cutoffThres, int minFaceSize) {
   // image width
   int32_t ncols = greyFrame.cols;
   // image height
@@ -67,7 +68,7 @@ bool detect(cv::Mat greyFrame, float cutoffThres) {
       orientation,
       pixels,
       nrows, ncols, width_step,
-      SCALEFACTOR, STRIDEFACTOR, MIN_SIZE,
+      SCALEFACTOR, STRIDEFACTOR, minFaceSize,
       MIN(nrows, ncols));
 
 #ifdef DEBUG_MESSAGE
@@ -110,5 +111,5 @@ bool detect(cv::Mat greyFrame, float cutoffThres) {
  * @param {boolean}  verbose - print debug messages to stdout
  */
 bool detect(cv::Mat greyFrame) {
-    return detect(greyFrame, CUTOFF_THRES);
+    return detect(greyFrame, CUTOFF_THRES, MIN_SIZE);
 }

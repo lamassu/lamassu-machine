@@ -50,7 +50,9 @@
       "contrast": 25,
       "lowExposure": null,
       "highExposure": null,
-      "exposureAdjustTime": 200
+      "exposureAdjustTime": 200,
+      "threshold": 6.0,
+      "minFaceSize": 180
     }
   },
   "updater": {

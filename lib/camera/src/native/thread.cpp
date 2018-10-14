@@ -39,10 +39,10 @@ void updateAsync(uv_async_t* req, int status)
     AsyncMessage* asyncMessage = (AsyncMessage*) req->data;
 
 #ifdef DEBUG_WINDOW
-    if (asyncMessage->frame.size().height > 0 && asyncMessage->frame.size().width > 0) {
+    /*if (asyncMessage->frame.size().height > 0 && asyncMessage->frame.size().width > 0) {
         cv::imshow("Preview", asyncMessage->frame);
         cv::waitKey(20);
-    }
+    }*/
 #endif
 
     Local<Array> arr = Array::New(isolate, asyncMessage->image.size());
@@ -139,11 +139,7 @@ void cameraLoop(uv_work_t* req) {
             // https://it.wikipedia.org/wiki/YUV
             split(tmp, channels);
 
-            if (message->cutoff > 0) {
-                msg->faceDetected = detect(/* greyFrame */ channels[0], message->cutoff);
-            } else {
-                msg->faceDetected = detect(/* greyFrame */ channels[0]/*, CUTOFF_THRES*/);
-            }
+            msg->faceDetected = detect(/* greyFrame */ channels[0], message->cutoff, message->minsize);
         }
 
         // Encode to jpg
@@ -159,10 +155,10 @@ void cameraLoop(uv_work_t* req) {
         }
 
 #ifdef DEBUG_WINDOW
-        if (tmp.size().height > 0 && tmp.size().width > 0) {
+        /*if (tmp.size().height > 0 && tmp.size().width > 0) {
             cv::imshow("Preview", msg->frame);
             cv::waitKey(20);
-        }
+        }*/
 #endif
 
         async.data = msg;
