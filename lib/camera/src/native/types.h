@@ -5,8 +5,8 @@
 #ifndef CAMERA_WRAPPER_TYPES_H
 #define CAMERA_WRAPPER_TYPES_H
 
-#define DEBUG_WINDOW
-#define DEBUG_MESSAGE
+//#define DEBUG_WINDOW
+//#define DEBUG_MESSAGE
 // #define DEBUG_TIMES
 
 // Core
