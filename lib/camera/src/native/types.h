@@ -5,8 +5,8 @@
 #ifndef CAMERA_WRAPPER_TYPES_H
 #define CAMERA_WRAPPER_TYPES_H
 
-// #define DEBUG_WINDOW
-// #define DEBUG_MESSAGE
+//#define DEBUG_WINDOW
+//#define DEBUG_MESSAGE
 // #define DEBUG_TIMES
 
 // Core
@@ -61,9 +61,9 @@ struct TMessage {
 
     // facedetect face minSize (pixels)
     int32_t minsize;
-    
+
     // facedetect quality threshold;
-    float cutoff;
+    double cutoff;
 
     // frame callback function
     Persistent<Function> callback;

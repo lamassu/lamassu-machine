@@ -7,6 +7,7 @@
 
 #include "types.h"
 #include "thread.h"
+#include "supyo.h"
 
 using namespace v8;
 
@@ -90,6 +91,26 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     }
 #ifdef DEBUG_MESSAGE
     printf("camera :: opts { faceDetect : %i }\n", bag->faceDetect);
+#endif
+
+    // accept opts { cutoff : double }
+    if (params->Has(String::NewFromUtf8(isolate, "threshold"))) {
+        bag->cutoff = params->Get(String::NewFromUtf8(isolate, "threshold"))->NumberValue();
+    } else {
+        bag->cutoff = CUTOFF_THRES;
+    }
+#ifdef DEBUG_MESSAGE
+    printf("camera :: opts { threshold : %f }\n", bag->cutoff);
+#endif
+
+    // accept opts { minFaceSize : integer }
+    if (params->Has(String::NewFromUtf8(isolate, "minFaceSize"))) {
+        bag->minsize = params->Get(String::NewFromUtf8(isolate, "minFaceSize"))->NumberValue();
+    } else {
+        bag->minsize = MIN_SIZE;
+    }
+#ifdef DEBUG_MESSAGE
+    printf("camera :: opts { minFaceSize : %d }\n", bag->minsize);
 #endif
 
     if (params->Has(String::NewFromUtf8(isolate, "frameCallback"))) {

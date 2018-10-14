@@ -39,6 +39,16 @@
       "lowExposure": null,
       "highExposure": null,
       "exposureAdjustTime": 200
+    },
+    "photoCard": {
+      "width": 1280,
+      "height": 960,
+      "contrast": 25,
+      "lowExposure": null,
+      "highExposure": null,
+      "exposureAdjustTime": 200,
+      "threshold": 6.0,
+      "minFaceSize": 180
     }
   },
   "updater": {

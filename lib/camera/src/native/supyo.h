@@ -59,9 +59,10 @@
  * try a larger number here (for example, 7.5f)
  */
 #ifndef CUTOFF_THRES
-#define CUTOFF_THRES 0.5
+#define CUTOFF_THRES 6.5
 #endif
 
+bool detect(cv::Mat greyFrame, float cutoffThres, int minFaceSize);
 bool detect(cv::Mat greyFrame);
 
 #endif //CAMERA_WRAPPER_SUPYO_H
