@@ -39,10 +39,10 @@ void updateAsync(uv_async_t* req, int status)
     AsyncMessage* asyncMessage = (AsyncMessage*) req->data;
 
 #ifdef DEBUG_WINDOW
-    if (asyncMessage->frame.size().height > 0 && asyncMessage->frame.size().width > 0) {
+    /*if (asyncMessage->frame.size().height > 0 && asyncMessage->frame.size().width > 0) {
         cv::imshow("Preview", asyncMessage->frame);
         cv::waitKey(20);
-    }
+    }*/
 #endif
 
     Local<Array> arr = Array::New(isolate, asyncMessage->image.size());
@@ -53,13 +53,13 @@ void updateAsync(uv_async_t* req, int status)
 
     // https://github.com/bellbind/node-v4l2camera/blob/master/v4l2camera.cc#L328
     Local<Value> argv[] = {
-        NULL,
+        Null(isolate),
         arr,
         Boolean::New(isolate, asyncMessage->faceDetected)
     };
 
     Local<Function> callBack = Local<Function>::New(isolate, bag->callback);
-    callBack->Call(isolate->GetCurrentContext()->Global(), 2, argv);
+    callBack->Call(isolate->GetCurrentContext()->Global(), 3, argv);
 
 #ifdef DEBUG_TIMES
     if (time2frame > 0) { // log only the first time
@@ -138,7 +138,8 @@ void cameraLoop(uv_work_t* req) {
             // Actually, YUV420 can be provide direct access to its grey-channel without any copying.
             // https://it.wikipedia.org/wiki/YUV
             split(tmp, channels);
-            msg->faceDetected = detect(/* greyFrame */ channels[0]);
+
+            msg->faceDetected = detect(/* greyFrame */ channels[0], message->cutoff, message->minsize);
         }
 
         // Encode to jpg
@@ -154,10 +155,10 @@ void cameraLoop(uv_work_t* req) {
         }
 
 #ifdef DEBUG_WINDOW
-        if (tmp.size().height > 0 && tmp.size().width > 0) {
+        /*if (tmp.size().height > 0 && tmp.size().width > 0) {
             cv::imshow("Preview", msg->frame);
             cv::waitKey(20);
-        }
+        }*/
 #endif
 
         async.data = msg;
