@@ -9,7 +9,7 @@
 #include "thread.h"
 #include "supyo.h"
 
-using namespace v8;
+//using namespace v8;
 
 uv_loop_t *loop;
 
@@ -17,18 +17,13 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
 
-#ifdef DEBUG_TIMES
     time2frame = getticks();
-    time2face = getticks();
-#endif
+    time2face  = getticks();
 
     if (bag != NULL && bag->started) {
         args.GetReturnValue().Set(Boolean::New(isolate, FALSE));
         return;
     }
-
-    // released in stopCapture
-    bag = new TMessage();
 
     // Check if opts is passed
     if (args.Length() < 1) {
@@ -42,7 +37,33 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
         return;
     }
 
+    // released in stopCapture
+    bag = new TMessage();
+
     Local<Object> params = args[0]->ToObject();
+
+    // accept opts { verbose : boolean }
+    if (params->Has(String::NewFromUtf8(isolate, "verbose"))) {
+        bag->verbose = params->Get(String::NewFromUtf8(isolate, "verbose"))->BooleanValue();
+    } else {
+        bag->verbose = false;
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { verbose : %i }\n", bag->verbose);
+    }
+
+    // accept opts { device : string|number }
+    Local<Value> input = Number::New(isolate, 0);
+    if (params->Has(String::NewFromUtf8(isolate, "device"))) {
+        Local<Value> input = params->Get(String::NewFromUtf8(isolate, "device"));
+        //if (!input->IsNumber()) {
+        bag->device = stringValue(input);
+    } else {
+        bag->device = std::string("");
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { device : %s }\n", bag->device.c_str());
+    }
 
     // accept opts { width : number, height : number }
     if (params->Has(String::NewFromUtf8(isolate, "width")) &&
@@ -55,9 +76,9 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
         bag->height = 0;
         bag->resize = false;
     }
-#ifdef DEBUG_MESSAGE
-    printf("camera :: opts { width : %d, height : %d }\n", bag->width, bag->height);
-#endif
+    if (bag->verbose) {
+        printf("camera :: opts { width : %d, height : %d }\n", bag->width, bag->height);
+    }
 
     // accept opts { codec : string }
     if (params->Has(String::NewFromUtf8(isolate, "codec"))) {
@@ -66,22 +87,9 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     } else {
         bag->codec = std::string("");
     }
-#ifdef DEBUG_MESSAGE
+    if (bag->verbose) {
         printf("camera :: opts { codec : %s }\n", bag->codec.c_str());
-#endif
-
-    // accept opts { input : string }
-    Local<Value> input = Number::New(isolate, 0);
-    std::string inputString;
-    if (params->Has(String::NewFromUtf8(isolate, "input"))) {
-        Local<Value> input = params->Get(String::NewFromUtf8(isolate, "input"));
-        if (!input->IsNumber()) {
-            inputString = stringValue(input);
-        }
     }
-#ifdef DEBUG_MESSAGE
-    printf("camera :: opts { input : %s }\n", inputString.c_str());
-#endif
 
     // accept opts { faceDetect : boolean }
     if (params->Has(String::NewFromUtf8(isolate, "faceDetect"))) {
@@ -89,29 +97,49 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     } else {
         bag->faceDetect = false;
     }
-#ifdef DEBUG_MESSAGE
-    printf("camera :: opts { faceDetect : %i }\n", bag->faceDetect);
-#endif
-
-    // accept opts { cutoff : double }
-    if (params->Has(String::NewFromUtf8(isolate, "threshold"))) {
-        bag->cutoff = params->Get(String::NewFromUtf8(isolate, "threshold"))->NumberValue();
-    } else {
-        bag->cutoff = CUTOFF_THRES;
+    if (bag->verbose) {
+        printf("camera :: opts { faceDetect : %i }\n", bag->faceDetect);
     }
-#ifdef DEBUG_MESSAGE
-    printf("camera :: opts { threshold : %f }\n", bag->cutoff);
-#endif
+
+    // accept opts { threshold : double }
+    if (params->Has(String::NewFromUtf8(isolate, "threshold"))) {
+        bag->threshold = params->Get(String::NewFromUtf8(isolate, "threshold"))->NumberValue();
+    } else {
+        bag->threshold = CUTOFF_THRES;
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { threshold : %f }\n", bag->threshold);
+    }
 
     // accept opts { minFaceSize : integer }
     if (params->Has(String::NewFromUtf8(isolate, "minFaceSize"))) {
-        bag->minsize = params->Get(String::NewFromUtf8(isolate, "minFaceSize"))->NumberValue();
+        bag->minFaceSize = params->Get(String::NewFromUtf8(isolate, "minFaceSize"))->NumberValue();
     } else {
-        bag->minsize = MIN_SIZE;
+        bag->minFaceSize = MIN_SIZE;
     }
-#ifdef DEBUG_MESSAGE
-    printf("camera :: opts { minFaceSize : %d }\n", bag->minsize);
-#endif
+    if (bag->verbose) {
+        printf("camera :: opts { minFaceSize : %d }\n", bag->minFaceSize);
+    }
+
+    // accept opts { debugWindow : boolean }
+    if (params->Has(String::NewFromUtf8(isolate, "debugWindow"))) {
+        bag->debugWindow = params->Get(String::NewFromUtf8(isolate, "debugWindow"))->BooleanValue();
+    } else {
+        bag->debugWindow = false;
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { debugWindow : %i }\n", bag->debugWindow);
+    }
+
+    // accept opts { debugTimes : boolean }
+    if (params->Has(String::NewFromUtf8(isolate, "debugTimes"))) {
+        bag->debugTimes = params->Get(String::NewFromUtf8(isolate, "debugTimes"))->BooleanValue();
+    } else {
+        bag->debugTimes = false;
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { debugTimes : %i }\n", bag->debugTimes);
+    }
 
     if (params->Has(String::NewFromUtf8(isolate, "frameCallback"))) {
         Local<Value> callback = params->Get(String::NewFromUtf8(isolate, "frameCallback"));
@@ -120,32 +148,32 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
             return;
         } else {
             bag->callback.Reset(isolate, Handle<Function>::Cast(callback));
-#ifdef DEBUG_MESSAGE
-            printf("camera :: opts { frameCallback : true }\n");
-#endif
+            if (bag->verbose) {
+                printf("camera :: opts { frameCallback : true }\n");
+            }
         }
     }
 
-#ifdef DEBUG_WINDOW
-    cv::namedWindow("Preview", 1);
-#endif
+    if (bag->debugWindow) {
+        cv::namedWindow("Preview", 1);
+    }
 
     // Initiate OpenCV camera
-#ifdef DEBUG_MESSAGE
-    printf("camera :: starting opencv VideoCapture %d\n", input->Int32Value());
-#endif
+    if (bag->verbose) {
+        printf("camera :: starting opencv VideoCapture %s\n", bag->device.c_str());
+    }
 
     bag->capture = new cv::VideoCapture();
     bool opened = false;
     if (input->IsNumber()) {
         opened = bag->capture->open((int) input->Int32Value());
-    } else if (!inputString.empty()) {
-        opened = bag->capture->open(inputString);
+    } else if (!bag->device.empty()) {
+        opened = bag->capture->open(bag->device);
     }
 
-#ifdef DEBUG_MESSAGE
-    printf("camera :: VideoCapture opened %d\n", opened);
-#endif
+    if (bag->verbose) {
+        printf("camera :: VideoCapture opened %d\n", opened);
+    }
 
     if (!opened) {
         isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Error: Unable to open video capture")));
@@ -157,13 +185,15 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     // https://github.com/opencv/opencv/commit/d84d3a519b62d4c7e38a1f509b9bb4ce9abb18ce#diff-ffd98ce8cebb3ca8525b8f368cbdd8d1
     // bag->capture->set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV);
 
-#ifdef DEBUG_WINDOW
-    cv::waitKey(10);
-#endif
+    if (bag->debugWindow) {
+        printf("camera :: waiting for user input. Press any key\n");
+        cv::waitKey(10);
+    }
 
-#ifdef DEBUG_MESSAGE
-    printf("camera :: starting thread\n");
-#endif
+    if (bag->verbose) {
+        printf("camera :: starting async thread\n");
+    }
+
     loop = uv_default_loop();
 
     uv_work_t* req = new uv_work_t();
@@ -195,13 +225,14 @@ void stopCapture(const FunctionCallbackInfo<Value>& args) {
     m_brk--;
     bag->started = false;
 
-#ifdef DEBUG_WINDOW
-    cv::destroyWindow("Preview");
-#endif
+    if (bag->debugWindow) {
+        cv::destroyWindow("Preview");
+    }
 
-#ifdef DEBUG_MESSAGE
-    printf("camera :: stopping thread\n");
-#endif
+    if (bag->verbose) {
+        printf("camera :: stopping thread\n");
+    }
+
     uv_loop_close(loop);
 
     if (async.type != UV_UNKNOWN_HANDLE && !uv_is_closing((uv_handle_t *) &async)) {

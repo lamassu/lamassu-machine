@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 /*
-	
+
 */
 
 int run_cascade(void* cascade, float* o, int r, int c, int s, void* vppixels, int nrows, int ncols, int ldim)
@@ -197,10 +197,11 @@ int find_objects
 				{
 					if(ndetections < maxndetections)
 					{
-						rcsq[4*ndetections+0] = r;
-						rcsq[4*ndetections+1] = c;
-						rcsq[4*ndetections+2] = s;
-						rcsq[4*ndetections+3] = q;
+						rcsq[5*ndetections+0] = r;
+						rcsq[5*ndetections+1] = c;
+						rcsq[5*ndetections+2] = s;
+						rcsq[5*ndetections+3] = q;
+						rcsq[5*ndetections+4] = angle;
 
 						//
 						++ndetections;
@@ -217,7 +218,7 @@ int find_objects
 }
 
 /*
-	
+
 */
 
 float get_overlap(float r1, float c1, float s1, float r2, float c2, float s2)

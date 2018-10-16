@@ -5,10 +5,6 @@
 #ifndef CAMERA_WRAPPER_TYPES_H
 #define CAMERA_WRAPPER_TYPES_H
 
-//#define DEBUG_WINDOW
-//#define DEBUG_MESSAGE
-// #define DEBUG_TIMES
-
 // Core
 #include <iostream>
 #include <fstream>
@@ -22,10 +18,15 @@
 
 // OpenCV deps
 #include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/video/video.hpp>
-#include <opencv2/highgui/highgui.hpp>
 
+// OpenCV face deps
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
+
+// Multi-thread
 #include <uv.h>
 #include <vector>
 
@@ -39,7 +40,6 @@
 
 using namespace v8;
 
-//Define functions in scope
 std::string stringValue(Local<Value> value);
 float getticks();
 std::vector<uchar> mat2vector(cv::Mat mat);
@@ -48,22 +48,34 @@ std::vector<uchar> mat2vector(cv::Mat mat);
  * Thread message
  */
 struct TMessage {
+    // Indicates whether or not the native process debugging messages are displayed
+    bool verbose;
+
+    // device - Camera device to open (example: 0, '/dev/video0')
+    std::string device;
+
     // camera frame size
     int32_t width, height;
-
     bool resize;
 
     // frame encoding
+    // Image format (only .jpg supported for now)
     std::string codec;
 
-    // facedetect enabled
+    // Indicates whether or not run the face detect algorithm
     bool faceDetect;
 
-    // facedetect face minSize (pixels)
-    int32_t minsize;
+    // Face recognition quality threshold (higher means more accuracy) default: 6.5
+    double threshold;
 
-    // facedetect quality threshold;
-    double cutoff;
+    // Minimum face size (in pixel) default: 128
+    int32_t minFaceSize;
+
+    // Display the native OpenCV highgui window
+    bool debugWindow;
+
+    // Indicates whether or not the native processing times are displayed
+    bool debugTimes;
 
     // frame callback function
     Persistent<Function> callback;
@@ -87,6 +99,7 @@ struct AsyncMessage {
     cv::Mat frame;
     bool window;
     bool faceDetected;
+    TMessage *bag;
 
     ~AsyncMessage() {
         image.clear();
@@ -98,10 +111,8 @@ extern int m_brk;
 extern uv_async_t async;
 extern TMessage *bag;
 
-#ifdef DEBUG_TIMES
 extern float time2process;
 extern float time2frame;
 extern float time2face;
-#endif
 
 #endif //CAMERA_WRAPPER_TYPES_H
