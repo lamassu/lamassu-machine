@@ -48,6 +48,7 @@
       "highExposure": null,
       "exposureAdjustTime": 200,
       "threshold": 6.0,
+      "threshold2": 200.0,
       "minFaceSize": 180
     }
   },
