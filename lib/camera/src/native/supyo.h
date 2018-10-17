@@ -63,6 +63,22 @@
 #define CUTOFF_THRES 6.5
 #endif
 
+/**
+ * max movement (in pixels)
+ * accepted by the validity window algorithm
+ */
+#ifndef VALIDITY_THRES
+#define VALIDITY_THRES 100
+#endif
+
+/**
+ * minimum amount of time (in seconds)
+ * in which the face should stand still
+ */
+#ifndef VALIDITY_TIME
+#define VALIDITY_TIME 1000
+#endif
+
 bool detect(cv::Mat greyFrame, cv::Mat colorFrame, TMessage* bag);
 
 #endif //CAMERA_WRAPPER_SUPYO_H

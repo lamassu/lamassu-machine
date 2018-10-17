@@ -197,11 +197,10 @@ int find_objects
 				{
 					if(ndetections < maxndetections)
 					{
-						rcsq[5*ndetections+0] = r;
-						rcsq[5*ndetections+1] = c;
-						rcsq[5*ndetections+2] = s;
-						rcsq[5*ndetections+3] = q;
-						rcsq[5*ndetections+4] = angle;
+						rcsq[4*ndetections+0] = r;
+						rcsq[4*ndetections+1] = c;
+						rcsq[4*ndetections+2] = s;
+						rcsq[4*ndetections+3] = q;
 
 						//
 						++ndetections;

@@ -30,6 +30,10 @@
 #include <uv.h>
 #include <vector>
 
+#ifndef MAX
+#define MAX(x, y) x > y ? x : y
+#endif
+
 #ifndef FALSE
 #define FALSE (0)
 #endif
@@ -68,6 +72,9 @@ struct TMessage {
     // Face recognition quality threshold (higher means more accuracy) default: 6.5
     double threshold;
 
+    // Face recognition quality threshold (higher means more accuracy) default: 6.5
+    double threshold2;
+
     // Minimum face size (in pixel) default: 128
     int32_t minFaceSize;
 
@@ -84,6 +91,9 @@ struct TMessage {
     cv::VideoCapture *capture;
 
     bool started;
+
+    float *rcsq;
+    int ndetections;
 
     ~TMessage() {
         callback.Reset();

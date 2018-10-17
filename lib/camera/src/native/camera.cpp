@@ -39,6 +39,8 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
 
     // released in stopCapture
     bag = new TMessage();
+    bag->rcsq = NULL;
+    bag->ndetections = 0;
 
     Local<Object> params = args[0]->ToObject();
 
@@ -109,6 +111,16 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     }
     if (bag->verbose) {
         printf("camera :: opts { threshold : %f }\n", bag->threshold);
+    }
+
+    // accept opts { threshold2 : double }
+    if (params->Has(String::NewFromUtf8(isolate, "threshold2"))) {
+        bag->threshold2 = params->Get(String::NewFromUtf8(isolate, "threshold2"))->NumberValue();
+    } else {
+        bag->threshold2 = 100;
+    }
+    if (bag->verbose) {
+        printf("camera :: opts { threshold2 : %f }\n", bag->threshold2);
     }
 
     // accept opts { minFaceSize : integer }
@@ -184,11 +196,6 @@ void startCapture(const FunctionCallbackInfo<Value>& args) {
     // This is only available since OpenCV 3.4
     // https://github.com/opencv/opencv/commit/d84d3a519b62d4c7e38a1f509b9bb4ce9abb18ce#diff-ffd98ce8cebb3ca8525b8f368cbdd8d1
     // bag->capture->set(CV_CAP_PROP_MODE, CV_CAP_MODE_YUYV);
-
-    if (bag->debugWindow) {
-        printf("camera :: waiting for user input. Press any key\n");
-        cv::waitKey(10);
-    }
 
     if (bag->verbose) {
         printf("camera :: starting async thread\n");
