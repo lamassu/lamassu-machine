@@ -4,46 +4,20 @@
 
 #include "thread.h"
 
-// Core
-#include <iostream>
-#include <fstream>
-#include <stdio.h>
-
-// Node.js deps
-#include <node.h>
-#include <v8.h>
-
-// OpenCV deps
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/video/video.hpp>
-
-// OpenCV face deps
-#include <opencv2/features2d/features2d.hpp>
-#include <opencv2/objdetect/objdetect.hpp>
-
-#include <vector>
-
-// Pico library wrapper
-#include "supyo.h"
-
 /*
  * - send an snapshot
  */
-void updateAsync(uv_async_t* req, int status)
-{
+void updateAsync(uv_async_t* req, int status) {
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
-
     AsyncMessage* asyncMessage = (AsyncMessage*) req->data;
 
-#ifdef DEBUG_WINDOW
-    if (asyncMessage->frame.size().height > 0 && asyncMessage->frame.size().width > 0) {
+    if (asyncMessage->bag->debugWindow &&
+            asyncMessage->frame.size().height > 0 &&
+            asyncMessage->frame.size().width > 0) {
         cv::imshow("Preview", asyncMessage->frame);
         cv::waitKey(20);
     }
-#endif
 
     Local<Array> arr = Array::New(isolate, asyncMessage->image.size());
     int pos = 0;
@@ -53,26 +27,26 @@ void updateAsync(uv_async_t* req, int status)
 
     // https://github.com/bellbind/node-v4l2camera/blob/master/v4l2camera.cc#L328
     Local<Value> argv[] = {
-        NULL,
+        Null(isolate),
         arr,
         Boolean::New(isolate, asyncMessage->faceDetected)
     };
 
     Local<Function> callBack = Local<Function>::New(isolate, bag->callback);
-    callBack->Call(isolate->GetCurrentContext()->Global(), 2, argv);
+    callBack->Call(isolate->GetCurrentContext()->Global(), 3, argv);
 
-#ifdef DEBUG_TIMES
-    if (time2frame > 0) { // log only the first time
-        time2frame = getticks() - time2frame;
-        printf("thread :: time to first frame %f\n", 1000.0f * time2frame);
-        time2frame = -1;
+    if (asyncMessage->bag->debugTimes) {
+        if (time2frame > 0) { // log only the first time
+            time2frame = getticks() - time2frame;
+            printf("thread :: time to first frame %f\n", 1000.0f * time2frame);
+            time2frame = -1;
+        }
+        if (time2face > 0 && asyncMessage->faceDetected) { // log only the first time
+            time2face = getticks() - time2face;
+            printf("thread :: time to first face %f\n", 1000.0f * time2face);
+            time2face = -1;
+        }
     }
-    if (time2face > 0 && asyncMessage->faceDetected) { // log only the first time
-        time2face = getticks() - time2face;
-        printf("thread :: time to first face %f\n", 1000.0f * time2face);
-        time2face = -1;
-    }
-#endif
 
     delete asyncMessage;
 }
@@ -86,11 +60,11 @@ void cameraLoop(uv_work_t* req) {
     TMessage* message = (TMessage*) req->data;
     cv::Mat tmp, rsz;
     std::vector<cv::Mat> channels(3);
-
-#ifdef DEBUG_MESSAGE
     float t = getticks();
-    printf("thread :: cameraLoop start\n");
-#endif
+
+    if (message->verbose) {
+        printf("thread :: cameraLoop start\n");
+    }
 
     /**
      * known problem.
@@ -103,19 +77,19 @@ void cameraLoop(uv_work_t* req) {
     }
 
     while(m_brk > 0 && message->capture->isOpened()) {
-
         AsyncMessage *msg = new AsyncMessage();
 
         // Assign defaults
+        msg->bag = message;
         msg->image = std::vector<unsigned char>();
         msg->faceDetected = false;
 
         // Capture Frame From WebCam
         message->capture->read(tmp);
 
-#ifdef DEBUG_TIMES
-        time2process = getticks();
-#endif
+        if (message->debugTimes) {
+            time2process = getticks();
+        }
 
         if (message->resize) {
             cv::Size size = cv::Size(message->width, message->height);
@@ -138,7 +112,8 @@ void cameraLoop(uv_work_t* req) {
             // Actually, YUV420 can be provide direct access to its grey-channel without any copying.
             // https://it.wikipedia.org/wiki/YUV
             split(tmp, channels);
-            msg->faceDetected = detect(/* greyFrame */ channels[0]);
+
+            msg->faceDetected = detect(/* greyFrame */ channels[0], tmp, message);
         }
 
         // Encode to jpg
@@ -153,13 +128,6 @@ void cameraLoop(uv_work_t* req) {
             msg->image = mat2vector(tmp);
         }
 
-#ifdef DEBUG_WINDOW
-        if (tmp.size().height > 0 && tmp.size().width > 0) {
-            cv::imshow("Preview", msg->frame);
-            cv::waitKey(20);
-        }
-#endif
-
         async.data = msg;
 
         if (async.type != UV_UNKNOWN_HANDLE) {
@@ -168,37 +136,38 @@ void cameraLoop(uv_work_t* req) {
             delete msg;
         }
 
-#ifdef DEBUG_TIMES
-        time2process = getticks() - time2process;
-        printf("thread :: processing time %f\n", 1000.0f * time2process);
-#endif
+        if (message->debugTimes) {
+            time2process = getticks() - time2process;
+            printf("thread :: processing time %f\n", 1000.0f * time2process);
+        }
 
     } // end cycle
-#ifdef DEBUG_MESSAGE
-    t = getticks() - t;
-    printf("thread :: cameraLoop end after %f\n", 1000.0f * t);
-#endif
 
     tmp.release();
+
+    if (message->verbose) {
+        t = getticks() - t;
+        printf("thread :: cameraLoop end after %f\n", 1000.0f * t);
+    }
 }
 
 /*
  * - stop camera capture
  */
 void cameraClose(uv_work_t* req, int status) {
-#ifdef DEBUG_MESSAGE
-    printf("thread :: cameraClose\n");
-#endif
-
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
     TMessage* message = (TMessage*) req->data;
+
+    if (bag->verbose) {
+        printf("thread :: cameraClose\n");
+    }
 
     message->capture->release();
     delete message->capture;
     delete req;
 
-#ifdef DEBUG_MESSAGE
-    printf("thread :: cameraClose end\n");
-#endif
+    if (bag->verbose) {
+        printf("thread :: cameraClose end\n");
+    }
 }
