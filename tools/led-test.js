@@ -1,8 +1,13 @@
-const ledControl = require('../lib/ssuboard/led-control')
+const delay = require('delay')
 
-const COLORS = ledControl.COLORS
-const LEDS = ledControl.LEDS
+const actionEmitter = require('../lib/action-emitter')
+const ledManager = require('../lib/ssuboard/led-manager')
 
-ledControl.timed({type: 'pulse', color: COLORS.orange, range: LEDS.doorLeds}, 5000)
+function emit (subsystem, action) {
+  return () => actionEmitter.emit(subsystem, {action})
+}
 
-process.on('unhandledRejection', console.log)
+ledManager.run()
+  .then(emit('brain', 'billValidatorPending'))
+  .then(() => delay(3000))
+  .then(emit('brain', 'ledsOff'))
