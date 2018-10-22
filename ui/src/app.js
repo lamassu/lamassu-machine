@@ -463,7 +463,12 @@ $(document).ready(function () {
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
   $('.change-language').mousedown(() => {
-    if (_primaryLocales.length === 2) return setLocale(otherLocale())
+    if (_primaryLocales.length === 2) {
+      setLocale(otherLocale())
+      setCryptoBuy(currentCoin)
+      setCryptoSell(currentCoin)
+      return
+    }
     setState('select_locale')
   })
 
