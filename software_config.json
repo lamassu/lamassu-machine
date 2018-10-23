@@ -62,7 +62,7 @@
       "pollTimeout": 60000
     }
   },
-  "scanId": {
-    "timeout": 120000
+  "scanner": {
+    "timeout": 30000
   }
 }

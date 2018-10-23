@@ -4,7 +4,8 @@
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,
-    "mockCryptoQR": {}
+    "mockCryptoQR": {},
+    "mockCameraImage": "mock_data/compliance/license.jpg"
   },
   "wifi": {
     "wpa": {
@@ -18,7 +19,7 @@
   },
   "billDispenser": {
     "device": null,
-    "mockedBalance": {
+    "_mockedBalance": {
       "cassettes": [
         {
           "count": 0
@@ -28,7 +29,7 @@
         }
       ]
     },
-    "mockedError": {
+    "_mockedError": {
       "0x51": [0, 4]
     }
   }

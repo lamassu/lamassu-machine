@@ -4,11 +4,20 @@ Installation for other distros may be slightly different.
 ## Packages
 
 ```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt-get update
-sudo apt-get install build-essential cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev
+sudo apt-get install \
+    build-essential cmake \
+    libgtk2.0-dev pkg-config \
+    libavcodec-dev libavformat-dev \
+    libswscale-dev libpcsclite-dev \
+    libv4l-dev libasound2-dev \
+    gcc-4.9 g++-4.9
+export CXX="g++-4.9"
+sudo npm install -g node-gyp node-pre-gyp
 ```
 
-## OpenCV
+## OpenCV@2.4.8
 
 Install from APT
 
@@ -29,10 +38,10 @@ sudo make install
 
 ## OpenCV
 
-Using Brew install OpenCV
+Using Brew install OpenCV@2.4.8
 
 ```
-brew install opencv
+brew install opencv@2
 brew install pkg-config
 ```
 
@@ -53,6 +62,7 @@ When running ``npm install``, don't worry about warnings or skipped optional dep
 npm install
 bash ./setup.sh
 npm run build
+node-gyp build
 ```
 
 ## Set up crypto wallets
@@ -109,4 +119,32 @@ When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
 
+## If you're having trouble with v4l2camera module
+
+```
+export CXX="g++-4.9"
+cd node_modules/
+git clone https://github.com/bellbind/node-v4l2camera.git v4l2camera
+cd v4l2camera
+npm install
+node-gyp rebuild
+```
+
+## If you're having trouble with speaker module
+
+```
+apt-get install -y libasound2-dev
+```
+
+## If you're having trouble with nfc-pcsc module
+
+```
+apt-get install -y libpcsclite-dev
+```
+
+## If you're having trouble with jpeg-turbo module
+
+```
+apt-get install -y yasm
+```
 

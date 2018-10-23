@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include "types.h"
+
 #include "pico/picort.h"
 
 /*
@@ -34,7 +35,7 @@
 /**
  * max number of detected objects
  */
-#define MAXNDETECTIONS 2048
+#define MAXNDETECTIONS 10
 
 /**
  * how much to move the window between neighboring detections increasing this
@@ -59,9 +60,25 @@
  * try a larger number here (for example, 7.5f)
  */
 #ifndef CUTOFF_THRES
-#define CUTOFF_THRES 0.5
+#define CUTOFF_THRES 6.5
 #endif
 
-bool detect(cv::Mat greyFrame);
+/**
+ * max movement (in pixels)
+ * accepted by the validity window algorithm
+ */
+#ifndef VALIDITY_THRES
+#define VALIDITY_THRES 100
+#endif
+
+/**
+ * minimum amount of time (in seconds)
+ * in which the face should stand still
+ */
+#ifndef VALIDITY_TIME
+#define VALIDITY_TIME 1000
+#endif
+
+bool detect(cv::Mat greyFrame, cv::Mat colorFrame, TMessage* bag);
 
 #endif //CAMERA_WRAPPER_SUPYO_H
