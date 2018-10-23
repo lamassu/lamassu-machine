@@ -14,7 +14,7 @@
 #include <stdint.h>
 
 /*
-	
+
 */
 
 int run_cascade(void* cascade, float* o, int r, int c, int s, void* vppixels, int nrows, int ncols, int ldim)
@@ -217,7 +217,7 @@ int find_objects
 }
 
 /*
-	
+
 */
 
 float get_overlap(float r1, float c1, float s1, float r2, float c2, float s2)

@@ -7,6 +7,9 @@
 
 #include "types.h"
 
+// Pico library wrapper
+#include "supyo.h"
+
 void updateAsync(uv_async_t* req, int status);
 void cameraLoop(uv_work_t* req);
 void cameraClose(uv_work_t* req, int status);
