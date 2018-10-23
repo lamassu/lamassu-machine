@@ -58,6 +58,7 @@ var onSendOnly = false
 var buttonActive = true
 var cassettes = null
 let currentCryptoCode = null
+let currentCoin = null
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -115,6 +116,7 @@ function processData (data) {
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
+  if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
 
   if (data.context) {
     $('.js-context').hide()
@@ -256,12 +258,10 @@ function chooseCoin (coins, twoWayMode) {
   const defaultCoin = coins[0]
 
   currentCryptoCode = defaultCoin.cryptoCode
+  currentCoin = defaultCoin
 
-  const cashIn = $('.cash-in')
-  const cashOut = $('.cash-out')
-
-  cashIn.html(`Buy<br/>${defaultCoin.display}`)
-  cashOut.html(`Sell<br/>${defaultCoin.display}`)
+  setCryptoBuy(defaultCoin)
+  setCryptoSell(defaultCoin)
 
   $('.crypto-buttons').empty()
 
@@ -302,6 +302,7 @@ function switchCoin (coin) {
   $(`.coin-${currentCryptoCode.toLowerCase()}`).removeClass('choose-coin-button-active')
   $(`.coin-${cryptoCode.toLowerCase()}`).addClass('choose-coin-button-active')
   currentCryptoCode = cryptoCode
+  currentCoin = coin
 
   cashIn.addClass('crypto-switch')
   setTimeout(() => setCryptoBuy(coin), 100)
@@ -459,6 +460,8 @@ $(document).ready(function () {
     switchCoin(coin)
   })
 
+  $('#are-you-sure-cancel-transaction').click(() => buttonPressed('cancelTransaction', previousState))
+  $('#are-you-sure-continue-transaction').click(() => buttonPressed('continueTransaction', previousState))
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
@@ -486,6 +489,8 @@ $(document).ready(function () {
     if (languageButtonJ.length === 0) return
     var newLocale = languageButtonJ.attr('data-locale')
     setLocale(newLocale)
+    setCryptoBuy(currentCoin)
+    setCryptoSell(currentCoin)
     setState('choose_coin')
   })
 
@@ -1193,6 +1198,11 @@ function fiatComplete (tx) {
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
   setState('fiat_complete')
+}
+
+function dispenseBatch (data) {
+  $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
+  $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
 
 function initDebug () {

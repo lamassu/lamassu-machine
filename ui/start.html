@@ -1291,6 +1291,7 @@
       <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
         <section class="instructions">
           <h1 class="js-i18n">Dispensing...</h1>
+          <h3 class="batch">Batch <span class="js-current-batch"></span> out of <span class="js-of-batch"></span></h3>
           <h2 class="js-i18n">Please take your cash.</h2>
         </section>
         <img class="dispensing-bill" src="images/dispensing-bill.png" />
@@ -1399,6 +1400,22 @@
             </section>
           </section>
           <section class="bottom"></section>
+        </section>
+      </section>
+
+      <section class="viewport are_you_sure_state" data-tr-section="are-you-sure">
+        <section class="info">
+          <h1 class="js-i18n">Are You Sure?</h1>
+          <section class="description long">
+            <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number, 
+              you'll need to manually settle the transaction with the operator. <p>
+            <p class="js-i18n"> Press <strong>'Continue transaction'</strong> and wait up to 60 seconds for your deposit to be seen.</p>
+            <p class="js-i18n"> Or press <strong>'Cancel transaction'</strong> to return to the home screen.</p>
+          </section>
+          <section class="actions">
+            <span class="button js-i18n" id="are-you-sure-continue-transaction">Continue Transaction</span>
+            <span class="button js-i18n" id="are-you-sure-cancel-transaction">Cancel Transaction</span>
+          </section>
         </section>
       </section>
 

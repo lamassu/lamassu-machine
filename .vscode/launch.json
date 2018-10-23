@@ -11,6 +11,12 @@
       "program": "${workspaceRoot}/bin/lamassu-machine",
       "cwd": "${workspaceRoot}",
       "args": ["--mockBv", "/dev/ttys011",  "--mockBillDispenser", "--mockCam"]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}"
     }
   ]
 }
