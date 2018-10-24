@@ -460,8 +460,12 @@ $(document).ready(function () {
     switchCoin(coin)
   })
 
-  $('#are-you-sure-cancel-transaction').click(() => buttonPressed('cancelTransaction', previousState))
-  $('#are-you-sure-continue-transaction').click(() => buttonPressed('continueTransaction', previousState))
+  var areYouSureCancel = document.getElementById('are-you-sure-cancel-transaction')
+  touchEvent(areYouSureCancel, () => buttonPressed('cancelTransaction', previousState))
+
+  var areYouSureContinue = document.getElementById('are-you-sure-continue-transaction')
+  touchEvent(areYouSureContinue, () => buttonPressed('continueTransaction', previousState))
+
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))

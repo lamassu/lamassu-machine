@@ -2000,6 +2000,10 @@ body  { margin: 0;}
   text-align: center !important;
 }
 
+.info .button.are-you-sure-button {
+  border-radius: 11%/50%;
+}
+
 @-webkit-keyframes pulse-out {
   0% {
   }
