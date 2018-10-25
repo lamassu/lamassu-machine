@@ -1,7 +1,9 @@
 body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-          user-select: none;
+      -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
   width: 1200px;
   overflow: hidden;
   direction: ltr;
@@ -48,8 +50,12 @@ strong {
 }
 
 .button {
+  -webkit-transition-property: background-color, border-color, color;
+  -o-transition-property: background-color, border-color, color;
   transition-property: background-color, border-color, color;
-  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+       -o-transition-duration: 0.2s;
+          transition-duration: 0.2s;
 }
 
 h1 { margin: 0;}
@@ -94,12 +100,16 @@ body  { margin: 0;}
 }
 
 .cancel, .wifi-cancel { position: absolute; top: 0; right: 0;}
-.i18n-rtl .cancel, .i18n-rtl .wifi-cancel { left: -1; right: auto; -webkit-transform: scaleX(-1); transform: scaleX(-1); }
+.i18n-rtl .cancel, .i18n-rtl .wifi-cancel { left: -1; right: auto; -webkit-transform: scaleX(-1); -ms-transform: scaleX(-1); transform: scaleX(-1); }
 
 .start-buttons {
   position: absolute; top:250; left: 0;
   width: 100%;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -307,6 +317,8 @@ body  { margin: 0;}
   font-size: 30px;
   color: #0e4160;   /* cobalt */
   font-weight: 500;
+  -webkit-transition: background-color 0.1s, color 0.1s;
+  -o-transition: background-color 0.1s, color 0.1s;
   transition: background-color 0.1s, color 0.1s;
 }
 
@@ -407,6 +419,8 @@ body  { margin: 0;}
 #phones img {
   position:absolute;
   left:0;
+  -webkit-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
   transition: opacity 2s ease-in-out;
 }
 
@@ -731,9 +745,15 @@ body  { margin: 0;}
   position: relative;
 
   /* Vertial and horizontal align */
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .info .content {
@@ -901,8 +921,12 @@ body  { margin: 0;}
   left: 0;
   top: 0;
   margin-bottom: 8px;
+  -webkit-transition-property: background-color, border-color, color;
+  -o-transition-property: background-color, border-color, color;
   transition-property: background-color, border-color, color;
-  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+       -o-transition-duration: 0.5s;
+          transition-duration: 0.5s;
 }
 
 #networks > .active {
@@ -1080,6 +1104,8 @@ body  { margin: 0;}
   position: relative;
   border: 4px solid #ffffff;
   font-weight: bold;
+  -webkit-transition: background-color 0.5s, color 0.5s;
+  -o-transition: background-color 0.5s, color 0.5s;
   transition: background-color 0.5s, color 0.5s;
 }
 
@@ -1735,10 +1761,23 @@ body  { margin: 0;}
 }
 
 .languages {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* 
+    Justify can be used instead of space-around because there are always more than 2 items.
+    Only change is a small difference on the outermost spacing.
+  */
+  -webkit-box-pack: justify;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0;
   position: absolute;
   width: 100%;
@@ -1877,11 +1916,11 @@ body  { margin: 0;}
 }
 
 .choose-coin-two-way {
-  background-image: url('../images/background-doublecircle.svg');
+  background-image: url('../images/background-doublecircle-1280x800.png');
 }
 
 .choose-coin-cash-in {
-  background-image: url('../images/background-singlecircle.svg');
+  background-image: url('../images/background-singlecircle-1280x800.png');
 }
 
 .choose-coin-cash-in .cash-out-box, .choose-coin-cash-in .coin-redeem {
@@ -1889,18 +1928,44 @@ body  { margin: 0;}
 }
 
 .choose_coin_state .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  /* Here we have to force center on webkit */
+  -webkit-box-pack: center;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100%;
   width: 100%;
   position: relative;
 }
 
+/* Simulate space around by adding a margin on the buy button */
+.cash-out-box {
+  margin-left: 378px;
+}
+
+@supports (display: flex) {
+  .cash-out-box {
+    margin-left: 0;
+  }
+}
+
+
 .crypto-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 200px;
   height: 200px;
   padding: 30px;
@@ -1924,8 +1989,12 @@ body  { margin: 0;}
 }
 
 .crypto-button-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
 }
 
@@ -1950,14 +2019,20 @@ body  { margin: 0;}
 .choose-coin-buttons {
   position: absolute;
   bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: 20px 0;
   width: 100%;
 }
 
 .crypto-buttons,
 .coin-redeem {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 0 10px;
 }
