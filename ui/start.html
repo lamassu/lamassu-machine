@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="flag-icon-css/css/flag-icon.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" media="screen and (max-height: 1079px)"> 
+    <link rel="stylesheet" href="css/main-1080.css" media="screen and (min-height: 1080px)">
 
     <script>const PORT=8080</script>
     <script>const HOST='localhost'</script>
@@ -234,8 +235,8 @@
             </span>
           </div>
         </section>
-        <div class="scan-id-image">
-          <img src="images/scan-id.png" width="453" height="606" />
+        <div class="scan-id-image-div">
+          <img src="images/scan-id.png" class="scan-id-image" width="453" height="606" />
         </div>
         <section class="bottom-bar">
           <p class="js-i18n-current-crypto-price current-crypto"></p>
@@ -253,8 +254,8 @@
             </span>
           </div>
         </section>
-        <div class="scan-photo-image">
-          <!--<img src="images/scan-photo.jpg" width="453" />-->
+        <div class="scan-photo-image-div">
+          <!--<img src="images/scan-photo.jpg" class="scan-photo-image" width="453" />-->
         </div>
         <section class="bottom-bar">
           <p class="js-i18n-current-crypto-price current-crypto"></p>
@@ -504,7 +505,7 @@
           <section class="top">
             <section class="content">
               <h1 class="js-i18n">Verifying identity…</h1>
-                <div class="loader"><img src="images/loading.gif" /></div>
+                <div class="loader"><img src="images/loading.gif"/></div>
                <p>
                 <strong class="js-i18n">Just making sure you're you.</strong><br/>
                 <span class="js-i18n">This could take a few seconds.</span>
@@ -739,8 +740,8 @@
               </div>
             </div>
           </section>
-          <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <circle cx="680" cy="180" r="30" />
+          <svg class="or-circle-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <circle class="or-circle" cx="680" cy="180" r="30" />
           </svg>
           <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
 
@@ -952,13 +953,13 @@
 
       <section id="locked-viewport" class="viewport locked_state info" data-tr-section="locked">
         <section class="main">
-          <section class="content">
-            <section class="top">
+          <section class="top">
+            <section class="content">
               <h1 class="js-i18n">This machine is locked</h1>
-               <p><strong class="js-i18n">Please ask for assistance.</strong></p>
+                <p><strong class="js-i18n">Please ask for assistance.</strong></p>
             </section>
-            <section class="bottom">
-            </section>
+          </section>
+          <section class="bottom">
           </section>
         </section>
       </section>
