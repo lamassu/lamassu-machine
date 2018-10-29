@@ -13,6 +13,7 @@
     "exitTime": 10800000,
     "checkPowerTime": 1000,
     "checkPowerTimeout": 4000,
+    "displayUnits": "Standard",
     "locale": {
       "localeInfo": {
         "primaryLocale": "en-US",

@@ -10,6 +10,7 @@ var fiatCode = null
 var locale = null
 var localeCode = null
 var jsLocaleCode = null // Sometimes slightly different than localeCode
+var displayUnits = "Standard"
 var _primaryLocales = []
 var lastRates = null
 var coins = {
@@ -65,7 +66,7 @@ var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
 
 function connect () {
   console.log(`ws://${HOST}:${PORT}/`)
-  websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
+  websocket = new WebSocket(`ws://${HOST}:${PORT}/`)  
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data)
     processData(data)
@@ -116,7 +117,7 @@ function processData (data) {
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
-  if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
+  if (data.displayUnits) setDisplayUnits(data.displayUnits)
 
   if (data.context) {
     $('.js-context').hide()
@@ -792,9 +793,10 @@ function setFixedFee (_fee) {
 
 function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var coin = coins[cryptoCode]
-
+  var coinScale = (displayUnits == "Milesimal" ? coin.displayScale + 3 : coin.displayScale)
+  
   $('.total-deposit').html(formatFiat(fiat))
-  var scale = new BigNumber(10).pow(coin.displayScale)
+  var scale = new BigNumber(10).pow(coinScale)
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber()
   var cryptoDisplayCode = coin.displayCode
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
@@ -822,6 +824,22 @@ function setupCassettes (_cassettes) {
   }
 }
 
+function setDisplayUnits (units) {
+  if (displayUnits != units) {
+    displayUnits = units;
+    if (units == "Milesimal") {
+      for (var key in coins) {
+        coins[key].displayCode = coins[key].displayCode.substr(1)
+      }
+    }
+    else {
+      for (var key in coins) {
+        coins[key].displayCode = 'm' + coins[key].displayCode
+      }
+    }
+  }
+}
+
 function updateCrypto (selector, cryptoAmount, cryptoDisplayCode) {
   $(selector).find('.crypto-amount').html(formatCrypto(cryptoAmount))
   $(selector).find('.crypto-units').html(cryptoDisplayCode)
@@ -845,7 +863,7 @@ function splitNumber (localize, localeCode) {
   if (split.length === 1) {
     return ['<span class="integer">', split[0], '</span>'].join('')
   }
-
+ 
   return [
     '<span class="integer">', split[0], '</span><span class="decimal-char">',
     decimalChar, '</span><span class="decimal">', split[1], '</span>'
@@ -888,11 +906,16 @@ function setExchangeRate (_rates) {
 
   var coin = coins[cryptoCode]
   var displayCode = coin.displayCode
-  var coinDisplayFactor = new BigNumber(10).pow(coin.unitScale - coin.displayScale)
-
   var cryptoToFiat = new BigNumber(rates.cashIn)
+  var fiatToCrypto = null;
 
-  var fiatToCrypto = new BigNumber(1).div(cryptoToFiat.div(coinDisplayFactor)).round(3).toString()
+  if (displayUnits == "Standard") {
+    var coinDisplayFactor = new BigNumber(10).pow(coin.unitScale - coin.displayScale)
+    fiatToCrypto = new BigNumber(1).div(cryptoToFiat.div(coinDisplayFactor)).round(3).toString()
+  }
+  else {
+    fiatToCrypto = new BigNumber(1).div(cryptoToFiat).round(3).toString()
+  }
 
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
   var translated = locale.translate('Our current %s price is %s').fetch(cryptoCode, rateStr)
