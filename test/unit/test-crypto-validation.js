@@ -102,8 +102,14 @@ test('Should fail length validation', t => {
   t.false(validated)
 })
 
-test('Should throw exception on invalid address', t => {
-  const addr = '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNL0'
+test('Should throw invalid address checksum exception', t => {
+  const addr = '3J98t1WpEZ73CNmQviecrnyiWrnqRhWN'
+  const validated = cryptoValidator.base58Validator('main', addr, BTCBase58Opts)
+  t.false(validated)
+})
+
+test('Should throw Non-base58 character exception', t => {
+  const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN0'
   const validated = cryptoValidator.base58Validator('main', addr, BTCBase58Opts)
   t.false(validated)
 })
