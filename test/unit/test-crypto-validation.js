@@ -1,7 +1,7 @@
 import test from 'ava'
 import cryptoValidator from '../../lib/coins/validators'
-import {parseUrl as parseBTCAddress, base58Opts as BTCBase58Opts} from '../../lib/coins/btc'
-import {base58Opts as LTCBase58Opts} from '../../lib/coins/ltc'
+import {base58Opts as BTCBase58Opts, bech32Opts as BTCBech32Opts} from '../../lib/coins/btc'
+import {base58Opts as LTCBase58Opts, bech32Opts as LTCBech32Opts} from '../../lib/coins/ltc'
 import {base58Opts as DASHBase58Opts} from '../../lib/coins/dash'
 import {base58Opts as ZECBase58Opts} from '../../lib/coins/zec'
 
@@ -37,8 +37,8 @@ test('Should validate LTC P2PKH', t => {
 
 test('Should validate LTC P2SH', t => {
   t.plan(2)
-  const mainNetaddr = '35tx7n3XhCc1TJorddFzixgAU1nUVCUMxm'
-  const testNetaddr = '2NBsZNqVDUKtchDSnTJT72tUgbtLGqpkfVe'
+  const mainNetaddr = 'ME7LnTc1rEdtiuSqJ2VivGJUWNPB7yS8fB'
+  const testNetaddr = 'QSv2w3XpTPwSjZoQHjNxzebXXVH2Feaoke'
   const validatedMain = cryptoValidator.base58Validator('main', mainNetaddr, LTCBase58Opts)
   const validatedTest = cryptoValidator.base58Validator('test', testNetaddr, LTCBase58Opts)
   t.true(validatedMain)
@@ -88,10 +88,20 @@ test('Should validate BTC bech32', t => {
   t.plan(2)
   const mainNetaddr = 'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq'
   const testNetaddr = 'tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx'
-  const validatedMain = parseBTCAddress('main', mainNetaddr)
-  const validatedTest = parseBTCAddress('test', testNetaddr)
-  t.is(validatedMain, mainNetaddr)
-  t.is(validatedTest, testNetaddr)
+  const validatedMain = cryptoValidator.bech32Validator('main', mainNetaddr, BTCBech32Opts)
+  const validatedTest = cryptoValidator.bech32Validator('test', testNetaddr, BTCBech32Opts)
+  t.true(validatedMain)
+  t.true(validatedTest)
+})
+
+test('Should validate LTC bech32', t => {
+  t.plan(2)
+  const mainNetaddr = 'ltc1qnfu0fj4m528pt84jpxl8daz2mf7n0xdmxunm25'
+  const testNetaddr = 'tltc1qfnpm6sdx9q6pse7rx9l3050fhrsevdg2mny4zg'
+  const validatedMain = cryptoValidator.bech32Validator('main', mainNetaddr, LTCBech32Opts)
+  const validatedTest = cryptoValidator.bech32Validator('test', testNetaddr, LTCBech32Opts)
+  t.true(validatedMain)
+  t.true(validatedTest)
 })
 
 test('Should fail length validation', t => {
