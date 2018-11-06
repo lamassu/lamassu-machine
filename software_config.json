@@ -3,6 +3,7 @@
     "connectingTimeout": 40000,
     "qrTimeout": 60000,
     "goodbyeTimeout": 2000,
+    "invalidAddressTimeout": 15000,
     "billTimeout": 60000,
     "completedTimeout": 60000,
     "periodicLogInterval": 3600000,

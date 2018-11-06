@@ -1038,6 +1038,7 @@ function translateCoin (cryptoCode) {
   $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code to send us your %s.').fetch(cryptoCode))
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
+  $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
   $('.js-i18n-coins-to-address').html(locale.translate('Your %s will be sent to:').fetch(cryptoCode))
 
   if (cryptoCode === 'ETH') {
