@@ -50,7 +50,7 @@ brew install pkg-config
 ## Mac OS X NodeJS setup
 
 ```
-curl -L https://git.io/n-install | bash -s -- -y lts
+curl -L https://git.io/n-install | bash -s -- -y 8.12
 . ~/.bash_profile
 ```
 
