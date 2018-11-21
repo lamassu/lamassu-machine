@@ -1522,6 +1522,10 @@ body  { margin: 0;}
   left: 804px;
 }
 
+.dispensing_state .batch {
+  opacity: 0;
+}
+
 .fiat_receipt .sums {
   position: relative;
   top: 50px;
