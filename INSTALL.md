@@ -49,6 +49,8 @@ brew install pkg-config
 
 ## Mac OS X NodeJS setup
 
+Note: Use the latest NodeJS version in the 8.* series.
+
 ```
 curl -L https://git.io/n-install | bash -s -- -y 8.12
 . ~/.bash_profile
