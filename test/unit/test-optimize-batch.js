@@ -5,6 +5,7 @@ import optimizeDispense from '../../lib/dispense-optimizer'
 const LIMIT = 20
 
 const optimizeDispenseWithLimit = inputArr => optimizeDispense(inputArr, LIMIT)
+const optimizeDispenseWithoutLimit = inputArr => optimizeDispense(inputArr)
 
 test('Pass only one batch', t => {
   const o = optimizeDispenseWithLimit([2, 6])
@@ -34,4 +35,11 @@ test('Sum of optimized batches equals input', t => {
   const o = optimizeDispenseWithLimit([54, 12])
 
   t.is(_.sum(_.flatten(o)), 66)
+})
+
+test('Should return input array', t => {
+  const input = [7,15]
+  const o = optimizeDispenseWithoutLimit(input)
+  
+  t.deepEqual(o, input)
 })
