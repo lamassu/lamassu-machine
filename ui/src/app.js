@@ -117,7 +117,6 @@ function processData (data) {
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
-  if (data.toggleBatchCounter) toggleBatchCounter(data.toggleBatchCounter)
 
   if (data.context) {
     $('.js-context').hide()
@@ -1207,15 +1206,18 @@ function fiatComplete (tx) {
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
+  toggleBatchCounter('hide')
+
   setState('fiat_complete')
 }
 
-function toggleBatchCounter(data) {
-  const opacity = data.state === 'show' ? 100 : 0
+function toggleBatchCounter(state) {
+  const opacity = state === 'show' ? 100 : 0
   $('.batch').css('opacity', opacity)
 }
 
 function dispenseBatch (data) {
+  if (data.of > 1) toggleBatchCounter('show')
   $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
   $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
