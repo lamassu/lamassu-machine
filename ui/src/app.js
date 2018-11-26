@@ -1206,7 +1206,7 @@ function fiatComplete (tx) {
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
   $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
 
-  toggleBatchCounter('hide')
+  toggleBatchCounter('show')
 
   setState('fiat_complete')
 }
@@ -1217,7 +1217,7 @@ function toggleBatchCounter(state) {
 }
 
 function dispenseBatch (data) {
-  if (data.of > 1) toggleBatchCounter('show')
+  if (data.of === 1) toggleBatchCounter('hide')
   $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
   $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
