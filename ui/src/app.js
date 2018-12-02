@@ -12,6 +12,7 @@ var localeCode = null
 var jsLocaleCode = null // Sometimes slightly different than localeCode
 var _primaryLocales = []
 var lastRates = null
+var manufacturingMode = false
 var coins = {
   BTC: {
     unitScale: 8,
@@ -115,6 +116,7 @@ function processData (data) {
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
+  if (data.manufacturingMode) setManufacturingMode(data.manufacturingMode)
 
   if (data.context) {
     $('.js-context').hide()
@@ -251,6 +253,12 @@ function chooseCoin (coins, twoWayMode) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
+  }
+
+  if (manufacturingMode) {
+    $('#factory-reset').removeClass('hide')
+  } else {
+    $('#factory-reset').addClass('hide')
   }
 
   const defaultCoin = coins[0]
@@ -448,6 +456,8 @@ $(document).ready(function () {
 
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
+
+  setupButton('factory-reset', 'factoryReset')
 
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
@@ -647,6 +657,10 @@ function setTermsScreen (data) {
   $screen.find('.js-terms-text').html(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
+}
+
+function setManufacturingMode (isActive) {
+  manufacturingMode = isActive
 }
 
 function moreNetworks () {
