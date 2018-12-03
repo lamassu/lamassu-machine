@@ -447,6 +447,7 @@ $(document).ready(function () {
   setupButton('redeem-later-ok', 'idle')
   setupButton('pre-receipt-ok', 'fiatReceipt')
   setupButton('fiat-error-ok', 'idle')
+  setupButton('factory-reset-error-ok', 'idle')
   setupButton('network-down-ok', 'idle')
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
