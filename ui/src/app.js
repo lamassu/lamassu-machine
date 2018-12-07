@@ -6,6 +6,12 @@ const params = new URLSearchParams(queryString.substring(1))
 const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 
+var currentPageIndex = 0
+var termsPages = []
+
+const MAX_CHARACTERS_IN_LINE = 70
+const MAX_LINES_IN_PAGE = 7
+
 var fiatCode = null
 var locale = null
 var localeCode = null
@@ -650,12 +656,133 @@ function setWifiList (recs, requestedPage) {
  * @param {String} data.cancel
  */
 function setTermsScreen (data) {
-  const $screen = $('.js-terms-screen')
-
+  var $screen = $('.js-terms-screen')
   $screen.find('.js-terms-title').html(data.title)
-  $screen.find('.js-terms-text').html(data.text)
+  renderTermsText(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
+}
+
+// to temove <p> & </p> tag from text
+function removePTagFromText (text) {
+  return text.slice(3, text.length - 4)
+}
+
+function splitToLines (textArray) {
+  var linesArray = []
+  var lineEndIndex = 0
+  while (lineEndIndex <= textArray.length - 2) {
+    var lineStartIndex = lineEndIndex + 1
+    if (lineEndIndex !== 0) {
+      lineEndIndex = calculateLinesLastWordIndex(textArray, lineEndIndex + 1)
+    } else {
+      lineStartIndex = 0
+      lineEndIndex = calculateLinesLastWordIndex(textArray, lineEndIndex)
+    }
+    linesArray.push(createLine(textArray, lineStartIndex, lineEndIndex))
+  }
+  return linesArray
+}
+
+function splitToPages (linesArray) {
+  var currentPageLineIndex = 0
+  var pageArray = []
+
+  pageArray.push(linesArray.slice(0, MAX_LINES_IN_PAGE).join(' '))
+  var pageText = linesArray[MAX_LINES_IN_PAGE - 1]
+  
+  for (var i = MAX_LINES_IN_PAGE; i < linesArray.length; ++i) {
+    if (currentPageLineIndex === MAX_LINES_IN_PAGE - 1) {
+      currentPageLineIndex = 0
+      pageArray.push(pageText)
+      pageText = linesArray[i - 1]
+    }
+    pageText = pageText.concat(' ' + linesArray[i])
+    currentPageLineIndex++
+  }
+  if (currentPageLineIndex !== 0) {
+    pageArray.push(pageText)
+  }
+
+  return pageArray
+}
+
+function renderTermsText (text) {
+  text = removePTagFromText(text)
+  var textArray = text.split(' ')
+  var linesArray = splitToLines(textArray)
+  termsPages = splitToPages(linesArray)
+  startPage()
+}
+
+function createLine (textArray, startWordIndex, endWordIndex) {
+  return '<h5>' + textArray.slice(startWordIndex, endWordIndex + 1).join(' ') + '</h5>'
+}
+
+function calculateLinesLastWordIndex (words, oldEndIndex) {
+  var newEndIndex = oldEndIndex
+  var line = words[oldEndIndex]
+  for (var i = oldEndIndex + 1; i < words.length; ++i) {
+    var sentence = line.concat(' ' + words[i])
+    if (sentence.length <= MAX_CHARACTERS_IN_LINE) {
+      line = sentence
+      newEndIndex = i
+    } else {
+      return newEndIndex
+    }
+  }
+  return Math.max(oldEndIndex, newEndIndex)
+}
+
+// click page up button
+function scrollUp () {
+  currentPageIndex = Math.max(0, currentPageIndex -= 1)
+  var termsText = termsPages[currentPageIndex]
+  updateButtonStyles(currentPageIndex)
+  var $screen = $('.js-terms-screen')
+  $screen.find('.js-terms-text').html(termsText)
+}
+
+// start page
+function startPage () {
+  var $screen = $('.js-terms-screen')
+  var currentPageText = termsPages[currentPageIndex]
+  updateButtonStyles(currentPageIndex, termsPages.length - 1)
+  $screen.find('.js-terms-text').html(currentPageText)
+}
+
+// click page up button
+function scrollDown () {
+  currentPageIndex = Math.min(termsPages.length - 1, currentPageIndex += 1)
+  var termsText = termsPages[currentPageIndex]
+  updateButtonStyles(currentPageIndex, termsPages.length - 1)
+  var $screen = $('.js-terms-screen')
+  $screen.find('.js-terms-text').html(termsText)
+}
+
+function updateButtonStyles (currentPageIndex, border) {
+  var buttonDown = document.getElementById('scroll-down')
+  var buttonUp = document.getElementById('scroll-up')
+  if (currentPageIndex === 0) {
+    makeButtonDisabled(buttonUp)
+  } else {
+    makeButtonEnabled(buttonUp)
+  }
+  if (currentPageIndex === border) {
+    makeButtonDisabled(buttonDown)
+  } else {
+    makeButtonEnabled(buttonDown)
+  }
+}
+
+function makeButtonDisabled (button) {
+  button.style.backgroundColor = '#eeeee3'
+  button.style.color = 'white'
+}
+
+function makeButtonEnabled (button) {
+  button.style.backgroundColor = '#D0D0C8'
+  button.style.color = 'black'
 }
 
 function moreNetworks () {

@@ -1400,10 +1400,14 @@
       <section class="viewport terms_screen_state info js-terms-screen" data-tr-section="terms">
         <section class="main">
           <section class="top">
+            <section class="actions-scroll">
+              <span class="scroll-button js-i18n js-scroll-up-button" onclick="scrollUp()" id="scroll-up">&#8679;</span>
+              <span class="scroll-button js-i18n js-scroll-down-button" onclick="scrollDown()" id="scroll-down">&#8681;</span>
+            </section>
             <section class="content">
               <h1 class="js-i18n js-terms-title"></h1>
               <section class="description long">
-                <p class="js-i18n js-terms-text"></p>
+                <p class="js-i18n js-terms-text" id="js-terms-text"></p>
               </section>
               <section class="actions">
                 <span class="button js-i18n js-terms-accept-button" id="terms-ok">Accept</span>
@@ -1419,7 +1423,7 @@
         <section class="info">
           <h1 class="js-i18n">Are You Sure?</h1>
           <section class="description long">
-            <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number, 
+            <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number,
               you'll need to manually settle the transaction with the operator. <p>
             <p class="js-i18n"> Press <strong>'Continue transaction'</strong> and wait up to 60 seconds for your deposit to be seen.</p>
             <p class="js-i18n"> Or press <strong>'Cancel transaction'</strong> to return to the home screen.</p>
