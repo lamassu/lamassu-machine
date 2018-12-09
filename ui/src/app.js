@@ -1210,6 +1210,7 @@ function fiatComplete (tx) {
 }
 
 function dispenseBatch (data) {
+  $('.batch').toggleClass('hide', data.of === 1)
   $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
   $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
