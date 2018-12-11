@@ -798,7 +798,7 @@ body  { margin: 0;}
   margin-top: 5px;
 }
 
-.actions-scroll {
+#actions-scroll {
   position: absolute;
   top: 40%;
   right: 1%;
@@ -808,6 +808,11 @@ body  { margin: 0;}
   width: 90%;
   margin-left: 5%;
   text-align: justify;
+}
+
+.js-terms-text-div {
+  height: 308px;
+  overflow: hidden;
 }
 
 .js-terms-text > h5 {
