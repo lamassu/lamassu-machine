@@ -6,6 +6,10 @@ const params = new URLSearchParams(queryString.substring(1))
 const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 
+const SCROLL_SIZE = 270
+var textHeightQuantity = 0
+var currentPage = 0
+
 var fiatCode = null
 var locale = null
 var localeCode = null
@@ -651,11 +655,70 @@ function setWifiList (recs, requestedPage) {
  */
 function setTermsScreen (data) {
   const $screen = $('.js-terms-screen')
-
   $screen.find('.js-terms-title').html(data.title)
-  $screen.find('.js-terms-text').html(data.text)
+  startPage(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
+}
+
+// click page up button
+function scrollUp () {
+  const div = document.getElementById('js-terms-text-div')
+  if (currentPage !== 0) {
+    currentPage -= 1
+    updateButtonStyles()
+    div.scrollTo(0, currentPage * SCROLL_SIZE)
+  }
+}
+
+// start page
+function startPage (text) {
+  const $screen = $('.js-terms-screen')
+  $screen.find('.js-terms-text').html(text)
+  updateButtonStyles()
+  setTimeout(function () {
+    const div = document.getElementById('js-terms-text-div').offsetHeight
+    textHeightQuantity = document.getElementById('js-terms-text').childNodes[0].offsetHeight
+    if (textHeightQuantity <= div) {
+      document.getElementById('actions-scroll').style.display = 'none'
+    }
+  })
+}
+
+// click page up button
+function scrollDown () {
+  const div = document.getElementById('js-terms-text-div')
+  if (!(currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0)) {
+    currentPage += 1
+    updateButtonStyles()
+    div.scrollTo(0, currentPage * SCROLL_SIZE)
+  }
+}
+
+function updateButtonStyles () {
+  textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
+  const buttonDown = document.getElementById('scroll-down')
+  const buttonUp = document.getElementById('scroll-up')
+  if (currentPage === 0) {
+    makeButtonDisabled(buttonUp)
+  } else {
+    makeButtonEnabled(buttonUp)
+  }
+
+  if (currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0) {
+    makeButtonDisabled(buttonDown)
+  } else {
+    makeButtonEnabled(buttonDown)
+  }
+}
+
+function makeButtonDisabled (button) {
+  button.style.backgroundColor = '#eeeee3'
+  button.style.color = 'white'
+}
+function makeButtonEnabled (button) {
+  button.style.backgroundColor = '#D0D0C8'
+  button.style.color = 'black'
 }
 
 function moreNetworks () {

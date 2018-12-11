@@ -786,6 +786,40 @@ body  { margin: 0;}
   margin-left: 100px;
 }
 
+.scroll-button {
+  background-color: #D0D0C8;   /* cobalt */
+  color: #5f5f55;
+  font-weight: 900;
+  font-size: 32px;
+  padding: 9px 21px;
+  border-radius: 50px;
+  position: relative;
+  display: block;
+  margin-top: 5px;
+}
+
+#actions-scroll {
+  position: absolute;
+  top: 40%;
+  right: 1%;
+}
+
+.js-terms-text {
+  width: 90%;
+  margin-left: 5%;
+  text-align: justify;
+}
+
+.js-terms-text-div {
+  height: 308px;
+  overflow: hidden;
+}
+
+.js-terms-text > h5 {
+  line-height: 1px;
+  font-weight: normal;
+}
+
 .info .button.ok {
   width: 5em;
 }
