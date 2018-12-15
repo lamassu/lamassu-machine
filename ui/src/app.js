@@ -920,12 +920,12 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function qrize (text, target, size, lightning) {
+function qrize (text, target, lightning) {
   const image = document.getElementById('bolt-img')
   const opts = {
     crisp: true,
     text,
-    size,
+    size: target.width(),
     render: 'canvas',
     rounded: 50,
     quiet: 1,
@@ -956,10 +956,10 @@ function setTx (tx) {
     $('.js-no-inserted-notes').show()
   }
 
-  qrize(txId, $('#cash-in-qr-code'), 300)
-  qrize(txId, $('#cash-in-fail-qr-code'), 300)
-  qrize(txId, $('#qr-code-fiat-receipt'), 330)
-  qrize(txId, $('#qr-code-fiat-complete'), 330)
+  qrize(txId, $('#cash-in-qr-code'))
+  qrize(txId, $('#cash-in-fail-qr-code'))
+  qrize(txId, $('#qr-code-fiat-receipt'))
+  qrize(txId, $('#qr-code-fiat-complete'))
 }
 
 function setBuyerAddress (address) {
@@ -1165,7 +1165,7 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(depositInfo.toAddress)
   $('.deposit_state .send-notice').show()
 
-  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), 330)
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'))
 }
 
 function deposit (tx) {
