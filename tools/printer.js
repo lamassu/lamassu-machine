@@ -11,6 +11,7 @@ const portOptions = {
 }
 
 const device = process.argv[2] || '/dev/ttyUSB1'
+const qrcodeStr = process.argv[3] || 'https://lamassu.is'
 const port = new SerialPort(device, portOptions)
 
 port.on('data', (data) => {
@@ -33,6 +34,7 @@ port.open((err) => {
   }
   else console.log(`[INFO]: Successfully opened a connection to ${device}.`)
 
+  const qrcodeStrLength = qrcodeStr.length.toString().padStart(4,'0')
   const cmd = '^XA\n' +
               '^FO50,50' +
               '^AQN,28,24' +
@@ -41,8 +43,8 @@ port.open((err) => {
               '^AQN,28,24' +
                   '^FDVisit us at https://lamassu.is or use the QR code.^FS\n' +
               '^FO50,100' +
-                '^BQN,2,10,H^FDHM,A' +
-                'https://lamassu.is^FS\n' +
+                `^BQN,2,10,H^FDHM,B${qrcodeStrLength}` +
+                `${qrcodeStr}^FS\n` +
               '^CN1\n' +
               '^XZ'
 
