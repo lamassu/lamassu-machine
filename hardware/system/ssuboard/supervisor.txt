@@ -1,5 +1,5 @@
 [program:lamassu-browser]
-command=/usr/bin/firefox file:///opt/lamassu-machine/ui/start.html
+command=/usr/bin/surf -KF file:///opt/lamassu-machine/ui/start.html
 environment=DISPLAY=":0"
 user=debian
 autostart=true
@@ -46,5 +46,3 @@ amixer set PCM 75%
 /opt/fullscreen.sh:
 #!/usr/bin/env bash
 
-sleep 20
-DISPLAY=:0 xdotool search --sync --onlyvisible --class "Firefox" windowactivate key F11
