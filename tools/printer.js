@@ -1,3 +1,4 @@
+const minimist = require('minimist')
 const SerialPort = require('serialport')
 
 const portOptions = {
@@ -10,8 +11,9 @@ const portOptions = {
   xoff: true
 }
 
-const device = process.argv[2] || '/dev/ttyUSB1'
-const qrcodeStr = process.argv[3] || 'https://lamassu.is'
+const args = minimist(process.argv.slice(2))
+const device = args.dev || '/dev/ttyUSB1'
+const qrcodeStr = args.str || 'https://lamassu.is'
 const port = new SerialPort(device, portOptions)
 
 port.on('data', (data) => {
