@@ -48,6 +48,7 @@ port.open((err) => {
                 `^BQN,2,10,H^FDHM,B${qrcodeStrLength}` +
                 `${qrcodeStr}^FS\n` +
               '^CN1\n' +
+              '^PN0\n' +
               '^XZ'
 
   console.log('[INFO]: Printing test message...')
