@@ -226,6 +226,10 @@ body  { margin: 0;}
   width: 510px;
 }
 
+.scan-photo .main {
+  width: 1120px;
+}
+
 .scan-id h1,
 .scan-photo h1 {
   color: #ffffff;
@@ -240,6 +244,10 @@ body  { margin: 0;}
   font-size: 30px;
   line-height: 1.4;
   color: #5f5f55;   /* sandstone */
+}
+
+.scan-photo .instructions {
+  width: 510px;
 }
 
 .scan-id .scan-id-image-div {
