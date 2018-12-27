@@ -890,6 +890,10 @@ body  { margin: 0;}
   background-color: #efefef;
 }
 
+.invalid_address_state #invalid-address {
+  font-size: 45px;
+}
+
 /* Bottom Bar */
 
 .bottom-bar {
