@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="flag-icon-css/css/flag-icon.css">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" media="screen and (max-height: 1079px)"> 
+    <link rel="stylesheet" href="css/main-1080.css" media="screen and (min-height: 1080px)">
 
     <script>const PORT=8080</script>
     <script>const HOST='localhost'</script>
@@ -234,8 +235,8 @@
             </span>
           </div>
         </section>
-        <div class="scan-id-image">
-          <img src="images/scan-id.png" width="453" height="606" />
+        <div class="scan-id-image-div">
+          <img src="images/scan-id.png" class="scan-id-image" width="453" height="606" />
         </div>
         <section class="bottom-bar">
           <p class="js-i18n-current-crypto-price current-crypto"></p>
@@ -253,8 +254,8 @@
             </span>
           </div>
         </section>
-        <div class="scan-photo-image">
-          <!--<img src="images/scan-photo.jpg" width="453" />-->
+        <div class="scan-photo-image-div">
+          <!--<img src="images/scan-photo.jpg" class="scan-photo-image" width="453" />-->
         </div>
         <section class="bottom-bar">
           <p class="js-i18n-current-crypto-price current-crypto"></p>
@@ -504,6 +505,23 @@
           <section class="top">
             <section class="content">
               <h1 class="js-i18n">Verifying identity…</h1>
+                <div class="loader"><img src="images/loading.gif"/></div>
+               <p>
+                <strong class="js-i18n">Just making sure you're you.</strong><br/>
+                <span class="js-i18n">This could take a few seconds.</span>
+               </p>
+            </section>
+          </section>
+          <section class="bottom">
+          </section>
+        </section>
+      </section>
+
+      <section class="viewport verifying_photo_state info" data-tr-section="verifying-photo">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Verifying photo card…</h1>
                 <div class="loader"><img src="images/loading.gif" /></div>
                <p>
                 <strong class="js-i18n">Just making sure you're you.</strong><br/>
@@ -751,8 +769,8 @@
               </div>
             </div>
           </section>
-          <svg class="or-circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <circle cx="680" cy="180" r="30" />
+          <svg class="or-circle-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <circle class="or-circle" cx="680" cy="180" r="30" />
           </svg>
           <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
 
@@ -964,13 +982,13 @@
 
       <section id="locked-viewport" class="viewport locked_state info" data-tr-section="locked">
         <section class="main">
-          <section class="content">
-            <section class="top">
+          <section class="top">
+            <section class="content">
               <h1 class="js-i18n">This machine is locked</h1>
-               <p><strong class="js-i18n">Please ask for assistance.</strong></p>
+                <p><strong class="js-i18n">Please ask for assistance.</strong></p>
             </section>
-            <section class="bottom">
-            </section>
+          </section>
+          <section class="bottom">
           </section>
         </section>
       </section>
@@ -1303,7 +1321,7 @@
       <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
         <section class="instructions">
           <h1 class="js-i18n">Dispensing...</h1>
-          <h3 class="batch">Batch <span class="js-current-batch"></span> out of <span class="js-of-batch"></span></h3>
+          <h3 class="batch hide">Batch <span class="js-current-batch"></span> out of <span class="js-of-batch"></span></h3>
           <h2 class="js-i18n">Please take your cash.</h2>
         </section>
         <img class="dispensing-bill" src="images/dispensing-bill.png" />
@@ -1421,19 +1439,24 @@
         </section>
       </section>
 
-      <section class="viewport are_you_sure_state" data-tr-section="are-you-sure">
-        <section class="info">
-          <h1 class="js-i18n">Are You Sure?</h1>
-          <section class="description long">
-            <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number,
-              you'll need to manually settle the transaction with the operator. <p>
-            <p class="js-i18n"> Press <strong>'Continue transaction'</strong> and wait up to 60 seconds for your deposit to be seen.</p>
-            <p class="js-i18n"> Or press <strong>'Cancel transaction'</strong> to return to the home screen.</p>
+      <section class="viewport are_you_sure_state info" data-tr-section="are-you-sure">
+        <section class="main">
+          <section class="top">
+            <section class="content">
+              <h1 class="js-i18n">Are You Sure?</h1>
+              <section class="description long">
+                <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number, 
+                  you'll need to manually settle the transaction with the operator. <p>
+                <p class="js-i18n"> Press <strong>'Continue transaction'</strong> and wait up to 60 seconds for your deposit to be seen.</p>
+                <p class="js-i18n"> Or press <strong>'Cancel transaction'</strong> to return to the home screen.</p>
+              </section>
+              <section class="actions">
+                <div class="button js-i18n are-you-sure-button" id="are-you-sure-continue-transaction">Continue Transaction</div>
+                <div class="button js-i18n are-you-sure-button" id="are-you-sure-cancel-transaction">Cancel Transaction</div>
+              </section>
+            </section>
           </section>
-          <section class="actions">
-            <span class="button js-i18n" id="are-you-sure-continue-transaction">Continue Transaction</span>
-            <span class="button js-i18n" id="are-you-sure-cancel-transaction">Cancel Transaction</span>
-          </section>
+          <section class="bottom"></section>
         </section>
       </section>
 
