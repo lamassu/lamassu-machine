@@ -12,7 +12,7 @@ const portOptions = {
 }
 
 const args = minimist(process.argv.slice(2))
-const device = args.dev || '/dev/ttyUSB1'
+const device = args.dev || '/dev/ssu-com3'
 const qrcodeStr = args.str || 'https://lamassu.is'
 const port = new SerialPort(device, portOptions)
 
