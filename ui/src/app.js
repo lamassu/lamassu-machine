@@ -464,14 +464,23 @@ $(document).ready(function () {
     switchCoin(coin)
   })
 
-  $('#are-you-sure-cancel-transaction').click(() => buttonPressed('cancelTransaction', previousState))
-  $('#are-you-sure-continue-transaction').click(() => buttonPressed('continueTransaction', previousState))
+  var areYouSureCancel = document.getElementById('are-you-sure-cancel-transaction')
+  touchEvent(areYouSureCancel, () => buttonPressed('cancelTransaction', previousState))
+
+  var areYouSureContinue = document.getElementById('are-you-sure-continue-transaction')
+  touchEvent(areYouSureContinue, () => buttonPressed('continueTransaction', previousState))
+
   $('.coin-redeem-button').click(() => buttonPressed('redeem'))
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
   $('.change-language').mousedown(() => {
-    if (_primaryLocales.length === 2) return setLocale(otherLocale())
+    if (_primaryLocales.length === 2) {
+      setLocale(otherLocale())
+      setCryptoBuy(currentCoin)
+      setCryptoSell(currentCoin)
+      return
+    }
     setState('select_locale')
   })
 
@@ -977,12 +986,12 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function qrize (text, target, size, lightning) {
+function qrize (text, target, lightning) {
   const image = document.getElementById('bolt-img')
   const opts = {
     crisp: true,
     text,
-    size,
+    size: target.width(),
     render: 'canvas',
     rounded: 50,
     quiet: 1,
@@ -1013,10 +1022,10 @@ function setTx (tx) {
     $('.js-no-inserted-notes').show()
   }
 
-  qrize(txId, $('#cash-in-qr-code'), 300)
-  qrize(txId, $('#cash-in-fail-qr-code'), 300)
-  qrize(txId, $('#qr-code-fiat-receipt'), 330)
-  qrize(txId, $('#qr-code-fiat-complete'), 330)
+  qrize(txId, $('#cash-in-qr-code'))
+  qrize(txId, $('#cash-in-fail-qr-code'))
+  qrize(txId, $('#qr-code-fiat-receipt'))
+  qrize(txId, $('#qr-code-fiat-complete'))
 }
 
 function setBuyerAddress (address) {
@@ -1223,7 +1232,7 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(depositInfo.toAddress)
   $('.deposit_state .send-notice').show()
 
-  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), 330)
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'))
 }
 
 function deposit (tx) {
@@ -1265,6 +1274,7 @@ function fiatComplete (tx) {
 }
 
 function dispenseBatch (data) {
+  $('.batch').toggleClass('hide', data.of === 1)
   $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
   $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
 }
