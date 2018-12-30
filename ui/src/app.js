@@ -425,10 +425,10 @@ $(document).ready(function () {
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
   setupButton('id-scan-failed-ok', 'idVerificationFailedOk')
   setupButton('id-code-failed-retry', 'idCodeFailedRetry')
-  setupButton('id-code-failed-cancel', 'cancelIdScan')
+  setupButton('id-code-failed-cancel', 'bye')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
   setupButton('photo-scan-failed-retry', 'retryPhotoScan')
-  setupButton('photo-scan-failed-cancel', 'cancelIdScan')
+  setupButton('photo-scan-failed-cancel', 'bye')
   setupButton('photo-verification-failed-ok', 'cancelIdScan')
 
   setupButton('sanctions-failure-ok', 'idle')
