@@ -1,10 +1,11 @@
 const _ = require('lodash/fp')
 const fs = require('fs')
 
-const camera = require('../lib/camera')
+const camera = require('@rafaeltaranto/lamassu-camera-wrapper')
+const mockWrapper = require('../lib/mocks/camera-wrapper')
 
 const config = require('../lib/configuration')
-  .loadConfig({ 'mockCam': true })
+  .loadConfig({ 'mockCam': true, mockWrapper })
 
 const mode = _.defaultTo(
   _.get('scanner.photoId', config),
