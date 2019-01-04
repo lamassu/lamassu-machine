@@ -3,7 +3,7 @@
   "license": "Unlicense",
   "version": "7.2.0",
   "dependencies": {
-    "@rafaeltaranto/lamassu-camera-wrapper": "^1.0.0",
+    "@lamassu/camera-wrapper": "^1.0.1",
     "async": "~0.2.9",
     "base-x": "^3.0.0",
     "bignumber.js": "^4.0.1",
