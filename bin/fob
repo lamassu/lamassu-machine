@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+
+'use strict'
+
+const rewire = require('rewire')
+const readline = require('readline')
+
+const fobManager = rewire('../lib/ssuboard/fob-manager')
+
+const AVAILABLE_COMMANDS = ['ls', 'add', 'rm']
+
+const command = process.argv[2] || '--help'
+const arg = process.argv[3]
+
+function askQuestion (query) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+
+  return new Promise(resolve => rl.question(query, ans => {
+    rl.close()
+    resolve(ans)
+  }))
+}
+
+async function exec () {
+  if (!AVAILABLE_COMMANDS.includes(command)) {
+    printHelp()
+    return
+  }
+
+  switch (command) {
+    case 'ls':
+      const list = (await fobManager.list()) || []
+      console.log(list.join('\n'))
+      break
+    case 'add':
+      addFob()
+      break
+    case 'rm':
+      removeFob()
+      break
+    default:
+      printHelp()
+  }
+}
+
+async function addFob () {
+  if (!arg) console.log('Needs name definition: fob add <name>')
+
+  console.log('This will register a new key fob to the list of authorised keys.')
+  const ans = await askQuestion('Are you sure? (y/N): ')
+
+  if (!ans && ans.trim() !== 'y' && ans.trim() !== 'Y') return
+
+  await fobManager.register(arg)
+    .catch(err => console.log(err && err.message))
+}
+
+async function removeFob () {
+  if (!arg) console.log('Needs name definition: fob rm <name>')
+
+  console.log(`You are about to revoke access to the key fob registered as '${arg}'?`)
+  const ans = await askQuestion('Are you sure? (y/N): ')
+
+  if (!ans && ans.trim() !== 'y' && ans.trim() !== 'Y') return
+
+  await fobManager.unregister(arg)
+    .then()
+    .catch(err => console.log(err && err.message))
+}
+
+function cleanupFobManager () {
+  return fobManager.cancelScan()
+}
+
+process.on('exit', async () => cleanupFobManager())
+
+function printHelp () {
+  console.log(`Usage: fob <command> [options]
+
+Commands:
+  ls             list all registered fobs
+  add <name>     register named fob
+  rm <name>      unregister named fob
+  `)
+}
+
+exec()
