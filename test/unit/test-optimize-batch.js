@@ -6,7 +6,7 @@ const LIMIT = 20
 
 const optimizeDispenseWithLimit = inputArr => optimizeDispense(inputArr, LIMIT)
 
-test.only('Pass one bach without limit', t => {
+test('Pass one bach without limit', t => {
   const o = optimizeDispense([2, 6], null)
   t.true(_.isEqual(o, [[2,6]]))
 })
