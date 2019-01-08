@@ -10,7 +10,7 @@
       "name": "Launch Program",
       "program": "${workspaceRoot}/bin/lamassu-machine",
       "cwd": "${workspaceRoot}",
-      "args": ["--mockBv", "/dev/ttys011",  "--mockBillDispenser", "--mockCam"]
+      "args": ["--mockBillValidator", "/dev/ttys011",  "--mockBillDispenser", "--mockCam"]
     },
     {
       "type": "node",
