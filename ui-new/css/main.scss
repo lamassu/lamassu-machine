@@ -1,0 +1,105 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+@import "./typography.scss";
+
+body {
+  user-select: none;
+  overflow: hidden;
+  direction: ltr;
+  margin: 0;
+  font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  cursor: none;
+}
+
+#view {
+  display: flex;
+  height: 100%;
+  width: 100%
+}
+
+.viewport {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}
+
+.viewport-active {
+  display: flex;
+}
+
+.goodbye_state .main {
+  background-color: $amazonite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goodbye_state h1 {
+  margin-bottom: 19vh;
+}
+
+.insert_bills_state .main .tl {
+  margin-right: 10vw;
+}
+
+.primary-side {
+  flex: 0.6;
+  margin-left: 7.8vw;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  padding-right: 5vw;
+}
+
+.secondary-side {
+  flex: 0.4; 
+  margin-right: 7.8vw;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  padding-left: 5vw;
+  display: flex;
+}
+
+.bill-slot {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cash-in-color .main {
+  background-color: $amazonite;
+  display: flex;
+}
+
+.cash-out-color .main {
+  background-color: $salmon;
+  display: flex;
+}
+
+.horizontal {
+  flex-direction: column;
+}
+
+.top-side {
+  flex: 0.7;
+}
+
+.top-side .primary-side {
+  margin-top: 0px;
+  margin-left: 9vw;
+}
+
+.top-side .secondary-side {
+  margin-top: 0px;
+  margin-left: 9vw;
+}
+
+.bottom-side {
+  flex: 0.3;
+}

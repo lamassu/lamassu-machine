@@ -1,0 +1,168 @@
+@import "./variables.scss";
+
+@mixin mont {
+  font-family: Mont Heavy;
+  font-weight: 900;
+}
+
+@mixin mueseo-bold {
+  font-family: MuseoSans;
+  font-weight: bold;
+}
+
+@mixin mueseo {
+  font-family: MuseoSans;
+  font-weight: 500;
+}
+
+@mixin mono {
+  font-family: BPmono;
+}
+
+/* Text styles */
+// TODO line-height is not "responsive" right now
+@mixin Heading-1 {
+  @include mont;
+  // x800 = 96px
+  font-size: 12vh;
+  line-height: 0.92;
+  color: $white;
+}
+
+@mixin Heading-2 {
+  @include mont;
+  // x800 = 64px
+  font-size: 8vh;
+  line-height: 0.88;
+  color: $white;
+}
+
+@mixin Heading-3 {
+  @include mont;
+  // x800 = 48px
+  font-size: 6vh;
+  line-height: 0.83;
+  color: $white;
+}
+
+@mixin Heading-4 {
+  @include mont;
+  // x800 = 24px
+  font-size: 3vh;
+  line-height: 1.67;
+  color: $white;
+}
+
+@mixin Heading-5 {
+  @include mont;
+  // x800 = 40px
+  font-size: 5vh;
+  line-height: 1.2;
+  color: $white;
+}
+
+@mixin Tagline {
+  @include mueseo-bold;
+  // x800 = 40px
+  font-size: 5vh;
+  line-height: 1.2;
+}
+
+@mixin Description-1 {
+  @include mueseo;
+  // x800 = 32px
+  font-size: 4vh;
+  line-height: 1.25;
+}
+
+@mixin Description-2 {
+  @include mueseo;
+  // x800 = 24px
+  font-size: 3vh;
+  line-height: 1.33;
+}
+
+@mixin Mono-Text-1 {
+  @include mono;
+  // x800 = 32px
+  font-size: 4vh;
+  line-height: 1;
+}
+
+@mixin Mono-Text-2 {
+  @include mono;
+  // x800 = 24px
+  font-size: 3vh;
+  line-height: 1;
+}
+
+h1, .h1 {
+  @include Heading-1;
+}
+
+h2, .h2 {
+  @include Heading-2;
+}
+
+h3, .h3 {
+  @include Heading-3;
+}
+
+h4, .h4 {
+  @include Heading-4;
+}
+
+h5, .h5 {
+  @include Heading-5;
+}
+
+.cash-in-color .tl, .cash-in-color .tl {
+  @include Tagline;
+  color: $purple-grey;
+}
+
+.cash-out-color .tl, .cash-out-color .tl {
+  @include Tagline;
+  color: $sapphire;
+}
+
+.cash-in-color .d1, .cash-in-color .d1 {
+  @include Description-1;
+  color: $purple-grey;
+
+}
+
+.cash-out-color .d1, .cash-out-color .d1 {
+  @include Description-1;
+  color: $sapphire;
+}
+
+.cash-in-color .d2, .cash-in-color .d2 {
+  @include Description-2;
+  color: $purple-grey;
+}
+
+.cash-out-color .d2, .cash-out-color .d2 {
+  @include Description-2;
+  color: $sapphire;
+}
+
+.cash-in-color .m1, .cash-in-color .m1 {
+  @include Mono-Text-1;
+  color: $purple-grey;
+}
+
+.cash-out-color .m1, .cash-out-color .m1 {
+  @include Mono-Text-1;
+  color: $sapphire;
+}
+
+.cash-in-color .m2, .cash-in-color .m2 {
+  @include Mono-Text-2;
+  color: $purple-grey;
+}
+
+.cash-out-color .m2, .cash-out-color .m2 {
+  @include Mono-Text-2;
+  color: $sapphire;
+}

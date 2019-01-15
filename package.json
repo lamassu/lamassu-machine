@@ -54,6 +54,7 @@
     "benchmark": "^2.1.4",
     "image-size": "^0.6.3",
     "microtime": "^2.1.7",
+    "node-sass": "^4.11.0",
     "p-whilst": "^1.0.0",
     "parse5": "^4.0.0",
     "sinon": "^6.3.4",
@@ -67,7 +68,8 @@
   "scripts": {
     "test": "ava test",
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
-    "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css"
+    "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css",
+    "sass:compile": "node-sass ui-new/css/main.scss ui-new/build/main.css"
   },
   "gypfile": true,
   "standard": {
