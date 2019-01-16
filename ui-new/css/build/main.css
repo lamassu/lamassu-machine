@@ -21,55 +21,6 @@
   src: local("Open Sans SemiBold"), local("OpenSans-SemiBold"), url("../fonts/open-sans/open-sans-v15-latin-600.eot?#iefix") format("embedded-opentype"), url("../fonts/open-sans/open-sans-v15-latin-600.woff2") format("woff2"), url("../fonts/open-sans/open-sans-v15-latin-600.woff") format("woff"), url("../fonts/open-sans/open-sans-v15-latin-600.ttf") format("truetype"), url("../fonts/open-sans/open-sans-v15-latin-600.svg#OpenSans") format("svg");
   /* Legacy iOS */ }
 
-/* montserrat-regular - latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/montserrat/montserrat-v12-latin-regular.eot");
-  /* IE9 Compat Modes */
-  src: local("Montserrat Regular"), local("Montserrat-Regular"), url("../fonts/montserrat/montserrat-v12-latin-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat/montserrat-v12-latin-regular.woff2") format("woff2"), url("../fonts/montserrat/montserrat-v12-latin-regular.woff") format("woff"), url("../fonts/montserrat/montserrat-v12-latin-regular.ttf") format("truetype"), url("../fonts/montserrat/montserrat-v12-latin-regular.svg#Montserrat") format("svg");
-  /* Legacy iOS */ }
-
-/* montserrat-700 - latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/montserrat/montserrat-v12-latin-700.eot");
-  /* IE9 Compat Modes */
-  src: local("Montserrat Bold"), local("Montserrat-Bold"), url("../fonts/montserrat/montserrat-v12-latin-700.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat/montserrat-v12-latin-700.woff2") format("woff2"), url("../fonts/montserrat/montserrat-v12-latin-700.woff") format("woff"), url("../fonts/montserrat/montserrat-v12-latin-700.ttf") format("truetype"), url("../fonts/montserrat/montserrat-v12-latin-700.svg#Montserrat") format("svg");
-  /* Legacy iOS */ }
-
-/*!
- * Web Fonts from Fontspring.com
- *
- * All OpenType features and all extended glyphs have been removed.
- * Fully installable fonts can be purchased at http://www.fontspring.com
- *
- * The fonts included in this stylesheet are subject to the End User License you purchased
- * from Fontspring. The fonts are protected under domestic and international trademark and
- * copyright law. You are prohibited from modifying, reverse engineering, duplicating, or
- * distributing this font software.
- *
- * (c) 2010-2018 Fontspring
- *
- *
- *
- *
- * The fonts included are copyrighted by the vendor listed below.
- *
- * Vendor:      Fontfabric
- * License URL: https://www.fontspring.com/licenses/fontfabric/webfont
- *
- *
- */
-@font-face {
-  font-family: 'Mont Bold';
-  src: url("../fonts/mont_bold_macroman/mont-bold-webfont.woff2") format("woff2"), url("../fonts/mont_bold_macroman/mont-bold-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-
 /*!
  * Web Fonts from Fontspring.com
  *
@@ -124,12 +75,6 @@
  */
 @font-face {
   font-family: 'MuseoSans';
-  src: url("../fonts/museosans_300_macroman/MuseoSans_300-webfont.woff2") format("woff2"), url("../fonts/museosans_300_macroman/MuseoSans_300-webfont.woff") format("woff");
-  font-weight: 300;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'MuseoSans';
   src: url("../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff2") format("woff2"), url("../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
@@ -140,6 +85,12 @@
   font-weight: bold;
   font-style: normal; }
 
+@font-face {
+  font-family: 'BPmono';
+  src: url("../fonts/BPmono/BPmono.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
 /* Color palette */
 /* amazonite */
 /* salmon */
@@ -147,114 +98,118 @@
 h1, .h1 {
   font-family: Mont Heavy;
   font-weight: 900;
-  font-size: 96px;
+  font-size: 12vh;
   line-height: 0.92;
   color: #ffffff; }
 
 h2, .h2 {
   font-family: Mont Heavy;
   font-weight: 900;
-  font-size: 64px;
+  font-size: 8vh;
   line-height: 0.88;
   color: #ffffff; }
 
 h3, .h3 {
   font-family: Mont Heavy;
   font-weight: 900;
-  font-size: 48px;
+  font-size: 6vh;
   line-height: 0.83;
   color: #ffffff; }
 
 h4, .h4 {
   font-family: Mont Heavy;
   font-weight: 900;
-  font-size: 24px;
+  font-size: 3vh;
   line-height: 1.67;
   color: #ffffff; }
 
 h5, .h5 {
   font-family: Mont Heavy;
   font-weight: 900;
-  font-size: 40px;
+  font-size: 5vh;
   line-height: 1.2;
   color: #ffffff; }
 
 .cash-in-color .tl, .cash-in-color .tl {
   font-family: MuseoSans;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 5vh;
   line-height: 1.2;
-  color: #403c51; }
+  color: #0e4160; }
 
 .cash-out-color .tl, .cash-out-color .tl {
   font-family: MuseoSans;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 5vh;
   line-height: 1.2;
-  color: #0e4160; }
+  color: #403c51; }
 
 .cash-in-color .d1, .cash-in-color .d1 {
   font-family: MuseoSans;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 4vh;
   line-height: 1.25;
-  color: #403c51; }
+  color: #0e4160; }
 
 .cash-out-color .d1, .cash-out-color .d1 {
   font-family: MuseoSans;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 4vh;
   line-height: 1.25;
-  color: #0e4160; }
+  color: #403c51; }
 
 .cash-in-color .d2, .cash-in-color .d2 {
   font-family: MuseoSans;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 3vh;
   line-height: 1.33;
-  color: #403c51; }
+  color: #0e4160; }
 
 .cash-out-color .d2, .cash-out-color .d2 {
   font-family: MuseoSans;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 3vh;
   line-height: 1.33;
-  color: #0e4160; }
+  color: #403c51; }
 
 .cash-in-color .m1, .cash-in-color .m1 {
   font-family: BPmono;
-  font-size: 32px;
+  font-size: 4vh;
   line-height: 1;
-  color: #403c51; }
+  color: #0e4160; }
 
 .cash-out-color .m1, .cash-out-color .m1 {
   font-family: BPmono;
-  font-size: 32px;
-  line-height: 1;
-  color: #0e4160; }
-
-.cash-in-color .m2, .cash-in-color .m2 {
-  font-family: BPmono;
-  font-size: 24px;
+  font-size: 4vh;
   line-height: 1;
   color: #403c51; }
 
-.cash-out-color .m2, .cash-out-color .m2 {
+.cash-in-color .m2, .cash-in-color .m2 {
   font-family: BPmono;
-  font-size: 24px;
+  font-size: 3vh;
   line-height: 1;
   color: #0e4160; }
+
+.cash-out-color .m2, .cash-out-color .m2 {
+  font-family: BPmono;
+  font-size: 3vh;
+  line-height: 1;
+  color: #403c51; }
+
+.cash-out-color .crypto-rate, .cash-out-color .crypto-rate {
+  color: #ffffff; }
+
+.cash-in-color .crypto-rate, .cash-in-color .crypto-rate {
+  color: #ffffff; }
 
 body {
   user-select: none;
   overflow: hidden;
   direction: ltr;
   margin: 0;
-  font-family: 'Source Sans Pro', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
   cursor: none; }
 
 #view {
-  display: flex;
   height: 100%;
   width: 100%; }
 
@@ -264,67 +219,82 @@ body {
   width: 100%;
   display: none; }
 
-.main {
-  height: 100%;
-  width: 100%; }
-
 .viewport-active {
   display: flex; }
 
-.goodbye_state .main {
-  background-color: #37e8d7;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex; }
 
-.goodbye_state h1 {
-  margin-bottom: 19vh; }
+.column {
+  flex-direction: column; }
+
+.header {
+  display: flex;
+  margin: 6vh;
+  justify-content: flex-end; }
+
+.cash-in-color {
+  background-color: #37e8d7; }
+
+.cash-out-color {
+  background-color: #fe7f78; }
+
+.crypto-rate {
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-right: 2vh; }
 
 .insert_bills_state .main .tl {
   margin-right: 10vw; }
 
 .primary-side {
-  flex: 0.6;
-  margin-left: 7.8vw;
-  margin-top: 10vh;
+  flex: 1;
+  margin-left: 9.4vw;
+  margin-top: 8vh;
   margin-bottom: 10vh;
-  padding-right: 5vw; }
+  margin-right: 5.4vw; }
 
 .secondary-side {
-  flex: 0.4;
+  flex: 1;
   margin-right: 7.8vw;
   margin-top: 10vh;
   margin-bottom: 10vh;
-  padding-left: 5vw;
-  display: flex; }
+  margin-left: 7.8vw; }
 
-.bill-slot {
-  flex: 1;
+.with-image {
   display: flex;
-  justify-content: center;
-  align-items: center; }
+  justify-content: center; }
 
-.cash-in-color .main {
-  background-color: #37e8d7;
-  display: flex; }
+.primary-side-title {
+  margin-bottom: 2vh; }
 
-.cash-out-color .main {
-  background-color: #fe7f78;
-  display: flex; }
+.primary-side-tl {
+  margin-top: 2.2vh; }
 
-.horizontal {
-  flex-direction: column; }
+.cancel-button {
+  width: 4vh; }
 
-.top-side {
-  flex: 0.7; }
+.goodbye_state {
+  align-items: center;
+  justify-content: center; }
 
-.top-side .primary-side {
-  margin-top: 0px;
-  margin-left: 9vw; }
+.goodbye_state h1 {
+  margin-bottom: 15vh; }
 
-.top-side .secondary-side {
-  margin-top: 0px;
-  margin-left: 9vw; }
+.crypto-address {
+  margin-top: 1.4vh;
+  line-height: 3vh; }
 
-.bottom-side {
-  flex: 0.3; }
+.js-i18n-coins-to-address {
+  margin-top: 8vh;
+  margin-bottom: 0; }
+
+.insert-bill-wrapper {
+  margin-top: 6.8vh;
+  margin-left: 5vh; }
+
+.insert-bill-wrapper img {
+  width: 25vw; }

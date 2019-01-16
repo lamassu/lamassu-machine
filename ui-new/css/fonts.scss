@@ -50,12 +50,11 @@
  */
 
 @font-face {
-    font-family: 'Mont Heavy';
-    src: url('../fonts/mont_heavy_macroman/mont-heavy-webfont.woff2') format('woff2'),
-         url('../fonts/mont_heavy_macroman/mont-heavy-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: 'Mont Heavy';
+  src: url('../fonts/mont_heavy_macroman/mont-heavy-webfont.woff2') format('woff2'),
+       url('../fonts/mont_heavy_macroman/mont-heavy-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*!
@@ -83,18 +82,27 @@
  */
 
 @font-face {
-    font-family: 'MuseoSans';
-    src: url('../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff2') format('woff2'),
-         url('../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'MuseoSans';
+  src: url('../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff2') format('woff2'),
+       url('../fonts/museosans_500_macroman/MuseoSans_500-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'MuseoSans';
-    src: url('../fonts/museosans_700_macroman/MuseoSans_700-webfont.woff2') format('woff2'),
-         url('../fonts/museosans_700_macroman/MuseoSans_700-webfont.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'MuseoSans';
+  src: url('../fonts/museosans_700_macroman/MuseoSans_700-webfont.woff2') format('woff2'),
+       url('../fonts/museosans_700_macroman/MuseoSans_700-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
 }
 
+
+// BP-mono Freely distributed at http://backpacker.gr/fonts/5
+
+@font-face {
+  font-family: 'BPmono';
+  src: url('../fonts/BPmono/BPmono.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}

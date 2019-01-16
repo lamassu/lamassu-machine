@@ -855,7 +855,7 @@ function setFixedFee (_fee) {
   const fee = parseFloat(_fee)
 
   if (fee > 0) {
-    const fixedFee = '<strong>+</strong>' + locale.translate('%s transaction fee').fetch(formatFiat(fee, 2))
+    const fixedFee = locale.translate('Transaction Fee: %s').fetch(formatFiat(fee, 2))
     $('.js-i18n-fixed-fee').html(fixedFee)
   } else {
     $('.js-i18n-fixed-fee').html('')
@@ -978,9 +978,10 @@ function setExchangeRate (_rates) {
     var cashOut = new BigNumber(rates.cashOut)
     var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
 
+    // TODO i18n this probably can drop the tranlate as well
     var localizedCashOutCryptoToFiat =
-      locale.translate('1 %s is %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
-    $('.js-fiat-crypto-rate').html(localizedCashOutCryptoToFiat)
+      locale.translate('1 %s = %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
+    $('.crypto-rate').html(localizedCashOutCryptoToFiat)
   }
 
   $('.js-crypto-display-units').text(displayCode)
@@ -1028,8 +1029,14 @@ function setTx (tx) {
   qrize(txId, $('#qr-code-fiat-complete'))
 }
 
+function formatAddress (address) {
+  if (!address) return
+  const withSpace = address.replace(/(.{4})/g, '$1 ')
+  return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
+}
+
 function setBuyerAddress (address) {
-  $('.crypto-address').html(address)
+  $('.crypto-address').html(formatAddress(address))
 }
 
 function setAccepting (currentAccepting) {
@@ -1111,7 +1118,8 @@ function translateCoin (cryptoCode) {
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
   $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
-  $('.js-i18n-coins-to-address').html(locale.translate('Your %s will be sent to:').fetch(cryptoCode))
+  // TODO study how does tranlate actually works, this line will be no longer needed.
+  $('.js-i18n-coins-to-address').html(locale.translate('Your coins will be sent to:').fetch())
 
   if (cryptoCode === 'ETH') {
     $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode))
@@ -1229,7 +1237,7 @@ function fiatCredit (data) {
 
 function setDepositAddress (depositInfo) {
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .crypto-address').text(depositInfo.toAddress)
+  $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'))
@@ -1257,7 +1265,7 @@ function fiatReceipt (tx) {
 
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_receipt_state .sent-coins .crypto-address').text(tx.toAddress)
+  $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
 
   setState('fiat_receipt')
 }
@@ -1268,7 +1276,7 @@ function fiatComplete (tx) {
 
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_complete_state .sent-coins .crypto-address').text(tx.toAddress)
+  $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
 
   setState('fiat_complete')
 }

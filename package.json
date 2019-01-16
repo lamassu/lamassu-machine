@@ -69,7 +69,9 @@
     "test": "ava test",
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
     "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css",
-    "sass:compile": "node-sass ui-new/css/main.scss ui-new/build/main.css"
+    "sass:watch": "node-sass -w ui-new/css/main.scss ui-new/css/build/main.css",
+    "newcss:build": "babel ui-new/src/app.js -s -o ui-new/js/app.js",
+    "sass:compile": "node-sass ui-new/css/main.scss ui-new/css/build/main.css"
   },
   "gypfile": true,
   "standard": {

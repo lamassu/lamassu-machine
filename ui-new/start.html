@@ -717,20 +717,23 @@
         </section>
       </section>
 
-      <section class="viewport insert_bills_state digital-side cash-in-color" data-tr-section="insert-bills">
+      <section class="viewport insert_bills_state column cash-in-color" data-tr-section="insert-bills">
+        <section class="header">
+          <p class="d2 crypto-rate">1 BTC = 3,369 EUR</p>
+          <div id="insertBillCancel">
+            <img class="cancel-button" src="images/close-icon.svg"/>
+          </div>
+        </section>
         <section class="main">
           <section class="primary-side">
-            <h2 id="insert-bill" class="js-i18n">Insert a bill</h2>
-            <p class="d1">Please insert your first bill into the machine.</p>
-            <p class="d2 send-to-your-address"><span class="js-i18n-coins-to-address"></span><br/>
-            <span class="crypto-address"></span></p>
-            <section class="tx-fee js-i18n-fixed-fee"></section>
+            <h2 id="insert-bill" class="js-i18n primary-side-title">Insert a bill</h2>
+            <p class="d1 primary-side-tl">Please insert your first bill into the machine.</p>
+            <p class="d2 js-i18n-fixed-fee"></p>
+            <p class="d2 js-i18n-coins-to-address"></p>
+            <p class="m2 crypto-address"></p>
           </section>
-          <section class="secondary-side">
-            <section class="bill-slot">
-              <div class="bill"><img src="images/bill.png" /></div>
-            </section>
-            <section id="insertBillCancel" style="display:none" class="cancel"><img src="images/cancel.png" /></section>
+          <section class="secondary-side with-image">
+            <div class="insert-bill-wrapper"><img src="images/insert-bill.svg"/></div>
           </section>
         </section>
       </section>
@@ -880,10 +883,8 @@
         </section>
       </section>
 
-      <section class="viewport goodbye_state" data-tr-section="goodbye">
-        <section class="main">
-          <h1 id="cya" class="js-i18n">See you!</h1>
-        </section>
+      <section class="viewport goodbye_state cash-in-color" data-tr-section="goodbye">
+        <h1 id="cya" class="js-i18n">See you!</h1>
       </section>
 
       <section class="viewport trouble_state info" data-tr-section="trouble">
@@ -1342,7 +1343,7 @@
       </section>
 
       <section id="fiat_complete_viewport" class="viewport fiat_receipt fiat_complete_state fiat-side cashOut" data-tr-section="fiat-complete">
-        <section class="main horizontal">
+        <section class="main column">
           <section class="top-side">
             <section class="primary-side">
               <h1 class="js-i18n">Thank you!</h1>

@@ -118,51 +118,58 @@ h5, .h5 {
 
 .cash-in-color .tl, .cash-in-color .tl {
   @include Tagline;
-  color: $purple-grey;
+  color: $sapphire;
 }
 
 .cash-out-color .tl, .cash-out-color .tl {
   @include Tagline;
-  color: $sapphire;
+  color: $purple-grey;
 }
 
 .cash-in-color .d1, .cash-in-color .d1 {
   @include Description-1;
-  color: $purple-grey;
-
+  color: $sapphire;
 }
 
 .cash-out-color .d1, .cash-out-color .d1 {
   @include Description-1;
-  color: $sapphire;
+  color: $purple-grey;
 }
 
 .cash-in-color .d2, .cash-in-color .d2 {
   @include Description-2;
-  color: $purple-grey;
+  color: $sapphire;
 }
 
 .cash-out-color .d2, .cash-out-color .d2 {
   @include Description-2;
-  color: $sapphire;
+  color: $purple-grey;
 }
 
 .cash-in-color .m1, .cash-in-color .m1 {
   @include Mono-Text-1;
-  color: $purple-grey;
+  color: $sapphire;
 }
 
 .cash-out-color .m1, .cash-out-color .m1 {
   @include Mono-Text-1;
-  color: $sapphire;
+  color: $purple-grey;
 }
 
 .cash-in-color .m2, .cash-in-color .m2 {
   @include Mono-Text-2;
-  color: $purple-grey;
+  color: $sapphire;
 }
 
 .cash-out-color .m2, .cash-out-color .m2 {
   @include Mono-Text-2;
-  color: $sapphire;
+  color: $purple-grey;
+}
+
+.cash-out-color .crypto-rate, .cash-out-color .crypto-rate {
+  color: $white;
+}
+
+.cash-in-color .crypto-rate, .cash-in-color .crypto-rate {
+  color: $white;
 }
