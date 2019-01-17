@@ -47,6 +47,7 @@
     "speaker": "^0.4.0"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.5",
     "ava": "^0.21.0",
     "babel-cli": "^6.24.1",
     "babel-polyfill": "^6.26.0",
@@ -57,6 +58,7 @@
     "node-sass": "^4.11.0",
     "p-whilst": "^1.0.0",
     "parse5": "^4.0.0",
+    "postcss-cli": "^6.1.1",
     "sinon": "^6.3.4",
     "standard": "^12.0.1",
     "x-ray": "^2.3.2"
@@ -69,9 +71,10 @@
     "test": "ava test",
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
     "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css",
-    "sass:watch": "node-sass -w ui-new/css/main.scss ui-new/css/build/main.css",
     "newcss:build": "babel ui-new/src/app.js -s -o ui-new/js/app.js",
-    "sass:compile": "node-sass ui-new/css/main.scss ui-new/css/build/main.css"
+    "sass:watch": "node-sass -w ui-new/css/main.scss ui-new/css/build/main.css",
+    "sass:compile": "node-sass ui-new/css/main.scss ui-new/css/build/main.css",
+    "sass:autoprefix": "postcss ui-new/css/build/main.css --no-map --use autoprefixer -d ui-new/css/build/"
   },
   "gypfile": true,
   "standard": {
@@ -92,6 +95,6 @@
     ]
   },
   "browserslist": [
-    "Chrome >= 29"
+    "Chrome >= 20"
   ]
 }

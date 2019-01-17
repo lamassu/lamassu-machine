@@ -458,6 +458,14 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
+  $('#doAnimation').click(event => {
+    transitionOut()
+    setTimeout(() => {
+      cleanUpTransition()
+      setState('insert_bills')
+    }, 200)
+  })
+
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
@@ -1308,4 +1316,12 @@ function initDebug () {
 
     setState(SCREEN)
   }
+}
+
+function transitionOut () {
+  $('#animate-me').addClass('animate-me')
+}
+
+function cleanUpTransition () {
+  $('#animate-me').removeClass('animate-me')
 }

@@ -465,6 +465,14 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted');
   setupButton('terms-ko', 'idle');
 
+  $('#doAnimation').click(function (event) {
+    transitionOut();
+    setTimeout(function () {
+      cleanUpTransition();
+      setState('insert_bills');
+    }, 200);
+  });
+
   $('.crypto-buttons').click(function (event) {
     var el = $(event.target);
     var coin = { cryptoCode: el.data('cryptoCode'), display: el.text() };
@@ -1038,7 +1046,7 @@ function setTx(tx) {
 function formatAddress(address) {
   if (!address) return;
   var withSpace = address.replace(/(.{4})/g, '$1 ');
-  return withSpace.replace(/(.{4} {5})/g, '$1<br/> ')
+  return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ');
 }
 
 function setBuyerAddress(address) {
@@ -1298,6 +1306,14 @@ function initDebug() {
 
     setState(SCREEN);
   }
+}
+
+function transitionOut() {
+  $('#animate-me').addClass('animate-me');
+}
+
+function cleanUpTransition() {
+  $('#animate-me').removeClass('animate-me');
 }
 
 //# sourceMappingURL=app.js.map

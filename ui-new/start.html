@@ -23,7 +23,7 @@
     <script src="js/vendor/langmap.js"></script>
     <script src="js/url-search-params.js"></script>
     <script src="../node_modules/bignumber.js/bignumber.min.js"></script>
-    <script src="js/test-app.js"></script>
+    <script src="js/app.js"></script>
   </head>
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
@@ -719,20 +719,20 @@
 
       <section class="viewport insert_bills_state column cash-in-color" data-tr-section="insert-bills">
         <section class="header">
-          <p class="d2 crypto-rate">1 BTC = 3,369 EUR</p>
-          <div id="insertBillCancel">
+          <p class="d2 crypto-rate fade-in">1 BTC = 3,369 EUR</p>
+          <div id="insertBillCancel" class="delay">
             <img class="cancel-button" src="images/close-icon.svg"/>
           </div>
         </section>
         <section class="main">
-          <section class="primary-side">
+          <section class="primary-side fade-in">
             <h2 id="insert-bill" class="js-i18n primary-side-title">Insert a bill</h2>
             <p class="d1 primary-side-tl">Please insert your first bill into the machine.</p>
             <p class="d2 js-i18n-fixed-fee"></p>
             <p class="d2 js-i18n-coins-to-address"></p>
             <p class="m2 crypto-address"></p>
           </section>
-          <section class="secondary-side with-image">
+          <section class="secondary-side with-image fade-in delay">
             <div class="insert-bill-wrapper"><img src="images/insert-bill.svg"/></div>
           </section>
         </section>
@@ -1386,11 +1386,17 @@
       </section>
 
       <section class="viewport choose_coin_state" data-tr-section="choose_coin">
+        <!-- <object id="bg-image" data="images/1way-bg-800.svg" type="image/svg+xml" />-->
+        <svg id="bg-image" xmlns="http://www.w3.org/2000/svg" width="1920" height="1081" viewBox="0 0 1920 1081" class="undefined">
+          <style>.a{fill:#37E8D7;}</style>
+          <path id="animate-me" d="M0 0L1920 0 1920 1080.5 1737.5 1080.5C1539.2 961.9 1314.9 899.5 1064.4 893.5 646.4 883.5 260.4 812.4 0 575.1L0 0Z" class="a"/>
+        </svg>
         <section class="change-language js-menu-language hide">
           <div class="multiple-language js-multi-language">Change language</div>
           <div class="js-two-language"></div>
         </section>
         <section class="main">
+          <div id="doAnimation" style="z-index: 2; margin: auto; background-color: red;"><p>CLICK ME TO ANIMATE</p></div>
           <section class="crypto-button-box cash-in-box">
             <div class="crypto-button-ball"></div>
             <div class="cash-in crypto-button"></div>
