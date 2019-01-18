@@ -123,6 +123,7 @@ function processData (data) {
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
+  if (data.direction) setDirection(data.direction)
 
   if (data.context) {
     $('.js-context').hide()
@@ -402,7 +403,7 @@ $(document).ready(function () {
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
     setBuyerAddress(null)
-    buttonPressed('insertBillCancel')
+    buttonPressed('cancelInsertBill')
   })
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
@@ -661,6 +662,21 @@ function setWifiList (recs, requestedPage) {
   if (recs.length > 4) {
     networks.append(button)
   }
+}
+
+function setUpDirectionElement (element, direction) {
+  if (direction === 'cashOut') {
+    element.removeClass('cash-in-color')
+    element.addClass('cash-out-color')
+  } else {
+    element.addClass('cash-in-color')
+    element.removeClass('cash-out-color')
+  }
+}
+
+function setDirection (direction) {
+  let scanPhoto = $('.scan_photo_state')
+  setUpDirectionElement(scanPhoto, direction)
 }
 
 /**

@@ -23,7 +23,7 @@
     <script src="js/vendor/langmap.js"></script>
     <script src="js/url-search-params.js"></script>
     <script src="../node_modules/bignumber.js/bignumber.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/test-app.js"></script>
   </head>
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
@@ -243,23 +243,27 @@
         <section id="scan-id-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
-      <section class="viewport scan-photo scan-photo-card scan_photo_state" data-tr-section="scan-photo">
-        <section class="main">
-          <h1 class="js-i18n">Please verify your identity</h1>
-          <div class="instructions">
-            <span class="js-i18n">
-            In order to proceed, we are required to verify your identity.
-            Please press the front of your <strong>state ID card</strong> against the scan window.
-            </span>
+      <section class="viewport scan_photo_state column" data-tr-section="scan-photo">
+        <header>
+          <div id="scan-photo-cancel">
+            <img class="cancel-button" src="images/close-icon.svg"/>
           </div>
+        </header>
+        <section class="main">
+          <section class="primary-side">
+            <h2 class="js-i18n primary-side-title s-margin-bottom">Please verify your identity</h2>
+            <p class="d1 primary-side-subtitle js-i18n">
+              In order to proceed, we are required to verify your identity.
+            </p>
+            <p class="d1 js-i18n">
+              Please press the front of your <strong>state ID card</strong> against the scan window.
+            </span>
+          </section>
+          <section class="secondary-side">
+            <img class="scan-image only-cash-in" src="images/scan-ID-cash-in.svg"/>
+            <img class="scan-image only-cash-out" src="images/scan-ID-cash-in.svg"/>
+          </section>
         </section>
-        <div class="scan-photo-image-div">
-          <!--<img src="images/scan-photo.jpg" class="scan-photo-image" width="453" />-->
-        </div>
-        <section class="bottom-bar">
-          <p class="js-i18n-current-crypto-price current-crypto"></p>
-        </section>
-        <section id="scan-photo-cancel" class="cancel"><img src="images/cancel.png" /></section>
       </section>
 
       <section class="viewport scan-id fiat-section register_phone_state" data-tr-section="register-phone">
@@ -726,7 +730,7 @@
         </header>
         <section class="main">
           <section class="primary-side fade-in">
-            <h2 id="insert-bill" class="js-i18n s-margin-bottom">Insert a bill</h2>
+            <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert a bill</h2>
             <p class="d1 primary-side-subtitle">Please insert your first bill into the machine.</p>
             <p class="d2 js-i18n-fixed-fee"></p>
             <p class="d2 js-i18n-coins-to-address coins-to-address"></p>
@@ -831,7 +835,7 @@
       <section id="completed_viewport" class="viewport completed_state column cash-in-color" data-tr-section="completed">
         <section class="main no-header">
           <section class="primary-side">
-            <h2 class="js-i18n">Thank you!</h2>
+            <h2 class="js-i18n primary-side-title">Thank you!</h2>
             <p class="js-i18n d2 white s-margin-bottom">You Purchased</p>
             <div class="total-crypto-rec i18n-latin">
               <span class="h3 crypto-amount i18n-latin"></span>
@@ -863,7 +867,7 @@
       <section id="fiat_complete_viewport" class="viewport fiat_complete_state column cash-out-color" data-tr-section="fiat-complete">
         <section class="main no-header">
           <section class="primary-side">
-            <h2 class="js-i18n">Thank you!</h2>
+            <h2 class="js-i18n primary-side-title">Thank you!</h2>
             <p class="js-i18n d2 white s-margin-bottom">We dispensed</p>
             <div class="fiat">
               <span class="js-amount h3"></span>
