@@ -5,6 +5,7 @@ const queryString = window.location.search
 const params = new URLSearchParams(queryString.substring(1))
 const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
+const CASH_OUT_QR_COLOR = '#403c51'
 const CASH_IN_QR_COLOR = '#0e4160'
 
 const SCROLL_SIZE = 270
@@ -1001,7 +1002,7 @@ function qrize (text, target, color, lightning) {
   const image = document.getElementById('bolt-img')
   const opts = {
     crisp: true,
-    fill: color,
+    fill: color || 'black',
     text,
     size: target.width(),
     render: 'canvas',
@@ -1037,7 +1038,7 @@ function setTx (tx) {
   qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
   qrize(txId, $('#cash-in-fail-qr-code'))
   qrize(txId, $('#qr-code-fiat-receipt'))
-  qrize(txId, $('#qr-code-fiat-complete'))
+  qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
 }
 
 function formatAddress (address) {
@@ -1251,7 +1252,7 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
-  qrize(depositInfo.depositUrl, $('#qr-code-deposit'))
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_IN_QR_COLOR)
 }
 
 function deposit (tx) {

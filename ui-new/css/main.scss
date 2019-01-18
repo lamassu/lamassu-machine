@@ -56,6 +56,10 @@ footer {
   color: $sapphire;
 }
 
+.purple-grey {
+  color: $purple-grey;
+}
+
 .cash-in-color {
   background-color: $amazonite;
 }
@@ -152,15 +156,22 @@ footer {
 }
 
 .qr-wrapper {
-  width: 320px;
-  height: 320px;
-  border-radius: 20px;
+  width: 40vh;
+  height: 40vh;
+  border-radius: 2.5vh;
   background-color: $white;
 }
 
 #cash-in-qr-code {
-  width: 240px;
-  height: 240px;
+  width: 36vh;
+  height: 36vh;
+  box-shadow: 0 0 2.5vh #e9e7e7;
+}
+
+#qr-code-fiat-complete {
+  width: 36vh;
+  height: 36vh;
+  box-shadow: 0 0 2.5vh #e9e7e7;
 }
 
 // TODO clean up after animation gets tested this is v0.1

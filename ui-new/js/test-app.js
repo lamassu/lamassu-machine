@@ -122,4 +122,37 @@ function setupFakes () {
     const withSpace = address.replace(/(.{4})/g, '$1 ')
     return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
   }
+
+  const CASH_IN_QR_COLOR = '#0e4160'
+  const CASH_OUT_QR_COLOR = '#403c51'
+
+  qrize(address, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
+  qrize(address, $('#cash-in-fail-qr-code'))
+  qrize(address, $('#qr-code-fiat-receipt'))
+  qrize(address, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+}
+
+function qrize (text, target, color, lightning) {
+  const image = document.getElementById('bolt-img')
+  const opts = {
+    crisp: true,
+    fill: color || 'black',
+    text,
+    size: target.width(),
+    render: 'canvas',
+    rounded: 50,
+    quiet: 1,
+    mPosX: 50,
+    mPosY: 50,
+    mSize: 30,
+    image
+  }
+
+  if (lightning) {
+    opts.mode = 'image'
+  }
+
+  const el = kjua(opts)
+
+  target.empty().append(el)
 }
