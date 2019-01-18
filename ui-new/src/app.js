@@ -5,6 +5,7 @@ const queryString = window.location.search
 const params = new URLSearchParams(queryString.substring(1))
 const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
+const CASH_IN_QR_COLOR = '#0e4160'
 
 const SCROLL_SIZE = 270
 var textHeightQuantity = 0
@@ -400,7 +401,7 @@ $(document).ready(function () {
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
     setBuyerAddress(null)
-    buttonPressed('cancelInsertBill')
+    buttonPressed('insertBillCancel')
   })
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
@@ -873,11 +874,12 @@ function setFixedFee (_fee) {
 function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var coin = coins[cryptoCode]
 
-  $('.total-deposit').html(formatFiat(fiat))
   var scale = new BigNumber(10).pow(coin.displayScale)
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber()
   var cryptoDisplayCode = coin.displayCode
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
+  $('.amount-deposited').html(`You deposited ${fiat} ${fiatCode}`)
+  $('.total-deposit').html(formatFiat(fiat))
 
   var inserted = lastBill
     ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
@@ -995,15 +997,16 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function qrize (text, target, lightning) {
+function qrize (text, target, color, lightning) {
   const image = document.getElementById('bolt-img')
   const opts = {
     crisp: true,
+    fill: color,
     text,
     size: target.width(),
     render: 'canvas',
     rounded: 50,
-    quiet: 1,
+    quiet: 0,
     mPosX: 50,
     mPosY: 50,
     mSize: 30,
@@ -1031,7 +1034,7 @@ function setTx (tx) {
     $('.js-no-inserted-notes').show()
   }
 
-  qrize(txId, $('#cash-in-qr-code'))
+  qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
   qrize(txId, $('#cash-in-fail-qr-code'))
   qrize(txId, $('#qr-code-fiat-receipt'))
   qrize(txId, $('#qr-code-fiat-complete'))

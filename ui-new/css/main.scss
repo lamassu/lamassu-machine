@@ -36,10 +36,24 @@ body {
   flex-direction: column;
 }
 
-.header {
+header {
   display: flex;
   margin: 6vh;
   justify-content: flex-end;
+}
+
+footer {
+  display: flex;
+}
+
+.take-a-photo {
+  flex-direction: column;
+  align-items: center;
+  min-height: 23vh;
+}
+
+.sapphire {
+  color: $sapphire;
 }
 
 .cash-in-color {
@@ -82,12 +96,17 @@ body {
   justify-content: center;
 }
 
-.primary-side-title {
+.s-margin-bottom {
   margin-bottom: 2vh;
 }
 
-.primary-side-tl {
+.primary-side-subtitle {
   margin-top: 2.2vh;
+}
+
+.camera {
+  width: 5vh;
+  margin-bottom: 2vh;
 }
 
 .cancel-button {
@@ -108,7 +127,7 @@ body {
   line-height: 3vh;
 }
 
-.js-i18n-coins-to-address {
+.coins-to-address {
   margin-top: 8vh;
   margin-bottom: 0;
 }
@@ -120,6 +139,28 @@ body {
 
 .insert-bill-wrapper img {
   width: 25vw;
+}
+
+.no-header {
+  padding: 5vh 0;
+}
+
+.centralize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-wrapper {
+  width: 320px;
+  height: 320px;
+  border-radius: 20px;
+  background-color: $white;
+}
+
+#cash-in-qr-code {
+  width: 240px;
+  height: 240px;
 }
 
 // TODO clean up after animation gets tested this is v0.1

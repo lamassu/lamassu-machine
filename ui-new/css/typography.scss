@@ -68,6 +68,13 @@
   line-height: 1.2;
 }
 
+@mixin Tagline-2 {
+  @include mueseo-bold;
+  // x800 = 24px
+  font-size: 3vh;
+  line-height: 0.8;
+}
+
 @mixin Description-1 {
   @include mueseo;
   // x800 = 32px
@@ -116,13 +123,23 @@ h5, .h5 {
   @include Heading-5;
 }
 
-.cash-in-color .tl, .cash-in-color .tl {
+.cash-in-color .tl1, .cash-in-color .tl1 {
   @include Tagline;
   color: $sapphire;
 }
 
-.cash-out-color .tl, .cash-out-color .tl {
+.cash-out-color .tl1, .cash-out-color .tl1 {
   @include Tagline;
+  color: $purple-grey;
+}
+
+.cash-in-color .tl2, .cash-in-color .tl2 {
+  @include Tagline-2;
+  color: $sapphire;
+}
+
+.cash-out-color .tl2, .cash-out-color .tl2 {
+  @include Tagline-2;
   color: $purple-grey;
 }
 
@@ -166,10 +183,6 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-out-color .crypto-rate, .cash-out-color .crypto-rate {
-  color: $white;
-}
-
-.cash-in-color .crypto-rate, .cash-in-color .crypto-rate {
+.viewport .white {
   color: $white;
 }

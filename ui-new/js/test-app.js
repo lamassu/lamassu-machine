@@ -91,12 +91,12 @@ function copyToClipboard (element) {
 }
 
 function setupFakes () {
-  let amount = [ '<span class="integer">9</span><span class="decimal-char">',
-    '.', '</span><span class="decimal">337</span>'
+  let amount = [ '<span class="integer">34</span><span class="decimal-char">',
+    '.', '</span><span class="decimal">479</span>'
   ].join('')
 
   $('.js-i18n-coins-to-address').html('Your coins will be sent to:')
-  let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu98iwnasdjlasjdaskldjaslkdjasldj1231231234'
+  let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu'
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(address))
   $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(address))
