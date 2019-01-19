@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const scanner = require('../lib/scanner')
-const cam = require('@lamassu/camera-wrapper')
+const cam = require('../@lamassu/camera-wrapper')
 const mockWrapper = require('../lib/mocks/camera-wrapper')
 
 const configuration = require('../lib/configuration')
