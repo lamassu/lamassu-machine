@@ -204,7 +204,7 @@ footer {
 }
 
 .animate-me {
-  animation: leaves 0.5s ease-in-out;
+  animation: fill-in 0.5s linear;
 }
 
 .fade-out {
@@ -222,9 +222,9 @@ footer {
   transform-origin: 50% 50%;
 }
 
-@keyframes leaves {
+@keyframes fill-in {
   0% {
-    transform: scale(1.0);
+    transform: scale(1);
   }
   100% {
     transform: scale(2);

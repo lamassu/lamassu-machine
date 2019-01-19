@@ -466,7 +466,7 @@ $(document).ready(function () {
     setTimeout(() => {
       cleanUpTransition()
       setState('insert_bills')
-    }, 200)
+    }, 300)
   })
 
   $('.crypto-buttons').click(event => {
