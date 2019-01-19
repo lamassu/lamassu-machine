@@ -675,8 +675,10 @@ function setUpDirectionElement (element, direction) {
 }
 
 function setDirection (direction) {
-  let scanPhoto = $('.scan_photo_state')
-  setUpDirectionElement(scanPhoto, direction)
+  let states = [$('.scan_photo_state'), $('.scan_id_state')]
+  states.forEach(it => {
+    setUpDirectionElement(it, direction)
+  })
 }
 
 /**
