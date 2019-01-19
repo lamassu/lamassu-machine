@@ -1,7 +1,7 @@
 const _ = require('lodash/fp')
 const fs = require('fs')
 
-const camera = require('@lamassu/camera-wrapper')
+const camera = require('../@lamassu/camera-wrapper')
 const mockWrapper = require('../lib/mocks/camera-wrapper')
 
 const config = require('../lib/configuration')
