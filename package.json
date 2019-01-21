@@ -71,10 +71,11 @@
     "test": "ava test",
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
     "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css",
-    "newcss:build": "babel ui-new/src/app.js -s -o ui-new/js/app.js",
-    "sass:watch": "node-sass -w ui-new/css/main.scss ui-new/css/build/main.css",
-    "sass:compile": "node-sass ui-new/css/main.scss ui-new/css/build/main.css",
-    "sass:autoprefix": "postcss ui-new/css/build/main.css --no-map --use autoprefixer -d ui-new/css/build/"
+    "newcss:sass": "ls -d -1 $PWD/ui-new/css/*.scss| entr node-sass ui-new/css/main.scss ui-new/css/build/main.css",
+    "newcss:autoprefix": "postcss ui-new/css/build/main.css --no-map --use autoprefixer -d ui-new/css/build/",
+    "newcss:js": "ls -d -1 $PWD/ui-new/src/*.js | entr babel ui-new/src/app.js -s -o ui-new/js/app.js && echo 'hello'",
+    "newcss:html": "ls -d -1 $PWD/ui-new/html/*.html | entr node ./ui-new/scripts/inline-html.js",
+    "newcss:watch": "npm run newcss:js & npm run newcss:html & npm run newcss:sass && npm run newcs:autoprefix"
   },
   "gypfile": true,
   "standard": {
