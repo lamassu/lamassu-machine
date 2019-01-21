@@ -1025,7 +1025,7 @@ function qrize (text, target, color, lightning) {
     size: target.width(),
     render: 'canvas',
     rounded: 50,
-    quiet: 0,
+    quiet: 2,
     mPosX: 50,
     mPosY: 50,
     mSize: 30,
