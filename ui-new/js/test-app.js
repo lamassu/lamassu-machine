@@ -68,7 +68,6 @@ $(function () {
 })
 
 function click (e) {
-  console.log('not copying')
   document.execCommand('copy')
   if (screen) {
     screen.classList.remove('viewport-active')
@@ -92,18 +91,18 @@ function copyToClipboard (element) {
 }
 
 function setupFakes () {
-  let amount = [ '<span class="integer">9</span><span class="decimal-char">',
-    '.', '</span><span class="decimal">337</span>'
+  let amount = [ '<span class="integer">34</span><span class="decimal-char">',
+    '.', '</span><span class="decimal">479</span>'
   ].join('')
 
-  $('.js-i18n-coins-to-address').html('Your BTC will be sent to:')
-  let address = '16j1QDLLcAuYkiWhQpnyk34yXihbvLfMfd'
-  $('.deposit_state .send-notice .crypto-address').text(address)
-  $('.fiat_receipt_state .sent-coins .crypto-address').text(address)
-  $('.fiat_complete_state .sent-coins .crypto-address').text(address)
-  $('.crypto-address').html(address)
+  $('.js-i18n-coins-to-address').html('Your coins will be sent to:')
+  let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu'
+  $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
+  $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(address))
+  $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(address))
+  $('.crypto-address').html(formatAddress(address))
   $('#fiat-inserted').html('per <span class="integer">1</span> EUR inserted')
-  $('.tx-fee').html('<strong>+</strong><span class="integer">1</span><span>.</span><span class="decimal">00</span> EUR transaction fee')
+  $('.js-i18n-fixed-fee').html('Transaction Fee: <span class="integer">1</span><span>.</span><span class="decimal">00</span> EUR')
   $('.insert_bills_state .bottom-bar .current-crypto').text('Lamassu Cryptomat')
   $('#js-i18n-high-bill-header').text("We're a little low")
   $('#js-i18n-highest-bill').html(`Please insert <span class="integer">10</span> EUR or less.`)
@@ -116,8 +115,44 @@ function setupFakes () {
   }
 
   ['.reverse-exchange-rate', '.total-crypto-rec'].forEach(it => {
-    console.log(it)
     updateCrypto(it)
   })
+
+  function formatAddress (address) {
+    const withSpace = address.replace(/(.{4})/g, '$1 ')
+    return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
+  }
+
+  const CASH_IN_QR_COLOR = '#0e4160'
+  const CASH_OUT_QR_COLOR = '#403c51'
+
+  qrize(address, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
+  qrize(address, $('#cash-in-fail-qr-code'))
+  qrize(address, $('#qr-code-fiat-receipt'))
+  qrize(address, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
 }
 
+function qrize (text, target, color, lightning) {
+  const image = document.getElementById('bolt-img')
+  const opts = {
+    crisp: true,
+    fill: color || 'black',
+    text,
+    size: target.width(),
+    render: 'canvas',
+    rounded: 50,
+    quiet: 2,
+    mPosX: 50,
+    mPosY: 50,
+    mSize: 30,
+    image
+  }
+
+  if (lightning) {
+    opts.mode = 'image'
+  }
+
+  const el = kjua(opts)
+
+  target.empty().append(el)
+}

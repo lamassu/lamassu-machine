@@ -66,4 +66,9 @@ native_modules.tgz
 ui/js/app.js
 ui/js/app.js.map
 
+ui-new/js/app.js
+ui-new/js/app.js.map
+ui-new/css/build
+ui/css/fonts
+
 result.jpg
