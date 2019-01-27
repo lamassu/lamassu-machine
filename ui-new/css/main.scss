@@ -95,6 +95,15 @@ footer {
   margin-right: 3.4vw;
 }
 
+
+.primary-side-dispensing {
+  flex: 1;
+  margin-left: 9.4vw;
+  margin-top: 8.5vh;
+  margin-bottom: 10vh;
+  margin-right: 3.4vw;
+}
+
 .secondary-side {
   flex: 1; 
   margin-right: 6.4vw;
@@ -116,6 +125,16 @@ footer {
 
 .primary-side-subtitle {
   margin-top: 0;
+}
+
+.primary-side-title-dispensing {
+  line-height: 72px;
+  margin-top: 1vh;
+}
+
+.primary-side-subtitle-dispensing {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .camera {
@@ -157,8 +176,17 @@ footer {
   margin-left: 4vh;
 }
 
+.dispense-bill-wrapper {
+  margin-top: 8.8vh;
+  margin-left: 4vh;
+}
+
 .insert-bill-wrapper img {
   width: 25vw;
+}
+
+.dispense-bill-wrapper img {
+  width: 400px;
 }
 
 .no-header {

@@ -1355,16 +1355,39 @@
           </section>
         </section>
       </section>
-    
-      <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
-        <section class="instructions">
-          <h1 class="js-i18n">Dispensing...</h1>
-          <h3 class="batch hide">Batch <span class="js-current-batch"></span> out of <span class="js-of-batch"></span></h3>
-          <h2 class="js-i18n">Please take your cash.</h2>
+
+      <section class="viewport dispensing_state column cash-out-color" data-tr-section="dispensing">
+        <header>
+          <p class="d2 white crypto-rate" style="visibility: hidden;">placeholder</p>
+        </header>
+        <section class="main">
+          <section class="primary-side-dispensing">
+            <p class="d2 primary-side-subtitle-dispensing" style="visibility: hidden;">placeholder</p>
+            <h2 class="js-i18n primary-side-title-dispensing xs-margin-bottom">Dispensing...</h2>
+            <p class="d1 primary-side-subtitle">Please wait while we<br>dispense your cash.</p>
+          </section>
+          <section class="secondary-side with-image">
+            <div class="dispense-bill-wrapper"><img src="images/dispensing.svg"/></div>
+          </section>
         </section>
-        <img class="dispensing-bill" src="images/dispensing-bill.png" />
       </section>
-    
+
+      <section class="viewport dispensing_collect_state column cash-out-color" data-tr-section="dispensing">
+        <header>
+          <p class="d2 white crypto-rate" style="visibility: hidden;">placeholder</p>
+        </header>
+        <section class="main">
+          <section class="primary-side-dispensing">
+            <p class="d2 primary-side-subtitle-dispensing" style="visibility: hidden;">placeholder</p>
+            <h2 class="js-i18n primary-side-title-dispensing xs-margin-bottom">All set</h2>
+            <p class="d1 primary-side-subtitle">Please remove your<br>cash from the tray.</p>
+          </section>
+          <section class="secondary-side with-image">
+            <div class="dispense-bill-wrapper"><img src="images/all-set.svg"/></div>
+          </section>
+        </section>
+      </section>
+
       <section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">
         <section class="instructions">
           <h1 class="js-i18n">Your Receipt</h1>
