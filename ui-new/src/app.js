@@ -1144,7 +1144,7 @@ function t (id, str) {
 function translateCoin (cryptoCode) {
   $('.js-i18n-total-purchased').html(locale.translate('total %s purchased').fetch(cryptoCode))
 
-  $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code to send us your %s.').fetch(cryptoCode))
+  $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode))
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
   $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
@@ -1266,6 +1266,7 @@ function fiatCredit (data) {
 }
 
 function setDepositAddress (depositInfo) {
+  console.log('this is going on ')
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
