@@ -75,7 +75,7 @@
     "newcss:autoprefix": "postcss ui-new/css/build/main.css --no-map --use autoprefixer -d ui-new/css/build/",
     "newcss:js": "ls -d -1 $PWD/ui-new/src/*.js | entr babel ui-new/src/app.js -s -o ui-new/js/app.js && echo 'hello'",
     "newcss:html": "ls -d -1 $PWD/ui-new/html/*.html | entr node ./ui-new/scripts/inline-html.js",
-    "newcss:watch": "npm run newcss:js & npm run newcss:html & npm run newcss:sass && npm run newcs:autoprefix"
+    "newcss:watch": "npm run newcss:js & npm run newcss:html & npm run newcss:sass && npm run newcss:autoprefix"
   },
   "gypfile": true,
   "standard": {

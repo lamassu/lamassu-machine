@@ -96,10 +96,11 @@ function setupFakes () {
   ].join('')
 
   $('.js-i18n-coins-to-address').html('Your coins will be sent to:')
-  let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu'
+  let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu98iwn'
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(address))
   $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(address))
+  $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.crypto-address').html(formatAddress(address))
   $('#fiat-inserted').html('per <span class="integer">1</span> EUR inserted')
   $('.js-i18n-fixed-fee').html('Transaction Fee: <span class="integer">1</span><span>.</span><span class="decimal">00</span> EUR')
@@ -108,6 +109,10 @@ function setupFakes () {
   $('#js-i18n-highest-bill').html(`Please insert <span class="integer">10</span> EUR or less.`)
   $('.js-i18n-did-send-coins').html('Have you sent the BTC yet?')
   $('.js-i18n-lowest-bill').html('Please insert <span class="integer">10</span> EUR or more.')
+  $('.js-crypto-display-units').text('mBTC')
+  $('.deposit_state .digital .js-amount').html(34.479)
+  $('.deposit_state .fiat .js-amount').text(320)
+  $('.js-currency').text('EUR')
 
   function updateCrypto (selector) {
     $(selector).find('.crypto-amount').html(amount)
@@ -130,6 +135,7 @@ function setupFakes () {
   qrize(address, $('#cash-in-fail-qr-code'))
   qrize(address, $('#qr-code-fiat-receipt'))
   qrize(address, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+  qrize(address, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
 }
 
 function qrize (text, target, color, lightning) {
@@ -155,4 +161,20 @@ function qrize (text, target, color, lightning) {
   const el = kjua(opts)
 
   target.empty().append(el)
+
+  $('#doAnimation').click(event => {
+    transitionOut()
+    click({ target: $('clicker-insert_bills_state') })
+    setTimeout(() => {
+      cleanUpTransition()
+    }, 300)
+  })
+
+  function transitionOut () {
+    $('#animate-me').addClass('animate-me')
+  }
+
+  function cleanUpTransition () {
+    $('#animate-me').removeClass('animate-me')
+  }
 }

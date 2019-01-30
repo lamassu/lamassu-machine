@@ -40,6 +40,7 @@ header {
   display: flex;
   margin: 6vh;
   justify-content: flex-end;
+  min-height: 3vh;
 }
 
 footer {
@@ -90,16 +91,12 @@ footer {
 .primary-side {
   flex: 1;
   margin-left: 9.4vw;
-  margin-top: 8vh;
-  margin-bottom: 10vh;
-  margin-right: 3.4vw;
+  margin-right: 3.6vw;
 }
 
 .secondary-side {
   flex: 1; 
   margin-right: 6.4vw;
-  margin-top: 8vh;
-  margin-bottom: 10vh;
   margin-left: 6.4vw;
 }
 
@@ -111,11 +108,7 @@ footer {
 .primary-side-title {
   line-height: 72px;
   margin-bottom: 5vh;
-  margin-top: 5.5vh;
-}
-
-.primary-side-subtitle {
-  margin-top: 0;
+  margin-top: 4vh;
 }
 
 .camera {
@@ -126,11 +119,11 @@ footer {
 .scan-image {
   margin-left: 3vh;
   width: 48vh;
-  margin-top: -1vh;
+  margin-top: -3vh;
 }
 
 .cancel-button {
-  width: 4vh;
+  width: 3.5vh;
 }
 
 .goodbye_state {
@@ -171,12 +164,10 @@ footer {
   align-items: center;
 }
 
-.s-margin-bottom {
-  margin-bottom: 2vh;
-}
-
-.xs-margin-bottom {
-  margin-bottom: 1vh;
+.qr-secondary-side {
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
 }
 
 .qr-wrapper {
@@ -186,16 +177,30 @@ footer {
   background-color: $white;
 }
 
-#cash-in-qr-code {
+.qr {
   width: 36vh;
   height: 36vh;
   box-shadow: 0 0 2.5vh #e9e7e7;
 }
 
-#qr-code-fiat-complete {
-  width: 36vh;
-  height: 36vh;
-  box-shadow: 0 0 2.5vh #e9e7e7;
+.lg-margin-top {
+  margin-top: 10vh;
+}
+
+.md-margin-top {
+  margin-top: 6vh;
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.sm-margin-bottom {
+  margin-bottom: 2vh;
+}
+
+.xs-margin-bottom {
+  margin-bottom: 1vh;
 }
 
 // TODO clean up after animation gets tested this is v0.1
