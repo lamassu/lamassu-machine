@@ -676,6 +676,7 @@ function setUpDirectionElement (element, direction) {
 
 function setDirection (direction) {
   let states = [
+    $('.scan_address_state'),
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
@@ -1149,6 +1150,7 @@ function t (id, str) {
 function translateCoin (cryptoCode) {
   $('.js-i18n-total-purchased').html(locale.translate('total %s purchased').fetch(cryptoCode))
 
+  $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode))
   $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode))
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))

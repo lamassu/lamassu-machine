@@ -127,8 +127,10 @@ function setupFakes () {
   $('.deposit_state .digital .js-amount').html(34.479)
   $('.deposit_state .fiat .js-amount').text(320)
   $('.js-currency').text('EUR')
+  $('.js-i18n-scan-your-address').html('Scan your <br/> BTC address')
 
   let states = [
+    $('.scan_address_state'),
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
