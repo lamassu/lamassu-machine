@@ -111,6 +111,14 @@ footer {
   margin-top: 4vh;
 }
 
+.dispense-bill-wrapper {
+  margin-top: 9vh;
+}
+
+.dispense-bill-wrapper img {
+  width: 31vw;
+}
+
 .camera {
   width: 5vh;
   margin-bottom: 2vh;
@@ -146,7 +154,7 @@ footer {
 }
 
 .insert-bill-wrapper {
-  margin-top: 9vh;
+  margin-top: 7vh;
   margin-left: 4vh;
 }
 
@@ -166,7 +174,8 @@ footer {
 
 .qr-secondary-side {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 4vh;
 }
 
@@ -183,12 +192,26 @@ footer {
   box-shadow: 0 0 2.5vh #e9e7e7;
 }
 
-.lg-margin-top {
+.lightning-img {
+  vertical-align: baseline;
+  height: 2.5vh;
+  margin-right: 1vh;
+}
+
+.xl-margin-top {
   margin-top: 10vh;
+}
+
+.lg-margin-top {
+  margin-top: 8vh;
 }
 
 .md-margin-top {
   margin-top: 6vh;
+}
+
+.sm-margin-top {
+  margin-top: 2vh;
 }
 
 .no-margin-top {

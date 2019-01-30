@@ -90,6 +90,40 @@
           <div class="qr-wrapper centralize">
             <div id="qr-code-deposit" class="qr"></div>
           </div> 
+          <!-- TODO lightning still not enabled
+          <div id="lightning-enabled" class="sm-margin-top">
+            <img class="lightning-img" src="images/lightning.svg"/>
+            <span class="d2">Lightning Enabled</span>
+          </div> -->
+        </section>
+      </section>
+    </section>
+    <section class="viewport dispensing_state column cash-out-color" data-tr-section="dispensing">
+      <header></header>
+      <section class="main lg-margin-top">
+        <section class="primary-side">
+          <p class="d2 no-margin-top" style="visibility: hidden;">placeholder</p>
+          <h2 class="js-i18n no-margin-top xs-margin-bottom">Dispensing...</h2>
+          <p class="d1 no-margin-top">Please wait while we<br>dispense your cash.</p>
+        </section>
+        <section class="secondary-side with-image">
+          <div class="dispense-bill-wrapper"><img src="images/dispensing.svg"/></div>
+        </section>
+      </section>
+    </section>
+    
+    <section class="viewport dispensing_collect_state column cash-out-color" data-tr-section="dispensing">
+      <header>
+        <p class="d2 white crypto-rate" style="visibility: hidden;">placeholder</p>
+      </header>
+      <section class="main lg-margin-top">
+        <section class="primary-side">
+          <p class="d2 no-margin-top" style="visibility: hidden;">placeholder</p>
+          <h2 class="js-i18n no-margin-top xs-margin-bottom">All set</h2>
+          <p class="d1 no-margin-top">Please remove your<br>cash from the tray.</p>
+        </section>
+        <section class="secondary-side with-image">
+          <div class="dispense-bill-wrapper"><img src="images/all-set.svg"/></div>
         </section>
       </section>
     </section>
@@ -139,7 +173,7 @@
           <img class="cancel-button" src="images/close-icon.svg"/>
         </div>
       </header>
-      <section class="main lg-margin-top">
+      <section class="main xl-margin-top">
         <section class="primary-side fade-in">
           <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert a bill</h2>
           <p class="d1 no-margin-top">Please insert your first bill into the machine.</p>
@@ -158,7 +192,7 @@
           <img class="cancel-button" src="images/close-icon.svg"/>
         </div>
       </header>
-      <section class="main lg-margin-top">
+      <section class="main xl-margin-top">
         <section class="primary-side">
           <h2 class="js-i18n primary-side-title xs-margin-bottom">Please verify your identity</h2>
           <p class="d1 no-margin-top js-i18n">
@@ -180,7 +214,7 @@
           <img class="cancel-button" src="images/close-icon.svg"/>
         </div>
       </header>
-      <section class="main lg-margin-top">
+      <section class="main xl-margin-top">
         <section class="primary-side">
           <h2 class="js-i18n primary-side-title xs-margin-bottom">Please verify your identity</h2>
           <p class="d1 no-margin-top js-i18n">
@@ -1353,15 +1387,6 @@
           </div>
         </section>
       </section>
-    </section>
-    
-    <section class="viewport dispensing_state fiat-side" data-tr-section="dispensing">
-      <section class="instructions">
-        <h1 class="js-i18n">Dispensing...</h1>
-        <h3 class="batch hide">Batch <span class="js-current-batch"></span> out of <span class="js-of-batch"></span></h3>
-        <h2 class="js-i18n">Please take your cash.</h2>
-      </section>
-      <img class="dispensing-bill" src="images/dispensing-bill.png" />
     </section>
     
     <section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">

@@ -1266,7 +1266,6 @@ function fiatCredit (data) {
 }
 
 function setDepositAddress (depositInfo) {
-  console.log('this is going on ')
   $('.deposit_state .loading').hide()
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
