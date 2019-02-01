@@ -28,4 +28,5 @@ cp $UPDATESCRIPT $EXPORT_DIR
 
 echo "Building..."
 node $SCRIPT_DIR/../build.js $EXPORT_BASE
-echo "Success."
+rm -rf $EXPORT_DIR
+echo "Complete."
