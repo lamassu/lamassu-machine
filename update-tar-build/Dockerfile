@@ -8,16 +8,17 @@ RUN apt-get update && apt-get -y upgrade && \
 
 ENV WORK=/usr/app
 
-RUN npm config set strict-ssl false
-RUN npm cache clean -f
-RUN npm install -g n
-# only to use npm@2
-RUN n 4
-RUN npm -v
+RUN npm config set strict-ssl false && \
+  npm cache clean -f && \
+  npm i -g n && \
+  npm config set strict-ssl true && \
+  n 6 && \
+  npm -v
 
 WORKDIR $WORK
 
 COPY ./package.json ./package.json
+COPY ./package-lock.json ./package-lock.json
 
 RUN npm install
 

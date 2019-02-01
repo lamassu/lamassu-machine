@@ -52,11 +52,13 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "benchmark": "^2.1.4",
+    "copy-node-modules": "^1.1.1",
     "image-size": "^0.6.3",
     "microtime": "^2.1.7",
     "p-whilst": "^1.0.0",
     "parse5": "^4.0.0",
     "rewire": "^4.0.1",
+    "rimraf": "^2.6.3",
     "sinon": "^6.3.4",
     "standard": "^11.0.1",
     "x-ray": "^2.3.2"
@@ -68,7 +70,8 @@
   "scripts": {
     "test": "ava test",
     "build": "babel ui/src/app.js -s -o ui/js/app.js",
-    "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css"
+    "autoprefix": "postcss ui/css/main.css --no-map --use autoprefixer -d build/css",
+    "build-update-tar": "bin/build-update-tar"
   },
   "standard": {
     "ignore": [

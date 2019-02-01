@@ -51,7 +51,10 @@ cp $MACHINE_DIR/bin/cam.js $TARGET_MACHINE_DIR/bin
 cp $MACHINE_DIR/bin/mock-cam.js $TARGET_MACHINE_DIR/bin
 
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
-$MACHINE_DIR/deploy/copy-modules.js $MACHINE_DIR/node_modules $TARGET_MODULES_DIR
+$MACHINE_DIR/node_modules/.bin/copy-node-modules $MACHINE_DIR $TARGET_MACHINE_DIR
+
+# remove native modules
+node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules
 cp -a $HARDWARE_DIR $EXPORT_DIR/hardware
 
 # Untar deploy-files
