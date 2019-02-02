@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $, TimelineMax */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -162,19 +162,22 @@ function qrize (text, target, color, lightning) {
 
   target.empty().append(el)
 
-  $('#doAnimation').click(event => {
-    transitionOut()
-    click({ target: $('clicker-insert_bills_state') })
-    setTimeout(() => {
-      cleanUpTransition()
-    }, 300)
-  })
+  $('#doAnimation').click(doTransition)
 
-  function transitionOut () {
-    $('#animate-me').addClass('animate-me')
-  }
-
-  function cleanUpTransition () {
-    $('#animate-me').removeClass('animate-me')
+  function doTransition () {
+    var tl = new TimelineMax()
+    const target = document.getElementById('clicker-insert_bills_state')
+    tl
+      .to('.fade-in-delay', 0, { opacity: 0, y: +30 })
+      .to('.fade-in', 0, { opacity: 0, y: +30 })
+      .to('#animate-me', 0.5, { scale: 2 })
+      .to('.fade-in', 0.4, {
+        opacity: 1,
+        y: 0,
+        onStart: click,
+        onStartParams: [{ target }]
+      }, '=-0.2')
+      .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
+      .to('#animate-me', 0, { scale: 1 })
   }
 }

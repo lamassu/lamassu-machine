@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TweenMax */
 'use strict'
 
 const queryString = window.location.search
@@ -461,13 +461,7 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
-  $('#doAnimation').click(event => {
-    transitionOut()
-    setTimeout(() => {
-      cleanUpTransition()
-      setState('insert_bills')
-    }, 300)
-  })
+  $('#doAnimation').click(doTransition)
 
   $('.crypto-buttons').click(event => {
     const el = $(event.target)
@@ -1340,10 +1334,19 @@ function initDebug () {
   }
 }
 
-function transitionOut () {
-  $('#animate-me').addClass('animate-me')
-}
-
-function cleanUpTransition () {
-  $('#animate-me').removeClass('animate-me')
+function doTransition () {
+  var tl = new TimelineMax()
+  const target = document.getElementById('clicker-insert_bills_state')
+  tl
+    .to('.fade-in-delay', 0, { opacity: 0, y: +30 })
+    .to('.fade-in', 0, { opacity: 0, y: +30 })
+    .to('#animate-me', 0.5, { scale: 2 })
+    .to('.fade-in', 0.4, {
+      opacity: 1,
+      y: 0,
+      onStart: click,
+      onStartParams: [{ target }]
+    }, '=-0.2')
+    .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
+    .to('#animate-me', 0, { scale: 1 })
 }

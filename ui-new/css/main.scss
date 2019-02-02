@@ -226,69 +226,6 @@ footer {
   margin-bottom: 1vh;
 }
 
-// TODO clean up after animation gets tested this is v0.1
 #bg-image {
   position: absolute;
-}
-
-.animate-me {
-  animation: fill-in 0.5s linear;
-}
-
-.fade-out {
-  animation: fadeout 0s ease-in 5s forwards;
-  animation-fill-mode: forwards;
-}
-
-.fade-in {
-  animation: slide-up-fade-in ease 0.4s forwards;
-  transform-origin: 50% 50%;
-}
-
-.delay {
-  animation: slide-up-fade-in2 ease 0.4s forwards;
-  transform-origin: 50% 50%;
-}
-
-@keyframes fill-in {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(2);
-  }
-}
-
-@keyframes fade-out {
-  to {
-    width:0;
-    height:0;
-    overflow:hidden;
-  }
-}
-
-@keyframes slide-up-fade-in {
-    0% {
-        opacity:0;
-        transform:  translate(0px,30px)  ;
-    }
-    100% {
-        opacity:1;
-        transform:  translate(0px,0px)  ;
-    }
-}
-
-@keyframes slide-up-fade-in2 {
-    0% {
-      opacity:0;
-      transform:  translate(0px,30px)  ;
-    }
-    25% {
-      opacity:0;
-      transform:  translate(0px,30px)  ;
-    }
-    100% {
-      opacity:1;
-      transform:  translate(0px,0px)  ;
-    }
 }
