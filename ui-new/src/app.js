@@ -675,7 +675,11 @@ function setUpDirectionElement (element, direction) {
 }
 
 function setDirection (direction) {
-  let states = [$('.scan_photo_state'), $('.scan_id_state')]
+  let states = [
+    $('.scan_photo_state'),
+    $('.scan_id_state'),
+    $('.register_phone_state')
+  ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
   })

@@ -91,13 +91,13 @@ footer {
 .primary-side {
   flex: 1;
   margin-left: 9.4vw;
-  margin-right: 3.6vw;
+  margin-right: 2.6vw;
 }
 
 .secondary-side {
   flex: 1; 
   margin-right: 6.4vw;
-  margin-left: 6.4vw;
+  margin-left: 5.4vw;
 }
 
 .with-image {
@@ -125,7 +125,7 @@ footer {
 }
 
 .scan-image {
-  margin-left: 3vh;
+  margin-left: 4vh;
   width: 48vh;
   margin-top: -3vh;
 }
@@ -155,7 +155,7 @@ footer {
 
 .insert-bill-wrapper {
   margin-top: 7vh;
-  margin-left: 4vh;
+  margin-left: 5vh;
 }
 
 .insert-bill-wrapper img {
@@ -224,6 +224,81 @@ footer {
 
 .xs-margin-bottom {
   margin-bottom: 1vh;
+}
+
+.key {
+  height: 11vh;
+  width: 13vh;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 11vh;
+}
+
+.cash-in-color .key:active {
+  background-color: $amazonite-two;
+}
+
+.cash-out-color .key:active {
+  background-color: $salmon-two;
+}
+
+.row {
+  display: flex;
+}
+
+.entry {
+  padding: 2vh;
+  min-height: 6vh;
+}
+
+.cash-in-color .phone-separator {
+  border-bottom: 0.1vh solid $amazonite-two;
+  width: 34vh;
+}
+
+.cash-out-color .phone-separator {
+  border-top: 0.1vh solid $salmon-two;
+  width: 34vh;
+}
+
+.register_phone_state .secondary-side {
+  display: flex;
+  justify-content: center;
+}
+
+.action-button {
+  height: 8vh;
+  width: 10vw;
+  background-color: white;
+  color: $purple-grey;
+  border-radius: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-button-wrapper {
+  width: 39vh;
+}
+
+#phone-keypad {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 7vh;
+  margin-top: 3vh;
+}
+
+#phone-keypad .action-button {
+  float: right;
+  margin-top: 5vh;
+}
+
+.backspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // TODO clean up after animation gets tested this is v0.1

@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $, Keypad */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -33,11 +33,18 @@ TODO:
 
 let clicker = null
 let screen = null
+var phoneKeypad = null
 
 $(function () {
   $('body').css('cursor', 'default')
 
   setupFakes()
+
+  phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
+    console.log('phoneNumber', result)
+  })
+
+  phoneKeypad.activate()
 
   var cList = document.createElement('div')
   cList.id = 'clicker-list'
