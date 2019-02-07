@@ -229,3 +229,12 @@ footer {
 #bg-image {
   position: absolute;
 }
+
+#metrics {
+  font-size: 3vh;
+  position: absolute;
+  height: 18vh;
+  width: 26vw;
+  z-index: 10;
+  background-color: red;
+}

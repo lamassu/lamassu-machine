@@ -1,4 +1,4 @@
-/* globals $, TimelineMax */
+/* globals $, TimelineMax, requestAnimationFrame */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -161,14 +161,27 @@ function qrize (text, target, color, lightning) {
   const el = kjua(opts)
 
   target.empty().append(el)
+  let animationFinished = true
+  let then = 0
+  let lowest = 0
+  let highest = 0
+  let avg = 0
+  let frameNumber = 0
 
   $('#doAnimation').click(doTransition)
 
   function doTransition () {
-    var tl = new TimelineMax()
+    then = 0
+    lowest = 0
+    highest = 0
+    avg = 0
+    frameNumber = 0
+    animationFinished = false
+
+    requestAnimationFrame(render)
+    var tl = new TimelineMax({ onComplete: () => { animationFinished = true } })
     const target = document.getElementById('clicker-insert_bills_state')
-    tl
-      .to('.fade-in-delay', 0, { opacity: 0, y: +30 })
+    tl.to('.fade-in-delay', 0, { opacity: 0, y: +30 })
       .to('.fade-in', 0, { opacity: 0, y: +30 })
       .to('#animate-me', 0.5, { scale: 2 })
       .to('.fade-in', 0.4, {
@@ -179,5 +192,37 @@ function qrize (text, target, color, lightning) {
       }, '=-0.2')
       .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
       .to('#animate-me', 0, { scale: 1 })
+  }
+
+  const metrics = document.querySelector('#metrics')
+
+  function render (now) {
+    const deltaTime = now - then
+
+    frameNumber++
+    if (then) {
+      if (!lowest || deltaTime < lowest) {
+        lowest = deltaTime
+      }
+
+      if (!highest || deltaTime > highest) {
+        highest = deltaTime
+      }
+
+      avg = (deltaTime + (avg * (frameNumber - 1))) / frameNumber
+    }
+
+    metrics.innerHTML = `
+frame: ${frameNumber} <br/>
+ms: ${deltaTime} <br/>
+lowest: ${lowest} <br/>
+highest: ${highest} <br/>
+avg: ${avg}
+    `
+
+    then = now
+    if (!animationFinished) {
+      requestAnimationFrame(render)
+    }
   }
 }
