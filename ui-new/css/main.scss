@@ -69,12 +69,12 @@ footer {
   background-color: $salmon;
 }
 
-.cash-in-color .only-cash-out {
+.cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
   display: none;
 }
 
-.cash-out-color .only-cash-in {
-  display: none;
+.hidden {
+  opacity: 0;
 }
 
 .crypto-rate {
@@ -89,15 +89,13 @@ footer {
 }
 
 .primary-side {
-  flex: 1;
-  margin-left: 9.4vw;
-  margin-right: 2.6vw;
+  flex: 0 0 50%;
+  padding-left: 9.4vw;
+  box-sizing: border-box;
 }
 
 .secondary-side {
-  flex: 1; 
-  margin-right: 6.4vw;
-  margin-left: 5.4vw;
+  flex: 0 0 50%;
 }
 
 .with-image {
@@ -125,7 +123,7 @@ footer {
 }
 
 .scan-image {
-  margin-left: 4vh;
+  margin-left: 13vh;
   width: 48vh;
   margin-top: -3vh;
 }
@@ -176,12 +174,12 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4vh;
 }
 
 .qr-wrapper {
   width: 40vh;
   height: 40vh;
+  margin-top: 4vh;
   border-radius: 2.5vh;
   background-color: $white;
 }
@@ -281,7 +279,7 @@ footer {
   width: 39vh;
 }
 
-#phone-keypad {
+#phone-keypad, #security-keypad {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -290,7 +288,7 @@ footer {
   margin-top: 3vh;
 }
 
-#phone-keypad .action-button {
+#phone-keypad .action-button, #security-keypad .action-button {
   float: right;
   margin-top: 5vh;
 }

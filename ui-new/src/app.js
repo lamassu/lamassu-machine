@@ -678,6 +678,7 @@ function setDirection (direction) {
   let states = [
     $('.scan_photo_state'),
     $('.scan_id_state'),
+    $('.security_code_state'),
     $('.register_phone_state')
   ]
   states.forEach(it => {
