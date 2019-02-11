@@ -1,0 +1,45 @@
+@import "./variables.scss";
+
+.action-button {
+  height: 8vh;
+  width: 10vw;
+  background-color: $white;
+  border-radius: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cash-in-color .action-button {
+  color: $sapphire;
+}
+
+.cash-out-color .action-button {
+  color: $purple-grey;
+}
+
+.cash-in-color .action-button:active {
+  background-color: $sapphire;
+  color: $white;
+}
+
+.cash-out-color .action-button:active {
+  background-color: $purple-grey;
+  color: $white;
+}
+
+.key {
+  height: 11vh;
+  width: 13vh;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 11vh;
+}
+
+.cash-in-color .key:active {
+  background-color: $amazonite-two;
+}
+
+.cash-out-color .key:active {
+  background-color: $salmon-two;
+}

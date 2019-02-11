@@ -1,6 +1,7 @@
 @import "./variables.scss";
 @import "./fonts.scss";
 @import "./typography.scss";
+@import "./buttons.scss";
 
 body {
   user-select: none;
@@ -32,6 +33,7 @@ body {
   display: flex;
 }
 
+// TODO this should be integrated with viewport
 .column {
   flex-direction: column;
 }
@@ -82,10 +84,6 @@ footer {
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 2vh;
-}
-
-.insert_bills_state .main .tl {
-  margin-right: 10vw;
 }
 
 .primary-side {
@@ -151,23 +149,14 @@ footer {
   margin-bottom: 0;
 }
 
-.insert-bill-wrapper {
+.insert-bill-wrapper img {
   margin-top: 7vh;
   margin-left: 5vh;
-}
-
-.insert-bill-wrapper img {
   width: 25vw;
 }
 
 .no-header {
   padding: 5vh 0;
-}
-
-.centralize {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .qr-secondary-side {
@@ -177,6 +166,9 @@ footer {
 }
 
 .qr-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40vh;
   height: 40vh;
   margin-top: 4vh;
@@ -224,22 +216,6 @@ footer {
   margin-bottom: 1vh;
 }
 
-.key {
-  height: 11vh;
-  width: 13vh;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 11vh;
-}
-
-.cash-in-color .key:active {
-  background-color: $amazonite-two;
-}
-
-.cash-out-color .key:active {
-  background-color: $salmon-two;
-}
-
 .row {
   display: flex;
 }
@@ -259,22 +235,6 @@ footer {
   width: 34vh;
 }
 
-.register_phone_state .secondary-side {
-  display: flex;
-  justify-content: center;
-}
-
-.action-button {
-  height: 8vh;
-  width: 10vw;
-  background-color: white;
-  color: $purple-grey;
-  border-radius: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .action-button-wrapper {
   width: 39vh;
 }
@@ -284,7 +244,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 7vh;
+  margin-left: 4vh;
   margin-top: 3vh;
 }
 
