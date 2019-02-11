@@ -61,7 +61,7 @@
   color: $white;
 }
 
-@mixin Tagline {
+@mixin Tagline-1 {
   @include mueseo-bold;
   // x800 = 40px
   font-size: 5vh;
@@ -124,12 +124,12 @@ h5, .h5 {
 }
 
 .cash-in-color .tl1, .cash-in-color .tl1 {
-  @include Tagline;
+  @include Tagline-1;
   color: $sapphire;
 }
 
 .cash-out-color .tl1, .cash-out-color .tl1 {
-  @include Tagline;
+  @include Tagline-1;
   color: $purple-grey;
 }
 
