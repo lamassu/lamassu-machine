@@ -1,6 +1,71 @@
 @import "./variables.scss";
+@import "./typography.scss";
 
-.action-button {
+.circle-button {
+  border: none;
+  height: 40vh;
+  width: 40vh;
+  border-radius: 40vh;
+  line-height: 6vh;
+  background-color: $white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-circle-button {
+  height: 36vh;
+  width: 36vh;
+  border-radius: 40vh;
+  line-height: 6vh;
+  background-color: $white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 1vh 0 $border-color;
+}
+
+.cash-in-color .inner-circle-button {
+  color: $sapphire;
+}
+
+.cash-out-color .inner-circle-button {
+  color: $purple-grey;
+}
+
+.cash-in-color .circle-button:active .inner-circle-button {
+  background-color: $sapphire;
+  color: $white;
+}
+
+.cash-in-color .circle-button:active {
+  background-color: $sapphire;
+  color: $white;
+}
+
+.cash-out-color .circle-button:active .inner-circle-button {
+  background-color: $purple-grey;
+  color: $white;
+}
+
+.cash-out-color .circle-button:active {
+  background-color: $purple-grey;
+  color: $white;
+}
+
+.cash-out-color .circle-button:disabled .inner-circle-button {
+  background-color: $salmon-two;
+  color: $salmon;
+}
+
+.cash-out-color .circle-button:disabled {
+  background-color: $salmon-two;
+  color: $salmon;
+}
+
+.progress-button {
   height: 8vh;
   width: 10vw;
   background-color: $white;
@@ -10,12 +75,33 @@
   align-items: center;
 }
 
-.cash-in-color .action-button {
+.cash-in-color .progress-button {
   color: $sapphire;
 }
 
-.cash-out-color .action-button {
+.cash-out-color .progress-button {
   color: $purple-grey;
+}
+
+.cash-in-color .progress-button:active {
+  background-color: $sapphire;
+  color: $white;
+}
+
+.cash-out-color .progress-button:active {
+  background-color: $purple-grey;
+  color: $white;
+}
+
+.action-button {
+  padding: 0 2.5vw;
+  height: 12vh;
+  min-width: 5vw;
+  background-color: #ffffff;
+  border-radius: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cash-in-color .action-button:active {
@@ -26,6 +112,36 @@
 .cash-out-color .action-button:active {
   background-color: $purple-grey;
   color: $white;
+}
+
+.filled-action-button {
+  padding: 0 3vw;
+  height: 12vh;
+  min-width: 5vw;
+  border-radius: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cash-in-color .filled-action-button {
+  background-color: $sapphire;
+  color: $white;
+}
+
+.cash-out-color .filled-action-button {
+  background-color: $purple-grey;
+  color: $white;
+}
+
+.cash-in-color .filled-action-button:active {
+  background-color: $white;
+  color: $sapphire;
+}
+
+.cash-out-color .filled-action-button:active {
+  background-color: $white;
+  color: $purple-grey;
 }
 
 .key {

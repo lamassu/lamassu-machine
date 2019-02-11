@@ -29,6 +29,46 @@
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
     <section id="view">
+    <section class="viewport choose_fiat_state column cash-out-color" data-tr-section="choose-fiat">
+      <header>
+        <p class="d2 white crypto-rate"></p>
+        <div id="chooseFiatCancel">
+          <img class="cancel-button" src="images/close-icon.svg"/>
+        </div>
+      </header>
+      <section class="main">
+        <section class="primary-side">
+          <h2 class="js-i18n primary-side-title xs-margin-bottom">How much?</h2>
+          <section class="sums">
+            <div class="fiat nm-margin-top sm-margin-bottom">
+              <span class="fiat-amount h1"></span>
+              <span class="js-currency h3"></span>
+            </div>
+            <div class="d1 digital js-18n" id="js-i18n-choose-digital-amount"></div>
+          </section>
+          <div class="d2 limit white"></div>
+        </section>
+        <section class="secondary-side qr-secondary-side nm-margin-top">
+          <button id="cash-out-button" class="circle-button h3 js-i18n">
+            <div class="inner-circle-button">
+              Cash<br/>Out
+            </div>
+          </div>
+        </section>
+      </section>
+      <footer id="js-fiat-buttons" class="cash-buttons">
+        <div class="cash-button action-button tl1" data-denomination-index="0">
+          <span class="plus">+</span> <span class="js-denomination"></span>
+        </div>
+        <div class="cash-button action-button tl1" data-denomination-index="1">
+          <span class="plus">+</span> <span class="js-denomination"></span>
+        </div>
+        <div class="cash-button action-button tl1" data-denomination-index="2">
+          <span class="plus">+</span> <span class="js-denomination"></span>
+        </div>
+        <div id="js-fiat-clear" class="cash-button clear js-i18n filled-action-button tl1">Clear</div>
+      </footer>
+    </section>
     <section id="completed_viewport" class="viewport completed_state column cash-in-color" data-tr-section="completed">
       <header></header>
       <section class="main">
@@ -235,8 +275,8 @@
                 <div class="key plus backspace-plus">+</div>
               </div>
             </section>
-            <section class="action-button-wrapper">
-              <div class="action-button enter tl2">Submit</button>
+            <section class="progress-button-wrapper">
+              <div class="progress-button enter tl2">Submit</button>
             </section>
           </section>
         </section>
@@ -353,8 +393,8 @@
                 </div>
               </div>
             </section>
-            <section class="action-button-wrapper">
-              <div class="action-button enter tl2">Submit</button>
+            <section class="progress-button-wrapper">
+              <div class="progress-button enter tl2">Submit</button>
             </section>
           </section>
         </section>
@@ -1310,33 +1350,6 @@
         <section class="bottom">
         </section>
       </section>
-    </section>
-    
-    <section class="viewport choose_fiat_state fiat-side" data-tr-section="choose-fiat">
-      <section class="cash-out-fade"></section>
-      <section class="instructions">
-        <h1 class="js-i18n">How much?</h1>
-        <h2 class="js-fiat-crypto-rate"></h2>
-        <section class="sums">
-          <div class="fiat"><strong class="fiat-amount"></strong> <span class="js-currency"/></div>
-          <div class="digital js-18n" id="js-i18n-choose-digital-amount"></div>
-        </section>
-      </section>
-      <span id="cash-out-button" class="circle-button js-i18n" style="display: none;">Cash out</span>
-      <div class="limit"></div>
-      <section id="js-fiat-buttons" class="cash-buttons">
-        <span class="cash-button" data-denomination-index="0">
-          <span class="plus">+</span> <span class="js-denomination"></span>
-        </span>
-        <span class="cash-button" data-denomination-index="1">
-          <span class="plus">+</span> <span class="js-denomination"></span>
-        </span>
-        <span class="cash-button" data-denomination-index="2">
-          <span class="plus">+</span> <span class="js-denomination"></span>
-        </span>
-        <span id="js-fiat-clear" class="cash-button clear js-i18n">Clear</span>
-      </section>
-      <section id="chooseFiatCancel" class="cancel"><img src="images/cancel.png" /></section>
     </section>
     
     <section class="viewport pending_deposit_state fiat-side" data-tr-section="pending-deposit">
