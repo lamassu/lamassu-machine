@@ -34,6 +34,7 @@ TODO:
 let clicker = null
 let screen = null
 var phoneKeypad = null
+var securityKeypad = null
 
 $(function () {
   $('body').css('cursor', 'default')
@@ -41,6 +42,12 @@ $(function () {
   setupFakes()
 
   phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
+    console.log('phoneNumber', result)
+  })
+
+  phoneKeypad.activate()
+
+  securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     console.log('phoneNumber', result)
   })
 
@@ -120,6 +127,27 @@ function setupFakes () {
   $('.deposit_state .digital .js-amount').html(34.479)
   $('.deposit_state .fiat .js-amount').text(320)
   $('.js-currency').text('EUR')
+
+  let states = [
+    $('.scan_photo_state'),
+    $('.scan_id_state'),
+    $('.security_code_state'),
+    $('.register_phone_state')
+  ]
+
+  states.forEach(it => {
+    setUpDirectionElement(it, 'cashOut')
+  })
+
+  function setUpDirectionElement (element, direction) {
+    if (direction === 'cashOut') {
+      element.removeClass('cash-in-color')
+      element.addClass('cash-out-color')
+    } else {
+      element.addClass('cash-in-color')
+      element.removeClass('cash-out-color')
+    }
+  }
 
   function updateCrypto (selector) {
     $(selector).find('.crypto-amount').html(amount)
