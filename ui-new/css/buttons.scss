@@ -1,6 +1,3 @@
-@import "./variables.scss";
-@import "./typography.scss";
-
 .circle-button {
   border: none;
   height: 40vh;
@@ -24,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 1vh 0 $border-color;
+  box-shadow: $shadow;
 }
 
 .cash-in-color .inner-circle-button {
@@ -66,8 +63,8 @@
 }
 
 .progress-button {
+  padding: 0 2vw;
   height: 8vh;
-  width: 10vw;
   background-color: $white;
   border-radius: 4vh;
   display: flex;
@@ -142,6 +139,18 @@
 .cash-out-color .filled-action-button:active {
   background-color: $white;
   color: $purple-grey;
+}
+
+.small-action-button {
+  border: none;
+  padding: 0 2.5vw;
+  height: 8vh;
+  min-width: 5vw;
+  background-color: #ffffff;
+  border-radius: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .key {
