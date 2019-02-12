@@ -65,6 +65,7 @@ var buttonActive = true
 var cassettes = null
 let currentCryptoCode = null
 let currentCoin = null
+let currentCoins = []
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -258,29 +259,102 @@ function blockedCustomer () {
 function chooseCoin (coins, twoWayMode) {
   if (twoWayMode) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
+    $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
+    $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
   }
 
   const defaultCoin = coins[0]
 
   currentCryptoCode = defaultCoin.cryptoCode
   currentCoin = defaultCoin
+  currentCoins = coins.slice(0)
 
   setCryptoBuy(defaultCoin)
   setCryptoSell(defaultCoin)
 
-  $('.crypto-buttons').empty()
-
-  if (coins.length > 1) {
-    coins.forEach(function (coin) {
-      const activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : ''
-      const el = `<div class="choose-coin-button coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-crypto-code="${coin.cryptoCode}">${coin.display}</div>`
-      $('.crypto-buttons').append(el)
-    })
-  }
+  setupCoinsButtons(coins, currentCryptoCode)
 
   setState('choose_coin')
+}
+
+function openLanguageDropdown () {
+  $('#language-dropdown-toggle').addClass('hide')
+  $('#languages').removeClass('hide')
+  $('#language-overlay').removeClass('hide')
+}
+
+function closeLanguageDropdown () {
+  $('#language-dropdown-toggle').removeClass('hide')
+  $('#languages').addClass('hide')
+  $('#language-overlay').addClass('hide')
+}
+
+function openCoinDropdown () {
+  $('#crypto-dropdown-toggle').addClass('hide')
+  $('#crypto-overlay').removeClass('hide')
+  $('#cryptos').removeClass('hide')
+}
+
+function closeCoinDropdown () {
+  $('#crypto-dropdown-toggle').removeClass('hide')
+  $('#crypto-overlay').addClass('hide')
+  $('#cryptos').addClass('hide')
+}
+
+function setupCoinsButtons () {
+  $('.crypto-buttons').empty()
+  closeCoinDropdown()
+
+  let coins = currentCoins.slice()
+  let dropdownCoins = []
+
+  if (coins.length === 1) return
+
+  const moreButton = coins.length > 4
+  if (moreButton) {
+    $('crypto-dropdown-toggle').removeClass('hide')
+    dropdownCoins = coins.slice(3)
+    coins = coins.slice(0, 3)
+  } else {
+    $('crypto-dropdown-toggle').addClass('hide')
+  }
+
+  coins.forEach(function (coin) {
+    const activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : ''
+    const el = `<div class="choose-coin-button h4 coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-crypto-code="${coin.cryptoCode}">
+      ${coin.display}
+      <span class="choose-coin-svg-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
+          <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
+        </svg>
+      </span>
+    </div>`
+    $('.crypto-buttons').append(el)
+  })
+  if (moreButton) {
+    $('.crypto-buttons').append(`
+      <div class="choose-coin-button h4" data-more="true">
+        <div id="crypto-dropdown-toggle" data-more="true">
+          More
+          <span class="choose-coin-svg-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
+              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
+            </svg>
+          </span>
+        </div>
+        <div id="cryptos" class="dropdown hide"></div>
+      </div>
+    `)
+    dropdownCoins.forEach(coin => {
+      const el = `<button class="h4 sapphire button small-action-button coin-${coin.cryptoCode.toLowerCase()}"
+        data-crypto-code="${coin.cryptoCode}">${coin.display}</button>`
+      $('#cryptos').append(el)
+    })
+    const el = `<button class="h4 sapphire button small-action-button" data-less="true">Less</button>`
+    $('#cryptos').append(el)
+  }
 }
 
 function setCryptoBuy (coin) {
@@ -320,6 +394,13 @@ function switchCoin (coin) {
     setTimeout(() => setCryptoSell(coin), 100)
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
+
+  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode)) 
+  if (currentCoins.length > 4 && selectedIndex > 2) {
+    currentCoins.splice(2, 0, currentCoins.splice(selectedIndex, 1)[0])
+  }
+
+  setupCoinsButtons()
 }
 
 $(document).ready(function () {
@@ -469,8 +550,42 @@ $(document).ready(function () {
     }, 300)
   })
 
+  const width = $('body').width()
+  const height = $('body').height()
+
+  function gcd (a, b) {
+    return (b === 0) ? a : gcd(b, a % b)
+  }
+
+  const w = width
+  const h = height
+  const r = gcd(w, h)
+  const aspectRatioPt1 = w / r
+  const aspectRatioPt2 = h / r
+
+  const aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
+  if (aspectRatio800) {
+    $('body').addClass('aspect-ratio-8-5')
+  } else {
+    $('body').addClass('aspect-ratio-16-9')
+  }
+
   $('.crypto-buttons').click(event => {
-    const el = $(event.target)
+    let el = $(event.target)
+    if (el.is('path') || el.is('svg') || el.is('span')) {
+      el = el.closest('div')
+    }
+
+    if (el.data('more')) {
+      openCoinDropdown()
+      return
+    }
+
+    if (el.data('less')) {
+      closeCoinDropdown()
+      return
+    }
+
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
     switchCoin(coin)
   })
@@ -481,7 +596,10 @@ $(document).ready(function () {
   var areYouSureContinue = document.getElementById('are-you-sure-continue-transaction')
   touchEvent(areYouSureContinue, () => buttonPressed('continueTransaction', previousState))
 
-  $('.coin-redeem-button').click(() => buttonPressed('redeem'))
+  $('.coin-redeem-button').click(() => {
+    setDirection('cashOut')
+    return buttonPressed('redeem')
+  })
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
@@ -492,7 +610,7 @@ $(document).ready(function () {
       setCryptoSell(currentCoin)
       return
     }
-    setState('select_locale')
+    openLanguageDropdown()
   })
 
   const cashInBox = $('.cash-in-box')
@@ -507,15 +625,31 @@ $(document).ready(function () {
 
   var lastTouch = null
 
+  var languageOverlay = document.getElementById('language-overlay')
+  touchEvent(languageOverlay, function (e) {
+    closeLanguageDropdown()
+  })
+
+  var cryptoOverlay = document.getElementById('crypto-overlay')
+  touchEvent(cryptoOverlay, function (e) {
+    closeCoinDropdown()
+  })
+
   var languageButtons = document.getElementById('languages')
   touchEvent(languageButtons, function (e) {
-    var languageButtonJ = $(e.target).closest('li')
+    var languageButtonJ = $(e.target).closest('button')
     if (languageButtonJ.length === 0) return
     var newLocale = languageButtonJ.attr('data-locale')
+
+    if (!newLocale) {
+      closeLanguageDropdown()
+      return
+    }
+
     setLocale(newLocale)
     setCryptoBuy(currentCoin)
     setCryptoSell(currentCoin)
-    setState('choose_coin')
+    closeLanguageDropdown()
   })
 
   var fiatButtons = document.getElementById('js-fiat-buttons')
@@ -855,7 +989,7 @@ function setPrimaryLocales (primaryLocales) {
   if (areArraysEqual(primaryLocales, _primaryLocales)) return
   _primaryLocales = primaryLocales
 
-  var languages = $('.languages')
+  var languages = $('#languages')
   languages.empty()
   var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function (a, b) {
     var langA = lookupLocaleNames(a)
@@ -863,16 +997,13 @@ function setPrimaryLocales (primaryLocales) {
     return langA.englishName.localeCompare(langB.englishName)
   })
 
+  languages.append(`<button class="square-button small-action-button tl2">Languages</button>`)
   for (var i = 0; i < sortedPrimaryLocales.length; i++) {
     var l = sortedPrimaryLocales[i]
     var lang = lookupLocaleNames(l)
-    var englishName = lang.englishName
-    var nativeName = lang.nativeName
-    var li = nativeName === englishName
-      ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
-      : '<li class="square-button" data-locale="' + l + '">' + nativeName +
-      '<span class="english">' + englishName + '</span> </li>'
-    languages.append(li)
+    var name = lang.nativeName || lang.englishName
+    var div = `<button class="square-button small-action-button tl2" data-locale="${l}">${name}</button>`
+    languages.append(div)
   }
 
   $('.js-menu-language').toggleClass('hide', sortedPrimaryLocales.length <= 1)

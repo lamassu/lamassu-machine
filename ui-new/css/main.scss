@@ -11,15 +11,22 @@ body {
   cursor: none;
 }
 
+.aspect-ratio-16-9 .only-8-5 {
+  display: none;
+}
+
+.aspect-ratio-8-5 .only-16-9 {
+  display: none;
+}
+
+
 #view {
-  height: 100%;
-  width: 100%
+  @include full-sized;
 }
 
 .viewport {
+  @include full-sized;
   flex: 1;
-  height: 100%;
-  width: 100%;
   display: none;
 }
 
@@ -28,9 +35,12 @@ body {
 }
 
 .main {
-  height: 100%;
-  width: 100%;
+  @include full-sized;
   display: flex;
+}
+
+.hide {
+  display: none;
 }
 
 // TODO this should be integrated with viewport
@@ -40,7 +50,7 @@ body {
 
 header {
   display: flex;
-  margin: 6vh;
+  padding: 6vh;
   justify-content: flex-end;
   min-height: 3vh;
 }
@@ -180,7 +190,7 @@ footer {
 .qr {
   width: 36vh;
   height: 36vh;
-  box-shadow: 0 0 1vh 0 $border-color;
+  box-shadow: $shadow;
 }
 
 .lightning-img {
@@ -211,6 +221,10 @@ footer {
 
 .no-margin-top {
   margin-top: 0;
+}
+
+.nm-margin-bottom {
+  margin-bottom: 4vh;
 }
 
 .sm-margin-bottom {
@@ -281,9 +295,154 @@ footer {
   margin-top: auto;
 }
 
+.choose-coin-cash-in .cash-out-box,
+.choose-coin-cash-in .cash-out-box-wrapper,
+.choose-coin-cash-in .coin-redeem,
+.choose-coin-cash-in .two-way-bg,
+.choose-coin-two-way .cash-in-bg
+{
+  display: none;
+}
+
+.cash-out-box, .cash-in-box {
+  margin: auto;
+}
+
+.choose_coin_state header, .choose_coin_state footer {
+  min-height: 8vh;
+  padding: 6vh;
+}
+
+#language-overlay, #crypto-overlay {
+  opacity: 0;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.dropdown button:first-child {
+  border-radius: 2vh 2vh 0 0;
+  z-index: 0;
+  position: relative;
+}
+
+.cash-in-color #languages button:first-child {
+  color: rgba($sapphire, 0.5);
+}
+
+.cash-out-color #languages button:first-child {
+  color: rgba($purple-grey, 0.5);
+}
+
+.dropdown button:last-child {
+  border-radius: 0 0 2vh 2vh;
+}
+
+.dropdown button {
+  align-items: flex-start;
+}
+
+.change-language {
+  width: 24vh;
+}
+
+.change-language #language-dropdown-toggle {
+  justify-content: flex-start;
+}
+
+.dropdown {
+  position: absolute;
+  width: inherit;
+  z-index: 10;
+  border-radius: 2vh;
+  box-shadow: $shadow;
+}
+
+#cryptos {
+  bottom: 5vh;
+  margin-left: -3vh;
+}
+
+#cryptos button:last-child {
+  color: rgba($sapphire, 0.5);
+}
+
+.reverse-dropdown {
+  position: absolute;
+  width: inherit;
+  z-index: 10;
+  border-radius: 2vh 2vh 0 0;
+}
+
+.dropdown button {
+  border-radius: 0;
+  width: 100%;
+  flex-direction: column;
+}
+
+.dropdown button div {
+  line-height: 1;
+}
+
+.dropdown button .english {
+  font-size: 2vh;
+}
+
+.coin-redeem {
+  margin-left: auto;
+}
+
+.crypto-buttons {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+}
+
+.crypto-buttons .choose-coin-button:first-child {
+  padding-left: 1vh;
+}
+
+.choose-coin-button {
+  padding: 0 4.5vh 0 4.5vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.choose-coin-cash-in .choose-coin-button {
+  color: $sapphire;
+}
+
+.choose-coin-button svg {
+  margin-top: -0.5vh;
+  opacity: 0;
+}
+
+.choose-coin-button-active svg {
+  opacity: 1;
+}
+
+.choose-coin-cash-in .choose-coin-button-active svg path {
+  stroke: $sapphire;
+}
+
+.choose-coin-svg-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.auto-margin {
+  margin: auto;
+}
+
 // TODO clean up after animation gets tested this is v0.1
 #bg-image {
-  position: absolute;
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
   z-index: -1;
 }
 

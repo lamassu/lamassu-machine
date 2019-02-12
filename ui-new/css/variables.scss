@@ -1,24 +1,54 @@
 /* Color palette */
 
-/* amazonite */
+// amazonite
 $amazonite: #37e8d7;
 $sapphire: #0e4160;
 $amazonite-two: #2cb9ac;
 
-/* salmon */
+$cashin-primary-color: $amazonite;
+$cashin-secondary-color: $sapphire;
+$cashin-alt-color: $amazonite-two;
+
+// salmon
 $salmon: #fe7f78;
 $purple-grey: #403c51;
 $salmon-two: #cb6560;
+
+$cashout-primary-color: $salmon;
+$cashout-secondary-color: $purple-grey;
+$cashout-alt-color: $salmon;
 
 // neutral
 $charcoal: #4a4a4a;
 $concrete: #f2f2f2;
 $white: #ffffff;
+$high-transparency-black: #00000014;
 
-$border-color: #00000014;
+$dark-color: $charcoal;
+$ligth-color: $concrete;
+$border-color: $high-transparency-black;
 
-// Typography
+
+/* Typography */
+
 $font-secondary: 'MuseoSans', sans-serif;
 $font-secondary-2: 'MuseoSans Bold', sans-serif;
 $font-primary: 'Mont Heavy', sans-serif;
 
+
+/* Useful Variables */
+
+$shadow: 0 0 1vh 0 $border-color;
+$spacer: 4vh;
+
+
+/* Mixins */
+@mixin centralize {
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin full-sized {
+  height: 100%;
+  width: 100%;
+}
