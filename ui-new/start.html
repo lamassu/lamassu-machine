@@ -173,7 +173,7 @@
       <section class="main">
         <section class="primary-side">
           <h2 class="js-i18n primary-side-title xs-margin-bottom">Send Coins</h2>
-          <p class="d1 no-margin-top js-i18n-please-scan"><p>
+          <p class="d1 no-margin-top js-i18n-please-scan"></p>
           <div class="fiat md-margin-top">
             <span class="js-amount h2"></span>
             <span class="js-currency h4"></span>
@@ -1096,34 +1096,6 @@
       </section>
     </section>
     
-    <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state digital-side" data-tr-section="withdraw_failure">
-      <section class="main">
-        <section class="deposit-summary">
-          <h1 class="thanks" class="js-i18n">We got this.</h1>
-          <p class="relax js-i18n">Our Internet was down for a bit but you'll receive your funds as soon as our connection is back.</p>
-          <div class="deposit-record">
-            <p>
-              <span class="total-crypto-rec total i18n-latin">
-              <span class="crypto-amount total-crypto amount i18n-latin"></span>
-              <span class="crypto-units i18n-latin"></span>
-              </span>
-              <br/>
-              <span class="js-i18n-total-purchased"></span>
-            </p>
-          </div>
-          <p><span class="js-i18n">Your coins will be sent to:</span><br/>
-          <span class="crypto-address"></span></p>
-        </section>
-        <section class="qr-section">
-          <div id="cash-in-fail-qr-code" class="qr-code"></div>
-          <p class="qr-caption" class="js-i18n">Take a photo of this screen</p>
-        </section>
-      </section>
-      <section class="bottom-bar">
-        <p class="current-crypto js-i18n">Tap anywhere when you're done.</p>
-      </section>
-    </section>
-    
     <section class="viewport trouble_state info" data-tr-section="trouble">
       <section class="main">
         <section class="top">
@@ -1572,6 +1544,41 @@
         </section>
         <section class="bottom"></section>
       </section>
+    </section>
+    <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state column cash-in-color" data-tr-section="withdraw_failure">
+      <header></header>
+      <section class="main">
+        <section class="primary-side">
+          <h2 class="js-i18n primary-side-title no-margin-top xs-margin-bottom">We got this</h2>
+          <p class="d2 no-margin-top">Our Internet was down for a bit but you'll receive your funds as soon as our connection is back.</p>
+          <p class="js-i18n d2 white xs-margin-bottom">You Purchased</p>
+          <div class="total-crypto-rec i18n-latin">
+            <span class="h3 crypto-amount i18n-latin"></span>
+            <span class="h4 crypto-units i18n-latin"></span>
+          </div>
+          <p class="js-i18n tl2 amount-deposited sm-margin-top">You deposited 230 euro TODO</p>
+          <p class="js-i18n d2 no-margin-bottom">Your coins are on their way to:</p>
+          <p class="m2 crypto-address"></p>
+        </section>
+        <section class="secondary-side qr-secondary-side">
+          <section class="qr-section">
+            <div class="qr-wrapper">
+              <div id="cash-in-fail-qr-code" class="qr"></div>
+            </div> 
+          </section>
+        </section>
+      </section>
+      <footer class="take-a-photo">
+        <!-- Optimized from images/camera.svg -->
+        <svg class="camera" xmlns="http://www.w4.org/2000/svg" width="55" height="42" viewBox="0 0 55 42">
+          <g fill="#0e4160" fill-rule="evenodd">
+            <path d="M27.5,34.375 C21.8075,34.375 17.1875,29.755 17.1875,24.0625 C17.1875,18.37 21.8075,13.75 27.5,13.75 C33.1925,13.75 37.8125,18.37 37.8125,24.0625 C37.8125,29.755 33.1925,34.375 27.5,34.375 M51.15,6.875 L41.25,6.875 L41.25,3.85 C41.25,1.725625 39.53125,0 37.4,0 L17.6,0 C15.46875,0 13.75,1.725625 13.75,3.85 L13.75,6.875 L3.85,6.875 C1.71875,6.875 0,8.600625 0,10.725 L0,37.4 C0,39.524375 1.71875,41.25 3.85,41.25 L51.15,41.25 C53.28125,41.25 55,39.524375 55,37.4 L55,10.725 C55,8.600625 53.28125,6.875 51.15,6.875"/>
+            <path d="M34.375,24.0625 C34.375,20.260625 31.301875,17.1875 27.5,17.1875 C23.698125,17.1875 20.625,20.260625 20.625,24.0625 C20.625,27.864375 23.698125,30.9375 27.5,30.9375 C31.301875,30.9375 34.375,27.864375 34.375,24.0625"/>
+          </g>
+        </svg>
+        <span class="h4 sapphire" class="js-i18n">Take a picture of this screen for your electronic receipt</span>
+        <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
+      </footer>
     </section>
     
     </section>
