@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
 'use strict'
 
 const queryString = window.location.search
@@ -11,6 +11,8 @@ const CASH_IN_QR_COLOR = '#0e4160'
 const SCROLL_SIZE = 270
 var textHeightQuantity = 0
 var currentPage = 0
+var aspectRatio800 = true
+var isTwoWay = null
 
 var fiatCode = null
 var locale = null
@@ -265,6 +267,9 @@ function chooseCoin (coins, twoWayMode) {
     $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
   }
 
+  isTwoWay = twoWayMode
+  setupAnimation(twoWayMode, aspectRatio800)
+
   const defaultCoin = coins[0]
 
   currentCryptoCode = defaultCoin.cryptoCode
@@ -312,8 +317,8 @@ function setupCoinsButtons () {
 
   if (coins.length === 1) return
 
-  const moreButton = coins.length > 4
-  if (moreButton) {
+  const showMoreButton = coins.length > 4
+  if (showMoreButton) {
     $('crypto-dropdown-toggle').removeClass('hide')
     dropdownCoins = coins.slice(3)
     coins = coins.slice(0, 3)
@@ -333,7 +338,7 @@ function setupCoinsButtons () {
     </div>`
     $('.crypto-buttons').append(el)
   })
-  if (moreButton) {
+  if (showMoreButton) {
     $('.crypto-buttons').append(`
       <div class="choose-coin-button h4" data-more="true">
         <div id="crypto-dropdown-toggle" data-more="true">
@@ -542,14 +547,6 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
-  $('#doAnimation').click(event => {
-    transitionOut()
-    setTimeout(() => {
-      cleanUpTransition()
-      setState('insert_bills')
-    }, 300)
-  })
-
   const width = $('body').width()
   const height = $('body').height()
 
@@ -563,7 +560,8 @@ $(document).ready(function () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  const aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
+  aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
+
   if (aspectRatio800) {
     $('body').addClass('aspect-ratio-8-5')
   } else {
@@ -615,7 +613,9 @@ $(document).ready(function () {
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
-    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'})
+    doTransition(
+      () => buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' })
+    )
   })
 
   const cashOutBox = $('.cash-out-box')
@@ -1190,10 +1190,12 @@ function setTx (tx) {
     $('.js-no-inserted-notes').show()
   }
 
-  qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
-  qrize(txId, $('#cash-in-fail-qr-code'))
-  qrize(txId, $('#qr-code-fiat-receipt'))
-  qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+  setTimeout(() => {
+    qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
+    qrize(txId, $('#cash-in-fail-qr-code'))
+    qrize(txId, $('#qr-code-fiat-receipt'))
+    qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+  }, 2000)
 }
 
 function formatAddress (address) {
@@ -1478,10 +1480,45 @@ function initDebug () {
   }
 }
 
-function transitionOut () {
-  $('#animate-me').addClass('animate-me')
+let background = null
+
+function doTransition (cb) {
+  // TODO transition for two way mode
+  let toShow = null
+  let toShowOver = null
+
+  if (isTwoWay) {
+    toShow = ['#bg-to-show']
+    toShowOver = ['.crypto-buttons', '.cash-in-box-wrapper']
+  } else {
+    toShow = ['#bg-to-show']//crypto-buttons']
+    toShowOver = ['header', '.main']
+  }
+
+  var tl = new TimelineMax()
+  tl.set('.fade-in-delay', { opacity: 0, y: +30 })
+    .set('.fade-in', { opacity: 0, y: +30 })
+    .set(toShow, { zIndex: 1 })
+    .set(toShowOver, { zIndex: 2 })
+    .to(background, 0.5, { scale: isTwoWay ? 3 : 2 })
+    .to('.fade-in', 0.4, {
+      opacity: 1,
+      onStart: cb,
+      y: 0
+    }, '=-0.2')
+    .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
+    .set(background, { scale: 1 })
+    .set(toShow, { zIndex: -1 })
+    .set(toShowOver, { zIndex: 0 })
 }
 
-function cleanUpTransition () {
-  $('#animate-me').removeClass('animate-me')
+function setupAnimation (isTwoWay, isAr800) {
+  var elem = document.getElementById('bg-to-show')
+  while (elem.firstChild) {
+    elem.removeChild(elem.firstChild)
+  }
+  var two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem)
+
+  background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
+  background.scale = 1
 }

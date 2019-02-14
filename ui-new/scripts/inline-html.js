@@ -18,6 +18,7 @@ let html = `<html>
 ${addPrefix(head, '  ')}
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
+    <div id="metrics" class="hide"></div>
     <section id="view">
 ${addPrefix(content, '    ')}
     </section>

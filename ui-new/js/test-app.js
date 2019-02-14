@@ -1,4 +1,4 @@
-/* globals $, Keypad */
+/* globals $, Keypad, TimelineMax, requestAnimationFrame, Two */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -35,11 +35,34 @@ let clicker = null
 let screen = null
 var phoneKeypad = null
 var securityKeypad = null
+let background = null
+let aspectRatio800 = true
 
 $(function () {
   $('body').css('cursor', 'default')
 
+  const width = $('body').width()
+  const height = $('body').height()
+
+  function gcd (a, b) {
+    return (b === 0) ? a : gcd(b, a % b)
+  }
+
+  const w = width
+  const h = height
+  const r = gcd(w, h)
+  const aspectRatioPt1 = w / r
+  const aspectRatioPt2 = h / r
+
+  aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
+
+  if (aspectRatio800) {
+    $('body').addClass('aspect-ratio-8-5')
+  } else {
+    $('body').addClass('aspect-ratio-16-9')
+  }
   setupFakes()
+  setupAnimation(false, aspectRatio800)
 
   phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
     console.log('phoneNumber', result)
@@ -51,7 +74,7 @@ $(function () {
     console.log('phoneNumber', result)
   })
 
-  phoneKeypad.activate()
+  securityKeypad.activate()
 
   var cList = document.createElement('div')
   cList.id = 'clicker-list'
@@ -82,18 +105,20 @@ $(function () {
 })
 
 function click (e) {
-  document.execCommand('copy')
-  if (screen) {
-    screen.classList.remove('viewport-active')
-    clicker.classList.remove('bgyellow')
-  }
+  setTimeout(() => {
+    document.execCommand('copy')
+    if (screen) {
+      screen.classList.remove('viewport-active')
+      clicker.classList.remove('bgyellow')
+    }
 
-  clicker = e.target
-  screen = Array.from(document.getElementsByClassName(e.target.getAttribute('original')))[0]
+    clicker = e.target
+    screen = Array.from(document.getElementsByClassName(e.target.getAttribute('original')))[0]
 
-  clicker.classList.add('bgyellow')
-  copyToClipboard(clicker)
-  screen.classList.add('viewport-active')
+    clicker.classList.add('bgyellow')
+    copyToClipboard(clicker)
+    screen.classList.add('viewport-active')
+  }, 0)
 }
 
 function copyToClipboard (element) {
@@ -198,20 +223,83 @@ function qrize (text, target, color, lightning) {
   const el = kjua(opts)
 
   target.empty().append(el)
+  let animationFinished = true
+  let then = 0
+  let lowest = 0
+  let highest = 0
+  let avg = 0
+  let frameNumber = 0
 
-  $('#doAnimation').click(event => {
-    transitionOut()
-    click({ target: $('clicker-insert_bills_state') })
-    setTimeout(() => {
-      cleanUpTransition()
-    }, 300)
-  })
+  $('.cash-in-box').click(doTransition)
 
-  function transitionOut () {
-    $('#animate-me').addClass('animate-me')
+  function doTransition () {
+    then = 0
+    lowest = 0
+    highest = 0
+    avg = 0
+    frameNumber = 0
+    animationFinished = false
+
+    requestAnimationFrame(render)
+    var tl = new TimelineMax({ onComplete: () => { animationFinished = true } })
+    const target = document.getElementById('clicker-insert_bills_state')
+    tl.set('.fade-in-delay', { opacity: 0, y: +30 })
+      .set('.fade-in', { opacity: 0, y: +30 })
+      .set('.crypto-buttons', { zIndex: -2 })
+      .to(background, 0.5, { scale: 2 })
+      .to('.fade-in', 0.4, {
+        opacity: 1,
+        onStart: click,
+        onStartParams: [{ target }],
+        y: 0
+      }, '=-0.2')
+      .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
+      .set(background, { scale: 1 })
+      .set('.crypto-buttons', { zIndex: 0 })
   }
 
-  function cleanUpTransition () {
-    $('#animate-me').removeClass('animate-me')
+  const metrics = document.querySelector('#metrics')
+  metrics.classList.remove('hide')
+
+  function render (now) {
+    const deltaTime = now - then
+
+    frameNumber++
+    if (then) {
+      if (!lowest || deltaTime < lowest) {
+        lowest = deltaTime
+      }
+
+      if (!highest || deltaTime > highest) {
+        highest = deltaTime
+      }
+
+      avg = (deltaTime + (avg * (frameNumber - 1))) / frameNumber
+    }
+
+    metrics.innerHTML = `
+frame: ${frameNumber} <br/>
+ms: ${deltaTime} <br/>
+lowest: ${lowest} <br/>
+highest: ${highest} <br/>
+avg: ${avg}
+    `
+
+    then = now
+    if (!animationFinished) {
+      requestAnimationFrame(render)
+    }
   }
+}
+
+function setupAnimation (isTwoWay, isAr800) {
+  var elem = document.getElementById('bg-to-show')
+  while (elem.firstChild) {
+    elem.removeChild(elem.firstChild)
+  }
+  var two = new Two({ fullscreen: true, type: Two.Types.webgl, autostart: true }).appendTo(elem)
+
+  console.log(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`)
+  background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
+  background.scale = 1
 }

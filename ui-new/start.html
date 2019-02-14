@@ -8,7 +8,9 @@
   
     <script>const PORT=8080</script>
     <script>const HOST='localhost'</script>
+    <script src="js/vendor/two.min.js"></script>
     <script src="js/assign-polyfill.js"></script>
+    <script src="js/vendor/TweenMax.min.js"></script>
     <script src="js/vendor/polyfill.min.js"></script>
     <script src="js/vendor/fastclick.min.js"></script>
     <script src="js/vendor/jquery-3.2.1.slim.min.js"></script>
@@ -28,6 +30,7 @@
   
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
+    <div id="metrics" class="hide"></div>
     <section id="view">
     <section class="viewport choose_coin_state column" data-tr-section="choose_coin">
       <header>
@@ -38,7 +41,7 @@
         </section>
       </header>
       <section class="main nm-margin-bottom">
-        <div class="cash-in-color auto-margin">
+        <div class="cash-in-box-wrapper cash-in-color auto-margin">
           <section class="crypto-button-box cash-in-box circle-button h3 sapphire">
             <div class="inner-circle-button">
               <div class="crypto-button-ball"></div>
@@ -67,34 +70,29 @@
       <!-- Globals -->
       <div id="language-overlay" class="hide button"></div>
       <div id="crypto-overlay" class="hide button"></div>
-      <svg id="bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" class="cash-in-bg only-8-5">
-        <style>.a{fill:#37E8D7;}</style>
-        <path id="animate-me" d="M0 0L1280 0 1280 800 1158.3 800C1026.1 721 876.6 679.4 709.6 675.4 430.9 668.7 173.6 621.3 0 463.2L0 0Z" class="a"/>
+      <svg id="one-way-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" class="cash-in-bg only-8-5 bg-image hide">
+        <path id="animate-me" d="M0 0L1280 0 1280 800 1158.3 800C1026.1 721 876.6 679.4 709.6 675.4 430.9 668.7 173.6 621.3 0 463.2L0 0Z" fill="#37E8D7"/>
       </svg>
-      <svg id="bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1081" class="cash-in-bg only-16-9">
-        <path fill="#37E8D7" fill-rule="evenodd" d="M4.54747351e-13,0 L1920,0 L1920,1080.47356 L1737.48939,1080.47356 C1539.2108,961.853152 1314.85648,899.537204 1064.4264,893.525721 C646.393558,883.490994 260.36953,812.350518 4.43104433e-12,575.134942 L4.54747351e-13,0 Z"/>
+      <svg id="one-way-1080" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="cash-in-bg only-16-9 bg-image hide">
+        <path d="M0 0L1920 0 1920 1080.5 1737.5 1080.5C1539.2 961.9 1314.9 899.5 1064.4 893.5 646.4 883.5 260.4 812.4 0 575.1L0 0Z" fill="#37E8D7"/>
       </svg>
-      <svg id="bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" class="two-way-bg only-8-5">
-        <g fill="none" fill-rule="evenodd">
-          <rect width="1280" height="800" fill="#37E8D7"/>
-          <g transform="translate(615)">
-            <path stroke="#FFF" stroke-width="10" d="M157.778138,-13.083558 L157.785239,813.090155 L149.059505,803.341309 C50.4601219,693.180924 -5,550.897939 -5,399.999499 C-5,249.145914 50.4141817,106.87319 149.052572,-3.33456478 L157.778138,-13.083558 Z"/>
-            <path fill="#FE7F78" d="M665,800.006681 L665,0 L152.77825,0 C57.6322632,106.486962 0,246.512862 0,399.999499 C0,553.673852 57.7733195,693.854523 152.785127,800.006681 L665,800.006681 Z"/>
-          </g>
-          <path fill="#37E8D7" fill-rule="nonzero" stroke="#FFF" stroke-width="10" d="M758.22049,3.27781859 C662.644319,113.371429 610,253.454676 610,399.999499 C610,546.799354 662.549377,686.676805 758.218167,796.719507 L765.417052,805 L-5,805 L-5,-5 L765.406759,-5 L758.22049,3.27781859 Z"/>
+      <svg id="two-way-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" class="two-way-bg only-8-5 bg-image hide">
+        <g fill="none"><rect width="1280" height="800" fill="#37E8D7"/>
+          <path d="M772.8-13.1L772.8 813.1 764.1 803.3C665.5 693.2 610 550.9 610 400 610 249.1 665.4 106.9 764.1-3.3L772.8-13.1Z" style="stroke-width:10;stroke:#FFF"/>
+          <path d="M1280 800L1280 0 767.8 0C672.6 106.5 615 246.5 615 400 615 553.7 672.8 693.9 767.8 800L1280 800Z" fill="#FE7F78"/>
+          <path d="M758.2 3.3C662.6 113.4 610 253.5 610 400 610 546.8 662.5 686.7 758.2 796.7L765.4 805 -5 805 -5-5 765.4-5 758.2 3.3Z" style="fill:#37E8D7;stroke-width:10;stroke:#FFF"/>
         </g>
       </svg>
-      <svg id="bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="two-way-bg only-16-9">
-        <g fill="none" fill-rule="evenodd">
-          <rect width="1920" height="1080" fill="#37E8D7"/>
-          <path fill="#37E8D7" fill-rule="nonzero" stroke="#FFF" stroke-width="15" d="M1117.35856,5.03216161 C983.116166,153.388625 907.5,345.7921 907.5,550 C907.5,745.045714 976.450656,929.43346 1099.99859,1075.14973 L1110.46997,1087.5 L-7.5,1087.5 L-7.5,-7.5 L1128.69846,-7.5 L1117.35856,5.03216161 Z"/>
-          <g transform="translate(900)">
-            <path stroke="#FFF" stroke-width="15" d="M188.557461,1084.85027 C62.7328261,936.448793 -7.5,748.63227 -7.5,550 C-7.5,342.036083 69.5217448,146.056149 206.236092,-5.03216161 L219.619877,-19.8230998 L201.4536,1100.06038 L188.557461,1084.85027 Z"/>
-            <path fill="#FE7F78" d="M0,550 C0,338.370636 80.1703513,145.466061 211.797328,0 L1020,0 L1020,1080 L194.278024,1080 C73.0912777,937.068589 0,752.069986 0,550 Z"/>
-          </g>
+      <svg id="two-way-1080" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" class="two-way-bg only-16-9 bg-image hide">
+        <g fill="none"><rect width="1920" height="1080" fill="#37E8D7"/>
+          <path d="M1117.4 5C983.1 153.4 907.5 345.8 907.5 550 907.5 745 976.5 929.4 1100 1075.1L1110.5 1087.5 -7.5 1087.5 -7.5-7.5 1128.7-7.5 1117.4 5Z" style="fill:#37E8D7;stroke-width:20;stroke:#FFF"/>
+          <path d="M1088.6 1084.9C962.7 936.4 892.5 748.6 892.5 550 892.5 342 969.5 146.1 1106.2-5L1119.6-19.8 1101.5 1100.1 1088.6 1084.9Z" style="stroke-width:20;stroke:#FFF"/>
+          <path d="M900 550C900 338.4 980.2 145.5 1111.8 0L1920 0 1920 1080 1094.3 1080C973.1 937.1 900 752.1 900 550Z" fill="#FE7F78"/>
         </g>
       </svg>
-    </section><section class="viewport choose_fiat_state column cash-out-color" data-tr-section="choose-fiat">
+      <div id="bg-to-show" class="bg-image"></div>
+    </section>
+    <section class="viewport choose_fiat_state column cash-out-color" data-tr-section="choose-fiat">
       <header>
         <p class="d2 white crypto-rate"></p>
         <div id="chooseFiatCancel">
@@ -286,12 +284,69 @@
           <p class="d2 js-i18n-coins-to-address coins-to-address"></p>
           <p class="m2 crypto-address"></p>
         </section>
-        <section class="secondary-side with-image fade-in delay">
+        <section class="secondary-side with-image fade-in-delay">
           <div class="insert-bill-wrapper"><img src="images/insert-bill.svg"/></div>
         </section>
       </section>
     </section>
-    <section class="viewport register_phone_state column" data-tr-section="register-phone">
+    <section class="viewport insert_more_bills_state column cash-in-color" data-tr-section="insert-more-bills">
+      <header>
+        <p class="d2 white crypto-rate fade-in"></p>
+        <!-- <div id="insertBillCancel" class="delay">
+          <img class="cancel-button" src="images/close-icon.svg"/>
+        </div> -->
+      </header>
+      <section class="main">
+    
+        <div class="blocked-customer-top">
+          <div class="blocked-customer-top-inner">In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit.</div>
+        </div>
+    
+        <section id="send-side">
+          <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
+          <div id="send-coins" class="send-coins circle-button js-send-crypto-enable">
+            <span class="js-i18n js-send-crypto-enable">SEND COINS</span>
+          </div>
+          <div class="send-coins circle-button js-send-crypto-disable">
+            <div class="js-send-crypto-disable spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+            </div>
+          </div>
+        </section>
+        <svg class="or-circle-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
+          <circle class="or-circle" cx="680" cy="180" r="30" />
+        </svg>
+        <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
+    
+        <section id="deposit-side">
+          <section id="limit-reached-section">
+            <p id="js-i18n-limit-reached"></p>
+            <p id="js-i18n-limit-description"></p>
+          </section>
+          <p id="insert-another" class="js-i18n">Insert another bill</p>
+          <div class="deposit-record">
+            <p>
+              <span class="total">
+                <span class="total-deposit amount"></span>
+              </span><br/>
+              <span class="js-i18n">deposited so far</span>
+            </p>
+            <p>
+              <span class="total-crypto-rec total">
+                <span class="crypto-amount total-crypto amount i18n-latin"></span>
+                <span class="crypto-units i18n-latin"></span>
+              </span><br/>
+              <span class="js-i18n-total-purchased"></span>
+            </p>
+          </div>
+        </section>
+      </section>
+      <section class="bottom-bar">
+        <p class="feedback"><span class="js-processing-bill"></span></p>
+      </section>
+    </section><section class="viewport register_phone_state column" data-tr-section="register-phone">
       <header>
         <div id="phone-number-cancel" class="delay">
           <img class="cancel-button" src="images/close-icon.svg"/>
@@ -350,18 +405,18 @@
     <section class="viewport scan_address_state column" data-tr-section="scan-address">
       <header>
         <p class="d2 white crypto-rate fade-in"></p>
-        <div id="scanCancel">
+        <div id="scanCancel" class="fade-in-delay">
           <img class="cancel-button" src="images/close-icon.svg"/>
         </div>
       </header>
       <section class="main xl-margin-top">
-        <section class="primary-side">
+        <section class="primary-side fade-in">
           <h2 class="js-i18n primary-side-title xs-margin-bottom js-i18n-scan-your-address"></h2>
           <p class="d1 no-margin-top js-i18n">
             Hold your QR code up to the scan window to proceed
           </p>
         </section>
-        <section class="secondary-side">
+        <section class="secondary-side fade-in-delay">
           <img class="scan-image" src="images/scan-BTC-address.svg"/>
         </section>
       </section>
@@ -1001,59 +1056,6 @@
         </section>
         <section class="bottom">
         </section>
-      </section>
-    </section>
-    
-    <section class="viewport insert_more_bills_state digital-side" data-tr-section="insert-more-bills">
-      <section class="main">
-    
-        <div class="blocked-customer-top">
-          <div class="blocked-customer-top-inner">In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit.</div>
-        </div>
-    
-        <section id="send-side">
-          <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
-          <div id="send-coins" class="send-coins circle-button js-send-crypto-enable">
-            <span class="js-i18n js-send-crypto-enable">SEND COINS</span>
-          </div>
-          <div class="send-coins circle-button js-send-crypto-disable">
-            <div class="js-send-crypto-disable spinner">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
-            </div>
-          </div>
-        </section>
-        <svg class="or-circle-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <circle class="or-circle" cx="680" cy="180" r="30" />
-        </svg>
-        <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
-    
-        <section id="deposit-side">
-          <section id="limit-reached-section">
-            <p id="js-i18n-limit-reached"></p>
-            <p id="js-i18n-limit-description"></p>
-          </section>
-          <p id="insert-another" class="js-i18n">Insert another bill</p>
-          <div class="deposit-record">
-            <p>
-              <span class="total">
-                <span class="total-deposit amount"></span>
-              </span><br/>
-              <span class="js-i18n">deposited so far</span>
-            </p>
-            <p>
-              <span class="total-crypto-rec total">
-                <span class="crypto-amount total-crypto amount i18n-latin"></span>
-                <span class="crypto-units i18n-latin"></span>
-              </span><br/>
-              <span class="js-i18n-total-purchased"></span>
-            </p>
-          </div>
-        </section>
-      </section>
-      <section class="bottom-bar">
-        <p class="feedback"><span class="js-processing-bill"></span></p>
       </section>
     </section>
     
