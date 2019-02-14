@@ -1192,7 +1192,7 @@ function setTx (tx) {
 
   setTimeout(() => {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
-    qrize(txId, $('#cash-in-fail-qr-code'))
+    qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-receipt'))
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
   }, 2000)
@@ -1410,7 +1410,7 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
-  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_IN_QR_COLOR)
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
 }
 
 function deposit (tx) {

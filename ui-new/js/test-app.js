@@ -194,7 +194,7 @@ function setupFakes () {
   const CASH_OUT_QR_COLOR = '#403c51'
 
   qrize(address, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
-  qrize(address, $('#cash-in-fail-qr-code'))
+  qrize(address, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
   qrize(address, $('#qr-code-fiat-receipt'))
   qrize(address, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
   qrize(address, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
