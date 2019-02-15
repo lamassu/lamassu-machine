@@ -504,7 +504,7 @@ $(document).ready(function () {
   setupImmediateButton('depositCancel', 'depositCancel')
 
   setupButton('initialize', 'initialize')
-  setupButton('test-mode', 'testMode')
+  // setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingErrorOk')
@@ -524,6 +524,7 @@ $(document).ready(function () {
   setupButton('photo-scan-failed-retry', 'retryPhotoScan')
   setupButton('photo-scan-failed-cancel', 'cancelIdScan')
   setupButton('photo-verification-failed-ok', 'cancelIdScan')
+  setupButton('invalid-address-try-again', 'invalidAddressTryAgain')
 
   setupButton('sanctions-failure-ok', 'idle')
   setupButton('limit-reached-ok', 'idle')
@@ -816,7 +817,12 @@ function setDirection (direction) {
     $('.scan_id_state'),
     $('.security_code_state'),
     $('.register_phone_state'),
-    $('.terms_screen_state')
+    $('.terms_screen_state'),
+    $('.verifying_photo_state'),
+    $('.verifying_id_state'),
+    $('.sending_coins_state'),
+    $('.sms_verification_state'),
+    $('.bad_phone_number_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1204,13 +1210,20 @@ function setTx (tx) {
   }, 2000)
 }
 
-function formatAddress (address) {
+function formatAddressNoBreakLines (address) {
   if (!address) return
-  const withSpace = address.replace(/(.{4})/g, '$1 ')
-  return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
+  return address.replace(/(.{4})/g, '$1 ')
+}
+
+function formatAddress (address) {
+  let toBr = formatAddressNoBreakLines(address)
+  if (!toBr) return
+
+  return toBr.replace(/((.{4} ){5})/g, '$1<br/> ')
 }
 
 function setBuyerAddress (address) {
+  $('.crypto-address-no-br').html(formatAddressNoBreakLines(address))
   $('.crypto-address').html(formatAddress(address))
 }
 
@@ -1226,7 +1239,7 @@ function setAccepting (currentAccepting) {
 function highBill (highestBill, reason) {
   var reasonText = reason === 'transactionLimit'
     ? locale.translate('Transaction limit reached.').fetch()
-    : locale.translate("We're a little low.").fetch()
+    : locale.translate("We're a little low on crypto.").fetch()
 
   t('high-bill-header', reasonText)
   t('highest-bill', locale.translate('Please insert %s or less.')

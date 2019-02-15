@@ -25,14 +25,35 @@
     <script src="js/vendor/langmap.js"></script>
     <script src="js/url-search-params.js"></script>
     <script src="../node_modules/bignumber.js/bignumber.min.js"></script>
-    <script src="js/test-app.js"></script>
+    <script src="js/app.js"></script>
   </head>
   
   <body>
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
     <div id="metrics" class="hide"></div>
     <section id="view">
-    <section class="viewport choose_coin_state column" data-tr-section="choose_coin">
+    <section class="viewport bad_phone_number_state info column" data-tr-section="bad-phone-number">
+      <header>
+        <img src="images/invalid-address.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n xs-margin-bottom">Try again</h3>
+        <div class="text-content">
+          <p class="js-i18n d2">
+            The phone number you entered didn't work. If you have <br/>
+            an international number, please prefix it with + and your <br/>
+            country's calling code.
+          </p>
+          <p class="js-i18n tl2">
+            For instance, Belgium's calling code is +32, so a Belgian <br/>
+            number would look like: +32 455 12 34 56
+          </p>
+        </div>
+      </section>
+      <footer>
+        <span class="filled-progress-button button js-i18n" id="bad-phone-number-ok">Try again</span>
+      </footer>
+    </section><section class="viewport choose_coin_state column" data-tr-section="choose_coin">
       <header>
         <section class="change-language js-menu-language hide cash-out-color">
           <div id="language-dropdown-toggle" class="multiple-language js-multi-language small-action-button tl2">Languages</div>
@@ -269,7 +290,15 @@
     <section class="viewport goodbye_state cash-in-color" data-tr-section="goodbye">
       <h1 id="cya" class="js-i18n">See you!</h1>
     </section>
-    <section class="viewport insert_bills_state column cash-in-color" data-tr-section="insert-bills">
+    <section class="viewport high_bill_state no-action-info column cash-in-color" data-tr-section="high-bill">
+      <header>
+        <img src="images/little-low.svg"/>
+      </header>
+      <section class="main">
+        <h2 id="js-i18n-high-bill-header" class="nm-margin-bottom"></h2>
+        <p id="js-i18n-highest-bill" class="d1 no-margin-top"></p>
+      </section>
+    </section><section class="viewport insert_bills_state column cash-in-color" data-tr-section="insert-bills">
       <header>
         <p class="d2 white crypto-rate fade-in"></p>
         <div id="insertBillCancel" class="delay">
@@ -344,6 +373,35 @@
     
       <footer>
         <p class="js-processing-bill d1"></p>
+      </footer>
+    </section><section class="viewport invalid_address_state info column cash-in-color" data-tr-section="invalid-address">
+      <header>
+        <img src="images/invalid-address.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
+        <div class="text-content sm-margin-top">
+          <p class="js-i18n d2">
+            It looks like you're using a wallet for a different coin<br/>
+            or an address format we don't yet support.
+          </p>
+          <p class="js-i18n tl2">Please check your QR code and try again.</p>
+        </div>
+      </section>
+      <footer>
+        <button id="invalid-address-try-again" class="filled-progress-button button js-i18n">Try again</button>
+      </footer>
+    </section>
+    <section class="viewport limit_reached_state info column cash-in-color" data-tr-section="limit-reached">
+      <header>
+        <img src="images/out-of-coins.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n sm-margin-bottom">We're all out of coins!</h3>
+        <p class="js-i18n d2">Please try again later.</p>
+      </section>
+      <footer>
+        <span id="limit-reached-ok" display="inline-block" class="filled-progress-button button ok js-i18n">OK</span>
       </footer>
     </section><section class="viewport register_phone_state column" data-tr-section="register-phone">
       <header>
@@ -522,6 +580,35 @@
           </section>
         </section>
       </section>
+    </section>
+    <section class="viewport sending_coins_state column info" data-tr-section="sending-coins">
+      <header></header>
+      <section class="main">
+        <h2 class="js-i18n sm-margin-bottom">Sending your coins…</h2>
+        <p class="js-i18n d2">Your coins are on their way to:</p>
+        <p class="crypto-address-no-br m2"></p>
+      </section>
+    </section>
+    <section class="viewport sms_verification_state info column" data-tr-section="sms-verification">
+      <header>
+        <img src="images/out-of-coins.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n xs-margin-bottom">ID verification</h3>
+        <div class="text-content">
+          <p class="js-i18n d2">
+            If you'd like to make a larger purchase we need to ask <br/>
+            for your mobile phone number. We'll then send you <br/>
+            an SMS code.
+          </p>
+          <p class="js-i18n tl2">Would you like to insert more bills?</p>
+        </div>
+      </section>
+      <footer>
+        <button class="filled-progress-button button js-i18n sms-start-verification">Yes, verify ID</button>
+        <button class="bordered-progress-button button js-i18n js-inserted-notes send-coins-sms">No, send coins</button>
+        <button class="bordered-progress-button button js-i18n js-no-inserted-notes send-coins-sms">No, cancel</button>
+      </footer>
     </section>
     <section id="wifi-viewport" class="viewport wifi_state" data-tr-section="wifi">
       <section class="main">
@@ -711,24 +798,6 @@
       </section>
     </section>
     
-    <section class="viewport bad_phone_number_state fiat-side" data-tr-section="bad-phone-number">
-      <section class="info">
-        <h1 class="js-i18n">Try Again</h1>
-        <section class="description long">
-          <p class="js-i18n">
-          The phone number you entered didn't work. If you have an international
-          number, please prefix it with <strong>+</strong> and your country's calling code.</p>
-          <p class="js-i18n">
-          For instance, Belgium's calling code is +32, so a Belgian number would look like:
-          +32 455 12 34 56
-          </p>
-        </section>
-        <section class="actions">
-          <span class="button js-i18n" id="bad-phone-number-ok">Try Again</span>
-        </section>
-      </section>
-    </section>
-    
     <section class="viewport unknown_phone_number_state fiat-side" data-tr-section="unknown-phone-number">
       <section class="info">
         <h1 class="js-i18n">All set</h1>
@@ -860,57 +929,6 @@
         </section>
         <section class="actions">
           <span class="button js-i18n" id="redeem-later-ok">OK</span>
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport verifying_id_state info" data-tr-section="verifying-id">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Verifying identity…</h1>
-              <div class="loader"><img src="images/loading.gif"/></div>
-              <p>
-              <strong class="js-i18n">Just making sure you're you.</strong><br/>
-              <span class="js-i18n">This could take a few seconds.</span>
-              </p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport verifying_photo_state info" data-tr-section="verifying-photo">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Verifying photo card…</h1>
-              <div class="loader"><img src="images/loading.gif" /></div>
-              <p>
-              <strong class="js-i18n">Just making sure you're you.</strong><br/>
-              <span class="js-i18n">This could take a few seconds.</span>
-              </p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport verifying_photo_state info" data-tr-section="verifying-photo">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Verifying photo card…</h1>
-              <div class="loader"><img src="images/loading.gif" /></div>
-              <p>
-              <strong class="js-i18n">Just making sure you're you.</strong><br/>
-              <span class="js-i18n">This could take a few seconds.</span>
-              </p>
-          </section>
-        </section>
-        <section class="bottom">
         </section>
       </section>
     </section>
@@ -1050,18 +1068,6 @@
       </section>
     </section>
     
-    <section class="viewport invalid_address_state info" data-tr-section="invalid-address">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 id="invalid-address">It looks like you're using a wallet for a different coin, or an address format we don't yet support.<br>Please check your QR code and try again.</h1>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
     <section class="viewport blocked_customer_state digital-side" data-tr-section="blocked-customer">
     
       <section class="main">
@@ -1076,26 +1082,6 @@
     
       <section class="bottom-bar">
         <p class="feedback"><span class="js-processing-bill"></span></p>
-      </section>
-    </section>
-    
-    <section class="viewport sms_verification_state fiat-side cash-in-style" data-tr-section="sms-verification">
-      <section class="info">
-        <h1 class="js-i18n">ID Verification</h1>
-        <section class="description">
-          <p class="js-i18n">
-            If you'd like to make a larger purchase, we'll need to make sure you're you by asking
-            for your mobile phone number. We'll then send you an SMS code.
-          </p>
-          <p>
-            <strong class="js-i18n">Would you like to insert more bills?</strong>
-          </p>
-        </section>
-        <section class="actions">
-          <span class="button wide js-i18n sms-start-verification">Yes, verify ID</span>
-          <span class="button wide js-i18n js-inserted-notes send-coins-sms">No, send coins</span>
-          <span class="button wide js-i18n js-no-inserted-notes send-coins-sms">No, cancel</span>
-        </section>
       </section>
     </section>
     
@@ -1180,22 +1166,6 @@
       </section>
     </section>
     
-    <section class="viewport limit_reached_state info" data-tr-section="limit-reached">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-              <h1 class="js-i18n">We're all out of coins!</h1>
-              <p><strong class="js-i18n">Please ask for assistance.</strong></p>
-              <div class="actions">
-              <span id="limit-reached-ok" display="inline-block" class="button ok js-i18n">OK</span>
-              </div>
-    
-          </section>
-        </section>
-        <section class="bottom"></section>
-      </section>
-    </section>
-    
     <section class="viewport hard_limit_reached_state info" data-tr-section="hard-limit-reached">
       <section class="main">
         <section class="top">
@@ -1208,19 +1178,6 @@
           </section>
         </section>
         <section class="bottom"></section>
-      </section>
-    </section>
-    
-    <section class="viewport high_bill_state info" data-tr-section="high-bill">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 id="js-i18n-high-bill-header"></h1>
-            <p><strong id="js-i18n-highest-bill"></strong></p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
       </section>
     </section>
     
@@ -1254,24 +1211,6 @@
       </section>
     </section>
     
-    <section class="viewport sending_coins_state info" data-tr-section="sending-coins">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Sending coins…</h1>
-              <div class="loader"><img src="images/loading.gif" /></div>
-              <p>
-              <strong class="js-i18n">Your coins are on their way to:</strong><br/>
-              <span class="crypto-address"></span>
-              </span>
-              </p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
     <section class="viewport wifi_failed_state info" data-tr-section="wifi-failed">
       <section class="main">
         <section class="top">
@@ -1283,27 +1222,6 @@
               </p>
               <div class="actions">
               <span display="inline-block" class="button js-i18n">TRY AGAIN</span>
-              </div>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport virgin_state info" data-tr-section="virgin">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1>Congratulations!</h1>
-              <p class="important">Welcome to your new Lamassu Cryptomat.</p>
-              <p>
-              Press <strong>INIT</strong> to generate a secure cryptographic certificate for your machine.<br />
-              This could take about fifteen minutes.
-              </p>
-              <div class="actions">
-              <span id="initialize" display="inline-block" class="button">INIT</span>
-              <span id="test-mode" display="inline-block" class="button">TEST</span>
               </div>
           </section>
         </section>
@@ -1540,6 +1458,39 @@
       <footer>
         <button class="button js-i18n filled-progress-button js-terms-accept-button" id="terms-ok">I agree</button>
         <button class="button js-i18n bordered-progress-button js-terms-cancel-button" id="terms-ko">Cancel</button>
+      </footer>
+    </section>
+    <section class="viewport verifying_id_state info column" data-tr-section="verifying-id">
+      <header></header>
+      <section class="main">
+        <h2 class="js-i18n no-margin-bottom">Verifying identity…</h2>
+        <p class="js-i18n d1">This could take a few seconds.</p>
+      </section>
+    </section>
+    
+    <section class="viewport verifying_photo_state info column" data-tr-section="verifying-photo">
+      <header></header>
+      <section class="main">
+        <h2 class="js-i18n no-margin-bottom">Verifying photo card…</h2>
+        <p class="js-i18n d1">This could take a few seconds.</p>
+      </section>
+    </section><section class="viewport virgin_state info column cash-in-color neutral-color" data-tr-section="virgin">
+      <header>
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="sapphire no-margin-bottom">Congratulations!</h3>
+        <p class="d2">Welcome to your new Lamassu Cryptomat.</p>
+        <div class="text-content">
+          <p class="tl2 no-margin-top">
+            Press initialize to generate a secure cryptographic certificate
+            <br/>
+            for your machine. This could take about fifteen minutes.
+          </p>
+        </div>
+      </section>
+      <footer>
+        <button id="initialize" class="button filled-progress-button">Initialize</span>
       </footer>
     </section>
     <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state column cash-in-color" data-tr-section="withdraw_failure">

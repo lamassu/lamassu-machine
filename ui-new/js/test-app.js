@@ -141,10 +141,11 @@ function setupFakes () {
   $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(address))
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.crypto-address').html(formatAddress(address))
+  $('.crypto-address-no-br').html(formatAddressNoBreakLines(address))
   $('#fiat-inserted').html('per <span class="integer">1</span> EUR inserted')
   $('.js-i18n-fixed-fee').html('Transaction Fee: <span class="integer">1</span><span>.</span><span class="decimal">00</span> EUR')
   $('.insert_bills_state .bottom-bar .current-crypto').text('Lamassu Cryptomat')
-  $('#js-i18n-high-bill-header').text("We're a little low")
+  $('#js-i18n-high-bill-header').text('We\'re a little low on crypto.')
   $('#js-i18n-highest-bill').html(`Please insert <span class="integer">10</span> EUR or less.`)
   $('.js-i18n-did-send-coins').html('Have you sent the BTC yet?')
   $('.js-i18n-lowest-bill').html('Please insert <span class="integer">10</span> EUR or more.')
@@ -163,7 +164,13 @@ function setupFakes () {
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
-    $('.register_phone_state')
+    $('.register_phone_state'),
+    $('.terms_screen_state'),
+    $('.verifying_photo_state'),
+    $('.verifying_id_state'),
+    $('.sending_coins_state'),
+    $('.sms_verification_state'),
+    $('.bad_phone_number_state')
   ]
 
   states.forEach(it => {
@@ -189,9 +196,16 @@ function setupFakes () {
     updateCrypto(it)
   })
 
+  function formatAddressNoBreakLines (address) {
+    if (!address) return
+    return address.replace(/(.{4})/g, '$1 ')
+  }
+
   function formatAddress (address) {
-    const withSpace = address.replace(/(.{4})/g, '$1 ')
-    return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
+    let toBr = formatAddressNoBreakLines(address)
+    if (!toBr) return
+
+    return toBr.replace(/((.{4} ){5})/g, '$1<br/> ')
   }
 
   const CASH_IN_QR_COLOR = '#0e4160'

@@ -525,6 +525,65 @@ footer {
   }
 }
 
+.info {
+  text-align: center;
+  header {
+    padding: 0;
+    height: 37vh;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .main {
+    height: auto;
+    min-height: 37vh;
+    align-items: center;
+    flex-direction: column;
+    .text-content {
+      text-align: left;
+      .tl2 {
+        line-height: 1.4;
+      }
+      p {
+        margin: 1vh 0;
+      }
+    }
+  }
+  footer {
+    justify-content: center;
+    button {
+      margin: 0 3vh;
+    }
+  }
+}
+
+.no-action-info {
+  @extend .info;
+  .main {
+    margin-top: 2vh;
+  }
+  header {
+    height: 40vh;
+  }
+}
+
+.high_bill_state, .limit_reached_state, .invalid_address_state {
+  img {
+    width: 24vh;
+  }
+}
+
+.invalid_address_state {
+  img {
+    width: 22vh;
+  }
+}
+
+.sms_verification_state {
+  .main {
+    text-align: left;
+  }
+}
+
 #metrics {
   font-size: 3vh;
   position: absolute;
