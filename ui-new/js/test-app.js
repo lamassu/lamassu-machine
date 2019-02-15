@@ -155,6 +155,8 @@ function setupFakes () {
   $('.js-currency').text('EUR')
   $('.js-i18n-scan-your-address').html('Scan your <br/> BTC address')
   $('.js-processing-bill').text('Vous avez introduit un billet de 50 USD')
+  $('.js-terms-title').text('Disclaimer')
+  $('.js-terms-text').text(`Once cryptocurrency is transferred to any party, it cannot be reversed, cancelled, or refunded. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control.`)
 
   let states = [
     $('.scan_address_state'),
