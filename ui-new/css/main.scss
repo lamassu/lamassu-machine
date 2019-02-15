@@ -440,6 +440,25 @@ footer {
   z-index: -1;
 }
 
+.insert_more_bills_state footer {
+  height: 39vh;
+  margin-left: 15vh;
+}
+
+.insert_more_bills_state .secondary-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.or {
+  position: absolute;
+  margin-left: 4vh;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
 #metrics {
   font-size: 3vh;
   position: absolute;

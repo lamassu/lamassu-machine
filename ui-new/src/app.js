@@ -1035,7 +1035,7 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var cryptoDisplayCode = coin.displayCode
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
   $('.amount-deposited').html(`You deposited ${fiat} ${fiatCode}`)
-  $('.total-deposit').html(formatFiat(fiat))
+  $('.fiat .js-amount').html(fiat)
 
   var inserted = lastBill
     ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
@@ -1281,8 +1281,6 @@ function t (id, str) {
 }
 
 function translateCoin (cryptoCode) {
-  $('.js-i18n-total-purchased').html(locale.translate('total %s purchased').fetch(cryptoCode))
-
   $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode))
   $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode))
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))

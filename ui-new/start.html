@@ -58,7 +58,7 @@
           </section>
         </div>
       </section>
-      <footer class="choose-coin-buttons">
+      <footer>
         <section class="crypto-buttons"></section>
         <section id="coin-redeem" class="coin-redeem cash-out-color">
           <div class="coin-redeem-button progress-button tl2">
@@ -292,19 +292,44 @@
     <section class="viewport insert_more_bills_state column cash-in-color" data-tr-section="insert-more-bills">
       <header>
         <p class="d2 white crypto-rate fade-in"></p>
-        <!-- <div id="insertBillCancel" class="delay">
-          <img class="cancel-button" src="images/close-icon.svg"/>
-        </div> -->
       </header>
       <section class="main">
     
-        <div class="blocked-customer-top">
+        <!-- <div class="blocked-customer-top">
           <div class="blocked-customer-top-inner">In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit.</div>
-        </div>
+        </div> -->
+          <!-- <section id="limit-reached-section">
+            <p id="js-i18n-limit-reached"></p>
+            <p id="js-i18n-limit-description"></p>
+          </section> -->
+        <section class="primary-side">
+          <h5 id="insert-another" class="js-i18n primary-side-title">Insert another bill</h5>
+          <div class="total md-margin-top">
+            <div class="fiat">
+              <span class="js-amount h2"></span>
+              <span class="js-currency h4"></span>
+            </div>
+          </div>
+          <p class="js-i18n d2 no-margin-top">deposited so far</p>
+          <div class="total-crypto-rec total sm-margin-top">
+            <span class="crypto-amount i18n-latin h2"></span>
+            <span class="crypto-units i18n-latin h4"></span>
+          </div>
+          <p class="js-i18n d2 no-margin-top">total purchased</p>
+        </section>
     
-        <section id="send-side">
-          <p id="tap-complete" class="js-i18n">Tap to complete purchase</p>
-          <div id="send-coins" class="send-coins circle-button js-send-crypto-enable">
+        <h3 class="or"><span id="js-i18n-or" class="js-i18n sapphire">OR</span></h3>
+    
+        <section class="secondary-side">
+          <h5 class="js-i18n primary-side-title">Finished?</h5>
+          <div id="send-coins" class="send-coins cash-in-color auto-margin js-send-crypto-enable">
+            <section class="circle-button h3 purple-grey js-send-crypto-enable">
+              <div class="inner-circle-button js-i18n js-send-crypto-enable">
+                Send<br/>Coins
+              </div>
+            </section>
+          </div>
+          <!-- <div id="send-coins" class="send-coins circle-button js-send-crypto-enable">
             <span class="js-i18n js-send-crypto-enable">SEND COINS</span>
           </div>
           <div class="send-coins circle-button js-send-crypto-disable">
@@ -313,39 +338,13 @@
               <div class="bounce2"></div>
               <div class="bounce3"></div>
             </div>
-          </div>
+          </div> -->
         </section>
-        <svg class="or-circle-svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <circle class="or-circle" cx="680" cy="180" r="30" />
-        </svg>
-        <div class="or"><span id="js-i18n-or" class="js-i18n">OR</span></div>
+      </section>
     
-        <section id="deposit-side">
-          <section id="limit-reached-section">
-            <p id="js-i18n-limit-reached"></p>
-            <p id="js-i18n-limit-description"></p>
-          </section>
-          <p id="insert-another" class="js-i18n">Insert another bill</p>
-          <div class="deposit-record">
-            <p>
-              <span class="total">
-                <span class="total-deposit amount"></span>
-              </span><br/>
-              <span class="js-i18n">deposited so far</span>
-            </p>
-            <p>
-              <span class="total-crypto-rec total">
-                <span class="crypto-amount total-crypto amount i18n-latin"></span>
-                <span class="crypto-units i18n-latin"></span>
-              </span><br/>
-              <span class="js-i18n-total-purchased"></span>
-            </p>
-          </div>
-        </section>
-      </section>
-      <section class="bottom-bar">
-        <p class="feedback"><span class="js-processing-bill"></span></p>
-      </section>
+      <footer>
+        <p class="js-processing-bill d1"></p>
+      </footer>
     </section><section class="viewport register_phone_state column" data-tr-section="register-phone">
       <header>
         <div id="phone-number-cancel" class="delay">

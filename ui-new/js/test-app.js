@@ -148,11 +148,13 @@ function setupFakes () {
   $('#js-i18n-highest-bill').html(`Please insert <span class="integer">10</span> EUR or less.`)
   $('.js-i18n-did-send-coins').html('Have you sent the BTC yet?')
   $('.js-i18n-lowest-bill').html('Please insert <span class="integer">10</span> EUR or more.')
+  $('.js-i18n-total-purchased').html('total purchased')
   $('.js-crypto-display-units').text('mBTC')
   $('.deposit_state .digital .js-amount').html(34.479)
   $('.deposit_state .fiat .js-amount').text(320)
   $('.js-currency').text('EUR')
   $('.js-i18n-scan-your-address').html('Scan your <br/> BTC address')
+  $('.js-processing-bill').text('Vous avez introduit un billet de 50 USD')
 
   let states = [
     $('.scan_address_state'),
