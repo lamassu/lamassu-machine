@@ -68,6 +68,10 @@ footer {
   background-color: $amazonite;
 }
 
+.neutral-color {
+  background-color: $concrete;
+}
+
 .cash-out-color {
   background-color: $salmon;
 }
@@ -509,6 +513,16 @@ footer {
   left: 0;
   right: 0;
   text-align: center;
+}
+
+.restart_state {
+  .main {
+    align-content: center;
+    justify-content: center;
+  }
+  .img {
+    width: 44vw;
+  }
 }
 
 #metrics {
