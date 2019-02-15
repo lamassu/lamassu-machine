@@ -1,14 +1,128 @@
-.circle-button {
+@mixin button {
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin pill-button {
+  @include button;
+  padding: 0 2vw;
+  height: 8vh;
+  border-radius: 4vh;
+}
+
+@mixin round-button {
+  @include button;
+  width: 9vh;
+  height: 9vh;
+  border-radius: 5vh;
+}
+
+@mixin cash-colors {
+  .cash-in-color & {
+    color: $sapphire;
+  }
+
+  .cash-out-color & {
+    color: $purple-grey;
+  }
+}
+
+@mixin cash-background-colors {
+  .cash-in-color & {
+    background-color: $sapphire;
+  }
+
+  .cash-out-color & {
+    background-color: $purple-grey;
+  }
+}
+
+@mixin cash-disabled-background-colors {
+  .cash-in-color & {
+    background-color: $amazonite-two;
+  }
+
+  .cash-out-color & {
+    background-color: $salmon-two;
+  }
+}
+
+@mixin cash-transparent-background-colors {
+  .cash-in-color & {
+    background-color: $amazonite;
+  }
+
+  .cash-out-color & {
+    background-color: $salmon;
+  }
+}
+
+@mixin cash-borders {
+  .cash-in-color & {
+    border: 0.3vh solid $sapphire;
+  }
+
+  .cash-out-color & {
+    border: 0.3vh solid $purple-grey;
+  }
+}
+
+.round-progress-button {
+  @include Tagline-2;
+  @include round-button;
+  @include cash-background-colors;
+  &:active {
+    @include cash-background-colors;
+    color: $white;
+  }
+  &:disabled {
+    @include cash-disabled-background-colors;
+  }
+}
+
+.progress-button {
+  @include Tagline-2;
+  @include cash-colors;
+  @include pill-button;
+  background-color: $white;
+  &:active {
+    @include cash-background-colors;
+    color: $white;
+  }
+}
+
+.filled-progress-button {
+  @include Tagline-2;
+  @include pill-button;
+  @include cash-background-colors;
+  color: $white;
+  &:active {
+    background-color: $white;
+    @include cash-colors;
+  }
+}
+
+.bordered-progress-button {
+  @include Tagline-2;
+  @include pill-button;
+  @include cash-borders;
+  @include cash-transparent-background-colors;
+  @include cash-colors;
+  &:active {
+    border-color: transparent;
+  }
+}
+
+.circle-button {
+  @include button;
   height: 40vh;
   width: 40vh;
   border-radius: 40vh;
   line-height: 6vh;
   background-color: $white;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .inner-circle-button {
@@ -60,34 +174,6 @@
 .cash-out-color .circle-button:disabled {
   background-color: $salmon-two;
   color: $salmon;
-}
-
-.progress-button {
-  padding: 0 2vw;
-  height: 8vh;
-  background-color: $white;
-  border-radius: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cash-in-color .progress-button {
-  color: $sapphire;
-}
-
-.cash-out-color .progress-button {
-  color: $purple-grey;
-}
-
-.cash-in-color .progress-button:active {
-  background-color: $sapphire;
-  color: $white;
-}
-
-.cash-out-color .progress-button:active {
-  background-color: $purple-grey;
-  color: $white;
 }
 
 .action-button {

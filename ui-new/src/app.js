@@ -11,6 +11,7 @@ const CASH_IN_QR_COLOR = '#0e4160'
 const SCROLL_SIZE = 270
 var textHeightQuantity = 0
 var currentPage = 0
+var totalPages = 0
 var aspectRatio800 = true
 var isTwoWay = null
 
@@ -814,7 +815,8 @@ function setDirection (direction) {
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
-    $('.register_phone_state')
+    $('.register_phone_state'),
+    $('.terms_screen_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -831,7 +833,7 @@ function setDirection (direction) {
  * @param {String} data.cancel
  */
 function setTermsScreen (data) {
-  const $screen = $('.js-terms-screen')
+  const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-title').html(data.title)
   startPage(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
@@ -844,22 +846,34 @@ function scrollUp () {
   if (currentPage !== 0) {
     currentPage -= 1
     updateButtonStyles()
+    updatePageCounter()
     div.scrollTo(0, currentPage * SCROLL_SIZE)
   }
 }
 
 // start page
 function startPage (text) {
-  const $screen = $('.js-terms-screen')
+  const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-text').html(text)
+  currentPage = 0
+  totalPages = 0
+  console.log('start')
   updateButtonStyles()
   setTimeout(function () {
-    const div = document.getElementById('js-terms-text-div').offsetHeight
-    textHeightQuantity = document.getElementById('js-terms-text').childNodes[0].offsetHeight
-    if (textHeightQuantity <= div) {
+    const div = document.getElementById('js-terms-text-div')
+    textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
+    if (textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
+    } else {
+      div.scrollTo(0, 0)
+      totalPages = Math.ceil(textHeightQuantity / SCROLL_SIZE)
+      updatePageCounter()
     }
   })
+}
+
+function updatePageCounter () {
+  document.getElementById('terms-page-counter').textContent = `${currentPage + 1}/${totalPages}`
 }
 
 // click page up button
@@ -868,6 +882,7 @@ function scrollDown () {
   if (!(currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0)) {
     currentPage += 1
     updateButtonStyles()
+    updatePageCounter()
     div.scrollTo(0, currentPage * SCROLL_SIZE)
   }
 }
@@ -877,25 +892,16 @@ function updateButtonStyles () {
   const buttonDown = document.getElementById('scroll-down')
   const buttonUp = document.getElementById('scroll-up')
   if (currentPage === 0) {
-    makeButtonDisabled(buttonUp)
+    buttonUp.disabled = true
   } else {
-    makeButtonEnabled(buttonUp)
+    buttonUp.disabled = false
   }
 
   if (currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0) {
-    makeButtonDisabled(buttonDown)
+    buttonDown.disabled = true
   } else {
-    makeButtonEnabled(buttonDown)
+    buttonDown.disabled = false
   }
-}
-
-function makeButtonDisabled (button) {
-  button.style.backgroundColor = '#eeeee3'
-  button.style.color = 'white'
-}
-function makeButtonEnabled (button) {
-  button.style.backgroundColor = '#D0D0C8'
-  button.style.color = 'black'
 }
 
 function moreNetworks () {

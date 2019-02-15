@@ -451,6 +451,58 @@ footer {
   align-items: center;
 }
 
+.terms_screen_state header {
+  justify-content: center;
+}
+
+.terms_screen_state footer {
+  justify-content: center;
+  height: 58vh;
+  margin-top: 8vh;
+}
+
+.terms_screen_state .main {
+  justify-content: center;
+}
+
+.terms_screen_state button {
+  margin: 0 3vh;
+}
+
+.js-terms-text-div {
+  width: 60vw;
+  margin-left: 8vh;
+  overflow: hidden;
+}
+
+.js-terms-text p {
+  margin-top: 0;
+}
+
+#actions-scroll {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 8vh;
+  margin-left: 6vh;
+  margin-top: 6vh;
+  p {
+    margin: 4vh 0;
+  }
+}
+
+.up-arrow-svg, .down-arrow-svg {
+  fill: $white;
+}
+
+.cash-in-color .round-progress-button:disabled .up-arrow-svg, .cash-in-color .round-progress-button:disabled .down-arrow-svg {
+  fill: $amazonite;
+}
+
+.cash-out-color .round-progress-button:disabled .up-arrow-svg, .cash-out-color .round-progress-button:disabled .down-arrow-svg {
+  fill: $salmon;
+}
+
 .or {
   position: absolute;
   margin-left: 4vh;
