@@ -1,0 +1,201 @@
+<section class="viewport unknown_phone_number_state fiat-side" data-tr-section="unknown-phone-number">
+  <section class="info">
+    <h1 class="js-i18n">All set</h1>
+    <section class="description long">
+      <p class="js-i18n">We don't see any open orders associated with your phone. If you have another
+      phone you may have used, you can try redeeming again with that number.</p>
+      <p class="js-i18n">If you're sure you have an open order associated with this phone, please
+      contact the operator.</p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="unknown-phone-number-ok">OK</span>
+    </section>
+  </section>
+</section>
+
+<section class="viewport fiat_error_state fiat-side" data-tr-section="fiat-error">
+  <section class="info">
+    <h1 class="js-i18n">Oops!</h1>
+    <section class="description">
+      <p class="js-i18n">We're having some difficulties.</p>
+      <p><strong class="js-i18n">Please contact the operator.</strong></p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="fiat-error-ok">OK</span>
+    </section>
+  </section>
+</section>
+
+<section class="viewport fiat_transaction_error_state fiat-side" data-tr-section="fiat-transaction-error">
+  <section class="info">
+    <h1 class="js-i18n">Oops!</h1>
+    <section class="description">
+      <p class="js-i18n">We're having some difficulties.</p>
+      <p><strong class="js-i18n">Please snap a photo of your receipt.</strong></p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="fiat-transaction-error-ok">Show Receipt</span>
+    </section>
+  </section>
+</section>
+
+<section class="viewport pre_receipt_state fiat-side" data-tr-section="pre-receipt">
+  <section class="info">
+    <h1 class="js-i18n">What next?</h1>
+    <section class="description long">
+      <p class="js-i18n">
+      We weren't able to verify your phone number, so we may not be able
+      to contact you when your cash is ready.
+      <p class="js-i18n">
+      Please snap a photo of the <strong>next screen</strong> for your electronic receipt,
+      then contact the operator.
+      </p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="pre-receipt-ok">Show Receipt</span>
+    </section>
+  </section>
+</section>
+
+<section class="viewport redeem_later_state fiat-side" data-tr-section="redeem-later">
+  <section class="info">
+    <h1 class="js-i18n">Thank You!</h1>
+    <section class="description long">
+      <p class="js-i18n">
+      We're waiting for your deposit to confirm on the blockchain.
+      <p class="js-i18n">
+      You will soon receive a text message
+      notifying you that your transaction has confirmed.
+      When that happens, please come back to this machine and press the <strong>Redeem</strong> button.
+      </p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="redeem-later-ok">OK</span>
+    </section>
+  </section>
+</section>
+
+<section class="viewport id_scan_failed_state info" data-tr-section="id-scan-failed">
+  <section class="main">
+    <section class="top">
+      <section class="content">
+        <h1 class="js-i18n">Sorry.</h1>
+        <p>
+          <span class="js-i18n">We could not read your ID card.</span><br/>
+          <span class="js-i18n">Please contact the operator for more information.</span>
+        </p>
+        <div class="actions">
+          <span id="id-scan-failed-ok" class="button js-i18n">OK</span>
+        </div>
+      </section>
+    </section>
+    <section class="bottom">
+    </section>
+  </section>
+</section>
+
+<section class="viewport sanctions_failure_state info" data-tr-section="sanctions-failure">
+  <section class="main">
+    <section class="top">
+      <section class="content">
+        <h1 class="js-i18n">Sorry.</h1>
+        <p>
+          <span class="js-i18n">We are unable to process your transaction.</span><br/>
+          <span class="js-i18n">Please contact the operator for more information.</span>
+        </p>
+        <div class="actions">
+          <span id="sanctions-failure-ok" class="button js-i18n">OK</span>
+        </div>
+      </section>
+    </section>
+    <section class="bottom">
+    </section>
+  </section>
+</section>
+
+<section class="viewport id_verification_error_state info" data-tr-section="id-verification-error">
+  <section class="main">
+    <section class="top">
+      <section class="content">
+        <h1 class="js-i18n">It's us, not you.</h1>
+        <p>
+          <strong class="js-i18n">Our system experienced an error.</strong><br/>
+          <span class="js-i18n">Please feel free to try again, or contact the operator.</span>
+        </p>
+        <div class="actions">
+          <span id="id-verification-error-ok" class="button js-i18n">OK</span>
+        </div>
+      </section>
+    </section>
+    <section class="bottom">
+    </section>
+  </section>
+</section>
+
+<section id="locked-viewport" class="viewport locked_state info" data-tr-section="locked">
+  <section class="main">
+    <section class="top">
+      <section class="content">
+        <h1 class="js-i18n">This machine is locked</h1>
+          <p><strong class="js-i18n">Please ask for assistance.</strong></p>
+      </section>
+    </section>
+    <section class="bottom">
+    </section>
+  </section>
+</section>
+
+<section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">
+  <section class="instructions">
+    <h1 class="js-i18n">Your Receipt</h1>
+    <section class="sums">
+      <div class="digital">
+        <div class="amount"><strong class="js-amount"></strong> <span class="js-crypto-display-units"></span></div>
+        <div class="js-i18n">were sent by you</div>
+      </div>
+      <div class="fiat">
+        <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
+        <div class="js-i18n">pending confirmation</div>
+      </div>
+    </section>
+    <div class="sent-coins">
+      <span class="js-i18n">Your coins were sent to:</span><br/>
+      <span class="crypto-address"></span>
+    </div>
+  </section>
+
+  <section class="qr-section">
+    <div class="qr-code-fiat-receipt" id="qr-code-fiat-receipt"></div>
+    <div class="send-notice-section">
+      <img class="camera" src="images/camera.png" />
+      <div class="send-notice js-i18n">Take a photo of the screen for your electronic receipt.</div>
+    </div>
+  </section>
+</section>
+
+<section class="viewport deposit_network_down_state fiat-side" data-tr-section="deposit-network-down">
+  <section class="info">
+    <h1 class="js-i18n">Network Down</h1>
+    <section class="description">
+      <p class="js-i18n">Sorry, we're down for the moment. Please come back later.</p>
+    </section>
+    <section class="actions">
+      <div class="actions">
+        <span id="network-down-ok" display="inline-block" class="button ok js-i18n">OK</span>
+      </div>
+    </section>
+  </section>
+</section>
+
+<section class="viewport wrong_dispenser_currency_state fiat-side" data-tr-section="wrong-dispenser-currency">
+  <section class="info">
+    <h1 class="js-i18n">Oops!</h1>
+    <section class="description">
+      <p class="js-i18n">This machine does not handle the currency you requested.</p>
+      <p class="js-i18n">Please cash out at a machine that handles your currency.</p>
+    </section>
+    <section class="actions">
+      <span class="button js-i18n" id="wrong-dispenser-currency-ok">OK</span>
+    </section>
+  </section>
+</section>

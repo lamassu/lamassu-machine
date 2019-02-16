@@ -1,0 +1,119 @@
+<section class="viewport booting_state column no-action-info cash-in-color neutral-color" data-tr-section="booting">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h2 class="js-i18n sapphire no-margin-bottom">Booting up...</h2>
+    <p class="js-i18n d1">Initializing hardware.</p>
+    <p class="js-i18n d1 no-margin-top"><strong>We'll be up in a moment.</strong></p>
+  </section>
+</section>
+
+<section class="viewport initializing_state column no-action-info cash-in-color neutral-color" data-tr-section="initializing">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h2 class="js-i18n sapphire no-margin-bottom">Initializing...</h2>
+    <p class="js-i18n d1">Generating cryptographic identity.</p>
+    <p class="js-i18n d1 no-margin-top"><strong>Please wait a few minutes.</strong></p>
+  </section>
+</section>
+
+<section class="viewport connecting_state column no-action-info cash-in-color neutral-color" data-tr-section="connecting">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h2 class="js-i18n sapphire">Connecting...</h2>
+  </section>
+</section>
+
+<section class="viewport pairing_state no-action-info column cash-in-color neutral-color" data-tr-section="pairing">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h2 class="js-i18n sapphire">Pairing...</h2>
+  </section>
+</section>
+
+<section class="viewport unpaired_state info column cash-in-color neutral-color" data-tr-section="unpaired">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h3 class="js-i18n sapphire no-margin-bottom">Pair with remote server</h3>
+    <p class="d2">
+      Press <strong>SCAN</strong> and preset the machine with the pairing
+      <br/>
+      QR code from your remote server.
+    </p>
+    <p class="tl2 no-margin-top">
+      IMPORTANT: Keep the machine secure until you have
+      <br/>
+      successfully paired with your remote server.
+    </p>
+  </section>
+  <footer>
+    <button id="pairing-scan" class="filled-progress-button button js-i18n">Scan</button>
+  </footer>
+</section>
+
+<section class="viewport pairing_error_state info column cash-in-color neutral-color" data-tr-section="pairing-error">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h3 class="js-i18n sapphire no-margin-bottom">Pairing failed</h3>
+    <p class="js-i18n d2">When attempting to pair, we experienced an error:</p>
+    <div class="js-pairing-error error m2"></div>
+  </section>
+  <footer>
+    <button id="pairing-error-ok" class="filled-progress-button button js-i18n">Try again</button>
+  </footer>
+</section>
+
+<section class="viewport pairing_scan_state info column cash-in-color neutral-color" data-tr-section="pairing-scan">
+  <header>
+    <!-- TODO correct SVG -->
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h3 class="js-i18n sapphire no-margin-bottom">Pair with remote server</h3>
+    <p class="js-i18n d2">
+      Please scan the pairing QR code you got from
+      <br/>
+      your remote server.
+    </p>
+  </section>
+  <footer>
+    <button id="pairing-scan-cancel" class="filled-progress-button button js-i18n">Cancel</button>
+  </footer>
+</section>
+
+<section class="viewport virgin_state info column cash-in-color neutral-color" data-tr-section="virgin">
+  <header>
+    <img src="images/lamassu-logo.svg"/>
+  </header>
+  <section class="main">
+    <h3 class="sapphire no-margin-bottom">Congratulations!</h3>
+    <p class="d2">Welcome to your new Lamassu Cryptomat.</p>
+    <div class="text-content">
+      <p class="tl2 no-margin-top">
+        Press initialize to generate a secure cryptographic certificate
+        <br/>
+        for your machine. This could take about fifteen minutes.
+      </p>
+    </div>
+  </section>
+  <footer>
+    <button id="initialize" class="button filled-progress-button">Initialize</span>
+  </footer>
+</section>

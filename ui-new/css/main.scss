@@ -527,6 +527,7 @@ footer {
 
 .info {
   text-align: center;
+  align-items: center;
   header {
     padding: 0;
     height: 37vh;
@@ -534,15 +535,13 @@ footer {
     align-items: flex-end;
   }
   .main {
+    max-width: 60%;
     height: auto;
     min-height: 37vh;
     align-items: center;
     flex-direction: column;
     .text-content {
       text-align: left;
-      .tl2 {
-        line-height: 1.4;
-      }
       p {
         margin: 1vh 0;
       }
@@ -553,6 +552,9 @@ footer {
     button {
       margin: 0 3vh;
     }
+  }
+  .tl2 {
+    line-height: 1.4;
   }
 }
 
@@ -602,6 +604,13 @@ footer {
   .main {
     text-align: left;
   }
+}
+
+.error {
+  padding: 2vh;
+  width: 60%;
+  background-color: $white;
+  margin-bottom: 4vh;
 }
 
 #metrics {
