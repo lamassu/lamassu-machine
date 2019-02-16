@@ -32,6 +32,25 @@
     <img id="bolt-img" src="images/bolt-o.png" style="display:none">
     <div id="metrics" class="hide"></div>
     <section id="view">
+    <!-- TODO missing nuno design -->
+    <!-- This deviates from the standard by using a h2 as title-->
+    
+    <section class="viewport are_you_sure_state info-no-image column cash-out-color" data-tr-section="are-you-sure">
+      <header></header>
+      <section class="main">
+        <h2 class="js-i18n">Are You Sure?</h2>
+        <div class="text-content">
+          <p class="js-i18n d2">If you've already sent coins and cancel without confirming your phone number, 
+            you'll need to manually settle the transaction with the operator. <p>
+          <p class="js-i18n tl2"> Press 'Continue transaction' and wait up to 60 seconds for your deposit to be seen.</p>
+          <p class="js-i18n tl2"> Or press 'Cancel transaction' to return to the home screen.</p>
+        </div>
+      </section>
+      <footer>
+        <button class="filled-progress-button button js-i18n are-you-sure-button" id="are-you-sure-continue-transaction">Continue Transaction</button>
+        <button class="bordered-progress-button button js-i18n are-you-sure-button" id="are-you-sure-cancel-transaction">Cancel Transaction</button>
+      </footer>
+    </section>
     <section class="viewport bad_phone_number_state info column" data-tr-section="bad-phone-number">
       <header>
         <!-- TODO correct SVG -->
@@ -1064,46 +1083,6 @@
       </section>
     </section>
     
-    <section class="viewport booting_state info" data-tr-section="booting">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="sorry js-i18n">Booting up...</h1>
-              <p><span class="js-i18n">Initializing hardware.</span><br/>
-            <strong><span class="js-i18n">We'll be up in a moment.</span></strong></p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport initializing_state info" data-tr-section="initializing">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="sorry">Initializing...</h1>
-              <p><span>Generating cryptographic identity</span><br/>
-            <strong><span></span>Please wait</strong> a few minutes</p>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport connecting_state info" data-tr-section="connecting">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="sorry js-i18n">Connecting...</h1>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
     <section id="locked-viewport" class="viewport locked_state info" data-tr-section="locked">
       <section class="main">
         <section class="top">
@@ -1173,69 +1152,6 @@
               </p>
               <div class="actions">
               <span display="inline-block" class="button js-i18n">TRY AGAIN</span>
-              </div>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport unpaired_state info" data-tr-section="unpaired">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Pair with remote server</h1>
-              <p class="js-i18n">Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server.</p>
-              <p class="important js-i18n"><strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server.</p>
-              <div class="actions">
-              <span id="pairing-scan" display="inline-block" class="button js-i18n">SCAN</span>
-              </div>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport pairing_scan_state info" data-tr-section="pairing-scan">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Pair with remote server</h1>
-              <p class="js-i18n">Please scan the pairing QR code you got from your remote server.</p>
-              <div class="actions">
-              <span id="pairing-scan-cancel" display="inline-block" class="button js-i18n">CANCEL</span>
-              </div>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport pairing_state info" data-tr-section="pairing">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Pairing...</h1>
-          </section>
-        </section>
-        <section class="bottom">
-        </section>
-      </section>
-    </section>
-    
-    <section class="viewport pairing_error_state info" data-tr-section="pairing-error">
-      <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Pair with remote server</h1>
-              <p class="js-i18n">When attempting to pair, we experienced an error:</p>
-              <p class="js-pairing-error error">
-              </p>
-              <div class="actions">
-              <span id="pairing-error-ok" display="inline-block" class="button js-i18n">OK</span>
               </div>
           </section>
         </section>
@@ -1360,26 +1276,124 @@
         </section>
       </section>
     </section>
-    
-    <section class="viewport are_you_sure_state info" data-tr-section="are-you-sure">
+    <section class="viewport booting_state column no-action-info cash-in-color neutral-color" data-tr-section="booting">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
       <section class="main">
-        <section class="top">
-          <section class="content">
-            <h1 class="js-i18n">Are You Sure?</h1>
-            <section class="description long">
-              <p class="js-i18n">If you've already sent coins and cancel without confirming your phone number, 
-                you'll need to manually settle the transaction with the operator. <p>
-              <p class="js-i18n"> Press <strong>'Continue transaction'</strong> and wait up to 60 seconds for your deposit to be seen.</p>
-              <p class="js-i18n"> Or press <strong>'Cancel transaction'</strong> to return to the home screen.</p>
-            </section>
-            <section class="actions">
-              <div class="button js-i18n are-you-sure-button" id="are-you-sure-continue-transaction">Continue Transaction</div>
-              <div class="button js-i18n are-you-sure-button" id="are-you-sure-cancel-transaction">Cancel Transaction</div>
-            </section>
-          </section>
-        </section>
-        <section class="bottom"></section>
+        <h2 class="js-i18n sapphire no-margin-bottom">Booting up...</h2>
+        <p class="js-i18n d1">Initializing hardware.</p>
+        <p class="js-i18n d1 no-margin-top"><strong>We'll be up in a moment.</strong></p>
       </section>
+    </section>
+    
+    <section class="viewport initializing_state column no-action-info cash-in-color neutral-color" data-tr-section="initializing">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h2 class="js-i18n sapphire no-margin-bottom">Initializing...</h2>
+        <p class="js-i18n d1">Generating cryptographic identity.</p>
+        <p class="js-i18n d1 no-margin-top"><strong>Please wait a few minutes.</strong></p>
+      </section>
+    </section>
+    
+    <section class="viewport connecting_state column no-action-info cash-in-color neutral-color" data-tr-section="connecting">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h2 class="js-i18n sapphire">Connecting...</h2>
+      </section>
+    </section>
+    
+    <section class="viewport pairing_state no-action-info column cash-in-color neutral-color" data-tr-section="pairing">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h2 class="js-i18n sapphire">Pairing...</h2>
+      </section>
+    </section>
+    
+    <section class="viewport unpaired_state info column cash-in-color neutral-color" data-tr-section="unpaired">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n sapphire no-margin-bottom">Pair with remote server</h3>
+        <p class="d2">
+          Press <strong>SCAN</strong> and preset the machine with the pairing
+          <br/>
+          QR code from your remote server.
+        </p>
+        <p class="tl2 no-margin-top">
+          IMPORTANT: Keep the machine secure until you have
+          <br/>
+          successfully paired with your remote server.
+        </p>
+      </section>
+      <footer>
+        <button id="pairing-scan" class="filled-progress-button button js-i18n">Scan</button>
+      </footer>
+    </section>
+    
+    <section class="viewport pairing_error_state info column cash-in-color neutral-color" data-tr-section="pairing-error">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n sapphire no-margin-bottom">Pairing failed</h3>
+        <p class="js-i18n d2">When attempting to pair, we experienced an error:</p>
+        <div class="js-pairing-error error m2"></div>
+      </section>
+      <footer>
+        <button id="pairing-error-ok" class="filled-progress-button button js-i18n">Try again</button>
+      </footer>
+    </section>
+    
+    <section class="viewport pairing_scan_state info column cash-in-color neutral-color" data-tr-section="pairing-scan">
+      <header>
+        <!-- TODO correct SVG -->
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="js-i18n sapphire no-margin-bottom">Pair with remote server</h3>
+        <p class="js-i18n d2">
+          Please scan the pairing QR code you got from
+          <br/>
+          your remote server.
+        </p>
+      </section>
+      <footer>
+        <button id="pairing-scan-cancel" class="filled-progress-button button js-i18n">Cancel</button>
+      </footer>
+    </section>
+    
+    <section class="viewport virgin_state info column cash-in-color neutral-color" data-tr-section="virgin">
+      <header>
+        <img src="images/lamassu-logo.svg"/>
+      </header>
+      <section class="main">
+        <h3 class="sapphire no-margin-bottom">Congratulations!</h3>
+        <p class="d2">Welcome to your new Lamassu Cryptomat.</p>
+        <div class="text-content">
+          <p class="tl2 no-margin-top">
+            Press initialize to generate a secure cryptographic certificate
+            <br/>
+            for your machine. This could take about fifteen minutes.
+          </p>
+        </div>
+      </section>
+      <footer>
+        <button id="initialize" class="button filled-progress-button">Initialize</span>
+      </footer>
     </section>
     <section class="viewport column terms_screen_state" data-tr-section="terms">
       <header class="md-margin-top">
@@ -1473,26 +1487,7 @@
         <h2 class="js-i18n no-margin-bottom">Verifying photo card…</h2>
         <p class="js-i18n d1">This could take a few seconds.</p>
       </section>
-    </section><section class="viewport virgin_state info column cash-in-color neutral-color" data-tr-section="virgin">
-      <header>
-        <img src="images/lamassu-logo.svg"/>
-      </header>
-      <section class="main">
-        <h3 class="sapphire no-margin-bottom">Congratulations!</h3>
-        <p class="d2">Welcome to your new Lamassu Cryptomat.</p>
-        <div class="text-content">
-          <p class="tl2 no-margin-top">
-            Press initialize to generate a secure cryptographic certificate
-            <br/>
-            for your machine. This could take about fifteen minutes.
-          </p>
-        </div>
-      </section>
-      <footer>
-        <button id="initialize" class="button filled-progress-button">Initialize</span>
-      </footer>
-    </section>
-    <section id="withdraw_failure_viewport" class="viewport withdraw_failure_state column cash-in-color" data-tr-section="withdraw_failure">
+    </section><section id="withdraw_failure_viewport" class="viewport withdraw_failure_state column cash-in-color" data-tr-section="withdraw_failure">
       <header></header>
       <section class="main">
         <section class="primary-side">
