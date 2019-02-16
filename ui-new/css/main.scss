@@ -566,6 +566,26 @@ footer {
   }
 }
 
+.info-with-contact {
+  @extend .info;
+  header {
+    height: 35vh;
+  }
+  .main {
+    min-height: 39vh;
+  }
+}
+
+.info-no-image {
+  @extend .info;
+  header {
+    height: 14vh;
+  }
+  .main {
+    min-height: 60vh;
+  }
+}
+
 .high_bill_state, .limit_reached_state, .invalid_address_state {
   img {
     width: 24vh;

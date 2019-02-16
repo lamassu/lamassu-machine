@@ -170,7 +170,12 @@ function setupFakes () {
     $('.verifying_id_state'),
     $('.sending_coins_state'),
     $('.sms_verification_state'),
-    $('.bad_phone_number_state')
+    $('.bad_phone_number_state'),
+    $('.bad_security_code_state'),
+    $('.max_phone_retries_state'),
+    $('.id_verification_failed_state'),
+    $('.photo_verification_failed_state'),
+    $('.blocked_customer_state')
   ]
 
   states.forEach(it => {

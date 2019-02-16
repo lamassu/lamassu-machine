@@ -98,7 +98,7 @@
   @include pill-button;
   @include cash-background-colors;
   color: $white;
-  min-width: 2 * $spacer;
+  min-width: 4 * $spacer;
   &:active {
     background-color: $white;
     @include cash-colors;
