@@ -5,12 +5,12 @@
   font-weight: 900;
 }
 
-@mixin mueseo-bold {
+@mixin museo-bold {
   font-family: MuseoSans;
   font-weight: bold;
 }
 
-@mixin mueseo {
+@mixin museo {
   font-family: MuseoSans;
   font-weight: 500;
 }
@@ -62,28 +62,42 @@
 }
 
 @mixin Tagline-1 {
-  @include mueseo-bold;
+  @include museo-bold;
   // x800 = 40px
   font-size: 5vh;
   line-height: 1.2;
 }
 
 @mixin Tagline-2 {
-  @include mueseo-bold;
+  @include museo-bold;
   // x800 = 24px
   font-size: 3vh;
   line-height: 0.8;
 }
 
 @mixin Description-1 {
-  @include mueseo;
+  @include museo;
+  // x800 = 32px
+  font-size: 4vh;
+  line-height: 1.25;
+}
+
+@mixin Description-1-bold {
+  @include museo-bold;
   // x800 = 32px
   font-size: 4vh;
   line-height: 1.25;
 }
 
 @mixin Description-2 {
-  @include mueseo;
+  @include museo;
+  // x800 = 24px
+  font-size: 3vh;
+  line-height: 1.33;
+}
+
+@mixin Description-2-bold {
+  @include museo-bold;
   // x800 = 24px
   font-size: 3vh;
   line-height: 1.33;
@@ -123,62 +137,82 @@ h5, .h5 {
   @include Heading-5;
 }
 
-.cash-in-color .tl1, .cash-in-color .tl1 {
+.cash-in-color .tl1 {
   @include Tagline-1;
   color: $sapphire;
 }
 
-.cash-out-color .tl1, .cash-out-color .tl1 {
+.cash-out-color .tl1 {
   @include Tagline-1;
   color: $purple-grey;
 }
 
-.cash-in-color .tl2, .cash-in-color .tl2 {
+.cash-in-color .tl2 {
   @include Tagline-2;
   color: $sapphire;
 }
 
-.cash-out-color .tl2, .cash-out-color .tl2 {
+.cash-out-color .tl2 {
   @include Tagline-2;
   color: $purple-grey;
 }
 
-.cash-in-color .d1, .cash-in-color .d1 {
+.cash-in-color .d1 {
   @include Description-1;
   color: $sapphire;
 }
 
-.cash-out-color .d1, .cash-out-color .d1 {
+.cash-out-color .d1 {
   @include Description-1;
   color: $purple-grey;
 }
 
-.cash-in-color .d2, .cash-in-color .d2 {
+.cash-in-color .d1b {
+  @include Description-1-bold;
+  color: $sapphire;
+}
+
+.cash-out-color .d1b {
+  @include Description-1-bold;
+  color: $purple-grey;
+}
+
+.cash-in-color .d2 {
   @include Description-2;
   color: $sapphire;
 }
 
-.cash-out-color .d2, .cash-out-color .d2 {
+.cash-out-color .d2 {
   @include Description-2;
   color: $purple-grey;
 }
 
-.cash-in-color .m1, .cash-in-color .m1 {
+.cash-in-color .d2b {
+  @include Description-2-bold;
+  color: $sapphire;
+}
+
+.cash-out-color .d2b {
+  @include Description-2-bold;
+  color: $purple-grey;
+}
+
+.cash-in-color .m1 {
   @include Mono-Text-1;
   color: $sapphire;
 }
 
-.cash-out-color .m1, .cash-out-color .m1 {
+.cash-out-color .m1 {
   @include Mono-Text-1;
   color: $purple-grey;
 }
 
-.cash-in-color .m2, .cash-in-color .m2 {
+.cash-in-color .m2 {
   @include Mono-Text-2;
   color: $sapphire;
 }
 
-.cash-out-color .m2, .cash-out-color .m2 {
+.cash-out-color .m2 {
   @include Mono-Text-2;
   color: $purple-grey;
 }

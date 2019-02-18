@@ -33,6 +33,12 @@ body {
   display: flex;
 }
 
+.mainv {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
 // TODO this should be integrated with viewport
 .column {
   flex-direction: column;
@@ -84,6 +90,67 @@ footer {
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 2vh;
+}
+
+.facephoto_state .mainv .header {
+  margin-top: 12vh;
+}
+
+.facephoto_state .mainv .header h2 {
+  margin-top: 26vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.facephoto_state .mainv .info {
+  margin-top: 1.5vh;
+}
+
+.facephoto_state .mainv .info .d1 {
+  margin-top: 0vh;
+  margin-bottom: 0vh;
+}
+
+.facephoto_state .mainv .info .d1b {
+  margin-top: 2.8vh;
+}
+
+.minimum_tx_state .mainv .header {
+  margin-top: 18vh;
+}
+
+.minimum_tx_state .mainv .header img {
+  width: 33.7vh;
+}
+
+.minimum_tx_state .mainv .header h2 {
+  margin-top: 7.1vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.minimum_tx_state .mainv .info .d1 {
+  margin-top: 2.2vh;
+  line-height: 1.25;
+}
+
+.pending_deposit_state .mainv .header {
+  margin-top: 18vh;
+}
+
+.pending_deposit_state .mainv .header img {
+  height: 22vh;
+}
+
+.pending_deposit_state .mainv .header h2 {
+  margin-top: 7.2vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.pending_deposit_state .mainv .info .d1b {
+  margin-top: 2.5vh;
+  line-height: 1.25
 }
 
 .primary-side {
