@@ -137,7 +137,7 @@ h5, .h5 {
   @include Heading-5;
 }
 
-.cash-in-color .tl1 {
+.cash-in-color .tl1, .system-color .tl1 {
   @include Tagline-1;
   color: $sapphire;
 }
@@ -147,7 +147,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .tl2 {
+.cash-in-color .tl2, .system-color .tl2 {
   @include Tagline-2;
   color: $sapphire;
 }
@@ -157,7 +157,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .d1 {
+.cash-in-color .d1, .system-color .d1 {
   @include Description-1;
   color: $sapphire;
 }
@@ -167,7 +167,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .d1b {
+.cash-in-color .d1b, .system-color .d1b {
   @include Description-1-bold;
   color: $sapphire;
 }
@@ -177,7 +177,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .d2 {
+.cash-in-color .d2, .system-color .d2 {
   @include Description-2;
   color: $sapphire;
 }
@@ -187,7 +187,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .d2b {
+.cash-in-color .d2b, .system-color .d2b {
   @include Description-2-bold;
   color: $sapphire;
 }
@@ -197,7 +197,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .m1 {
+.cash-in-color .m1, .system-color .m1 {
   @include Mono-Text-1;
   color: $sapphire;
 }

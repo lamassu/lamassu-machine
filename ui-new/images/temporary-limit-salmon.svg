@@ -1,0 +1,31 @@
+<svg id="a2ea6f5a-bcb6-49b2-a984-e1255bf3c32a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 208 176">
+  <defs>
+    <clipPath id="bdb4bf60-2bae-49d3-ae1b-ff16c8709182">
+      <rect x="8" y="28" width="200" height="64" rx="9.77714" fill="#cb6560"/>
+    </clipPath>
+  </defs>
+  <title>temporary-limit</title>
+  <g>
+    <rect x="35.23662" y="13" width="6.38926" height="15" fill="#403c51"/>
+    <rect y="28" width="200" height="64" rx="9.77714" fill="#403c51"/>
+    <g>
+      <rect x="8" y="28" width="200" height="64" rx="9.77714" fill="#cb6560"/>
+      <g clip-path="url(#bdb4bf60-2bae-49d3-ae1b-ff16c8709182)">
+        <path d="M66.4,8.88372,12.32,123.48837H-8.48L45.6,8.88372Zm33.28,0L45.6,123.48837H66.4L120.48,8.88372Zm54.08,0L99.68,123.48837h20.8L174.56,8.88372Zm54.08,0L153.76,123.48837h20.8L228.64,8.88372Z" fill="#fbcb40"/>
+      </g>
+    </g>
+    <g>
+      <polygon points="49.76 92 33.12 92 33.12 167.6 28.96 176 53.92 176 49.76 167.6 49.76 92" fill="#403c51"/>
+      <polygon points="174.56 167.6 174.56 92 157.92 92 157.92 167.6 153.76 176 178.72 176 174.56 167.6" fill="#403c51"/>
+    </g>
+    <g>
+      <path d="M36.91888,16A8.06626,8.06626,0,0,1,28.788,8a8.06626,8.06626,0,0,1,8.13091-8H39.788V16Z" fill="#ce9912"/>
+      <circle cx="39.78797" cy="8" r="8" fill="#fbcb40"/>
+    </g>
+    <rect x="163.18864" y="13" width="6.38926" height="15" fill="#403c51"/>
+    <g>
+      <path d="M164.87091,16A8.06625,8.06625,0,0,1,156.74,8a8.06625,8.06625,0,0,1,8.13091-8H167.74V16Z" fill="#ce9912"/>
+      <circle cx="167.74" cy="8" r="8" fill="#fbcb40"/>
+    </g>
+  </g>
+</svg>
