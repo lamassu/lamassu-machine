@@ -1,11 +1,16 @@
-<section class="viewport choose_fiat_state column cash-out-color" data-tr-section="choose-fiat">
+<section
+  class="viewport choose_fiat_state cash-out-color"
+  data-tr-section="choose-fiat"
+  data-screentype="flow-action-tp"
+>
   <header>
     <p class="d2 white crypto-rate"></p>
     <div id="chooseFiatCancel">
-      <img class="cancel-button" src="images/close-icon.svg"/>
+      <img class="cancel-button" src="images/close-icon.svg" />
     </div>
   </header>
-  <section class="main">
+
+  <main>
     <section class="primary-side">
       <h2 class="js-i18n primary-side-title xs-margin-bottom">How much?</h2>
       <section class="sums">
@@ -18,23 +23,29 @@
       <div class="d2 limit white"></div>
     </section>
     <section class="secondary-side qr-secondary-side nm-margin-top">
-      <button id="cash-out-button" class="circle-button h3 js-i18n">
-        <div class="inner-circle-button">
-          Cash<br/>Out
+      <button id="cash-out-button" class="circle-button h3">
+        <div class="inner-circle-button js-i18n">
+          Cash Out
         </div>
-      </div>
+      </button>
     </section>
-  </section>
+  </main>
+
   <footer id="js-fiat-buttons" class="cash-buttons">
     <div class="cash-button action-button tl1" data-denomination-index="0">
-      <span class="plus">+</span> <span class="js-denomination"></span>
+      <span class="plus">+</span>
+      <span class="js-denomination"></span>
     </div>
     <div class="cash-button action-button tl1" data-denomination-index="1">
-      <span class="plus">+</span> <span class="js-denomination"></span>
+      <span class="plus">+</span>
+      <span class="js-denomination"></span>
     </div>
     <div class="cash-button action-button tl1" data-denomination-index="2">
-      <span class="plus">+</span> <span class="js-denomination"></span>
+      <span class="plus">+</span>
+      <span class="js-denomination"></span>
     </div>
-    <div id="js-fiat-clear" class="cash-button clear js-i18n filled-action-button tl1">Clear</div>
+    <div id="js-fiat-clear" class="cash-button clear js-i18n filled-action-button tl1">
+      Clear
+    </div>
   </footer>
 </section>

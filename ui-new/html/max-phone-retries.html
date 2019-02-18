@@ -1,20 +1,25 @@
-<section class="viewport max_phone_retries_state column info-with-contact" data-tr-section="max-phone-retries">
+<section
+  class="viewport max_phone_retries_state info-with-contact"
+  data-tr-section="max-phone-retries"
+  data-screentype="info-contact-tp"
+>
   <header>
-    <!-- TODO correct SVG -->
-    <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
-    <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
+    <img class="only-cash-in" src="images/phone-error-amazonite.svg" />
+    <img class="only-cash-out" src="images/phone-error-salmon.svg" />
   </header>
-  <section class="main">
+
+  <main>
     <h3 class="js-i18n nm-margin-bottom">Oops, this isn't working</h3>
     <section class="text-content">
       <p class="js-i18n d2">
-        You've hit the maximum number of retries. Please <br/>
+        You've hit the maximum number of retries. Please
         contact the operator to sort this out, or try again later.
       </p>
     </section>
-  </section>
-  <!-- TODO Contact card -->
+    <!-- TODO Contact card -->
+  </main>
+
   <footer>
-    <span class="filled-progress-button button js-i18n" id="max-phone-retries-ok">OK</span>
+    <button class="filled-progress-button button js-i18n" id="max-phone-retries-ok">OK</button>
   </footer>
 </section>

@@ -1,0 +1,48 @@
+.insert_bills_state {
+  .text-content {
+    max-width: 57vh;
+  }
+}
+
+.security_code_state {
+  .text-content {
+    max-width: 63vh;
+  }
+}
+
+.invalid_address_state,
+.bad_security_code_state {
+  .text-content {
+    max-width: 72vh;
+  }
+}
+
+.unpaired_state,
+.max_phone_retries_state,
+.sms_verification_state {
+  .text-content {
+    max-width: 75vh;
+  }
+}
+
+.bad_phone_number_state,
+.blocked_customer_state {
+  .text-content {
+    max-width: 78vh;
+  }
+}
+
+.pre_receipt_state,
+.unknown_phone_number_state {
+  .text-content {
+    max-width: 82vh;
+  }
+}
+
+.are_you_sure_state,
+.redeem_later_state,
+.virgin_state {
+  .text-content {
+    max-width: 86vh;
+  }
+}

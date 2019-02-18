@@ -1,5 +1,5 @@
-<section id="wifi-viewport" class="viewport wifi_state" data-tr-section="wifi">
-  <section class="main">
+<section id="wifi-viewport" class="viewport wifi_state" data-tr-section="wifi" data-screentype="wifi-tp">
+  <main>
     <section id="wifi-instructions">
       <h1 class="js-i18n">Select a WiFi network</h1>
       <p>
@@ -8,18 +8,18 @@
     </section>
     <div id="networks" class="i18n-latin">
     </div>
-  </section>
+  </main>
   <section class="bottom-bar">
     <p class="feedback js-i18n">Lamassu Cryptomat</p>
   </section>
   <section id="wifiListCancel" class="cancel"><img src="images/cancel.png" /></section>
 </section>
 
-<section class="viewport wifi_password_state" data-tr-section="wifi-password" id="wifi-password">
+<section class="viewport wifi_password_state system-color info" data-tr-section="wifi-password" id="wifi-password" data-screentype="wifi-tp">
   <section id="wifi-keyboard" class="wifi-network pass-screen">
     <section class="pass-top">
       <div class="label">
-        <h1><span class="js-i18n">WiFi password</span></h1>
+        <h3><span class="js-i18n">WiFi password</span></h3>
         <p id="js-i18n-wifi-for-ssid" class="ssid-container"></p>
       </div>
       <div class="entry">
@@ -186,38 +186,16 @@
   </section>
 </section>
 
-<section class="viewport wifi_connecting_state info" data-tr-section="wifi-connecting">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">Connecting…</h1>
-          <div class="loader"><img src="images/loading.gif" /></div>
-          <p>
-          <strong id="js-i18n-wifi-connect"></strong><br />
-          <span id="js-i18n-wifi-connecting"></span>
-          </p>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
-</section>
-
-<section class="viewport wifi_failed_state info" data-tr-section="wifi-failed">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">WiFi failed to connect…</h1>
-          <p>
-          <span class="js-wifi-failed"></span><br/>
-          <span class="js-i18n">Please try the <strong>password</strong> again.</span>
-          </p>
-          <div class="actions">
-          <span display="inline-block" class="button js-i18n">TRY AGAIN</span>
-          </div>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
+<section class="viewport wifi_connecting_state no-action-info system-color" data-tr-section="wifi-connecting" data-screentype="wifi-tp system-tp">
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h2 class="js-i18n no-margin-bottom">Connecting…</h2>
+    <p class="js-i18n-wifi-connect d1"></p>
+    <p class="d1 no-margin-top">
+      <strong class="js-i18n-wifi-connecting"></strong>
+    </p>
+  </main>
 </section>
