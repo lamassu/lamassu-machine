@@ -2,6 +2,7 @@
 @import "./fonts.scss";
 @import "./typography.scss";
 @import "./buttons.scss";
+@import "./loading.scss";
 
 body {
   user-select: none;
@@ -467,6 +468,10 @@ footer {
   margin: 0;
   padding-left: 3.5vw;
   padding-right: 3.5vw;
+}
+
+.waiting_state .mainv .header {
+  margin-top: 36.6vh;
 }
 
 .primary-side {
