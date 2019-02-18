@@ -827,7 +827,12 @@ function setDirection (direction) {
     $('.max_phone_retries_state'),
     $('.id_verification_failed_state'),
     $('.photo_verification_failed_state'),
-    $('.blocked_customer_state')
+    $('.blocked_customer_state'),
+    $('.fiat_error_state'),
+    $('.fiat_transaction_error_state'),
+    $('.id_scan_failed_state'),
+    $('.sanctions_failure_state'),
+    $('.id_verification_error_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1161,10 +1166,7 @@ function setExchangeRate (_rates) {
     var cashOut = new BigNumber(rates.cashOut)
     var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
 
-    // TODO i18n this probably can drop the tranlate as well
-    var localizedCashOutCryptoToFiat =
-      locale.translate('1 %s = %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
-    $('.crypto-rate').html(localizedCashOutCryptoToFiat)
+    $('.crypto-rate').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
   }
 
   $('.js-crypto-display-units').text(displayCode)
@@ -1210,7 +1212,7 @@ function setTx (tx) {
   setTimeout(() => {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
-    qrize(txId, $('#qr-code-fiat-receipt'))
+    qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
   }, 2000)
 }
@@ -1310,8 +1312,6 @@ function translateCoin (cryptoCode) {
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
   $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
-  // TODO study how does tranlate actually works, this line will be no longer needed.
-  $('.js-i18n-coins-to-address').html(locale.translate('Your coins will be sent to:').fetch())
 
   if (cryptoCode === 'ETH') {
     $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode))
@@ -1505,7 +1505,7 @@ function initDebug () {
 let background = null
 
 function doTransition (cb) {
-  // TODO transition for two way mode
+  // TODO Disable animations for V1
   let toShow = null
   let toShowOver = null
 
@@ -1513,8 +1513,8 @@ function doTransition (cb) {
     toShow = ['#bg-to-show']
     toShowOver = ['.crypto-buttons', '.cash-in-box-wrapper']
   } else {
-    toShow = ['#bg-to-show']//crypto-buttons']
-    toShowOver = ['header', '.main']
+    toShow = ['#bg-to-show']
+    toShowOver = ['header', 'main']
   }
 
   var tl = new TimelineMax()

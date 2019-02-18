@@ -6,27 +6,6 @@ How this currently works: change the app.js import on start.html to test-app.js
 TODO:
   - Some way to change screen state (like dispensing with and w/o batch)
   - Start script to serve start.html without the need to change it
-  - Add default state to the following screens
-    7. choose_coin
-    8. choose_fiat
-    9. completed
-    12. deposit
-    13. deposit_timeout_state
-    14. dispensing
-    15. fiat_complete
-    17. fiat_receipt
-    21. high_bill
-    27. insert_bills
-    28. insert_more_bills
-    34. minimum_tx_state
-    36. pairing_error
-    47. scan_address
-    48. scan_id
-    49. scan_photo
-    51. select_locale
-    54. terms_screen_state
-    67. wifi
-    68. withdrawn_failure
 */
 
 'use strict'
@@ -78,7 +57,7 @@ $(function () {
 
   var cList = document.createElement('div')
   cList.id = 'clicker-list'
-  cList.setAttribute('style', 'position: absolute; right: 12px; top: 0; height: 800px; overflow: scroll')
+  cList.setAttribute('style', 'position: absolute; right: 12px; top: 200px; height: 600px; overflow: scroll')
   document.body.appendChild(cList)
 
   var style = document.createElement('style')
@@ -86,21 +65,72 @@ $(function () {
   style.innerHTML = '.bgyellow { background-color: yellow } '
   document.getElementsByTagName('head')[0].appendChild(style)
 
-  let values = Array.from(document.getElementsByClassName('viewport'))
-    .map(it => it.className.split(/\s+/))
-    .flat()
-    .filter(it => it.endsWith('_state'))
-    .sort()
+  var tList = document.createElement('div')
+  tList.id = 'types-list'
+  tList.setAttribute('style', 'position: absolute; right: 12px; top: 0; height: 200px; overflow: scroll')
+  document.body.appendChild(tList)
+
+  const screens = []
+  let finalTypes = []
+
+  Array.from(document.getElementsByClassName('viewport')).forEach(it => {
+    const possibleName = it.className.split(/\s+/).filter(it => it.endsWith('_state'))
+
+    if (!possibleName || !possibleName.length) return console.log(possibleName)
+
+    const name = possibleName[0]
+    let types = null
+    if (it.dataset.screentype) {
+      types = it.dataset.screentype.split(/\s+/)
+      finalTypes.push(...types)
+    }
+
+    screens.push({ name, types })
+  })
+
+  finalTypes = new Set(finalTypes.sort())
 
   let i = 1
-  values.forEach(it => {
+  screens.sort((a, b) => {
+    let nameA = a.name.toUpperCase()
+    let nameB = b.name.toUpperCase()
+
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  }).forEach(it => {
     var newElement = document.createElement('div')
-    newElement.id = `clicker-${it}`
-    newElement.setAttribute('original', it)
-    newElement.innerHTML = `${i}. ${it}`
+    newElement.id = `clicker-${it.name}`
+    newElement.setAttribute('original', it.name)
+    newElement.setAttribute('class', (it.types || []).join(' '))
+    newElement.innerHTML = `${i}. ${it.name}`
     newElement.addEventListener('click', click)
     cList.appendChild(newElement)
     i++
+  })
+
+  finalTypes.forEach(it => {
+    var newElement = document.createElement('div')
+    newElement.innerHTML = it
+    newElement.addEventListener('click', (e) => {
+      $('#clicker-list div').show()
+      let oldElem = $('.bgyellow')
+      oldElem.removeClass('bgyellow')
+
+      if (!e.target.getAttribute('clicked') || e.target.getAttribute('clicked') === 'false') {
+        oldElem.attr('clicked', false)
+        e.target.setAttribute('clicked', true)
+        e.target.classList.add('bgyellow')
+        $(`#clicker-list div:not(.${it})`).hide()
+      } else {
+        e.target.setAttribute('clicked', false)
+      }
+    })
+    tList.appendChild(newElement)
   })
 })
 
@@ -134,7 +164,6 @@ function setupFakes () {
     '.', '</span><span class="decimal">479</span>'
   ].join('')
 
-  $('.js-i18n-coins-to-address').html('Your coins will be sent to:')
   let address = 'wjy98nu928ud1o82dbj2u9i81wqjjyu98iwn'
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(address))
@@ -159,6 +188,8 @@ function setupFakes () {
   $('.js-terms-title').text('Disclaimer')
   $('.js-terms-text').text(`Once cryptocurrency is transferred to any party, it cannot be reversed, cancelled, or refunded. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control.`)
   $('.js-pairing-error').text('Failure accessing server')
+  $('.js-i18n-wifi-connect').text('You\'re connecting to the WiFi network Taranto')
+  $('.js-i18n-wifi-connecting').html('This could take a few moments.')
 
   let states = [
     $('.scan_address_state'),
@@ -176,7 +207,12 @@ function setupFakes () {
     $('.max_phone_retries_state'),
     $('.id_verification_failed_state'),
     $('.photo_verification_failed_state'),
-    $('.blocked_customer_state')
+    $('.blocked_customer_state'),
+    $('.fiat_error_state'),
+    $('.fiat_transaction_error_state'),
+    $('.id_scan_failed_state'),
+    $('.sanctions_failure_state'),
+    $('.id_verification_error_state')
   ]
 
   states.forEach(it => {
@@ -219,7 +255,7 @@ function setupFakes () {
 
   qrize(address, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
   qrize(address, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
-  qrize(address, $('#qr-code-fiat-receipt'))
+  qrize(address, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
   qrize(address, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
   qrize(address, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
 }

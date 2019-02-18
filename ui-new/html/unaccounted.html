@@ -1,201 +1,199 @@
-<section class="viewport unknown_phone_number_state fiat-side" data-tr-section="unknown-phone-number">
-  <section class="info">
-    <h1 class="js-i18n">All set</h1>
-    <section class="description long">
-      <p class="js-i18n">We don't see any open orders associated with your phone. If you have another
-      phone you may have used, you can try redeeming again with that number.</p>
-      <p class="js-i18n">If you're sure you have an open order associated with this phone, please
-      contact the operator.</p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="unknown-phone-number-ok">OK</span>
-    </section>
-  </section>
+<section
+  class="viewport fiat_error_state info-no-image"
+  data-tr-section="fiat-error"
+  data-screentype="unaccounted-tp info-contact-tp"
+>
+  <header></header>
+  <main>
+    <h3 class="js-i18n">Oops!</h3>
+    <div class="text-content d2">
+      <p class="js-i18n no-margin-bottom">We're having some difficulties.</p>
+      <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
+    </div>
+    <!-- TODO Contact card -->
+  </main>
+  <footer>
+    <button class="filled-progress-button button js-i18n" id="fiat-error-ok">OK</button>
+  </footer>
 </section>
 
-<section class="viewport fiat_error_state fiat-side" data-tr-section="fiat-error">
-  <section class="info">
-    <h1 class="js-i18n">Oops!</h1>
-    <section class="description">
-      <p class="js-i18n">We're having some difficulties.</p>
-      <p><strong class="js-i18n">Please contact the operator.</strong></p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="fiat-error-ok">OK</span>
-    </section>
-  </section>
+<section
+  class="viewport fiat_transaction_error_state info"
+  data-tr-section="fiat-transaction-error"
+  data-screentype="unaccounted-tp info-action-tp"
+>
+  <header>
+    <!-- TODO Correct SVG -->
+    <img class="only-cash-in" src="images/error-signal-amazonite.svg" />
+    <img class="only-cash-out" src="images/error-signal-salmon.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n sm-margin-bottom">Oops!</h3>
+    <p class="js-i18n d2">We're having some difficulties.</p>
+    <p class="js-i18n tl2 no-margin-top">Please snap a photo of your receipt.</p>
+  </main>
+  <footer>
+    <button class="filled-progress-button button js-i18n" id="fiat-transaction-error-ok">
+      Show Receipt
+    </button>
+  </footer>
 </section>
 
-<section class="viewport fiat_transaction_error_state fiat-side" data-tr-section="fiat-transaction-error">
-  <section class="info">
-    <h1 class="js-i18n">Oops!</h1>
-    <section class="description">
-      <p class="js-i18n">We're having some difficulties.</p>
-      <p><strong class="js-i18n">Please snap a photo of your receipt.</strong></p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="fiat-transaction-error-ok">Show Receipt</span>
-    </section>
-  </section>
-</section>
-
-<section class="viewport pre_receipt_state fiat-side" data-tr-section="pre-receipt">
-  <section class="info">
-    <h1 class="js-i18n">What next?</h1>
-    <section class="description long">
-      <p class="js-i18n">
-      We weren't able to verify your phone number, so we may not be able
-      to contact you when your cash is ready.
-      <p class="js-i18n">
-      Please snap a photo of the <strong>next screen</strong> for your electronic receipt,
-      then contact the operator.
+<section
+  class="viewport redeem_later_state info cash-out-color"
+  data-tr-section="redeem-later"
+  data-screentype="unaccounted-tp info-action-tp"
+>
+  <header>
+    <img src="images/almost-there.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n xs-margin-bottom">Thank You!</h3>
+    <div class="text-content">
+      <p class="js-i18n d2">
+        We're waiting for your deposit to confirm on the blockchain.
+        You will soon receive a text message notifying you that your
+        transaction has confirmed.
       </p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="pre-receipt-ok">Show Receipt</span>
-    </section>
-  </section>
-</section>
-
-<section class="viewport redeem_later_state fiat-side" data-tr-section="redeem-later">
-  <section class="info">
-    <h1 class="js-i18n">Thank You!</h1>
-    <section class="description long">
-      <p class="js-i18n">
-      We're waiting for your deposit to confirm on the blockchain.
-      <p class="js-i18n">
-      You will soon receive a text message
-      notifying you that your transaction has confirmed.
-      When that happens, please come back to this machine and press the <strong>Redeem</strong> button.
+      <p class="js-i18n tl2">
+        When that happens, please come back to this machine and
+        press the Redeem button.
       </p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="redeem-later-ok">OK</span>
-    </section>
-  </section>
+    </div>
+  </main>
+  <footer>
+    <button class="filled-progress-button button js-i18n" id="redeem-later-ok">OK</button>
+  </footer>
 </section>
 
-<section class="viewport id_scan_failed_state info" data-tr-section="id-scan-failed">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">Sorry.</h1>
-        <p>
-          <span class="js-i18n">We could not read your ID card.</span><br/>
-          <span class="js-i18n">Please contact the operator for more information.</span>
-        </p>
-        <div class="actions">
-          <span id="id-scan-failed-ok" class="button js-i18n">OK</span>
-        </div>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
+<section
+  class="viewport id_scan_failed_state info-with-contact"
+  data-tr-section="id-scan-failed"
+  data-screentype="unaccounted-tp info-contact-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/error-signal-amazonite.svg" />
+    <img class="only-cash-out" src="images/error-signal-salmon.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n nm-margin-bottom">Sorry</h3>
+    <div class="text-content d2">
+      <p class="js-i18n no-margin-bottom">We could not read your ID card.</p>
+      <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
+    </div>
+  </main>
+  <footer>
+    <button id="id-scan-failed-ok" class="filled-progress-button button js-i18n">OK</button>
+  </footer>
 </section>
 
-<section class="viewport sanctions_failure_state info" data-tr-section="sanctions-failure">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">Sorry.</h1>
-        <p>
-          <span class="js-i18n">We are unable to process your transaction.</span><br/>
-          <span class="js-i18n">Please contact the operator for more information.</span>
-        </p>
-        <div class="actions">
-          <span id="sanctions-failure-ok" class="button js-i18n">OK</span>
-        </div>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
+<section
+  class="viewport sanctions_failure_state info-no-image"
+  data-tr-section="sanctions-failure"
+  data-screentype="unaccounted-tp info-contact-tp"
+>
+  <header></header>
+  <main>
+    <h3 class="js-i18n">Sorry</h3>
+    <div class="text-content d2">
+      <p class="js-i18n no-margin-bottom">We are unable to process your transaction.</p>
+      <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
+    </div>
+  </main>
+  <footer>
+    <button id="sanctions-failure-ok" class="filled-progress-button button js-i18n">OK</button>
+  </footer>
 </section>
 
-<section class="viewport id_verification_error_state info" data-tr-section="id-verification-error">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">It's us, not you.</h1>
-        <p>
-          <strong class="js-i18n">Our system experienced an error.</strong><br/>
-          <span class="js-i18n">Please feel free to try again, or contact the operator.</span>
-        </p>
-        <div class="actions">
-          <span id="id-verification-error-ok" class="button js-i18n">OK</span>
-        </div>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
+<section
+  class="viewport id_verification_error_state info-with-contact"
+  data-tr-section="id-verification-error"
+  data-screentype="unaccounted-tp info-contact-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/error-signal-amazonite.svg" />
+    <img class="only-cash-out" src="images/error-signal-salmon.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n nm-margin-bottom">It's us, not you.</h3>
+    <div class="text-content d2">
+      <p class="js-i18n no-margin-bottom">Our system experienced an error.</p>
+      <p class="js-i18n no-margin-top">Please feel free to try again, or contact the operator.</p>
+    </div>
+  </main>
+  <footer>
+    <button id="id-verification-error-ok" class="filled-progress-button button js-i18n">OK</button>
+  </footer>
 </section>
 
-<section id="locked-viewport" class="viewport locked_state info" data-tr-section="locked">
-  <section class="main">
-    <section class="top">
-      <section class="content">
-        <h1 class="js-i18n">This machine is locked</h1>
-          <p><strong class="js-i18n">Please ask for assistance.</strong></p>
-      </section>
-    </section>
-    <section class="bottom">
-    </section>
-  </section>
-</section>
-
-<section id="fiat_receipt_viewport" class="viewport fiat_receipt fiat_receipt_state fiat-side" data-tr-section="fiat-receipt">
-  <section class="instructions">
-    <h1 class="js-i18n">Your Receipt</h1>
-    <section class="sums">
+<section
+  id="fiat_receipt_viewport"
+  class="viewport fiat_receipt_state cash-out-color"
+  data-tr-section="fiat-receipt"
+  data-screentype="unaccounted-tp flow-action-tp"
+>
+  <header></header>
+  <main>
+    <section class="primary-side">
+      <h2 class="js-i18n primary-side-title">Your Receipt</h2>
+      <p class="js-i18n d2 white xs-margin-bottom">You sent us</p>
       <div class="digital">
-        <div class="amount"><strong class="js-amount"></strong> <span class="js-crypto-display-units"></span></div>
-        <div class="js-i18n">were sent by you</div>
+        <span class="h3 js-amount"></span>
+        <span class="h4 js-crypto-display-units"></span>
       </div>
-      <div class="fiat">
-        <div class="amount"><strong class="js-amount"></strong> <span class="js-currency"/></div>
-        <div class="js-i18n">pending confirmation</div>
+      <div class="fiat tl2">
+        <p>
+          <span class="js-amount"></span>
+          <span class="js-currency"></span>
+          <span class="js-i18n">pending confirmation</span>
+        </p>
+      </div>
+      <div class="sent-coins">
+        <p class="js-i18n d2 no-margin-bottom">Your coins were sent to:</p>
+        <p class="m2 crypto-address"></p>
       </div>
     </section>
-    <div class="sent-coins">
-      <span class="js-i18n">Your coins were sent to:</span><br/>
-      <span class="crypto-address"></span>
-    </div>
-  </section>
-
-  <section class="qr-section">
-    <div class="qr-code-fiat-receipt" id="qr-code-fiat-receipt"></div>
-    <div class="send-notice-section">
-      <img class="camera" src="images/camera.png" />
-      <div class="send-notice js-i18n">Take a photo of the screen for your electronic receipt.</div>
-    </div>
-  </section>
+    <section class="secondary-side qr-secondary-side">
+      <div class="qr-wrapper">
+        <div id="qr-code-fiat-receipt" class="qr"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="take-a-photo">
+    <!-- Optimized from images/camera.svg -->
+    <!-- prettier-ignore -->
+    <svg class="camera" xmlns="http://www.w4.org/2000/svg" width="55" height="42" viewBox="0 0 55 42">
+      <g fill="#403c51" fill-rule="evenodd">
+        <path d="M27.5,34.375 C21.8075,34.375 17.1875,29.755 17.1875,24.0625 C17.1875,18.37 21.8075,13.75 27.5,13.75 C33.1925,13.75 37.8125,18.37 37.8125,24.0625 C37.8125,29.755 33.1925,34.375 27.5,34.375 M51.15,6.875 L41.25,6.875 L41.25,3.85 C41.25,1.725625 39.53125,0 37.4,0 L17.6,0 C15.46875,0 13.75,1.725625 13.75,3.85 L13.75,6.875 L3.85,6.875 C1.71875,6.875 0,8.600625 0,10.725 L0,37.4 C0,39.524375 1.71875,41.25 3.85,41.25 L51.15,41.25 C53.28125,41.25 55,39.524375 55,37.4 L55,10.725 C55,8.600625 53.28125,6.875 51.15,6.875"/>
+        <path d="M34.375,24.0625 C34.375,20.260625 31.301875,17.1875 27.5,17.1875 C23.698125,17.1875 20.625,20.260625 20.625,24.0625 C20.625,27.864375 23.698125,30.9375 27.5,30.9375 C31.301875,30.9375 34.375,27.864375 34.375,24.0625"/>
+      </g>
+    </svg>
+    <span class="h4 purple-grey" class="js-i18n">
+      Take a picture of this screen for your electronic receipt
+    </span>
+    <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
+  </footer>
 </section>
 
-<section class="viewport deposit_network_down_state fiat-side" data-tr-section="deposit-network-down">
-  <section class="info">
-    <h1 class="js-i18n">Network Down</h1>
-    <section class="description">
-      <p class="js-i18n">Sorry, we're down for the moment. Please come back later.</p>
-    </section>
-    <section class="actions">
-      <div class="actions">
-        <span id="network-down-ok" display="inline-block" class="button ok js-i18n">OK</span>
-      </div>
-    </section>
-  </section>
-</section>
-
-<section class="viewport wrong_dispenser_currency_state fiat-side" data-tr-section="wrong-dispenser-currency">
-  <section class="info">
-    <h1 class="js-i18n">Oops!</h1>
-    <section class="description">
-      <p class="js-i18n">This machine does not handle the currency you requested.</p>
-      <p class="js-i18n">Please cash out at a machine that handles your currency.</p>
-    </section>
-    <section class="actions">
-      <span class="button js-i18n" id="wrong-dispenser-currency-ok">OK</span>
-    </section>
-  </section>
+<section
+  class="viewport wrong_dispenser_currency_state info cash-out-color"
+  data-tr-section="wrong-dispenser-currency"
+  data-screentype="unaccounted-tp info-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/error-signal-amazonite.svg" />
+    <img class="only-cash-out" src="images/error-signal-salmon.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n sm-margin-bottom">Oops!</h3>
+    <p class="js-i18n d2">This machine does not handle the currency you requested.</p>
+    <p class="js-i18n tl2 no-margin-top">
+      Please cash out at a machine that handles your currency.
+    </p>
+  </main>
+  <footer>
+    <button class="filled-progress-button button js-i18n" id="wrong-dispenser-currency-ok">
+      OK
+    </button>
+  </footer>
 </section>

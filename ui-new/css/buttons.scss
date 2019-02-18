@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  outline: none;
 }
 
 @mixin pill-button {
@@ -20,7 +21,7 @@
 }
 
 @mixin cash-colors {
-  .cash-in-color & {
+  .cash-in-color, .system-color & {
     color: $sapphire;
   }
 
@@ -29,8 +30,18 @@
   }
 }
 
+@mixin cash-disabled-colors {
+  .cash-in-color, .system-color & {
+    color: $amazonite;
+  }
+
+  .cash-out-color & {
+    color: $salmon;
+  }
+}
+
 @mixin cash-background-colors {
-  .cash-in-color & {
+  .cash-in-color, .system-color & {
     background-color: $sapphire;
   }
 
@@ -40,7 +51,7 @@
 }
 
 @mixin cash-disabled-background-colors {
-  .cash-in-color & {
+  .cash-in-color, .system-color & {
     background-color: $amazonite-two;
   }
 
@@ -50,7 +61,7 @@
 }
 
 @mixin cash-transparent-background-colors {
-  .cash-in-color & {
+  .cash-in-color, .system-color & {
     background-color: $amazonite;
   }
 
@@ -60,7 +71,7 @@
 }
 
 @mixin cash-borders {
-  .cash-in-color & {
+  .cash-in-color, .system-color & {
     border: 0.3vh solid $sapphire;
   }
 
@@ -90,6 +101,10 @@
   &:active {
     @include cash-background-colors;
     color: $white;
+  }
+  &:disabled {
+    @include cash-disabled-background-colors;
+    @include cash-disabled-colors;
   }
 }
 

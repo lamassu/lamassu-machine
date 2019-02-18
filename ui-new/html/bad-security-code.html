@@ -1,22 +1,29 @@
-<section class="viewport bad_security_code_state column info" data-tr-section="bad-security-code">
+<section
+  class="viewport bad_security_code_state info"
+  data-tr-section="bad-security-code"
+  data-screentype="info-action-tp"
+>
   <header>
-    <!-- TODO correct SVG -->
-    <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
-    <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
+    <img class="only-cash-in" src="images/wrong-code-amazonite.svg" />
+    <img class="only-cash-out" src="images/wrong-code-salmon.svg" />
   </header>
-  <section class="main">
+
+  <main>
     <h3 class="js-i18n xs-margin-bottom">Try again</h3>
     <div class="text-content sm-margin-top">
       <p class="js-i18n d2">
         The code you entered was incorrect.
       </p>
       <p class="js-i18n tl2">
-        Please make sure you're entering the six digit code<br/>
+        Please make sure you're entering the six digit code
         you receive from us.
       </p>
     </div>
-  </section>
+  </main>
+
   <footer>
-    <span class="filled-progress-button button js-i18n" id="bad-security-code-ok">Try again</span>
+    <button class="filled-progress-button button js-i18n" id="bad-security-code-ok">
+      Try again
+    </button>
   </footer>
 </section>

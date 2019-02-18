@@ -1,23 +1,30 @@
-<section class="viewport bad_phone_number_state info column" data-tr-section="bad-phone-number">
+<section
+  class="viewport bad_phone_number_state info"
+  data-tr-section="bad-phone-number"
+  data-screentype="info-action-tp"
+>
   <header>
-    <!-- TODO correct SVG -->
-    <img src="images/invalid-address.svg"/>
+    <img class="only-cash-in" src="images/phone-warning-amazonite.svg" />
+    <img class="only-cash-out" src="images/phone-warning-salmon.svg" />
   </header>
-  <section class="main">
+
+  <main>
     <h3 class="js-i18n xs-margin-bottom">Try again</h3>
     <div class="text-content">
       <p class="js-i18n d2">
-        The phone number you entered didn't work. If you have <br/>
-        an international number, please prefix it with + and your <br/>
-        country's calling code.
+        The phone number you entered didn't work. If you have an international number, please prefix
+        it with + and your country's calling code.
       </p>
       <p class="js-i18n tl2">
-        For instance, Belgium's calling code is +32, so a Belgian <br/>
-        number would look like: +32 455 12 34 56
+        For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12
+        34 56
       </p>
     </div>
-  </section>
+  </main>
+
   <footer>
-    <span class="filled-progress-button button js-i18n" id="bad-phone-number-ok">Try again</span>
+    <button class="filled-progress-button button js-i18n" id="bad-phone-number-ok">
+      Try again
+    </button>
   </footer>
 </section>

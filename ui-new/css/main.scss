@@ -2,6 +2,7 @@
 @import "./fonts.scss";
 @import "./typography.scss";
 @import "./buttons.scss";
+@import "./text-content-sizes.scss";
 
 body {
   user-select: none;
@@ -19,24 +20,20 @@ body {
   @include full-sized;
   flex: 1;
   display: none;
+  flex-direction: column;
 }
 
 .viewport-active {
   display: flex;
 }
 
-.main {
+main {
   @include full-sized;
   display: flex;
 }
 
 .hide {
   display: none;
-}
-
-// TODO this should be integrated with viewport
-.column {
-  flex-direction: column;
 }
 
 header {
@@ -68,8 +65,12 @@ footer {
   background-color: $amazonite;
 }
 
-.neutral-color {
+.system-color {
   background-color: $concrete;
+  h2,
+  h3 {
+    color: $sapphire;
+  }
 }
 
 .cash-out-color {
@@ -275,6 +276,18 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    width: 3vh;
+  }
+}
+
+.plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 2vh;
+  }
 }
 
 .cash-button {
@@ -465,7 +478,7 @@ footer {
   margin-top: 8vh;
 }
 
-.terms_screen_state .main {
+.terms_screen_state main {
   justify-content: center;
 }
 
@@ -516,7 +529,7 @@ footer {
 }
 
 .restart_state {
-  .main {
+  main {
     align-content: center;
     justify-content: center;
   }
@@ -534,8 +547,7 @@ footer {
     justify-content: center;
     align-items: flex-end;
   }
-  .main {
-    max-width: 60%;
+  main {
     height: auto;
     min-height: 37vh;
     align-items: center;
@@ -544,6 +556,16 @@ footer {
       text-align: left;
       p {
         margin: 1vh 0;
+      }
+      // TODO get rid of this
+      .no-margin-bottom {
+        margin-bottom: 0;
+      }
+      .sm-margin-bottom {
+        margin-bottom: 2vh;
+      }
+      .no-margin-top {
+        margin-top: 0;
       }
     }
   }
@@ -560,7 +582,7 @@ footer {
 
 .no-action-info {
   @extend .info;
-  .main {
+  main {
     margin-top: 2vh;
   }
   header {
@@ -571,10 +593,10 @@ footer {
 .info-with-contact {
   @extend .info;
   header {
-    height: 35vh;
+    height: 36vh;
   }
-  .main {
-    min-height: 39vh;
+  main {
+    min-height: 38vh;
   }
 }
 
@@ -583,14 +605,31 @@ footer {
   header {
     height: 14vh;
   }
-  .main {
+  main {
     min-height: 60vh;
   }
 }
 
-.high_bill_state, .limit_reached_state, .invalid_address_state {
+.choose_fiat_state, .insert_more_bills_state {
+  .inner-circle-button {
+    padding: 0 6vh;
+  }
+}
+
+.high_bill_state,
+.limit_reached_state,
+.invalid_address_state,
+.id_scan_failed_state,
+.id_scan_error_state,
+.unknown_phone_number_state {
   img {
     width: 24vh;
+  }
+}
+
+.redeem_later_state {
+  img {
+    width: 24.5vh;
   }
 }
 
@@ -600,9 +639,38 @@ footer {
   }
 }
 
+.max_phone_retries_state, .bad_phone_number_state {
+  img {
+    width: 21vh;
+    margin-left: 5vh;
+  }
+}
+
+.maintenance_state {
+  img {
+    width: 19vh;
+  }
+}
+
+.virgin_state {
+  img {
+    width: 17vh;
+  }
+}
+
+.restart_state {
+  img {
+    width: 70vh;
+  }
+}
+
 .sms_verification_state {
-  .main {
+  main {
     text-align: left;
+  }
+  img {
+    width: 21vh;
+    margin-left: 4vh;
   }
 }
 

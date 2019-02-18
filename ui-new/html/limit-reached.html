@@ -1,12 +1,24 @@
-<section class="viewport limit_reached_state info column cash-in-color" data-tr-section="limit-reached">
+<section
+  class="viewport limit_reached_state info cash-in-color"
+  data-tr-section="limit-reached"
+  data-screentype="info-action-tp"
+>
   <header>
-    <img src="images/out-of-coins.svg"/>
+    <img src="images/out-of-coins.svg" />
   </header>
-  <section class="main">
+
+  <main>
     <h3 class="js-i18n sm-margin-bottom">We're all out of coins!</h3>
     <p class="js-i18n d2">Please try again later.</p>
-  </section>
+  </main>
+
   <footer>
-    <span id="limit-reached-ok" display="inline-block" class="filled-progress-button button ok js-i18n">OK</span>
+    <button
+      id="limit-reached-ok"
+      display="inline-block"
+      class="filled-progress-button button ok js-i18n"
+    >
+      OK
+    </button>
   </footer>
 </section>

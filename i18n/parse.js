@@ -7,7 +7,7 @@ const x = Xray({
   filters: {strip}
 })
 
-const uiPath = path.resolve(__dirname, '..', 'ui')
+const uiPath = path.resolve(__dirname, '..', 'ui-new')
 const startPath = path.resolve(uiPath, 'start.html')
 const html = fs.readFileSync(startPath, {encoding: 'utf8'})
 
