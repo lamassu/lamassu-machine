@@ -96,13 +96,6 @@
   line-height: 1.33;
 }
 
-@mixin Description-2-bold {
-  @include museo-bold;
-  // x800 = 24px
-  font-size: 3vh;
-  line-height: 1.33;
-}
-
 @mixin Mono-Text-1 {
   @include mono;
   // x800 = 32px
@@ -188,12 +181,12 @@ h5, .h5 {
 }
 
 .cash-in-color .d2b, .system-color .d2b {
-  @include Description-2-bold;
+  @include Tagline-2;
   color: $sapphire;
 }
 
 .cash-out-color .d2b {
-  @include Description-2-bold;
+  @include Tagline-2;
   color: $purple-grey;
 }
 

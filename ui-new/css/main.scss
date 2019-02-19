@@ -119,15 +119,14 @@ footer {
   border: 2px solid $purple-grey;
   background: $purple-grey;
   color: $white;
-  @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .cash-out-color .mainv .actions .button-no {
   border: 2px solid $purple-grey;
   color: $purple-grey;
   @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .cash-out-color .mainv .actions .button-yes:active,
@@ -136,7 +135,7 @@ footer {
   background: $white;
   color: $purple-grey;
   @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .cash-in-color .mainv .actions .button-yes {
@@ -144,14 +143,14 @@ footer {
   background: $sapphire;
   color: $white;
   @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .cash-in-color .mainv .actions .button-no {
   border: 2px solid $sapphire;
   color: $sapphire;
   @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .cash-in-color .mainv .actions .button-yes:active,
@@ -160,7 +159,7 @@ footer {
   background: $white;
   color: $sapphire;
   @include museo-bold
-  @include Description-2-bold
+  @include Tagline-2
 }
 
 .deposit_network_down_state .mainv .header {
