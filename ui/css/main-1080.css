@@ -966,22 +966,6 @@ body  { margin: 0;}
   background-size: 50px 37px;
 }
 
-.wifi-network-button .bar1 {
-  background-image: url('../images/wifiicon/1.svg');
-}
-
-.wifi-network-button .bar2 {
-  background-image: url('../images/wifiicon/2.svg');
-}
-
-.wifi-network-button .bar3 {
-  background-image: url('../images/wifiicon/3.svg');
-}
-
-.wifi-network-button .bar4 {
-  background-image: url('../images/wifiicon/4.svg');
-}
-
 #networks .button {
   background-color: #0e4160;
   color: #ffffff;

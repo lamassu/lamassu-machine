@@ -787,14 +787,15 @@ function setWifiList (recs, requestedPage) {
   for (var i = 0; i < len; i++) {
     var rec = recs[i + offset]
     var bars = 'bar' + (Math.floor(rec.strength * 4) + 1)
-    var html = '<div class="wifi-network-button">' +
+    var html = '<div class="wifi-network-button filled-action-button tl2">' +
     '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
       rec.ssid + '">' + rec.displaySsid +
-    '</span>' + '<span class="icon ' + bars + '"></span></div>'
+    '</span>' + '<img src="images/wifiicon/ ' + bars + '"/></div>'
     networks.append(html)
   }
+
   var moreTxt = locale.translate('MORE').fetch()
-  var button = '<span display="inline-block" id="more-networks" class="button">' + moreTxt + '</span>'
+  var button = '<span display="inline-block" id="more-networks" class="button filled-action-button tl2">' + moreTxt + '</span>'
   if (recs.length > 4) {
     networks.append(button)
   }

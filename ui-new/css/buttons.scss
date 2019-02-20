@@ -21,7 +21,7 @@
 }
 
 @mixin cash-colors {
-  .cash-in-color, .system-color & {
+  .cash-in-color &, .system-color & {
     color: $sapphire;
   }
 
@@ -31,7 +31,7 @@
 }
 
 @mixin cash-disabled-colors {
-  .cash-in-color, .system-color & {
+  .cash-in-color &, .system-color & {
     color: $amazonite;
   }
 
@@ -41,7 +41,7 @@
 }
 
 @mixin cash-background-colors {
-  .cash-in-color, .system-color & {
+  .cash-in-color &, .system-color & {
     background-color: $sapphire;
   }
 
@@ -51,7 +51,7 @@
 }
 
 @mixin cash-disabled-background-colors {
-  .cash-in-color, .system-color & {
+  .cash-in-color &, .system-color & {
     background-color: $amazonite-two;
   }
 
@@ -60,18 +60,8 @@
   }
 }
 
-@mixin cash-transparent-background-colors {
-  .cash-in-color, .system-color & {
-    background-color: $amazonite;
-  }
-
-  .cash-out-color & {
-    background-color: $salmon;
-  }
-}
-
 @mixin cash-borders {
-  .cash-in-color, .system-color & {
+  .cash-in-color &, .system-color & {
     border: 0.3vh solid $sapphire;
   }
 
@@ -124,8 +114,8 @@
   @include Tagline-2;
   @include pill-button;
   @include cash-borders;
-  @include cash-transparent-background-colors;
   @include cash-colors;
+  background-color: transparent;
   &:active {
     border-color: transparent;
   }
@@ -223,7 +213,7 @@
   align-items: center;
 }
 
-.cash-in-color .filled-action-button {
+.cash-in-color .filled-action-button, .system-color .filled-action-button {
   background-color: $sapphire;
   color: $white;
 }
@@ -233,7 +223,7 @@
   color: $white;
 }
 
-.cash-in-color .filled-action-button:active {
+.cash-in-color .filled-action-button:active, .system-color .filled-action-button:active {
   background-color: $white;
   color: $sapphire;
 }
