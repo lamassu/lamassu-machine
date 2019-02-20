@@ -1,4 +1,4 @@
-/* globals $, Keypad, TimelineMax, requestAnimationFrame, Two */
+/* globals $, Keypad, TimelineMax, requestAnimationFrame, Two, Keyboard */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -48,6 +48,8 @@ $(function () {
   })
 
   phoneKeypad.activate()
+
+  let wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
   securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     console.log('phoneNumber', result)
@@ -190,6 +192,24 @@ function setupFakes () {
   $('.js-pairing-error').text('Failure accessing server')
   $('.js-i18n-wifi-connect').text('You\'re connecting to the WiFi network Taranto')
   $('.js-i18n-wifi-connecting').html('This could take a few moments.')
+  $('#networks').html(`
+    <div class="wifi-network-button filled-action-button tl2">
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <img src="images/wifiicon/4.svg"></span>
+    </div>
+    <div class="wifi-network-button filled-action-button tl2">
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <img src="images/wifiicon/3.svg"></span>
+    </div>
+    <div class="wifi-network-button filled-action-button tl2">
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <img src="images/wifiicon/2.svg"></span>
+    </div>
+    <div class="wifi-network-button filled-action-button tl2">
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <img src="images/wifiicon/1.svg"></span>
+    </div>
+  `)
 
   let states = [
     $('.scan_address_state'),

@@ -649,8 +649,8 @@
           </div>
         </section>
         <section class="secondary-side">
-          <section id="phone-keypad" class="keypad h5">
-            <section class="entry">
+          <section id="phone-keypad" class="keypad">
+            <section class="entry h5">
               <div class="box full-box"></div>
             </section>
             <div class="phone-separator hidden"></div>
@@ -731,8 +731,8 @@
           </p>
         </section>
         <section class="secondary-side">
-          <img class="scan-image only-cash-in" src="images/scan-driver-license-cash-in.svg" />
-          <img class="scan-image only-cash-out" src="images/scan-driver-license-cash-in.svg" />
+          <img class="scan-image only-cash-in" src="images/scan/SL-amaz-driver-license.svg" />
+          <img class="scan-image only-cash-out" src="images/scan/SL-salm-driver-license.svg" />
         </section>
       </main>
     </section>
@@ -760,8 +760,8 @@
           </p>
         </section>
         <section class="secondary-side">
-          <img class="scan-image only-cash-in" src="images/scan-ID-cash-in.svg" />
-          <img class="scan-image only-cash-out" src="images/scan-ID-cash-in.svg" />
+          <img class="scan-image only-cash-in" src="images/scan/SL-amaz-stateID.svg" />
+          <img class="scan-image only-cash-out" src="images/scan/SL-salm-stateID.svg" />
         </section>
       </main>
     </section>
@@ -787,8 +787,8 @@
           </div>
         </section>
         <section class="secondary-side">
-          <section id="security-keypad" class="keypad h5">
-            <section class="entry">
+          <section id="security-keypad" class="keypad">
+            <section class="entry h5">
               <div class="box full-box"></div>
             </section>
             <div class="phone-separator hidden"></div>
@@ -1644,41 +1644,42 @@
         <p class="js-i18n d1">This could take a few seconds.</p>
       </main>
     </section>
-    <section id="wifi-viewport" class="viewport wifi_state" data-tr-section="wifi" data-screentype="wifi-tp">
-      <main>
-        <section id="wifi-instructions">
-          <h1 class="js-i18n">Select a WiFi network</h1>
-          <p>
-            <span class="js-i18n">Only secured networks are shown.</span>
-          </p>
-        </section>
-        <div id="networks" class="i18n-latin">
+    <section id="wifi-viewport" class="viewport wifi_state system-color" data-tr-section="wifi" data-screentype="wifi-tp">
+      <header>
+        <div id="wifiListCancel">
+          <img class="cancel-button" src="images/close-icon-amaz.svg" />
         </div>
+      </header>
+      <main>
+        <section class="primary-side">
+          <h3 class="js-i18n no-margin-bottom">Select a WiFi network</h1>
+          <p class="js-i18n d2">Only secured networks are shown.</p>
+        </section>
+        <section class="secondary-side">
+          <div id="networks" class="i18n-latin">
+          </div>
+        </section>
       </main>
-      <section class="bottom-bar">
-        <p class="feedback js-i18n">Lamassu Cryptomat</p>
-      </section>
-      <section id="wifiListCancel" class="cancel"><img src="images/cancel.png" /></section>
     </section>
     
     <section class="viewport wifi_password_state system-color info" data-tr-section="wifi-password" id="wifi-password" data-screentype="wifi-tp">
       <section id="wifi-keyboard" class="wifi-network pass-screen">
         <section class="pass-top">
-          <div class="label">
-            <h3><span class="js-i18n">WiFi password</span></h3>
-            <p id="js-i18n-wifi-for-ssid" class="ssid-container"></p>
+          <div id="wifiPassCancel" class="delay">
+            <img class="cancel-button" src="images/close-icon-amaz.svg" />
           </div>
+          <h3 class="js-i18n no-margin-bottom">WiFi password</h3>
+          <p id="js-i18n-wifi-for-ssid" class="ssid-container d2"></p>
           <div class="entry">
-            <input class="passphrase" type="password" autofocus="autofocus"
-                placeholder="WiFi password" data-content=""/>
-            <div class="button backspace">←</div>
-            <div id="wifiConnect" class="button connect"><span class="js-i18n">Connect</span></div>
+            <input class="passphrase h5" type="password" autofocus="autofocus" data-content=""/>
+            <button class="filled-progress-button button backspace">←</button>
+            <button id="wifiConnect" class="bordered-progress-button button connect"><span class="js-i18n">Connect</span></button>
           </div>
         </section>
     
-        <section class="pass-bottom">
+        <section class="pass-bottom keys tl2">
           <div class="keyboard-layout i18n-latin" data-case="lc">
-            <div class="keyboard keyboard-lc">
+            <div class="keypad keyboard keyboard-lc">
               <div class="row">
                 <div class="key" data-ascii="49">1</div>
                 <div class="key" data-ascii="50">2</div>
@@ -1828,7 +1829,6 @@
             </div>
           </div>
         </section>
-        <section id="wifiPassCancel" class="wifi-cancel"><img src="images/cancel.png" /></section>
       </section>
     </section>
     

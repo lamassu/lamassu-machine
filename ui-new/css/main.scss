@@ -681,6 +681,87 @@ footer {
   margin-bottom: 4vh;
 }
 
+#wifi-keyboard {
+  box-sizing: border-box;
+  #wifiPassCancel {
+    margin: 2vh 2vh auto auto;
+  }
+  .pass-top {
+    display: flex;
+    flex-direction: column;
+  }
+  .passphrase {
+    border: none;
+    text-align: center;
+    color: $white;
+    background-color: $sapphire;
+    margin-left: auto;
+  }
+  .connect-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .backspace {
+    font-size: 6vh;
+    margin: 0 1vh;
+    padding-bottom: 1.5vh;
+  }
+  .row {
+    justify-content: center;
+  }
+  .key {
+    box-sizing: border-box;
+    border: 0.1vh solid;
+    margin: 0.3vh;
+    &:active {
+      border: none;
+    }
+  }
+  .special {
+    width: 19vh;
+  }
+  .space {
+    width: 91vh;
+  }
+  .entry {
+    display: flex;
+    padding: 0 2vh 6vh;
+  }
+}
+
+#networks {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 6vh;
+    position: absolute;
+    margin-left: 14vh;
+  }
+  .filled-action-button {
+    width: 40vh;
+    height: 10vh;
+    margin: 1vh;
+  }
+}
+
+.wifi-network-button .bar1 {
+  background-image: url('images/wifiicon/1.svg');
+}
+
+.wifi-network-button .bar2 {
+  background-image: url('images/wifiicon/2.svg');
+}
+
+.wifi-network-button .bar3 {
+  background-image: url('images/wifiicon/3.svg');
+}
+
+.wifi-network-button .bar4 {
+  background-image: url('images/wifiicon/4.svg');
+}
+
 #metrics {
   font-size: 3vh;
   position: absolute;
