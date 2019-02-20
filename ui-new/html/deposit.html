@@ -1,37 +1,43 @@
-<section class="viewport deposit_state column cash-out-color" data-tr-section="deposit">
+<section
+  class="viewport deposit_state cash-out-color"
+  data-tr-section="deposit"
+  data-screentype="flow-action-tp"
+>
   <header>
     <div id="depositCancel" class="delay">
-      <img class="cancel-button" src="images/close-icon.svg"/>
+      <img class="cancel-button" src="images/close-icon.svg" />
     </div>
   </header>
-  <section class="main">
+
+  <main>
     <section class="primary-side">
       <h2 class="js-i18n primary-side-title xs-margin-bottom">Send Coins</h2>
-      <p class="d1 no-margin-top js-i18n-please-scan"><p>
+      <p class="d1 no-margin-top js-i18n-please-scan"></p>
       <div class="fiat md-margin-top">
         <span class="js-amount h2"></span>
         <span class="js-currency h4"></span>
         <p class="d2 i18n no-margin-top">will be dispensed to you.</p>
       </div>
       <div class="d2 digital send-notice">
-        <p class="coins-to-address"> 
-          <span class="js-i18n">You will send us </span>
-          <span class="js-amount"></span> 
+        <p class="coins-to-address">
+          <span class="js-i18n">You will send us</span>
+          <span class="js-amount"></span>
           <span class="js-crypto-display-units"></span>
-          <span class="js-i18n">to: </span>
+          <span class="js-i18n">to:</span>
         </p>
         <p class="m2 crypto-address"></p>
       </div>
     </section>
+
     <section class="secondary-side qr-secondary-side">
       <div class="qr-wrapper">
         <div id="qr-code-deposit" class="qr"></div>
-      </div> 
+      </div>
       <!-- TODO lightning still not enabled
       <div id="lightning-enabled" class="sm-margin-top">
         <img class="lightning-img" src="images/lightning.svg"/>
         <span class="d2">Lightning Enabled</span>
       </div> -->
     </section>
-  </section>
+  </main>
 </section>

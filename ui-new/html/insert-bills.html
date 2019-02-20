@@ -1,20 +1,29 @@
-<section class="viewport insert_bills_state column cash-in-color" data-tr-section="insert-bills">
+<section
+  class="viewport insert_bills_state cash-in-color"
+  data-tr-section="insert-bills"
+  data-screentype="flow-no-action-tp"
+>
   <header>
     <p class="d2 white crypto-rate fade-in"></p>
     <div id="insertBillCancel" class="delay">
-      <img class="cancel-button" src="images/close-icon.svg"/>
+      <img class="cancel-button" src="images/close-icon.svg" />
     </div>
   </header>
-  <section class="main xl-margin-top">
+
+  <main class="xl-margin-top">
     <section class="primary-side fade-in">
       <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert a bill</h2>
-      <p class="d1 no-margin-top">Please insert your first bill into <br/> the machine.</p>
-      <p class="d2 js-i18n-fixed-fee"></p>
-      <p class="d2 js-i18n-coins-to-address coins-to-address"></p>
-      <p class="m2 crypto-address"></p>
+      <div class="text-content">
+        <p class="d1 no-margin-top">
+          Please insert your first bill into the machine.
+        </p>
+        <p class="d2 js-i18n-fixed-fee"></p>
+        <p class="d2 js-i18n coins-to-address">Your coins will be sent to:</p>
+        <p class="m2 crypto-address"></p>
+      </div>
     </section>
-    <section class="secondary-side with-image fade-in delay">
-      <div class="insert-bill-wrapper"><img src="images/insert-bill.svg"/></div>
+    <section class="secondary-side with-image fade-in-delay">
+      <div class="insert-bill-wrapper"><img src="images/insert-bill.svg" /></div>
     </section>
-  </section>
+  </main>
 </section>

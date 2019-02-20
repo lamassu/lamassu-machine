@@ -1,5 +1,3 @@
-@import "./variables.scss";
-
 @mixin mont {
   font-family: Mont Heavy;
   font-weight: 900;
@@ -200,7 +198,7 @@ h5, .h5 {
   color: $purple-grey;
 }
 
-.cash-in-color .m2 {
+.cash-in-color .m2, .system-color .m2 {
   @include Mono-Text-2;
   color: $sapphire;
 }

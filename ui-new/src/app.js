@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua */
+/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
 'use strict'
 
 const queryString = window.location.search
@@ -11,6 +11,9 @@ const CASH_IN_QR_COLOR = '#0e4160'
 const SCROLL_SIZE = 270
 var textHeightQuantity = 0
 var currentPage = 0
+var totalPages = 0
+var aspectRatio800 = true
+var isTwoWay = null
 
 var fiatCode = null
 var locale = null
@@ -65,6 +68,7 @@ var buttonActive = true
 var cassettes = null
 let currentCryptoCode = null
 let currentCoin = null
+let currentCoins = []
 
 var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -258,29 +262,105 @@ function blockedCustomer () {
 function chooseCoin (coins, twoWayMode) {
   if (twoWayMode) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
+    $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
+    $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
   }
+
+  isTwoWay = twoWayMode
+  setupAnimation(twoWayMode, aspectRatio800)
 
   const defaultCoin = coins[0]
 
   currentCryptoCode = defaultCoin.cryptoCode
   currentCoin = defaultCoin
+  currentCoins = coins.slice(0)
 
   setCryptoBuy(defaultCoin)
   setCryptoSell(defaultCoin)
 
-  $('.crypto-buttons').empty()
-
-  if (coins.length > 1) {
-    coins.forEach(function (coin) {
-      const activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : ''
-      const el = `<div class="choose-coin-button coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-crypto-code="${coin.cryptoCode}">${coin.display}</div>`
-      $('.crypto-buttons').append(el)
-    })
-  }
+  setupCoinsButtons(coins, currentCryptoCode)
 
   setState('choose_coin')
+}
+
+function openLanguageDropdown () {
+  $('#language-dropdown-toggle').addClass('hide')
+  $('#languages').removeClass('hide')
+  $('#language-overlay').removeClass('hide')
+}
+
+function closeLanguageDropdown () {
+  $('#language-dropdown-toggle').removeClass('hide')
+  $('#languages').addClass('hide')
+  $('#language-overlay').addClass('hide')
+}
+
+function openCoinDropdown () {
+  $('#crypto-dropdown-toggle').addClass('hide')
+  $('#crypto-overlay').removeClass('hide')
+  $('#cryptos').removeClass('hide')
+}
+
+function closeCoinDropdown () {
+  $('#crypto-dropdown-toggle').removeClass('hide')
+  $('#crypto-overlay').addClass('hide')
+  $('#cryptos').addClass('hide')
+}
+
+function setupCoinsButtons () {
+  $('.crypto-buttons').empty()
+  closeCoinDropdown()
+
+  let coins = currentCoins.slice()
+  let dropdownCoins = []
+
+  if (coins.length === 1) return
+
+  const showMoreButton = coins.length > 4
+  if (showMoreButton) {
+    $('crypto-dropdown-toggle').removeClass('hide')
+    dropdownCoins = coins.slice(3)
+    coins = coins.slice(0, 3)
+  } else {
+    $('crypto-dropdown-toggle').addClass('hide')
+  }
+
+  coins.forEach(function (coin) {
+    const activeClass = coin.cryptoCode === currentCryptoCode ? 'choose-coin-button-active' : ''
+    const el = `<div class="choose-coin-button h4 coin-${coin.cryptoCode.toLowerCase()} ${activeClass}" data-crypto-code="${coin.cryptoCode}">
+      ${coin.display}
+      <span class="choose-coin-svg-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
+          <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
+        </svg>
+      </span>
+    </div>`
+    $('.crypto-buttons').append(el)
+  })
+  if (showMoreButton) {
+    $('.crypto-buttons').append(`
+      <div class="choose-coin-button h4" data-more="true">
+        <div id="crypto-dropdown-toggle" data-more="true">
+          More
+          <span class="choose-coin-svg-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
+              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
+            </svg>
+          </span>
+        </div>
+        <div id="cryptos" class="dropdown hide"></div>
+      </div>
+    `)
+    dropdownCoins.forEach(coin => {
+      const el = `<button class="h4 sapphire button small-action-button coin-${coin.cryptoCode.toLowerCase()}"
+        data-crypto-code="${coin.cryptoCode}">${coin.display}</button>`
+      $('#cryptos').append(el)
+    })
+    const el = `<button class="h4 sapphire button small-action-button" data-less="true">Less</button>`
+    $('#cryptos').append(el)
+  }
 }
 
 function setCryptoBuy (coin) {
@@ -320,6 +400,13 @@ function switchCoin (coin) {
     setTimeout(() => setCryptoSell(coin), 100)
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
+
+  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode)) 
+  if (currentCoins.length > 4 && selectedIndex > 2) {
+    currentCoins.splice(2, 0, currentCoins.splice(selectedIndex, 1)[0])
+  }
+
+  setupCoinsButtons()
 }
 
 $(document).ready(function () {
@@ -417,7 +504,7 @@ $(document).ready(function () {
   setupImmediateButton('depositCancel', 'depositCancel')
 
   setupButton('initialize', 'initialize')
-  setupButton('test-mode', 'testMode')
+  // setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
   setupButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingErrorOk')
@@ -437,6 +524,7 @@ $(document).ready(function () {
   setupButton('photo-scan-failed-retry', 'retryPhotoScan')
   setupButton('photo-scan-failed-cancel', 'cancelIdScan')
   setupButton('photo-verification-failed-ok', 'cancelIdScan')
+  setupButton('invalid-address-try-again', 'invalidAddressTryAgain')
 
   setupButton('sanctions-failure-ok', 'idle')
   setupButton('limit-reached-ok', 'idle')
@@ -461,16 +549,43 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
-  $('#doAnimation').click(event => {
-    transitionOut()
-    setTimeout(() => {
-      cleanUpTransition()
-      setState('insert_bills')
-    }, 300)
-  })
+  const width = $('body').width()
+  const height = $('body').height()
+
+  function gcd (a, b) {
+    return (b === 0) ? a : gcd(b, a % b)
+  }
+
+  const w = width
+  const h = height
+  const r = gcd(w, h)
+  const aspectRatioPt1 = w / r
+  const aspectRatioPt2 = h / r
+
+  aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
+
+  if (aspectRatio800) {
+    $('body').addClass('aspect-ratio-8-5')
+  } else {
+    $('body').addClass('aspect-ratio-16-9')
+  }
 
   $('.crypto-buttons').click(event => {
-    const el = $(event.target)
+    let el = $(event.target)
+    if (el.is('path') || el.is('svg') || el.is('span')) {
+      el = el.closest('div')
+    }
+
+    if (el.data('more')) {
+      openCoinDropdown()
+      return
+    }
+
+    if (el.data('less')) {
+      closeCoinDropdown()
+      return
+    }
+
     const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
     switchCoin(coin)
   })
@@ -481,7 +596,10 @@ $(document).ready(function () {
   var areYouSureContinue = document.getElementById('are-you-sure-continue-transaction')
   touchEvent(areYouSureContinue, () => buttonPressed('continueTransaction', previousState))
 
-  $('.coin-redeem-button').click(() => buttonPressed('redeem'))
+  $('.coin-redeem-button').click(() => {
+    setDirection('cashOut')
+    return buttonPressed('redeem')
+  })
   $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
 
@@ -492,12 +610,14 @@ $(document).ready(function () {
       setCryptoSell(currentCoin)
       return
     }
-    setState('select_locale')
+    openLanguageDropdown()
   })
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
-    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashIn'})
+    doTransition(
+      () => buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' })
+    )
   })
 
   const cashOutBox = $('.cash-out-box')
@@ -507,15 +627,31 @@ $(document).ready(function () {
 
   var lastTouch = null
 
+  var languageOverlay = document.getElementById('language-overlay')
+  touchEvent(languageOverlay, function (e) {
+    closeLanguageDropdown()
+  })
+
+  var cryptoOverlay = document.getElementById('crypto-overlay')
+  touchEvent(cryptoOverlay, function (e) {
+    closeCoinDropdown()
+  })
+
   var languageButtons = document.getElementById('languages')
   touchEvent(languageButtons, function (e) {
-    var languageButtonJ = $(e.target).closest('li')
+    var languageButtonJ = $(e.target).closest('button')
     if (languageButtonJ.length === 0) return
     var newLocale = languageButtonJ.attr('data-locale')
+
+    if (!newLocale) {
+      closeLanguageDropdown()
+      return
+    }
+
     setLocale(newLocale)
     setCryptoBuy(currentCoin)
     setCryptoSell(currentCoin)
-    setState('choose_coin')
+    closeLanguageDropdown()
   })
 
   var fiatButtons = document.getElementById('js-fiat-buttons')
@@ -651,14 +787,15 @@ function setWifiList (recs, requestedPage) {
   for (var i = 0; i < len; i++) {
     var rec = recs[i + offset]
     var bars = 'bar' + (Math.floor(rec.strength * 4) + 1)
-    var html = '<div class="wifi-network-button">' +
+    var html = '<div class="wifi-network-button filled-action-button tl2">' +
     '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
       rec.ssid + '">' + rec.displaySsid +
-    '</span>' + '<span class="icon ' + bars + '"></span></div>'
+    '</span>' + '<img src="images/wifiicon/ ' + bars + '"/></div>'
     networks.append(html)
   }
+
   var moreTxt = locale.translate('MORE').fetch()
-  var button = '<span display="inline-block" id="more-networks" class="button">' + moreTxt + '</span>'
+  var button = '<span display="inline-block" id="more-networks" class="button filled-action-button tl2">' + moreTxt + '</span>'
   if (recs.length > 4) {
     networks.append(button)
   }
@@ -680,7 +817,23 @@ function setDirection (direction) {
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
-    $('.register_phone_state')
+    $('.register_phone_state'),
+    $('.terms_screen_state'),
+    $('.verifying_photo_state'),
+    $('.verifying_id_state'),
+    $('.sending_coins_state'),
+    $('.sms_verification_state'),
+    $('.bad_phone_number_state'),
+    $('.bad_security_code_state'),
+    $('.max_phone_retries_state'),
+    $('.id_verification_failed_state'),
+    $('.photo_verification_failed_state'),
+    $('.blocked_customer_state'),
+    $('.fiat_error_state'),
+    $('.fiat_transaction_error_state'),
+    $('.id_scan_failed_state'),
+    $('.sanctions_failure_state'),
+    $('.id_verification_error_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -697,7 +850,7 @@ function setDirection (direction) {
  * @param {String} data.cancel
  */
 function setTermsScreen (data) {
-  const $screen = $('.js-terms-screen')
+  const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-title').html(data.title)
   startPage(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
@@ -710,22 +863,34 @@ function scrollUp () {
   if (currentPage !== 0) {
     currentPage -= 1
     updateButtonStyles()
+    updatePageCounter()
     div.scrollTo(0, currentPage * SCROLL_SIZE)
   }
 }
 
 // start page
 function startPage (text) {
-  const $screen = $('.js-terms-screen')
+  const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-text').html(text)
+  currentPage = 0
+  totalPages = 0
+  console.log('start')
   updateButtonStyles()
   setTimeout(function () {
-    const div = document.getElementById('js-terms-text-div').offsetHeight
-    textHeightQuantity = document.getElementById('js-terms-text').childNodes[0].offsetHeight
-    if (textHeightQuantity <= div) {
+    const div = document.getElementById('js-terms-text-div')
+    textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
+    if (textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
+    } else {
+      div.scrollTo(0, 0)
+      totalPages = Math.ceil(textHeightQuantity / SCROLL_SIZE)
+      updatePageCounter()
     }
   })
+}
+
+function updatePageCounter () {
+  document.getElementById('terms-page-counter').textContent = `${currentPage + 1}/${totalPages}`
 }
 
 // click page up button
@@ -734,6 +899,7 @@ function scrollDown () {
   if (!(currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0)) {
     currentPage += 1
     updateButtonStyles()
+    updatePageCounter()
     div.scrollTo(0, currentPage * SCROLL_SIZE)
   }
 }
@@ -743,25 +909,16 @@ function updateButtonStyles () {
   const buttonDown = document.getElementById('scroll-down')
   const buttonUp = document.getElementById('scroll-up')
   if (currentPage === 0) {
-    makeButtonDisabled(buttonUp)
+    buttonUp.disabled = true
   } else {
-    makeButtonEnabled(buttonUp)
+    buttonUp.disabled = false
   }
 
   if (currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0) {
-    makeButtonDisabled(buttonDown)
+    buttonDown.disabled = true
   } else {
-    makeButtonEnabled(buttonDown)
+    buttonDown.disabled = false
   }
-}
-
-function makeButtonDisabled (button) {
-  button.style.backgroundColor = '#eeeee3'
-  button.style.color = 'white'
-}
-function makeButtonEnabled (button) {
-  button.style.backgroundColor = '#D0D0C8'
-  button.style.color = 'black'
 }
 
 function moreNetworks () {
@@ -855,7 +1012,7 @@ function setPrimaryLocales (primaryLocales) {
   if (areArraysEqual(primaryLocales, _primaryLocales)) return
   _primaryLocales = primaryLocales
 
-  var languages = $('.languages')
+  var languages = $('#languages')
   languages.empty()
   var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function (a, b) {
     var langA = lookupLocaleNames(a)
@@ -863,16 +1020,13 @@ function setPrimaryLocales (primaryLocales) {
     return langA.englishName.localeCompare(langB.englishName)
   })
 
+  languages.append(`<button class="square-button small-action-button tl2">Languages</button>`)
   for (var i = 0; i < sortedPrimaryLocales.length; i++) {
     var l = sortedPrimaryLocales[i]
     var lang = lookupLocaleNames(l)
-    var englishName = lang.englishName
-    var nativeName = lang.nativeName
-    var li = nativeName === englishName
-      ? '<li class="square-button" data-locale="' + l + '">' + englishName + '</li>'
-      : '<li class="square-button" data-locale="' + l + '">' + nativeName +
-      '<span class="english">' + englishName + '</span> </li>'
-    languages.append(li)
+    var name = lang.nativeName || lang.englishName
+    var div = `<button class="square-button small-action-button tl2" data-locale="${l}">${name}</button>`
+    languages.append(div)
   }
 
   $('.js-menu-language').toggleClass('hide', sortedPrimaryLocales.length <= 1)
@@ -904,7 +1058,7 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var cryptoDisplayCode = coin.displayCode
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
   $('.amount-deposited').html(`You deposited ${fiat} ${fiatCode}`)
-  $('.total-deposit').html(formatFiat(fiat))
+  $('.fiat .js-amount').html(fiat)
 
   var inserted = lastBill
     ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill))
@@ -1013,10 +1167,7 @@ function setExchangeRate (_rates) {
     var cashOut = new BigNumber(rates.cashOut)
     var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
 
-    // TODO i18n this probably can drop the tranlate as well
-    var localizedCashOutCryptoToFiat =
-      locale.translate('1 %s = %s %s').fetch(cryptoCode, cashOutCryptoToFiat, fiatCode)
-    $('.crypto-rate').html(localizedCashOutCryptoToFiat)
+    $('.crypto-rate').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
   }
 
   $('.js-crypto-display-units').text(displayCode)
@@ -1059,19 +1210,28 @@ function setTx (tx) {
     $('.js-no-inserted-notes').show()
   }
 
-  qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
-  qrize(txId, $('#cash-in-fail-qr-code'))
-  qrize(txId, $('#qr-code-fiat-receipt'))
-  qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+  setTimeout(() => {
+    qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
+    qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
+    qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
+    qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
+  }, 2000)
+}
+
+function formatAddressNoBreakLines (address) {
+  if (!address) return
+  return address.replace(/(.{4})/g, '$1 ')
 }
 
 function formatAddress (address) {
-  if (!address) return
-  const withSpace = address.replace(/(.{4})/g, '$1 ')
-  return withSpace.replace(/((.{4} ){5})/g, '$1<br/> ')
+  let toBr = formatAddressNoBreakLines(address)
+  if (!toBr) return
+
+  return toBr.replace(/((.{4} ){5})/g, '$1<br/> ')
 }
 
 function setBuyerAddress (address) {
+  $('.crypto-address-no-br').html(formatAddressNoBreakLines(address))
   $('.crypto-address').html(formatAddress(address))
 }
 
@@ -1087,7 +1247,7 @@ function setAccepting (currentAccepting) {
 function highBill (highestBill, reason) {
   var reasonText = reason === 'transactionLimit'
     ? locale.translate('Transaction limit reached.').fetch()
-    : locale.translate("We're a little low.").fetch()
+    : locale.translate("We're a little low on crypto.").fetch()
 
   t('high-bill-header', reasonText)
   t('highest-bill', locale.translate('Please insert %s or less.')
@@ -1148,15 +1308,11 @@ function t (id, str) {
 }
 
 function translateCoin (cryptoCode) {
-  $('.js-i18n-total-purchased').html(locale.translate('total %s purchased').fetch(cryptoCode))
-
   $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode))
   $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode))
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
   $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
-  // TODO study how does tranlate actually works, this line will be no longer needed.
-  $('.js-i18n-coins-to-address').html(locale.translate('Your coins will be sent to:').fetch())
 
   if (cryptoCode === 'ETH') {
     $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode))
@@ -1277,7 +1433,7 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
-  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_IN_QR_COLOR)
+  qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
 }
 
 function deposit (tx) {
@@ -1347,10 +1503,45 @@ function initDebug () {
   }
 }
 
-function transitionOut () {
-  $('#animate-me').addClass('animate-me')
+let background = null
+
+function doTransition (cb) {
+  // TODO Disable animations for V1
+  let toShow = null
+  let toShowOver = null
+
+  if (isTwoWay) {
+    toShow = ['#bg-to-show']
+    toShowOver = ['.crypto-buttons', '.cash-in-box-wrapper']
+  } else {
+    toShow = ['#bg-to-show']
+    toShowOver = ['header', 'main']
+  }
+
+  var tl = new TimelineMax()
+  tl.set('.fade-in-delay', { opacity: 0, y: +30 })
+    .set('.fade-in', { opacity: 0, y: +30 })
+    .set(toShow, { zIndex: 1 })
+    .set(toShowOver, { zIndex: 2 })
+    .to(background, 0.5, { scale: isTwoWay ? 3 : 2 })
+    .to('.fade-in', 0.4, {
+      opacity: 1,
+      onStart: cb,
+      y: 0
+    }, '=-0.2')
+    .to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2')
+    .set(background, { scale: 1 })
+    .set(toShow, { zIndex: -1 })
+    .set(toShowOver, { zIndex: 0 })
 }
 
-function cleanUpTransition () {
-  $('#animate-me').removeClass('animate-me')
+function setupAnimation (isTwoWay, isAr800) {
+  var elem = document.getElementById('bg-to-show')
+  while (elem.firstChild) {
+    elem.removeChild(elem.firstChild)
+  }
+  var two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem)
+
+  background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
+  background.scale = 1
 }

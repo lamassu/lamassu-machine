@@ -1,0 +1,173 @@
+<section
+  class="viewport booting_state no-action-info system-color"
+  data-tr-section="booting"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h2 class="js-i18n no-margin-bottom">Booting up...</h2>
+    <p class="js-i18n d1">Initializing hardware.</p>
+    <p class="js-i18n d1 no-margin-top"><strong>We'll be up in a moment.</strong></p>
+  </main>
+</section>
+
+<section
+  class="viewport initializing_state no-action-info system-color"
+  data-tr-section="initializing"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h2 class="js-i18n no-margin-bottom">Initializing...</h2>
+    <p class="js-i18n d1">Generating cryptographic identity.</p>
+    <p class="js-i18n d1 no-margin-top"><strong>Please wait a few minutes.</strong></p>
+  </main>
+</section>
+
+<section
+  class="viewport connecting_state no-action-info system-color"
+  data-tr-section="connecting"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h2 class="js-i18n">Connecting...</h2>
+  </main>
+</section>
+
+<section
+  class="viewport pairing_state no-action-info system-color"
+  data-tr-section="pairing"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h2 class="js-i18n">Pairing...</h2>
+  </main>
+</section>
+
+<section
+  class="viewport unpaired_state info system-color"
+  data-tr-section="unpaired"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h3 class="js-i18n sm-margin-bottom">Pair with remote server</h3>
+    <div class="text-content">
+      <p class="d2">
+        Press SCAN and preset the machine with the pairing
+        QR code from your remote server.
+      </p>
+      <p class="tl2 no-margin-top">
+        IMPORTANT: Keep the machine secure until you have
+        successfully paired with your remote server.
+      </p>
+    </div>
+  </main>
+  <footer>
+    <button id="pairing-scan" class="filled-progress-button button js-i18n">Scan</button>
+  </footer>
+</section>
+
+<section
+  class="viewport pairing_error_state info system-color"
+  data-tr-section="pairing-error"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h3 class="js-i18n no-margin-bottom">Pairing failed</h3>
+    <p class="js-i18n d2">When attempting to pair, we experienced an error:</p>
+    <div class="js-pairing-error error m2"></div>
+  </main>
+  <footer>
+    <button id="pairing-error-ok" class="filled-progress-button button js-i18n">Try again</button>
+  </footer>
+</section>
+
+<section
+  class="viewport pairing_scan_state info system-color"
+  data-tr-section="pairing-scan"
+  data-screentype="system-tp"
+>
+  <header>
+    <!-- TODO correct SVG -->
+    <!-- <img src="images/lamassu-logo.svg"/> -->
+  </header>
+  <main>
+    <h3 class="js-i18n no-margin-bottom">Pair with remote server</h3>
+    <p class="js-i18n d2">
+      Please scan the pairing QR code you got from your remote server.
+    </p>
+  </main>
+  <footer>
+    <button id="pairing-scan-cancel" class="filled-progress-button button js-i18n">Cancel</button>
+  </footer>
+</section>
+
+<section
+  class="viewport virgin_state info system-color"
+  data-tr-section="virgin"
+  data-screentype="system-tp"
+>
+  <header>
+    <img src="images/lamassu-logo.svg" />
+  </header>
+  <main>
+    <h3 class="nm-margin-bottom">Congratulations!</h3>
+    <div class="text-content">
+      <p class="d2">Welcome to your new Lamassu Cryptomat.</p>
+      <p class="tl2 no-margin-top ">
+        Press initialize to generate a secure cryptographic certificate
+        for your machine. This could take about fifteen minutes.
+      </p>
+    </div>
+  </main>
+  <footer>
+    <button id="initialize" class="button filled-progress-button">Initialize</button>
+  </footer>
+</section>
+
+<section
+  class="viewport restart_state system-color"
+  data-tr-section="restart"
+  data-screentype="system-tp"
+>
+  <main>
+    <img src="images/lamassu.svg" />
+  </main>
+</section>
+
+<section
+  class="viewport maintenance_state info system-color"
+  data-tr-section="maintenance"
+  data-screentype="system-tp info-contact-tp"
+>
+  <header>
+    <img src="images/maintenance.svg" />
+  </header>
+  <main>
+    <h3 class="js-i18n xs-margin-bottom">Maintenance Required</h3>
+    <p class="js-i18n d2">Please contact the operator.</p>
+    <!-- TODO Contact card -->
+  </main>
+</section>

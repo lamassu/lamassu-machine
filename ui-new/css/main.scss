@@ -3,6 +3,7 @@
 @import "./typography.scss";
 @import "./buttons.scss";
 @import "./loading.scss";
+@import "./text-content-sizes.scss";
 
 body {
   user-select: none;
@@ -13,24 +14,22 @@ body {
 }
 
 #view {
-  height: 100%;
-  width: 100%
+  @include full-sized;
 }
 
 .viewport {
+  @include full-sized;
   flex: 1;
-  height: 100%;
-  width: 100%;
   display: none;
+  flex-direction: column;
 }
 
 .viewport-active {
   display: flex;
 }
 
-.main {
-  height: 100%;
-  width: 100%;
+main {
+  @include full-sized;
   display: flex;
 }
 
@@ -43,11 +42,13 @@ body {
 // TODO this should be integrated with viewport
 .column {
   flex-direction: column;
+.hide {
+  display: none;
 }
 
 header {
   display: flex;
-  margin: 6vh;
+  padding: 6vh;
   justify-content: flex-end;
   min-height: 3vh;
 }
@@ -72,6 +73,14 @@ footer {
 
 .cash-in-color {
   background-color: $amazonite;
+}
+
+.system-color {
+  background-color: $concrete;
+  h2,
+  h3 {
+    color: $sapphire;
+  }
 }
 
 .cash-out-color {
@@ -567,7 +576,7 @@ footer {
 .qr {
   width: 36vh;
   height: 36vh;
-  box-shadow: 0 0 1vh 0 $border-color;
+  box-shadow: $shadow;
 }
 
 .lightning-img {
@@ -600,8 +609,16 @@ footer {
   margin-top: 0;
 }
 
+.nm-margin-bottom {
+  margin-bottom: 4vh;
+}
+
 .sm-margin-bottom {
   margin-bottom: 2vh;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
 }
 
 .xs-margin-bottom {
@@ -649,6 +666,18 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  img {
+    width: 3vh;
+  }
+}
+
+.plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 2vh;
+  }
 }
 
 .cash-button {
@@ -668,70 +697,466 @@ footer {
   margin-top: auto;
 }
 
-// TODO clean up after animation gets tested this is v0.1
-#bg-image {
+.choose-coin-cash-in .cash-out-box,
+.choose-coin-cash-in .cash-out-box-wrapper,
+.choose-coin-cash-in .coin-redeem,
+.choose-coin-cash-in .two-way-bg,
+.choose-coin-two-way .cash-in-bg
+{
+  display: none;
+}
+
+.cash-out-box, .cash-in-box {
+  margin: auto;
+}
+
+.choose_coin_state header, .choose_coin_state footer {
+  min-height: 8vh;
+  padding: 6vh;
+}
+
+#language-overlay, #crypto-overlay {
+  opacity: 0;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
   position: absolute;
+}
+
+.dropdown button:first-child {
+  border-radius: 2vh 2vh 0 0;
+  z-index: 0;
+  position: relative;
+}
+
+.cash-in-color #languages button:first-child {
+  color: rgba($sapphire, 0.5);
+}
+
+.cash-out-color #languages button:first-child {
+  color: rgba($purple-grey, 0.5);
+}
+
+.dropdown button:last-child {
+  border-radius: 0 0 2vh 2vh;
+}
+
+.dropdown button {
+  align-items: flex-start;
+}
+
+.change-language {
+  width: 24vh;
+}
+
+.change-language #language-dropdown-toggle {
+  justify-content: flex-start;
+}
+
+.dropdown {
+  position: absolute;
+  width: inherit;
+  z-index: 10;
+  border-radius: 2vh;
+  box-shadow: $shadow;
+}
+
+#cryptos {
+  bottom: 5vh;
+  margin-left: -3vh;
+}
+
+#cryptos button:last-child {
+  color: rgba($sapphire, 0.5);
+}
+
+.reverse-dropdown {
+  position: absolute;
+  width: inherit;
+  z-index: 10;
+  border-radius: 2vh 2vh 0 0;
+}
+
+.dropdown button {
+  border-radius: 0;
+  width: 100%;
+  flex-direction: column;
+}
+
+.dropdown button div {
+  line-height: 1;
+}
+
+.dropdown button .english {
+  font-size: 2vh;
+}
+
+.coin-redeem {
+  margin-left: auto;
+}
+
+.crypto-buttons {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+}
+
+.crypto-buttons .choose-coin-button:first-child {
+  padding-left: 1vh;
+}
+
+.choose-coin-button {
+  padding: 0 4.5vh 0 4.5vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.choose-coin-cash-in .choose-coin-button {
+  color: $sapphire;
+}
+
+.choose-coin-button svg {
+  margin-top: -0.5vh;
+  opacity: 0;
+}
+
+.choose-coin-button-active svg {
+  opacity: 1;
+}
+
+.choose-coin-cash-in .choose-coin-button-active svg path {
+  stroke: $sapphire;
+}
+
+.choose-coin-svg-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.auto-margin {
+  margin: auto;
+}
+
+.bg-image {
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
   z-index: -1;
 }
 
-.animate-me {
-  animation: fill-in 0.5s linear;
+.insert_more_bills_state footer {
+  height: 39vh;
+  margin-left: 15vh;
 }
 
-.fade-out {
-  animation: fadeout 0s ease-in 5s forwards;
-  animation-fill-mode: forwards;
+.insert_more_bills_state .secondary-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.fade-in {
-  animation: slide-up-fade-in ease 0.4s forwards;
-  transform-origin: 50% 50%;
+.terms_screen_state header {
+  justify-content: center;
 }
 
-.delay {
-  animation: slide-up-fade-in2 ease 0.4s forwards;
-  transform-origin: 50% 50%;
+.terms_screen_state footer {
+  justify-content: center;
+  height: 58vh;
+  margin-top: 8vh;
 }
 
-@keyframes fill-in {
-  0% {
-    transform: scale(1);
+.terms_screen_state main {
+  justify-content: center;
+}
+
+.terms_screen_state button {
+  margin: 0 3vh;
+}
+
+.js-terms-text-div {
+  width: 60vw;
+  margin-left: 8vh;
+  overflow: hidden;
+}
+
+.js-terms-text p {
+  margin-top: 0;
+}
+
+#actions-scroll {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 8vh;
+  margin-left: 6vh;
+  margin-top: 6vh;
+  p {
+    margin: 4vh 0;
   }
-  100% {
-    transform: scale(2);
+}
+
+.up-arrow-svg, .down-arrow-svg {
+  fill: $white;
+}
+
+.cash-in-color .round-progress-button:disabled .up-arrow-svg, .cash-in-color .round-progress-button:disabled .down-arrow-svg {
+  fill: $amazonite;
+}
+
+.cash-out-color .round-progress-button:disabled .up-arrow-svg, .cash-out-color .round-progress-button:disabled .down-arrow-svg {
+  fill: $salmon;
+}
+
+.or {
+  position: absolute;
+  margin-left: 4vh;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.restart_state {
+  main {
+    align-content: center;
+    justify-content: center;
+  }
+  .img {
+    width: 44vw;
   }
 }
 
-@keyframes fade-out {
-  to {
-    width:0;
-    height:0;
-    overflow:hidden;
+.info {
+  text-align: center;
+  align-items: center;
+  header {
+    padding: 0;
+    height: 37vh;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  main {
+    height: auto;
+    min-height: 37vh;
+    align-items: center;
+    flex-direction: column;
+    .text-content {
+      text-align: left;
+      p {
+        margin: 1vh 0;
+      }
+      // TODO get rid of this
+      .no-margin-bottom {
+        margin-bottom: 0;
+      }
+      .sm-margin-bottom {
+        margin-bottom: 2vh;
+      }
+      .no-margin-top {
+        margin-top: 0;
+      }
+    }
+  }
+  footer {
+    justify-content: center;
+    button {
+      margin: 0 3vh;
+    }
+  }
+  .tl2 {
+    line-height: 1.4;
   }
 }
 
-@keyframes slide-up-fade-in {
-    0% {
-        opacity:0;
-        transform:  translate(0px,30px)  ;
-    }
-    100% {
-        opacity:1;
-        transform:  translate(0px,0px)  ;
-    }
+.no-action-info {
+  @extend .info;
+  main {
+    margin-top: 2vh;
+  }
+  header {
+    height: 40vh;
+  }
 }
 
-@keyframes slide-up-fade-in2 {
-    0% {
-      opacity:0;
-      transform:  translate(0px,30px)  ;
+.info-with-contact {
+  @extend .info;
+  header {
+    height: 36vh;
+  }
+  main {
+    min-height: 38vh;
+  }
+}
+
+.info-no-image {
+  @extend .info;
+  header {
+    height: 14vh;
+  }
+  main {
+    min-height: 60vh;
+  }
+}
+
+.choose_fiat_state, .insert_more_bills_state {
+  .inner-circle-button {
+    padding: 0 6vh;
+  }
+}
+
+.high_bill_state,
+.limit_reached_state,
+.invalid_address_state,
+.id_scan_failed_state,
+.id_scan_error_state,
+.unknown_phone_number_state {
+  img {
+    width: 24vh;
+  }
+}
+
+.redeem_later_state {
+  img {
+    width: 24.5vh;
+  }
+}
+
+.invalid_address_state {
+  img {
+    width: 22vh;
+  }
+}
+
+.max_phone_retries_state, .bad_phone_number_state {
+  img {
+    width: 21vh;
+    margin-left: 5vh;
+  }
+}
+
+.maintenance_state {
+  img {
+    width: 19vh;
+  }
+}
+
+.virgin_state {
+  img {
+    width: 17vh;
+  }
+}
+
+.restart_state {
+  img {
+    width: 70vh;
+  }
+}
+
+.sms_verification_state {
+  main {
+    text-align: left;
+  }
+  img {
+    width: 21vh;
+    margin-left: 4vh;
+  }
+}
+
+.error {
+  padding: 2vh;
+  width: 60%;
+  background-color: $white;
+  margin-bottom: 4vh;
+}
+
+#wifi-keyboard {
+  box-sizing: border-box;
+  #wifiPassCancel {
+    margin: 2vh 2vh auto auto;
+  }
+  .pass-top {
+    display: flex;
+    flex-direction: column;
+  }
+  .passphrase {
+    border: none;
+    text-align: center;
+    color: $white;
+    background-color: $sapphire;
+    margin-left: auto;
+  }
+  .connect-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .backspace {
+    font-size: 6vh;
+    margin: 0 1vh;
+    padding-bottom: 1.5vh;
+  }
+  .row {
+    justify-content: center;
+  }
+  .key {
+    box-sizing: border-box;
+    border: 0.1vh solid;
+    margin: 0.3vh;
+    &:active {
+      border: none;
     }
-    25% {
-      opacity:0;
-      transform:  translate(0px,30px)  ;
-    }
-    100% {
-      opacity:1;
-      transform:  translate(0px,0px)  ;
-    }
+  }
+  .special {
+    width: 19vh;
+  }
+  .space {
+    width: 91vh;
+  }
+  .entry {
+    display: flex;
+    padding: 0 2vh 6vh;
+  }
+}
+
+#networks {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 6vh;
+    position: absolute;
+    margin-left: 14vh;
+  }
+  .filled-action-button {
+    width: 40vh;
+    height: 10vh;
+    margin: 1vh;
+  }
+}
+
+.wifi-network-button .bar1 {
+  background-image: url('images/wifiicon/1.svg');
+}
+
+.wifi-network-button .bar2 {
+  background-image: url('images/wifiicon/2.svg');
+}
+
+.wifi-network-button .bar3 {
+  background-image: url('images/wifiicon/3.svg');
+}
+
+.wifi-network-button .bar4 {
+  background-image: url('images/wifiicon/4.svg');
+}
+
+#metrics {
+  font-size: 3vh;
+  position: absolute;
+  height: 18vh;
+  width: 26vw;
+  z-index: 10;
+  background-color: red;
 }

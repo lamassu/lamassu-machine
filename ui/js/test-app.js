@@ -120,4 +120,3 @@ function setupFakes () {
     updateCrypto(it)
   })
 }
-
