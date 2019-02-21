@@ -168,26 +168,26 @@ footer {
   @include Tagline-2
 }
 
-.deposit_network_down_state .mainv .header {
+.trouble_state .mainv .header {
   margin-top: 15vh;
 }
 
-.deposit_network_down_state .mainv .header h3 {
+.trouble_state .mainv .header h3 {
   margin-top: 6.79vh;
   margin-bottom: 0vh;
 }
 
-.deposit_network_down_state .mainv .info {
+.trouble_state .mainv .info {
   margin-top: 3.7vh;
   margin-bottom: 0vh;
 }
 
-.deposit_network_down_state .mainv .info p {
+.trouble_state .mainv .info p {
   margin-top: 0.3vh;
   margin-bottom: 0vh;
 }
 
-.deposit_network_down_state .mainv .info .contacts {
+.trouble_state .mainv .info .contacts {
   margin-top: 4.9vh;
   width: 40.5vw;
   background-color: $white;
@@ -197,23 +197,23 @@ footer {
   padding-right: 2.5vw;
 }
 
-.deposit_network_down_state .mainv .info .contacts table {
+.trouble_state .mainv .info .contacts table {
   width: 100%;
 }
 
-.deposit_network_down_state .mainv .info .contacts table:nth-child(2) {
+.trouble_state .mainv .info .contacts table:nth-child(2) {
   margin-top: 2.7vh;
 }
 
-.deposit_network_down_state .mainv .info .contacts td {
+.trouble_state .mainv .info .contacts td {
   width: 50%;
 }
 
-.deposit_network_down_state .mainv .info .contacts td div {
+.trouble_state .mainv .info .contacts td div {
   display: flex;
 }
 
-.deposit_network_down_state .mainv .info .contacts td div img {
+.trouble_state .mainv .info .contacts td div img {
   margin-right: 1.25vw;
 }
 
