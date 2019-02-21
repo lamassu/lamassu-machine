@@ -1,14 +1,24 @@
-<section class="viewport limit_reached_state cash-out-color" data-tr-section="limit-reached">
-  <section class="mainv">
-    <section class="header">
-      <img src="images/out-of-cash.svg"/>
-      <h3 class="js-i18n">We're all out of cash!</h3>
-    </section>
-    <section class="info">
-      <p class="d2 js-i18n">Please try again later.</p>
-    </section>
-    <section class="actions">
-      <span id="limit-reached-ok" class="button button-yes js-i18n" >OK</span>
-    </section>
-  </section>
+<section
+  class="viewport limit_reached_state info cash-in-color"
+  data-tr-section="limit-reached"
+  data-screentype="info-action-tp"
+>
+  <header>
+    <img src="images/out-of-coins.svg" />
+  </header>
+
+  <main>
+    <h3 class="js-i18n sm-margin-bottom">We're all out of coins!</h3>
+    <p class="js-i18n d2">Please try again later.</p>
+  </main>
+
+  <footer>
+    <button
+      id="limit-reached-ok"
+      display="inline-block"
+      class="filled-progress-button button ok js-i18n"
+    >
+      OK
+    </button>
+	</footer>
 </section>
