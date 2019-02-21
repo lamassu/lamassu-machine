@@ -233,6 +233,10 @@ function setupFakes () {
     $('.id_scan_failed_state'),
     $('.sanctions_failure_state'),
     $('.id_verification_error_state')
+    $('.facephoto_state')
+    $('.facephoto_permission_state')
+    $('.hard_limit_reached_state')
+    $('.photo_scan_failed_state')
   ]
 
   states.forEach(it => {
