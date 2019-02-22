@@ -1261,7 +1261,7 @@ function highBill (highestBill, reason) {
 }
 
 function minimumTx (lowestBill) {
-  t('lowest-bill', locale.translate('Please insert %s or more.')
+  t('lowest-bill', locale.translate('Minimum first bill is %s.')
     .fetch(formatFiat(lowestBill)))
   setScreen('minimum_tx')
   window.setTimeout(revertScreen, 3000)
