@@ -127,7 +127,7 @@
         </button>
       </footer>
     </section>
-    <section class="viewport waiting_state cash-in-color fiat-side" data-tr-section="cash-in-waiting">
+    <section class="viewport cash_in_waiting_state cash-in-color fiat-side" data-tr-section="cash-in-waiting">
       <section class="mainv">
         <section class="header">
     			<div class="sk-three-bounce">
@@ -689,7 +689,40 @@
             contact the operator to sort this out, or try again later.
           </p>
         </section>
-        <!-- TODO Contact card -->
+        <div class="contacts-compact">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>  
       </main>
     
       <footer>
@@ -998,32 +1031,16 @@
       </footer>
     </section>
     <section
-      class="viewport id_code_failed_state info"
-      data-tr-section="id-code-failed"
-      data-screentype="info-action-tp"
-    >
-      <header>
-        <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
-        <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
-      </header>
-      <main>
-        <h3 class="js-i18n sm-margin-bottom">Want to try again?</h3>
-        <p class="js-i18n d2">The code you entered did not match.</p>
-        <p class="js-i18n tl2 no-margin-top">You might want to give it another shot.</p>
-      </main>
-      <footer>
-        <button id="id-code-failed-retry" class="filled-progress-button button js-i18n">Try Again</button>
-        <button id="id-code-failed-cancel" class="bordered-progress-button button js-i18n">Cancel</button>
-      </footer>
-    </section>
-    <section
       class="viewport booting_state no-action-info system-color"
       data-tr-section="booting"
       data-screentype="system-tp"
     >
       <header>
-        <!-- TODO correct SVG -->
-        <!-- <img src="images/lamassu-logo.svg"/> -->
+        <div class="sk-three-bounce">
+          <div class="sk-child sk-bounce1"></div>
+          <div class="sk-child sk-bounce2"></div>
+          <div class="sk-child sk-bounce3"></div>
+        </div>
       </header>
       <main>
         <h2 class="js-i18n no-margin-bottom">Booting up...</h2>
@@ -1068,8 +1085,11 @@
       data-screentype="system-tp"
     >
       <header>
-        <!-- TODO correct SVG -->
-        <!-- <img src="images/lamassu-logo.svg"/> -->
+        <div class="sk-three-bounce">
+          <div class="sk-child sk-bounce1"></div>
+          <div class="sk-child sk-bounce2"></div>
+          <div class="sk-child sk-bounce3"></div>
+        </div>
       </header>
       <main>
         <h2 class="js-i18n">Pairing...</h2>
@@ -1186,7 +1206,40 @@
       <main>
         <h3 class="js-i18n xs-margin-bottom">Maintenance Required</h3>
         <p class="js-i18n d2">Please contact the operator.</p>
-        <!-- TODO Contact card -->
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>
       </main>
     </section>
     <section class="viewport terms_screen_state" data-tr-section="terms" data-screentype="exception-tp">
@@ -1233,7 +1286,11 @@
         </button>
       </footer>
     </section>
-    <section class="viewport trouble_state system-color" data-tr-section="trouble">
+    <section
+      class="viewport trouble_state system-color"
+      data-tr-section="trouble" 
+      data-screentype="info-contact-tp"
+    >
       <section class="mainv">
         <section class="header">
           <img src="images/network-down.svg"/>
@@ -1246,24 +1303,36 @@
             <table>
               <tr>
                 <td><div>
-                  <img src="images/operator.svg"/>
-                  <div class="d2"></div>
+                  <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                    <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                      <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                      <circle cx="9" cy="4" r="4"/>
+                    </g>
+                  </svg>
+                  <div class="d2 operator-name"></div>
                 </div></td>
                 <td><div>
-                  <img src="images/phone.svg"/>
-                  <div class="d2"></div>
+                  <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                    <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                  </svg>                
+                  <div class="d2 operator-phone"></div>
                 </div></td>
               </tr>
             </table>
             <table>
               <tr>
                 <td><div>
-                  <img src="images/email.svg"/>
-                  <div class="d2"></div>
+                  <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                    <g fill="none" stroke="#0E4160" stroke-width="2">
+                      <rect width="23" height="18" x="1" y="1" rx="2"/>
+                      <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                    </g>
+                  </svg>
+                  <div class="d2 operator-email"></div>
                 </div></td>
               </tr>
             </table>
-          </div>
+          </div>        
         </section>
       </section>
     </section>
@@ -1279,7 +1348,40 @@
           <p class="js-i18n no-margin-bottom">We're having some difficulties.</p>
           <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
         </div>
-        <!-- TODO Contact card -->
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>  
       </main>
       <footer>
         <button class="filled-progress-button button js-i18n" id="fiat-error-ok">OK</button>
@@ -1350,6 +1452,40 @@
           <p class="js-i18n no-margin-bottom">We could not read your ID card.</p>
           <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
         </div>
+        <div class="contacts-compact">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>
       </main>
       <footer>
         <button id="id-scan-failed-ok" class="filled-progress-button button js-i18n">OK</button>
@@ -1367,6 +1503,40 @@
         <div class="text-content d2">
           <p class="js-i18n no-margin-bottom">We are unable to process your transaction.</p>
           <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
+        </div>
+        <div class="contacts-compact">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
         </div>
       </main>
       <footer>
@@ -1388,6 +1558,40 @@
         <div class="text-content d2">
           <p class="js-i18n no-margin-bottom">Our system experienced an error.</p>
           <p class="js-i18n no-margin-top">Please feel free to try again, or contact the operator.</p>
+        </div>
+        <div class="contacts-compact">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
         </div>
       </main>
       <footer>
@@ -1560,7 +1764,40 @@
       <main>
         <h3 class="js-i18n xs-margin-bottom">This Machine Is Locked</h3>
         <p class="js-i18n d2">Please ask for assistance.</p>
-        <!-- TODO Contact card -->
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>
       </main>
     </section>
     
@@ -1622,7 +1859,40 @@
             Please contact the operator for more information.
           </p>
         </div>
-        <!-- TODO Contact card -->
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>  
       </main>
       <footer>
         <button id="photo-verification-failed-ok" class="filled-progress-button button js-i18n">
@@ -1647,7 +1917,40 @@
             Please contact the operator for more information.
           </p>
         </div>
-        <!-- TODO Contact card -->
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
+        </div>  
       </main>
       <footer>
         <button id="id-verification-failed-ok" class="filled-progress-button button js-i18n">OK</button>
@@ -1667,6 +1970,40 @@
             In order to process your transaction, we need to clarify
             some information about your account
           </p>
+        </div>
+        <div class="contacts">
+          <table>
+            <tr>
+              <td><div>
+                <svg class="operator-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="23" viewBox="0 0 20 23">
+                  <g fill="none" stroke="#0E4160" stroke-width="2" transform="translate(1 1)">
+                    <path d="M18,18.0710678 C18,14.1658249 13.9705627,11 9,11 C4.02943725,11 0,14.1658249 0,18.0710678 C0,21.9763107 18,21.9763107 18,18.0710678 Z"/>
+                    <circle cx="9" cy="4" r="4"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-name"></div>
+              </div></td>
+              <td><div>
+                <svg class="phone-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                  <path fill="none" stroke="#0E4160" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.7002669,20.223239 L13.711196,20.2297975 C15.6562993,21.4689271 18.2010434,21.1898683 19.8314843,19.5586416 L20.5200167,18.8699962 C21.1599944,18.2297203 21.1599944,17.1918329 20.5200167,16.551557 L17.621623,13.652688 C16.9814521,13.0126054 15.9437348,13.0126054 15.3035638,13.652688 C14.9960935,13.9604059 14.5789559,14.1332966 14.1439878,14.1332966 C13.7090196,14.1332966 13.2918821,13.9604059 12.9844117,13.652688 L8.34610748,9.01580946 C7.70612979,8.37553351 7.70612979,7.33764613 8.34610748,6.69737017 C8.65377493,6.38984942 8.82663729,5.97264343 8.82663729,5.53760399 C8.82663729,5.10256454 8.65377493,4.68535855 8.34610748,4.3778378 L5.44771378,1.48006196 C4.8075428,0.839979345 3.76982556,0.839979345 3.12965457,1.48006196 L2.44112214,2.16761421 C0.810162813,3.79832239 0.531149791,6.3434838 1.77007624,8.28890605 L1.77663369,8.29983693 C4.95311815,12.9996406 9.00065138,17.0470954 13.7002669,20.223239 Z"/>
+                </svg>                
+                <div class="d2 operator-phone"></div>
+              </div></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td><div>
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+                  <g fill="none" stroke="#0E4160" stroke-width="2">
+                    <rect width="23" height="18" x="1" y="1" rx="2"/>
+                    <path d="M1.25,1.25 L10.6895822,10.7124734 C11.4490451,11.4737781 12.6745541,11.4982808 13.4638408,10.7679416 L23.75,1.25"/>
+                  </g>
+                </svg>
+                <div class="d2 operator-email"></div>
+              </div></td>
+            </tr>
+          </table>
         </div>
       </main>
       <footer>

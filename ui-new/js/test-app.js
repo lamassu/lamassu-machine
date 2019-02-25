@@ -192,6 +192,9 @@ function setupFakes () {
   $('.js-pairing-error').text('Failure accessing server')
   $('.js-i18n-wifi-connect').text('You\'re connecting to the WiFi network Taranto')
   $('.js-i18n-wifi-connecting').html('This could take a few moments.')
+  $('.operator-name').html('Rafael Taranto')
+  $('.operator-phone').html('+55 82 2288-3828')
+  $('.operator-email').html('my-long-email@hotmail.com.br')
   $('#networks').html(`
     <div class="wifi-network-button filled-action-button tl2">
       <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>

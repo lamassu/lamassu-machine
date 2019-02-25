@@ -128,6 +128,7 @@ function processData (data) {
   if (data.terms) setTermsScreen(data.terms)
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
+  if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
 
   if (data.context) {
     $('.js-context').hide()
@@ -808,6 +809,18 @@ function setUpDirectionElement (element, direction) {
   } else {
     element.addClass('cash-in-color')
     element.removeClass('cash-out-color')
+  }
+}
+
+function setOperatorInfo (operator) {
+  console.log(`operator`, operator)
+  if (!operator || !operator.active) {
+    $('.contacts, .contacts-compact').addClass('hide')
+  } else {
+    $('.contacts, .contacts-compact').removeClass('hide')
+    $('.operator-name').text(operator.name)
+    $('.operator-email').text(operator.email)
+    $('.operator-phone').text(operator.phone)
   }
 }
 

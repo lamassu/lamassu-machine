@@ -187,7 +187,32 @@ footer {
   margin-bottom: 0vh;
 }
 
-.trouble_state .mainv .info .contacts {
+.cash-in-color .contacts, .cash-in-color .contacts-compact {
+  background-color: $amazonite-two;
+  .d2 {
+    color: $white;
+  }
+  path, circle, rect {
+    stroke: $white;
+  }
+}
+
+.cash-out-color .contacts, .cash-out-color .contacts-compact {
+  background-color: $salmon-two;
+  .d2 {
+    color: $white;
+  }
+  path, circle, rect {
+    stroke: $white;
+  }
+}
+
+.email-icon {
+  margin-top: 0.7vh;
+}
+
+.contacts,
+.contacts-compact {
   margin-top: 4.9vh;
   width: 40.5vw;
   background-color: $white;
@@ -195,26 +220,25 @@ footer {
   padding-bottom: 3vh;
   padding-left: 2.5vw;
   padding-right: 2.5vw;
+  table {
+    width: 100%;
+  }
+  &:nth-child(2) {
+    margin-top: 2.7vh;
+  }
+  td {
+    width: 50%;
+    div {
+      display: flex;
+      svg {
+        margin-right: 1.25vw;
+      }
+    }
+  }
 }
 
-.trouble_state .mainv .info .contacts table {
-  width: 100%;
-}
-
-.trouble_state .mainv .info .contacts table:nth-child(2) {
-  margin-top: 2.7vh;
-}
-
-.trouble_state .mainv .info .contacts td {
-  width: 50%;
-}
-
-.trouble_state .mainv .info .contacts td div {
-  display: flex;
-}
-
-.trouble_state .mainv .info .contacts td div img {
-  margin-right: 1.25vw;
+.contacts-compact {
+  margin: 1.9vh 0;
 }
 
 .deposit_timeout_state .mainv .header {
