@@ -54,6 +54,10 @@ msgstr "Please make sure you're entering the six digit code you receive from us.
 msgid "Try again"
 msgstr "Try again"
 
+#: On screen: cash-in-waiting
+msgid "One moment..."
+msgstr "One moment..."
+
 #: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
@@ -86,6 +90,26 @@ msgstr "Your coins are on their way to:"
 msgid "Tap anywhere on the screen when you're done."
 msgstr "Tap anywhere on the screen when you're done."
 
+#: On screen: deposit-timeout
+msgid "Nothing yet."
+msgstr "Nothing yet."
+
+#: On screen: deposit-timeout
+msgid "No coins are showing up."
+msgstr "No coins are showing up."
+
+#: On screen: deposit-timeout
+msgid "Have you sent the BTC yet?"
+msgstr "Have you sent the BTC yet?"
+
+#: On screen: deposit-timeout
+msgid "Yes, I have"
+msgstr "Yes, I have"
+
+#: On screen: deposit-timeout
+msgid "No, I haven't"
+msgstr "No, I haven't"
+
 #: On screen: deposit
 msgid "Send Coins"
 msgstr "Send Coins"
@@ -103,8 +127,40 @@ msgid "Dispensing..."
 msgstr "Dispensing..."
 
 #: On screen: dispensing
+msgid "Please wait while we dispense your cash."
+msgstr "Please wait while we dispense your cash."
+
+#: On screen: dispensing
 msgid "All set"
 msgstr "All set"
+
+#: On screen: facephoto-permission
+msgid "May we?"
+msgstr "May we?"
+
+#: On screen: facephoto-permission
+msgid "In order to continue this transaction, we need to snap a photo of you to comply with local lays. Is this ok?"
+msgstr "In order to continue this transaction, we need to snap a photo of you to comply with local lays. Is this ok?"
+
+#: On screen: facephoto-permission
+msgid "Yes, take photo"
+msgstr "Yes, take photo"
+
+#: On screen: facephoto-permission
+msgid "No, finish up"
+msgstr "No, finish up"
+
+#: On screen: facephoto
+msgid "Look into the camera"
+msgstr "Look into the camera"
+
+#: On screen: facephoto
+msgid "We didn't get a good picture of you."
+msgstr "We didn't get a good picture of you."
+
+#: On screen: facephoto
+msgid "Please look into the camera located abovethe screen."
+msgstr "Please look into the camera located abovethe screen."
 
 #: On screen: fiat-complete
 msgid "Thank you!"
@@ -121,6 +177,22 @@ msgstr "Tap anywhere on the screen when you're done."
 #: On screen: goodbye
 msgid "See you!"
 msgstr "See you!"
+
+#: On screen: hard-limit-reached
+msgid "Temporary limit reached"
+msgstr "Temporary limit reached"
+
+#: On screen: hard-limit-reached
+msgid "Apologies. We've reached out mandated per-user limit."
+msgstr "Apologies. We've reached out mandated per-user limit."
+
+#: On screen: hard-limit-reached
+msgid "Please come back on: February 7th 2019 at 05:00pm."
+msgstr "Please come back on: February 7th 2019 at 05:00pm."
+
+#: On screen: hard-limit-reached
+msgid "OK"
+msgstr "OK"
 
 #: On screen: insert-bills
 msgid "Insert a bill"
@@ -193,6 +265,50 @@ msgstr "You've hit the maximum number of retries. Please contact the operator to
 #: On screen: max-phone-retries
 msgid "OK"
 msgstr "OK"
+
+#: On screen: minimum-tx
+msgid "More, please"
+msgstr "More, please"
+
+#: On screen: out-of-cash
+msgid "We're all out of cash!"
+msgstr "We're all out of cash!"
+
+#: On screen: out-of-cash
+msgid "Please try again later."
+msgstr "Please try again later."
+
+#: On screen: out-of-cash
+msgid "OK"
+msgstr "OK"
+
+#: On screen: pending-deposit
+msgid "Funds Received!"
+msgstr "Funds Received!"
+
+#: On screen: pending-deposit
+msgid "Authorizing..."
+msgstr "Authorizing..."
+
+#: On screen: photo-scan-failed
+msgid "Want to try again?"
+msgstr "Want to try again?"
+
+#: On screen: photo-scan-failed
+msgid "The document you've shown did not match."
+msgstr "The document you've shown did not match."
+
+#: On screen: photo-scan-failed
+msgid "You might want to give it another shot."
+msgstr "You might want to give it another shot."
+
+#: On screen: photo-scan-failed
+msgid "Try again"
+msgstr "Try again"
+
+#: On screen: photo-scan-failed
+msgid "Cancel"
+msgstr "Cancel"
 
 #: On screen: register-phone
 msgid "Phone Number"
@@ -286,150 +402,6 @@ msgstr "No, send coins"
 msgid "No, cancel"
 msgstr "No, cancel"
 
-#: On screen: out-of-cash
-msgid "Out of cash"
-msgstr "Out of cash"
-
-#: On screen: out-of-cash
-msgid "Sorry, but we're all out of cash!"
-msgstr "Sorry, but we're all out of cash!"
-
-#: On screen: out-of-cash
-msgid "Please contact the operator for assistance."
-msgstr "Please contact the operator for assistance."
-
-#: On screen: waiting
-msgid "One moment"
-msgstr "One moment"
-
-#: On screen: cash-in-waiting
-msgid "One moment"
-msgstr "One moment"
-
-#: On screen: deposit-timeout
-msgid "Nothing yet..."
-msgstr "Nothing yet..."
-
-#: On screen: deposit-timeout
-msgid "No coins are showing up."
-msgstr "No coins are showing up."
-
-#: On screen: deposit-timeout
-msgid "Yes, I have"
-msgstr "Yes, I have"
-
-#: On screen: deposit-timeout
-msgid "No, I haven't"
-msgstr "No, I haven't"
-
-#: On screen: pending-deposit
-msgid "Funds received!"
-msgstr "Funds received!"
-
-#: On screen: pending-deposit
-msgid "We've received your payment."
-msgstr "We've received your payment."
-
-#: On screen: pending-deposit
-msgid "Authorizing..."
-msgstr "Authorizing..."
-
-#: On screen: minimum-tx
-msgid "More, Please."
-msgstr "More, Please."
-
-#: On screen: id-code-failed
-msgid "Want to try again?"
-msgstr "Want to try again?"
-
-#: On screen: id-code-failed
-msgid "The code you entered did not match."
-msgstr "The code you entered did not match."
-
-#: On screen: id-code-failed
-msgid "You might want to give it another shot."
-msgstr "You might want to give it another shot."
-
-#: On screen: id-code-failed
-msgid "Try Again"
-msgstr "Try Again"
-
-#: On screen: id-code-failed
-msgid "Cancel"
-msgstr "Cancel"
-
-#: On screen: photo-scan-failed
-msgid "Want to try again?"
-msgstr "Want to try again?"
-
-#: On screen: photo-scan-failed
-msgid "The document you've shown did not match."
-msgstr "The document you've shown did not match."
-
-#: On screen: photo-scan-failed
-msgid "You might want to give it another shot."
-msgstr "You might want to give it another shot."
-
-#: On screen: photo-scan-failed
-msgid "Try Again"
-msgstr "Try Again"
-
-#: On screen: photo-scan-failed
-msgid "Cancel"
-msgstr "Cancel"
-
-#: On screen: hard-limit-reached
-msgid "Temporary limit reached"
-msgstr "Temporary limit reached"
-
-#: On screen: hard-limit-reached
-msgid "You've been busy! Let us cool off for a couple of days and try again."
-msgstr "You've been busy! Let us cool off for a couple of days and try again."
-
-#: On screen: hard-limit-reached
-msgid "OK"
-msgstr "OK"
-
-#: On screen: trouble
-msgid "Sorry!"
-msgstr "Sorry!"
-
-#: On screen: trouble
-msgid "We're down for the moment."
-msgstr "We're down for the moment."
-
-#: On screen: trouble
-msgid "Please contact the operator."
-msgstr "Please contact the operator."
-
-#: On screen: unconfirmed-deposit
-msgid "Almost there"
-msgstr "Almost there"
-
-#: On screen: unconfirmed-deposit
-msgid "Your order is in the system, but it hasn't yet been confirmed on the blockchain."
-msgstr "Your order is in the system, but it hasn't yet been confirmed on the blockchain."
-
-#: On screen: unconfirmed-deposit
-msgid "Please wait until you receive a text message from us, then come back for your cash."
-msgstr "Please wait until you receive a text message from us, then come back for your cash."
-
-#: On screen: unconfirmed-deposit
-msgid "OK"
-msgstr "OK"
-
-#: On screen: deposit-network-down
-msgid "Network Down"
-msgstr "Network Down"
-
-#: On screen: deposit-network-down
-msgid "Sorry, we're down for the moment. Please come back later."
-msgstr "Sorry, we're down for the moment. Please come back later."
-
-#: On screen: deposit-network-down
-msgid "OK"
-msgstr "OK"
-
 #: On screen: booting
 msgid "Booting up..."
 msgstr "Booting up..."
@@ -509,6 +481,18 @@ msgstr "I agree"
 #: On screen: terms
 msgid "Cancel"
 msgstr "Cancel"
+
+#: On screen: trouble
+msgid "Network down"
+msgstr "Network down"
+
+#: On screen: trouble
+msgid "Sorry, we are down for the moment."
+msgstr "Sorry, we are down for the moment."
+
+#: On screen: trouble
+msgid "Please contact the operator."
+msgstr "Please contact the operator."
 
 #: On screen: fiat-error
 msgid "Oops!"
@@ -642,6 +626,58 @@ msgstr "Please cash out at a machine that handles your currency."
 msgid "OK"
 msgstr "OK"
 
+#: On screen: deposit-network-down
+msgid "Network Down"
+msgstr "Network Down"
+
+#: On screen: deposit-network-down
+msgid "Sorry, we're down for the moment."
+msgstr "Sorry, we're down for the moment."
+
+#: On screen: deposit-network-down
+msgid "Please come back later."
+msgstr "Please come back later."
+
+#: On screen: deposit-network-down
+msgid "OK"
+msgstr "OK"
+
+#: On screen: id-code-failed
+msgid "Want to try again?"
+msgstr "Want to try again?"
+
+#: On screen: id-code-failed
+msgid "The code you entered did not match."
+msgstr "The code you entered did not match."
+
+#: On screen: id-code-failed
+msgid "You might want to give it another shot."
+msgstr "You might want to give it another shot."
+
+#: On screen: id-code-failed
+msgid "Try Again"
+msgstr "Try Again"
+
+#: On screen: id-code-failed
+msgid "Cancel"
+msgstr "Cancel"
+
+#: On screen: unconfirmed-deposit
+msgid "Almost there"
+msgstr "Almost there"
+
+#: On screen: unconfirmed-deposit
+msgid "We see your transaction but we're still waiting for confirmation. This take 10 minutes on average but can take up to an hour or two."
+msgstr "We see your transaction but we're still waiting for confirmation. This take 10 minutes on average but can take up to an hour or two."
+
+#: On screen: unconfirmed-deposit
+msgid "Please come back for you cash and press Redeem when you get our text message."
+msgstr "Please come back for you cash and press Redeem when you get our text message."
+
+#: On screen: unconfirmed-deposit
+msgid "OK"
+msgstr "OK"
+
 #: On screen: unknown-phone-number
 msgid "All set"
 msgstr "All set"
@@ -754,17 +790,17 @@ msgstr "Verifying photo card…"
 msgid "This could take a few seconds."
 msgstr "This could take a few seconds."
 
+#: On screen: waiting
+msgid "One moment..."
+msgstr "One moment..."
+
 #: On screen: wifi
-msgid "Select a WiFi network"
-msgstr "Select a WiFi network"
+msgid "Select a WiFi network Only secured networks are shown."
+msgstr "Select a WiFi network Only secured networks are shown."
 
 #: On screen: wifi
 msgid "Only secured networks are shown."
 msgstr "Only secured networks are shown."
-
-#: On screen: wifi
-msgid "Lamassu Cryptomat"
-msgstr "Lamassu Cryptomat"
 
 #: On screen: wifi-password
 msgid "WiFi password"
@@ -859,8 +895,8 @@ msgid "Please insert %s or less."
 msgstr "Please insert %s or less."
 
 #: On screen: dynamic
-msgid "Please insert %s or more."
-msgstr "Please insert %s or more."
+msgid "Minimum first bill is %s."
+msgstr "Minimum first bill is %s."
 
 #: On screen: dynamic
 msgid "Error in validation."

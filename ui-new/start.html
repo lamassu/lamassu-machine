@@ -376,13 +376,13 @@
     
       <main class="lg-margin-top">
         <section class="primary-side">
-          <p class="d2 no-margin-top" style="visibility: hidden;">placeholder</p>
+          <p class="d2 no-margin-top batch"></p>
           <h2 class="js-i18n no-margin-top xs-margin-bottom">Dispensing...</h2>
-          <p class="d1 no-margin-top">
-            Please wait while we
-            <br />
-            dispense your cash.
-          </p>
+          <div class="text-content">
+            <p class="d1 no-margin-top js-i18n">
+              Please wait while we dispense your cash.
+            </p>
+          </div>
         </section>
     
         <section class="secondary-side with-image">
@@ -1707,18 +1707,23 @@
         <button id="id-code-failed-retry" class="filled-progress-button button js-i18n">Try Again</button>
         <button id="id-code-failed-cancel" class="bordered-progress-button button js-i18n">Cancel</button>
       </footer>
-    </section><section class="viewport unconfirmed_deposit_state cash-out-color" data-tr-section="unconfirmed-deposit">
+    </section>
+    <section class="viewport unconfirmed_deposit_state cash-out-color" data-tr-section="unconfirmed-deposit">
       <section class="mainv">
         <section class="header">
           <img src="images/almost-there.svg"/>
           <h3 class="js-i18n">Almost there</h3>
         </section>
         <section class="info">
-          <p class="js-i18n d2">We see your transaction but we're still waiting for<br/>
-                                confirmation. This take 10 minutes on average but<br/>
-    														can take up to an hour or two.</p>
-          <p class="js-i18n d2">Please come back for you cash and press <b>Redeem</b><br/>
-    			                      when you get our text message.</p>
+          <p class="js-i18n d2">
+            We see your transaction but we're still waiting for
+            confirmation. This take 10 minutes on average but
+            can take up to an hour or two.
+          </p>
+          <p class="js-i18n d2">
+            Please come back for you cash and press <b>Redeem</b>
+            when you get our text message.
+          </p>
         </section>
         <section class="actions">
           <span class="button button-yes js-i18n" id="unconfirmed-deposit-ok">OK</span>

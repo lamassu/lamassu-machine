@@ -813,7 +813,6 @@ function setUpDirectionElement (element, direction) {
 }
 
 function setOperatorInfo (operator) {
-  console.log(`operator`, operator)
   if (!operator || !operator.active) {
     $('.contacts, .contacts-compact').addClass('hide')
   } else {
@@ -1494,8 +1493,7 @@ function fiatComplete (tx) {
 
 function dispenseBatch (data) {
   $('.batch').toggleClass('hide', data.of === 1)
-  $('.dispensing_state.fiat-side .js-current-batch').text(data.current)
-  $('.dispensing_state.fiat-side .js-of-batch').text(data.of)
+  $('.batch').text(`${data.current}/${data.of}`)
 }
 
 function initDebug () {
