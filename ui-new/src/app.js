@@ -837,7 +837,8 @@ function setDirection (direction) {
     $('.facephoto_state'),
     $('.facephoto_permission_state'),
     $('.hard_limit_reached_state'),
-    $('.photo_scan_failed_state')
+    $('.photo_scan_failed_state'),
+    $('.id_code_failed_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
