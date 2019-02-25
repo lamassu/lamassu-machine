@@ -1,5 +1,7 @@
-.cash-in-color .sk-three-bounce .sk-child {
-  background-color: $sapphire;
+.cash-in-color, .system-color {
+  .sk-three-bounce .sk-child {
+    background-color: $sapphire;
+  }
 }
 
 .cash-out-color .sk-three-bounce .sk-child {
