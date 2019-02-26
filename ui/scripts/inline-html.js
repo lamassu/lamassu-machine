@@ -1,14 +1,14 @@
 const fs = require('fs')
 
-const BUILD_PATH = 'ui-new/start.html'
+const BUILD_PATH = 'ui/start.html'
 
-let head = fs.readFileSync('ui-new/html/head.html', 'utf8')
+let head = fs.readFileSync('ui/html/head.html', 'utf8')
 
 let content = ''
 
-fs.readdirSync('ui-new/html/').forEach(it => {
+fs.readdirSync('ui/html/').forEach(it => {
   if (!it.endsWith('head.html')) {
-    content += fs.readFileSync(`ui-new/html/${it}`)
+    content += fs.readFileSync(`ui/html/${it}`)
   }
 })
 
