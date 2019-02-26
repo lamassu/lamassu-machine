@@ -1,4 +1,4 @@
-/* globals $, formatE164, formatInternational */
+/* globals $, formatE164, libphonenumber */
 var TIMEOUT = 120000
 var LENGTHS = {
   phoneNumber: 15,
@@ -26,10 +26,18 @@ var Keypad = function (keypadId, opts, callback) {
     if (target.hasClass('enter')) {
       self.deactivate()
       var result = self.type === 'phoneNumber'
-      ? formatE164(self.opts.country, self.result)
-      : self.result
+        ? formatE164(self.opts.country, self.result)
+        : self.result
       self.reset()
       return self.callback(result)
+    }
+
+    if (target.hasClass('backspace')) {
+      return self.backspace()
+    }
+
+    if (target.hasClass('plus')) {
+      return self._keyPress({ text: () => '+' })
     }
 
     if (target.hasClass('key')) {
@@ -67,21 +75,57 @@ Keypad.prototype.reset = function reset () {
   this.keypad.find('.box').text('')
   this.count = 0
   this.result = ''
+  this.keypad.find('.phone-separator').addClass('hidden')
+  this.keypad.find('.enter')[0].disabled = true
+
   if (this.type === 'phoneNumber') {
-    this.keypad.find('.enter-plus').removeClass('enter').addClass('plus').text('+')
+    this.keypad.find('.backspace-plus').removeClass('backspace').addClass('plus').html('<img class="plus" src="images/plus.svg" />')
+  }
+}
+
+Keypad.prototype.backspace = function backspace () {
+  this.keypad.find('.box').text('')
+
+  this.result = this.result.substring(0, this.result.length - 1)
+
+  var display = this.type === 'phoneNumber'
+    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
+    : this.result
+
+  if (!display) {
+    this.keypad.find('.phone-separator').addClass('hidden')
+  }
+
+  this.keypad.find('.box').text(display)
+
+  if (this.type === 'phoneNumber' && !this.result) {
+    this.keypad.find('.backspace-plus').removeClass('backspace').addClass('plus').html('<img class="plus" src="images/plus.svg" />')
+  }
+
+  if (!this.result) {
+    this.keypad.find('.enter')[0].disabled = true
   }
 }
 
 Keypad.prototype._keyPress = function _keyPress (target) {
   if (this.result.replace('+', '').length >= LENGTHS[this.type]) return
-  if (this.result.length > 0 && this.type === 'phoneNumber') {
-    this.keypad.find('.enter-plus').addClass('enter').removeClass('plus').text('Enter')
-  }
   var numeral = target.text()
   this.result += numeral
-  var display = this.type === 'phoneNumber'
-  ? formatInternational(this.opts.country, this.result)
-  : this.result
+  var display = this.type === 'phoneNumber' && this.result
+    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
+    : this.result
+
+  if (display) {
+    this.keypad.find('.phone-separator').removeClass('hidden')
+  }
 
   this.keypad.find('.box').text(display)
+
+  if (this.result.length > 0 && this.type === 'phoneNumber') {
+    this.keypad.find('.backspace-plus').addClass('backspace').removeClass('plus').html('<img class="backspace" src="images/delete-keypad.svg" />')
+  }
+
+  if (this.result.length > 0 && this.result !== '+') {
+    this.keypad.find('.enter')[0].disabled = false
+  }
 }
