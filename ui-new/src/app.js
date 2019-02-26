@@ -14,6 +14,7 @@ var currentPage = 0
 var totalPages = 0
 var aspectRatio800 = true
 var isTwoWay = null
+var isRTL = false
 
 var fiatCode = null
 var locale = null
@@ -263,13 +264,12 @@ function blockedCustomer () {
 function chooseCoin (coins, twoWayMode) {
   if (twoWayMode) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
-    $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
-    $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
   }
 
   isTwoWay = twoWayMode
+  setChooseCoinColors()
   setupAnimation(twoWayMode, aspectRatio800)
 
   const defaultCoin = coins[0]
@@ -978,7 +978,10 @@ function setLocale (data) {
 
   var isArabic = jsLocaleCode.indexOf('ar-') === 0
   var isHebrew = jsLocaleCode.indexOf('he-') === 0
-  var isRTL = isArabic || isHebrew
+  isRTL = isArabic || isHebrew
+  console.log(isRTL, 'rtl')
+
+  setChooseCoinColors()
 
   if (isRTL) {
     $('body').addClass('i18n-rtl')
@@ -1007,6 +1010,22 @@ function setLocale (data) {
   $('.js-two-language').html(otherLanguageName())
 
   if (lastRates) setExchangeRate(lastRates)
+}
+
+function setChooseCoinColors () {
+  if (isTwoWay && isRTL) {
+    $('#coin-redeem').addClass('cash-in-color')
+    $('#coin-redeem').removeClass('cash-out-color')
+  } else {
+    $('#coin-redeem').addClass('cash-out-color')
+    $('#coin-redeem').removeClass('cash-in-color')
+  }
+
+  if (isTwoWay && !isRTL) {
+    $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
+  } else {
+    $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
+  }
 }
 
 function areArraysEqual (arr1, arr2) {

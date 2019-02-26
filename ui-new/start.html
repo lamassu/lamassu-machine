@@ -29,7 +29,7 @@
     <script src="js/vendor/langmap.js"></script>
     <script src="js/url-search-params.js"></script>
     <script src="../node_modules/bignumber.js/bignumber.min.js"></script>
-    <script src="js/test-app.js"></script>
+    <script src="js/app.js"></script>
   </head>
   
   <body>
@@ -308,21 +308,19 @@
         <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
       </footer>
     </section>
-    <section class="viewport deposit_timeout_state cash-out-color" data-tr-section="deposit-timeout">
-      <section class="mainv">
-        <section class="header">
-          <img src="images/nothing-yet.svg"/>
-          <h3 class="js-i18n">Nothing yet.</h3>
-        </section>
-        <section class="info">
-          <p class="js-i18n d2">No coins are showing up.</p>
-          <p class="js-i18n d2b">Have you sent the BTC yet?</p>
-        </section>
-        <section class="actions">
-          <span class="button button-yes js-i18n" id="deposit-timeout-sent-yes">Yes, I have</span>
-          <span class="button button-no js-i18n" id="deposit-timeout-sent-no">No, I haven't</span>
-        </section>
-      </section>
+    <section class="viewport deposit_timeout_state info cash-out-color" data-tr-section="deposit-timeout">
+      <header>
+        <img src="images/nothing-yet.svg"/>
+      </header>
+      <main>
+        <h3 class="js-i18n sm-margin-bottom">Nothing yet.</h3>
+        <p class="js-i18n d2">No coins are showing up.</p>
+        <p class="js-i18n d2b no-margin-top">Have you sent the BTC yet?</p>
+      </main>
+      <footer>
+        <button class="button filled-progress-button js-i18n" id="deposit-timeout-sent-yes">Yes, I have</span>
+        <button class="button bordered-progress-button js-i18n" id="deposit-timeout-sent-no">No, I haven't</span>
+      </footer>
     </section>
     <section
       class="viewport deposit_state cash-out-color"
@@ -430,6 +428,7 @@
                         a photo of you to comply with local lays. Is this ok?</p>
         </section>
         <section class="actions">
+          <!-- TODO RTL buttons -->
           <span class="button button-yes js-i18n" id="facephoto-permission-yes">Yes, take photo</span>
           <span class="button button-no js-i18n" id="facephoto-permission-no">No, finish up</span>
         </section>
@@ -777,6 +776,7 @@
           <p class="js-i18n d2b">You might want to give it another shot.</p>
         </section>
         <section class="actions">
+          <!-- TODO RTL buttons -->
           <span class="button button-yes js-i18n" id="photo-scan-failed-retry">Try again</span>
           <span class="button button-no js-i18n" id="photo-scan-failed-cancel">Cancel</span>
         </section>
