@@ -130,6 +130,7 @@ function processData (data) {
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
+  if (data.machineVersion) setMachineVersion(data.machineVersion)
 
   if (data.context) {
     $('.js-context').hide()
@@ -823,9 +824,16 @@ function setOperatorInfo (operator) {
   }
 }
 
+function setMachineVersion (version) {
+  const versions = ['sintra', 'douro']
+  const body = $('body')
+
+  versions.forEach(it => body.removeClass(it))
+  $('body').addClass(version)
+}
+
 function setDirection (direction) {
   let states = [
-    $('.scan_address_state'),
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
