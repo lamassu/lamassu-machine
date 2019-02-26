@@ -131,8 +131,8 @@ footer {
 .cash-out-color .mainv .actions .button-no {
   border: 2px solid $purple-grey;
   color: $purple-grey;
-  @include museo-bold
-  @include Tagline-2
+  @include museo-bold;
+  @include Tagline-2;
 }
 
 .cash-out-color .mainv .actions .button-yes:active,
@@ -140,23 +140,23 @@ footer {
   border: 2px solid $white;
   background: $white;
   color: $purple-grey;
-  @include museo-bold
-  @include Tagline-2
+  @include museo-bold;
+  @include Tagline-2;
 }
 
 .cash-in-color .mainv .actions .button-yes {
   border: 2px solid $sapphire;
   background: $sapphire;
   color: $white;
-  @include museo-bold
-  @include Tagline-2
+  @include museo-bold;
+  @include Tagline-2;
 }
 
 .cash-in-color .mainv .actions .button-no {
   border: 2px solid $sapphire;
   color: $sapphire;
-  @include museo-bold
-  @include Tagline-2
+  @include museo-bold;
+  @include Tagline-2;
 }
 
 .cash-in-color .mainv .actions .button-yes:active,
@@ -164,8 +164,8 @@ footer {
   border: 2px solid $white;
   background: $white;
   color: $sapphire;
-  @include museo-bold
-  @include Tagline-2
+  @include museo-bold;
+  @include Tagline-2;
 }
 
 .trouble_state .mainv .header {
@@ -241,31 +241,8 @@ footer {
   margin: 1.9vh 0;
 }
 
-.deposit_timeout_state .mainv .header {
-  margin-top: 9vh;
-}
-
-.deposit_timeout_state .mainv .header img {
+.deposit_timeout_state img {
   width: 12.8vw;
-}
-
-.deposit_timeout_state .mainv .header h3 {
-  margin-top: 5vh;
-  margin-bottom: 0;
-}
-
-.deposit_timeout_state .mainv .info {
-  margin-top: 5.1vh;
-  text-align: right;
-  margin-right: 7.3vw;
-}
-
-.deposit_timeout_state .mainv .info .db2 {
-  margin-top: 2vh;
-}
-
-.deposit_timeout_state .mainv .actions {
-  margin-top: 12vh;
 }
 
 .facephoto_permission_state .mainv .header {
@@ -508,8 +485,10 @@ footer {
   padding-right: 3.5vw;
 }
 
-.waiting_state .mainv .header {
-  margin-top: 36.6vh;
+.waiting_state, .cash_in_waiting_state {
+  .mainv .header {
+    margin-top: 36.6vh;
+  }
 }
 
 .primary-side {
@@ -1209,4 +1188,57 @@ footer {
   width: 26vw;
   z-index: 10;
   background-color: red;
+}
+
+.keypad {
+  direction: ltr;
+}
+
+.i18n-rtl {
+  font-family: 'Noto Sans Hebrew';
+  direction: rtl;
+  .primary-side {
+    padding-left: 0;
+    padding-right: 9.4vw;
+  }
+  .cash-buttons {
+    padding-right: 8vw;
+    padding-left: 0;
+  }
+  .contacts,
+  .contacts-compact {
+    td div svg {
+      margin-left: 1.25vw;
+      margin-right: 0;
+    }
+  }
+  .info main .text-content {
+    text-align: right;
+  }
+  .insert_more_bills_state footer {
+    margin-right: 15vh;
+    margin-left: 0;
+  }
+  #networks img {
+    margin-right: 14vh;
+    margin-left: 0;
+  }
+  .scan-image {
+    margin-right: 10vh;
+    margin-left: 0;
+  }
+  .unconfirmed_deposit_state .mainv .info {
+    text-align: right;
+  }
+  .crypto-rate {
+    margin-left: auto;
+    margin-right: 0;
+  }
+  .coin-redeem {
+    margin-right: auto;
+    margin-left: 0;
+  }
+  .choose_coin_state main {
+    direction: ltr;
+  }
 }
