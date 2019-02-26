@@ -15,6 +15,7 @@ var totalPages = 0
 var aspectRatio800 = true
 var isTwoWay = null
 var isRTL = false
+var two = null
 
 var fiatCode = null
 var locale = null
@@ -271,7 +272,7 @@ function chooseCoin (coins, twoWayMode) {
 
   isTwoWay = twoWayMode
   setChooseCoinColors()
-  setupAnimation(twoWayMode, aspectRatio800)
+  // setupAnimation(twoWayMode, aspectRatio800)
 
   const defaultCoin = coins[0]
 
@@ -617,9 +618,7 @@ $(document).ready(function () {
 
   const cashInBox = $('.cash-in-box')
   cashInBox.click(() => {
-    doTransition(
-      () => buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' })
-    )
+    buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' })
   })
 
   const cashOutBox = $('.cash-out-box')
@@ -899,7 +898,6 @@ function startPage (text) {
   $screen.find('.js-terms-text').html(text)
   currentPage = 0
   totalPages = 0
-  console.log('start')
   updateButtonStyles()
   setTimeout(function () {
     const div = document.getElementById('js-terms-text-div')
@@ -987,9 +985,9 @@ function setLocale (data) {
   var isArabic = jsLocaleCode.indexOf('ar-') === 0
   var isHebrew = jsLocaleCode.indexOf('he-') === 0
   isRTL = isArabic || isHebrew
-  console.log(isRTL, 'rtl')
 
   setChooseCoinColors()
+  // setupAnimation(isTwoWay, aspectRatio800)
 
   if (isRTL) {
     $('body').addClass('i18n-rtl')
@@ -1021,15 +1019,11 @@ function setLocale (data) {
 }
 
 function setChooseCoinColors () {
-  if (isTwoWay && isRTL) {
-    $('#coin-redeem').addClass('cash-in-color')
-    $('#coin-redeem').removeClass('cash-out-color')
-  } else {
-    $('#coin-redeem').addClass('cash-out-color')
-    $('#coin-redeem').removeClass('cash-in-color')
-  }
+  var elem = $('#bg-to-show')
+  let img = `images/background/${isTwoWay ? '2way' : '1way'}-${aspectRatio800 ? '800' : '1080'}${isRTL && isTwoWay ? '-rtl' : ''}.svg`
+  elem.empty().html(`<img class="bg-image" src=${img} />`)
 
-  if (isTwoWay && !isRTL) {
+  if (isTwoWay) {
     $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
   } else {
     $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
@@ -1561,6 +1555,7 @@ function doTransition (cb) {
     toShowOver = ['header', 'main']
   }
 
+  two.start()
   var tl = new TimelineMax()
   tl.set('.fade-in-delay', { opacity: 0, y: +30 })
     .set('.fade-in', { opacity: 0, y: +30 })
@@ -1576,6 +1571,7 @@ function doTransition (cb) {
     .set(background, { scale: 1 })
     .set(toShow, { zIndex: -1 })
     .set(toShowOver, { zIndex: 0 })
+  two.pause()
 }
 
 function setupAnimation (isTwoWay, isAr800) {
@@ -1583,8 +1579,9 @@ function setupAnimation (isTwoWay, isAr800) {
   while (elem.firstChild) {
     elem.removeChild(elem.firstChild)
   }
-  var two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem)
+  two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem)
 
-  background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
+  let elementId = `${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}${isRTL && isTwoWay ? '-rtl' : ''}`
+  background = two.interpret(document.getElementById(elementId))
   background.scale = 1
 }
