@@ -19,6 +19,7 @@ let aspectRatio800 = true
 
 $(function () {
   $('body').css('cursor', 'default')
+  $('body').addClass('sintra')
 
   const width = $('body').width()
   const height = $('body').height()
@@ -215,7 +216,6 @@ function setupFakes () {
   `)
 
   let states = [
-    $('.scan_address_state'),
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
