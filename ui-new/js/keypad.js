@@ -1,4 +1,4 @@
-/* globals $, formatE164, formatInternational */
+/* globals $, formatE164, libphonenumber */
 var TIMEOUT = 120000
 var LENGTHS = {
   phoneNumber: 15,
@@ -89,7 +89,7 @@ Keypad.prototype.backspace = function backspace () {
   this.result = this.result.substring(0, this.result.length - 1)
 
   var display = this.type === 'phoneNumber'
-    ? formatInternational(this.opts.country, this.result)
+    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
     : this.result
 
   if (!display) {
@@ -112,7 +112,7 @@ Keypad.prototype._keyPress = function _keyPress (target) {
   var numeral = target.text()
   this.result += numeral
   var display = this.type === 'phoneNumber' && this.result
-    ? formatInternational(this.opts.country, this.result)
+    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
     : this.result
 
   if (display) {
