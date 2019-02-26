@@ -761,10 +761,7 @@ function setState (state, delay) {
   } else setScreen(currentState, previousState)
 
   if (state === 'insert_more_bills') {
-    $('#limit-reached-section').css({'display': 'none'})
-    $('#insert-another').css({'display': 'block'})
     t('or', locale.translate('OR').fetch())
-    $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
   }
 }
 
@@ -840,7 +837,6 @@ function setDirection (direction) {
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
     $('.verifying_id_state'),
-    $('.sending_coins_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
@@ -1314,7 +1310,6 @@ function sendOnly (reason, cryptoCode) {
   onSendOnly = true
 
   t('or', '!')
-  $('.or-circle circle').attr('r', $('#js-i18n-or').width() / 2 + 15)
   const errorMessages = {
     transactionLimit: locale.translate('Transaction limit reached.').fetch(),
     validatorError: locale.translate('Error in validation.').fetch(),
@@ -1326,14 +1321,13 @@ function sendOnly (reason, cryptoCode) {
   // If no reason provided defaults to lowBalance
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
 
-  t('limit-reached', reasonText)
-  t('limit-description',
-    locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
-  $('#insert-another').css({'display': 'none'})
-  $('#limit-reached-section').css({'display': 'block'})
+  $('#insert-another').html(reasonText)
 
-  if (reason === 'blockedCustomer') $('.blocked-customer-top').show()
-  else $('.blocked-customer-top').hide()
+  if (reason === 'blockedCustomer') {
+    $('.js-processing-bill').html(locale.translate('In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit.').fetch())
+  } else {
+    $('.js-processing-bill').html(locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
+  }
 }
 
 function setPartialSend (sent, total) {
