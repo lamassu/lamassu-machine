@@ -911,6 +911,10 @@ msgid "We're out of %s"
 msgstr "We're out of %s"
 
 #: On screen: dynamic
+msgid "In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit."
+msgstr "In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit."
+
+#: On screen: dynamic
 msgid "Please touch <strong>Send Coins</strong> to complete your purchase."
 msgstr "Please touch <strong>Send Coins</strong> to complete your purchase."
 
