@@ -62,4 +62,5 @@ function getLogFile () {
   return path.resolve(dataPath, 'log', `${ymd}.log`)
 }
 
+fs.mkdir(path.resolve(dataPath, 'log'), () => {})
 clim(console, true)
