@@ -1,0 +1,31 @@
+<svg id="b5bc6916-2ba9-4be2-a8e7-c4491427c49b" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 237.12 176">
+  <defs>
+    <clipPath id="f11af4ab-2ab7-41a7-989b-ed92bc351741">
+      <rect x="16.48" y="28" width="200" height="64" rx="9.77714" fill="#2cb9ac"/>
+    </clipPath>
+  </defs>
+  <title>temporary-limit-amazonite</title>
+  <g>
+    <rect x="43.71662" y="13" width="6.38926" height="15" fill="#0e4160"/>
+    <rect x="8.48" y="28" width="200" height="64" rx="9.77714" fill="#0e4160"/>
+    <g>
+      <rect x="16.48" y="28" width="200" height="64" rx="9.77714" fill="#2cb9ac"/>
+      <g clip-path="url(#f11af4ab-2ab7-41a7-989b-ed92bc351741)">
+        <path d="M74.88,8.88372,20.8,123.48837H0L54.08,8.88372Zm33.28,0L54.08,123.48837h20.8L128.96,8.88372Zm54.08,0L108.16,123.48837h20.8L183.04,8.88372Zm54.08,0L162.24,123.48837h20.8L237.12,8.88372Z" fill="#fbcb40"/>
+      </g>
+    </g>
+    <g>
+      <polygon points="58.24 92 41.6 92 41.6 167.6 37.44 176 62.4 176 58.24 167.6 58.24 92" fill="#0e4160"/>
+      <polygon points="183.04 167.6 183.04 92 166.4 92 166.4 167.6 162.24 176 187.2 176 183.04 167.6" fill="#0e4160"/>
+    </g>
+    <g>
+      <path d="M45.39888,16A8.06626,8.06626,0,0,1,37.268,8a8.06626,8.06626,0,0,1,8.13091-8H48.268V16Z" fill="#ce9912"/>
+      <circle cx="48.26797" cy="8" r="8" fill="#fbcb40"/>
+    </g>
+    <rect x="171.66864" y="13" width="6.38926" height="15" fill="#0e4160"/>
+    <g>
+      <path d="M173.35091,16A8.06625,8.06625,0,0,1,165.22,8a8.06625,8.06625,0,0,1,8.13091-8H176.22V16Z" fill="#ce9912"/>
+      <circle cx="176.22" cy="8" r="8" fill="#fbcb40"/>
+    </g>
+  </g>
+</svg>

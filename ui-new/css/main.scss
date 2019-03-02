@@ -2,6 +2,7 @@
 @import "./fonts.scss";
 @import "./typography.scss";
 @import "./buttons.scss";
+@import "./loading.scss";
 @import "./text-content-sizes.scss";
 
 body {
@@ -30,6 +31,12 @@ body {
 main {
   @include full-sized;
   display: flex;
+}
+
+.mainv {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .hide {
@@ -77,6 +84,14 @@ footer {
   background-color: $salmon;
 }
 
+.system-color {
+  background-color: $concrete;
+}
+
+.system-color h3 {
+  color: $sapphire;
+}
+
 .cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
   display: none;
 }
@@ -90,6 +105,386 @@ footer {
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 2vh;
+}
+
+.mainv .actions .button-yes {
+  margin-left: 2.5vw;
+  margin-right: 2.4vw;
+  border-radius: 4vh;
+  padding: 2vh 3vh;
+}
+
+.mainv .actions .button-no {
+  margin-left: 2.4vw;
+  margin-right: 2.5vw;
+  border-radius: 4vh;
+  padding: 2vh 3vh;
+}
+
+.cash-out-color .mainv .actions .button-yes {
+  border: 2px solid $purple-grey;
+  background: $purple-grey;
+  color: $white;
+  @include Tagline-2
+}
+
+.cash-out-color .mainv .actions .button-no {
+  border: 2px solid $purple-grey;
+  color: $purple-grey;
+  @include museo-bold
+  @include Tagline-2
+}
+
+.cash-out-color .mainv .actions .button-yes:active,
+.cash-out-color .mainv .actions .button-no:active {
+  border: 2px solid $white;
+  background: $white;
+  color: $purple-grey;
+  @include museo-bold
+  @include Tagline-2
+}
+
+.cash-in-color .mainv .actions .button-yes {
+  border: 2px solid $sapphire;
+  background: $sapphire;
+  color: $white;
+  @include museo-bold
+  @include Tagline-2
+}
+
+.cash-in-color .mainv .actions .button-no {
+  border: 2px solid $sapphire;
+  color: $sapphire;
+  @include museo-bold
+  @include Tagline-2
+}
+
+.cash-in-color .mainv .actions .button-yes:active,
+.cash-in-color .mainv .actions .button-no:active {
+  border: 2px solid $white;
+  background: $white;
+  color: $sapphire;
+  @include museo-bold
+  @include Tagline-2
+}
+
+.trouble_state .mainv .header {
+  margin-top: 15vh;
+}
+
+.trouble_state .mainv .header h3 {
+  margin-top: 6.79vh;
+  margin-bottom: 0vh;
+}
+
+.trouble_state .mainv .info {
+  margin-top: 3.7vh;
+  margin-bottom: 0vh;
+}
+
+.trouble_state .mainv .info p {
+  margin-top: 0.3vh;
+  margin-bottom: 0vh;
+}
+
+.trouble_state .mainv .info .contacts {
+  margin-top: 4.9vh;
+  width: 40.5vw;
+  background-color: $white;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+}
+
+.trouble_state .mainv .info .contacts table {
+  width: 100%;
+}
+
+.trouble_state .mainv .info .contacts table:nth-child(2) {
+  margin-top: 2.7vh;
+}
+
+.trouble_state .mainv .info .contacts td {
+  width: 50%;
+}
+
+.trouble_state .mainv .info .contacts td div {
+  display: flex;
+}
+
+.trouble_state .mainv .info .contacts td div img {
+  margin-right: 1.25vw;
+}
+
+.deposit_timeout_state .mainv .header {
+  margin-top: 9vh;
+}
+
+.deposit_timeout_state .mainv .header img {
+  width: 12.8vw;
+}
+
+.deposit_timeout_state .mainv .header h3 {
+  margin-top: 5vh;
+  margin-bottom: 0;
+}
+
+.deposit_timeout_state .mainv .info {
+  margin-top: 5.1vh;
+  text-align: right;
+  margin-right: 7.3vw;
+}
+
+.deposit_timeout_state .mainv .info .db2 {
+  margin-top: 2vh;
+}
+
+.deposit_timeout_state .mainv .actions {
+  margin-top: 12vh;
+}
+
+.facephoto_permission_state .mainv .header {
+  margin-top: 22vh;
+}
+
+.facephoto_permission_state .mainv .header img {
+  width: 15.6vw;
+}
+
+.facephoto_permission_state .mainv .header h3 {
+  margin-top: 5vh;
+  margin-bottom: 0;
+}
+
+.facephoto_permission_state .mainv .info {
+  margin-top: 5vh;
+  text-align: right;
+}
+
+.facephoto_permission_state .mainv .info .db2 {
+  margin-top: 2vh;
+}
+
+.facephoto_permission_state .mainv .actions {
+  margin-top: 15vh;
+}
+
+.facephoto_state .mainv .header {
+  margin-top: 12vh;
+}
+
+.facephoto_state .mainv .header h2 {
+  margin-top: 26vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.facephoto_state .mainv .info {
+  margin-top: 1.5vh;
+}
+
+.facephoto_state .mainv .info .d1 {
+  margin-top: 0vh;
+  margin-bottom: 0vh;
+}
+
+.facephoto_state .mainv .info .d1b {
+  margin-top: 2.8vh;
+}
+
+.hard_limit_reached_state .mainv .header {
+  margin-top: 15.5vh
+}
+
+.hard_limit_reached_state .mainv .header img {
+  height: 21.2vh;
+  padding-right: 1vw;
+}
+
+.hard_limit_reached_state .mainv .header h3 {
+  margin-top: 5.9vh;
+  margin-bottom: 0;
+}
+
+.hard_limit_reached_state .mainv .info {
+  margin-top: 4.5vh;
+}
+
+.hard_limit_reached_state .mainv .info .d2 {
+  margin-bottom: 0vh;
+}
+
+.hard_limit_reached_state .mainv .info .d2b {
+  margin-top: 2vh;
+  padding-left: 0.7vw;
+}
+
+.hard_limit_reached_state .mainv .actions {
+  margin-top: 14vh;
+  padding-right: 1.5vw;
+}
+
+.hard_limit_reached_state .mainv .actions .button-yes {
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  margin-right: 1.2vw;
+}
+
+.out_of_cash_state .mainv .header {
+  margin-top: 15vh;
+}
+
+.out_of_cash_state .mainv .header img {
+  height: 22.1vh;
+}
+
+.out_of_cash_state .mainv .header h3 {
+  margin-top: 6.5vh;
+  margin-bottom: 0vh;
+}
+
+.out_of_cash_state .mainv .info {
+  margin-top: 4.7vh;
+  margin-bottom: 0vh;
+}
+
+.out_of_cash_state .mainv .info .d2 {
+  margin: 0;
+}
+
+.out_of_cash_state .mainv .actions {
+  margin-top: 19vh;
+}
+
+.out_of_cash_state .mainv .actions .button-yes {
+  margin: 0;
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+}
+
+.minimum_tx_state .mainv .header {
+  margin-top: 18vh;
+}
+
+.minimum_tx_state .mainv .header img {
+  width: 33.7vh;
+}
+
+.minimum_tx_state .mainv .header h2 {
+  margin-top: 7.1vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.minimum_tx_state .mainv .info .d1 {
+  margin-top: 2.2vh;
+  line-height: 1.25;
+}
+
+.pending_deposit_state .mainv .header {
+  margin-top: 18vh;
+}
+
+.pending_deposit_state .mainv .header img {
+  height: 22vh;
+}
+
+.pending_deposit_state .mainv .header h2 {
+  margin-top: 7.2vh;
+  margin-bottom: 0;
+  line-height: 1.33;
+}
+
+.pending_deposit_state .mainv .info .d1b {
+  margin-top: 2.5vh;
+  line-height: 1.25
+}
+
+.photo_scan_failed_state .mainv .header img {
+  width: 17.5vw;
+}
+
+.photo_scan_failed_state .mainv .header h3 {
+  margin-top: 6.7vh;
+  margin-bottom: 0;
+}
+
+.photo_scan_failed_state .mainv .header {
+  margin-top: 15vh;
+}
+
+.photo_scan_failed_state .mainv .info .d2 {
+  margin-top: 2vh;
+  margin-bottom: 0vh;
+}
+
+.photo_scan_failed_state .mainv .info .d2b {
+  margin-top: 2vh;
+  margin-bottom: 0vh;
+}
+
+.photo_scan_failed_state .mainv .info {
+  margin-top: 3.9vh;
+}
+
+.photo_scan_failed_state .mainv .actions {
+  margin-top: 14vh;
+}
+
+.photo_scan_failed_state .mainv .actions .button-yes {
+  margin-right: 1.5vw;
+  border-radius: 4vh;
+  padding: 2vh 3vh;
+}
+
+.photo_scan_failed_state .mainv .actions .button-no {
+  margin-left: 1.5vw;
+  margin-right: 2.5vw;
+  border-radius: 4vh;
+  padding: 2vh 3vh;
+}
+
+.unconfirmed_deposit_state .mainv .header {
+  margin-top: 15vh;
+}
+
+.unconfirmed_deposit_state .mainv .header img {
+  height: 22vh;
+}
+
+.unconfirmed_deposit_state .mainv .header h3 {
+  margin-top: 6.3vh;
+  margin-bottom: 0vh;
+}
+
+.unconfirmed_deposit_state .mainv .info .d2 {
+  margin: 0;
+}
+
+.unconfirmed_deposit_state .mainv .info .d2:nth-child(2) {
+  margin-top: 2vh;
+}
+
+.unconfirmed_deposit_state .mainv .info {
+  margin-top: 4.7vh;
+  margin-bottom: 0vh;
+  margin-left: -2vw;
+  text-align: left;
+}
+
+.unconfirmed_deposit_state .mainv .actions {
+  margin-top: 11vh;
+}
+
+.unconfirmed_deposit_state .mainv .actions .button-yes {
+  margin: 0;
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+}
+
+.waiting_state .mainv .header {
+  margin-top: 36.6vh;
 }
 
 .primary-side {

@@ -833,7 +833,11 @@ function setDirection (direction) {
     $('.fiat_transaction_error_state'),
     $('.id_scan_failed_state'),
     $('.sanctions_failure_state'),
-    $('.id_verification_error_state')
+    $('.id_verification_error_state'),
+    $('.facephoto_state'),
+    $('.facephoto_permission_state'),
+    $('.hard_limit_reached_state'),
+    $('.photo_scan_failed_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1257,7 +1261,7 @@ function highBill (highestBill, reason) {
 }
 
 function minimumTx (lowestBill) {
-  t('lowest-bill', locale.translate('Please insert %s or more.')
+  t('lowest-bill', locale.translate('Minimum first bill is %s.')
     .fetch(formatFiat(lowestBill)))
   setScreen('minimum_tx')
   window.setTimeout(revertScreen, 3000)
