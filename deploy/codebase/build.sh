@@ -19,7 +19,8 @@ EXPORT_BASE=$EXPORT_ROOT/$SUB_DIR
 EXPORT_DIR=$EXPORT_BASE/subpackage
 EXPORT_SCRIPT_DIR=$EXPORT_BASE/package
 TARGET_MACHINE_DIR=$EXPORT_DIR/lamassu-machine
-HARDWARE_DIR=$EXPORT_ROOT/hardware/codebase
+HARDWARE_DIR=$MACHINE_DIR/hardware/codebase
+BUILD_FILES_DIR=$MACHINE_DIR/deploy-files
 UPDATESCRIPT=$SCRIPT_DIR/updateinit.js
 TARGET_MODULES_DIR=$TARGET_MACHINE_DIR/node_modules
 
@@ -46,19 +47,35 @@ cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -a $MACHINE_DIR/exec $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/bin/lamassu-machine $TARGET_MACHINE_DIR/bin
+cp $MACHINE_DIR/bin/cam.js $TARGET_MACHINE_DIR/bin
+cp $MACHINE_DIR/bin/mock-cam.js $TARGET_MACHINE_DIR/bin
 
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
-$MACHINE_DIR/deploy/copy-modules.js $MACHINE_DIR/node_modules $TARGET_MODULES_DIR
+$MACHINE_DIR/node_modules/.bin/copy-node-modules $MACHINE_DIR $TARGET_MACHINE_DIR
+
+# remove native modules
+node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules
 cp -a $HARDWARE_DIR $EXPORT_DIR/hardware
 
-# Remove locally installed files
-rm -rf $TARGET_MACHINE_DIR/ui/css/fonts/*
+# Untar deploy-files
+tar -xvf $MACHINE_DIR/deploy-files.tar.gz
 
 # Copy back basic fonts
-cp $MACHINE_DIR/ui/css/fonts/brandon_txt* $TARGET_MACHINE_DIR/ui/css/fonts
-cp $MACHINE_DIR/ui/css/fonts/SourceCodePro-Regular.ttf $TARGET_MACHINE_DIR/ui/css/fonts
-cp $MACHINE_DIR/ui/css/fonts/Noto* $TARGET_MACHINE_DIR/ui/css/fonts
-cp -a $MACHINE_DIR/ui/css/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
+mkdir -p $TARGET_MACHINE_DIR/ui/css/fonts
+cp $BUILD_FILES_DIR/fonts/*.ttf $TARGET_MACHINE_DIR/ui/css/fonts
+cp $BUILD_FILES_DIR/fonts/*.woff $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
+
+# Copy licences.json
+cp $BUILD_FILES_DIR/licenses.json $TARGET_MACHINE_DIR/licenses.json
+
+# Copy aaeon node_modules
+cp -R $BUILD_FILES_DIR/aaeon_node_modules $EXPORT_DIR/hardware/aaeon/node_modules
+
+# Copy libBarcodeScanner.json
+mkdir $EXPORT_DIR/hardware/aaeon/lib/
+cp $BUILD_FILES_DIR/libBarcodeScanner.so $EXPORT_DIR/hardware/aaeon/lib/
+
 
 # Reduce package size, these are unneeded
 rm -rf $TARGET_MODULES_DIR/clim/example

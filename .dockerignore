@@ -1,0 +1,4 @@
+./node_modules
+./build
+./update-tar-build
+./hardware/codebase/aaeon/node_modules
