@@ -3,9 +3,9 @@
   "license": "Unlicense",
   "version": "7.2.0",
   "dependencies": {
-    "async": "~0.2.9",
+    "@lamassu/camera-wrapper": "1.0.1",
+    "async": "~1.5.2",
     "base-x": "^3.0.0",
-    "bech32": "^1.1.3",
     "bignumber.js": "^4.0.1",
     "bs58check": "^2.0.2",
     "cashaddrjs": "~0.2.8",
@@ -72,8 +72,9 @@
     "build": "npm run build:html && npm run build:js && npm run build:sass && npm run build:autoprefix",
     "build:html": "node ./ui/scripts/inline-html.js",
     "build:js": "babel ui/src/app.js -s -o ui/js/app.js",
+    "build:js-test": "babel ui/src/test-app.js -s -o ui/js/test-app.js",
     "build:sass": "node-sass ui/css/main.scss ui/css/build/main.css",
-    "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d build/css",
+    "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d ui/css/build/main2.css",
     "watch:sass": "ls -d -1 $PWD/ui/css/*.scss| entr npm run build:sass",
     "watch:js": "ls -d -1 $PWD/ui/src/*.js | entr npm run build:js",
     "watch:html": "ls -d -1 $PWD/ui/html/*.html | entr npm run build:html",
@@ -98,6 +99,6 @@
     ]
   },
   "browserslist": [
-    "Chrome >= 20"
+    "Chrome >= 10"
   ]
 }
