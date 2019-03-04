@@ -68,7 +68,11 @@ ui-old/js/app.js.map
 
 ui/js/app.js
 ui/js/app.js.map
+ui/js/test-app.js
+ui/js/test-app.js.map
 ui/css/build
 ui/css/fonts
+ui/start.html
+ui/main.css
 
 result.jpg

@@ -42,7 +42,7 @@ $(function () {
     $('body').addClass('aspect-ratio-16-9')
   }
   setupFakes()
-  setupAnimation(false, aspectRatio800)
+  // setupAnimation(false, aspectRatio800)
 
   phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
     console.log('phoneNumber', result)
@@ -379,14 +379,14 @@ avg: ${avg}
   }
 }
 
-function setupAnimation (isTwoWay, isAr800) {
-  var elem = document.getElementById('bg-to-show')
-  while (elem.firstChild) {
-    elem.removeChild(elem.firstChild)
-  }
-  var two = new Two({ fullscreen: true, type: Two.Types.webgl, autostart: true }).appendTo(elem)
+// function setupAnimation (isTwoWay, isAr800) {
+//   var elem = document.getElementById('bg-to-show')
+//   while (elem.firstChild) {
+//     elem.removeChild(elem.firstChild)
+//   }
+//   var two = new Two({ fullscreen: true, type: Two.Types.webgl, autostart: true }).appendTo(elem)
 
-  console.log(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`)
-  background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
-  background.scale = 1
-}
+//   console.log(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`)
+//   background = two.interpret(document.getElementById(`${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}`))
+//   background.scale = 1
+// }

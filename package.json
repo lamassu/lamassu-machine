@@ -6,6 +6,7 @@
     "@lamassu/camera-wrapper": "1.0.1",
     "async": "~1.5.2",
     "base-x": "^3.0.0",
+    "bech32": "^1.1.3",
     "bignumber.js": "^4.0.1",
     "bs58check": "^2.0.2",
     "cashaddrjs": "~0.2.8",
@@ -69,16 +70,18 @@
   },
   "scripts": {
     "test": "ava test",
-    "build": "npm run build:html && npm run build:js && npm run build:sass && npm run build:autoprefix",
+    "build": "npm run build:html && npm run build:js-test && npm run build:js && npm run build:sass && npm run build:autoprefix",
     "build:html": "node ./ui/scripts/inline-html.js",
     "build:js": "babel ui/src/app.js -s -o ui/js/app.js",
     "build:js-test": "babel ui/src/test-app.js -s -o ui/js/test-app.js",
     "build:sass": "node-sass ui/css/main.scss ui/css/build/main.css",
-    "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d ui/css/build/main2.css",
+    "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d ui/",
     "watch:sass": "ls -d -1 $PWD/ui/css/*.scss| entr npm run build:sass",
-    "watch:js": "ls -d -1 $PWD/ui/src/*.js | entr npm run build:js",
+    "watch:autoprefix": "ls -d -1 $PWD/ui/css/build/main.css| entr npm run build:autoprefix",
+    "watch:js": "ls -d -1 $PWD/ui/src/app.js | entr npm run build:js",
+    "watch:js-test": "ls -d -1 $PWD/ui/src/test-app.js | entr npm run build:js-test",
     "watch:html": "ls -d -1 $PWD/ui/html/*.html | entr npm run build:html",
-    "watch": "npm run watch:js & npm run watch:html & npm run watch:sass"
+    "watch": "npm run watch:js & npm run watch:js-test & npm run watch:html & npm run watch:sass & npm run watch:autoprefix"
   },
   "gypfile": true,
   "standard": {
@@ -99,6 +102,6 @@
     ]
   },
   "browserslist": [
-    "Chrome >= 10"
+    "Chrome >= 20"
   ]
 }
