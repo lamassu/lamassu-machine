@@ -1209,11 +1209,15 @@ function setExchangeRate (_rates) {
 
 function qrize (text, target, color, lightning) {
   const image = document.getElementById('bolt-img')
+  // Hack for surf browser
+  const size = document.body.clientHeight * 0.36
+  console.log(`siz32 ${document.body.clientHeight * 0.36}`)
+
   const opts = {
     crisp: true,
     fill: color || 'black',
     text,
-    size: target.width(),
+    size,
     render: 'canvas',
     rounded: 50,
     quiet: 2,
@@ -1249,7 +1253,7 @@ function setTx (tx) {
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
-  }, 2000)
+  }, 1000)
 }
 
 function formatAddressNoBreakLines (address) {

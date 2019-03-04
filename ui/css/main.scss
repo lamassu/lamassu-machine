@@ -719,6 +719,12 @@ footer {
   display: none;
 }
 
+.cash-out-box-wrapper, .cash-in-box-wrapper {
+  display: flex;
+  width: 40vh;
+  height: 40vh;
+}
+
 .cash-out-box, .cash-in-box {
   margin: auto;
 }
@@ -847,12 +853,14 @@ footer {
   justify-content: center;
 }
 
-.auto-margin {
-  margin: auto;
+.choose_coin_state main {
+  justify-content: space-around;
+  align-items: center;
 }
 
 .bg-image {
   position: fixed;
+  width: 100%;
   top:0;
   bottom:0;
   left:0;
@@ -928,7 +936,8 @@ footer {
 }
 
 .or {
-  position: absolute;
+  margin-left: 4vh;
+  margin-top: 4vh;
   margin-left: 4vh;
   left: 0;
   right: 0;
