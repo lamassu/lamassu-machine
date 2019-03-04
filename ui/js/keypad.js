@@ -37,7 +37,9 @@ var Keypad = function (keypadId, opts, callback) {
     }
 
     if (target.hasClass('plus')) {
-      return self._keyPress({ text: () => '+' })
+      return self._keyPress({ text: function () {
+        return '+'
+      } })
     }
 
     if (target.hasClass('key')) {
