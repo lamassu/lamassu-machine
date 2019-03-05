@@ -1466,7 +1466,7 @@ function fiatCredit (data) {
 
 function setDepositAddress (depositInfo) {
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
+  $('.deposit_state .send-notice .crypto-address').html(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
@@ -1494,7 +1494,7 @@ function fiatReceipt (tx) {
 
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
+  $('.fiat_receipt_state .sent-coins .crypto-address').html(formatAddress(tx.toAddress))
 
   setState('fiat_receipt')
 }
@@ -1505,7 +1505,7 @@ function fiatComplete (tx) {
 
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
+  $('.fiat_complete_state .sent-coins .crypto-address').html(formatAddress(tx.toAddress))
 
   setState('fiat_complete')
 }
