@@ -1211,7 +1211,6 @@ function qrize (text, target, color, lightning) {
   const image = document.getElementById('bolt-img')
   // Hack for surf browser
   const size = document.body.clientHeight * 0.36
-  console.log(`siz32 ${document.body.clientHeight * 0.36}`)
 
   const opts = {
     crisp: true,

@@ -1,109 +1,89 @@
-@mixin mont {
-  font-family: Mont Heavy;
-  font-weight: 900;
-}
-
-@mixin museo-bold {
-  font-family: MuseoSans;
-  font-weight: bold;
-}
-
-@mixin museo {
-  font-family: MuseoSans;
-  font-weight: 500;
-}
-
-@mixin mono {
-  font-family: BPmono;
-}
+// We need to kill cyrillic from Museo so everything can work nicely 
 
 /* Text styles */
 // TODO line-height is not "responsive" right now
+@mixin Heading {
+  font-family: 'Mont Heavy', 'Rubik', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Kufi Arabic';
+  .i28n-he & {
+    font-family: 'Rubik', 'Mont Heavy', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Kufi Arabic';
+  }
+  color: $white;
+  font-weight: 900;
+}
+
 @mixin Heading-1 {
-  @include mont;
-  // x800 = 96px
+  @include Heading;
   font-size: 12vh;
   line-height: 0.92;
-  color: $white;
 }
 
 @mixin Heading-2 {
-  @include mont;
-  // x800 = 64px
+  @include Heading;
   font-size: 8vh;
   line-height: 0.88;
-  color: $white;
 }
 
 @mixin Heading-3 {
-  @include mont;
-  // x800 = 48px
+  @include Heading;
   font-size: 6vh;
   line-height: 0.83;
-  color: $white;
 }
 
 @mixin Heading-4 {
-  @include mont;
-  // x800 = 24px
+  @include Heading;
   font-size: 3vh;
   line-height: 1.67;
-  color: $white;
 }
 
 @mixin Heading-5 {
-  @include mont;
-  // x800 = 40px
+  @include Heading;
   font-size: 5vh;
   line-height: 1.2;
-  color: $white;
+}
+
+@mixin Description {
+  .brandon & {
+    font-family: 'MuseoSans', 'Rubik', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
+  }
+  font-family: 'Rubik', 'MuseoSans', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';
 }
 
 @mixin Tagline-1 {
-  @include museo-bold;
-  // x800 = 40px
+  @include Description;
+  font-weight: 700;
   font-size: 5vh;
   line-height: 1.2;
 }
 
 @mixin Tagline-2 {
-  @include museo-bold;
-  // x800 = 24px
+  @include Description;
+  font-weight: 700;
   font-size: 3vh;
   line-height: 0.8;
 }
 
 @mixin Description-1 {
-  @include museo;
-  // x800 = 32px
-  font-size: 4vh;
-  line-height: 1.25;
-}
-
-@mixin Description-1-bold {
-  @include museo-bold;
-  // x800 = 32px
+  @include Description;
+  font-weight: 500;
   font-size: 4vh;
   line-height: 1.25;
 }
 
 @mixin Description-2 {
-  @include museo;
-  // x800 = 24px
+  @include Description;
+  font-weight: 500;
   font-size: 3vh;
   line-height: 1.33;
 }
 
 @mixin Mono-Text-1 {
-  @include mono;
-  // x800 = 32px
+  font-family: BPmono;
   font-size: 4vh;
   line-height: 1;
 }
 
 @mixin Mono-Text-2 {
-  @include mono;
-  // x800 = 24px
+  font-family: BPmono;
   font-size: 3vh;
   line-height: 1;
 }
@@ -155,16 +135,6 @@ h5, .h5 {
 
 .cash-out-color .d1 {
   @include Description-1;
-  color: $purple-grey;
-}
-
-.cash-in-color .d1b, .system-color .d1b {
-  @include Description-1-bold;
-  color: $sapphire;
-}
-
-.cash-out-color .d1b {
-  @include Description-1-bold;
   color: $purple-grey;
 }
 
