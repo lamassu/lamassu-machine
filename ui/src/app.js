@@ -1047,6 +1047,7 @@ function setPrimaryLocales (primaryLocales) {
   _primaryLocales = primaryLocales
 
   var languages = $('#languages')
+  closeLanguageDropdown()
   languages.empty()
   var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function (a, b) {
     var langA = lookupLocaleNames(a)
@@ -1062,6 +1063,8 @@ function setPrimaryLocales (primaryLocales) {
     var div = `<button class="square-button small-action-button tl2" data-locale="${l}">${name}</button>`
     languages.append(div)
   }
+
+  $('.js-two-language').html(otherLanguageName())
 
   $('.js-menu-language').toggleClass('hide', sortedPrimaryLocales.length <= 1)
   $('.js-multi-language').toggleClass('hide', sortedPrimaryLocales.length === 2)
