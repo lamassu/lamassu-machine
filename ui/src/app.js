@@ -1047,6 +1047,7 @@ function setPrimaryLocales (primaryLocales) {
   _primaryLocales = primaryLocales
 
   var languages = $('#languages')
+  closeLanguageDropdown()
   languages.empty()
   var sortedPrimaryLocales = primaryLocales.filter(lookupLocaleNames).sort(function (a, b) {
     var langA = lookupLocaleNames(a)
@@ -1062,6 +1063,8 @@ function setPrimaryLocales (primaryLocales) {
     var div = `<button class="square-button small-action-button tl2" data-locale="${l}">${name}</button>`
     languages.append(div)
   }
+
+  $('.js-two-language').html(otherLanguageName())
 
   $('.js-menu-language').toggleClass('hide', sortedPrimaryLocales.length <= 1)
   $('.js-multi-language').toggleClass('hide', sortedPrimaryLocales.length === 2)
@@ -1209,11 +1212,14 @@ function setExchangeRate (_rates) {
 
 function qrize (text, target, color, lightning) {
   const image = document.getElementById('bolt-img')
+  // Hack for surf browser
+  const size = document.body.clientHeight * 0.36
+
   const opts = {
     crisp: true,
     fill: color || 'black',
     text,
-    size: target.width(),
+    size,
     render: 'canvas',
     rounded: 50,
     quiet: 2,
@@ -1249,7 +1255,7 @@ function setTx (tx) {
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
-  }, 2000)
+  }, 1000)
 }
 
 function formatAddressNoBreakLines (address) {
@@ -1462,7 +1468,7 @@ function fiatCredit (data) {
 
 function setDepositAddress (depositInfo) {
   $('.deposit_state .loading').hide()
-  $('.deposit_state .send-notice .crypto-address').text(formatAddress(depositInfo.toAddress))
+  $('.deposit_state .send-notice .crypto-address').html(formatAddress(depositInfo.toAddress))
   $('.deposit_state .send-notice').show()
 
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
@@ -1490,7 +1496,7 @@ function fiatReceipt (tx) {
 
   $('.fiat_receipt_state .digital .js-amount').html(display)
   $('.fiat_receipt_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_receipt_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
+  $('.fiat_receipt_state .sent-coins .crypto-address').html(formatAddress(tx.toAddress))
 
   setState('fiat_receipt')
 }
@@ -1501,7 +1507,7 @@ function fiatComplete (tx) {
 
   $('.fiat_complete_state .digital .js-amount').html(display)
   $('.fiat_complete_state .fiat .js-amount').text(tx.fiat)
-  $('.fiat_complete_state .sent-coins .crypto-address').text(formatAddress(tx.toAddress))
+  $('.fiat_complete_state .sent-coins .crypto-address').html(formatAddress(tx.toAddress))
 
   setState('fiat_complete')
 }

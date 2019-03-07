@@ -135,7 +135,6 @@ footer {
 .cash-out-color .mainv .actions .button-no {
   border: 2px solid $purple-grey;
   color: $purple-grey;
-  @include museo-bold;
   @include Tagline-2;
 }
 
@@ -144,7 +143,6 @@ footer {
   border: 2px solid $white;
   background: $white;
   color: $purple-grey;
-  @include museo-bold;
   @include Tagline-2;
 }
 
@@ -152,14 +150,12 @@ footer {
   border: 2px solid $sapphire;
   background: $sapphire;
   color: $white;
-  @include museo-bold;
   @include Tagline-2;
 }
 
 .cash-in-color .mainv .actions .button-no {
   border: 2px solid $sapphire;
   color: $sapphire;
-  @include museo-bold;
   @include Tagline-2;
 }
 
@@ -168,7 +164,6 @@ footer {
   border: 2px solid $white;
   background: $white;
   color: $sapphire;
-  @include museo-bold;
   @include Tagline-2;
 }
 
@@ -294,7 +289,7 @@ footer {
   margin-bottom: 0vh;
 }
 
-.facephoto_state .mainv .info .d1b {
+.facephoto_state .mainv .info .tl2 {
   margin-top: 2.8vh;
 }
 
@@ -401,7 +396,7 @@ footer {
   line-height: 1.33;
 }
 
-.pending_deposit_state .mainv .info .d1b {
+.pending_deposit_state .mainv .info .tl2 {
   margin-top: 2.5vh;
   line-height: 1.25
 }
@@ -719,6 +714,12 @@ footer {
   display: none;
 }
 
+.cash-out-box-wrapper, .cash-in-box-wrapper {
+  display: flex;
+  width: 40vh;
+  height: 40vh;
+}
+
 .cash-out-box, .cash-in-box {
   margin: auto;
 }
@@ -847,12 +848,14 @@ footer {
   justify-content: center;
 }
 
-.auto-margin {
-  margin: auto;
+.choose_coin_state main {
+  justify-content: space-around;
+  align-items: center;
 }
 
 .bg-image {
   position: fixed;
+  width: 100%;
   top:0;
   bottom:0;
   left:0;
@@ -928,7 +931,8 @@ footer {
 }
 
 .or {
-  position: absolute;
+  margin-left: 4vh;
+  margin-top: 4vh;
   margin-left: 4vh;
   left: 0;
   right: 0;
@@ -1203,7 +1207,6 @@ footer {
 }
 
 .i18n-rtl {
-  font-family: 'Noto Sans Hebrew';
   direction: rtl;
   .primary-side {
     padding-left: 0;

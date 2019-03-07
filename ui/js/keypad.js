@@ -26,7 +26,7 @@ var Keypad = function (keypadId, opts, callback) {
     if (target.hasClass('enter')) {
       self.deactivate()
       var result = self.type === 'phoneNumber'
-        ? formatE164(self.opts.country, self.result)
+        ? libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country).number
         : self.result
       self.reset()
       return self.callback(result)
@@ -37,7 +37,9 @@ var Keypad = function (keypadId, opts, callback) {
     }
 
     if (target.hasClass('plus')) {
-      return self._keyPress({ text: () => '+' })
+      return self._keyPress({ text: function () {
+        return '+'
+      } })
     }
 
     if (target.hasClass('key')) {
