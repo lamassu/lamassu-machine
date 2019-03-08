@@ -105,6 +105,7 @@ footer {
 }
 
 .crypto-rate {
+  direction: ltr;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
@@ -548,6 +549,11 @@ footer {
 .crypto-address {
   margin-top: 1.4vh;
   line-height: 3vh;
+  direction: ltr;
+}
+
+.crypto-address-no-br {
+  direction: ltr;
 }
 
 .coins-to-address {
@@ -868,7 +874,7 @@ footer {
   margin-left: 15vh;
 }
 
-.insert_more_bills_state .primary-side {
+.insert_more_bills_state .primary-side-title {
   max-width: 80vh;
 }
 
@@ -931,9 +937,8 @@ footer {
 }
 
 .or {
-  margin-left: 4vh;
+  position: fixed;
   margin-top: 4vh;
-  margin-left: 4vh;
   left: 0;
   right: 0;
   text-align: center;
@@ -1022,7 +1027,7 @@ footer {
 }
 
 .choose_fiat_state, .insert_more_bills_state {
-  .inner-circle-button {
+  .inner-circle-button span {
     padding: 0 6vh;
   }
 }
@@ -1248,5 +1253,9 @@ footer {
   .coin-redeem {
     margin-right: auto;
     margin-left: 0;
+  }
+  .crypto-address, .crypto-address-no-br{
+    display: flex;
+    justify-content: flex-end;
   }
 }
