@@ -131,8 +131,8 @@ function processData (data) {
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
-  if (data.machineVersion) setMachineVersion(data.machineVersion)
   if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
+  if (data.cryptomatModel) setMachineVersion(data.cryptomatModel)
 
   if (data.context) {
     $('.js-context').hide()
