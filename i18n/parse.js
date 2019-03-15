@@ -10,6 +10,7 @@ const x = Xray({
 const uiPath = path.resolve(__dirname, '..', 'ui')
 const startPath = path.resolve(uiPath, 'start.html')
 const html = fs.readFileSync(startPath, {encoding: 'utf8'})
+const keys = {}
 
 function strip (s) {
   return s.trim().replace(/[\n ]+/g, ' ')
@@ -40,6 +41,10 @@ function parseHtml (s) {
 }
 
 function recToPo (string, screen) {
+  if (keys[string]) return
+
+  keys[string] = true
+
   return `#: On screen: ${screen}
 msgid "${string}"
 msgstr "${string}"

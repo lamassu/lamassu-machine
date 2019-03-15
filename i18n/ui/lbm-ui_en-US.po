@@ -34,14 +34,6 @@ msgstr "The phone number you entered didn't work. If you have an international n
 msgid "For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12 34 56"
 msgstr "For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12 34 56"
 
-#: On screen: bad-phone-number
-msgid "Try again"
-msgstr "Try again"
-
-#: On screen: bad-security-code
-msgid "Try again"
-msgstr "Try again"
-
 #: On screen: bad-security-code
 msgid "The code you entered was incorrect."
 msgstr "The code you entered was incorrect."
@@ -49,10 +41,6 @@ msgstr "The code you entered was incorrect."
 #: On screen: bad-security-code
 msgid "Please make sure you're entering the six digit code you receive from us."
 msgstr "Please make sure you're entering the six digit code you receive from us."
-
-#: On screen: bad-security-code
-msgid "Try again"
-msgstr "Try again"
 
 #: On screen: cash-in-waiting
 msgid "One moment..."
@@ -163,16 +151,8 @@ msgid "Please look into the camera located abovethe screen."
 msgstr "Please look into the camera located abovethe screen."
 
 #: On screen: fiat-complete
-msgid "Thank you!"
-msgstr "Thank you!"
-
-#: On screen: fiat-complete
 msgid "We dispensed"
 msgstr "We dispensed"
-
-#: On screen: fiat-complete
-msgid "Tap anywhere on the screen when you're done."
-msgstr "Tap anywhere on the screen when you're done."
 
 #: On screen: goodbye
 msgid "See you!"
@@ -222,10 +202,6 @@ msgstr "OR"
 msgid "Finished?"
 msgstr "Finished?"
 
-#: On screen: insert-more-bills
-msgid "Send Coins"
-msgstr "Send Coins"
-
 #: On screen: invalid-address
 msgid "Invalid address"
 msgstr "Invalid address"
@@ -238,10 +214,6 @@ msgstr "It looks like you're using a wallet for a different coin or an address f
 msgid "Please check your QR code and try again."
 msgstr "Please check your QR code and try again."
 
-#: On screen: invalid-address
-msgid "Try again"
-msgstr "Try again"
-
 #: On screen: limit-reached
 msgid "We're all out of coins!"
 msgstr "We're all out of coins!"
@@ -249,10 +221,6 @@ msgstr "We're all out of coins!"
 #: On screen: limit-reached
 msgid "Please try again later."
 msgstr "Please try again later."
-
-#: On screen: limit-reached
-msgid "OK"
-msgstr "OK"
 
 #: On screen: max-phone-retries
 msgid "Oops, this isn't working"
@@ -262,10 +230,6 @@ msgstr "Oops, this isn't working"
 msgid "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 msgstr "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 
-#: On screen: max-phone-retries
-msgid "OK"
-msgstr "OK"
-
 #: On screen: minimum-tx
 msgid "More, please"
 msgstr "More, please"
@@ -273,14 +237,6 @@ msgstr "More, please"
 #: On screen: out-of-cash
 msgid "We're all out of cash!"
 msgstr "We're all out of cash!"
-
-#: On screen: out-of-cash
-msgid "Please try again later."
-msgstr "Please try again later."
-
-#: On screen: out-of-cash
-msgid "OK"
-msgstr "OK"
 
 #: On screen: pending-deposit
 msgid "Funds Received!"
@@ -303,10 +259,6 @@ msgid "You might want to give it another shot."
 msgstr "You might want to give it another shot."
 
 #: On screen: photo-scan-failed
-msgid "Try again"
-msgstr "Try again"
-
-#: On screen: photo-scan-failed
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -326,10 +278,6 @@ msgstr "Please enter the mobile number you used when you placed your order."
 msgid "Please enter your mobile number for ID verification."
 msgstr "Please enter your mobile number for ID verification."
 
-#: On screen: register-phone
-msgid "Clear"
-msgstr "Clear"
-
 #: On screen: scan-address
 msgid "Hold your QR code up to the scan window to proceed"
 msgstr "Hold your QR code up to the scan window to proceed"
@@ -347,14 +295,6 @@ msgid "Please press the back of your driver's license against the scan window."
 msgstr "Please press the back of your driver's license against the scan window."
 
 #: On screen: scan-photo
-msgid "Please verify your identity"
-msgstr "Please verify your identity"
-
-#: On screen: scan-photo
-msgid "In order to proceed, we are required to verify your identity."
-msgstr "In order to proceed, we are required to verify your identity."
-
-#: On screen: scan-photo
 msgid "Please press the front of your state ID card against the scan window."
 msgstr "Please press the front of your state ID card against the scan window."
 
@@ -366,17 +306,9 @@ msgstr "Security Code"
 msgid "We've texted you a security code. When you get it, enter it here."
 msgstr "We've texted you a security code. When you get it, enter it here."
 
-#: On screen: security-code
-msgid "Clear"
-msgstr "Clear"
-
 #: On screen: sending-coins
 msgid "Sending your coins…"
 msgstr "Sending your coins…"
-
-#: On screen: sending-coins
-msgid "Your coins are on their way to:"
-msgstr "Your coins are on their way to:"
 
 #: On screen: sms-verification
 msgid "ID verification"
@@ -450,21 +382,9 @@ msgstr "Pairing failed"
 msgid "When attempting to pair, we experienced an error:"
 msgstr "When attempting to pair, we experienced an error:"
 
-#: On screen: pairing-error
-msgid "Try again"
-msgstr "Try again"
-
-#: On screen: pairing-scan
-msgid "Pair with remote server"
-msgstr "Pair with remote server"
-
 #: On screen: pairing-scan
 msgid "Please scan the pairing QR code you got from your remote server."
 msgstr "Please scan the pairing QR code you got from your remote server."
-
-#: On screen: pairing-scan
-msgid "Cancel"
-msgstr "Cancel"
 
 #: On screen: maintenance
 msgid "Maintenance Required"
@@ -478,10 +398,6 @@ msgstr "Please contact the operator."
 msgid "I agree"
 msgstr "I agree"
 
-#: On screen: terms
-msgid "Cancel"
-msgstr "Cancel"
-
 #: On screen: trouble
 msgid "Network down"
 msgstr "Network down"
@@ -489,10 +405,6 @@ msgstr "Network down"
 #: On screen: trouble
 msgid "Sorry, we are down for the moment."
 msgstr "Sorry, we are down for the moment."
-
-#: On screen: trouble
-msgid "Please contact the operator."
-msgstr "Please contact the operator."
 
 #: On screen: fiat-error
 msgid "Oops!"
@@ -505,18 +417,6 @@ msgstr "We're having some difficulties."
 #: On screen: fiat-error
 msgid "Please contact the operator for more information."
 msgstr "Please contact the operator for more information."
-
-#: On screen: fiat-error
-msgid "OK"
-msgstr "OK"
-
-#: On screen: fiat-transaction-error
-msgid "Oops!"
-msgstr "Oops!"
-
-#: On screen: fiat-transaction-error
-msgid "We're having some difficulties."
-msgstr "We're having some difficulties."
 
 #: On screen: fiat-transaction-error
 msgid "Please snap a photo of your receipt."
@@ -527,20 +427,12 @@ msgid "Show Receipt"
 msgstr "Show Receipt"
 
 #: On screen: redeem-later
-msgid "Thank You!"
-msgstr "Thank You!"
-
-#: On screen: redeem-later
 msgid "We're waiting for your deposit to confirm on the blockchain. You will soon receive a text message notifying you that your transaction has confirmed."
 msgstr "We're waiting for your deposit to confirm on the blockchain. You will soon receive a text message notifying you that your transaction has confirmed."
 
 #: On screen: redeem-later
 msgid "When that happens, please come back to this machine and press the Redeem button."
 msgstr "When that happens, please come back to this machine and press the Redeem button."
-
-#: On screen: redeem-later
-msgid "OK"
-msgstr "OK"
 
 #: On screen: id-scan-failed
 msgid "Sorry"
@@ -550,29 +442,9 @@ msgstr "Sorry"
 msgid "We could not read your ID card."
 msgstr "We could not read your ID card."
 
-#: On screen: id-scan-failed
-msgid "Please contact the operator for more information."
-msgstr "Please contact the operator for more information."
-
-#: On screen: id-scan-failed
-msgid "OK"
-msgstr "OK"
-
-#: On screen: sanctions-failure
-msgid "Sorry"
-msgstr "Sorry"
-
 #: On screen: sanctions-failure
 msgid "We are unable to process your transaction."
 msgstr "We are unable to process your transaction."
-
-#: On screen: sanctions-failure
-msgid "Please contact the operator for more information."
-msgstr "Please contact the operator for more information."
-
-#: On screen: sanctions-failure
-msgid "OK"
-msgstr "OK"
 
 #: On screen: id-verification-error
 msgid "It's us, not you."
@@ -585,10 +457,6 @@ msgstr "Our system experienced an error."
 #: On screen: id-verification-error
 msgid "Please feel free to try again, or contact the operator."
 msgstr "Please feel free to try again, or contact the operator."
-
-#: On screen: id-verification-error
-msgid "OK"
-msgstr "OK"
 
 #: On screen: fiat-receipt
 msgid "Your Receipt"
@@ -606,14 +474,6 @@ msgstr "pending confirmation"
 msgid "Your coins were sent to:"
 msgstr "Your coins were sent to:"
 
-#: On screen: fiat-receipt
-msgid "Tap anywhere on the screen when you're done."
-msgstr "Tap anywhere on the screen when you're done."
-
-#: On screen: wrong-dispenser-currency
-msgid "Oops!"
-msgstr "Oops!"
-
 #: On screen: wrong-dispenser-currency
 msgid "This machine does not handle the currency you requested."
 msgstr "This machine does not handle the currency you requested."
@@ -621,10 +481,6 @@ msgstr "This machine does not handle the currency you requested."
 #: On screen: wrong-dispenser-currency
 msgid "Please cash out at a machine that handles your currency."
 msgstr "Please cash out at a machine that handles your currency."
-
-#: On screen: wrong-dispenser-currency
-msgid "OK"
-msgstr "OK"
 
 #: On screen: deposit-network-down
 msgid "Network Down"
@@ -638,29 +494,9 @@ msgstr "Sorry, we're down for the moment."
 msgid "Please come back later."
 msgstr "Please come back later."
 
-#: On screen: deposit-network-down
-msgid "OK"
-msgstr "OK"
-
-#: On screen: id-code-failed
-msgid "Want to try again?"
-msgstr "Want to try again?"
-
 #: On screen: id-code-failed
 msgid "The code you entered did not match."
 msgstr "The code you entered did not match."
-
-#: On screen: id-code-failed
-msgid "You might want to give it another shot."
-msgstr "You might want to give it another shot."
-
-#: On screen: id-code-failed
-msgid "Try Again"
-msgstr "Try Again"
-
-#: On screen: id-code-failed
-msgid "Cancel"
-msgstr "Cancel"
 
 #: On screen: unconfirmed-deposit
 msgid "Almost there"
@@ -674,14 +510,6 @@ msgstr "We see your transaction but we're still waiting for confirmation. This t
 msgid "Please come back for you cash and press Redeem when you get our text message."
 msgstr "Please come back for you cash and press Redeem when you get our text message."
 
-#: On screen: unconfirmed-deposit
-msgid "OK"
-msgstr "OK"
-
-#: On screen: unknown-phone-number
-msgid "All set"
-msgstr "All set"
-
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
 msgstr "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
@@ -689,10 +517,6 @@ msgstr "We don't see any open orders associated with your phone. If you have ano
 #: On screen: unknown-phone-number
 msgid "If you're sure you have an open order associated with this phone, please contact the operator."
 msgstr "If you're sure you have an open order associated with this phone, please contact the operator."
-
-#: On screen: unknown-phone-number
-msgid "OK"
-msgstr "OK"
 
 #: On screen: locked
 msgid "This Machine Is Locked"
@@ -714,10 +538,6 @@ msgstr "We weren't able to verify your phone number, so we may not be able to co
 msgid "Please snap a photo of the next screen for your electronic receipt, then contact the operator."
 msgstr "Please snap a photo of the next screen for your electronic receipt, then contact the operator."
 
-#: On screen: pre-receipt
-msgid "Show Receipt"
-msgstr "Show Receipt"
-
 #: On screen: wifi-failed
 msgid "WiFi failed to connect..."
 msgstr "WiFi failed to connect..."
@@ -726,41 +546,9 @@ msgstr "WiFi failed to connect..."
 msgid "Please try the password again."
 msgstr "Please try the password again."
 
-#: On screen: wifi-failed
-msgid "Try again"
-msgstr "Try again"
-
-#: On screen: photo-verification-failed
-msgid "Sorry"
-msgstr "Sorry"
-
 #: On screen: photo-verification-failed
 msgid "Our system indicated an identification problem."
 msgstr "Our system indicated an identification problem."
-
-#: On screen: photo-verification-failed
-msgid "Please contact the operator for more information."
-msgstr "Please contact the operator for more information."
-
-#: On screen: photo-verification-failed
-msgid "OK"
-msgstr "OK"
-
-#: On screen: id-verification-failed
-msgid "Sorry"
-msgstr "Sorry"
-
-#: On screen: id-verification-failed
-msgid "Our system indicated an identification problem."
-msgstr "Our system indicated an identification problem."
-
-#: On screen: id-verification-failed
-msgid "Please contact the operator for more information."
-msgstr "Please contact the operator for more information."
-
-#: On screen: id-verification-failed
-msgid "OK"
-msgstr "OK"
 
 #: On screen: blocked-customer
 msgid "Please contact support"
@@ -769,10 +557,6 @@ msgstr "Please contact support"
 #: On screen: blocked-customer
 msgid "In order to process your transaction, we need to clarify some information about your account"
 msgstr "In order to process your transaction, we need to clarify some information about your account"
-
-#: On screen: blocked-customer
-msgid "OK"
-msgstr "OK"
 
 #: On screen: verifying-id
 msgid "Verifying identity…"
@@ -785,14 +569,6 @@ msgstr "This could take a few seconds."
 #: On screen: verifying-photo
 msgid "Verifying photo card…"
 msgstr "Verifying photo card…"
-
-#: On screen: verifying-photo
-msgid "This could take a few seconds."
-msgstr "This could take a few seconds."
-
-#: On screen: waiting
-msgid "One moment..."
-msgstr "One moment..."
 
 #: On screen: wifi
 msgid "Select a WiFi network Only secured networks are shown."
@@ -818,18 +594,6 @@ msgstr "Connecting…"
 msgid "We got this"
 msgstr "We got this"
 
-#: On screen: withdraw_failure
-msgid "You Purchased"
-msgstr "You Purchased"
-
-#: On screen: withdraw_failure
-msgid "Your coins are on their way to:"
-msgstr "Your coins are on their way to:"
-
-#: On screen: withdraw_failure
-msgid "Tap anywhere on the screen when you're done."
-msgstr "Tap anywhere on the screen when you're done."
-
 #: On screen: dynamic
 msgid "This could take a few moments."
 msgstr "This could take a few moments."
@@ -849,10 +613,6 @@ msgstr "Sell<br/>%s"
 #: On screen: dynamic
 msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
-
-#: On screen: dynamic
-msgid "OR"
-msgstr "OR"
 
 #: On screen: dynamic
 msgid "MORE"
