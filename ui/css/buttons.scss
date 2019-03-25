@@ -183,14 +183,12 @@
 }
 
 .action-button {
+  @include button;
   padding: 0 2.5vw;
   height: 12vh;
   min-width: 5vw;
   background-color: #ffffff;
   border-radius: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .cash-in-color .action-button:active {
@@ -203,14 +201,17 @@
   color: $white;
 }
 
+.cash-out-color .action-button:disabled {
+  background-color: $salmon-two;
+  color: $salmon;
+}
+
 .filled-action-button {
+  @include button;
   padding: 0 3vw;
   height: 12vh;
   min-width: 5vw;
   border-radius: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .cash-in-color .filled-action-button, .system-color .filled-action-button {

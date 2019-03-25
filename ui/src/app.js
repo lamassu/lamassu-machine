@@ -1418,8 +1418,8 @@ function manageFiatButtons (activeDenominations) {
     var denomination = cassette.denomination
     var enabled = activeDenominations[denomination]
     var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']')
-    if (enabled) button.removeClass('disabled')
-    else button.addClass('disabled')
+    if (enabled) button.prop('disabled', false)
+    else button.prop('disabled', true)
   }
 }
 
