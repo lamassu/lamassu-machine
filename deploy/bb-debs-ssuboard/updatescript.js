@@ -35,7 +35,7 @@ function command(cmd, cb) {
 
 function installDebs(cb) {
     async.series([
-      async.retry(2, async.apply(command, 'apt install -y libopencv-dev')),
+      async.retry(2, async.apply(command, 'apt update && apt install -y libopencv-dev')),
     ], cb);
 }
 
