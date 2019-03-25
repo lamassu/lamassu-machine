@@ -132,6 +132,7 @@ function processData (data) {
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
   if (data.machineVersion) setMachineVersion(data.machineVersion)
+  if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
 
   if (data.context) {
     $('.js-context').hide()
@@ -820,6 +821,10 @@ function setOperatorInfo (operator) {
     $('.operator-email').text(operator.email)
     $('.operator-phone').text(operator.phone)
   }
+}
+
+function setHardLimitHours (hours) {
+  $('#hard-limit-hours').text(locale.translate('Please come back in %s hours').fetch(hours))
 }
 
 function setMachineVersion (version) {
