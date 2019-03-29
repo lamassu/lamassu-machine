@@ -132,6 +132,7 @@ function processData (data) {
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
   if (data.machineVersion) setMachineVersion(data.machineVersion)
+  if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
 
   if (data.context) {
     $('.js-context').hide()
@@ -762,6 +763,8 @@ function setState (state, delay) {
 
   if (state === 'insert_more_bills') {
     t('or', locale.translate('OR').fetch())
+    $('#insert-another').html(locale.translate('Insert another bill'))
+    $('#insert-more-bills-finished').css('visibility', 'visible')
   }
 }
 
@@ -820,6 +823,10 @@ function setOperatorInfo (operator) {
   }
 }
 
+function setHardLimitHours (hours) {
+  $('#hard-limit-hours').text(locale.translate('Please come back in %s hours').fetch(hours))
+}
+
 function setMachineVersion (version) {
   const versions = ['sintra', 'douro']
   const body = $('body')
@@ -853,7 +860,8 @@ function setDirection (direction) {
     $('.facephoto_permission_state'),
     $('.hard_limit_reached_state'),
     $('.photo_scan_failed_state'),
-    $('.id_code_failed_state')
+    $('.id_code_failed_state'),
+    $('.waiting_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1315,7 +1323,8 @@ function sendOnly (reason, cryptoCode) {
   if (onSendOnly) return
   onSendOnly = true
 
-  t('or', '!')
+  t('or', '')
+  $('#insert-more-bills-finished').css('visibility', 'hidden')
   const errorMessages = {
     transactionLimit: locale.translate('Transaction limit reached.').fetch(),
     validatorError: locale.translate('Error in validation.').fetch(),
