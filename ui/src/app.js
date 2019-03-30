@@ -1258,9 +1258,15 @@ function setTx (tx) {
   }, 1000)
 }
 
+function removeNetworkPrefix (address) {
+  const [firstPart, secondPart] = address.split(':')
+  if (secondPart) return secondPart
+  return firstPart
+}
+
 function formatAddressNoBreakLines (address) {
   if (!address) return
-  return address.replace(/(.{4})/g, '$1 ')
+  return removeNetworkPrefix(address).replace(/(.{4})/g, '$1 ')
 }
 
 function formatAddress (address) {
