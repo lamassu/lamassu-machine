@@ -87,10 +87,6 @@ msgid "No coins are showing up."
 msgstr "No coins are showing up."
 
 #: On screen: deposit-timeout
-msgid "Have you sent the BTC yet?"
-msgstr "Have you sent the BTC yet?"
-
-#: On screen: deposit-timeout
 msgid "Yes, I have"
 msgstr "Yes, I have"
 
@@ -167,10 +163,6 @@ msgid "Apologies. We've reached out mandated per-user limit."
 msgstr "Apologies. We've reached out mandated per-user limit."
 
 #: On screen: hard-limit-reached
-msgid "Please come back on: February 7th 2019 at 05:00pm."
-msgstr "Please come back on: February 7th 2019 at 05:00pm."
-
-#: On screen: hard-limit-reached
 msgid "OK"
 msgstr "OK"
 
@@ -181,10 +173,6 @@ msgstr "Insert a bill"
 #: On screen: insert-bills
 msgid "Your coins will be sent to:"
 msgstr "Your coins will be sent to:"
-
-#: On screen: insert-more-bills
-msgid "Insert another bill"
-msgstr "Insert another bill"
 
 #: On screen: insert-more-bills
 msgid "deposited so far"
@@ -615,8 +603,16 @@ msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
 
 #: On screen: dynamic
+msgid "Insert another bill"
+msgstr "Insert another bill"
+
+#: On screen: dynamic
 msgid "MORE"
 msgstr "MORE"
+
+#: On screen: dynamic
+msgid "Please come back in %s hours"
+msgstr "Please come back in %s hours"
 
 #: On screen: dynamic
 msgid "for %s"
