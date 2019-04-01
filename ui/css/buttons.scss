@@ -62,11 +62,23 @@
 
 @mixin cash-borders {
   .cash-in-color &, .system-color & {
-    border: 0.3vh solid $sapphire;
+    border: 3px solid $sapphire;
   }
 
   .cash-out-color & {
-    border: 0.3vh solid $purple-grey;
+    border: 3px solid $purple-grey;
+  }
+}
+
+.cash-in-color #actions-scroll .round-progress-button {
+  &:active svg path{
+    fill: $sapphire;
+  }
+}
+
+.cash-out-color #actions-scroll .round-progress-button {
+  &:active svg path{
+    fill: $purple-grey;
   }
 }
 
@@ -75,8 +87,8 @@
   @include round-button;
   @include cash-background-colors;
   &:active {
-    @include cash-background-colors;
-    color: $white;
+    background-color: $white;
+    @include cash-colors;
   }
   &:disabled {
     @include cash-disabled-background-colors;
@@ -260,4 +272,11 @@
 
 .cash-out-color .key:active {
   background-color: $salmon-two;
+}
+
+button div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

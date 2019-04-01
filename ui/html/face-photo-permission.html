@@ -1,18 +1,23 @@
-<section class="viewport facephoto_permission_state" data-tr-section="facephoto-permission">
-  <section class="mainv">
-    <section class="header">
-      <img class="only-cash-in" src="images/may-we-amazonite.svg"/>
-      <img class="only-cash-out" src="images/may-we-salmon.svg"/>
-      <h3 class="js-i18n">May we?</h3>
-    </section>
-    <section class="info">
-      <p class="js-i18n d2">In order to continue this transaction, we need to snap<br/>
-                    a photo of you to comply with local lays. Is this ok?</p>
-    </section>
-    <section class="actions">
-      <!-- TODO RTL buttons -->
-      <span class="button button-yes js-i18n" id="facephoto-permission-yes">Yes, take photo</span>
-      <span class="button button-no js-i18n" id="facephoto-permission-no">No, finish up</span>
-    </section>
-  </section>
+<section
+  class="viewport facephoto_permission_state info"
+  data-tr-section="facephoto-permission"
+  data-screentype="info-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/may-we-amazonite.svg"/>
+    <img class="only-cash-out" src="images/may-we-salmon.svg"/>
+  </header>
+  <main>
+    <h3 class="js-i18n">May we?</h3>
+    <div class="text-content">
+      <p class="js-i18n d2">
+        In order to continue this transaction, we need to snap
+        a photo of you to comply with local lays. Is this ok?
+      </p>
+    </div>
+  </main>
+  <footer>
+    <button id="facephoto-permission-yes" class="filled-progress-button button js-i18n">Yes, take photo</button>
+    <button id="facephoto-permission-no" class="bordered-progress-button button js-i18n">No, finish up</button>
+  </footer>
 </section>

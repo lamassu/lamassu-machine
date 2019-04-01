@@ -16,6 +16,18 @@
   }
 }
 
+.facephoto_permission_state {
+  .text-content {
+    max-width: 65vh;
+  }
+}
+
+.unconfirmed_deposit_state {
+  .text-content {
+    max-width: 70vh;
+  }
+}
+
 .invalid_address_state,
 .bad_security_code_state {
   .text-content {
