@@ -71,13 +71,13 @@
 }
 
 .cash-in-color #actions-scroll .round-progress-button {
-  &:active svg path{
+  &:active svg path {
     fill: $sapphire;
   }
 }
 
 .cash-out-color #actions-scroll .round-progress-button {
-  &:active svg path{
+  &:active svg path {
     fill: $purple-grey;
   }
 }

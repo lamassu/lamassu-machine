@@ -20,7 +20,7 @@ let aspectRatio800 = true
 $(function () {
   $('body').css('cursor', 'default')
   $('body').addClass('sintra')
-  $('body').addClass('brandon')
+  $('body').addClass('museo')
 
   const width = $('body').width()
   const height = $('body').height()
