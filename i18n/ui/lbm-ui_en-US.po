@@ -47,6 +47,10 @@ msgid "One moment..."
 msgstr "One moment..."
 
 #: On screen: choose_coin
+msgid "Languages"
+msgstr "Languages"
+
+#: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
 
@@ -75,6 +79,10 @@ msgid "Your coins are on their way to:"
 msgstr "Your coins are on their way to:"
 
 #: On screen: completed
+msgid "Take a picture of this screen for your electronic receipt"
+msgstr "Take a picture of this screen for your electronic receipt"
+
+#: On screen: completed
 msgid "Tap anywhere on the screen when you're done."
 msgstr "Tap anywhere on the screen when you're done."
 
@@ -99,6 +107,10 @@ msgid "Send Coins"
 msgstr "Send Coins"
 
 #: On screen: deposit
+msgid "will be dispensed to you."
+msgstr "will be dispensed to you."
+
+#: On screen: deposit
 msgid "You will send us"
 msgstr "You will send us"
 
@@ -118,13 +130,17 @@ msgstr "Please wait while we dispense your cash."
 msgid "All set"
 msgstr "All set"
 
+#: On screen: dispensing
+msgid "Please remove your cash from the tray."
+msgstr "Please remove your cash from the tray."
+
 #: On screen: facephoto-permission
 msgid "May we?"
 msgstr "May we?"
 
 #: On screen: facephoto-permission
-msgid "In order to continue this transaction, we need to snap a photo of you to comply with local lays. Is this ok?"
-msgstr "In order to continue this transaction, we need to snap a photo of you to comply with local lays. Is this ok?"
+msgid "In order to continue this transaction, we need to snap a photo of you to comply with local laws. Is this ok?"
+msgstr "In order to continue this transaction, we need to snap a photo of you to comply with local laws. Is this ok?"
 
 #: On screen: facephoto-permission
 msgid "Yes, take photo"
@@ -143,12 +159,16 @@ msgid "We didn't get a good picture of you."
 msgstr "We didn't get a good picture of you."
 
 #: On screen: facephoto
-msgid "Please look into the camera located abovethe screen."
-msgstr "Please look into the camera located abovethe screen."
+msgid "Please look into the camera located above the screen."
+msgstr "Please look into the camera located above the screen."
 
 #: On screen: fiat-complete
 msgid "We dispensed"
 msgstr "We dispensed"
+
+#: On screen: fiat-complete
+msgid "You sent us"
+msgstr "You sent us"
 
 #: On screen: goodbye
 msgid "See you!"
@@ -159,8 +179,8 @@ msgid "Temporary limit reached"
 msgstr "Temporary limit reached"
 
 #: On screen: hard-limit-reached
-msgid "Apologies. We've reached out mandated per-user limit."
-msgstr "Apologies. We've reached out mandated per-user limit."
+msgid "Apologies. We've reached our mandated per-user limit."
+msgstr "Apologies. We've reached our mandated per-user limit."
 
 #: On screen: hard-limit-reached
 msgid "OK"
@@ -169,6 +189,10 @@ msgstr "OK"
 #: On screen: insert-bills
 msgid "Insert a bill"
 msgstr "Insert a bill"
+
+#: On screen: insert-bills
+msgid "Please insert your first bill into the machine."
+msgstr "Please insert your first bill into the machine."
 
 #: On screen: insert-bills
 msgid "Your coins will be sent to:"
@@ -266,9 +290,13 @@ msgstr "Please enter the mobile number you used when you placed your order."
 msgid "Please enter your mobile number for ID verification."
 msgstr "Please enter your mobile number for ID verification."
 
+#: On screen: register-phone
+msgid "Submit"
+msgstr "Submit"
+
 #: On screen: scan-address
-msgid "Hold your QR code up to the scan window to proceed"
-msgstr "Hold your QR code up to the scan window to proceed"
+msgid "Hold your QR code up to the scan window to proceed."
+msgstr "Hold your QR code up to the scan window to proceed."
 
 #: On screen: scan-id
 msgid "Please verify your identity"
@@ -295,8 +323,8 @@ msgid "We've texted you a security code. When you get it, enter it here."
 msgstr "We've texted you a security code. When you get it, enter it here."
 
 #: On screen: sending-coins
-msgid "Sending your coins…"
-msgstr "Sending your coins…"
+msgid "Sending your coins..."
+msgstr "Sending your coins..."
 
 #: On screen: sms-verification
 msgid "ID verification"
@@ -451,10 +479,6 @@ msgid "Your Receipt"
 msgstr "Your Receipt"
 
 #: On screen: fiat-receipt
-msgid "You sent us"
-msgstr "You sent us"
-
-#: On screen: fiat-receipt
 msgid "pending confirmation"
 msgstr "pending confirmation"
 
@@ -487,12 +511,8 @@ msgid "The code you entered did not match."
 msgstr "The code you entered did not match."
 
 #: On screen: unconfirmed-deposit
-msgid "Almost there"
-msgstr "Almost there"
-
-#: On screen: unconfirmed-deposit
-msgid "We see your transaction but we're still waiting for confirmation. This take 10 minutes on average but can take up to an hour or two."
-msgstr "We see your transaction but we're still waiting for confirmation. This take 10 minutes on average but can take up to an hour or two."
+msgid "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
+msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
 msgid "Please come back for you cash and press Redeem when you get our text message."
@@ -547,20 +567,20 @@ msgid "In order to process your transaction, we need to clarify some information
 msgstr "In order to process your transaction, we need to clarify some information about your account"
 
 #: On screen: verifying-id
-msgid "Verifying identity…"
-msgstr "Verifying identity…"
+msgid "Verifying identity..."
+msgstr "Verifying identity..."
 
 #: On screen: verifying-id
 msgid "This could take a few seconds."
 msgstr "This could take a few seconds."
 
 #: On screen: verifying-photo
-msgid "Verifying photo card…"
-msgstr "Verifying photo card…"
+msgid "Verifying photo card..."
+msgstr "Verifying photo card..."
 
 #: On screen: wifi
-msgid "Select a WiFi network Only secured networks are shown."
-msgstr "Select a WiFi network Only secured networks are shown."
+msgid "Select a WiFi network"
+msgstr "Select a WiFi network"
 
 #: On screen: wifi
 msgid "Only secured networks are shown."
@@ -573,10 +593,6 @@ msgstr "WiFi password"
 #: On screen: wifi-password
 msgid "Connect"
 msgstr "Connect"
-
-#: On screen: wifi-connecting
-msgid "Connecting…"
-msgstr "Connecting…"
 
 #: On screen: withdraw_failure
 msgid "We got this"
@@ -627,6 +643,10 @@ msgid "Transaction Fee: %s"
 msgstr "Transaction Fee: %s"
 
 #: On screen: dynamic
+msgid "You deposited %s"
+msgstr "You deposited %s"
+
+#: On screen: dynamic
 msgid "You inserted a %s bill"
 msgstr "You inserted a %s bill"
 
@@ -653,6 +673,10 @@ msgstr "Please insert %s or less."
 #: On screen: dynamic
 msgid "Minimum first bill is %s."
 msgstr "Minimum first bill is %s."
+
+#: On screen: dynamic
+msgid "Processing %s ..."
+msgstr "Processing %s ..."
 
 #: On screen: dynamic
 msgid "Error in validation."
@@ -697,6 +721,10 @@ msgstr "Invalid %s address"
 #: On screen: dynamic
 msgid "This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute."
 msgstr "This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute."
+
+#: On screen: dynamic
+msgid "Transaction limit reached, please cash out"
+msgstr "Transaction limit reached, please cash out"
 
 #: On screen: dynamic
 msgid "You'll be sending %s %s"
