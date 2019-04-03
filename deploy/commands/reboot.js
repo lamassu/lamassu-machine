@@ -10,7 +10,7 @@ let restartCommand = null
 if (hardwareCode === 'aaeon')
   restartCommand = 'restart lamassu-machine; killall chromium-browser'
 else if (hardwareCode === 'ssuboard')
-  restartCommand = 'supervisorctl restart all'
+  restartCommand = 'supervisorctl restart lamassu-machine lamassu-browser'
 else restartCommand = ''
 
 
