@@ -4,11 +4,14 @@ var cp = require('child_process');
 var async = require('./async');
 var report = require('./report').report;
 
-var hardwareCode = process.argv[2] || 'N7G1';
+const hardwareCode = process.argv[2].toLowerCase();
 
-var restartCommand = hardwareCode === 'N7G1' ?
- 'poweroff -d 2' :
- 'restart lamassu-machine; killall chromium-browser';
+let restartCommand = null
+if (hardwareCode === 'aaeon')
+  restartCommand = 'restart lamassu-machine; killall chromium-browser'
+else if (hardwareCode === 'ssuboard')
+  restartCommand = 'supervisorctl restart all'
+else restartCommand = ''
 
 
 report(null, 'started', function() {});
