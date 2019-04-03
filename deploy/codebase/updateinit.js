@@ -35,6 +35,33 @@ function installBarcodeLib(cb) {
   command(cmd, cb);
 }
 
+function installDeviceConfig (cb) {
+  try {
+    const currentDeviceConfigPath = '/opt/apps/machine/lamassu-machine'
+    const newDeviceConfigPath = '/tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json'
+    const currentDeviceConfig = require(currentDeviceConfigPath)
+    const newDeviceConfig = require(newDeviceConfigPath)
+
+    if (currentDeviceConfig.billDispenser) {
+      newDeviceConfig.billDispenser.mode = currentDeviceConfig.billDispenser.model
+      newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
+    }
+    if (currentDeviceConfig.billValidator) {
+      newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+    }
+
+    // Pretty-printing the new configuration to retain its usual form.
+    const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
+    fs.writeFileSync(newDeviceConfigPath, adjustedDeviceConfig)
+
+    const cmd = 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'
+    command(cmd, cb)
+  }
+  catch (err) {
+    cb(err)
+  }
+}
+
 function installSys(cb) {
   if (hardwareCode !== 'N7G1') return cb();
   async.series([
@@ -52,7 +79,7 @@ async.series([
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/lamassu-machine /opt/apps/machine'),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
   async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/bin /opt/apps/machine/lamassu-machine'),
-  async.apply(command, 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'),
+  async.apply(installDeviceConfig),
   async.apply(installBarcodeLib),
   async.apply(report, null, 'finished.')
 ], function(err) {
