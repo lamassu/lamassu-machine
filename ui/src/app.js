@@ -8,7 +8,7 @@ const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 const CASH_OUT_QR_COLOR = '#403c51'
 const CASH_IN_QR_COLOR = '#0e4160'
 
-const SCROLL_SIZE = 270
+var scrollSize = 0
 var textHeightQuantity = 0
 var currentPage = 0
 var totalPages = 0
@@ -892,7 +892,7 @@ function scrollUp () {
     currentPage -= 1
     updateButtonStyles()
     updatePageCounter()
-    div.scrollTo(0, currentPage * SCROLL_SIZE)
+    div.scrollTo(0, currentPage * scrollSize)
   }
 }
 
@@ -902,15 +902,16 @@ function startPage (text) {
   $screen.find('.js-terms-text').html(text)
   currentPage = 0
   totalPages = 0
-  updateButtonStyles()
   setTimeout(function () {
     const div = document.getElementById('js-terms-text-div')
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
+    scrollSize = div.offsetHeight - 40
+    updateButtonStyles()
     if (textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       div.scrollTo(0, 0)
-      totalPages = Math.ceil(textHeightQuantity / SCROLL_SIZE)
+      totalPages = Math.ceil(textHeightQuantity / scrollSize)
       updatePageCounter()
     }
   })
@@ -923,11 +924,11 @@ function updatePageCounter () {
 // click page up button
 function scrollDown () {
   const div = document.getElementById('js-terms-text-div')
-  if (!(currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0)) {
+  if (!(currentPage * scrollSize + scrollSize > textHeightQuantity && currentPage !== 0)) {
     currentPage += 1
     updateButtonStyles()
     updatePageCounter()
-    div.scrollTo(0, currentPage * SCROLL_SIZE)
+    div.scrollTo(0, currentPage * scrollSize)
   }
 }
 
@@ -941,7 +942,7 @@ function updateButtonStyles () {
     buttonUp.disabled = false
   }
 
-  if (currentPage * SCROLL_SIZE + SCROLL_SIZE > textHeightQuantity && currentPage !== 0) {
+  if (currentPage * scrollSize + scrollSize > textHeightQuantity && currentPage !== 0) {
     buttonDown.disabled = true
   } else {
     buttonDown.disabled = false
