@@ -1,0 +1,21 @@
+{
+    "name": "element-scroll-polyfill",
+    "version": "1.0.1",
+    "description": "A minimal polyfill for Element scroll extensions.",
+    "license": "MIT",
+    "repository": "idmadj/element-scroll-polyfill",
+    "main": "index.js",
+    "keywords": [
+        "element",
+        "scroll",
+        "scrollto",
+        "scrollby",
+        "polyfill",
+        "microsoft",
+        "ie",
+        "msie",
+        "edge",
+        "npm",
+        "package"
+    ]
+}
