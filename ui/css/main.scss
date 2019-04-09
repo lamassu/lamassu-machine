@@ -730,10 +730,17 @@ footer {
   margin: auto;
 }
 
-.choose_coin_state header, .choose_coin_state footer {
+.choose_coin_state header {
   min-height: 8vh;
   padding: 6vh;
 }
+
+.choose_coin_state footer {
+  min-height: 19vh;
+  padding: 6vh;
+  box-sizing: border-box;
+}
+
 
 #language-overlay, #crypto-overlay {
   opacity: 0;
