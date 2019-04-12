@@ -638,6 +638,8 @@ footer {
   z-index: 5;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
   position: absolute;
 }
 
@@ -682,6 +684,11 @@ footer {
 #cryptos {
   bottom: 5vh;
   margin-left: -3vh;
+  button {
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+  }
 }
 
 #cryptos button:last-child {
@@ -728,6 +735,12 @@ footer {
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.change-language .dropdown button {
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 }
 
 .choose-coin-cash-in .choose-coin-button {

@@ -1535,6 +1535,11 @@ function dispenseBatch (data) {
 function initDebug () {
   if (DEBUG_MODE === 'dev') {
     $('body').css('cursor', 'default')
+    var style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = 'button { cursor: default !important; }'
+    document.getElementsByTagName('head')[0].appendChild(style)
+
     return
   }
 
@@ -1542,6 +1547,10 @@ function initDebug () {
     setPrimaryLocales(['en-US'])
     setLocale('en-US')
     $('body').css('cursor', 'default')
+    var style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = 'button { cursor: default !important; }'
+    document.getElementsByTagName('head')[0].appendChild(style)
 
     if (!SCREEN) {
       return chooseCoin([
