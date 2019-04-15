@@ -1024,9 +1024,11 @@ function setLocale (data) {
 }
 
 function setChooseCoinColors () {
-  var elem = $('#bg-to-show')
+  var elem = $('#bg-to-show > img')
   let img = `images/background/${isTwoWay ? '2way' : '1way'}-${aspectRatio800 ? '800' : '1080'}${isRTL && isTwoWay ? '-rtl' : ''}.svg`
-  elem.empty().html(`<img class="bg-image" src=${img} />`)
+  if (img !== elem.attr('src')) {
+    elem.attr('src', img)
+  }
 
   if (isTwoWay) {
     $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
