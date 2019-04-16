@@ -174,7 +174,6 @@ function setupFakes () {
   $('.deposit_state .send-notice .crypto-address').text(formatAddress(address))
   $('.crypto-address').html(formatAddress(address))
   $('.crypto-address-no-br').html(formatAddressNoBreakLines(address))
-  $('#fiat-inserted').html('per <span class="integer">1</span> EUR inserted')
   $('.js-i18n-fixed-fee').html('Transaction Fee: <span class="integer">1</span><span>.</span><span class="decimal">00</span> EUR')
   $('.insert_bills_state .bottom-bar .current-crypto').text('Lamassu Cryptomat')
   $('#js-i18n-high-bill-header').text('We\'re a little low on crypto.')

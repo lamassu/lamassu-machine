@@ -1184,10 +1184,6 @@ function formatFiat (amount, fractionDigits) {
   return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode
 }
 
-function singleCurrencyUnit () {
-  return formatFiat(1)
-}
-
 function setExchangeRate (_rates) {
   lastRates = _rates
   var cryptoCode = _rates.cryptoCode
@@ -1195,25 +1191,17 @@ function setExchangeRate (_rates) {
 
   var coin = coins[cryptoCode]
   var displayCode = coin.displayCode
-  var coinDisplayFactor = new BigNumber(10).pow(coin.unitScale - coin.displayScale)
 
   var cryptoToFiat = new BigNumber(rates.cashIn)
 
-  var fiatToCrypto = new BigNumber(1).div(cryptoToFiat.div(coinDisplayFactor)).round(3).toString()
-
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  var translated = locale.translate('Our current %s price is %s').fetch(cryptoCode, rateStr)
-  $('.js-i18n-current-crypto-price').html(translated)
-  updateCrypto('.reverse-exchange-rate', fiatToCrypto, displayCode)
-  var insertedText = locale.translate('per %s inserted')
-    .fetch(singleCurrencyUnit())
-  $('#fiat-inserted').html(insertedText)
+  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr} ${fiatCode}`)
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
     var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
 
-    $('.crypto-rate').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
+    $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
   }
 
   $('.js-crypto-display-units').text(displayCode)
