@@ -64,7 +64,6 @@ When running ``npm install``, don't worry about warnings or skipped optional dep
 npm install
 bash ./setup.sh
 npm run build
-node-gyp build
 ```
 
 ## Set up crypto wallets

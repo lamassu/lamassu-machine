@@ -52,6 +52,7 @@ header {
 
 footer {
   display: flex;
+  width: 100%;
 }
 
 .take-a-photo {
@@ -168,25 +169,6 @@ footer {
   @include Tagline-2;
 }
 
-.trouble_state .mainv .header {
-  margin-top: 15vh;
-}
-
-.trouble_state .mainv .header h3 {
-  margin-top: 6.79vh;
-  margin-bottom: 0vh;
-}
-
-.trouble_state .mainv .info {
-  margin-top: 3.7vh;
-  margin-bottom: 0vh;
-}
-
-.trouble_state .mainv .info p {
-  margin-top: 0.3vh;
-  margin-bottom: 0vh;
-}
-
 .cash-in-color .contacts, .cash-in-color .contacts-compact {
   background-color: $amazonite-two;
   .d2 {
@@ -243,55 +225,6 @@ footer {
 
 .deposit_timeout_state img {
   width: 12.8vw;
-}
-
-.facephoto_permission_state .mainv .header {
-  margin-top: 22vh;
-}
-
-.facephoto_permission_state .mainv .header img {
-  width: 15.6vw;
-}
-
-.facephoto_permission_state .mainv .header h3 {
-  margin-top: 5vh;
-  margin-bottom: 0;
-}
-
-.facephoto_permission_state .mainv .info {
-  margin-top: 5vh;
-  text-align: right;
-}
-
-.facephoto_permission_state .mainv .info .db2 {
-  margin-top: 2vh;
-}
-
-.facephoto_permission_state .mainv .actions {
-  margin-top: 15vh;
-}
-
-.facephoto_state .mainv .header {
-  margin-top: 12vh;
-}
-
-.facephoto_state .mainv .header h2 {
-  margin-top: 26vh;
-  margin-bottom: 0;
-  line-height: 1.33;
-}
-
-.facephoto_state .mainv .info {
-  margin-top: 1.5vh;
-}
-
-.facephoto_state .mainv .info .d1 {
-  margin-top: 0vh;
-  margin-bottom: 0vh;
-}
-
-.facephoto_state .mainv .info .tl2 {
-  margin-top: 2.8vh;
 }
 
 .hard_limit_reached_state .mainv .header {
@@ -444,45 +377,6 @@ footer {
   margin-right: 2.5vw;
   border-radius: 4vh;
   padding: 2vh 3vh;
-}
-
-.unconfirmed_deposit_state .mainv .header {
-  margin-top: 15vh;
-}
-
-.unconfirmed_deposit_state .mainv .header img {
-  height: 22vh;
-}
-
-.unconfirmed_deposit_state .mainv .header h3 {
-  margin-top: 6.3vh;
-  margin-bottom: 0vh;
-}
-
-.unconfirmed_deposit_state .mainv .info .d2 {
-  margin: 0;
-}
-
-.unconfirmed_deposit_state .mainv .info .d2:nth-child(2) {
-  margin-top: 2vh;
-}
-
-.unconfirmed_deposit_state .mainv .info {
-  margin-top: 4.7vh;
-  margin-bottom: 0vh;
-  margin-left: -2vw;
-  text-align: left;
-  max-width: 70vh;
-}
-
-.unconfirmed_deposit_state .mainv .actions {
-  margin-top: 11vh;
-}
-
-.unconfirmed_deposit_state .mainv .actions .button-yes {
-  margin: 0;
-  padding-left: 3.5vw;
-  padding-right: 3.5vw;
 }
 
 .waiting_state, .cash_in_waiting_state {
@@ -654,7 +548,7 @@ footer {
 }
 
 .cash-out-color .phone-separator {
-  border-top: 0.1vh solid $salmon-two;
+  border-top: 1px solid $salmon-two;
   width: 34vh;
 }
 
@@ -669,6 +563,10 @@ footer {
   align-items: center;
   margin-left: 4vh;
   margin-top: 3vh;
+}
+
+#phone-keypad .keys, #security-keypad .keys {
+  width: 39vh;
 }
 
 #phone-keypad .progress-button, #security-keypad .progress-button {
@@ -740,6 +638,8 @@ footer {
   z-index: 5;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
   position: absolute;
 }
 
@@ -784,6 +684,11 @@ footer {
 #cryptos {
   bottom: 5vh;
   margin-left: -3vh;
+  button {
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+  }
 }
 
 #cryptos button:last-child {
@@ -830,6 +735,12 @@ footer {
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.change-language .dropdown button {
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 }
 
 .choose-coin-cash-in .choose-coin-button {
@@ -962,6 +873,7 @@ footer {
     height: 37vh;
     justify-content: center;
     align-items: flex-end;
+    width: 100%;
   }
   main {
     height: auto;
@@ -1032,6 +944,7 @@ footer {
   }
 }
 
+.unconfirmed_deposit_state,
 .high_bill_state,
 .limit_reached_state,
 .invalid_address_state,
@@ -1085,6 +998,12 @@ footer {
   img {
     width: 21vh;
     margin-left: 4vh;
+  }
+}
+
+.trouble_state {
+  img {
+    width: 30vh;
   }
 }
 
@@ -1242,9 +1161,6 @@ footer {
   .scan-image {
     margin-right: 10vh;
     margin-left: 0;
-  }
-  .unconfirmed_deposit_state .mainv .info {
-    text-align: right;
   }
   .crypto-rate {
     margin-left: auto;

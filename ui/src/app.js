@@ -72,7 +72,7 @@ let currentCryptoCode = null
 let currentCoin = null
 let currentCoins = []
 
-var BRANDON = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
+var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
 function connect () {
@@ -1011,8 +1011,8 @@ function setLocale (data) {
     $('body').removeClass('i18n-he')
   }
 
-  if (BRANDON.indexOf(lang) !== -1) $('body').addClass('brandon')
-  else $('body').removeClass('brandon')
+  if (MUSEO.indexOf(lang) !== -1) $('body').addClass('museo')
+  else $('body').removeClass('museo')
 
   locale = loadI18n(localeCode)
   try { translatePage() } catch (ex) {}
@@ -1535,6 +1535,11 @@ function dispenseBatch (data) {
 function initDebug () {
   if (DEBUG_MODE === 'dev') {
     $('body').css('cursor', 'default')
+    var style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = 'button { cursor: default !important; }'
+    document.getElementsByTagName('head')[0].appendChild(style)
+
     return
   }
 
@@ -1542,6 +1547,10 @@ function initDebug () {
     setPrimaryLocales(['en-US'])
     setLocale('en-US')
     $('body').css('cursor', 'default')
+    var style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = 'button { cursor: default !important; }'
+    document.getElementsByTagName('head')[0].appendChild(style)
 
     if (!SCREEN) {
       return chooseCoin([
