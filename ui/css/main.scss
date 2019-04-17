@@ -955,7 +955,8 @@ footer {
 .high_bill_state,
 .limit_reached_state,
 .invalid_address_state,
-.unknown_phone_number_state {
+.unknown_phone_number_state,
+.tx_not_seen_state {
   img {
     width: 24vh;
   }

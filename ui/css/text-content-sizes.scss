@@ -22,12 +22,7 @@
   }
 }
 
-.unconfirmed_deposit_state {
-  .text-content {
-    max-width: 70vh;
-  }
-}
-
+.unconfirmed_deposit_state,
 .invalid_address_state,
 .bad_security_code_state {
   .text-content {
@@ -62,5 +57,11 @@
 .virgin_state {
   .text-content {
     max-width: 86vh;
+  }
+}
+
+.tx_not_seen_state {
+  .text-content {
+    max-width: 92vh;
   }
 }

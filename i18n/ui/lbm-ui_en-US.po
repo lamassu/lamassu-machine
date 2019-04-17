@@ -422,6 +422,18 @@ msgstr "Network down"
 msgid "Sorry, we are down for the moment."
 msgstr "Sorry, we are down for the moment."
 
+#: On screen: tx-not-seen
+msgid "We're taking a look"
+msgstr "We're taking a look"
+
+#: On screen: tx-not-seen
+msgid "We have your order, but haven't seen your deposit transaction yet. Check whether your wallet sent the coins for your transaction."
+msgstr "We have your order, but haven't seen your deposit transaction yet. Check whether your wallet sent the coins for your transaction."
+
+#: On screen: tx-not-seen
+msgid "If you're sure your coins were sent, please contact the operator."
+msgstr "If you're sure your coins were sent, please contact the operator."
+
 #: On screen: fiat-error
 msgid "Oops!"
 msgstr "Oops!"
@@ -511,12 +523,16 @@ msgid "The code you entered did not match."
 msgstr "The code you entered did not match."
 
 #: On screen: unconfirmed-deposit
+msgid "Almost there"
+msgstr "Almost there"
+
+#: On screen: unconfirmed-deposit
 msgid "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
-msgid "Please come back for you cash and press Redeem when you get our text message."
-msgstr "Please come back for you cash and press Redeem when you get our text message."
+msgid "Please come back for your cash and press Redeem when you get our text message."
+msgstr "Please come back for your cash and press Redeem when you get our text message."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
@@ -649,14 +665,6 @@ msgstr "You deposited %s"
 #: On screen: dynamic
 msgid "You inserted a %s bill"
 msgstr "You inserted a %s bill"
-
-#: On screen: dynamic
-msgid "Our current %s price is %s"
-msgstr "Our current %s price is %s"
-
-#: On screen: dynamic
-msgid "per %s inserted"
-msgstr "per %s inserted"
 
 #: On screen: dynamic
 msgid "Transaction limit reached."
