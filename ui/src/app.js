@@ -1102,7 +1102,7 @@ function setCredit (fiat, crypto, lastBill, cryptoCode) {
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber()
   var cryptoDisplayCode = coin.displayCode
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode)
-  $('.amount-deposited').html(`You deposited ${fiat} ${fiatCode}`)
+  $('.amount-deposited').html(locale.translate('You deposited %s').fetch(`${fiat} ${fiatCode}`))
   $('.fiat .js-amount').html(fiat)
 
   var inserted = lastBill
@@ -1318,7 +1318,7 @@ function minimumTx (lowestBill) {
 }
 
 function readingBill (bill) {
-  $('.js-processing-bill').html('Processing ' + formatFiat(bill) + '...')
+  $('.js-processing-bill').html(locale.translate('Processing %s ...').fetch(formatFiat(bill)))
   $('.js-send-crypto-enable').hide()
   $('.js-send-crypto-disable').show()
 }
@@ -1414,8 +1414,8 @@ function loadI18n (localeCode) {
 
 function reachFiatLimit (rec) {
   var msg = null
-  if (rec.isEmpty) msg = "We're a little low, please cash out"
-  else if (rec.txLimitReached) msg = 'Transaction limit reached, please cash out'
+  if (rec.isEmpty) msg = locale.translate(`We're a little low, please cash out`)
+  else if (rec.txLimitReached) msg = locale.translate('Transaction limit reached, please cash out')
 
   var el = $('.choose_fiat_state .limit')
   if (msg) el.html(msg).show()
