@@ -548,6 +548,7 @@ $(document).ready(function () {
 
   setupButton('unknown-phone-number-ok', 'idle')
   setupButton('unconfirmed-deposit-ok', 'idle')
+  setupButton('tx-not-seen-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
 
   setupButton('terms-ok', 'termsAccepted')
