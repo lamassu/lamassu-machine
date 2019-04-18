@@ -5,8 +5,6 @@ const uuid = require('uuid')
 
 const dataPath = require('./lib/data-path')
 
-const LOG_FILE = path.resolve(dataPath, 'machine.log')
-
 let lastTimestamp = null
 let serial = 0
 
@@ -33,7 +31,6 @@ function diskLog (level, timestamp, msg) {
     level,
     msg
   }) + '\n'
-  fs.appendFile(LOG_FILE, line, () => {})
   fs.appendFile(getLogFile(), line, () => {})
 }
 
