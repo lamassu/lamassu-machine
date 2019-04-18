@@ -93,14 +93,6 @@ footer {
   color: $sapphire;
 }
 
-.cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
-  display: none;
-}
-
-.douro .only-sintra, .sintra .only-douro {
-  display: none;
-}
-
 .hidden {
   opacity: 0;
 }
@@ -422,9 +414,22 @@ footer {
 }
 
 .scan-image {
+  display: none;
   margin-left: 10vh;
   width: 48vh;
   margin-top: -3vh;
+}
+
+.only-sintra {
+  margin-top: 1vh;
+}
+
+.sintra .only-sintra, .douro .only-douro, .gaia .only-gaia {
+  display: block;
+}
+
+.cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
+  display: none;
 }
 
 .cancel-button {
