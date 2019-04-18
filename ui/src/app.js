@@ -12,7 +12,7 @@ var scrollSize = 0
 var textHeightQuantity = 0
 var currentPage = 0
 var totalPages = 0
-var aspectRatio800 = true
+var aspectRatio = '16:10'
 var isTwoWay = null
 var isRTL = false
 var two = null
@@ -567,13 +567,7 @@ $(document).ready(function () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  aspectRatio800 = aspectRatioPt1 === 8 && aspectRatioPt2 === 5
-
-  if (aspectRatio800) {
-    $('body').addClass('aspect-ratio-8-5')
-  } else {
-    $('body').addClass('aspect-ratio-16-9')
-  }
+  aspectRatio = aspectRatioPt1 === 8 && aspectRatioPt2 === 5 ? '16:10' : '16:9'
 
   $('.crypto-buttons').click(event => {
     let el = $(event.target)
@@ -829,7 +823,7 @@ function setHardLimitHours (hours) {
 }
 
 function setMachineVersion (version) {
-  const versions = ['sintra', 'douro']
+  const versions = ['sintra', 'douro', 'gaia']
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))
@@ -1026,7 +1020,7 @@ function setLocale (data) {
 
 function setChooseCoinColors () {
   var elem = $('#bg-to-show > img')
-  let img = `images/background/${isTwoWay ? '2way' : '1way'}-${aspectRatio800 ? '800' : '1080'}${isRTL && isTwoWay ? '-rtl' : ''}.svg`
+  let img = `images/background/${isTwoWay ? '2way' : '1way'}-${aspectRatio}${isRTL ? '-rtl' : ''}.svg`
   if (img !== elem.attr('src')) {
     elem.attr('src', img)
   }
@@ -1591,7 +1585,7 @@ function setupAnimation (isTwoWay, isAr800) {
   }
   two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem)
 
-  let elementId = `${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}${isRTL && isTwoWay ? '-rtl' : ''}`
+  let elementId = `${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}${isRTL ? '-rtl' : ''}`
   background = two.interpret(document.getElementById(elementId))
   background.scale = 1
 }
