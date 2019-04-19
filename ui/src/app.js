@@ -1198,7 +1198,7 @@ function setExchangeRate (_rates) {
   var cryptoToFiat = new BigNumber(rates.cashIn)
 
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr} ${fiatCode}`)
+  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
