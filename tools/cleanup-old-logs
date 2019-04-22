@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const path = require('path')
+const dataPath = require('../lib/data-path')
+
+// Remove machine.log
+const LOG_FILE = path.resolve(dataPath, 'machine.log')
+unlink(LOG_FILE)
+
+// Remove supervisor old logs
+removeOldSupervisorLogs()
+
+
+function removeOldSupervisorLogs() {
+  const logs = [
+    'lamassu-audio',
+    'lamassu-browser',
+    'lamassu-machine',
+    'lamassu-updater',
+    'lamassu-watchdog'
+  ]
+
+  logs.forEach(it => {
+    for (let i = 2; i < 11; i++) {
+      unlink(`var/log/supervisor/${it}.out.log.${i}`)
+      unlink(`var/log/supervisor/${it}.err.log.${i}`)
+    }
+  })
+}
+
+function unlink (path) {
+  try { fs.unlinkSync(path) } catch (ex) { }
+}
+
