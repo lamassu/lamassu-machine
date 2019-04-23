@@ -417,6 +417,11 @@ $(document).ready(function () {
   const attachFastClick = Origami.fastclick
   attachFastClick(document.body)
 
+  window.addEventListener('resize', () => {
+    calculateAspectRatio()
+    setChooseCoinColors()
+  })
+
   // Matt's anti-drag hack
   window.onclick =
     window.oncontextmenu =
@@ -554,20 +559,7 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
 
-  const width = $('body').width()
-  const height = $('body').height()
-
-  function gcd (a, b) {
-    return (b === 0) ? a : gcd(b, a % b)
-  }
-
-  const w = width
-  const h = height
-  const r = gcd(w, h)
-  const aspectRatioPt1 = w / r
-  const aspectRatioPt2 = h / r
-
-  aspectRatio = aspectRatioPt1 === 8 && aspectRatioPt2 === 5 ? '16:10' : '16:9'
+  calculateAspectRatio()
 
   $('.crypto-buttons').click(event => {
     let el = $(event.target)
@@ -1542,6 +1534,23 @@ function initDebug () {
 
     setState(SCREEN)
   }
+}
+
+function calculateAspectRatio () {
+  const width = $('body').width()
+  const height = $('body').height()
+
+  function gcd (a, b) {
+    return (b === 0) ? a : gcd(b, a % b)
+  }
+
+  const w = width
+  const h = height
+  const r = gcd(w, h)
+  const aspectRatioPt1 = w / r
+  const aspectRatioPt2 = h / r
+
+  aspectRatio = aspectRatioPt1 === 8 && aspectRatioPt2 === 5 ? '16:10' : '16:9'
 }
 
 let background = null
