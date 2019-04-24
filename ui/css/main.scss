@@ -808,12 +808,14 @@ footer {
 
 .terms_screen_state footer {
   justify-content: center;
-  height: 58vh;
+  height: 18vh;
   margin-top: 8vh;
 }
 
 .terms_screen_state main {
   justify-content: center;
+  flex: 1;
+  overflow: hidden;
 }
 
 .terms_screen_state button {
