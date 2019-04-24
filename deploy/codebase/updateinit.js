@@ -52,10 +52,7 @@ function installDeviceConfig (cb) {
 
     // Pretty-printing the new configuration to retain its usual form.
     const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
-    fs.writeFileSync(newDeviceConfigPath, adjustedDeviceConfig)
-
-    const cmd = 'cp /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json /opt/apps/machine/lamassu-machine'
-    command(cmd, cb)
+    fs.writeFileSync(currentDeviceConfigPath, adjustedDeviceConfig)
   }
   catch (err) {
     cb(err)
