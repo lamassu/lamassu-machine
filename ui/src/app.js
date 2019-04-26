@@ -827,7 +827,7 @@ function setMachineVersion (version) {
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))
-  $('body').addClass(version)
+  $('body').addClass(version.startsWith('douro') ? 'douro' : version)
 }
 
 function setDirection (direction) {
