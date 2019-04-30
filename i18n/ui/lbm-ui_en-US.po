@@ -350,6 +350,18 @@ msgstr "No, send coins"
 msgid "No, cancel"
 msgstr "No, cancel"
 
+#: On screen: suspicious-address
+msgid "Suspicious address"
+msgstr "Suspicious address"
+
+#: On screen: suspicious-address
+msgid "This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet."
+msgstr "This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet."
+
+#: On screen: suspicious-address
+msgid "Start over"
+msgstr "Start over"
+
 #: On screen: booting
 msgid "Booting up..."
 msgstr "Booting up..."
