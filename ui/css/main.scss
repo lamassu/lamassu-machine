@@ -161,7 +161,7 @@ footer {
   @include Tagline-2;
 }
 
-.cash-in-color .contacts, .cash-in-color .contacts-compact {
+.cash-in-color .contacts {
   background-color: $amazonite-two;
   .d2 {
     color: $white;
@@ -171,7 +171,7 @@ footer {
   }
 }
 
-.cash-out-color .contacts, .cash-out-color .contacts-compact {
+.cash-out-color .contacts {
   background-color: $salmon-two;
   .d2 {
     color: $white;
@@ -181,32 +181,23 @@ footer {
   }
 }
 
-.email-icon {
-  margin-top: 0.7vh;
-}
-
-.contacts,
-.contacts-compact {
-  margin-top: 4.9vh;
-  width: 40.5vw;
+.contacts {
+  white-space: nowrap;
+  min-width: 41vw;
   background-color: $white;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
-  padding-left: 2.5vw;
-  padding-right: 2.5vw;
+  padding: 3vh;
   table {
     width: 100%;
   }
-  &:nth-child(2) {
-    margin-top: 2.7vh;
-  }
   td {
-    width: 50%;
-    div {
-      display: flex;
-      svg {
-        margin-right: 1.25vw;
-      }
+    padding: 1vh;
+    img, svg {
+      width: 2vw;
+      margin-right: 1vw;
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
     }
   }
 }
@@ -982,7 +973,7 @@ footer {
 }
 
 .max_phone_retries_state, .bad_phone_number_state {
-  img {
+  header img {
     width: 21vh;
     margin-left: 5vh;
   }
@@ -1156,8 +1147,7 @@ footer {
     padding-right: 8vw;
     padding-left: 0;
   }
-  .contacts,
-  .contacts-compact {
+  .contacts {
     td div svg {
       margin-left: 1.25vw;
       margin-right: 0;
