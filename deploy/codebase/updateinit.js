@@ -53,6 +53,8 @@ function installDeviceConfig (cb) {
     // Pretty-printing the new configuration to retain its usual form.
     const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
     fs.writeFileSync(currentDeviceConfigPath, adjustedDeviceConfig)
+
+    cb()
   }
   catch (err) {
     cb(err)
