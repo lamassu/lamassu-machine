@@ -552,7 +552,7 @@ footer {
 }
 
 .cash-in-color .phone-separator {
-  border-bottom: 0.1vh solid $amazonite-two;
+  border-bottom: 1px solid $amazonite-two;
   width: 34vh;
 }
 
@@ -1062,8 +1062,11 @@ footer {
 
 #wifi-keyboard {
   box-sizing: border-box;
+  width: 100%;
   #wifiPassCancel {
-    margin: 2vh 2vh auto auto;
+    display: flex;
+    margin: 6vh 6vh -4vh 0;
+    justify-content: flex-end;
   }
   .pass-top {
     display: flex;
@@ -1074,7 +1077,7 @@ footer {
     text-align: center;
     color: $white;
     background-color: $sapphire;
-    margin-left: auto;
+    margin-left: 28vw;
   }
   .connect-wrapper {
     display: flex;
@@ -1083,14 +1086,13 @@ footer {
   .backspace {
     font-size: 6vh;
     margin: 0 1vh;
-    padding-bottom: 1.5vh;
   }
   .row {
     justify-content: center;
   }
   .key {
     box-sizing: border-box;
-    border: 0.1vh solid;
+    border: 1px solid;
     margin: 0.3vh;
     &:active {
       border: none;
@@ -1113,10 +1115,12 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  .wifiicon-wrapper {
+    margin-left: 9vh;
+    margin-right: -16vh;
+  }
   img {
     width: 6vh;
-    position: absolute;
-    margin-left: 14vh;
   }
   .filled-action-button {
     width: 40vh;

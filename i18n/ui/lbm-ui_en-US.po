@@ -614,6 +614,14 @@ msgstr "Select a WiFi network"
 msgid "Only secured networks are shown."
 msgstr "Only secured networks are shown."
 
+#: On screen: wifi
+msgid "Or connect Ethernet"
+msgstr "Or connect Ethernet"
+
+#: On screen: wifi
+msgid "A wired connection is preferred for stability."
+msgstr "A wired connection is preferred for stability."
+
 #: On screen: wifi-password
 msgid "WiFi password"
 msgstr "WiFi password"
