@@ -1,13 +1,12 @@
 <section id="wifi-viewport" class="viewport wifi_state system-color" data-tr-section="wifi" data-screentype="wifi-tp">
   <header>
-    <div id="wifiListCancel" class="cancel-button-wrapper">
-      <img class="cancel-button" src="images/close-icon-amaz.svg" />
-    </div>
   </header>
   <main>
     <section class="primary-side">
       <h3 class="js-i18n no-margin-bottom">Select a WiFi network</h3>
       <p class="js-i18n d2">Only secured networks are shown.</p>
+      <h3 class="js-i18n no-margin-bottom">Or connect Ethernet</h3>
+      <p class="js-i18n d2">A wired connection is preferred for stability.</p>
     </section>
     <section class="secondary-side">
       <div id="networks" class="i18n-latin">
@@ -25,7 +24,7 @@
       <h3 class="js-i18n no-margin-bottom">WiFi password</h3>
       <p id="js-i18n-wifi-for-ssid" class="ssid-container d2"></p>
       <div class="entry">
-        <input class="passphrase h5" type="password" autofocus="autofocus" data-content=""/>
+        <input class="passphrase h5" type="password" readonly="readonly" data-content=""/>
         <button class="filled-progress-button button backspace">←</button>
         <button id="wifiConnect" class="bordered-progress-button button connect"><span class="js-i18n">Connect</span></button>
       </div>
