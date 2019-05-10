@@ -16,6 +16,7 @@ var aspectRatio = '16:10'
 var isTwoWay = null
 var isRTL = false
 var two = null
+var cryptomatModel = null
 
 var fiatCode = null
 var locale = null
@@ -132,7 +133,7 @@ function processData (data) {
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
   if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
-  if (data.cryptomatModel) setMachineVersion(data.cryptomatModel)
+  if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
 
   if (data.context) {
     $('.js-context').hide()
@@ -141,7 +142,11 @@ function processData (data) {
 
   switch (data.action) {
     case 'wifiList':
-      setState('wifi')
+      if (cryptomatModel === 'douro1') {
+        setState('wifi')
+      } else {
+        setState('connect_ethernet')
+      }
       break
     case 'wifiPass':
       setState('wifi_password')
@@ -503,7 +508,6 @@ $(document).ready(function () {
   })
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
-  setupImmediateButton('wifiListCancel', 'cancelWifiList')
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
@@ -821,12 +825,13 @@ function setHardLimitHours (hours) {
   $('#hard-limit-hours').text(locale.translate('Please come back in %s hours').fetch(hours))
 }
 
-function setMachineVersion (version) {
+function setCryptomatModel (model) {
+  cryptomatModel = model
   const versions = ['sintra', 'douro', 'gaia']
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))
-  $('body').addClass(version.startsWith('douro') ? 'douro' : version)
+  $('body').addClass(model.startsWith('douro') ? 'douro' : model)
 }
 
 function setDirection (direction) {
