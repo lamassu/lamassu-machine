@@ -1,0 +1,106 @@
+<section
+  class="viewport printer_scanning_error_state info cash-in-color"
+  data-tr-section="printer-scanning-error"
+  data-screentype="info-action-tp"
+>
+  <header>
+    <!-- TODO: correct svg -->
+    <img src="images/verify-ID-phone-amazonite.svg" />
+  </header>
+
+  <main>
+    <h3 class="js-i18n nm-margin-bottom">QR scanning error</h3>
+    <div class="text-content">
+      <p class="js-i18n d2">
+        We couldn't properly scan your paper wallet. Make sure
+        you position it correctly on the scanning bay and that
+        it was properly printed.
+      </p>
+      <p class="js-i18n tl2">If the problem persists try printing again.</p>
+    </div>
+  </main>
+
+  <footer>
+    <button id="printer-scan-again" class="filled-progress-button button js-i18n">
+      Scan again
+    </button>
+    <button id="printer-print-again" class="bordered-progress-button button js-i18n">
+      Print again
+    </button>
+  </footer>
+</section>
+
+<section
+  class="viewport printer_error_state info-no-image cash-in-color"
+  data-tr-section="printer-error-state"
+  data-screentype="info-contact-tp"
+>
+  <header></header>
+  <main>
+    <h3 class="js-i18n">Printing Failed</h3>
+    <div class="text-content">
+      <p class="js-i18n d2">
+        In seems there was a problem while printing your wallet.
+        Please contact the operator for more information or try
+        printing again.
+      </p>
+    </div>
+    <table class="contacts nm-margin-top">
+      <tr>
+        <td>
+          <img src="images/contact/operator.svg" />
+          <span class="d2 operator-name"></span>
+        </td>
+        <td>
+          <img src="images/contact/phone.svg" />
+          <span class="d2 operator-phone"></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <img src="images/contact/email.svg" />
+          <span class="d2 operator-email"></span>
+        </td>
+      </tr>
+    </table>
+  </main>
+  <footer>
+    <button id="printer-print-again2" class="filled-progress-button button">
+      <div class="js-i18n">Try again</div>
+    </button>
+    <button id="printer-back-to-home" class="bordered-progress-button button">
+      <div class="js-i18n">Back to Home</div>
+    </button>
+  </footer>
+</section>
+
+<section
+  class="viewport printer_scan_address_state cash-in-color"
+  data-tr-section="printer-scan-address"
+  data-screentype="flow-no-action-tp"
+>
+  <header>
+    <div id="printer-scan-cancel" class="cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="xl-margin-top">
+    <section class="primary-side">
+      <h2 class="primary-side-title xs-margin-bottom">Validate Wallet</h2>
+      <p class="d1 no-margin-top js-i18n">
+          To validate, please present the front of your paper wallet to the scan window.
+      </p>
+      <p class="d1 no-margin-top">
+        <strong class="js-i18n">
+          IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!
+        </strong>
+      </p>
+    </section>
+    <section class="secondary-side">
+      <!-- TODO correct svgs -->
+      <object class="scan-image only-sintra" data="images/scan/animation/sintra/BTC-amazonite.svg"></object>
+      <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
+    </section>
+  </main>
+</section>

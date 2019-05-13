@@ -40,9 +40,16 @@
 }
 
 .bad_phone_number_state,
+.printer_scanning_error_state,
 .blocked_customer_state {
   .text-content {
     max-width: 78vh;
+  }
+}
+
+.printer_error_state {
+  .text-content {
+    max-width: 79vh;
   }
 }
 

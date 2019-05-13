@@ -511,6 +511,12 @@ $(document).ready(function () {
   setupImmediateButton('fiat_complete_viewport', 'completed')
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel')
   setupImmediateButton('depositCancel', 'depositCancel')
+  setupImmediateButton('printer-scan-cancel', 'cancelScan')
+
+  setupButton('printer-back-to-home', 'idle')
+  setupButton('printer-print-again', 'printAgain')
+  setupButton('printer-print-again2', 'printAgain')
+  setupButton('printer-scan-again', 'printerScanAgain')
 
   setupButton('initialize', 'initialize')
   // setupButton('test-mode', 'testMode')
@@ -1227,6 +1233,7 @@ function qrize (text, target, color, lightning) {
 
 function setTx (tx) {
   const txId = tx.id
+  const isPaperWallet = tx.isPaperWallet
   const hasBills = tx.bills && tx.bills.length > 0
 
   if (hasBills) {
@@ -1236,6 +1243,8 @@ function setTx (tx) {
     $('.js-inserted-notes').hide()
     $('.js-no-inserted-notes').show()
   }
+
+  $('.js-paper-wallet').toggleClass('hide', !isPaperWallet)
 
   setTimeout(() => {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
