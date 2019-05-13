@@ -46,8 +46,11 @@ main {
 header {
   display: flex;
   padding: 6vh;
-  justify-content: flex-end;
   min-height: 3vh;
+}
+
+.choose_coin_state header {
+  justify-content: flex-end;
 }
 
 footer {
@@ -99,10 +102,16 @@ footer {
 
 .crypto-rate {
   direction: ltr;
-  margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 2vh;
+}
+
+.paper-wallet-header-message {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2vh;
+  border-left: 2px solid $sapphire;
 }
 
 .mainv .actions .button-yes {
@@ -421,6 +430,10 @@ footer {
 
 .cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
   display: none;
+}
+
+.cancel-button-wrapper {
+  margin-left: auto;
 }
 
 .cancel-button {
