@@ -1152,6 +1152,10 @@ footer {
 
 .i18n-rtl {
   direction: rtl;
+  .cancel-button-wrapper {
+    margin-right: auto;
+    margin-left: 0;
+  }
   .primary-side {
     padding-left: 0;
     padding-right: 9.4vw;
