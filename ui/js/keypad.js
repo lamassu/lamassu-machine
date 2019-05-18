@@ -25,9 +25,10 @@ var Keypad = function (keypadId, opts, callback) {
 
     if (target.hasClass('enter')) {
       self.deactivate()
-      var result = self.type === 'phoneNumber'
-        ? libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country).number
-        : self.result
+
+      const phoneResult = libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country)
+      const result = self.type === 'phoneNumber' && phoneResult ? phoneResult.number : self.result
+
       self.reset()
       return self.callback(result)
     }

@@ -223,6 +223,7 @@ function setupFakes () {
     $('.verifying_photo_state'),
     $('.verifying_id_state'),
     $('.sms_verification_state'),
+    $('.id_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
