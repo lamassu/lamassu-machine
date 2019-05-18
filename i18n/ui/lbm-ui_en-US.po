@@ -15,12 +15,12 @@ msgid "Or press 'Cancel transaction' to return to the home screen."
 msgstr "Or press 'Cancel transaction' to return to the home screen."
 
 #: On screen: are-you-sure
-msgid "Continue Transaction"
-msgstr "Continue Transaction"
+msgid "Continue transaction"
+msgstr "Continue transaction"
 
 #: On screen: are-you-sure
-msgid "Cancel Transaction"
-msgstr "Cancel Transaction"
+msgid "Cancel transaction"
+msgstr "Cancel transaction"
 
 #: On screen: bad-phone-number
 msgid "Try again"
@@ -85,6 +85,10 @@ msgstr "Take a picture of this screen for your electronic receipt"
 #: On screen: completed
 msgid "Tap anywhere on the screen when you're done."
 msgstr "Tap anywhere on the screen when you're done."
+
+#: On screen: connect_ethernet
+msgid "Network down"
+msgstr "Network down"
 
 #: On screen: deposit-timeout
 msgid "Nothing yet."
@@ -187,6 +191,10 @@ msgid "OK"
 msgstr "OK"
 
 #: On screen: insert-bills
+msgid "Wallet successfully validated!"
+msgstr "Wallet successfully validated!"
+
+#: On screen: insert-bills
 msgid "Insert a bill"
 msgstr "Insert a bill"
 
@@ -197,6 +205,10 @@ msgstr "Please insert your first bill into the machine."
 #: On screen: insert-bills
 msgid "Your coins will be sent to:"
 msgstr "Your coins will be sent to:"
+
+#: On screen: insert-more-bills
+msgid "Insert another bill"
+msgstr "Insert another bill"
 
 #: On screen: insert-more-bills
 msgid "deposited so far"
@@ -274,6 +286,46 @@ msgstr "You might want to give it another shot."
 msgid "Cancel"
 msgstr "Cancel"
 
+#: On screen: printer-scanning-error
+msgid "QR scanning error"
+msgstr "QR scanning error"
+
+#: On screen: printer-scanning-error
+msgid "We couldn't properly scan your paper wallet. Make sure you position it correctly on the scanning bay and that it was properly printed."
+msgstr "We couldn't properly scan your paper wallet. Make sure you position it correctly on the scanning bay and that it was properly printed."
+
+#: On screen: printer-scanning-error
+msgid "If the problem persists try printing again."
+msgstr "If the problem persists try printing again."
+
+#: On screen: printer-scanning-error
+msgid "Scan again"
+msgstr "Scan again"
+
+#: On screen: printer-scanning-error
+msgid "Print again"
+msgstr "Print again"
+
+#: On screen: printer-error-state
+msgid "Printing Failed"
+msgstr "Printing Failed"
+
+#: On screen: printer-error-state
+msgid "In seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
+msgstr "In seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
+
+#: On screen: printer-error-state
+msgid "Back to Home"
+msgstr "Back to Home"
+
+#: On screen: printer-scan-address
+msgid "To validate, please present the front of your paper wallet to the scan window."
+msgstr "To validate, please present the front of your paper wallet to the scan window."
+
+#: On screen: printer-scan-address
+msgid "IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!"
+msgstr "IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!"
+
 #: On screen: register-phone
 msgid "Phone Number"
 msgstr "Phone Number"
@@ -321,6 +373,14 @@ msgstr "Security Code"
 #: On screen: security-code
 msgid "We've texted you a security code. When you get it, enter it here."
 msgstr "We've texted you a security code. When you get it, enter it here."
+
+#: On screen: send-only
+msgid "We're out of coins!"
+msgstr "We're out of coins!"
+
+#: On screen: send-only
+msgid "Send coins"
+msgstr "Send coins"
 
 #: On screen: sending-coins
 msgid "Sending your coins..."
@@ -427,10 +487,6 @@ msgid "I agree"
 msgstr "I agree"
 
 #: On screen: trouble
-msgid "Network down"
-msgstr "Network down"
-
-#: On screen: trouble
 msgid "Sorry, we are down for the moment."
 msgstr "Sorry, we are down for the moment."
 
@@ -463,8 +519,8 @@ msgid "Please snap a photo of your receipt."
 msgstr "Please snap a photo of your receipt."
 
 #: On screen: fiat-transaction-error
-msgid "Show Receipt"
-msgstr "Show Receipt"
+msgid "Show receipt"
+msgstr "Show receipt"
 
 #: On screen: redeem-later
 msgid "We're waiting for your deposit to confirm on the blockchain. You will soon receive a text message notifying you that your transaction has confirmed."
@@ -647,10 +703,6 @@ msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
 
 #: On screen: dynamic
-msgid "Insert another bill"
-msgstr "Insert another bill"
-
-#: On screen: dynamic
 msgid "MORE"
 msgstr "MORE"
 
@@ -699,24 +751,16 @@ msgid "Processing %s ..."
 msgstr "Processing %s ..."
 
 #: On screen: dynamic
-msgid "Error in validation."
-msgstr "Error in validation."
+msgid "Transaction limit reached"
+msgstr "Transaction limit reached"
 
 #: On screen: dynamic
-msgid "Network connection error"
-msgstr "Network connection error"
+msgid "Error in validation"
+msgstr "Error in validation"
 
 #: On screen: dynamic
-msgid "We're out of %s"
-msgstr "We're out of %s"
-
-#: On screen: dynamic
-msgid "In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit."
-msgstr "In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit."
-
-#: On screen: dynamic
-msgid "Please touch <strong>Send Coins</strong> to complete your purchase."
-msgstr "Please touch <strong>Send Coins</strong> to complete your purchase."
+msgid "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
+msgstr "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
 
 #: On screen: dynamic
 msgid "Scan your <br/> %s address"
