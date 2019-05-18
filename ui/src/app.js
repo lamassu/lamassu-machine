@@ -252,12 +252,19 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
+    case 'idVerification':
+      idVerification()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
+}
+
+function idVerification () {
+  setScreen('id_verification')
 }
 
 function smsVerification (threshold) {
@@ -843,6 +850,7 @@ function setDirection (direction) {
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
     $('.verifying_id_state'),
+    $('.id_verification_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
