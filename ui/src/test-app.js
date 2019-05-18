@@ -183,7 +183,7 @@ function setupFakes () {
   $('.js-i18n-total-purchased').html('total purchased')
   $('.js-crypto-display-units').text('mBTC')
   $('.deposit_state .digital .js-amount').html(34.479)
-  $('.deposit_state .fiat .js-amount').text(320)
+  $('.fiat .js-amount').text(320)
   $('.js-currency').text('EUR')
   $('.js-i18n-scan-your-address').html('Scan your <br/> BTC address')
   $('.js-processing-bill').text('Vous avez introduit un billet de 50 USD')

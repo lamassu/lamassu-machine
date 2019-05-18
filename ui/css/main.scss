@@ -988,6 +988,7 @@ footer {
   }
 }
 
+.locked_state,
 .maintenance_state {
   img {
     width: 19vh;
@@ -1016,13 +1017,6 @@ footer {
   }
 }
 
-.connect_ethernet_state,
-.trouble_state {
-  img {
-    width: 30vh;
-  }
-}
-
 .printer_scanning_error_state {
   img {
     width: 24vh;
@@ -1030,7 +1024,9 @@ footer {
   }
 }
 
-.deposit_network_down_state {
+.deposit_network_down_state,
+.connect_ethernet_state,
+.trouble_state {
   img {
     width: 33vh;
   }
@@ -1205,4 +1201,17 @@ footer {
     display: flex;
     justify-content: flex-end;
   }
+}
+
+.send-only-total {
+  margin-bottom: 6vh;
+  margin-top: 3vh;
+  display: flex;
+  justify-content: space-around;
+  min-width: 70vh;
+}
+
+.send_only_state .text-content {
+  min-width: 72vh;
+  max-width: 80vh;
 }
