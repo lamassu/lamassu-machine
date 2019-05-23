@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+[ -z "$1" ] && echo "Specify target platform in the first argument" && exit 1
+
 SUB_DIR=codebase
 SCRIPT_DIR=$(dirname $0)
 MACHINE_DIR=$SCRIPT_DIR/../..
@@ -24,8 +26,6 @@ BUILD_FILES_DIR=$MACHINE_DIR/deploy-files
 UPDATESCRIPT=$SCRIPT_DIR/updateinit.js
 TARGET_MODULES_DIR=$TARGET_MACHINE_DIR/node_modules
 
-rm -rf $EXPORT_SCRIPT_DIR
-rm -rf $EXPORT_DIR
 mkdir -p $EXPORT_DIR
 mkdir -p $EXPORT_SCRIPT_DIR
 mkdir -p $TARGET_MODULES_DIR
@@ -51,44 +51,33 @@ cp $MACHINE_DIR/bin/cam.js $TARGET_MACHINE_DIR/bin
 cp $MACHINE_DIR/bin/mock-cam.js $TARGET_MACHINE_DIR/bin
 
 cp -r $MACHINE_DIR/ui $TARGET_MACHINE_DIR
-$MACHINE_DIR/node_modules/.bin/copy-node-modules $MACHINE_DIR $TARGET_MACHINE_DIR
+cp -R $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
 
-# remove native modules
-node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules
-cp -a $HARDWARE_DIR $EXPORT_DIR/hardware
+# Remove native modules
+node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --rem-native
 
-# Untar deploy-files
-tar -xvf $MACHINE_DIR/deploy-files.tar.gz
+if [ $1 == "acp" ] ; then
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/acp/node_modules
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/acp/node_modules --rem-interpreted
+  cp $MACHINE_DIR/device_config.json $TARGET_MACHINE_DIR/device_config.json
+elif [ $1 == "ssuboard" ] ; then
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/node_modules
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
+  cp $MACHINE_DIR/device_config.json $TARGET_MACHINE_DIR/device_config.json
+elif [ $1 == "upboard" ] ; then
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/node_modules
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
+  cp $MACHINE_DIR/device_config.json $TARGET_MACHINE_DIR/device_config.json
+else
+  echo "The first argument should the target's platform name: acp, ssuboard, upboard"
+  exit 1
+fi
 
-# Copy back basic fonts
+# Copy fonts
 mkdir -p $TARGET_MACHINE_DIR/ui/css/fonts
 cp $BUILD_FILES_DIR/fonts/*.ttf $TARGET_MACHINE_DIR/ui/css/fonts
 cp $BUILD_FILES_DIR/fonts/*.woff $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $BUILD_FILES_DIR/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
 
-# Copy licences.json
-cp $BUILD_FILES_DIR/licenses.json $TARGET_MACHINE_DIR/licenses.json
-
-# Copy aaeon node_modules
-cp -R $BUILD_FILES_DIR/aaeon_node_modules $EXPORT_DIR/hardware/aaeon/node_modules
-
-# Copy libBarcodeScanner.json
-mkdir $EXPORT_DIR/hardware/aaeon/lib/
-cp $BUILD_FILES_DIR/libBarcodeScanner.so $EXPORT_DIR/hardware/aaeon/lib/
-
-
-# Reduce package size, these are unneeded
-rm -rf $TARGET_MODULES_DIR/clim/example
-
-# Note, this is only needed for early release aaeons
-mkdir -p $EXPORT_DIR/native/aaeon/scripts
-cp $SCRIPT_DIR/updateinit-aaeon.js $EXPORT_DIR/native/aaeon/scripts/updateinit.js
-cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_DIR/native/aaeon/scripts
-cp $SCRIPT_DIR/../report.js $EXPORT_DIR/native/aaeon/scripts
-
 git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.txt
 cat $EXPORT_DIR/revision.txt
-
-node $SCRIPT_DIR/../build.js $EXPORT_BASE
-
-rm -rf $EXPORT_DIR

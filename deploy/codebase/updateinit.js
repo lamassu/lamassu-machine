@@ -9,17 +9,12 @@ var tar = require('/opt/apps/machine/lamassu-machine/node_modules/tar');
 
 var TIMEOUT = 120000;
 
-var hardwareCode = process.argv[2] || 'N7G1';
+var hardwareCode = process.argv[2];
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
-}
-
-function remountRW(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  command('/bin/mount -o remount,rw /', cb);
 }
 
 function untar(tarball, outPath, cb) {
@@ -29,16 +24,10 @@ function untar(tarball, outPath, cb) {
   .on('end', cb);   // success
 }
 
-function installBarcodeLib(cb) {
-  if (hardwareCode !== 'aaeon') return cb();
-  var cmd = 'cp -p /tmp/extract/package/subpackage/hardware/aaeon/lib/libBarcodeScanner.so /usr/lib';
-  command(cmd, cb);
-}
-
 function installDeviceConfig (cb) {
   try {
     const currentDeviceConfigPath = '/opt/apps/machine/lamassu-machine'
-    const newDeviceConfigPath = '/tmp/extract/package/subpackage/hardware/' + hardwareCode + '/device_config.json'
+    const newDeviceConfigPath = `/tmp/extract/package/subpackage/lamassu_machine/device_config_${hardwareCode}.json`
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
@@ -61,25 +50,17 @@ function installDeviceConfig (cb) {
   }
 }
 
-function installSys(cb) {
-  if (hardwareCode !== 'N7G1') return cb();
-  async.series([
-    async.apply(command, 'cp -p /tmp/extract/package/subpackage/hardware/N7G1/sys/xinitrc /opt/apps/machine/system'),
-    async.apply(command, 'cp -p /tmp/extract/package/subpackage/hardware/N7G1/sys/inittab /etc')
-  ], cb);
-}
-
+let applicationParentFolder = null
+if (hardwareCode === 'aaeon')
+  applicationParentFolder = '/opt/apps/machine'
+applicationParentFolder = '/opt'
 
 async.series([
-  async.apply(remountRW),
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
-  async.apply(installSys),
-  async.apply(command, 'cp -a /tmp/extract/package/subpackage/lamassu-machine /opt/apps/machine'),
-  async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/node_modules /opt/apps/machine/lamassu-machine'),
-  async.apply(command, 'cp -a /tmp/extract/package/subpackage/hardware/' + hardwareCode + '/bin /opt/apps/machine/lamassu-machine'),
+  async.apply(command, `cp -a /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, `cp -a /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/node_modules`),
   async.apply(installDeviceConfig),
-  async.apply(installBarcodeLib),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
