@@ -2,13 +2,9 @@
 
 SCRIPT_DIR=$(dirname $0)
 
-supervisorctl stop
 rm -rf /etc/supervisor
 cp -r $SCRIPT_DIR/../hardware/system/ssuboard/supervisor /etc/supervisor
 
-# Supervisor can have a race condition
-# The sleep is for mitigation
-sleep 30s
-supervisorctl start
+supervisorctl update
 
 echo 'Supervisor configuration updated'
