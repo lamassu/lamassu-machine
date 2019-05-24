@@ -58,17 +58,17 @@ node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --re
 
 if [ $1 == "acp" ] ; then
   mkdir -p $EXPORT_DIR/hardware/acp/node_modules
-  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/acp/node_modules
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/acp/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/acp/node_modules --rem-interpreted
   cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/acp/
 elif [ $1 == "ssuboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
-  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/node_modules
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
   cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/ssuboard/
 elif [ $1 == "upboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
-  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/node_modules
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
   cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/
 else
