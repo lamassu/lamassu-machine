@@ -26,8 +26,11 @@ function untar(tarball, outPath, cb) {
 
 function installDeviceConfig (cb) {
   try {
-    const currentDeviceConfigPath = '/opt/apps/machine/lamassu-machine'
-    const newDeviceConfigPath = `/tmp/extract/package/subpackage/lamassu_machine/device_config_${hardwareCode}.json`
+    const currentDeviceConfigPath = hardwareCode === 'aaeon' ? 
+      '/opt/apps/machine/lamassu-machine' :
+      '/opt/lamassu-machine'
+
+    const newDeviceConfigPath = `/tmp/extract/package/subpackage/hardware/${hardwareCode}/device_config.json`
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
@@ -59,7 +62,7 @@ async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
   async.apply(command, `cp -a /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -a /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/node_modules`),
+  async.apply(command, `cp -a /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
   async.apply(report, null, 'finished.')
 ], function(err) {
