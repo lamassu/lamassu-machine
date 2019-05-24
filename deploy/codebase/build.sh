@@ -56,11 +56,11 @@ cp -R $MACHINE_DIR/node_modules $TARGET_MACHINE_DIR
 # Remove native modules
 node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --rem-native
 
-if [ $1 == "acp" ] ; then
-  mkdir -p $EXPORT_DIR/hardware/acp/node_modules
-  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/acp/
-  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/acp/node_modules --rem-interpreted
-  cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/acp/
+if [ $1 == "aaeon" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/aaeon/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/aaeon/node_modules --rem-interpreted
+  cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/aaeon/
 elif [ $1 == "ssuboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
@@ -72,7 +72,7 @@ elif [ $1 == "upboard" ] ; then
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
   cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/
 else
-  echo "The first argument should the target's platform name: acp, ssuboard, upboard"
+  echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"
   exit 1
 fi
 
