@@ -31,6 +31,10 @@ function installDeviceConfig (cb) {
       '/opt/lamassu-machine'
 
     const newDeviceConfigPath = `/tmp/extract/package/subpackage/hardware/${hardwareCode}/device_config.json`
+    
+    // Updates don't necessarily need to carry a device_config.json file
+    if (!fs.existsSync(newDeviceConfigPath)) return cb()
+    
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
