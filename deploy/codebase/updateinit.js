@@ -1,15 +1,17 @@
 'use strict';
 
-var fs = require('fs');
-var zlib = require('zlib');
-var async = require('./async');
-var cp = require('child_process');
-var report = require('./report').report;
-var tar = require('/opt/apps/machine/lamassu-machine/node_modules/tar');
+const fs = require('fs');
+const zlib = require('zlib');
+const async = require('./async');
+const cp = require('child_process');
+const report = require('./report').report;
 
-var TIMEOUT = 120000;
+const hardwareCode = process.argv[2];
+const tar = hardwareCode === 'aaeon' ? 
+  require('/opt/apps/machine/lamassu-machine/node_modules/tar') :
+  require('/opt/lamassu-machine/node_modules/tar');
 
-var hardwareCode = process.argv[2];
+const TIMEOUT = 120000;
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
