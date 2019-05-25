@@ -9,7 +9,17 @@ var path = require('path');
 function loadCerts() {
   var config;
 
-  // New lamassu-machine
+  // ssuboard and upboard machines
+  if (fs.existsSync('/opt/lamassu-machine')) {
+    config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
+    if (fs.existsSync(config.updater.caFile)) return {
+      ca: fs.readFileSync(config.updater.caFile),
+      cert: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.pem')),
+      key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
+    };
+  }
+
+  // aaeon/acp machines
   if (fs.existsSync('/opt/apps/machine/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {
