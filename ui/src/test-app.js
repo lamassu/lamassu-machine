@@ -197,19 +197,19 @@ function setupFakes () {
   $('.operator-email').html('my-long-email@hotmail.com.br')
   $('#networks').html(`
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">sm</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/4.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">larger</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/3.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">some letter</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/2.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">lots and lots of letters</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/1.svg"></span></div>
     </div>
   `)
