@@ -1,5 +1,3 @@
-// Note: this is currently useful for versions of sencha-brain on the aaeon system.
-
 'use strict';
 
 var https = require('https');
@@ -9,7 +7,17 @@ var path = require('path');
 function loadCerts() {
   var config;
 
-  // New lamassu-machine
+  // ssuboard & aaeon-upboard
+  if (fs.existsSync('/opt/lamassu-machine')) {
+    config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
+    if (fs.existsSync(config.updater.caFile)) return {
+      ca: fs.readFileSync(config.updater.caFile),
+      cert: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.pem')),
+      key: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.key'))
+    };
+  }
+
+  // aaeon-acp (pre-convergence)
   if (fs.existsSync('/opt/apps/machine/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {
@@ -18,27 +26,7 @@ function loadCerts() {
       key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
     };
   }
-
-  // Nexus7 sencha-brain
-  if (fs.existsSync('/usr/local/share/sencha/certs/')) {
-    config = JSON.parse(fs.readFileSync('/usr/local/share/sencha/node/sencha-brain/software_config.json'));
-    return {
-      ca: fs.readFileSync(config.updater.caFile),
-      cert: fs.readFileSync(config.updater.certFile),
-      key: fs.readFileSync(config.updater.keyFile)
-    };
-  }
-
-  // sencha-brain aaeons
-  var baseDir = fs.existsSync('/opt/sencha-brain') ? '/opt' : '/home/iva';
-  config = JSON.parse(fs.readFileSync(baseDir + '/sencha-brain/device_config.json'));
-
-  return {
-    ca: fs.readFileSync(config.updater.caFile),
-    cert: fs.readFileSync(config.brain.certs.certFile),
-    key: fs.readFileSync(config.brain.certs.keyFile)
-  };
-}
+};
 
 var _certs = loadCerts();
 
