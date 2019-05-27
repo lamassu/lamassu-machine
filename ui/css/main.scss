@@ -1117,11 +1117,16 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  .ssid {
+    margin: auto;
+  }
   .wifiicon-wrapper {
-    margin-left: 9vh;
-    margin-right: -16vh;
+    min-width: 6vh;
+    height: 10vh;
+    display: flex;
   }
   img {
+    margin: auto;
     width: 6vh;
   }
   .filled-action-button {

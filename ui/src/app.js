@@ -793,7 +793,7 @@ function setWifiList (recs, requestedPage) {
     var html = '<div class="wifi-network-button filled-action-button tl2">' +
     '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
       rec.ssid + '">' + rec.displaySsid +
-    '</span>' + '<div class="wifiicon-wrapper"><img src="images/wifiicon/ ' + bars + '"/></div></div>'
+    '</span>' + '<div class="wifiicon-wrapper"><img src="images/wifiicon/' + bars + '.svg"/></div></div>'
     networks.append(html)
   }
 
