@@ -1330,8 +1330,6 @@ function sendOnly (reason) {
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
   $('#send-only-title').text(reasonText)
 
-  console.log('reason', reason)
-  reason = 'blockedCustomer'
   if (reason === 'blockedCustomer') {
     $('.js-send-only-text').text(locale.translate("Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit.").fetch())
   } else {
