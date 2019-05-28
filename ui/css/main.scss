@@ -572,6 +572,9 @@ footer {
   align-items: center;
   margin-left: 4vh;
   margin-top: 3vh;
+  .keys {
+    width: 42vh;
+  }
 }
 
 #phone-keypad .progress-button, #security-keypad .progress-button {
