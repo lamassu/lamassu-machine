@@ -14,8 +14,8 @@ function loadCerts() {
     config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {
       ca: fs.readFileSync(config.updater.caFile),
-      cert: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.pem')),
-      key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
+      cert: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.pem')),
+      key: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.key'))
     };
   }
 
