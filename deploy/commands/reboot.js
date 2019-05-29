@@ -9,7 +9,7 @@ const hardwareCode = process.argv[2].toLowerCase();
 let restartCommand = null
 if (hardwareCode === 'aaeon')
   restartCommand = 'restart lamassu-machine; killall chromium-browser'
-else if (hardwareCode === 'ssuboard')
+else if (hardwareCode === 'ssuboard' || hardwareCode === 'upboard')
   restartCommand = 'supervisorctl restart lamassu-machine lamassu-browser'
 else restartCommand = ''
 
