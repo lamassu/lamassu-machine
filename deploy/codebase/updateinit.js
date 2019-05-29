@@ -29,8 +29,8 @@ function untar(tarball, outPath, cb) {
 function installDeviceConfig (cb) {
   try {
     const currentDeviceConfigPath = hardwareCode === 'aaeon' ? 
-      '/opt/apps/machine/lamassu-machine' :
-      '/opt/lamassu-machine'
+      '/opt/apps/machine/lamassu-machine/device_config.json' :
+      '/opt/lamassu-machine/device_config.json'
 
     const newDeviceConfigPath = `/tmp/extract/package/subpackage/hardware/${hardwareCode}/device_config.json`
     
