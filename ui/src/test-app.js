@@ -183,7 +183,7 @@ function setupFakes () {
   $('.js-i18n-total-purchased').html('total purchased')
   $('.js-crypto-display-units').text('mBTC')
   $('.deposit_state .digital .js-amount').html(34.479)
-  $('.deposit_state .fiat .js-amount').text(320)
+  $('.fiat .js-amount').text(320)
   $('.js-currency').text('EUR')
   $('.js-i18n-scan-your-address').html('Scan your <br/> BTC address')
   $('.js-processing-bill').text('Vous avez introduit un billet de 50 USD')
@@ -197,19 +197,19 @@ function setupFakes () {
   $('.operator-email').html('my-long-email@hotmail.com.br')
   $('#networks').html(`
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">sm</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/4.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">larger</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/3.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">some letter</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/2.svg"></span></div>
     </div>
     <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">taranto</span>
+      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">lots and lots of letters</span>
       <div class="wifiicon-wrapper"><img src="images/wifiicon/1.svg"></span></div>
     </div>
   `)
@@ -223,6 +223,7 @@ function setupFakes () {
     $('.verifying_photo_state'),
     $('.verifying_id_state'),
     $('.sms_verification_state'),
+    $('.id_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),

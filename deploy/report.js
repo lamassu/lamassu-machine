@@ -1,5 +1,3 @@
-// Note: this is currently useful for versions of sencha-brain on the aaeon system.
-
 'use strict';
 
 var https = require('https');
@@ -9,7 +7,7 @@ var path = require('path');
 function loadCerts() {
   var config;
 
-  // ssuboard and upboard machines
+  // ssuboard & aaeon-upboard
   if (fs.existsSync('/opt/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {
@@ -19,7 +17,7 @@ function loadCerts() {
     };
   }
 
-  // aaeon/acp machines
+  // aaeon-acp (pre-convergence)
   if (fs.existsSync('/opt/apps/machine/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {

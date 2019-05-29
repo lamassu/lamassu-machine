@@ -66,7 +66,6 @@ var wifiKeyboard = null
 var phoneKeypad = null
 var securityKeypad = null
 var previousState = null
-var onSendOnly = false
 var buttonActive = true
 var cassettes = null
 let currentCryptoCode = null
@@ -119,7 +118,7 @@ function processData (data) {
   if (data.tx) setTx(data.tx)
   if (data.wifiList) setWifiList(data.wifiList)
   if (data.wifiSsid) setWifiSsid(data.wifiSsid)
-  if (data.sendOnly) sendOnly(data.reason, data.cryptoCode)
+  if (data.sendOnly) sendOnly(data.reason)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo)
   if (data.cassettes) setupCassettes(data.cassettes)
@@ -252,12 +251,19 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
+    case 'idVerification':
+      idVerification()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
+}
+
+function idVerification () {
+  setScreen('id_verification')
 }
 
 function smsVerification (threshold) {
@@ -492,7 +498,13 @@ $(document).ready(function () {
   })
 
   var sendCoinsButton = document.getElementById('send-coins')
+  var sendCoinsButton2 = document.getElementById('send-only-send-coins')
   touchEvent(sendCoinsButton, function () {
+    setState('sending_coins')
+    buttonPressed('sendCoins')
+  })
+
+  touchEvent(sendCoinsButton2, function () {
     setState('sending_coins')
     buttonPressed('sendCoins')
   })
@@ -741,8 +753,6 @@ function setScreen (newScreen, oldScreen) {
 function setState (state, delay) {
   if (state === currentState) return
 
-  onSendOnly = false
-
   previousState = currentState
   currentState = state
 
@@ -758,12 +768,6 @@ function setState (state, delay) {
       setScreen(currentState, previousState)
     }, delay)
   } else setScreen(currentState, previousState)
-
-  if (state === 'insert_more_bills') {
-    t('or', locale.translate('OR').fetch())
-    $('#insert-another').html(locale.translate('Insert another bill'))
-    $('#insert-more-bills-finished').css('visibility', 'visible')
-  }
 }
 
 function revertScreen () { setScreen(currentState) }
@@ -789,7 +793,7 @@ function setWifiList (recs, requestedPage) {
     var html = '<div class="wifi-network-button filled-action-button tl2">' +
     '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
       rec.ssid + '">' + rec.displaySsid +
-    '</span>' + '<div class="wifiicon-wrapper"><img src="images/wifiicon/ ' + bars + '"/></div></div>'
+    '</span>' + '<div class="wifiicon-wrapper"><img src="images/wifiicon/' + bars + '.svg"/></div></div>'
     networks.append(html)
   }
 
@@ -843,6 +847,7 @@ function setDirection (direction) {
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
     $('.verifying_id_state'),
+    $('.id_verification_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
@@ -1310,32 +1315,28 @@ function readingBill (bill) {
   $('.js-send-crypto-disable').show()
 }
 
-function sendOnly (reason, cryptoCode) {
-  // TODO: sendOnly should be made into its own state.
-  // Remove all instances of onSendOnly when doing this.
-  if (onSendOnly) return
-  onSendOnly = true
+function sendOnly (reason) {
+  // TODO: sendOnly should be made into its own state on brain.js
+  if (currentState === 'send_only') return
 
-  t('or', '')
-  $('#insert-more-bills-finished').css('visibility', 'hidden')
   const errorMessages = {
-    transactionLimit: locale.translate('Transaction limit reached.').fetch(),
-    validatorError: locale.translate('Error in validation.').fetch(),
-    networkDown: locale.translate('Network connection error').fetch(),
-    lowBalance: locale.translate("We're out of %s").fetch(cryptoCode),
-    blockedCustomer: locale.translate('Transaction limit reached.')
+    transactionLimit: locale.translate('Transaction limit reached').fetch(),
+    validatorError: locale.translate('Error in validation').fetch(),
+    lowBalance: locale.translate("We're out of coins!").fetch(),
+    blockedCustomer: locale.translate('Transaction limit reached')
   }
 
   // If no reason provided defaults to lowBalance
   const reasonText = errorMessages[reason] || errorMessages.lowBalance
-
-  $('#insert-another').html(reasonText)
+  $('#send-only-title').text(reasonText)
 
   if (reason === 'blockedCustomer') {
-    $('.js-processing-bill').html(locale.translate('In order to process a larger transaction, we need to clarify some information about your account. Please complete your current transaction and contact support to raise your limit.').fetch())
+    $('.js-send-only-text').text(locale.translate("Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit.").fetch())
   } else {
-    $('.js-processing-bill').html(locale.translate('Please touch <strong>Send Coins</strong> to complete your purchase.').fetch())
+    $('.js-send-only-text').text('')
   }
+
+  setState('send_only')
 }
 
 function setPartialSend (sent, total) {

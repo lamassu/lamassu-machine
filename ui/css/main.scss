@@ -572,6 +572,9 @@ footer {
   align-items: center;
   margin-left: 4vh;
   margin-top: 3vh;
+  .keys {
+    width: 42vh;
+  }
 }
 
 #phone-keypad .progress-button, #security-keypad .progress-button {
@@ -988,6 +991,7 @@ footer {
   }
 }
 
+.locked_state,
 .maintenance_state {
   img {
     width: 19vh;
@@ -1006,6 +1010,12 @@ footer {
   }
 }
 
+.id_verification_state {
+  img {
+    width: 33vh;
+  }
+}
+
 .sms_verification_state {
   main {
     text-align: left;
@@ -1016,13 +1026,6 @@ footer {
   }
 }
 
-.connect_ethernet_state,
-.trouble_state {
-  img {
-    width: 30vh;
-  }
-}
-
 .printer_scanning_error_state {
   img {
     width: 24vh;
@@ -1030,7 +1033,9 @@ footer {
   }
 }
 
-.deposit_network_down_state {
+.deposit_network_down_state,
+.connect_ethernet_state,
+.trouble_state {
   img {
     width: 33vh;
   }
@@ -1115,11 +1120,16 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  .ssid {
+    margin: auto;
+  }
   .wifiicon-wrapper {
-    margin-left: 9vh;
-    margin-right: -16vh;
+    min-width: 6vh;
+    height: 10vh;
+    display: flex;
   }
   img {
+    margin: auto;
     width: 6vh;
   }
   .filled-action-button {
@@ -1205,4 +1215,17 @@ footer {
     display: flex;
     justify-content: flex-end;
   }
+}
+
+.send-only-total {
+  margin-bottom: 6vh;
+  margin-top: 3vh;
+  display: flex;
+  justify-content: space-around;
+  min-width: 70vh;
+}
+
+.send_only_state .text-content {
+  min-width: 72vh;
+  max-width: 80vh;
 }
