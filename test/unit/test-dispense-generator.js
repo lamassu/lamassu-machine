@@ -33,7 +33,7 @@ test('Should complete single dispense', async t => {
   const txId = '80b34dde'
   const dispensedBills = { bills: [ { dispensed: 0, rejected: 0 }, { dispensed: 1, rejected: 0 } ] }
   const g = dispenseGenerator([[0,1]], tx, txId)
-  actionEmitter.emit('billDispenser', { action: 'dispensed', value: dispensedBills })
+  actionEmitter.emit('billDispenser', { action: 'dispensed', value: dispensedBills, current: 1, of: 1 })
   
   t.plan(7)
   t.true(spy.firstCall.args[0].action === 'updateUI')
@@ -63,11 +63,11 @@ test('Should complete mulitiple dispense', async t => {
   const dispensedBills3 = { bills: [ { dispensed: 0, rejected: 0 }, { dispensed: 3, rejected: 0 }, ] }
   
   const g = dispenseGenerator([[ 2, 18 ], [ 0, 20 ], [ 0, 3 ]], tx, txId)
-  actionEmitter.emit('billDispenser', { action: 'dispensed' })
+  actionEmitter.emit('billDispenser', { action: 'dispensed', current: 1, of: 3 })
   actionEmitter.emit('billCollected', { action: 'dispensed', value: dispensedBills1 })
-  actionEmitter.emit('billDispenser', { action: 'dispensed' })
+  actionEmitter.emit('billDispenser', { action: 'dispensed', current: 2, of: 3 })
   actionEmitter.emit('billCollected', { action: 'dispensed', value: dispensedBills2 })
-  actionEmitter.emit('billDispenser', { action: 'dispensed' })
+  actionEmitter.emit('billDispenser', { action: 'dispensed', current: 3, of: 3 })
   actionEmitter.emit('billCollected', { action: 'dispensed', value: dispensedBills3 })
 
   t.plan(14)
