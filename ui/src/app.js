@@ -918,7 +918,7 @@ function startPage (text) {
       totalPages = Math.ceil(textHeightQuantity / scrollSize)
       updatePageCounter()
     }
-  })
+  }, 100)
 }
 
 function updatePageCounter () {
