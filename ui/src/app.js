@@ -17,6 +17,8 @@ var isTwoWay = null
 var isRTL = false
 var two = null
 var cryptomatModel = null
+var termsConditionsTimeout = null
+var T_C_TIMEOUT = 30000
 
 var fiatCode = null
 var locale = null
@@ -887,10 +889,31 @@ function setTermsScreen (data) {
   startPage(data.text)
   $screen.find('.js-terms-accept-button').html(data.accept)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
+  setTermsConditionsTimeout()
+}
+
+function clearTermsConditionsTimeout () {
+  clearTimeout(termsConditionsTimeout)
+}
+
+function setTermsConditionsTimeout () {
+  termsConditionsTimeout = setTimeout(function () {
+    console.log('is this going on?')
+    if (currentState === 'terms_screen') {
+      console.log('and this?')
+      buttonPressed('idle')
+    }
+  }, T_C_TIMEOUT)
+}
+
+function resetTermsConditionsTimeout () {
+  clearTermsConditionsTimeout()
+  setTermsConditionsTimeout()
 }
 
 // click page up button
 function scrollUp () {
+  resetTermsConditionsTimeout()
   const div = document.getElementById('js-terms-text-div')
   if (currentPage !== 0) {
     currentPage -= 1
@@ -927,6 +950,7 @@ function updatePageCounter () {
 
 // click page up button
 function scrollDown () {
+  resetTermsConditionsTimeout()
   const div = document.getElementById('js-terms-text-div')
   if (!(currentPage * scrollSize + scrollSize > textHeightQuantity && currentPage !== 0)) {
     currentPage += 1
