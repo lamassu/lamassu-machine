@@ -8,7 +8,7 @@ var BASE = '/tmp/extract'
 var DONE_PATH = BASE + '/done.txt'
 var SCRIPT_PATH = BASE + '/package/updatescript.js'
 var RUNNING_PATH = BASE + '/running.txt'
-var TIMEOUT = 300000
+var TIMEOUT = 420000
 
 var child = null
 var t0 = null
