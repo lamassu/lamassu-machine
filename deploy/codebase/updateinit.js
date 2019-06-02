@@ -11,7 +11,7 @@ const tar = hardwareCode === 'aaeon' ?
   require('/opt/apps/machine/lamassu-machine/node_modules/tar') :
   require('/opt/lamassu-machine/node_modules/tar');
 
-const TIMEOUT = 120000;
+const TIMEOUT = 300000;
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
