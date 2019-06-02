@@ -60,9 +60,9 @@ function installDeviceConfig (cb) {
 }
 
 let applicationParentFolder = null
+applicationParentFolder = '/opt'
 if (hardwareCode === 'aaeon')
   applicationParentFolder = '/opt/apps/machine'
-applicationParentFolder = '/opt'
 
 async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine'),
