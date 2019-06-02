@@ -60,17 +60,23 @@ if [ $1 == "aaeon" ] ; then
   mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/aaeon/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/aaeon/node_modules --rem-interpreted
-  cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/aaeon/
+  if [ $2 == "--copy-device-config" ] ; then
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/aaeon/
+  fi
 elif [ $1 == "ssuboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
-  cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/ssuboard/
+  if [ $2 == "--copy-device-config" ] ; then
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/ssuboard/
+  fi
 elif [ $1 == "upboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
-  cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/
+  if [ $2 == "--copy-device-config" ] ; then
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/
+  fi
 else
   echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"
   exit 1
