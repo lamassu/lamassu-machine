@@ -67,8 +67,8 @@ if (hardwareCode === 'aaeon')
 async.series([
   async.apply(command, 'mkdir -p /opt/apps/machine'),
   async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
-  async.apply(command, `cp -a /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -a /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
+  async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
   async.apply(report, null, 'finished.')
 ], function(err) {
