@@ -47,10 +47,8 @@ function installDeviceConfig (cb) {
   }
 }
 
-let applicationParentFolder = null
-applicationParentFolder = '/opt'
-if (hardwareCode === 'aaeon')
-  applicationParentFolder = '/opt/apps/machine'
+
+const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
 async.series([
   async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
