@@ -1,29 +1,17 @@
 'use strict';
 
 const fs = require('fs');
-const zlib = require('zlib');
 const async = require('./async');
 const cp = require('child_process');
 const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
-const tar = hardwareCode === 'aaeon' ? 
-  require('/opt/apps/machine/lamassu-machine/node_modules/tar') :
-  require('/opt/lamassu-machine/node_modules/tar');
-
 const TIMEOUT = 300000;
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
-}
-
-function untar(tarball, outPath, cb) {
-  var fileIn = fs.createReadStream(tarball);
-  fileIn.pipe(zlib.createGunzip()).pipe(tar.Extract(outPath))
-  .on('error', cb)
-  .on('end', cb);   // success
 }
 
 function installDeviceConfig (cb) {
@@ -65,7 +53,7 @@ if (hardwareCode === 'aaeon')
   applicationParentFolder = '/opt/apps/machine'
 
 async.series([
-  async.apply(untar, '/tmp/extract/package/subpackage.tgz', '/tmp/extract/package/'),
+  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
