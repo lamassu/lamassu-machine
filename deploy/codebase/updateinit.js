@@ -17,8 +17,8 @@ function command(cmd, cb) {
 
 function installDeviceConfig (cb) {
   try {
-    const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.tmp.json`
-    const newDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
+    const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
+    const newDeviceConfigPath = `/tmp/extract/package/subpackage/hardware/${hardwareCode}/device_config.json`
     
     // Updates don't necessarily need to carry a device_config.json file
     if (!fs.existsSync(newDeviceConfigPath)) return cb()
@@ -47,11 +47,9 @@ function installDeviceConfig (cb) {
 
 async.series([
   async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
-  async.apply(command, `cp ${applicationParentFolder}/lamassu-machine/device_config.json ${applicationParentFolder}/lamassu-machine/device_config.tmp.json`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
-  async.apply(command, `rm ${applicationParentFolder}/lamassu-machine/device_config.tmp.json`),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
