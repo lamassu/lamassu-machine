@@ -1540,7 +1540,7 @@ function fiatComplete (tx) {
 }
 
 function dispenseBatch (data) {
-  $('.batch').toggleClass('hide', data.of === 1)
+  $('.batch').css('visibility', data.of === 1 ? 'hidden' : 'visible')
   $('.batch').text(`${data.current}/${data.of}`)
 }
 

@@ -1,9 +1,11 @@
+.dispensing_collect_state,
 .dispensing_state {
   .text-content {
     width: 44vh;
   }
 }
 
+.dispensing_partial_collect_state,
 .insert_bills_state {
   .text-content {
     max-width: 57vh;
