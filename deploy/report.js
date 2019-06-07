@@ -26,7 +26,7 @@ function loadCerts() {
       key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
     };
   }
-};
+}
 
 var _certs = loadCerts();
 

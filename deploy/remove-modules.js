@@ -5,14 +5,17 @@ const path = require('path')
 var rimraf = require("rimraf");
 
 const base = process.argv[2]
+const mode = process.argv[3]
 
 const isNative = m => {
   const isNative = fs.existsSync(path.resolve(base, m, 'build', 'Release'))
 
   // TODO this is awfully manual right now. 
-  const mappedNative = m === '@lamassu' || m === '@pokusew'
+  const mappedNative = m === '@lamassu' || m === '@pokusew' || m === '@joepie91'
 
-  return isNative || mappedNative
+  if (mode === '--rem-native')
+    return isNative || mappedNative
+  return ! (isNative || mappedNative)
 }
 
 fs.readdirSync(base)
