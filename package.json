@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "7.2.0",
+  "version": "7.3.0",
   "dependencies": {
     "@lamassu/camera-wrapper": "1.0.1",
     "async": "~1.5.2",
