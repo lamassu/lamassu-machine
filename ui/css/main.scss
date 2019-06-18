@@ -1010,6 +1010,27 @@ footer {
   }
 }
 
+.facephoto_failed_state {
+  img {
+    width: 26vh;
+    margin-left: 1vh;
+  }
+}
+
+.facephoto_permission_state {
+  img {
+    width: 25vh;
+  }
+}
+
+.facephoto_state,
+.facephoto_retry_state {
+  img {
+    width: 6vh;
+    margin-bottom: 23vh;
+  }
+}
+
 .id_verification_state {
   img {
     width: 33vh;
@@ -1233,4 +1254,8 @@ footer {
 .batch {
   min-height: 4vh;
   margin-bottom: 0;
+}
+
+.facephoto-please-look-text {
+  max-width: 85vh;
 }

@@ -221,6 +221,7 @@ function setupFakes () {
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
+    $('.verifying_face_photo_state'),
     $('.verifying_id_state'),
     $('.sms_verification_state'),
     $('.id_verification_state'),
@@ -236,10 +237,13 @@ function setupFakes () {
     $('.sanctions_failure_state'),
     $('.id_verification_error_state'),
     $('.facephoto_state'),
+    $('.facephoto_retry_state'),
     $('.facephoto_permission_state'),
+    $('.facephoto_failed_state'),
     $('.hard_limit_reached_state'),
     $('.photo_scan_failed_state'),
-    $('.id_code_failed_state')
+    $('.id_code_failed_state'),
+    $('.waiting_state')
   ]
 
   states.forEach(it => {
