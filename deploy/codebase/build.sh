@@ -87,6 +87,11 @@ mkdir -p $TARGET_MACHINE_DIR/ui/css/fonts
 cp $BUILD_FILES_DIR/fonts/*.ttf $TARGET_MACHINE_DIR/ui/css/fonts
 cp $BUILD_FILES_DIR/fonts/*.woff $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $BUILD_FILES_DIR/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/BPmono $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/MontHeavy $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/MuseoSans $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/NotoKufiArabic $TARGET_MACHINE_DIR/ui/css/fonts
+cp -a $BUILD_FILES_DIR/fonts/Rubik $TARGET_MACHINE_DIR/ui/css/fonts
 
 git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.txt
 cat $EXPORT_DIR/revision.txt
