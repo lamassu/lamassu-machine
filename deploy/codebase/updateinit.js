@@ -32,6 +32,7 @@ function installDeviceConfig (cb) {
     }
     if (currentDeviceConfig.billValidator) {
       newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType
+      newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
     }
 
     // Pretty-printing the new configuration to retain its usual form.
