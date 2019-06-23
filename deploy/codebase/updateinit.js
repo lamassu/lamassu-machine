@@ -6,7 +6,7 @@ const cp = require('child_process');
 const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
-const TIMEOUT = 300000;
+const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
 function command(cmd, cb) {
@@ -31,7 +31,7 @@ function installDeviceConfig (cb) {
       newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
     }
     if (currentDeviceConfig.billValidator) {
-      newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+      newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType
     }
 
     // Pretty-printing the new configuration to retain its usual form.
