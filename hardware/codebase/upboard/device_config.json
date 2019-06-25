@@ -12,12 +12,6 @@
   "compliance": {
     "paperWallet": false
   },
-  "kioskPrinter": {
-    "maker": "Zebra",
-    "model": "KR-403",
-    "protocol": "RS232",
-    "address": "/dev/ttyJ5"
-  },
   "scanner": {
     "testnet": false,
     "device": "/dev/video-scan",
