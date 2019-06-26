@@ -5,7 +5,7 @@
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,
-    "nfcReader": "ACS ACR1281 1S PICC Reader [ACR1281 Dual Reader PICC] 00 00",
+    "nfcReader": null,
     "wifiDisabled": true,
     "hasSsuboard": true
   },
