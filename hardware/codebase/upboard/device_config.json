@@ -1,0 +1,58 @@
+{
+  "cryptomatModel": "gaia",
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "data",
+    "wifiConfigPath": null,
+    "nfcReader": null,
+    "wifiDisabled": true,
+    "hasSsuboard": true
+  },
+  "compliance": {
+    "paperWallet": false
+  },
+  "scanner": {
+    "testnet": false,
+    "device": "/dev/video-scan",
+    "qr": {
+      "width": 640,
+      "height": 480,
+      "contrast": 30,
+      "lowExposure": 75,
+      "highExposure": null,
+      "exposureAdjustTime": 200
+    },
+    "photoId": {
+      "width": 1280,
+      "height": 960,
+      "contrast": 25,
+      "lowExposure": null,
+      "highExposure": null,
+      "exposureAdjustTime": 200
+    }
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "rs232": {
+      "device": "/dev/ttyJ4"
+    }
+  },
+  "billDispenser": {
+    "model": "f56",
+    "device": null
+  },
+  "updater": {
+    "caFile": "/opt/certs/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
+    },
+    "packageJsonDir": "/opt/lamassu-machine"
+  }
+}
