@@ -221,7 +221,7 @@ function setupFakes () {
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
-    $('.verifying_face_photo_state'),
+    $('.verifying_facephoto_state'),
     $('.verifying_id_state'),
     $('.sms_verification_state'),
     $('.id_verification_state'),

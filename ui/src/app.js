@@ -623,6 +623,7 @@ $(document).ready(function () {
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
   $('#facephoto-permission-no').click(() => buttonPressed('finishBeforeSms'))
   $('#facephoto-scan-failed-cancel').click(() => buttonPressed('finishBeforeSms'))
+  $('#facephoto-scan-failed-cancel2').click(() => buttonPressed('finishBeforeSms'))
 
   $('.change-language').mousedown(() => {
     if (_primaryLocales.length === 2) {
@@ -853,7 +854,7 @@ function setDirection (direction) {
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
-    $('.verifying_face_photo_state'),
+    $('.verifying_facephoto_state'),
     $('.verifying_id_state'),
     $('.id_verification_state'),
     $('.sms_verification_state'),
