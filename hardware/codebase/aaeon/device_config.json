@@ -34,10 +34,6 @@
     },
     "photoId": {
       "width": 1280,
-      "height": 960
-    },
-    "photoCard": {
-      "width": 1280,
       "height": 960,
       "threshold": 20,
       "minFaceSize": 180
