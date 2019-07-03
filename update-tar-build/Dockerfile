@@ -2,9 +2,7 @@ FROM ubuntu:14.04
 
 RUN apt-get update && apt-get -y upgrade && \
   apt-get install -y git node npm build-essential cmake libgtk2.0-dev \
-  pkg-config libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev \
-  libopencv-core-dev libopencv-highgui-dev libopencv-imgproc-dev \
-  libopencv-video-dev libopencv-features2d-dev libopencv-objdetect-dev
+  pkg-config libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev
 
 ENV WORK=/usr/app
 

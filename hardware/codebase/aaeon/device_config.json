@@ -30,29 +30,16 @@
     "device": "/dev/video0",
     "qr": {
       "width": 640,
-      "height": 480,
-      "contrast": 30,
-      "lowExposure": 75,
-      "highExposure": null,
-      "exposureAdjustTime": 200
+      "height": 480
     },
     "photoId": {
       "width": 1280,
-      "height": 960,
-      "contrast": 25,
-      "lowExposure": null,
-      "highExposure": null,
-      "exposureAdjustTime": 200
+      "height": 960
     },
     "photoCard": {
       "width": 1280,
       "height": 960,
-      "contrast": 25,
-      "lowExposure": null,
-      "highExposure": null,
-      "exposureAdjustTime": 200,
       "threshold": 20,
-      "threshold2": 1000.0,
       "minFaceSize": 180
     }
   },
