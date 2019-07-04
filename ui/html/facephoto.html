@@ -1,0 +1,91 @@
+<section
+  class="viewport facephoto_state no-action-info cash-in-color"
+  data-tr-section="facephoto"
+  data-screentype="info-no-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/look-amazonite.svg"/>
+    <img class="only-cash-out" src="images/look-salmon.svg"/>
+  </header>
+
+  <main>
+    <h2 class="js-i18n no-margin-bottom">Look at the dot</h2>
+    <p class="js-i18n d1">This should just take a second.</p>
+  </main>
+</section>
+
+<section
+  class="viewport facephoto_permission_state info"
+  data-tr-section="facephoto-permission"
+  data-screentype="info-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/camera/camera-amazonite.svg"/>
+    <img class="only-cash-out" src="images/camera/camera-salmon.svg"/>
+  </header>
+  <main>
+    <h3 class="js-i18n nm-margin-bottom">May we?</h3>
+    <div class="text-content">
+      <p class="js-i18n d2">
+        In order to continue this transaction, we need to snap
+        a photo of you to comply with local laws. Is this ok?
+      </p>
+    </div>
+  </main>
+  <footer>
+    <button id="facephoto-permission-yes" class="filled-progress-button button js-i18n">Yes, take photo</button>
+    <button id="facephoto-permission-no" class="bordered-progress-button button js-i18n">No, finish up</button>
+  </footer>
+</section>
+
+<section
+  class="viewport facephoto_failed_state info"
+  data-tr-section="facephoto-failed-number"
+  data-screentype="info-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/camera/camera-error-amazonite.svg"/>
+    <img class="only-cash-out" src="images/camera/camera-error-salmon.svg"/>
+  </header>
+
+  <main>
+    <h3 class="js-i18n sm-margin-bottom">Try again?</h3>
+    <p class="js-i18n d2">
+      Looks like we didn't get a good shot.
+    </p>
+    <p class="js-i18n tl2 no-margin-top">
+      Shall we try another photo?
+    </p>
+  </main>
+
+  <footer>
+    <button class="button filled-progress-button js-i18n" id="facephoto-scan-failed-retry">
+      Yes, try again
+    </button>
+    <button class="button bordered-progress-button js-inserted-notes js-i18n" id="facephoto-scan-failed-cancel">
+      No, send coins
+    </button>
+    <button class="button bordered-progress-button js-no-inserted-notes js-i18n" id="facephoto-scan-failed-cancel2">
+      No, cancel
+    </button>
+  </footer>
+</section>
+
+<section
+  class="viewport facephoto_retry_state no-action-info cash-in-color"
+  data-tr-section="facephoto_retry"
+  data-screentype="info-no-action-tp"
+>
+  <header>
+    <img class="only-cash-in" src="images/look-amazonite.svg"/>
+    <img class="only-cash-out" src="images/look-salmon.svg"/>
+  </header>
+
+  <main>
+    <h2 class="js-i18n no-margin-bottom">Look into the camera</h2>
+    <p class="js-i18n d1">We didn't get a good picture of you.</p>
+    <p class="d1 no-margin-top facephoto-please-look-text">
+      <strong class="js-i18n">Please look into the camera located above the screen.</strong>
+    </p>
+  </main>
+</section>

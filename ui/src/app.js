@@ -616,8 +616,14 @@ $(document).ready(function () {
     setDirection('cashOut')
     return buttonPressed('redeem')
   })
-  $('.sms-start-verification').click(() => buttonPressed('smsCompliance'))
+  $('#facephoto-scan-failed-retry').click(() => buttonPressed('retryFacephoto'))
+  $('.id-start-verification').click(() => buttonPressed('permissionIdCompliance'))
+  $('.sms-start-verification').click(() => buttonPressed('permissionSmsCompliance'))
+  $('#facephoto-permission-yes').click(() => buttonPressed('permissionPhotoCompliance'))
   $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
+  $('#facephoto-permission-no').click(() => buttonPressed('finishBeforeSms'))
+  $('#facephoto-scan-failed-cancel').click(() => buttonPressed('finishBeforeSms'))
+  $('#facephoto-scan-failed-cancel2').click(() => buttonPressed('finishBeforeSms'))
 
   $('.change-language').mousedown(() => {
     if (_primaryLocales.length === 2) {
@@ -848,6 +854,7 @@ function setDirection (direction) {
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
+    $('.verifying_facephoto_state'),
     $('.verifying_id_state'),
     $('.id_verification_state'),
     $('.sms_verification_state'),
@@ -863,7 +870,9 @@ function setDirection (direction) {
     $('.sanctions_failure_state'),
     $('.id_verification_error_state'),
     $('.facephoto_state'),
+    $('.facephoto_retry_state'),
     $('.facephoto_permission_state'),
+    $('.facephoto_failed_state'),
     $('.hard_limit_reached_state'),
     $('.photo_scan_failed_state'),
     $('.id_code_failed_state'),
@@ -898,9 +907,7 @@ function clearTermsConditionsTimeout () {
 
 function setTermsConditionsTimeout () {
   termsConditionsTimeout = setTimeout(function () {
-    console.log('is this going on?')
     if (currentState === 'terms_screen') {
-      console.log('and this?')
       buttonPressed('idle')
     }
   }, T_C_TIMEOUT)

@@ -12,6 +12,15 @@
   "compliance": {
     "paperWallet": false
   },
+  "frontFacingCamera": {
+    "device": "/dev/video-front",
+    "facephoto": {
+      "width": 1280,
+      "height": 960,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
   "scanner": {
     "testnet": false,
     "device": "/dev/video-scan",
