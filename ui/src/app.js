@@ -1602,7 +1602,7 @@ function calculateAspectRatio () {
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9'
   } else {
-    aspectRatio = height < 1420 ? '16:10' : '16:9'
+    aspectRatio = w < 1420 ? '16:10' : '16:9'
   }
 }
 
