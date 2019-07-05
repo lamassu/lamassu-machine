@@ -1,7 +1,11 @@
 const delay = require('delay')
 
 const actionEmitter = require('../lib/action-emitter')
-const ledManager = require('../lib/ssuboard/led-manager')
+
+const ledManager = process.argv[2] === 'gaia' ?
+  require('../lib/upboard/led-manager')
+  :
+  require('../lib/ssuboard/led-manager')
 
 function emit (subsystem, action) {
   return () => actionEmitter.emit(subsystem, {action})
