@@ -256,12 +256,19 @@ function processData (data) {
     case 'idVerification':
       idVerification()
       break
+    case 'facephotoPermission':
+      facephotoPermission()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
+}
+
+function facephotoPermission () {
+  setScreen('facephoto_permission')
 }
 
 function idVerification () {

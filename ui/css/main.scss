@@ -1023,7 +1023,13 @@ footer {
   }
 }
 
-.facephoto_state,
+.facephoto_state {
+  img {
+    width: 3vh;
+    margin-bottom: 33vh;
+  }
+}
+
 .facephoto_retry_state {
   img {
     width: 6vh;
