@@ -6,8 +6,7 @@
     "dataPath": "data",
     "wifiConfigPath": null,
     "nfcReader": null,
-    "wifiDisabled": true,
-    "hasSsuboard": true
+    "wifiDisabled": true
   },
   "compliance": {
     "paperWallet": false
