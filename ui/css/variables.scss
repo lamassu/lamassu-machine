@@ -22,11 +22,11 @@ $cashout-alt-color: $salmon;
 $charcoal: #4a4a4a;
 $concrete: #f2f2f2;
 $white: #ffffff;
-$high-transparency-black: #00000014;
+$black: #000000;
 
 $dark-color: $charcoal;
 $ligth-color: $concrete;
-$border-color: $high-transparency-black;
+$border-color: rgba($black, 0.08);
 
 
 /* Typography */
