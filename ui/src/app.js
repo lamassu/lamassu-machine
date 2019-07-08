@@ -1604,7 +1604,13 @@ function calculateAspectRatio () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  aspectRatio = aspectRatioPt1 === 8 && aspectRatioPt2 === 5 ? '16:10' : '16:9'
+  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+    aspectRatio = '16:10'
+  } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
+    aspectRatio = '16:9'
+  } else {
+    aspectRatio = w < 1420 ? '16:10' : '16:9'
+  }
 }
 
 let background = null
