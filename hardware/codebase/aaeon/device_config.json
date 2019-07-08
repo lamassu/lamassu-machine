@@ -1,4 +1,5 @@
 {
+  "cryptomatModel": "douro1",
   "brain": {
     "freeMemRatio": 0.01,
     "powerStatus": null,
@@ -26,6 +27,15 @@
   "billDispenser": {
     "device": "/dev/ttyS1"
   },
+  "frontFacingCamera": {
+    "device": "/dev/video1",
+    "facephoto": {
+      "width": 1280,
+      "height": 960,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
   "scanner": {
     "device": "/dev/video0",
     "qr": {
@@ -45,6 +55,7 @@
     "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/var/lib/lamassu-machine/lamassu.pub.key"
-    }
+    },
+    "packageJsonDir": "/opt/apps/machine/lamassu-machine"
   }
 }
