@@ -1,0 +1,17 @@
+/opt/setup/audio-setup.sh
+#!/bin/bash
+echo 91 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio91/direction
+echo 1 > /sys/class/gpio/gpio91/value
+
+echo 66 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio66/direction
+echo 1 > /sys/class/gpio/gpio66/value
+
+amixer set PCM 75%
+
+/opt/setup/fullscreen.sh:
+#!/usr/bin/env bash
+
+sleep 20
+DISPLAY=:0 xdotool search --sync --onlyvisible --class "Firefox" windowactivate key F11

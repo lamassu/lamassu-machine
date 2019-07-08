@@ -1,0 +1,7 @@
+KERNELS=="2-1.3:1.0", SYMLINK+="ssu-com1"
+KERNEL=="ttymxc1", SYMLINK+="ssu-com2"
+KERNELS=="1-1.4:1.0", SYMLINK+="ssu-com3"
+KERNEL=="ttymxc2", SYMLINK+="ssu-com4"
+KERNEL=="video[0-9]*", ATTR{name}="USB 2.0 Camera", ATTRS{idVendor}=="05a3", ATTRS{idProduct}=="8830", SYMLINK+="video-scan"
+KERNEL=="video[0-9]*", ATTR{name}="USB 2.0 Camera", ATTRS{idVendor}=="05a3", ATTRS{idProduct}=="9530", SYMLINK+="video-front"
+ACTION=="add", SUBSYSTEM=="rtc", ATTRS{hctosys}=="0", RUN+="/sbin/hwclock -s --utc"
