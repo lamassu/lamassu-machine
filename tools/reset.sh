@@ -14,10 +14,18 @@ rm -rf /opt/lamassu-machine/data/connection_info.json \
        /opt/lamassu-machine/data/tx-db \
        /opt/lamassu-machine/data/operator-info.json \
 
+if [ -d "/home/machine" ]; then
+  touch /home/machine/.bash_logout
+  echo "history -c" > /home/machine/.bash_logout
+fi
+
+if [ -d "/home/debian" ]; then
+  touch /home/debian/.bash_logout
+  echo "history -c" > /home/debian/.bash_logout
+fi
+
 touch /root/.bash_logout
-touch /home/machine/.bash_logout
 echo "history -c" > /root/.bash_logout
-echo "history -c" > /home/machine/.bash_logout
 
 echo > /etc/udev/rules.d/70-persistent-net.rules
 
