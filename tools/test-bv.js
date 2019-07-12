@@ -6,30 +6,34 @@ if (!device) {
 }
 
 console.log('Connecting to: %s', device)
-var config = {currency: 'EUR', rs232: {device: device}}
-var id003 = require('../lib/id003/id003').factory(config)
+const billValidator = process.argv[3] === 'ccnet' ?
+  require('../lib/ccnet/ccnet')
+  :
+  require('../lib/id003/id003')
 
-id003.on('error', function (err) { console.log(err) })
-id003.on('disconnected', function () { console.log('Disconnnected') })
-id003.on('billAccepted', function () { console.log('Bill accepted') })
-id003.on('billRead', function (data) {
+var config = {currency: 'EUR', rs232: {device: device}}
+
+billValidator.on('error', function (err) { console.log(err) })
+billValidator.on('disconnected', function () { console.log('Disconnnected') })
+billValidator.on('billAccepted', function () { console.log('Bill accepted') })
+billValidator.on('billRead', function (data) {
   console.log('Bill read: %j', data)
   id003.stack()
 })
-id003.on('billValid', function () { console.log('Bill valid') })
-id003.on('billRejected', function () { console.log('Bill rejected') })
-id003.on('timeout', function () { console.log('Bill timeout') })
-id003.on('standby', function () { console.log('Standby') })
-id003.on('jam', function () { console.log('jam') })
-id003.on('stackerOpen', function () { console.log('Stacker open') })
-id003.on('enabled', function (data) { console.log('Enabled') })
+billValidator.on('billValid', function () { console.log('Bill valid') })
+billValidator.on('billRejected', function () { console.log('Bill rejected') })
+billValidator.on('timeout', function () { console.log('Bill timeout') })
+billValidator.on('standby', function () { console.log('Standby') })
+billValidator.on('jam', function () { console.log('jam') })
+billValidator.on('stackerOpen', function () { console.log('Stacker open') })
+billValidator.on('enabled', function (data) { console.log('Enabled') })
 
-id003.run(function (err) {
+billValidator.run(function (err) {
   if (err) {
     console.log(err)
     process.exit(1)
   } else {
-    id003.enable()
+    billValidator.enable()
     console.log('success.')
   }
 })
