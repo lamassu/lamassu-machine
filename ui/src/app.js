@@ -593,7 +593,8 @@ $(document).ready(function () {
 
   calculateAspectRatio()
 
-  $('.crypto-buttons').click(event => {
+  const cryptoButtons = document.getElementById('crypto-buttons')
+  touchEvent(cryptoButtons, event => {
     let el = $(event.target)
     if (el.is('path') || el.is('svg') || el.is('span')) {
       el = el.closest('div')
@@ -609,7 +610,7 @@ $(document).ready(function () {
       return
     }
 
-    const coin = {cryptoCode: el.data('cryptoCode'), display: el.text()}
+    const coin = { cryptoCode: el.data('cryptoCode'), display: el.text() }
     switchCoin(coin)
   })
 
@@ -619,20 +620,27 @@ $(document).ready(function () {
   var areYouSureContinue = document.getElementById('are-you-sure-continue-transaction')
   touchEvent(areYouSureContinue, () => buttonPressed('continueTransaction', previousState))
 
-  $('.coin-redeem-button').click(() => {
+  var coinRedeem = document.getElementById('coin-redeem-button')
+  touchEvent(coinRedeem, () => {
     setDirection('cashOut')
-    return buttonPressed('redeem')
+    buttonPressed('redeem')
   })
-  $('#facephoto-scan-failed-retry').click(() => buttonPressed('retryFacephoto'))
-  $('.id-start-verification').click(() => buttonPressed('permissionIdCompliance'))
-  $('.sms-start-verification').click(() => buttonPressed('permissionSmsCompliance'))
-  $('#facephoto-permission-yes').click(() => buttonPressed('permissionPhotoCompliance'))
-  $('.send-coins-sms').click(() => buttonPressed('finishBeforeSms'))
-  $('#facephoto-permission-no').click(() => buttonPressed('finishBeforeSms'))
-  $('#facephoto-scan-failed-cancel').click(() => buttonPressed('finishBeforeSms'))
-  $('#facephoto-scan-failed-cancel2').click(() => buttonPressed('finishBeforeSms'))
 
-  $('.change-language').mousedown(() => {
+  setupButton('facephoto-scan-failed-retry', 'retryFacephoto')
+  setupButton('id-start-verification', 'permissionIdCompliance')
+  setupButton('sms-start-verification', 'permissionSmsCompliance')
+  setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
+
+  setupButton('send-coins-id', 'finishBeforeSms')
+  setupButton('send-coins-id-2', 'finishBeforeSms')
+  setupButton('send-coins-sms', 'finishBeforeSms')
+  setupButton('send-coins-sms-2', 'finishBeforeSms')
+
+  setupButton('facephoto-permission-no', 'finishBeforeSms')
+  setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
+  setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
+
+  touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
       setLocale(otherLocale())
       setCryptoBuy(currentCoin)
@@ -642,14 +650,14 @@ $(document).ready(function () {
     openLanguageDropdown()
   })
 
-  const cashInBox = $('.cash-in-box')
-  cashInBox.click(() => {
+  const cashInBox = document.getElementById('cash-in-box')
+  touchEvent(cashInBox, () => {
     buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' })
   })
 
-  const cashOutBox = $('.cash-out-box')
-  cashOutBox.click(() => {
-    buttonPressed('start', {cryptoCode: currentCryptoCode, direction: 'cashOut'})
+  const cashOutBox = document.getElementById('cash-out-box')
+  touchEvent(cashOutBox, () => {
+    buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashOut' })
   })
 
   var lastTouch = null
@@ -709,7 +717,7 @@ function targetButton (element) {
 }
 
 function touchEvent (element, callback) {
-  element.addEventListener('mousedown', function (e) {
+  function handler (e) {
     var target = targetButton(e.target)
 
     target.classList.add('active')
@@ -725,15 +733,20 @@ function touchEvent (element, callback) {
 
     e.stopPropagation()
     e.preventDefault()
-  })
+  }
+
+  element.addEventListener('touchstart', handler)
+  element.addEventListener('mousedown', handler)
 }
 
 function touchImmediateEvent (element, callback) {
-  element.addEventListener('mousedown', function (e) {
+  function handler (e) {
     callback(e)
     e.stopPropagation()
     e.preventDefault()
-  })
+  }
+  element.addEventListener('touchstart', handler)
+  element.addEventListener('mousedown', handler)
 }
 
 function setupImmediateButton (buttonClass, buttonAction, callback) {
