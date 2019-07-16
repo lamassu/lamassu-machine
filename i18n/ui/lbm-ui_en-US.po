@@ -311,8 +311,8 @@ msgid "Printing Failed"
 msgstr "Printing Failed"
 
 #: On screen: printer-error-state
-msgid "In seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
-msgstr "In seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
+msgid "It seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
+msgstr "It seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
 
 #: On screen: printer-error-state
 msgid "Back to Home"
