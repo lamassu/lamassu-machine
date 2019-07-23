@@ -284,3 +284,15 @@ button div {
   justify-content: center;
   align-items: center;
 }
+
+footer .filled-progress-button, footer .bordered-progress-button {
+  position: relative;
+  &:after {
+    position: absolute;
+    content: '';
+    top: -20px;
+    right: -10px;
+    left: -10px;
+    bottom: -20px;
+  }
+}
