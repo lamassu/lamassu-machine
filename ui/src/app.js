@@ -611,6 +611,7 @@ $(document).ready(function () {
     }
 
     const coin = { cryptoCode: el.data('cryptoCode'), display: el.text() }
+    if (!coin.cryptoCode) return
     switchCoin(coin)
   })
 
