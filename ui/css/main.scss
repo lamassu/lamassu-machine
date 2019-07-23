@@ -434,6 +434,15 @@ footer {
 
 .cancel-button-wrapper {
   margin-left: auto;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: '';
+    top: -15px;
+    right: -15px;
+    left: -15px;
+    bottom: -20px;
+  }
 }
 
 .cancel-button {
@@ -617,6 +626,12 @@ footer {
   margin-top: auto;
 }
 
+.choose_fiat_state ,.insert_more_bills_state {
+  footer {
+    width: auto;
+  }
+}
+
 .choose-coin-cash-in .cash-out-box,
 .choose-coin-cash-in .cash-out-box-wrapper,
 .choose-coin-cash-in .coin-redeem,
@@ -743,6 +758,14 @@ footer {
 
 .crypto-buttons .choose-coin-button:first-child {
   padding-left: 1vh;
+  &:after {
+    position: absolute;
+    content: '';
+    top: -20px;
+    right: 0;
+    left: -20px;
+    bottom: -20px;
+  }
 }
 
 .choose-coin-button {
@@ -750,6 +773,15 @@ footer {
   justify-content: center;
   display: flex;
   flex-direction: column;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: '';
+    top: -20px;
+    right: -1px;
+    left: -1px;
+    bottom: -20px;
+  }
 }
 
 .change-language .dropdown button {
