@@ -9,6 +9,12 @@
     "wifiDisabled": true,
     "hasSsuboard": true
   },
+  "kioskPrinter": {
+    "maker": "Zebra",
+    "model": "KR-403",
+    "protocol": "RS232",
+    "address": "/dev/ssu-com3"
+  },
   "frontFacingCamera": {
     "device": "/dev/video-front",
     "facephoto": {
