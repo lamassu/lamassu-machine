@@ -557,7 +557,8 @@ $(document).ready(function () {
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
     securityKeypad.deactivate.bind(securityKeypad))
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
-  setupButton('id-scan-failed-ok', 'idVerificationFailedOk')
+  setupButton('id-scan-failed-try-again', 'idCodeFailedRetry')
+  setupButton('id-scan-failed-cancel', 'idVerificationFailedOk')
   setupButton('id-code-failed-retry', 'idCodeFailedRetry')
   setupButton('id-code-failed-cancel', 'bye')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')

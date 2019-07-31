@@ -327,50 +327,6 @@ footer {
   line-height: 1.25
 }
 
-.photo_scan_failed_state .mainv .header img {
-  width: 17.5vw;
-}
-
-.photo_scan_failed_state .mainv .header h3 {
-  margin-top: 6.7vh;
-  margin-bottom: 0;
-}
-
-.photo_scan_failed_state .mainv .header {
-  margin-top: 15vh;
-}
-
-.photo_scan_failed_state .mainv .info .d2 {
-  margin-top: 2vh;
-  margin-bottom: 0vh;
-}
-
-.photo_scan_failed_state .mainv .info .d2b {
-  margin-top: 2vh;
-  margin-bottom: 0vh;
-}
-
-.photo_scan_failed_state .mainv .info {
-  margin-top: 3.9vh;
-}
-
-.photo_scan_failed_state .mainv .actions {
-  margin-top: 14vh;
-}
-
-.photo_scan_failed_state .mainv .actions .button-yes {
-  margin-right: 1.5vw;
-  border-radius: 4vh;
-  padding: 2vh 3vh;
-}
-
-.photo_scan_failed_state .mainv .actions .button-no {
-  margin-left: 1.5vw;
-  margin-right: 2.5vw;
-  border-radius: 4vh;
-  padding: 2vh 3vh;
-}
-
 .waiting_state, .cash_in_waiting_state {
   .mainv .header {
     margin-top: 36.6vh;
@@ -1101,6 +1057,7 @@ footer {
 }
 
 .id_code_failed_state,
+.photo_scan_failed_state,
 .wrong_dispenser_currency_state,
 .id_scan_failed_state,
 .suspicious_address_state,
