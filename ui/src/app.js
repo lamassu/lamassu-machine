@@ -565,6 +565,7 @@ $(document).ready(function () {
   setupButton('photo-scan-failed-cancel', 'bye')
   setupButton('photo-verification-failed-ok', 'cancelIdScan')
   setupButton('invalid-address-try-again', 'invalidAddressTryAgain')
+  setupButton('address-reuse-start-over', 'idle')
   setupButton('suspicious-address-start-over', 'idle')
 
   setupButton('sanctions-failure-ok', 'idle')
