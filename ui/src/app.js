@@ -123,6 +123,7 @@ function processData (data) {
   if (data.sendOnly) sendOnly(data.reason)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo)
+  if (data.version) setVersion(data.version)
   if (data.cassettes) setupCassettes(data.cassettes)
   if (data.beep) confirmBeep.play()
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
@@ -1529,6 +1530,10 @@ function setDepositAddress (depositInfo) {
   $('.deposit_state .send-notice').show()
 
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR)
+}
+
+function setVersion (version) {
+  $('.version-number').html(`Version: ${version}`)
 }
 
 function deposit (tx) {
