@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "7.3.2",
+  "version": "7.3.3",
   "dependencies": {
     "@lamassu/supyo": "1.0.0",
     "async": "~1.5.2",
