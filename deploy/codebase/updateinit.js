@@ -38,7 +38,7 @@ function installDeviceConfig (cb) {
       newDeviceConfig.kioskPrinter = currentDeviceConfig.kioskPrinter
     }
     if (currentDeviceConfig.compliance) {
-      newDeviceConfig.compliance.paperWallet = currentDeviceConfig.compliance.paperWallet
+      newDeviceConfig.compliance = currentDeviceConfig.compliance
     }
 
     // Pretty-printing the new configuration to retain its usual form.
