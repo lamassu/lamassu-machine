@@ -7,8 +7,8 @@ msgid "It looks like you've used this address already."
 msgstr "It looks like you've used this address already."
 
 #: On screen: address-reuse
-msgid "For both your privacy and safety against scams, plase generate a new one from your wallet and scan that one instead."
-msgstr "For both your privacy and safety against scams, plase generate a new one from your wallet and scan that one instead."
+msgid "For both your privacy and safety against scams, please generate a new one from your wallet and scan that one instead."
+msgstr "For both your privacy and safety against scams, please generate a new one from your wallet and scan that one instead."
 
 #: On screen: address-reuse
 msgid "Start over"
