@@ -34,6 +34,12 @@ function installDeviceConfig (cb) {
       newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType
       newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
     }
+    if (currentDeviceConfig.kioskPrinter) {
+      newDeviceConfig.kioskPrinter = currentDeviceConfig.kioskPrinter
+    }
+    if (currentDeviceConfig.compliance) {
+      newDeviceConfig.compliance = currentDeviceConfig.compliance
+    }
 
     // Pretty-printing the new configuration to retain its usual form.
     const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
