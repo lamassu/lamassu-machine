@@ -40,6 +40,9 @@ function installDeviceConfig (cb) {
       newDeviceConfig.kioskPrinter.protocol = currentDeviceConfig.kioskPrinter.protocol
       newDeviceConfig.kioskPrinter.address = currentDeviceConfig.kioskPrinter.address
     }
+    if (currentDeviceConfig.compliance) {
+      newDeviceConfig.compliance = currentDeviceConfig.compliance
+    }
 
     // Pretty-printing the new configuration to retain its usual form.
     const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
