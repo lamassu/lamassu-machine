@@ -27,15 +27,6 @@
   "billDispenser": {
     "device": "/dev/ttyS1"
   },
-  "frontFacingCamera": {
-    "device": "/dev/video1",
-    "facephoto": {
-      "width": 1280,
-      "height": 960,
-      "threshold": 20,
-      "minFaceSize": 180
-    }
-  },
   "scanner": {
     "device": "/dev/video0",
     "qr": {

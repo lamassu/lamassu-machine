@@ -44,10 +44,6 @@
       "device": "/dev/ttyJ5"
     }
   },
-  "billDispenser": {
-    "model": "f56",
-    "device": null
-  },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
     "downloadDir": "/tmp/download",
