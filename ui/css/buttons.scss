@@ -75,13 +75,13 @@ button {
 }
 
 .cash-in-color #actions-scroll .round-progress-button {
-  &:active svg path {
+  &:active svg path, .active svg path {
     fill: $sapphire;
   }
 }
 
 .cash-out-color #actions-scroll .round-progress-button {
-  &:active svg path {
+  &:active svg path, .active svg path  {
     fill: $purple-grey;
   }
 }
@@ -90,7 +90,7 @@ button {
   @include Tagline-2;
   @include round-button;
   @include cash-background-colors;
-  &:active {
+  &:active, .active {
     background-color: $white;
     @include cash-colors;
   }
@@ -104,7 +104,7 @@ button {
   @include cash-colors;
   @include pill-button;
   background-color: $white;
-  &:active {
+  &:active, .active {
     @include cash-background-colors;
     color: $white;
   }
@@ -120,7 +120,7 @@ button {
   @include cash-background-colors;
   color: $white;
   min-width: 4 * $spacer;
-  &:active {
+  &:active, .active {
     background-color: $white;
     @include cash-colors;
   }
@@ -132,7 +132,7 @@ button {
   @include cash-borders;
   @include cash-colors;
   background-color: transparent;
-  &:active {
+  &:active, .active {
     border-color: transparent;
   }
 }
@@ -168,21 +168,25 @@ button {
   color: $purple-grey;
 }
 
+.cash-in-color .circle-button.active .inner-circle-button,
 .cash-in-color .circle-button:active .inner-circle-button {
   background-color: $sapphire;
   color: $white;
 }
 
+.cash-in-color .circle-button.active,
 .cash-in-color .circle-button:active {
   background-color: $sapphire;
   color: $white;
 }
 
+.cash-out-color .circle-button.active .inner-circle-button,
 .cash-out-color .circle-button:active .inner-circle-button {
   background-color: $purple-grey;
   color: $white;
 }
 
+.cash-out-color .circle-button.active,
 .cash-out-color .circle-button:active {
   background-color: $purple-grey;
   color: $white;
@@ -207,11 +211,13 @@ button {
   border-radius: 3vh;
 }
 
+.cash-in-color .action-button.active,
 .cash-in-color .action-button:active {
   background-color: $sapphire;
   color: $white;
 }
 
+.cash-out-color .action-button.active,
 .cash-out-color .action-button:active {
   background-color: $purple-grey;
   color: $white;
@@ -240,11 +246,13 @@ button {
   color: $white;
 }
 
+.cash-in-color .filled-action-button.active, .system-color .filled-action-button.active,
 .cash-in-color .filled-action-button:active, .system-color .filled-action-button:active {
   background-color: $white;
   color: $sapphire;
 }
 
+.cash-out-color .filled-action-button.active,
 .cash-out-color .filled-action-button:active {
   background-color: $white;
   color: $purple-grey;
@@ -270,10 +278,12 @@ button {
   line-height: 11vh;
 }
 
+.cash-in-color .key.active,
 .cash-in-color .key:active {
   background-color: $amazonite-two;
 }
 
+.cash-out-color .key.active,
 .cash-out-color .key:active {
   background-color: $salmon-two;
 }
