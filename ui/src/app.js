@@ -739,8 +739,8 @@ function touchEvent (element, callback) {
     e.preventDefault()
   }
 
-  element.addEventListener('touchstart', handler)
-  element.addEventListener('mousedown', handler)
+  element.addEventListener('touchend', handler)
+  element.addEventListener('mouseup', handler)
 }
 
 function touchImmediateEvent (element, callback) {
@@ -749,8 +749,8 @@ function touchImmediateEvent (element, callback) {
     e.stopPropagation()
     e.preventDefault()
   }
-  element.addEventListener('touchstart', handler)
-  element.addEventListener('mousedown', handler)
+  element.addEventListener('touchend', handler)
+  element.addEventListener('mouseup', handler)
 }
 
 function setupImmediateButton (buttonClass, buttonAction, callback) {
