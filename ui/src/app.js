@@ -722,6 +722,8 @@ function targetButton (element) {
 
 function touchEvent (element, callback) {
   function handler (e) {
+    // Only handle touch events on gaia
+    if (e.type === 'touchend' && cryptomatModel !== 'gaia') return
     var target = targetButton(e.target)
 
     target.classList.add('active')
