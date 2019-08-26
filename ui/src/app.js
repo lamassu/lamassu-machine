@@ -722,8 +722,6 @@ function targetButton (element) {
 
 function touchEvent (element, callback) {
   function handler (e) {
-    // Only handle touch events on gaia
-    if (e.type === 'touchend' && cryptomatModel !== 'gaia') return
     var target = targetButton(e.target)
 
     target.classList.add('active')
@@ -741,7 +739,9 @@ function touchEvent (element, callback) {
     e.preventDefault()
   }
 
-  element.addEventListener('touchend', handler)
+  if (shouldEnableTouch()) {
+    element.addEventListener('touchend', handler)
+  }
   element.addEventListener('mouseup', handler)
 }
 
@@ -751,7 +751,9 @@ function touchImmediateEvent (element, callback) {
     e.stopPropagation()
     e.preventDefault()
   }
-  element.addEventListener('touchend', handler)
+  if (shouldEnableTouch()) {
+    element.addEventListener('touchend', handler)
+  }
   element.addEventListener('mouseup', handler)
 }
 
@@ -1680,4 +1682,15 @@ function setupAnimation (isTwoWay, isAr800) {
   let elementId = `${isTwoWay ? 'two-way' : 'one-way'}-${isAr800 ? '800' : '1080'}${isRTL ? '-rtl' : ''}`
   background = two.interpret(document.getElementById(elementId))
   background.scale = 1
+}
+
+function shouldEnableTouch () {
+  const ua = navigator.userAgent
+  const M = ua.match(/surf|chromium(?=\/))\/?\s*(\d+)/ig)
+
+  // Is surf
+  if (M.length === 2) return false
+
+  // ACP has chromium 34 and upboard 73
+  return M[0].match(/chromium\/(\d+)/i)[1] >= 73 
 }
