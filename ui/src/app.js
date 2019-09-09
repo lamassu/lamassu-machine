@@ -1686,11 +1686,8 @@ function setupAnimation (isTwoWay, isAr800) {
 
 function shouldEnableTouch () {
   const ua = navigator.userAgent
-  const M = ua.match(/surf|chromium(?=\/))\/?\s*(\d+)/ig)
-
-  // Is surf
-  if (M.length === 2) return false
+  if (ua.match(/surf/ig)) return false
 
   // ACP has chromium 34 and upboard 73
-  return M[0].match(/chromium\/(\d+)/i)[1] >= 73 
+  return ua.match(/chromium\/(\d+)/i)[1] >= 73 
 }
