@@ -35,7 +35,7 @@ mv node_modules/@joepie91/v4l2camera node_modules/
 cp hardware/codebase/upboard/device_config.json ./
 
 # Certs and licenses
-curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --passphrase GPG_PASSWORD --decrypt | xz -dc > licenses.json
+curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --passphrase $GPG_PASSWORD --decrypt | xz -dc > licenses.json
 sudo mkdir -p /opt/certs
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/certs-2018.12.28.tar.xz | sudo tar -xJ -C /opt/certs
 
@@ -59,7 +59,7 @@ sudo sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-brow
 sudo cp -r /opt/lamassu-machine/hardware/system/upboard/udev/* /etc/udev/rules.d/
 
 # change password
-sudo echo 'ubilinux:PASSWORD_REPLACE' | chpasswd
+sudo echo `ubilinux:${USER_PASSWORD}` | chpasswd
 
 # remove system tray
 sudo apt-get purge lxqt-panel cmst -y
