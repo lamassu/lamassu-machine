@@ -124,7 +124,6 @@ function processData(data) {
   if (data.sendOnly) sendOnly(data.reason);
   if (data.fiatCredit) fiatCredit(data.fiatCredit);
   if (data.depositInfo) setDepositAddress(data.depositInfo);
-  if (data.version) setVersion(data.version);
   if (data.cassettes) setupCassettes(data.cassettes);
   if (data.beep) confirmBeep.play();
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
@@ -547,8 +546,7 @@ $(document).ready(function () {
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', phoneKeypad.deactivate.bind(phoneKeypad));
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode', securityKeypad.deactivate.bind(securityKeypad));
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk');
-  setupButton('id-scan-failed-try-again', 'idCodeFailedRetry');
-  setupButton('id-scan-failed-cancel', 'idVerificationFailedOk');
+  setupButton('id-scan-failed-ok', 'idVerificationFailedOk');
   setupButton('id-code-failed-retry', 'idCodeFailedRetry');
   setupButton('id-code-failed-cancel', 'bye');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
@@ -556,7 +554,6 @@ $(document).ready(function () {
   setupButton('photo-scan-failed-cancel', 'bye');
   setupButton('photo-verification-failed-ok', 'cancelIdScan');
   setupButton('invalid-address-try-again', 'invalidAddressTryAgain');
-  setupButton('address-reuse-start-over', 'idle');
   setupButton('suspicious-address-start-over', 'idle');
 
   setupButton('sanctions-failure-ok', 'idle');
@@ -585,8 +582,7 @@ $(document).ready(function () {
 
   calculateAspectRatio();
 
-  var cryptoButtons = document.getElementById('crypto-buttons');
-  touchEvent(cryptoButtons, function (event) {
+  $('.crypto-buttons').click(function (event) {
     var el = $(event.target);
     if (el.is('path') || el.is('svg') || el.is('span')) {
       el = el.closest('div');
@@ -603,7 +599,6 @@ $(document).ready(function () {
     }
 
     var coin = { cryptoCode: el.data('cryptoCode'), display: el.text() };
-    if (!coin.cryptoCode) return;
     switchCoin(coin);
   });
 
@@ -617,27 +612,36 @@ $(document).ready(function () {
     return buttonPressed('continueTransaction', previousState);
   });
 
-  var coinRedeem = document.getElementById('coin-redeem-button');
-  touchEvent(coinRedeem, function () {
+  $('.coin-redeem-button').click(function () {
     setDirection('cashOut');
-    buttonPressed('redeem');
+    return buttonPressed('redeem');
+  });
+  $('#facephoto-scan-failed-retry').click(function () {
+    return buttonPressed('retryFacephoto');
+  });
+  $('.id-start-verification').click(function () {
+    return buttonPressed('permissionIdCompliance');
+  });
+  $('.sms-start-verification').click(function () {
+    return buttonPressed('permissionSmsCompliance');
+  });
+  $('#facephoto-permission-yes').click(function () {
+    return buttonPressed('permissionPhotoCompliance');
+  });
+  $('.send-coins-sms').click(function () {
+    return buttonPressed('finishBeforeSms');
+  });
+  $('#facephoto-permission-no').click(function () {
+    return buttonPressed('finishBeforeSms');
+  });
+  $('#facephoto-scan-failed-cancel').click(function () {
+    return buttonPressed('finishBeforeSms');
+  });
+  $('#facephoto-scan-failed-cancel2').click(function () {
+    return buttonPressed('finishBeforeSms');
   });
 
-  setupButton('facephoto-scan-failed-retry', 'retryFacephoto');
-  setupButton('id-start-verification', 'permissionIdCompliance');
-  setupButton('sms-start-verification', 'permissionSmsCompliance');
-  setupButton('facephoto-permission-yes', 'permissionPhotoCompliance');
-
-  setupButton('send-coins-id', 'finishBeforeSms');
-  setupButton('send-coins-id-2', 'finishBeforeSms');
-  setupButton('send-coins-sms', 'finishBeforeSms');
-  setupButton('send-coins-sms-2', 'finishBeforeSms');
-
-  setupButton('facephoto-permission-no', 'finishBeforeSms');
-  setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms');
-  setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms');
-
-  touchEvent(document.getElementById('change-language-section'), function () {
+  $('.change-language').mousedown(function () {
     if (_primaryLocales.length === 2) {
       setLocale(otherLocale());
       setCryptoBuy(currentCoin);
@@ -647,13 +651,13 @@ $(document).ready(function () {
     openLanguageDropdown();
   });
 
-  var cashInBox = document.getElementById('cash-in-box');
-  touchEvent(cashInBox, function () {
+  var cashInBox = $('.cash-in-box');
+  cashInBox.click(function () {
     buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashIn' });
   });
 
-  var cashOutBox = document.getElementById('cash-out-box');
-  touchEvent(cashOutBox, function () {
+  var cashOutBox = $('.cash-out-box');
+  cashOutBox.click(function () {
     buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashOut' });
   });
 
@@ -713,7 +717,7 @@ function targetButton(element) {
 }
 
 function touchEvent(element, callback) {
-  function handler(e) {
+  element.addEventListener('mousedown', function (e) {
     var target = targetButton(e.target);
 
     target.classList.add('active'
@@ -729,24 +733,15 @@ function touchEvent(element, callback) {
 
     e.stopPropagation();
     e.preventDefault();
-  }
-
-  if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler);
-  }
-  element.addEventListener('mouseup', handler);
+  });
 }
 
 function touchImmediateEvent(element, callback) {
-  function handler(e) {
+  element.addEventListener('mousedown', function (e) {
     callback(e);
     e.stopPropagation();
     e.preventDefault();
-  }
-  if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler);
-  }
-  element.addEventListener('mouseup', handler);
+  });
 }
 
 function setupImmediateButton(buttonClass, buttonAction, callback) {
@@ -1485,10 +1480,6 @@ function setDepositAddress(depositInfo) {
   qrize(depositInfo.depositUrl, $('#qr-code-deposit'), CASH_OUT_QR_COLOR);
 }
 
-function setVersion(version) {
-  $('.version-number').html('Version: ' + version);
-}
-
 function deposit(tx) {
   var cryptoCode = tx.cryptoCode;
   var display = displayCrypto(tx.cryptoAtoms, cryptoCode);
@@ -1618,14 +1609,6 @@ function setupAnimation(isTwoWay, isAr800) {
   var elementId = (isTwoWay ? 'two-way' : 'one-way') + '-' + (isAr800 ? '800' : '1080') + (isRTL ? '-rtl' : '');
   background = two.interpret(document.getElementById(elementId));
   background.scale = 1;
-}
-
-function shouldEnableTouch() {
-  var ua = navigator.userAgent;
-  if (ua.match(/surf/ig)) return false;
-
-  // ACP has chromium 34 and upboard 73
-  return ua.match(/chromium\/(\d+)/i)[1] >= 73;
 }
 
 //# sourceMappingURL=app.js.map

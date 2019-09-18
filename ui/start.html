@@ -4,17 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="flag-icon-css/css/flag-icon.css" />
     <link rel="stylesheet" href="main.css" />
-    <!-- Preload bold fonts for the language dropdown -->
-    <link rel="preload" href="css/fonts/MontHeavy/mont-heavy-webfont.woff" as="font" />
-    <link rel="preload" href="css/fonts/MontHeavy/mont-heavy-webfont.woff2" as="font" />
-    <link rel="preload" href="css/fonts/MuseoSans/MuseoSans_700-webfont.woff" as="font" />
-    <link rel="preload" href="css/fonts/MuseoSans/MuseoSans_700-webfont.woff2" as="font" />
-    <link rel="preload" href="css/fonts/NotoKufiArabic/NotoKufiArabic-Bold.ttf" as="font" />
-    <link rel="preload" href="css/fonts/NotoSansCJKJP/NotoSansCJKjp-Bold.otf" as="font" />
-    <link rel="preload" href="css/fonts/NotoSansCJKKR/NotoSansCJKkr-Bold.otf" as="font" />
-    <link rel="preload" href="css/fonts/NotoSansCJKSC/NotoSansCJKsc-Bold.otf" as="font" />
-    <link rel="preload" href="css/fonts/NotoSansCJKTC/NotoSansCJKtc-Bold.otf" as="font" />
-    <link rel="preload" href="css/fonts/Rubik/Rubik-Bold.otf" as="font" />
   
     <script>
       const PORT = 8080;
@@ -44,35 +33,6 @@
   <body>
     <div id="metrics" class="hide"></div>
     <section id="view">
-    <section
-      class="viewport address_reuse_state info cash-in-color"
-      data-tr-section="address-reuse"
-      data-screentype="info-action-tp"
-    >
-      <header>
-        <img src="images/address-reuse.svg" />
-      </header>
-    
-      <main>
-        <h3 class="js-i18n xs-margin-bottom">Address already used</h3>
-        <div class="text-content sm-margin-top">
-          <p class="js-i18n d2 sm-margin-bottom">
-            It looks like you've used this address already.
-          </p>
-          <p class="js-i18n d2">
-            For both your privacy and safety against scams,
-            plase generate a new one from your wallet and
-            scan that one instead.
-          </p>
-        </div>
-      </main>
-    
-      <footer>
-        <button id="address-reuse-start-over" class="filled-progress-button button js-i18n">
-          Start over
-        </button>
-      </footer>
-    </section>
     <section
       class="viewport are_you_sure_state info-no-image cash-out-color"
       data-tr-section="are-you-sure"
@@ -182,7 +142,7 @@
       data-screentype="exception-tp"
     >
       <header>
-        <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
+        <section class="change-language js-menu-language hide cash-out-color">
           <div
             id="language-dropdown-toggle"
             class="multiple-language js-multi-language small-action-button tl2 js-i18n"
@@ -196,7 +156,7 @@
     
       <main class="nm-margin-bottom">
         <div class="cash-in-box-wrapper cash-in-color auto-margin">
-          <section id="cash-in-box" class="crypto-button-box cash-in-box circle-button h3 sapphire">
+          <section class="crypto-button-box cash-in-box circle-button h3 sapphire">
             <div class="inner-circle-button">
               <div class="crypto-button-ball"></div>
               <div class="cash-in crypto-button"></div>
@@ -204,7 +164,7 @@
           </section>
         </div>
         <div class="cash-out-box-wrapper cash-out-color auto-margin">
-          <section id="cash-out-box" class="crypto-button-box cash-out-box circle-button h3 purple-grey">
+          <section class="crypto-button-box cash-out-box circle-button h3 purple-grey">
             <div class="inner-circle-button">
               <div class="crypto-button-ball"></div>
               <div class="cash-out crypto-button"></div>
@@ -214,9 +174,9 @@
       </main>
     
       <footer>
-        <section id="crypto-buttons" class="button crypto-buttons"></section>
-        <section id="coin-redeem" class="button coin-redeem cash-out-color">
-          <div id="coin-redeem-button" class="button progress-button">
+        <section class="crypto-buttons"></section>
+        <section id="coin-redeem" class="coin-redeem cash-out-color">
+          <div class="coin-redeem-button progress-button">
             <span class="js-i18n">Redeem</span>
           </div>
         </section>
@@ -651,29 +611,6 @@
       </main>
     </section>
     <section
-      class="viewport id_scan_failed_state info"
-      data-tr-section="id-scan-failed"
-      data-screentype="info-action-tp"
-    >
-      <header>
-        <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
-        <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
-      </header>
-      <main>
-        <h3 class="js-i18n sm-margin-bottom">Sorry</h3>
-        <p class="js-i18n d2 no-margin-bottom">We could not read your ID card.</p>
-        <p class="js-i18n tl2">You might want to give it another shot.</p>
-      </main>
-      <footer>
-        <button id="id-scan-failed-try-again" class="filled-progress-button button">
-          <div class="js-i18n">Try again</div>
-        </button>
-        <button id="id-scan-failed-cancel" class="bordered-progress-button button">
-          <div class="js-i18n">Cancel</div>
-        </button>
-      </footer>
-    </section>
-    <section
       class="viewport id_verification_state info"
       data-tr-section="id-verification"
       data-screentype="info-action-tp"
@@ -695,13 +632,13 @@
       </main>
     
       <footer>
-        <button id="id-start-verification" class="filled-progress-button button js-i18n">
+        <button class="filled-progress-button button js-i18n id-start-verification">
           Yes, verify ID
         </button>
-        <button id="send-coins-id" class="bordered-progress-button button js-i18n js-inserted-notes">
+        <button class="bordered-progress-button button js-i18n js-inserted-notes send-coins-sms">
           No, send coins
         </button>
-        <button id="send-coins-id-2" class="bordered-progress-button button js-i18n js-no-inserted-notes">
+        <button class="bordered-progress-button button js-i18n js-no-inserted-notes send-coins-sms">
           No, cancel
         </button>
       </footer>
@@ -914,28 +851,23 @@
         </section>
       </section>
     </section>
-    <section
-      class="viewport photo_scan_failed_state info"
-      data-tr-section="photo-scan-failed"
-      data-screentype="info-action-tp"
-    >
-      <header>
-        <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
-        <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
-      </header>
-      <main>
-        <h3 class="js-i18n sm-margin-bottom">Want to try again?</h3>
-        <p class="js-i18n d2">The document you've shown did not match.</p>
-        <p class="js-i18n tl2 no-margin-top">You might want to give it another shot.</p>
-      </main>
-      <footer>
-        <button id="photo-scan-failed-retry" class="filled-progress-button button">
-          <div class="js-i18n">Try again</div>
-        </button>
-        <button id="photo-scan-failed-cancel" class="bordered-progress-button button">
-          <div class="js-i18n">Cancel</div>
-        </button>
-      </footer>
+    <section class="viewport photo_scan_failed_state info" data-tr-section="photo-scan-failed">
+      <section class="mainv">
+        <section class="header">
+          <img class="only-cash-in" src="images/error-signal-amazonite.svg"/>
+          <img class="only-cash-out" src="images/error-signal-salmon.svg"/>
+          <h3 class="js-i18n">Want to try again?</h3>
+        </section>
+        <section class="info">
+          <p class="js-i18n d2">The document you've shown did not match.</p>
+          <p class="js-i18n d2b">You might want to give it another shot.</p>
+        </section>
+        <section class="actions">
+          <!-- TODO RTL buttons -->
+          <span class="button button-yes js-i18n" id="photo-scan-failed-retry">Try again</span>
+          <span class="button button-no js-i18n" id="photo-scan-failed-cancel">Cancel</span>
+        </section>
+      </section>
     </section>
     <section
       class="viewport printer_scanning_error_state info cash-in-color"
@@ -978,7 +910,7 @@
         <h3 class="js-i18n">Printing Failed</h3>
         <div class="text-content">
           <p class="js-i18n d2">
-            It seems there was a problem while printing your wallet.
+            In seems there was a problem while printing your wallet.
             Please contact the operator for more information or try
             printing again.
           </p>
@@ -1328,13 +1260,13 @@
       </main>
     
       <footer>
-        <button id="sms-start-verification" class="filled-progress-button button js-i18n">
+        <button class="filled-progress-button button js-i18n sms-start-verification">
           Yes, verify ID
         </button>
-        <button id="send-coins-sms" class="bordered-progress-button button js-i18n js-inserted-notes">
+        <button class="bordered-progress-button button js-i18n js-inserted-notes send-coins-sms">
           No, send coins
         </button>
-        <button id="send-coins-sms-2" class="bordered-progress-button button js-i18n js-no-inserted-notes">
+        <button class="bordered-progress-button button js-i18n js-no-inserted-notes send-coins-sms">
           No, cancel
         </button>
       </footer>
@@ -1460,7 +1392,6 @@
         <button id="pairing-scan" class="filled-progress-button button">
           <div class="js-i18n">Scan</div>
         </button>
-        <p class="tl2 version-number"></p>
       </footer>
     </section>
     
@@ -1523,7 +1454,6 @@
       </main>
       <footer>
         <button id="initialize" class="button filled-progress-button">Initialize</button>
-        <p class="tl2 version-number"></p>
       </footer>
     </section>
     
@@ -1776,6 +1706,45 @@
       </main>
       <footer>
         <button class="filled-progress-button button" id="redeem-later-ok"><div class="js-i18n">OK</div></button>
+      </footer>
+    </section>
+    
+    <section
+      class="viewport id_scan_failed_state info-with-contact"
+      data-tr-section="id-scan-failed"
+      data-screentype="unaccounted-tp info-contact-tp"
+    >
+      <header>
+        <img class="only-cash-in" src="images/error-signal-amazonite.svg" />
+        <img class="only-cash-out" src="images/error-signal-salmon.svg" />
+      </header>
+      <main>
+        <h3 class="js-i18n nm-margin-bottom">Sorry</h3>
+        <div class="text-content d2">
+          <p class="js-i18n no-margin-bottom">We could not read your ID card.</p>
+          <p class="js-i18n no-margin-top">Please contact the operator for more information.</p>
+        </div>
+        <table class="contacts sm-margin-top sm-margin-bottom">
+          <tr>
+            <td>
+              <img src="images/contact/operator.svg" />
+              <span class="d2 operator-name"></span>
+            </td>
+            <td>
+              <img src="images/contact/phone.svg" />
+              <span class="d2 operator-phone"></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <img src="images/contact/email.svg" />
+              <span class="d2 operator-email"></span>
+            </td>
+          </tr>
+        </table>
+      </main>
+      <footer>
+        <button id="id-scan-failed-ok" class="filled-progress-button button"><div class="js-i18n">OK</div></button>
       </footer>
     </section>
     
