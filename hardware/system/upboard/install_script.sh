@@ -59,12 +59,13 @@ sudo sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-brow
 sudo cp -r /opt/lamassu-machine/hardware/system/upboard/udev/* /etc/udev/rules.d/
 
 # change password
-echo `ubilinux:${USER_PASSWORD}` | sudo chpasswd
+echo ubilinux:$USER_PASSWORD | sudo chpasswd
 
 # remove system tray
 sudo apt-get purge lxqt-panel cmst -y
 
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
+sudo grub-update
 
 sudo reboot
