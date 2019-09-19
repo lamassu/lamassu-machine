@@ -24,13 +24,12 @@
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
     "minimist": "^1.2.0",
-    "nfc-pcsc": "^0.6.1",
+    "nan": "^2.14.0",
     "node-forge": "^0.7.1",
     "p-any": "^1.1.0",
     "p-do-whilst": "^0.1.0",
     "p-series": "^1.0.0",
     "p-settle": "^2.0.0",
-    "pcsclite": "^0.6.0",
     "pify": "^3.0.0",
     "rxjs": "^5.4.2",
     "serialport": "^6.0.0-beta1",
@@ -46,6 +45,8 @@
     "jpeg-turbo": "lamassu/node-jpeg-turbo",
     "manatee": "2.0.2",
     "v4l2camera": "1.0.4",
+    "nfc-pcsc": "^0.6.1",
+    "pcsclite": "^0.6.0",
     "speaker": "^0.4.0"
   },
   "devDependencies": {
