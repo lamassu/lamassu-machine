@@ -777,6 +777,7 @@ function setScreen (newScreen, oldScreen) {
   }
 
   var newView = $('.' + newScreen + '_state')
+  if (newView.length !== 1) console.log('FATAL: ' + newView.length + ' screens found of class ' + newScreen + '_state')
 
   $('.viewport').removeClass('viewport-active')
   newView.addClass('viewport-active')
