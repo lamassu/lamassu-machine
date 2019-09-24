@@ -41,7 +41,7 @@
   },
   "billValidator": {
     "rs232": {
-      "device": "/dev/ttyJ4"
+      "device": "/dev/ttyJ5"
     }
   },
   "billDispenser": {
