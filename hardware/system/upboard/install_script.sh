@@ -66,6 +66,6 @@ sudo apt-get purge lxqt-panel cmst -y
 
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
-sudo grub-update
+sudo update-grub
 
 sudo reboot
