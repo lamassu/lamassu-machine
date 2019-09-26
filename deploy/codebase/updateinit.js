@@ -26,7 +26,7 @@ function installDeviceConfig (cb) {
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
-    if (currentDeviceConfig.billDispenser) {
+    if (currentDeviceConfig.billDispenser && newDeviceConfig.billDispenser) {
       newDeviceConfig.billDispenser.model = currentDeviceConfig.billDispenser.model
       newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
     }
