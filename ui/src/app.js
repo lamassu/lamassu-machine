@@ -1689,5 +1689,10 @@ function shouldEnableTouch () {
   if (ua.match(/surf/ig)) return false
 
   // ACP has chromium 34 and upboard 73
-  return ua.match(/chromium\/(\d+)/i)[1] >= 73 
+  const chromiumVersion = ua.match(/chromium\/(\d+)/i)
+  const chromeVersion = ua.match(/chrome\/(\d+)/i)
+  const chromiumPlus73 = chromiumVersion && chromiumVersion[1] >= 73
+  const chromePlus73 = chromeVersion && chromeVersion[1] >= 73
+
+  return chromiumPlus73 || chromePlus73
 }
