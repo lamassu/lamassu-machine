@@ -1625,7 +1625,12 @@ function shouldEnableTouch() {
   if (ua.match(/surf/ig)) return false;
 
   // ACP has chromium 34 and upboard 73
-  return ua.match(/chromium\/(\d+)/i)[1] >= 73;
+  var chromiumVersion = ua.match(/chromium\/(\d+)/i);
+  var chromeVersion = ua.match(/chrome\/(\d+)/i);
+  var chromiumPlus73 = chromiumVersion && chromiumVersion[1] >= 73;
+  var chromePlus73 = chromeVersion && chromeVersion[1] >= 73;
+
+  return chromiumPlus73 || chromePlus73;
 }
 
 //# sourceMappingURL=app.js.map
