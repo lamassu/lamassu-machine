@@ -13,7 +13,7 @@ sudo -E bash setup_8.x.sh
 sudo apt install nodejs -y
 
 git clone https://github.com/lamassu/lamassu-led
-git clone https://github.com/lamassu/lamassu-machine -b crafty-chnemu
+git clone https://github.com/lamassu/lamassu-machine -b defiant-dingirma
 
 # install lamsasu-led
 cd lamassu-led
@@ -51,6 +51,13 @@ EOL
 
 sudo mv sddm.conf /etc/
 
+# Disable screensaver and power saver
+cat > .xsessionrc << EOL
+xset s off
+xset s noblank
+xset -dpms
+EOL
+
 # Supervisor config files
 sudo cp -r /opt/lamassu-machine/hardware/system/upboard/supervisor/conf.d/ /etc/supervisor/
 sudo sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf
@@ -62,10 +69,10 @@ sudo cp -r /opt/lamassu-machine/hardware/system/upboard/udev/* /etc/udev/rules.d
 echo ubilinux:$USER_PASSWORD | sudo chpasswd
 
 # remove system tray
-sudo apt-get purge lxqt-panel cmst -y
+sudo apt-get purge lxqt-panel cmst xscreensaver -y
 
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
-sudo grub-update
+sudo update-grub
 
 sudo reboot
