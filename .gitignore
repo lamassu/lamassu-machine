@@ -71,6 +71,9 @@ ui/js/test-app.js.map
 ui/css/build
 ui/css/fonts
 
+stress-test/machines/
+stress-test/config.json
+
 result.jpg
 
 build-scripts/update.tar
