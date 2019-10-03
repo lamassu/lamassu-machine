@@ -66,26 +66,41 @@ test('Should throw for invalid ZEC address', t => {
   t.true(spy.threw())
 })
 
-test('Should parse ADA address (Byron era)', t => {
-  const addresses = [
-    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9s', // Daedalus like address
-    'Ae2tdPwUPEZKmwoy3AU3cXb5Chnasj6mvVNxV1H11997q3VW5ihbSfQwGpm' // Yoroi like address
-  ]
-  
-  for (let addr of addresses) {
-    let parsed = parseADAAddress('main', addr)
-    t.is(parsed, addr)
-  }
+test('Should parse Daedalus ADA address (Byron era)', t => {
+  const addr = '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9s'
+  const parsed = parseADAAddress('main', addr)
+  t.is(parsed, addr)
 })
 
-test('Should recognize invalid ADA address', t => {
-  const addresses = [
-    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9', // not valid CBOR
-    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF8s' // not valid checksum
-  ]
-
-  for (let addr of addresses) {
-    let parsed = parseADAAddress('main', addr)
-    t.is(parsed, null)
-  }
+test('Should parse Yoroi ADA address (Byron era)', t => {
+  const addr = 'Ae2tdPwUPEZKmwoy3AU3cXb5Chnasj6mvVNxV1H11997q3VW5ihbSfQwGpm'
+  const parsed = parseADAAddress('main', addr)
+  t.is(parsed, addr)
 })
+
+test('Should recognize invalid ADA address (invalid base58)', t => {
+  const addr = 'Ae2tdPwUPEZKmwoy3AU3cXb5Chnasj6mvVNxV1H11997q3VW5ihbSfQwGpm%'
+  let spy = sinon.spy(parseADAAddress)
+  try {
+    spy('main', addr)
+  } catch (error) { }
+  t.true(spy.threw())
+});
+
+test('Should recognize invalid ADA address (invalid CBOR)', t => {
+  const addr = '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9'
+  let spy = sinon.spy(parseADAAddress)
+  try {
+    spy('main', addr)
+  } catch (error) { }
+  t.true(spy.threw())
+});
+
+test('Should recognize invalid ADA address (invalid checksum)', t => {
+  const addr = '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF8s'
+  let spy = sinon.spy(parseADAAddress)
+  try {
+    spy('main', addr)
+  } catch (error) { }
+  t.true(spy.threw())
+});
