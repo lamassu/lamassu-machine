@@ -72,3 +72,5 @@ ui/css/build
 ui/css/fonts
 
 result.jpg
+
+build-scripts/update.tar
