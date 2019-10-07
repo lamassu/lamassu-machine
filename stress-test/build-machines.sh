@@ -41,15 +41,15 @@ EOL
   DEVICE_ID=`openssl x509 -outform der -in ./machines/$NUMBER/client.pem | sha256sum | cut -d " " -f 1`
 
   # Update db config
-  sudo -u postgres psql -t -d lamassu -c "select data from user_config where type='config' order by id desc limit 1" > config.json
+  sudo -u postgres psql -t -d lamassu-stress -c "select data from user_config where type='config' order by id desc limit 1" > config.json
   NEW_CONFIG=$(node ./save-config.js $NUMBER $DEVICE_ID)
-  sudo -u postgres psql "lamassu" << EOF
+  sudo -u postgres psql "lamassu-stress" << EOF
     insert into user_config(type, data, created, valid) 
     values('config', '$NEW_CONFIG', now(), 't')
 EOF
 
   # Add device on db
-  sudo -u postgres psql "lamassu" << EOF
+  sudo -u postgres psql "lamassu-stress" << EOF
     insert into devices(device_id, cashbox, cassette1, cassette2, paired, display, created, name, last_online, location) 
     values ('$DEVICE_ID', 0, 0, 0, 't', 't', now(), $NUMBER, now(), '{}'::json)
 EOF
