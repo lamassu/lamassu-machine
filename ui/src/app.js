@@ -60,7 +60,7 @@ var coins = {
   ADA: {
     unitScale: 6,
     displayScale: 6,
-    displayCode: 'Lovelace'
+    displayCode: 'ADA'
   }
 }
 
