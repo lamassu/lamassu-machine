@@ -56,6 +56,11 @@ var coins = {
     unitScale: 8,
     displayScale: 5,
     displayCode: 'mBCH'
+  },
+  ADA: {
+    unitScale: 6,
+    displayScale: 6,
+    displayCode: 'Lovelace'
   }
 }
 

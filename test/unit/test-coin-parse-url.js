@@ -4,6 +4,7 @@ import {parseUrl as parseBTCAddress} from '../../lib/coins/btc'
 import {parseUrl as parseLTCAddress} from '../../lib/coins/ltc'
 import {parseUrl as parseDASHAddress} from '../../lib/coins/dash'
 import {parseUrl as parseZECAddress} from '../../lib/coins/zec'
+import {parseUrl as parseADAAddress} from '../../lib/coins/ada';
 
 test('Should parse BTC address', t => {
   const addr = '1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2'
@@ -63,4 +64,28 @@ test('Should throw for invalid ZEC address', t => {
     spy('main', addr)
   } catch (error) { }
   t.true(spy.threw())
+})
+
+test('Should parse ADA address (Byron era)', t => {
+  const addresses = [
+    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9s', // Daedalus like address
+    'Ae2tdPwUPEZKmwoy3AU3cXb5Chnasj6mvVNxV1H11997q3VW5ihbSfQwGpm' // Yoroi like address
+  ]
+  
+  for (let addr of addresses) {
+    let parsed = parseADAAddress('main', addr)
+    t.is(parsed, addr)
+  }
+})
+
+test('Should recognize invalid ADA address', t => {
+  const addresses = [
+    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF9', // not valid CBOR
+    '37btjrVyb4KFTChjvZKjxBfUHjpEFz3CzNDyChYqSfCVLABzxKcW6JWWTYXd1ELD8cirXJ6osWpkN3dVqouRgFbLmua5gCWv8Pha1AQyPtwSeMkF8s' // not valid checksum
+  ]
+
+  for (let addr of addresses) {
+    let parsed = parseADAAddress('main', addr)
+    t.is(parsed, null)
+  }
 })
