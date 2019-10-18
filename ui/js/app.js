@@ -1183,29 +1183,24 @@ function splitNumber(localize, localeCode) {
   return ['<span class="integer">', split[0], '</span><span class="decimal-char">', decimalChar, '</span><span class="decimal">', split[1], '</span>'].join('');
 }
 
-function formatNumber(num) {
+function formatNumber(num, fractionDigits = 3) {
   var localized = num.toLocaleString(jsLocaleCode, {
     useGrouping: true,
-    maximumFractionDigits: 3,
-    minimumFractionDigits: 3
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits
   });
 
   return splitNumber(localized, jsLocaleCode);
 }
 
-function formatCrypto(amount) {
+function formatCrypto(amount, fractionDigits) {
   return formatNumber(amount);
 }
 
 function formatFiat(amount, fractionDigits) {
   if (!fractionDigits) fractionDigits = 0;
 
-  var localized = amount.toLocaleString(jsLocaleCode, {
-    useGrouping: true,
-    maximumFractionDigits: fractionDigits,
-    minimumFractionDigits: fractionDigits
-  });
-  return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode;
+  return formatNumber(amount, fractionDigits) + ' ' + fiatCode;
 }
 
 function setExchangeRate(_rates) {
@@ -1223,7 +1218,7 @@ function setExchangeRate(_rates) {
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut);
-    var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber());
+    var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber(), 2);
 
     $('.crypto-rate-cash-out').html('1 ' + cryptoCode + ' = ' + cashOutCryptoToFiat + ' ' + fiatCode);
   }
