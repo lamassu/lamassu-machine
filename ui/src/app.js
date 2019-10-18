@@ -7,6 +7,7 @@ const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 const CASH_OUT_QR_COLOR = '#403c51'
 const CASH_IN_QR_COLOR = '#0e4160'
+const EXCHANGE_DP = 2
 
 var scrollSize = 0
 var textHeightQuantity = 0
@@ -1243,7 +1244,7 @@ function formatFiat (amount, fractionDigits) {
     maximumFractionDigits: fractionDigits,
     minimumFractionDigits: fractionDigits
   })
-  return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode
+  return splitNumber(localized, jsLocaleCode)
 }
 
 function setExchangeRate (_rates) {
@@ -1257,11 +1258,11 @@ function setExchangeRate (_rates) {
   var cryptoToFiat = new BigNumber(rates.cashIn)
 
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
+  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr} ${fiatCode}`)
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
-    var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
+    var cashOutCryptoToFiat = cashOut && formatFiat(cashOut.round(2).toNumber(), 2)
 
     $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
   }
