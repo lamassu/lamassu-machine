@@ -1244,7 +1244,7 @@ function formatFiat (amount, fractionDigits) {
     maximumFractionDigits: fractionDigits,
     minimumFractionDigits: fractionDigits
   })
-  return splitNumber(localized, jsLocaleCode)
+  return splitNumber(localized, jsLocaleCode) + ' ' + fiatCode
 }
 
 function setExchangeRate (_rates) {
@@ -1258,13 +1258,13 @@ function setExchangeRate (_rates) {
   var cryptoToFiat = new BigNumber(rates.cashIn)
 
   var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr} ${fiatCode}`)
+  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
     var cashOutCryptoToFiat = cashOut && formatFiat(cashOut.round(2).toNumber(), 2)
 
-    $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
+    $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat}`)
   }
 
   $('.js-crypto-display-units').text(displayCode)
