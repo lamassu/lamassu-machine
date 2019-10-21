@@ -7,7 +7,6 @@ const SCREEN = params.get('screen')
 const DEBUG_MODE = SCREEN ? 'demo' : params.get('debug')
 const CASH_OUT_QR_COLOR = '#403c51'
 const CASH_IN_QR_COLOR = '#0e4160'
-const EXCHANGE_DP = 2
 
 var scrollSize = 0
 var textHeightQuantity = 0
