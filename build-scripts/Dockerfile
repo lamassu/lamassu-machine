@@ -47,20 +47,25 @@ FROM acp as acp-build
     curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $PASSWORD --decrypt | xz -dc > licenses.json && \
     curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x 
 
-  RUN cd lamassu-machine && sed -i '/v4l2camera/d' package.json && npm install && \
+  RUN cd lamassu-machine && npm install && \
     cp ./hardware/codebase/aaeon/device_config.json ./ && \
     bash ./deploy/codebase/build.sh aaeon --copy-device-config
   
-FROM upboard as upboard-build
+FROM upboard as upboard-gaia-build
   COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
-  RUN ls /lamassu
   RUN cd lamassu-machine && rm -rf node_modules && npm install && \
-    cp ./hardware/codebase/upboard/device_config.json ./ && \
-    bash ./deploy/codebase/build.sh upboard --copy-device-config
+    cp ./hardware/codebase/upboard/gaia/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
+
+FROM upboard as upboard-sintra-build
+  COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+    cp ./hardware/codebase/upboard/sintra/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
 
 FROM ssuboard as ssuboard-build
-  COPY --from=upboard-build /lamassu/lamassu-machine /lamassu/lamassu-machine
-  RUN cd lamassu-machine && rm -rf node_modules && git checkout package.json && \
-    npm install && cp ./hardware/codebase/ssuboard/device_config.json ./ && \
+  COPY --from=upboard-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+    cp ./hardware/codebase/ssuboard/device_config.json ./ && \
     bash ./deploy/codebase/build.sh ssuboard --copy-device-config
   RUN cd lamassu-machine && bash ./deploy/codebase/package.sh

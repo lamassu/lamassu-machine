@@ -15,6 +15,7 @@ var t0 = null
 var running = false
 
 var platform = process.argv[2] || 'N7G1'
+var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 
 process.on('SIGUSR2', function () {
   // USR1 is reserved by node
@@ -59,7 +60,7 @@ function executeScript () {
     return
   }
   console.log('in execute')
-  child = cp.fork(SCRIPT_PATH, [platform])
+  child = cp.fork(SCRIPT_PATH, [platform, model])
   child.on('error', function (err) {
     cleanUp()
     console.log(err)

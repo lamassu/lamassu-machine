@@ -31,9 +31,6 @@ mkdir -p $EXPORT_SCRIPT_DIR
 mkdir -p $TARGET_MODULES_DIR
 mkdir -p $TARGET_MACHINE_DIR/bin
 
-# Compile app.js
-npm run build > /dev/null
-
 # Needed for updateinit script on target device
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
 cp $SCRIPT_DIR/../report.js $EXPORT_SCRIPT_DIR
@@ -69,12 +66,21 @@ elif [ $1 == "ssuboard" ] ; then
   if [ $2 == "--copy-device-config" ] ; then
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/ssuboard/
   fi
-elif [ $1 == "upboard" ] ; then
+elif [ $1 == "upboard-sintra" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
   if [ $2 == "--copy-device-config" ] ; then
-    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/
+    mkdir $EXPORT_DIR/hardware/upboard/sintra
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/sintra/
+  fi
+elif [ $1 == "upboard-gaia" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard/gaia
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/gaia/
   fi
 else
   echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"

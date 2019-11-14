@@ -3,7 +3,7 @@ const delay = require('delay')
 const actionEmitter = require('../lib/action-emitter')
 
 const ledManager = process.argv[2] === 'gaia' ?
-  require('../lib/upboard/led-manager')
+  require('../lib/upboard/gaia/led-manager')
   :
   require('../lib/ssuboard/led-manager')
 
