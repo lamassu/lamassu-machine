@@ -1,11 +1,24 @@
 #!/bin/bash
 set -e
 
+TAG=$1
+MACHINE=$2
+
+if [ -z $1 ] || [ -z $2 ]; then
+  echo 'usage: install_script <machine> <version>'
+  exit 1
+fi
+
+if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ]; then
+  echo 'Install script expects "gaia" or "sintra" as machine parameter'
+  exit 1
+fi
+
 sudo apt update && sudo apt full-upgrade -y
 
 # install dependencies
 sudo apt install build-essential chromium curl git supervisor yasm -y
-sudo apt install libavcodec-dev libavformat-dev libswscale-dev -y
+sudo apt install libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev -y
 
 curl -sL https://deb.nodesource.com/setup_8.x | sed 's/DISTRO=\$(lsb_release -c -s)/DISTRO=stretch/g' > setup_8.x.sh
 
@@ -13,7 +26,7 @@ sudo -E bash setup_8.x.sh
 sudo apt install nodejs -y
 
 git clone https://github.com/lamassu/lamassu-led
-git clone https://github.com/lamassu/lamassu-machine -b defiant-dingirma
+git clone https://github.com/lamassu/lamassu-machine -b $1
 
 # install lamsasu-led
 cd lamassu-led
@@ -32,7 +45,7 @@ npm i @joepie91/v4l2camera@1.0.5
 mv node_modules/@joepie91/v4l2camera node_modules/
 
 # device config
-cp hardware/codebase/upboard/device_config.json ./
+cp hardware/codebase/upboard/$MACHINE/device_config.json ./
 
 # Certs and licenses
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $GPG_PASSWORD --decrypt | xz -dc > licenses.json
@@ -59,11 +72,11 @@ xset -dpms
 EOL
 
 # Supervisor config files
-sudo cp -r /opt/lamassu-machine/hardware/system/upboard/supervisor/conf.d/ /etc/supervisor/
+sudo cp -r /opt/lamassu-machine/hardware/system/upboard/$MACHINE/supervisor/conf.d/ /etc/supervisor/
 sudo sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf
 
 # Udev config files
-sudo cp -r /opt/lamassu-machine/hardware/system/upboard/udev/* /etc/udev/rules.d/
+sudo cp -r /opt/lamassu-machine/hardware/system/upboard/$MACHINE/udev/* /etc/udev/rules.d/
 
 # change password
 echo ubilinux:$USER_PASSWORD | sudo chpasswd
