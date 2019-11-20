@@ -781,6 +781,10 @@ function setScreen(newScreen, oldScreen) {
 function setState(state, delay) {
   if (state === currentState) return;
 
+  if (currentState === 'terms_screen') {
+    clearTermsConditionsTimeout();
+  }
+
   previousState = currentState;
   currentState = state;
 
