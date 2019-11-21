@@ -359,12 +359,12 @@ function setupCoinsButtons() {
     $('.crypto-buttons').append(el);
   });
   if (showMoreButton) {
-    $('.crypto-buttons').append('\n      <div class="choose-coin-button h4" data-more="true">\n        <div id="crypto-dropdown-toggle" data-more="true">\n          More\n          <span class="choose-coin-svg-wrapper">\n            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">\n              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>\n            </svg>\n          </span>\n        </div>\n        <div id="cryptos" class="dropdown hide"></div>\n      </div>\n    ');
+    $('.crypto-buttons').append('\n      <div class="choose-coin-button h4" data-more="true">\n        <div id="crypto-dropdown-toggle" data-more="true">\n          <span class="js-i18n">More</span>\n          <span class="choose-coin-svg-wrapper">\n            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">\n              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>\n            </svg>\n          </span>\n        </div>\n        <div id="cryptos" class="dropdown hide"></div>\n      </div>\n    ');
     dropdownCoins.forEach(function (coin) {
       var el = '<button class="h4 sapphire button small-action-button coin-' + coin.cryptoCode.toLowerCase() + '"\n        data-crypto-code="' + coin.cryptoCode + '">' + coin.display + '</button>';
       $('#cryptos').append(el);
     });
-    var el = '<button class="h4 sapphire button small-action-button" data-less="true">Less</button>';
+    var el = '<button class="h4 sapphire button small-action-button js-i18n" data-less="true">Less</button>';
     $('#cryptos').append(el);
   }
 }
