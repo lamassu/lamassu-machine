@@ -70,6 +70,14 @@ msgstr "Languages"
 msgid "Redeem"
 msgstr "Redeem"
 
+#: On screen: choose_coin
+msgid "More"
+msgstr "More"
+
+#: On screen: choose_coin
+msgid "Less"
+msgstr "Less"
+
 #: On screen: choose-fiat
 msgid "How much?"
 msgstr "How much?"
@@ -435,8 +443,8 @@ msgid "Please press the back of your driver's license against the scan window."
 msgstr "Please press the back of your driver's license against the scan window."
 
 #: On screen: scan-photo
-msgid "Please press the front of your state ID card against the scan window."
-msgstr "Please press the front of your state ID card against the scan window."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window."
 
 #: On screen: security-code
 msgid "Security Code"
