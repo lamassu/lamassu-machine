@@ -368,7 +368,7 @@ function setupCoinsButtons () {
     $('.crypto-buttons').append(`
       <div class="choose-coin-button h4" data-more="true">
         <div id="crypto-dropdown-toggle" data-more="true">
-          More
+          <span class="js-i18n">More</span>
           <span class="choose-coin-svg-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
               <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
@@ -383,7 +383,7 @@ function setupCoinsButtons () {
         data-crypto-code="${coin.cryptoCode}">${coin.display}</button>`
       $('#cryptos').append(el)
     })
-    const el = `<button class="h4 sapphire button small-action-button" data-less="true">Less</button>`
+    const el = `<button class="h4 sapphire button small-action-button" data-less="true"><span class="js-i18n">Less</span></button>`
     $('#cryptos').append(el)
   }
 }
