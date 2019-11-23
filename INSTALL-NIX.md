@@ -66,6 +66,17 @@ When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
 
+## If you're having trouble with tiny-secp256k1 installation related to node-gyp 
+
+Sometimes it might be a [locale-related issue](https://github.com/NixOS/nixpkgs/issues/32848)
+
+Try executing the `npm install` step inside a `--pure` flagged `nix-shell`
+
+```
+nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.03.tar.gz
+[nix-shell:<lamassu-machine-dir>]$ npm install
+```
+
 ## If you're having trouble with ENOENT: node_modules/node-sass/vendor 
 
 ```
