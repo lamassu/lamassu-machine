@@ -82,3 +82,15 @@ nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/ni
 ```
 npm rebuild node-sass
 ```
+
+## If you're having trouble with serialport bindings
+
+Configure mockPrinter on your device_config.json
+```
+{
+  "brain": {
+    ...
+    "mockPrinter": true,
+  },
+  ...
+```
