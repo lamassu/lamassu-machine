@@ -65,3 +65,9 @@ Don't worry if the fonts don't look right. The production software uses a propri
 When the screen asks you to insert a bill, navigate to the terminal
 where you opened the mock bill validator, and input **1**<kbd>Enter</kbd>
 to insert a one dollar bill.
+
+## If you're having trouble with ENOENT: node_modules/node-sass/vendor 
+
+```
+npm rebuild node-sass
+```
