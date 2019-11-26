@@ -103,6 +103,19 @@
   font-weight: 700;
   font-style: normal; }
 
+/* Noto Sans Arabic [noto-sans-hebrew] */
+@font-face {
+  font-family: 'Noto Sans Hebrew';
+  src: url("css/fonts/NotoSansHebrew/NotoSansHebrew-Regular.ttf");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Noto Sans Hebrew';
+  src: url("css/fonts/NotoSansHebrew/NotoSansHebrew-Bold.ttf");
+  font-weight: 700;
+  font-style: normal; }
+
 /* Supplemental fonts */
 @font-face {
   font-family: 'Noto Sans CJK JP';
