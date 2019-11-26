@@ -18,7 +18,6 @@ sudo apt update && sudo apt full-upgrade -y
 
 # install dependencies
 sudo apt install build-essential chromium curl git supervisor yasm -y
-sudo apt install libavcodec-dev libavformat-dev libswscale-dev libpcsclite-dev -y
 
 curl -sL https://deb.nodesource.com/setup_8.x | sed 's/DISTRO=\$(lsb_release -c -s)/DISTRO=stretch/g' > setup_8.x.sh
 

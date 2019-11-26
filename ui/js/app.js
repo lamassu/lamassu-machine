@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, Audio, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
+/* globals $, URLSearchParams, WebSocket, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
 'use strict';
 
 var queryString = window.location.search;
@@ -61,7 +61,6 @@ var coins = {
 
 var currentState;
 
-var confirmBeep = null;
 var accepting = false;
 var websocket = null;
 var wifiKeyboard = null;
@@ -126,7 +125,6 @@ function processData(data) {
   if (data.depositInfo) setDepositAddress(data.depositInfo);
   if (data.version) setVersion(data.version);
   if (data.cassettes) setupCassettes(data.cassettes);
-  if (data.beep) confirmBeep.play();
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
   if (data.readingBill) readingBill(data.readingBill);
   if (data.cryptoCode) translateCoin(data.cryptoCode);
@@ -163,7 +161,6 @@ function processData(data) {
       setState('wifi_connecting' // in case we didn't go through wifi-connecting
       );break;
     case 'pairing':
-      confirmBeep.play();
       setState('pairing');
       break;
     case 'pairingError':
@@ -214,7 +211,6 @@ function processData(data) {
       setState('sending_coins');
       break;
     case 'cryptoTransferComplete':
-      confirmBeep.play();
       setState('completed');
       break;
     case 'networkDown':
@@ -452,9 +448,6 @@ $(document).ready(function () {
     if (currentState !== 'security_code') return;
     buttonPressed('securityCode', result);
   });
-
-  // buffers automatically when created
-  confirmBeep = new Audio('sounds/Confirm8-Bit.ogg');
 
   if (DEBUG_MODE !== 'demo') {
     connect();

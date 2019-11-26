@@ -103,12 +103,6 @@ npm install
 node-gyp rebuild
 ```
 
-## If you're having trouble with speaker module
-
-```
-apt-get install -y libasound2-dev
-```
-
 ## If you're having trouble with nfc-pcsc module
 
 ```
