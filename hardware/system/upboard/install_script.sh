@@ -51,6 +51,8 @@ curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12
 sudo mkdir -p /opt/certs
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/certs-2018.12.28.tar.xz | sudo tar -xJ -C /opt/certs
 
+curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/fonts-2019.11.26.tar.xz | sudo tar -xJ -C lamassu-machine/ui/fonts
+
 # final machine path
 cd .. && sudo mv lamassu-machine /opt
 
