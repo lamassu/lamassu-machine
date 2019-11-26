@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-TAG=$1
-MACHINE=$2
+MACHINE=$1
+TAG=$2
 
 if [ -z $1 ] || [ -z $2 ]; then
   echo 'usage: install_script <machine> <version>'
@@ -25,7 +25,7 @@ sudo -E bash setup_8.x.sh
 sudo apt install nodejs -y
 
 git clone https://github.com/lamassu/lamassu-led
-git clone https://github.com/lamassu/lamassu-machine -b $1
+git clone https://github.com/lamassu/lamassu-machine -b $TAG
 
 # install lamsasu-led
 cd lamassu-led
@@ -51,7 +51,7 @@ curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12
 sudo mkdir -p /opt/certs
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/certs-2018.12.28.tar.xz | sudo tar -xJ -C /opt/certs
 
-curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/fonts-2019.11.26.tar.xz | sudo tar -xJ -C lamassu-machine/ui/fonts
+curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/fonts-2019.11.26.tar.xz | sudo tar -xJ -C ui/
 
 # final machine path
 cd .. && sudo mv lamassu-machine /opt
