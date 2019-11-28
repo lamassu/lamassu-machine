@@ -12,6 +12,7 @@ var Brain = require('../lib/brain')
 var Configuration = require('../lib/configuration.js')
 
 var bailed = false
+var brain = null
 
 function bail (err) {
   if (bailed) return
@@ -30,12 +31,19 @@ function startBrain () {
 
   var config = Configuration.loadConfig(commandLine)
 
-  var brain = new Brain(config)
+  brain = new Brain(config)
   brain.on('error', bail)
   brain.run()
 }
 
-process.on('uncaughtException', bail)
+process.on('uncaughtException', err => {
+  if (err.code === 'EPIPE') {
+    if (brain) brain.epipeLog()
+    console.trace(err)
+    return
+  }
+  bail(err)
+})
 process.on('unhandledRejection', console.log)
 process.on('exit', function () { console.log('lamassu-machine exiting') })
 
