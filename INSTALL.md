@@ -69,7 +69,7 @@ In second terminal window:
 
 ```
 node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam \
---mockPair '<totem-from-admin>'
+--mockPair --devBoard '<totem-from-admin>'
 ```
 
 **IMPORTANT**: Make sure to use single quotes and not double quotes, or the shell will mess up the totem.
@@ -101,12 +101,6 @@ git clone https://github.com/bellbind/node-v4l2camera.git v4l2camera
 cd v4l2camera
 npm install
 node-gyp rebuild
-```
-
-## If you're having trouble with speaker module
-
-```
-apt-get install -y libasound2-dev
 ```
 
 ## If you're having trouble with nfc-pcsc module

@@ -7,8 +7,8 @@ msgid "It looks like you've used this address already."
 msgstr "It looks like you've used this address already."
 
 #: On screen: address-reuse
-msgid "For both your privacy and safety against scams, plase generate a new one from your wallet and scan that one instead."
-msgstr "For both your privacy and safety against scams, plase generate a new one from your wallet and scan that one instead."
+msgid "For both your privacy and safety against scams, please generate a new one from your wallet and scan that one instead."
+msgstr "For both your privacy and safety against scams, please generate a new one from your wallet and scan that one instead."
 
 #: On screen: address-reuse
 msgid "Start over"
@@ -69,6 +69,14 @@ msgstr "Languages"
 #: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
+
+#: On screen: choose_coin
+msgid "More"
+msgstr "More"
+
+#: On screen: choose_coin
+msgid "Less"
+msgstr "Less"
 
 #: On screen: choose-fiat
 msgid "How much?"
@@ -435,8 +443,8 @@ msgid "Please press the back of your driver's license against the scan window."
 msgstr "Please press the back of your driver's license against the scan window."
 
 #: On screen: scan-photo
-msgid "Please press the front of your state ID card against the scan window."
-msgstr "Please press the front of your state ID card against the scan window."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window."
 
 #: On screen: security-code
 msgid "Security Code"
@@ -647,8 +655,8 @@ msgid "We see your transaction but we're still waiting for confirmation. This ta
 msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
-msgid "Please come back for your cash and press Redeem when you get our text message."
-msgstr "Please come back for your cash and press Redeem when you get our text message."
+msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."

@@ -6,6 +6,12 @@ const cp = require('child_process');
 const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
+const machineCode = process.argv[3];
+
+const path = hardwareCode === 'upboard' ?
+  `/tmp/extract/package/subpackage/hardware/${hardwareCode}/${machineCode}` :
+  `/tmp/extract/package/subpackage/hardware/${hardwareCode}`
+
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
@@ -18,7 +24,7 @@ function command(cmd, cb) {
 function installDeviceConfig (cb) {
   try {
     const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
-    const newDeviceConfigPath = `/tmp/extract/package/subpackage/hardware/${hardwareCode}/device_config.json`
+    const newDeviceConfigPath = `${path}/device_config.json`
     
     // Updates don't necessarily need to carry a device_config.json file
     if (!fs.existsSync(newDeviceConfigPath)) return cb()
@@ -26,7 +32,7 @@ function installDeviceConfig (cb) {
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
-    if (currentDeviceConfig.billDispenser) {
+    if (currentDeviceConfig.billDispenser && newDeviceConfig.billDispenser) {
       newDeviceConfig.billDispenser.model = currentDeviceConfig.billDispenser.model
       newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
     }
@@ -39,6 +45,9 @@ function installDeviceConfig (cb) {
       newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
       newDeviceConfig.kioskPrinter.protocol = currentDeviceConfig.kioskPrinter.protocol
       newDeviceConfig.kioskPrinter.address = currentDeviceConfig.kioskPrinter.address
+    }
+    if (currentDeviceConfig.compliance) {
+      newDeviceConfig.compliance = currentDeviceConfig.compliance
     }
 
     // Pretty-printing the new configuration to retain its usual form.

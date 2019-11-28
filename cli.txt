@@ -1,1 +1,0 @@
-node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam

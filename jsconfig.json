@@ -12,7 +12,7 @@
 		"jspm_packages",
 		"tmp",
 		"temp",
-        "hardware",
+		"hardware",
 		"build",
 		"ui/css/fonts"
 	]
