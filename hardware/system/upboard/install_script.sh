@@ -3,15 +3,36 @@ set -e
 
 MACHINE=$1
 TAG=$2
+PRINTER=$3
 
 if [ -z $1 ] || [ -z $2 ]; then
-  echo 'usage: install_script <machine> <version>'
+  echo 'usage: install_script <machine> <version> [printer]'
+  echo 'machines: "gaia" or "sintra"'
+  echo 'version: git tag'
+  echo 'printer [optional]: "nippon" or "zebra"'
   exit 1
 fi
 
 if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ]; then
   echo 'Install script expects "gaia" or "sintra" as machine parameter'
   exit 1
+fi
+
+if [ -z $3 ]; then
+  PRINTER='None'
+fi
+
+if [ "$PRINTER" != "None" ] && [ "$PRINTER" != "zebra" ] && [ "$PRINTER" != "zippon" ]; then
+  echo 'Install script expects "Zebra" or "Nippon" as printer parameter'
+  exit 1
+fi
+
+if [ "$PRINTER" == "nippon" ]; then
+  PRINTER='Nippon'
+fi
+
+if [ "$PRINTER" == "zebra" ]; then
+  PRINTER='Zebra'
 fi
 
 sudo apt update && sudo apt full-upgrade -y
@@ -27,7 +48,7 @@ sudo apt install nodejs -y
 git clone https://github.com/lamassu/lamassu-led
 git clone https://github.com/lamassu/lamassu-machine -b $TAG
 
-# install lamsasu-led
+# install lamassu-led
 cd lamassu-led
 sed -i 's/spidev1\.0/spidev2\.0/g' main.c
 gcc *.c -Wall -O2 -lm -o leds
@@ -45,6 +66,9 @@ mv node_modules/@joepie91/v4l2camera node_modules/
 
 # device config
 cp hardware/codebase/upboard/$MACHINE/device_config.json ./
+
+# config printer
+sudo sed -i 's/Nippon/'"$PRINTER"'/g' ./device_config.json
 
 # Certs and licenses
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $GPG_PASSWORD --decrypt | xz -dc > licenses.json
