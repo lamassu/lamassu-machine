@@ -42,9 +42,15 @@ function installDeviceConfig (cb) {
     }
     if (currentDeviceConfig.kioskPrinter) {
       newDeviceConfig.kioskPrinter.maker = currentDeviceConfig.kioskPrinter.maker
-      newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
-      newDeviceConfig.kioskPrinter.protocol = currentDeviceConfig.kioskPrinter.protocol
       newDeviceConfig.kioskPrinter.address = currentDeviceConfig.kioskPrinter.address
+
+      if (currentDeviceConfig.kioskPrinter.model) {
+        newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
+      }
+
+      if (currentDeviceConfig.kioskPrinter.protocol) {
+        newDeviceConfig.kioskPrinter.protocol = currentDeviceConfig.kioskPrinter.protocol
+      }
     }
     if (currentDeviceConfig.compliance) {
       newDeviceConfig.compliance = currentDeviceConfig.compliance
