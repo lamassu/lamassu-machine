@@ -11,6 +11,10 @@
   "compliance": {
     "paperWallet": false
   },
+  "kioskPrinter": {
+    "maker": "Nippon",
+    "address": "/dev/ttyJ4"
+  },
   "frontFacingCamera": {
     "device": "/dev/video-front",
     "facephoto": {
