@@ -12,7 +12,7 @@
     "paperWallet": false
   },
   "kioskPrinter": {
-    "maker": "Nippon",
+    "model": "Nippon-2511D-2",
     "address": "/dev/ttyJ4"
   },
   "frontFacingCamera": {
