@@ -10,7 +10,7 @@
     "hasSsuboard": true
   },
   "kioskPrinter": {
-    "maker": "Nippon",
+    "model": "Zebra-KR-403",
     "address": "/dev/ssu-com3"
   },
   "compliance": {
