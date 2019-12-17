@@ -41,11 +41,11 @@ function installDeviceConfig (cb) {
       newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
     }
     if (currentDeviceConfig.kioskPrinter) {
-      newDeviceConfig.kioskPrinter.maker = currentDeviceConfig.kioskPrinter.maker
+      newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
       newDeviceConfig.kioskPrinter.address = currentDeviceConfig.kioskPrinter.address
 
-      if (currentDeviceConfig.kioskPrinter.model) {
-        newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
+      if (currentDeviceConfig.kioskPrinter.maker) {
+        newDeviceConfig.kioskPrinter.maker = currentDeviceConfig.kioskPrinter.maker
       }
 
       if (currentDeviceConfig.kioskPrinter.protocol) {

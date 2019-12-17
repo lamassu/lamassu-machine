@@ -22,17 +22,17 @@ if [ -z $3 ]; then
   PRINTER='None'
 fi
 
-if [ "$PRINTER" != "None" ] && [ "$PRINTER" != "zebra" ] && [ "$PRINTER" != "zippon" ]; then
+if [ "$PRINTER" != "None" ] && [ "$PRINTER" != "zebra" ] && [ "$PRINTER" != "nippon" ]; then
   echo 'Install script expects "Zebra" or "Nippon" as printer parameter'
   exit 1
 fi
 
-if [ "$PRINTER" == "nippon" ]; then
-  PRINTER='Nippon'
+if [ "$PRINTER" == "Nippon" ]; then
+  PRINTER='Nippon-2511D-2'
 fi
 
 if [ "$PRINTER" == "zebra" ]; then
-  PRINTER='Zebra'
+  PRINTER='Zebra-KR-403'
 fi
 
 sudo apt update && sudo apt full-upgrade -y
@@ -68,7 +68,7 @@ mv node_modules/@joepie91/v4l2camera node_modules/
 cp hardware/codebase/upboard/$MACHINE/device_config.json ./
 
 # config printer
-sudo sed -i 's/Nippon/'"$PRINTER"'/g' ./device_config.json
+sudo sed -i 's/Nippon-2511D-2/'"$PRINTER"'/g' ./device_config.json
 
 # Certs and licenses
 curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $GPG_PASSWORD --decrypt | xz -dc > licenses.json
