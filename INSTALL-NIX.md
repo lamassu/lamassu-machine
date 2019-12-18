@@ -1,6 +1,6 @@
 ## Running nix-shell
 
-To get your dev environment setup all you need to do is to run `nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.03.tar.gz`
+To get your dev environment setup all you need to do is to run `nix-shell`
 
 ## Installing packages
 
@@ -73,7 +73,7 @@ Sometimes it might be a [locale-related issue](https://github.com/NixOS/nixpkgs/
 Try executing the `npm install` step inside a `--pure` flagged `nix-shell`
 
 ```
-nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.03.tar.gz
+nix-shell --pure
 [nix-shell:<lamassu-machine-dir>]$ npm install
 ```
 
