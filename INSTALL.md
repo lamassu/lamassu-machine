@@ -69,7 +69,7 @@ In second terminal window:
 
 ```
 node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam \
---mockPair --devBoard '<totem-from-admin>'
+--mockPair '<totem-from-admin>' --devBoard
 ```
 
 **IMPORTANT**: Make sure to use single quotes and not double quotes, or the shell will mess up the totem.
