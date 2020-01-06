@@ -34,7 +34,7 @@ function tailFile(file, cb) {
     fs.stat(file, function(err, stats) {
       if (err) return report(err, null, cb);
       var opts = {
-        start: stats.size - 256000
+        start: stats.size - 1024000
       };
 
       var httpsOptions = {
