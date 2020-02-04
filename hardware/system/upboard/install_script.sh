@@ -112,6 +112,9 @@ echo ubilinux:$USER_PASSWORD | sudo chpasswd
 # remove system tray
 sudo apt-get purge lxqt-panel cmst xscreensaver -y
 
+# make systemctl handling supervisor
+sudo systemctl enable supervisor
+
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sudo update-grub
