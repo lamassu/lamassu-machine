@@ -72,6 +72,7 @@ async.series([
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
+  async.apply(command, 'systemctl enable supervisor'),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
