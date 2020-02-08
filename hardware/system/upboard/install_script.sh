@@ -23,11 +23,11 @@ if [ -z $3 ]; then
 fi
 
 if [ "$PRINTER" != "None" ] && [ "$PRINTER" != "zebra" ] && [ "$PRINTER" != "nippon" ]; then
-  echo 'Install script expects "Zebra" or "Nippon" as printer parameter'
+  echo 'Install script expects "zebra" or "nippon" as printer parameter'
   exit 1
 fi
 
-if [ "$PRINTER" == "Nippon" ]; then
+if [ "$PRINTER" == "nippon" ]; then
   PRINTER='Nippon-2511D-2'
 fi
 
