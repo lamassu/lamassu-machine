@@ -8,9 +8,15 @@ const report = require('./report').report;
 const hardwareCode = process.argv[2];
 const machineCode = process.argv[3];
 
+const packagePath = '/tmp/extract/package/subpackage'
+
 const path = hardwareCode === 'upboard' ?
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}/${machineCode}` :
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}`
+  `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
+  `${packagePath}/hardware/${hardwareCode}`
+
+const supervisorPath = hardwareCode === 'upboard' ?
+  `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
+  `${packagePath}/supervisor/${hardwareCode}`
 
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
@@ -19,6 +25,24 @@ function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
+}
+
+function updateSupervisor (cb) {
+  if (hardwareCode === 'aaeon') return cb()
+  cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
+    if (err) {
+      console.log('failure activating systemctl')
+    }
+
+    async.series([ 
+      async.apply(command, 'rm /etc/supervisor/conf.d/*'),
+      async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+      async.apply(command, 'supervisorctl update'),
+      cb()
+    ], (err) => {
+      if (err) throw err; 
+    })
+  })
 }
 
 function installDeviceConfig (cb) {
@@ -72,7 +96,7 @@ async.series([
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
-  async.apply(command, 'systemctl enable supervisor'),
+  async.apply(updateSupervisor),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
