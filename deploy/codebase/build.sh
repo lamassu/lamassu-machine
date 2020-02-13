@@ -22,6 +22,7 @@ EXPORT_DIR=$EXPORT_BASE/subpackage
 EXPORT_SCRIPT_DIR=$EXPORT_BASE/package
 TARGET_MACHINE_DIR=$EXPORT_DIR/lamassu-machine
 HARDWARE_DIR=$MACHINE_DIR/hardware/codebase
+SYSTEM_DIR=$MACHINE_DIR/hardware/system
 BUILD_FILES_DIR=$MACHINE_DIR/deploy-files
 UPDATESCRIPT=$SCRIPT_DIR/updateinit.js
 TARGET_MODULES_DIR=$TARGET_MACHINE_DIR/node_modules
@@ -61,6 +62,9 @@ if [ $1 == "aaeon" ] ; then
   fi
 elif [ $1 == "ssuboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/ssuboard
+
+  cp $SYSTEM_DIR/ssuboard/supervisor/conf.d/* $EXPORT_DIR/supervisor/ssuboard
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
   if [ $2 == "--copy-device-config" ] ; then
@@ -68,6 +72,9 @@ elif [ $1 == "ssuboard" ] ; then
   fi
 elif [ $1 == "upboard-sintra" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard/sintra
+
+  cp $SYSTEM_DIR/upboard/sintra/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/sintra
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
   if [ $2 == "--copy-device-config" ] ; then
@@ -76,6 +83,9 @@ elif [ $1 == "upboard-sintra" ] ; then
   fi
 elif [ $1 == "upboard-gaia" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard/gaia
+
+  cp $SYSTEM_DIR/upboard/gaia/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/gaia
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
   if [ $2 == "--copy-device-config" ] ; then

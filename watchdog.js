@@ -4,6 +4,8 @@
 var fs = require('fs')
 var cp = require('child_process')
 
+require('./lite-logging')
+
 var BASE = '/tmp/extract'
 var DONE_PATH = BASE + '/done.txt'
 var SCRIPT_PATH = BASE + '/package/updatescript.js'
@@ -21,6 +23,10 @@ process.on('SIGUSR2', function () {
   // USR1 is reserved by node
   console.log('Got SIGUSR2. Immune.')
 })
+
+process.on('uncaughtException', console.log)
+process.on('unhandledRejection', console.log)
+process.on('exit', () => console.log('lamassu-watchdog exiting'))
 
 setInterval(watch, 1000)
 setInterval(function () {
