@@ -56,6 +56,11 @@ node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --re
 if [ $1 == "aaeon" ] ; then
   mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/aaeon/
+
+  # ACP chromium update
+  cp $MACHINE_DIR/hardware/system/aaeon/sencha-chrome.conf $EXPORT_DIR/hardware/aaeon/
+  cp $MACHINE_DIR/hardware/system/aaeon/start-chrome $EXPORT_DIR/hardware/aaeon/
+
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/aaeon/node_modules --rem-interpreted
   if [ $2 == "--copy-device-config" ] ; then
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/aaeon/
