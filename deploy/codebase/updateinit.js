@@ -21,6 +21,28 @@ function command(cmd, cb) {
   });
 }
 
+function updateAcpChromium (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//`, {timeout: TIMEOUT}, (err, stdout) => {
+    if (err) {
+      console.log('failure getting chromim version', err)
+      throw err
+    }
+    
+    if (Number(stdout) >= '65') return cb()
+
+    async.series([ 
+      async.apply(command, 'apt update && apt install chromium-browser -y'),
+      async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
+      async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
+      cb()
+    ], function(err) {
+      if (err) throw err;
+    });
+  })
+}
+
 function installDeviceConfig (cb) {
   try {
     const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
@@ -72,6 +94,7 @@ async.series([
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
+  async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
