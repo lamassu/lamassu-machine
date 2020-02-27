@@ -48,6 +48,9 @@
       "device": "/dev/ttyJ5"
     }
   },
+  "billDispenser": {
+    "device": "/sys/bus/usb/devices/1-4"
+  },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
     "downloadDir": "/tmp/download",
