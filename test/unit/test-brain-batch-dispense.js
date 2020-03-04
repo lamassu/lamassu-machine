@@ -22,7 +22,7 @@ test('batch dispense [20,0] limit 20', async t => {
     ]
   }
 
-  const { dispenseRecords, error } = await Brain.prototype._batchDispense.apply(thisArg, [notesToDispense, initialParams])
+  const { dispenseRecords, error } = await Brain.prototype._batchDispense.apply(thisArg, [notesToDispense[0], initialParams])
   t.falsy(error, 'No error should happen')
   t.deepEqual(dispenseRecords, [{ dispensed: 20, rejected: 0 }, { dispensed: 0, rejected: 0 }], 'Dispenses all 20 notes on first batch');
 })
@@ -40,7 +40,7 @@ test('batch dispense [0,20] limit 20', async t => {
     ]
   }
 
-  const { dispenseRecords, error } = await Brain.prototype._batchDispense.apply(thisArg, [notesToDispense, initialParams])
+  const { dispenseRecords, error } = await Brain.prototype._batchDispense.apply(thisArg, [notesToDispense[0], initialParams])
   t.falsy(error, 'No error should happen')
   t.deepEqual(dispenseRecords, [{ dispensed: 0, rejected: 0 }, { dispensed: 20, rejected: 0 }], 'Dispenses all 20 notes on first batch');
 })
