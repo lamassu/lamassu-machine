@@ -57,6 +57,10 @@ if [ $1 == "aaeon" ] ; then
   mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/aaeon/
 
+  # ACP udev update
+  mkdir -p $EXPORT_DIR/udev/aaeon
+  cp $SYSTEM_DIR/aaeon/udev/99-douro.rules $EXPORT_DIR/udev/aaeon
+
   # ACP chromium update
   cp $MACHINE_DIR/hardware/system/aaeon/sencha-chrome.conf $EXPORT_DIR/hardware/aaeon/
   cp $MACHINE_DIR/hardware/system/aaeon/start-chrome $EXPORT_DIR/hardware/aaeon/
