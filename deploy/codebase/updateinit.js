@@ -18,6 +18,8 @@ const supervisorPath = hardwareCode === 'upboard' ?
   `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
   `${packagePath}/supervisor/${hardwareCode}`
 
+const udevPath = `${packagePath}/udev/aaeon`
+
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
@@ -25,6 +27,18 @@ function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
+}
+
+function updateUdev (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  async.series([ 
+    async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
+    async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
+    cb()
+  ], (err) => {
+    if (err) throw err; 
+  })
 }
 
 function updateSupervisor (cb) {
@@ -118,6 +132,7 @@ async.series([
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
   async.apply(updateSupervisor),
+  async.apply(updateUdev),
   async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
 ], function(err) {
