@@ -49,7 +49,7 @@
     }
   },
   "billDispenser": {
-    "device": "/sys/bus/usb/devices/1-4"
+    "device": "/sys/bus/usb/devices/1-4:1.0"
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
