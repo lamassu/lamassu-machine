@@ -886,3 +886,6 @@ msgstr "Dash"
 msgid "Bitcoin Cash"
 msgstr "Bitcoin Cash"
 
+#: On screen: coins
+msgid "Ducatus"
+msgstr "Ducatus"
