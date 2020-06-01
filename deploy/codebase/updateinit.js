@@ -8,9 +8,17 @@ const report = require('./report').report;
 const hardwareCode = process.argv[2];
 const machineCode = process.argv[3];
 
+const packagePath = '/tmp/extract/package/subpackage'
+
 const path = hardwareCode === 'upboard' ?
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}/${machineCode}` :
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}`
+  `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
+  `${packagePath}/hardware/${hardwareCode}`
+
+const supervisorPath = hardwareCode === 'upboard' ?
+  `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
+  `${packagePath}/supervisor/${hardwareCode}`
+
+const udevPath = `${packagePath}/udev/aaeon`
 
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
@@ -19,6 +27,58 @@ function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
   });
+}
+
+function updateUdev (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  async.series([ 
+    async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
+    async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
+    cb()
+  ], (err) => {
+    if (err) throw err; 
+  })
+}
+
+function updateSupervisor (cb) {
+  if (hardwareCode === 'aaeon') return cb()
+  cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
+    if (err) {
+      console.log('failure activating systemctl')
+    }
+
+    async.series([ 
+      async.apply(command, 'rm /etc/supervisor/conf.d/*'),
+      async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+      async.apply(command, 'supervisorctl update'),
+      cb()
+    ], (err) => {
+      if (err) throw err; 
+    })
+  })
+}
+
+function updateAcpChromium (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//`, {timeout: TIMEOUT}, (err, stdout) => {
+    if (err) {
+      console.log('failure getting chromim version', err)
+      throw err
+    }
+    
+    if (Number(stdout) >= '65') return cb()
+
+    async.series([ 
+      async.apply(command, 'apt update && apt install chromium-browser -y'),
+      async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
+      async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
+      cb()
+    ], function(err) {
+      if (err) throw err;
+    });
+  })
 }
 
 function installDeviceConfig (cb) {
@@ -68,10 +128,12 @@ function installDeviceConfig (cb) {
 }
 
 async.series([
-  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
-  async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'), async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
+  async.apply(updateSupervisor),
+  async.apply(updateUdev),
+  async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
