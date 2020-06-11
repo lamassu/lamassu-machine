@@ -35,9 +35,9 @@ function updateUdev (cb) {
   async.series([ 
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
     async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
-    cb()
   ], (err) => {
     if (err) throw err; 
+    cb()
   })
 }
 
@@ -52,9 +52,9 @@ function updateSupervisor (cb) {
       async.apply(command, 'rm /etc/supervisor/conf.d/*'),
       async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
       async.apply(command, 'supervisorctl update'),
-      cb()
     ], (err) => {
       if (err) throw err; 
+      cb()
     })
   })
 }
@@ -62,7 +62,7 @@ function updateSupervisor (cb) {
 function updateAcpChromium (cb) {
   if (hardwareCode !== 'aaeon') return cb()
 
-  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//`, {timeout: TIMEOUT}, (err, stdout) => {
+  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`, {timeout: TIMEOUT}, (err, stdout) => {
     if (err) {
       console.log('failure getting chromim version', err)
       throw err
@@ -74,9 +74,9 @@ function updateAcpChromium (cb) {
       async.apply(command, 'apt update && apt install chromium-browser -y'),
       async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
       async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
-      cb()
     ], function(err) {
       if (err) throw err;
+      cb()
     });
   })
 }
