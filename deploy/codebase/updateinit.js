@@ -62,7 +62,7 @@ function updateSupervisor (cb) {
 function updateAcpChromium (cb) {
   if (hardwareCode !== 'aaeon') return cb()
 
-  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'`, {timeout: TIMEOUT}, (err, stdout) => {
+  cp.exec(`chromium-browser --version | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//k'`, {timeout: TIMEOUT}, (err, stdout) => {
     if (err) {
       console.log('failure getting chromim version', err)
       throw err
@@ -71,9 +71,10 @@ function updateAcpChromium (cb) {
     if (Number(stdout) >= '65') return cb()
 
     async.series([ 
-      async.apply(command, 'apt update && apt install chromium-browser -y'),
+      async.apply(command, 'apt update || apt install chromium-browser -y'),
       async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
       async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
+      async.apply(command, 'killall chromium-browser && killall start-chrome'),
     ], function(err) {
       if (err) throw err;
       cb()
