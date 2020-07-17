@@ -29,7 +29,8 @@ var traderConfig = {
     retryInterval: 5000,
     sendTimeout: 30000,
     pollTimeout: 10000
-  }
+  },
+  cryptomatModel: 'sintra'
 }
 
 var connectionInfo = {
