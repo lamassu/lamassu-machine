@@ -56,6 +56,11 @@ var coins = {
     unitScale: 8,
     displayScale: 5,
     displayCode: 'mBCH'
+  },
+  DUC: {
+    unitScale: 8,
+    displayScale: 8,
+    displayCode: 'DUC'
   }
 }
 
