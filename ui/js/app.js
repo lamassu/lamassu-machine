@@ -1335,7 +1335,7 @@ function sendOnly(reason) {
     transactionLimit: locale.translate('Transaction limit reached').fetch(),
     validatorError: locale.translate('Error in validation').fetch(),
     lowBalance: locale.translate("We're out of coins!").fetch(),
-    blockedCustomer: locale.translate('Transaction limit reached')
+    blockedCustomer: locale.translate('Transaction limit reached').fetch()
 
     // If no reason provided defaults to lowBalance
   };var reasonText = errorMessages[reason] || errorMessages.lowBalance;
