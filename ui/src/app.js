@@ -132,7 +132,7 @@ function processData (data) {
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
-  if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
+  if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
 
   if (data.context) {
@@ -859,8 +859,18 @@ function setOperatorInfo (operator) {
   }
 }
 
-function setHardLimitHours (hours) {
-  $('#hard-limit-hours').text(locale.translate('Please come back in %s hours').fetch(hours))
+function setHardLimit(limits) {
+  const component = $('#hard-limit-hours')
+
+  if (limits.hardLimitWeeks >= 1) {
+    return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks))
+  }
+
+  if (limits.hardLimitDays >= 1) {
+    return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours))
+  }
+
+  component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours))
 }
 
 function setCryptomatModel (model) {
