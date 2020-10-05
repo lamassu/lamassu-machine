@@ -64,6 +64,7 @@ var currentState
 var accepting = false
 var websocket = null
 var wifiKeyboard = null
+var usSsnKeypad = null
 var phoneKeypad = null
 var securityKeypad = null
 var previousState = null
@@ -180,6 +181,10 @@ function processData (data) {
     case 'fakeDualIdle':
       setState('dual_idle')
       break
+    case 'registerUsSsn':
+      usSsnKeypad.activate()
+      setState('register_us_ssn')
+      break
     case 'registerPhone':
       phoneKeypad.activate()
       setState('register_phone')
@@ -256,6 +261,9 @@ function processData (data) {
     case 'facephotoPermission':
       facephotoPermission()
       break
+    case 'usSsnPermission':
+      usSsnPermission()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
@@ -266,6 +274,10 @@ function processData (data) {
 
 function facephotoPermission () {
   setScreen('facephoto_permission')
+}
+
+function usSsnPermission () {
+  setScreen('us_ssn_permission')
 }
 
 function idVerification () {
@@ -364,7 +376,7 @@ function setupCoinsButtons () {
     $('.crypto-buttons').append(`
       <div class="choose-coin-button h4" data-more="true">
         <div id="crypto-dropdown-toggle" data-more="true">
-          <span class="js-i18n">More</span>
+          <span class="js-i18n">${locale.translate('More').fetch()}</span>
           <span class="choose-coin-svg-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
               <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
@@ -379,7 +391,7 @@ function setupCoinsButtons () {
         data-crypto-code="${coin.cryptoCode}">${coin.display}</button>`
       $('#cryptos').append(el)
     })
-    const el = `<button class="h4 sapphire button small-action-button js-i18n" data-less="true">Less</button>`
+    const el = `<button class="h4 sapphire button small-action-button js-i18n" data-less="true">${locale.translate('Less').fetch()}</button>`
     $('#cryptos').append(el)
   }
 }
@@ -450,6 +462,11 @@ $(document).ready(function () {
   BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
+
+  usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
+    if (currentState !== 'register_us_ssn') return
+    buttonPressed('usSsn', result)
+  })
 
   phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
     if (currentState !== 'register_phone') return
@@ -546,6 +563,8 @@ $(document).ready(function () {
 
   setupImmediateButton('scan-id-cancel', 'cancelIdScan')
   setupImmediateButton('scan-photo-cancel', 'cancelIdScan')
+  setupImmediateButton('us-ssn-cancel', 'cancelUsSsn',
+    usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
@@ -627,6 +646,7 @@ $(document).ready(function () {
   setupButton('id-start-verification', 'permissionIdCompliance')
   setupButton('sms-start-verification', 'permissionSmsCompliance')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
+  setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
 
   setupButton('send-coins-id', 'finishBeforeSms')
   setupButton('send-coins-id-2', 'finishBeforeSms')
@@ -634,6 +654,8 @@ $(document).ready(function () {
   setupButton('send-coins-sms-2', 'finishBeforeSms')
 
   setupButton('facephoto-permission-no', 'finishBeforeSms')
+  setupButton('us-ssn-permission-no', 'finishBeforeSms')
+  setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
@@ -887,6 +909,8 @@ function setDirection (direction) {
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
+    $('.register_us_ssn_state'),
+    $('.us_ssn_permission_state'),
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),

@@ -14,6 +14,7 @@ let clicker = null
 let screen = null
 var phoneKeypad = null
 var securityKeypad = null
+var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
 
@@ -51,6 +52,12 @@ $(function () {
   phoneKeypad.activate()
 
   let wifiKeyboard = new Keyboard('wifi-keyboard').init()
+
+  usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
+    console.log('phoneNumber', result)
+  })
+
+  usSsnKeypad.activate()
 
   securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     console.log('phoneNumber', result)
@@ -219,6 +226,7 @@ function setupFakes () {
     $('.scan_id_state'),
     $('.security_code_state'),
     $('.register_phone_state'),
+    $('.register_us_ssn_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
     $('.verifying_facephoto_state'),
@@ -239,6 +247,7 @@ function setupFakes () {
     $('.facephoto_state'),
     $('.facephoto_retry_state'),
     $('.facephoto_permission_state'),
+    $('.us_ssn_permission_state'),
     $('.facephoto_failed_state'),
     $('.hard_limit_reached_state'),
     $('.photo_scan_failed_state'),
