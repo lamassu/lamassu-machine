@@ -257,6 +257,10 @@ footer {
   margin-right: 1.2vw;
 }
 
+.us_ssn_permission_state .d2 {
+  max-width: 84vh;
+}
+
 .out_of_cash_state .mainv .header {
   margin-top: 15vh;
 }
@@ -530,7 +534,7 @@ footer {
   width: 39vh;
 }
 
-#phone-keypad, #security-keypad {
+#phone-keypad, #security-keypad, #us-ssn-keypad {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -542,7 +546,7 @@ footer {
   }
 }
 
-#phone-keypad .progress-button, #security-keypad .progress-button {
+#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button {
   float: right;
   margin-top: 5vh;
 }
@@ -1028,6 +1032,12 @@ footer {
 .id_verification_state {
   img {
     width: 33vh;
+  }
+}
+
+.us_ssn_permission_state {
+  img {
+    width: 36vh;
   }
 }
 
