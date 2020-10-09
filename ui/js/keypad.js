@@ -92,9 +92,7 @@ Keypad.prototype.backspace = function backspace () {
 
   this.result = this.result.substring(0, this.result.length - 1)
 
-  var display = this.type === 'phoneNumber' ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
-    : this.type === 'usSsn' && this.result ? ssnFormat(this.result)
-    : this.result
+  var display = getDisplay(this.result, this.type, this.opts.country)
 
   if (!display) {
     this.keypad.find('.phone-separator').addClass('hidden')
@@ -139,15 +137,21 @@ function isValidSsn (ssn) {
     ssn.substr(5) !== '0000'
 }
 
+function getDisplay (result, type, country) {
+  if (!result) return result
+
+  if (type === 'phoneNumber') return new libphonenumber.AsYouType(country).input(result)
+  if (type === 'usSsn') return ssnFormat(result)
+
+  return result
+}
+
 Keypad.prototype._keyPress = function _keyPress (target) {
   if (this.result.replace('+', '').length >= LENGTHS[this.type]) return
   var numeral = target.text()
   this.result += numeral
 
-  var display = this.type === 'phoneNumber' && this.result ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
-    : this.type === 'usSsn' && this.result ? ssnFormat(this.result)
-    : this.result
-  
+  var display = getDisplay(this.result, this.type, this.opts.country)
 
   if (display) {
     this.keypad.find('.phone-separator').removeClass('hidden')
