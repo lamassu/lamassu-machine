@@ -552,8 +552,8 @@ $(document).ready(function () {
   setupButton('pairing-error-ok', 'pairingErrorOk');
   setupButton('cash-out-button', 'cashOut');
 
-  setupImmediateButton('scan-id-cancel', 'cancelIdScan');
-  setupImmediateButton('scan-photo-cancel', 'cancelIdScan');
+  setupImmediateButton('scan-id-cancel', 'idDataActionCancel');
+  setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel');
   setupImmediateButton('us-ssn-cancel', 'cancelUsSsn', usSsnKeypad.deactivate.bind(usSsnKeypad));
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', phoneKeypad.deactivate.bind(phoneKeypad));
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode', securityKeypad.deactivate.bind(securityKeypad));
@@ -564,7 +564,7 @@ $(document).ready(function () {
   setupButton('id-code-failed-cancel', 'bye');
   setupButton('id-verification-error-ok', 'idVerificationErrorOk');
   setupButton('photo-scan-failed-retry', 'retryPhotoScan');
-  setupButton('photo-scan-failed-cancel', 'bye');
+  setupButton('photo-scan-failed-cancel', 'photoScanVerificationCancel');
   setupButton('photo-verification-failed-ok', 'cancelIdScan');
   setupButton('invalid-address-try-again', 'invalidAddressTryAgain');
   setupButton('address-reuse-start-over', 'idle');
