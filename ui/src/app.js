@@ -64,6 +64,7 @@ var currentState
 var accepting = false
 var websocket = null
 var wifiKeyboard = null
+var promoKeyboard = null
 var usSsnKeypad = null
 var phoneKeypad = null
 var securityKeypad = null
@@ -96,10 +97,12 @@ function verifyConnection () {
 function buttonPressed (button, data) {
   if (!buttonActive) return
   wifiKeyboard.deactivate()
+  promoKeyboard.deactivate()
   buttonActive = false
   setTimeout(function () {
     buttonActive = true
     wifiKeyboard.activate()
+    promoKeyboard.activate()
   }, 300)
   var res = {button: button}
   if (data || data === null) res.data = data
@@ -135,6 +138,8 @@ function processData (data) {
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
+  if (data.areThereAvailableCoupons !== undefined) setAvailableCoupons(data.areThereAvailableCoupons)
+  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
 
   if (data.context) {
     $('.js-context').hide()
@@ -266,6 +271,12 @@ function processData (data) {
       break
     case 'blockedCustomer':
       blockedCustomer()
+      break
+    case 'insertPromoCode':
+      setState('insert_promo_code')
+      break
+    case 'invalidPromoCode':
+      setState('promo_code_not_found')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -463,6 +474,8 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
+  promoKeyboard = new Keyboard('promo-keyboard').init()
+
   usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
     if (currentState !== 'register_us_ssn') return
     buttonPressed('usSsn', result)
@@ -553,6 +566,26 @@ $(document).ready(function () {
   setupButton('printer-print-again', 'printAgain')
   setupButton('printer-print-again2', 'printAgain')
   setupButton('printer-scan-again', 'printerScanAgain')
+
+  setupButton('insert-first-bill-promo-button', 'insertPromoCode')
+  setupButton('choose-fiat-promo-button', 'insertPromoCode')
+
+  var promoCodeCancelButton = document.getElementById('promo-code-cancel')
+  touchImmediateEvent(promoCodeCancelButton, function () {
+    buttonPressed('cancelPromoCode')
+  })
+
+  var submitCodeButton = document.getElementById('submit-promo-code')
+  touchEvent(submitCodeButton, function () {
+    var code = $('.promo-code-input').data('content')
+    buttonPressed('submitPromoCode', { input: code })
+  })
+
+  setupButton('submit-promo-code', 'submitPromoCode', {
+    input: $('.promo-code-input').data('content')
+  })
+  setupButton('promo-code-try-again', 'insertPromoCode')
+  setupButton('promo-code-continue', 'cancelPromoCode')
 
   setupButton('initialize', 'initialize')
   // setupButton('test-mode', 'testMode')
@@ -813,6 +846,7 @@ function setState (state, delay) {
   currentState = state
 
   wifiKeyboard.reset()
+  promoKeyboard.reset()
 
   if (state === 'idle') {
     $('.qr-code').empty()
@@ -936,7 +970,9 @@ function setDirection (direction) {
     $('.hard_limit_reached_state'),
     $('.failed_scan_id_photo_state'),
     $('.retry_permission_id_state'),
-    $('.waiting_state')
+    $('.waiting_state'),
+    $('.insert_promo_code_state'),
+    $('.promo_code_not_found_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1289,10 +1325,12 @@ function setExchangeRate (_rates) {
   var coin = coins[cryptoCode]
   var displayCode = coin.displayCode
 
-  var cryptoToFiat = new BigNumber(rates.cashIn)
+  if (rates.cashIn) {
+    var cryptoToFiat = new BigNumber(rates.cashIn)
+    var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
 
-  var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
+    $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
+  }
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
@@ -1727,4 +1765,32 @@ function shouldEnableTouch () {
   const chromePlus73 = chromeVersion && chromeVersion[1] >= 73
 
   return chromiumPlus73 || chromePlus73
+}
+
+function setAvailableCoupons (areThereAvailableCoupons) {
+  if (areThereAvailableCoupons) {
+    $('#insert-first-bill-coupon-added').hide()
+    $('#choose-fiat-coupon-added').hide()
+    $('#insert-first-bill-promo-button').show()
+    $('#choose-fiat-promo-button').show()
+  } else {
+    $('#insert-first-bill-promo-button').hide()
+    $('#choose-fiat-promo-button').hide()
+  }
+}
+
+function setCurrentDiscount (currentDiscount) {
+  if (currentDiscount > 0) {
+    $('#insert-first-bill-promo-button').hide()
+    $('#choose-fiat-promo-button').hide()
+    $('#insert-first-bill-coupon-added').html(`✔ Coupon added (${currentDiscount}% discount)`)
+    $('#choose-fiat-coupon-added').html(`✔ Coupon added (${currentDiscount}% discount)`)
+    $('#insert-first-bill-coupon-added').show()
+    $('#choose-fiat-coupon-added').show()
+  } else {
+    $('#insert-first-bill-promo-button').show()
+    $('#choose-fiat-promo-button').show()
+    $('#insert-first-bill-coupon-added').hide()
+    $('#choose-fiat-coupon-added').hide()
+  }
 }

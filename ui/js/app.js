@@ -64,6 +64,7 @@ var currentState;
 var accepting = false;
 var websocket = null;
 var wifiKeyboard = null;
+var promoKeyboard = null;
 var usSsnKeypad = null;
 var phoneKeypad = null;
 var securityKeypad = null;
@@ -97,10 +98,12 @@ function verifyConnection() {
 function buttonPressed(button, data) {
   if (!buttonActive) return;
   wifiKeyboard.deactivate();
+  promoKeyboard.deactivate();
   buttonActive = false;
   setTimeout(function () {
     buttonActive = true;
     wifiKeyboard.activate();
+    promoKeyboard.activate();
   }, 300);
   var res = { button: button };
   if (data || data === null) res.data = data;
@@ -136,6 +139,8 @@ function processData(data) {
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo);
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
+  if (data.areThereAvailableCoupons !== undefined) setAvailableCoupons(data.areThereAvailableCoupons);
+  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
 
   if (data.context) {
     $('.js-context').hide();
@@ -159,15 +164,15 @@ function processData(data) {
       break;
     case 'wifiConnected':
       t('wifi-connecting', locale.translate('Connected. Waiting for ticker.').fetch());
-      setState('wifi_connecting'); // in case we didn't go through wifi-connecting
-      break;
+      setState('wifi_connecting' // in case we didn't go through wifi-connecting
+      );break;
     case 'pairing':
       setState('pairing');
       break;
     case 'pairingError':
-      $('.js-pairing-error').text(data.err);
+      $('.js-pairing-error').text(data.err
       // Give it some time to update text in background
-      setTimeout(function () {
+      );setTimeout(function () {
         setState('pairing_error');
       }, 500);
       break;
@@ -268,6 +273,12 @@ function processData(data) {
     case 'blockedCustomer':
       blockedCustomer();
       break;
+    case 'insertPromoCode':
+      setState('insert_promo_code');
+      break;
+    case 'invalidPromoCode':
+      setState('promo_code_not_found');
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -302,10 +313,10 @@ function chooseCoin(coins, twoWayMode) {
   }
 
   isTwoWay = twoWayMode;
-  setChooseCoinColors();
+  setChooseCoinColors
   // setupAnimation(twoWayMode, aspectRatio800)
 
-  var defaultCoin = coins[0];
+  ();var defaultCoin = coins[0];
 
   currentCryptoCode = defaultCoin.cryptoCode;
   currentCoin = defaultCoin;
@@ -440,16 +451,18 @@ $(document).ready(function () {
   window.addEventListener('resize', function () {
     calculateAspectRatio();
     setChooseCoinColors();
-  });
+  }
 
   // Matt's anti-drag hack
-  window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
+  );window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
     return false;
   };
 
   BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN });
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
+
+  promoKeyboard = new Keyboard('promo-keyboard').init();
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     if (currentState !== 'register_us_ssn') return;
@@ -545,9 +558,29 @@ $(document).ready(function () {
   setupButton('printer-print-again2', 'printAgain');
   setupButton('printer-scan-again', 'printerScanAgain');
 
-  setupButton('initialize', 'initialize');
+  setupButton('insert-first-bill-promo-button', 'insertPromoCode');
+  setupButton('choose-fiat-promo-button', 'insertPromoCode');
+
+  var promoCodeCancelButton = document.getElementById('promo-code-cancel');
+  touchImmediateEvent(promoCodeCancelButton, function () {
+    buttonPressed('cancelPromoCode');
+  });
+
+  var submitCodeButton = document.getElementById('submit-promo-code');
+  touchEvent(submitCodeButton, function () {
+    var code = $('.promo-code-input').data('content');
+    buttonPressed('submitPromoCode', { input: code });
+  });
+
+  setupButton('submit-promo-code', 'submitPromoCode', {
+    input: $('.promo-code-input').data('content')
+  });
+  setupButton('promo-code-try-again', 'insertPromoCode');
+  setupButton('promo-code-continue', 'cancelPromoCode');
+
+  setupButton('initialize', 'initialize'
   // setupButton('test-mode', 'testMode')
-  setupButton('pairing-scan', 'pairingScan');
+  );setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingErrorOk');
   setupButton('cash-out-button', 'cashOut');
@@ -730,10 +763,10 @@ function touchEvent(element, callback) {
   function handler(e) {
     var target = targetButton(e.target);
 
-    target.classList.add('active');
+    target.classList.add('active'
 
     // Wait for transition to finish
-    setTimeout(function () {
+    );setTimeout(function () {
       target.classList.remove('active');
     }, 300);
 
@@ -804,6 +837,7 @@ function setState(state, delay) {
   currentState = state;
 
   wifiKeyboard.reset();
+  promoKeyboard.reset();
 
   if (state === 'idle') {
     $('.qr-code').empty();
@@ -897,7 +931,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
@@ -1046,10 +1080,10 @@ function setLocale(data) {
   var isHebrew = jsLocaleCode.indexOf('he-') === 0;
   isRTL = isArabic || isHebrew;
 
-  setChooseCoinColors();
+  setChooseCoinColors
   // setupAnimation(isTwoWay, aspectRatio800)
 
-  if (isRTL) {
+  ();if (isRTL) {
     $('body').addClass('i18n-rtl');
   } else {
     $('body').removeClass('i18n-rtl');
@@ -1245,10 +1279,12 @@ function setExchangeRate(_rates) {
   var coin = coins[cryptoCode];
   var displayCode = coin.displayCode;
 
-  var cryptoToFiat = new BigNumber(rates.cashIn);
+  if (rates.cashIn) {
+    var cryptoToFiat = new BigNumber(rates.cashIn);
+    var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2);
 
-  var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2);
-  $('.crypto-rate-cash-in').html('1 ' + cryptoCode + ' = ' + rateStr);
+    $('.crypto-rate-cash-in').html('1 ' + cryptoCode + ' = ' + rateStr);
+  }
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut);
@@ -1261,9 +1297,9 @@ function setExchangeRate(_rates) {
 }
 
 function qrize(text, target, color, lightning) {
-  var image = document.getElementById('bolt-img');
+  var image = document.getElementById('bolt-img'
   // Hack for surf browser
-  var size = document.body.clientHeight * 0.36;
+  );var size = document.body.clientHeight * 0.36;
 
   var opts = {
     crisp: true,
@@ -1423,10 +1459,10 @@ function translatePage() {
     var el = $(this);
     var base = el.data('baseTranslation');
     el.attr('placeholder', locale.translate(base).fetch());
-  });
+  }
 
   // Adjust send coins button
-  var length = $('#send-coins span').text().length;
+  );var length = $('#send-coins span').text().length;
   if (length > 17) $('body').addClass('i18n-long-send-coins');else $('body').removeClass('i18n-long-send-coins');
 }
 
@@ -1660,6 +1696,34 @@ function shouldEnableTouch() {
   var chromePlus73 = chromeVersion && chromeVersion[1] >= 73;
 
   return chromiumPlus73 || chromePlus73;
+}
+
+function setAvailableCoupons(areThereAvailableCoupons) {
+  if (areThereAvailableCoupons) {
+    $('#insert-first-bill-coupon-added').hide();
+    $('#choose-fiat-coupon-added').hide();
+    $('#insert-first-bill-promo-button').show();
+    $('#choose-fiat-promo-button').show();
+  } else {
+    $('#insert-first-bill-promo-button').hide();
+    $('#choose-fiat-promo-button').hide();
+  }
+}
+
+function setCurrentDiscount(currentDiscount) {
+  if (currentDiscount > 0) {
+    $('#insert-first-bill-promo-button').hide();
+    $('#choose-fiat-promo-button').hide();
+    $('#insert-first-bill-coupon-added').html('\u2714 Coupon added (' + currentDiscount + '% discount)');
+    $('#choose-fiat-coupon-added').html('\u2714 Coupon added (' + currentDiscount + '% discount)');
+    $('#insert-first-bill-coupon-added').show();
+    $('#choose-fiat-coupon-added').show();
+  } else {
+    $('#insert-first-bill-promo-button').show();
+    $('#choose-fiat-promo-button').show();
+    $('#insert-first-bill-coupon-added').hide();
+    $('#choose-fiat-coupon-added').hide();
+  }
 }
 
 //# sourceMappingURL=app.js.map
