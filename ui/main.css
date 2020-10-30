@@ -1376,7 +1376,7 @@ footer {
 .choose_fiat_state .limit {
   margin-top: auto; }
 
-.choose_fiat_state footer, .insert_more_bills_state footer {
+.choose_fiat_state footer {
   width: auto; }
 
 .choose-coin-cash-in .cash-out-box,
@@ -1580,7 +1580,13 @@ footer {
 
 .insert_more_bills_state footer {
   height: 39vh;
-  margin-left: 15vh; }
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
+  display: block; }
+
+.insert_bills_state footer {
+  padding-left: 9.4vw;
+  margin-bottom: 6vh; }
 
 .insert_more_bills_state .primary-side-title {
   max-width: 80vh; }
@@ -1819,6 +1825,87 @@ footer {
   width: 60%;
   background-color: #ffffff;
   margin-bottom: 4vh; }
+
+.cash-in-color .promo-code-input {
+  border-bottom: #34d9c8 2px solid; }
+
+.cash-in-color .promo-keyboard .key {
+  background-color: #34d9c8; }
+  .cash-in-color .promo-keyboard .key:active {
+    background-color: #2cb9ac; }
+
+.cash-out-color .promo-code-input {
+  border-bottom: #e6746d 2px solid; }
+
+.cash-out-color .promo-keyboard .key {
+  background-color: #e6746d; }
+  .cash-out-color .promo-keyboard .key:active {
+    background-color: #cb6560; }
+
+.promo-keyboard {
+  box-sizing: border-box;
+  width: 100%; }
+  .promo-keyboard .promo-backspace {
+    width: 18vh !important; }
+  .promo-keyboard .row {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center; }
+  .promo-keyboard .key {
+    box-sizing: border-box;
+    border: 1px;
+    color: #ffffff;
+    margin: 0.45vh;
+    border-radius: 10px;
+    font-size: 3vh;
+    height: 10vh;
+    width: 10vh;
+    line-height: 10vh; }
+    .promo-keyboard .key:active {
+      border: none; }
+
+#promo-code-title {
+  color: #ffffff; }
+
+.promo-code-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none; }
+
+.insert_promo_code_state footer {
+  margin-bottom: 6vh; }
+
+.insert_promo_code_state footer button {
+  margin: 0 auto;
+  display: block; }
+
+.insert_promo_code_state main {
+  display: block;
+  margin-top: -10vh;
+  margin-bottom: -26vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%; }
+
+#scan-address-promo-button {
+  margin: 0 auto;
+  display: block; }
+
+.promo-code-title-wrapper {
+  text-align: left; }
+
+#promo-code-cancel {
+  float: right; }
+
+.choose_fiat_state #choose-fiat-promo-button {
+  margin-top: 8vh; }
+
+.choose_fiat_state #choose-fiat-coupon-added {
+  margin-top: 8vh; }
 
 #wifi-keyboard {
   box-sizing: border-box;

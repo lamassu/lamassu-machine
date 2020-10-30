@@ -2,7 +2,7 @@
 var Keyboard = function (keyboardId) {
   this.keyboardId = keyboardId
   this.keyboard = $('#' + keyboardId)
-  this.inputBox = this.keyboard.find('input.passphrase')
+  this.inputBox = this.keyboardId === 'wifi-keyboard' ? this.keyboard.find('input.passphrase') : $('.promo-code-input')
   this.keyCase = 'lc'
   this.backspaceTimeout = null
   this.active = true
@@ -26,10 +26,17 @@ Keyboard.prototype.init = function init () {
     }
   })
 
-  this.keyboard.find('.entry .backspace').get(0).addEventListener('mouseup', function (e) {
-    var target = $(e.target)
-    self._backspaceUp(target)
-  })
+  if (this.keyboardId === 'wifi-keyboard') {
+    this.keyboard.find('.entry .backspace').get(0).addEventListener('mouseup', function (e) {
+      var target = $(e.target)
+      self._backspaceUp(target)
+    })
+  } else if (this.keyboardId === 'promo-keyboard') {
+    this.keyboard.find('.backspace').get(0).addEventListener('mouseup', function (e) {
+      var target = $(e.target)
+      self._backspaceUp(target)
+    })
+  }
 
   return this
 }

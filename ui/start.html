@@ -242,6 +242,10 @@
               <span class="js-currency h3"></span>
             </div>
             <div class="d1 digital js-18n" id="js-i18n-choose-digital-amount"></div>
+            <button id="choose-fiat-promo-button" class="bordered-progress-button button d2">
+              Have a promo code?
+            </button>
+            <p id="choose-fiat-coupon-added" class="d2" style="display:none">✔ Coupon added (5% discount)</p>
           </section>
           <div class="d2 limit white"></div>
         </section>
@@ -726,6 +730,13 @@
           <div class="insert-bill-wrapper"><img src="images/insert-bill.svg" /></div>
         </section>
       </main>
+    
+      <footer>
+        <button id="insert-first-bill-promo-button" class="bordered-progress-button button lg-margin-bottom d2">
+          Have a promo code?
+        </button>
+        <p id="insert-first-bill-coupon-added" class="d2" style="display:none">✔ Coupon added (5% discount)</p>
+      </footer>
     </section>
     <section
       class="viewport insert_more_bills_state cash-in-color"
@@ -774,6 +785,83 @@
       </footer>
     </section>
     <section
+      class="viewport insert_promo_code_state"
+      data-tr-section="insert-promo-code"
+      id="promo-code"
+      data-screentype="promo-tp">
+    
+      <header class="promo-code-header">
+        <div id="promo-code-cancel" class="cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main>
+        <div class="promo-code-title-wrapper">
+          <p id="promo-code-title" class="d1 promo-code-title">Type in your promo code</p>
+          <input class="promo-code-input passphrase h3" type="text" readonly value="">
+        </div>
+    
+        <section id="promo-keyboard" class="promo-keyboard keys tl2">
+          <div class="keyboard-layout i18n-latin" data-case="uc">
+            <div class="keyboard keyboard-uc">
+              <div class="row">
+                <div class="key" data-ascii="49">1</div>
+                <div class="key" data-ascii="50">2</div>
+                <div class="key" data-ascii="51">3</div>
+                <div class="key" data-ascii="52">4</div>
+                <div class="key" data-ascii="53">5</div>
+                <div class="key" data-ascii="54">6</div>
+                <div class="key" data-ascii="55">7</div>
+                <div class="key" data-ascii="56">8</div>
+                <div class="key" data-ascii="57">9</div>
+                <div class="key" data-ascii="48">0</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="81">Q</div>
+                <div class="key" data-ascii="87">W</div>
+                <div class="key" data-ascii="69">E</div>
+                <div class="key" data-ascii="82">R</div>
+                <div class="key" data-ascii="84">T</div>
+                <div class="key" data-ascii="89">Y</div>
+                <div class="key" data-ascii="85">U</div>
+                <div class="key" data-ascii="73">I</div>
+                <div class="key" data-ascii="79">O</div>
+                <div class="key" data-ascii="80">P</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="65">A</div>
+                <div class="key" data-ascii="83">S</div>
+                <div class="key" data-ascii="68">D</div>
+                <div class="key" data-ascii="70">F</div>
+                <div class="key" data-ascii="71">G</div>
+                <div class="key" data-ascii="72">H</div>
+                <div class="key" data-ascii="74">J</div>
+                <div class="key" data-ascii="75">K</div>
+                <div class="key" data-ascii="76">L</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="90">Z</div>
+                <div class="key" data-ascii="88">X</div>
+                <div class="key" data-ascii="67">C</div>
+                <div class="key" data-ascii="86">V</div>
+                <div class="key" data-ascii="66">B</div>
+                <div class="key" data-ascii="78">N</div>
+                <div class="key" data-ascii="77">M</div>
+                <div class="key backspace promo-backspace" data-ascii="08">
+                  <img class="backspace" src="images/delete-keypad.svg"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    
+      <footer>
+        <button id="submit-promo-code" class="filled-progress-button button">Submit</button>
+      </footer>
+      
+    </section><section
       class="viewport invalid_address_state info cash-in-color"
       data-tr-section="invalid-address"
       data-screentype="info-action-tp"
@@ -1023,6 +1111,39 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/pv-key.svg"></object>
         </section>
       </main>
+    </section>
+    <section
+      class="viewport promo_code_not_found_state info"
+      data-tr-section="invalid-promo-code"
+      data-screentype="info-action-tp"
+    >
+      <header>
+        <img src="images/coupon-salmon.svg" />
+      </header>
+    
+      <main>
+        <h3 class="js-i18n xs-margin-bottom">Promo code not found</h3>
+        <div class="text-content sm-margin-top">
+          <p class="js-i18n d2">
+            Sorry! That's not a promo code we could find.
+          </p>
+          <p class="js-i18n d2">
+            You may try a different code, or continue with your transaction.
+          </p>
+          <p class="js-i18n d2">
+            If you are sure of the code, please contact the operation for clarification.
+          </p>
+        </div>
+      </main>
+    
+      <footer>
+        <button id="promo-code-try-again" class="bordered-progress-button button js-i18n">
+          Enter a different code
+        </button>
+        <button id="promo-code-continue" class="filled-progress-button button js-i18n">
+          Continue transaction
+        </button>
+      </footer>
     </section>
     <section
       class="viewport register_phone_state"
