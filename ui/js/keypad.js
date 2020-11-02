@@ -2,7 +2,8 @@
 var TIMEOUT = 120000
 var LENGTHS = {
   phoneNumber: 15,
-  code: 10
+  code: 10,
+  usSsn: 9
 }
 
 var Keypad = function (keypadId, opts, callback) {
@@ -91,9 +92,7 @@ Keypad.prototype.backspace = function backspace () {
 
   this.result = this.result.substring(0, this.result.length - 1)
 
-  var display = this.type === 'phoneNumber'
-    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
-    : this.result
+  var display = getDisplay(this.result, this.type, this.opts.country)
 
   if (!display) {
     this.keypad.find('.phone-separator').addClass('hidden')
@@ -108,15 +107,51 @@ Keypad.prototype.backspace = function backspace () {
   if (!this.result) {
     this.keypad.find('.enter')[0].disabled = true
   }
+
+  if (this.type === 'usSsn' && !isValidSsn(this.result)) {
+    this.keypad.find('.enter')[0].disabled = true
+  }
+}
+
+function ssnFormat (ssn) {
+  if (ssn.length < 4) {
+    return ssn
+  }
+
+  if ((ssn.length > 3) && (ssn.length < 6)) {
+    return ssn.substr(0, 3) + '-' + ssn.substr(3)
+  }
+
+  if ((ssn.length > 5)) {
+    return ssn.substr(0, 3) + '-' + ssn.substr(3, 2) + '-' + ssn.substr(5);
+  }
+}
+
+function isValidSsn (ssn) {
+  return ssn && 
+    ssn.length === LENGTHS.usSsn && 
+    ssn.substr(0, 1) !== '9' &&
+    ssn.substr(0, 3) !== '000' &&
+    ssn.substr(0, 3) !== '666' &&
+    ssn.substr(3, 2) !== '00' &&
+    ssn.substr(5) !== '0000'
+}
+
+function getDisplay (result, type, country) {
+  if (!result) return result
+
+  if (type === 'phoneNumber') return new libphonenumber.AsYouType(country).input(result)
+  if (type === 'usSsn') return ssnFormat(result)
+
+  return result
 }
 
 Keypad.prototype._keyPress = function _keyPress (target) {
   if (this.result.replace('+', '').length >= LENGTHS[this.type]) return
   var numeral = target.text()
   this.result += numeral
-  var display = this.type === 'phoneNumber' && this.result
-    ? (new libphonenumber.AsYouType(this.opts.country).input(this.result))
-    : this.result
+
+  var display = getDisplay(this.result, this.type, this.opts.country)
 
   if (display) {
     this.keypad.find('.phone-separator').removeClass('hidden')
@@ -128,7 +163,11 @@ Keypad.prototype._keyPress = function _keyPress (target) {
     this.keypad.find('.backspace-plus').addClass('backspace').removeClass('plus').html('<img class="backspace" src="images/delete-keypad.svg" />')
   }
 
-  if (this.result.length > 0 && this.result !== '+') {
+  if (this.result.length > 0 && this.result !== '+' && this.type !== 'usSsn') {
+    this.keypad.find('.enter')[0].disabled = false
+  }
+
+  if (this.type === 'usSsn' && isValidSsn((this.result))) {
     this.keypad.find('.enter')[0].disabled = false
   }
 }

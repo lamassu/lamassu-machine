@@ -1064,6 +1064,9 @@ footer {
   padding-right: 3.5vw;
   margin-right: 1.2vw; }
 
+.us_ssn_permission_state .d2 {
+  max-width: 84vh; }
+
 .out_of_cash_state .mainv .header {
   margin-top: 15vh; }
 
@@ -1311,7 +1314,7 @@ footer {
 .progress-button-wrapper {
   width: 39vh; }
 
-#phone-keypad, #security-keypad {
+#phone-keypad, #security-keypad, #us-ssn-keypad {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
@@ -1327,10 +1330,10 @@ footer {
           align-items: center;
   margin-left: 4vh;
   margin-top: 3vh; }
-  #phone-keypad .keys, #security-keypad .keys {
+  #phone-keypad .keys, #security-keypad .keys, #us-ssn-keypad .keys {
     width: 42vh; }
 
-#phone-keypad .progress-button, #security-keypad .progress-button {
+#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button {
   float: right;
   margin-top: 5vh; }
 
@@ -1779,6 +1782,9 @@ footer {
 
 .id_verification_state img {
   width: 33vh; }
+
+.us_ssn_permission_state img {
+  width: 36vh; }
 
 .sms_verification_state main {
   text-align: left; }

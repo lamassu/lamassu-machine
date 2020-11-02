@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/chromium-browser --touch-events=enabled --disable-pinch --incognito --kiosk file:///opt/apps/machine/lamassu-machine/ui/start.html
+/usr/bin/chromium-browser --touch-events=enabled --kiosk --incognito --disable-pinch file:///opt/apps/machine/lamassu-machine/ui/start.html

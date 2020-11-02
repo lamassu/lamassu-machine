@@ -23,11 +23,11 @@ if [ -z $3 ]; then
 fi
 
 if [ "$PRINTER" != "None" ] && [ "$PRINTER" != "zebra" ] && [ "$PRINTER" != "nippon" ]; then
-  echo 'Install script expects "Zebra" or "Nippon" as printer parameter'
+  echo 'Install script expects "zebra" or "nippon" as printer parameter'
   exit 1
 fi
 
-if [ "$PRINTER" == "Nippon" ]; then
+if [ "$PRINTER" == "nippon" ]; then
   PRINTER='Nippon-2511D-2'
 fi
 
@@ -111,6 +111,9 @@ echo ubilinux:$USER_PASSWORD | sudo chpasswd
 
 # remove system tray
 sudo apt-get purge lxqt-panel cmst xscreensaver -y
+
+# make systemctl handling supervisor
+sudo systemctl enable supervisor
 
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub

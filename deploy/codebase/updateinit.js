@@ -8,9 +8,17 @@ const report = require('./report').report;
 const hardwareCode = process.argv[2];
 const machineCode = process.argv[3];
 
+const packagePath = '/tmp/extract/package/subpackage'
+
 const path = hardwareCode === 'upboard' ?
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}/${machineCode}` :
-  `/tmp/extract/package/subpackage/hardware/${hardwareCode}`
+  `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
+  `${packagePath}/hardware/${hardwareCode}`
+
+const supervisorPath = hardwareCode === 'upboard' ?
+  `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
+  `${packagePath}/supervisor/${hardwareCode}`
+
+const udevPath = `${packagePath}/udev/aaeon`
 
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
@@ -18,6 +26,49 @@ const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' :
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
     cb(err);
+  });
+}
+
+function updateUdev (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  async.series([ 
+    async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
+    async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
+  ], (err) => {
+    if (err) throw err; 
+    cb()
+  })
+}
+
+function updateSupervisor (cb) {
+  if (hardwareCode === 'aaeon') return cb()
+  cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
+    if (err) {
+      console.log('failure activating systemctl')
+    }
+
+    async.series([ 
+      async.apply(command, 'rm /etc/supervisor/conf.d/*'),
+      async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+      async.apply(command, `users | grep -q ubilinux && sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
+      async.apply(command, 'supervisorctl update'),
+    ], (err) => {
+      if (err) throw err; 
+      cb()
+    })
+  })
+}
+
+function updateAcpChromium (cb) {
+  if (hardwareCode !== 'aaeon') return cb()
+
+  async.series([ 
+    async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
+    async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
+  ], function(err) {
+    if (err) throw err;
+    cb()
   });
 }
 
@@ -32,6 +83,9 @@ function installDeviceConfig (cb) {
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
+    if (currentDeviceConfig.cryptomatModel) {
+      newDeviceConfig.cryptomatModel = currentDeviceConfig.cryptomatModel
+    }
     if (currentDeviceConfig.billDispenser && newDeviceConfig.billDispenser) {
       newDeviceConfig.billDispenser.model = currentDeviceConfig.billDispenser.model
       newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
@@ -68,10 +122,12 @@ function installDeviceConfig (cb) {
 }
 
 async.series([
-  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
-  async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'), async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
   async.apply(installDeviceConfig),
+  async.apply(updateSupervisor),
+  async.apply(updateUdev),
+  async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err;
