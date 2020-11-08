@@ -1,6 +1,6 @@
 ## Running nix-shell
 
-To get your dev environment setup all you need to do is to run `nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.03.tar.gz`
+To get your dev environment setup all you need to do is to run `nix-shell`
 
 ## Installing packages
 
@@ -43,7 +43,7 @@ In second terminal window:
 
 ```
 node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam \
---mockPair --devBoard '<totem-from-admin>'
+--devBoard --mockPair '<totem-from-admin>'
 ```
 
 **IMPORTANT**: Make sure to use single quotes and not double quotes, or the shell will mess up the totem.
@@ -73,7 +73,7 @@ Sometimes it might be a [locale-related issue](https://github.com/NixOS/nixpkgs/
 Try executing the `npm install` step inside a `--pure` flagged `nix-shell`
 
 ```
-nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/nixos-19.03.tar.gz
+nix-shell --pure
 [nix-shell:<lamassu-machine-dir>]$ npm install
 ```
 

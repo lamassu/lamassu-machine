@@ -70,14 +70,6 @@ msgstr "Languages"
 msgid "Redeem"
 msgstr "Redeem"
 
-#: On screen: choose_coin
-msgid "More"
-msgstr "More"
-
-#: On screen: choose_coin
-msgid "Less"
-msgstr "Less"
-
 #: On screen: choose-fiat
 msgid "How much?"
 msgstr "How much?"
@@ -254,6 +246,22 @@ msgstr "Apologies. We've reached our mandated per-user limit."
 msgid "OK"
 msgstr "OK"
 
+#: On screen: id-scan-failed
+msgid "Sorry"
+msgstr "Sorry"
+
+#: On screen: id-scan-failed
+msgid "We could not read your ID card."
+msgstr "We could not read your ID card."
+
+#: On screen: id-scan-failed
+msgid "You might want to give it another shot."
+msgstr "You might want to give it another shot."
+
+#: On screen: id-scan-failed
+msgid "Cancel"
+msgstr "Cancel"
+
 #: On screen: id-verification
 msgid "ID verification"
 msgstr "ID verification"
@@ -357,14 +365,6 @@ msgstr "Want to try again?"
 #: On screen: photo-scan-failed
 msgid "The document you've shown did not match."
 msgstr "The document you've shown did not match."
-
-#: On screen: photo-scan-failed
-msgid "You might want to give it another shot."
-msgstr "You might want to give it another shot."
-
-#: On screen: photo-scan-failed
-msgid "Cancel"
-msgstr "Cancel"
 
 #: On screen: printer-scanning-error
 msgid "QR scanning error"
@@ -586,14 +586,6 @@ msgstr "We're waiting for your deposit to confirm on the blockchain. You will so
 msgid "When that happens, please come back to this machine and press the Redeem button."
 msgstr "When that happens, please come back to this machine and press the Redeem button."
 
-#: On screen: id-scan-failed
-msgid "Sorry"
-msgstr "Sorry"
-
-#: On screen: id-scan-failed
-msgid "We could not read your ID card."
-msgstr "We could not read your ID card."
-
 #: On screen: sanctions-failure
 msgid "We are unable to process your transaction."
 msgstr "We are unable to process your transaction."
@@ -694,6 +686,30 @@ msgstr "WiFi failed to connect..."
 msgid "Please try the password again."
 msgstr "Please try the password again."
 
+#: On screen: us-ssn-permission
+msgid "US SSN required"
+msgstr "US SSN required"
+
+#: On screen: us-ssn-permission
+msgid "To proceed, we are required to ask you to type in your Social Security Number"
+msgstr "To proceed, we are required to ask you to type in your Social Security Number"
+
+#: On screen: us-ssn-permission
+msgid "Type in SSN?"
+msgstr "Type in SSN?"
+
+#: On screen: us-ssn-permission
+msgid "Yes, type in"
+msgstr "Yes, type in"
+
+#: On screen: register-us-ssn
+msgid "Social security number"
+msgstr "Social security number"
+
+#: On screen: register-us-ssn
+msgid "To proceed, please enter your social security number."
+msgstr "To proceed, please enter your social security number."
+
 #: On screen: photo-verification-failed
 msgid "Our system indicated an identification problem."
 msgstr "Our system indicated an identification problem."
@@ -759,6 +775,14 @@ msgid "Connected. Waiting for ticker."
 msgstr "Connected. Waiting for ticker."
 
 #: On screen: dynamic
+msgid "More"
+msgstr "More"
+
+#: On screen: dynamic
+msgid "Less"
+msgstr "Less"
+
+#: On screen: dynamic
 msgid "Buy<br/>%s"
 msgstr "Buy<br/>%s"
 
@@ -773,6 +797,14 @@ msgstr "Lamassu Cryptomat"
 #: On screen: dynamic
 msgid "MORE"
 msgstr "MORE"
+
+#: On screen: dynamic
+msgid "Please come back in %s weeks"
+msgstr "Please come back in %s weeks"
+
+#: On screen: dynamic
+msgid "Please come back in %s days and %s hours"
+msgstr "Please come back in %s days and %s hours"
 
 #: On screen: dynamic
 msgid "Please come back in %s hours"

@@ -64,6 +64,7 @@ var currentState
 var accepting = false
 var websocket = null
 var wifiKeyboard = null
+var usSsnKeypad = null
 var phoneKeypad = null
 var securityKeypad = null
 var previousState = null
@@ -132,7 +133,7 @@ function processData (data) {
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
-  if (data.hardLimitHours) setHardLimitHours(data.hardLimitHours)
+  if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
 
   if (data.context) {
@@ -179,6 +180,10 @@ function processData (data) {
     case 'dualIdle':
     case 'fakeDualIdle':
       setState('dual_idle')
+      break
+    case 'registerUsSsn':
+      usSsnKeypad.activate()
+      setState('register_us_ssn')
       break
     case 'registerPhone':
       phoneKeypad.activate()
@@ -256,6 +261,9 @@ function processData (data) {
     case 'facephotoPermission':
       facephotoPermission()
       break
+    case 'usSsnPermission':
+      usSsnPermission()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
@@ -266,6 +274,10 @@ function processData (data) {
 
 function facephotoPermission () {
   setScreen('facephoto_permission')
+}
+
+function usSsnPermission () {
+  setScreen('us_ssn_permission')
 }
 
 function idVerification () {
@@ -364,7 +376,7 @@ function setupCoinsButtons () {
     $('.crypto-buttons').append(`
       <div class="choose-coin-button h4" data-more="true">
         <div id="crypto-dropdown-toggle" data-more="true">
-          <span class="js-i18n">More</span>
+          <span class="js-i18n">${locale.translate('More').fetch()}</span>
           <span class="choose-coin-svg-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">
               <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>
@@ -379,7 +391,7 @@ function setupCoinsButtons () {
         data-crypto-code="${coin.cryptoCode}">${coin.display}</button>`
       $('#cryptos').append(el)
     })
-    const el = `<button class="h4 sapphire button small-action-button js-i18n" data-less="true">Less</button>`
+    const el = `<button class="h4 sapphire button small-action-button js-i18n" data-less="true">${locale.translate('Less').fetch()}</button>`
     $('#cryptos').append(el)
   }
 }
@@ -450,6 +462,11 @@ $(document).ready(function () {
   BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
+
+  usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
+    if (currentState !== 'register_us_ssn') return
+    buttonPressed('usSsn', result)
+  })
 
   phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
     if (currentState !== 'register_phone') return
@@ -544,8 +561,10 @@ $(document).ready(function () {
   setupButton('pairing-error-ok', 'pairingErrorOk')
   setupButton('cash-out-button', 'cashOut')
 
-  setupImmediateButton('scan-id-cancel', 'cancelIdScan')
-  setupImmediateButton('scan-photo-cancel', 'cancelIdScan')
+  setupImmediateButton('scan-id-cancel', 'idDataActionCancel');
+  setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel');
+  setupImmediateButton('us-ssn-cancel', 'cancelUsSsn',
+    usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
@@ -557,7 +576,7 @@ $(document).ready(function () {
   setupButton('id-code-failed-cancel', 'bye')
   setupButton('id-verification-error-ok', 'idVerificationErrorOk')
   setupButton('photo-scan-failed-retry', 'retryPhotoScan')
-  setupButton('photo-scan-failed-cancel', 'bye')
+  setupButton('photo-scan-failed-cancel', 'photoScanVerificationCancel')
   setupButton('photo-verification-failed-ok', 'cancelIdScan')
   setupButton('invalid-address-try-again', 'invalidAddressTryAgain')
   setupButton('address-reuse-start-over', 'idle')
@@ -627,6 +646,7 @@ $(document).ready(function () {
   setupButton('id-start-verification', 'permissionIdCompliance')
   setupButton('sms-start-verification', 'permissionSmsCompliance')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
+  setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
 
   setupButton('send-coins-id', 'finishBeforeSms')
   setupButton('send-coins-id-2', 'finishBeforeSms')
@@ -634,6 +654,8 @@ $(document).ready(function () {
   setupButton('send-coins-sms-2', 'finishBeforeSms')
 
   setupButton('facephoto-permission-no', 'finishBeforeSms')
+  setupButton('us-ssn-permission-no', 'finishBeforeSms')
+  setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
@@ -774,6 +796,7 @@ function setScreen (newScreen, oldScreen) {
   }
 
   var newView = $('.' + newScreen + '_state')
+  if (newView.length !== 1) console.log('FATAL: ' + newView.length + ' screens found of class ' + newScreen + '_state')
 
   $('.viewport').removeClass('viewport-active')
   newView.addClass('viewport-active')
@@ -858,8 +881,18 @@ function setOperatorInfo (operator) {
   }
 }
 
-function setHardLimitHours (hours) {
-  $('#hard-limit-hours').text(locale.translate('Please come back in %s hours').fetch(hours))
+function setHardLimit(limits) {
+  const component = $('#hard-limit-hours')
+
+  if (limits.hardLimitWeeks >= 1) {
+    return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks))
+  }
+
+  if (limits.hardLimitDays >= 1) {
+    return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours))
+  }
+
+  component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours))
 }
 
 function setCryptomatModel (model) {
@@ -876,6 +909,8 @@ function setDirection (direction) {
     $('.scan_photo_state'),
     $('.scan_id_state'),
     $('.security_code_state'),
+    $('.register_us_ssn_state'),
+    $('.us_ssn_permission_state'),
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
@@ -1261,9 +1296,9 @@ function setExchangeRate (_rates) {
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
-    var cashOutCryptoToFiat = cashOut && formatCrypto(cashOut.round(3).toNumber())
+    var cashOutCryptoToFiat = cashOut && formatFiat(cashOut.round(2).toNumber(), 2)
 
-    $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat} ${fiatCode}`)
+    $('.crypto-rate-cash-out').html(`1 ${cryptoCode} = ${cashOutCryptoToFiat}`)
   }
 
   $('.js-crypto-display-units').text(displayCode)
@@ -1379,7 +1414,7 @@ function sendOnly (reason) {
     transactionLimit: locale.translate('Transaction limit reached').fetch(),
     validatorError: locale.translate('Error in validation').fetch(),
     lowBalance: locale.translate("We're out of coins!").fetch(),
-    blockedCustomer: locale.translate('Transaction limit reached')
+    blockedCustomer: locale.translate('Transaction limit reached').fetch()
   }
 
   // If no reason provided defaults to lowBalance
