@@ -255,7 +255,7 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
-    case 'idVerification':
+    case 'permission_id':
       idVerification()
       break
     case 'facephotoPermission':
@@ -281,7 +281,7 @@ function usSsnPermission () {
 }
 
 function idVerification () {
-  setScreen('id_verification')
+  setScreen('permission_id')
 }
 
 function smsVerification (threshold) {
@@ -907,7 +907,7 @@ function setCryptomatModel (model) {
 function setDirection (direction) {
   let states = [
     $('.scan_photo_state'),
-    $('.scan_id_state'),
+    $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_us_ssn_state'),
     $('.us_ssn_permission_state'),
@@ -915,8 +915,8 @@ function setDirection (direction) {
     $('.terms_screen_state'),
     $('.verifying_photo_state'),
     $('.verifying_facephoto_state'),
-    $('.verifying_id_state'),
-    $('.id_verification_state'),
+    $('.verifying_id_data_state'),
+    $('.permission_id_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
