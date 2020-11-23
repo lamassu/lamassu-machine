@@ -786,7 +786,7 @@ footer .filled-progress-button, footer .bordered-progress-button {
 .sms_verification_state .text-content {
   max-width: 75vh; }
 
-.id_verification_state .text-content,
+.permission_id_state .text-content,
 .bad_phone_number_state .text-content,
 .printer_scanning_error_state .text-content,
 .blocked_customer_state .text-content {
@@ -1780,7 +1780,7 @@ footer {
   width: 6vh;
   margin-bottom: 23vh; }
 
-.id_verification_state img {
+.permission_id_state img {
   width: 33vh; }
 
 .us_ssn_permission_state img {
