@@ -771,7 +771,7 @@ footer .filled-progress-button, footer .bordered-progress-button {
 .security_code_state .text-content {
   max-width: 63vh; }
 
-.facephoto_permission_state .text-content {
+.permission_face_photo_state .text-content {
   max-width: 65vh; }
 
 .unconfirmed_deposit_state .text-content,
@@ -1765,18 +1765,18 @@ footer {
 .restart_state img {
   width: 70vh; }
 
-.facephoto_failed_state img {
+.scan_face_photo_failed_state img {
   width: 26vh;
   margin-left: 1vh; }
 
-.facephoto_permission_state img {
+.permission_face_photo_state img {
   width: 25vh; }
 
-.facephoto_state img {
+.scan_face_photo_state img {
   width: 3vh;
   margin-bottom: 33vh; }
 
-.facephoto_retry_state img {
+.scan_face_photo_retry_state img {
   width: 6vh;
   margin-bottom: 23vh; }
 
@@ -1807,7 +1807,7 @@ footer {
 .wrong_dispenser_currency_state img,
 .id_scan_failed_state img,
 .suspicious_address_state img,
-.id_verification_error_state img,
+.permission_id_error_state img,
 .fiat_transaction_error_state img {
   width: 28vh; }
 
