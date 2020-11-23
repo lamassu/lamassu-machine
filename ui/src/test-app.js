@@ -222,13 +222,13 @@ function setupFakes () {
   `)
 
   let states = [
-    $('.scan_photo_state'),
+    $('.scan_id_photo_state'),
     $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_phone_state'),
     $('.register_us_ssn_state'),
     $('.terms_screen_state'),
-    $('.verifying_photo_state'),
+    $('.verifying_id_photo_state'),
     $('.verifying_facephoto_state'),
     $('.verifying_id_data_state'),
     $('.sms_verification_state'),
@@ -237,7 +237,7 @@ function setupFakes () {
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
     $('.id_verification_failed_state'),
-    $('.photo_verification_failed_state'),
+    $('.id_photo_verification_failed_state'),
     $('.blocked_customer_state'),
     $('.fiat_error_state'),
     $('.fiat_transaction_error_state'),
@@ -250,7 +250,7 @@ function setupFakes () {
     $('.us_ssn_permission_state'),
     $('.facephoto_failed_state'),
     $('.hard_limit_reached_state'),
-    $('.photo_scan_failed_state'),
+    $('.id_photo_scan_failed_state'),
     $('.id_code_failed_state'),
     $('.waiting_state')
   ]
