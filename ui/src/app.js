@@ -258,7 +258,7 @@ function processData (data) {
     case 'permission_id':
       idVerification()
       break
-    case 'facephotoPermission':
+    case 'permission_face_photo':
       facephotoPermission()
       break
     case 'usSsnPermission':
@@ -273,7 +273,7 @@ function processData (data) {
 }
 
 function facephotoPermission () {
-  setScreen('facephoto_permission')
+  setScreen('permission_face_photo')
 }
 
 function usSsnPermission () {
@@ -914,25 +914,25 @@ function setDirection (direction) {
     $('.register_phone_state'),
     $('.terms_screen_state'),
     $('.verifying_id_photo_state'),
-    $('.verifying_facephoto_state'),
+    $('.verifying_face_photo_state'),
     $('.verifying_id_data_state'),
     $('.permission_id_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
-    $('.id_verification_failed_state'),
+    $('.permission_id_failed_state'),
     $('.id_photo_verification_failed_state'),
     $('.blocked_customer_state'),
     $('.fiat_error_state'),
     $('.fiat_transaction_error_state'),
     $('.id_scan_failed_state'),
     $('.sanctions_failure_state'),
-    $('.id_verification_error_state'),
-    $('.facephoto_state'),
-    $('.facephoto_retry_state'),
-    $('.facephoto_permission_state'),
-    $('.facephoto_failed_state'),
+    $('.permission_id_error_state'),
+    $('.scan_face_photo_state'),
+    $('.scan_face_photo_retry_state'),
+    $('.permission_face_photo_state'),
+    $('.scan_face_photo_failed_state'),
     $('.hard_limit_reached_state'),
     $('.id_photo_scan_failed_state'),
     $('.id_code_failed_state'),
