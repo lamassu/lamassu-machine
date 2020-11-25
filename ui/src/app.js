@@ -921,7 +921,7 @@ function setDirection (direction) {
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
-    $('.permission_id_failed_state'),
+    $('.failed_verifying_id_state'),
     $('.id_photo_verification_failed_state'),
     $('.blocked_customer_state'),
     $('.fiat_error_state'),
@@ -930,11 +930,11 @@ function setDirection (direction) {
     $('.sanctions_failure_state'),
     $('.permission_id_error_state'),
     $('.scan_face_photo_state'),
-    $('.scan_face_photo_retry_state'),
+    $('.retry_scan_face_photo_state'),
     $('.permission_face_photo_state'),
-    $('.scan_face_photo_failed_state'),
+    $('.failed_scan_face_photo_state'),
     $('.hard_limit_reached_state'),
-    $('.id_photo_scan_failed_state'),
+    $('.id_failed_scan_id_photo_state'),
     $('.id_code_failed_state'),
     $('.waiting_state')
   ]
