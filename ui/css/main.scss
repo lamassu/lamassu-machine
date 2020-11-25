@@ -1002,7 +1002,7 @@ footer {
   }
 }
 
-.scan_face_photo_failed_state {
+.failed_scan_face_photo_state {
   img {
     width: 26vh;
     margin-left: 1vh;
@@ -1022,7 +1022,7 @@ footer {
   }
 }
 
-.scan_face_photo_retry_state {
+.retry_scan_face_photo_state {
   img {
     width: 6vh;
     margin-bottom: 23vh;
@@ -1067,7 +1067,7 @@ footer {
 }
 
 .id_code_failed_state,
-.id_photo_scan_failed_state,
+.id_failed_scan_id_photo_state,
 .wrong_dispenser_currency_state,
 .id_scan_failed_state,
 .suspicious_address_state,
