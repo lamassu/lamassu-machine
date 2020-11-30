@@ -1066,12 +1066,12 @@ footer {
   }
 }
 
-.id_code_failed_state,
-.id_failed_scan_id_photo_state,
+.retry_permission_id_state,
+.failed_scan_id_photo_state,
 .wrong_dispenser_currency_state,
-.id_scan_failed_state,
+.failed_scan_id_data_state,
 .suspicious_address_state,
-.permission_id_error_state,
+.error_permission_id_state,
 .fiat_transaction_error_state {
   img {
     width: 28vh;
