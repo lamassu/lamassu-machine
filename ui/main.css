@@ -1802,12 +1802,12 @@ footer {
 .trouble_state img {
   width: 33vh; }
 
-.id_code_failed_state img,
-.id_failed_scan_id_photo_state img,
+.retry_permission_id_state img,
+.failed_scan_id_photo_state img,
 .wrong_dispenser_currency_state img,
-.id_scan_failed_state img,
+.failed_scan_id_data_state img,
 .suspicious_address_state img,
-.permission_id_error_state img,
+.error_permission_id_state img,
 .fiat_transaction_error_state img {
   width: 28vh; }
 
