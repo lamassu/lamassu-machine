@@ -678,6 +678,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-retry', 'retryFacephoto')
   setupButton('id-start-verification', 'permissionIdCompliance')
   setupButton('sms-start-verification', 'permissionSmsCompliance')
+  setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
 
@@ -941,6 +942,7 @@ function setCryptomatModel (model) {
 function setDirection (direction) {
   let states = [
     $('.scan_id_photo_state'),
+    $('.scan_photo_sintra_state'),
     $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_us_ssn_state'),
