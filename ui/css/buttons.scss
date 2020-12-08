@@ -17,6 +17,13 @@ button {
   border-radius: 4vh;
 }
 
+@mixin pill-button-bg {
+  @include button;
+  padding: 0 2vw;
+  height: 8vh;
+  border-radius: 2vh;
+}
+
 @mixin round-button {
   @include button;
   width: 9vh;
@@ -117,6 +124,18 @@ button {
 .filled-progress-button {
   @include Tagline-2;
   @include pill-button;
+  @include cash-background-colors;
+  color: $white;
+  min-width: 4 * $spacer;
+  &:active, .active {
+    background-color: $white;
+    @include cash-colors;
+  }
+}
+
+.filled-progress-button-bg {
+  @include Tagline-2;
+  @include pill-button-bg;
   @include cash-background-colors;
   color: $white;
   min-width: 4 * $spacer;

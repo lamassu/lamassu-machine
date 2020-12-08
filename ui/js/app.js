@@ -159,15 +159,15 @@ function processData(data) {
       break;
     case 'wifiConnected':
       t('wifi-connecting', locale.translate('Connected. Waiting for ticker.').fetch());
-      setState('wifi_connecting'); // in case we didn't go through wifi-connecting
-      break;
+      setState('wifi_connecting' // in case we didn't go through wifi-connecting
+      );break;
     case 'pairing':
       setState('pairing');
       break;
     case 'pairingError':
-      $('.js-pairing-error').text(data.err);
+      $('.js-pairing-error').text(data.err
       // Give it some time to update text in background
-      setTimeout(function () {
+      );setTimeout(function () {
         setState('pairing_error');
       }, 500);
       break;
@@ -302,10 +302,10 @@ function chooseCoin(coins, twoWayMode) {
   }
 
   isTwoWay = twoWayMode;
-  setChooseCoinColors();
+  setChooseCoinColors
   // setupAnimation(twoWayMode, aspectRatio800)
 
-  var defaultCoin = coins[0];
+  ();var defaultCoin = coins[0];
 
   currentCryptoCode = defaultCoin.cryptoCode;
   currentCoin = defaultCoin;
@@ -440,10 +440,10 @@ $(document).ready(function () {
   window.addEventListener('resize', function () {
     calculateAspectRatio();
     setChooseCoinColors();
-  });
+  }
 
   // Matt's anti-drag hack
-  window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
+  );window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
     return false;
   };
 
@@ -545,9 +545,9 @@ $(document).ready(function () {
   setupButton('printer-print-again2', 'printAgain');
   setupButton('printer-scan-again', 'printerScanAgain');
 
-  setupButton('initialize', 'initialize');
+  setupButton('initialize', 'initialize'
   // setupButton('test-mode', 'testMode')
-  setupButton('pairing-scan', 'pairingScan');
+  );setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingErrorOk');
   setupButton('cash-out-button', 'cashOut');
@@ -637,6 +637,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-retry', 'retryFacephoto');
   setupButton('id-start-verification', 'permissionIdCompliance');
   setupButton('sms-start-verification', 'permissionSmsCompliance');
+  setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto');
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance');
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance');
 
@@ -730,10 +731,10 @@ function touchEvent(element, callback) {
   function handler(e) {
     var target = targetButton(e.target);
 
-    target.classList.add('active');
+    target.classList.add('active'
 
     // Wait for transition to finish
-    setTimeout(function () {
+    );setTimeout(function () {
       target.classList.remove('active');
     }, 300);
 
@@ -897,7 +898,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_photo_sintra_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
@@ -1046,10 +1047,10 @@ function setLocale(data) {
   var isHebrew = jsLocaleCode.indexOf('he-') === 0;
   isRTL = isArabic || isHebrew;
 
-  setChooseCoinColors();
+  setChooseCoinColors
   // setupAnimation(isTwoWay, aspectRatio800)
 
-  if (isRTL) {
+  ();if (isRTL) {
     $('body').addClass('i18n-rtl');
   } else {
     $('body').removeClass('i18n-rtl');
@@ -1261,9 +1262,9 @@ function setExchangeRate(_rates) {
 }
 
 function qrize(text, target, color, lightning) {
-  var image = document.getElementById('bolt-img');
+  var image = document.getElementById('bolt-img'
   // Hack for surf browser
-  var size = document.body.clientHeight * 0.36;
+  );var size = document.body.clientHeight * 0.36;
 
   var opts = {
     crisp: true,
@@ -1423,10 +1424,10 @@ function translatePage() {
     var el = $(this);
     var base = el.data('baseTranslation');
     el.attr('placeholder', locale.translate(base).fetch());
-  });
+  }
 
   // Adjust send coins button
-  var length = $('#send-coins span').text().length;
+  );var length = $('#send-coins span').text().length;
   if (length > 17) $('body').addClass('i18n-long-send-coins');else $('body').removeClass('i18n-long-send-coins');
 }
 
