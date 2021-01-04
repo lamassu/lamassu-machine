@@ -2,7 +2,7 @@ const minimist = require('minimist')
 const SerialPort = require('serialport')
 
 const BN = require('../lib/bn')
-const coinUtils = require('../lib/coins/utils')
+const coinUtils = require('lamassu-coins').utils
 const printerLoader = require('../lib/printer/loader')
 
 const deviceConfig = require('../device_config.json')
