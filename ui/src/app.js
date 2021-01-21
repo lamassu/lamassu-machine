@@ -942,7 +942,7 @@ function setCryptomatModel (model) {
 function setDirection (direction) {
   let states = [
     $('.scan_id_photo_state'),
-    $('.scan_photo_sintra_state'),
+    $('.scan_manual_id_photo_state'),
     $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_us_ssn_state'),
