@@ -1880,6 +1880,18 @@ footer {
   box-sizing: border-box;
   width: 100%; }
   .promo-keyboard .promo-backspace {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center; }
+    .promo-keyboard .promo-backspace img {
+      width: 3vh; }
+  .promo-keyboard .promo-backspace-key {
     width: 18vh !important; }
   .promo-keyboard .row {
     -webkit-box-pack: center;
@@ -1938,7 +1950,7 @@ footer {
 .choose_fiat_state #choose-fiat-promo-button {
   margin-top: 8vh; }
 
-.choose_fiat_state #choose-fiat-coupon-added {
+.choose_fiat_state #choose-fiat-code-added {
   margin-top: 8vh; }
 
 #wifi-keyboard {
