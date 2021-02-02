@@ -1,4 +1,7 @@
 /* globals $ */
+
+const KEYBOARD_TIMEOUT = 30000
+
 var Keyboard = function (keyboardId) {
   this.keyboardId = keyboardId
   this.keyboard = $('#' + keyboardId)
@@ -6,12 +9,16 @@ var Keyboard = function (keyboardId) {
   this.keyCase = 'lc'
   this.backspaceTimeout = null
   this.active = true
+  this.timeoutRef = null
 }
 
-Keyboard.prototype.init = function init () {
+Keyboard.prototype.init = function init (callback) {
+  this.callback = callback ? callback : null
+
   var keyboard = document.getElementById(this.keyboardId)
   var self = this
   keyboard.addEventListener('mousedown', function (e) {
+    self._restartTimeout()
     if (!self.active) return
 
     var target = $(e.target)
@@ -31,14 +38,19 @@ Keyboard.prototype.init = function init () {
       var target = $(e.target)
       self._backspaceUp(target)
     })
-  } else if (this.keyboardId === 'promo-keyboard') {
-    this.keyboard.find('.backspace').get(0).addEventListener('mouseup', function (e) {
-      var target = $(e.target)
-      self._backspaceUp(target)
-    })
   }
 
   return this
+}
+
+Keyboard.prototype._restartTimeout = function _restartTimeout () {
+  var self = this
+
+  clearTimeout(this.timeoutRef)
+  this.timeoutRef = setTimeout(function () {
+    self.reset()
+    self.callback && self.callback()
+  }, KEYBOARD_TIMEOUT)
 }
 
 Keyboard.prototype.reset = function reset () {
@@ -47,10 +59,13 @@ Keyboard.prototype.reset = function reset () {
 
 Keyboard.prototype.activate = function activate () {
   this.active = true
+  this.reset()
+  this._restartTimeout()
 }
 
 Keyboard.prototype.deactivate = function deactivate () {
   this.active = false
+  clearTimeout(this.timeoutRef)
 }
 
 Keyboard.prototype._toggleShift = function _toggleShift () {
@@ -96,14 +111,33 @@ Keyboard.prototype._keyPress = function _keyPress (target) {
 }
 
 Keyboard.prototype._backspace = function _backspace (target) {
-  target.addClass('active')
-  var inputBox = this.inputBox
-  window.clearTimeout(this.backspaceTimeout)
-  this.backspaceTimeout = window.setTimeout(function () {
-    inputBox.data('content', '')
-    inputBox.val('')
+  if (this.keyboardId === 'promo-keyboard') {
+    var inputBox = this.inputBox
+    var content = inputBox.data('content')
+    var result = content.substring(0, content.length - 1)
+    inputBox.data('content', result)
+    inputBox.val(result)
     inputBox.caretToEnd()
-  }, 1000)
+
+  } else {
+    target.addClass('active')
+    var inputBox = this.inputBox
+    window.clearTimeout(this.backspaceTimeout)
+    this.backspaceTimeout = window.setTimeout(function () {
+      inputBox.data('content', '')
+      inputBox.val('')
+      inputBox.caretToEnd()
+    }, 1000)
+  }
+  // target.addClass('active')
+  // var inputBox = this.inputBox
+  // window.clearTimeout(this.backspaceTimeout)
+  // var content = inputBox.data('content').slice(0, -1)
+  // this.backspaceTimeout = window.setTimeout(function () {
+  //   inputBox.data('content', content)
+  //   inputBox.val(content)
+  //   inputBox.caretToEnd()
+  // }, 100)
 }
 
 Keyboard.prototype._backspaceUp = function _backspaceUp (target) {

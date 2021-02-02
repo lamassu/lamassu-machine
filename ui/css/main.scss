@@ -1130,6 +1130,14 @@ footer {
   box-sizing: border-box;
   width: 100%;
   .promo-backspace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 3vh;
+    }
+  }
+  .promo-backspace-key {
     width: 18vh !important;
   }
   .row {
@@ -1200,7 +1208,7 @@ footer {
   margin-top: 8vh;
 }
 
-.choose_fiat_state #choose-fiat-coupon-added {
+.choose_fiat_state #choose-fiat-code-added {
   margin-top: 8vh;
 }
 

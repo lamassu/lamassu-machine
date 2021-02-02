@@ -139,7 +139,7 @@ function processData(data) {
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo);
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
-  if (data.areThereAvailableCoupons !== undefined) setAvailableCoupons(data.areThereAvailableCoupons);
+  if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
 
   if (data.context) {
@@ -274,6 +274,7 @@ function processData(data) {
       blockedCustomer();
       break;
     case 'insertPromoCode':
+      promoKeyboard.activate();
       setState('insert_promo_code');
       break;
     case 'invalidPromoCode':
@@ -462,7 +463,10 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init();
 
-  promoKeyboard = new Keyboard('promo-keyboard').init();
+  promoKeyboard = new Keyboard('promo-keyboard').init(function () {
+    if (currentState !== 'insert_promo_code') return;
+    buttonPressed('cancelPromoCode');
+  });
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     if (currentState !== 'register_us_ssn') return;
@@ -563,11 +567,13 @@ $(document).ready(function () {
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel');
   touchImmediateEvent(promoCodeCancelButton, function () {
+    promoKeyboard.deactivate.bind(promoKeyboard);
     buttonPressed('cancelPromoCode');
   });
 
   var submitCodeButton = document.getElementById('submit-promo-code');
   touchEvent(submitCodeButton, function () {
+    promoKeyboard.deactivate.bind(promoKeyboard);
     var code = $('.promo-code-input').data('content');
     buttonPressed('submitPromoCode', { input: code });
   });
@@ -1699,10 +1705,10 @@ function shouldEnableTouch() {
   return chromiumPlus73 || chromePlus73;
 }
 
-function setAvailableCoupons(areThereAvailableCoupons) {
-  if (areThereAvailableCoupons) {
-    $('#insert-first-bill-coupon-added').hide();
-    $('#choose-fiat-coupon-added').hide();
+function setAvailablePromoCodes(areThereAvailablePromoCodes) {
+  if (areThereAvailablePromoCodes) {
+    $('#insert-first-bill-code-added').hide();
+    $('#choose-fiat-code-added').hide();
     $('#insert-first-bill-promo-button').show();
     $('#choose-fiat-promo-button').show();
   } else {
@@ -1715,15 +1721,15 @@ function setCurrentDiscount(currentDiscount) {
   if (currentDiscount > 0) {
     $('#insert-first-bill-promo-button').hide();
     $('#choose-fiat-promo-button').hide();
-    $('#insert-first-bill-coupon-added').html('\u2714 Coupon added (' + currentDiscount + '% discount)');
-    $('#choose-fiat-coupon-added').html('\u2714 Coupon added (' + currentDiscount + '% discount)');
-    $('#insert-first-bill-coupon-added').show();
-    $('#choose-fiat-coupon-added').show();
+    $('#insert-first-bill-code-added').html('\u2714 Promo code added (' + currentDiscount + '% discount)');
+    $('#choose-fiat-code-added').html('\u2714 Promo code added (' + currentDiscount + '% discount)');
+    $('#insert-first-bill-code-added').show();
+    $('#choose-fiat-code-added').show();
   } else {
     $('#insert-first-bill-promo-button').show();
     $('#choose-fiat-promo-button').show();
-    $('#insert-first-bill-coupon-added').hide();
-    $('#choose-fiat-coupon-added').hide();
+    $('#insert-first-bill-code-added').hide();
+    $('#choose-fiat-code-added').hide();
   }
 }
 
