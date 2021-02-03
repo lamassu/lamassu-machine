@@ -406,6 +406,26 @@ msgstr "To validate, please present the front of your paper wallet to the scan w
 msgid "IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!"
 msgstr "IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!"
 
+#: On screen: invalid-promo-code
+msgid "Promo code not found"
+msgstr "Promo code not found"
+
+#: On screen: invalid-promo-code
+msgid "Sorry! That's not a promo code we could find."
+msgstr "Sorry! That's not a promo code we could find."
+
+#: On screen: invalid-promo-code
+msgid "You may try a different code, or continue with your transaction."
+msgstr "You may try a different code, or continue with your transaction."
+
+#: On screen: invalid-promo-code
+msgid "If you are sure of the code, please contact the operator for clarification."
+msgstr "If you are sure of the code, please contact the operator for clarification."
+
+#: On screen: invalid-promo-code
+msgid "Enter a different code"
+msgstr "Enter a different code"
+
 #: On screen: register-phone
 msgid "Phone Number"
 msgstr "Phone Number"
@@ -442,9 +462,17 @@ msgstr "In order to proceed, we are required to verify your identity."
 msgid "Please press the back of your driver's license against the scan window."
 msgstr "Please press the back of your driver's license against the scan window."
 
+#: On screen: scan-photo-manual
+msgid "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
+msgstr "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
+
+#: On screen: scan-photo-manual
+msgid "Ready to scan"
+msgstr "Ready to scan"
+
 #: On screen: scan-photo
-msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
-msgstr "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgid "Please press the front of your state ID card against the scan window."
+msgstr "Please press the front of your state ID card against the scan window."
 
 #: On screen: security-code
 msgid "Security Code"
@@ -647,8 +675,8 @@ msgid "We see your transaction but we're still waiting for confirmation. This ta
 msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
-msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
-msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+msgid "Please come back for your cash and press Redeem when you get our text message."
+msgstr "Please come back for your cash and press Redeem when you get our text message."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
