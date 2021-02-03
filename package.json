@@ -82,12 +82,14 @@
     "build:js-test": "babel ui/src/test-app.js -s -o ui/js/test-app.js",
     "build:sass": "node-sass ui/css/main.scss ui/css/build/main.css",
     "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d ui/",
+    "build:i18n": "node i18n/parse.js",
     "watch:sass": "ls -d -1 $PWD/ui/css/*.scss| entr npm run build:sass",
     "watch:autoprefix": "ls -d -1 $PWD/ui/css/build/main.css| entr npm run build:autoprefix",
     "watch:js": "ls -d -1 $PWD/ui/src/app.js | entr npm run build:js",
     "watch:js-test": "ls -d -1 $PWD/ui/src/test-app.js | entr npm run build:js-test",
     "watch:html": "ls -d -1 $PWD/ui/html/*.html | entr npm run build:html",
-    "watch": "npm run watch:js & npm run watch:js-test & npm run watch:html & npm run watch:sass & npm run watch:autoprefix"
+    "watch:i18n": "ls -d -1 $PWD/i18n/parse.js | entr npm run build:i18n",
+    "watch": "npm run watch:js & npm run watch:js-test & npm run watch:html & npm run watch:sass & npm run watch:autoprefix & npm run watch:i18n"
   },
   "gypfile": true,
   "standard": {
