@@ -26,38 +26,44 @@ var localeCode = null;
 var jsLocaleCode = null; // Sometimes slightly different than localeCode
 var _primaryLocales = [];
 var lastRates = null;
-var coins = {
-  BTC: {
-    unitScale: 8,
-    displayScale: 5,
-    displayCode: 'mBTC'
-  },
-  ETH: {
-    unitScale: 18,
-    displayScale: 15,
-    displayCode: 'mETH'
-  },
-  ZEC: {
-    unitScale: 8,
-    displayScale: 5,
-    displayCode: 'mZEC'
-  },
-  LTC: {
-    unitScale: 8,
-    displayScale: 5,
-    displayCode: 'mLTC'
-  },
-  DASH: {
-    unitScale: 8,
-    displayScale: 5,
-    displayCode: 'mDASH'
-  },
-  BCH: {
-    unitScale: 8,
-    displayScale: 5,
-    displayCode: 'mBCH'
-  }
-};
+// var coins = {
+//   BTC: {
+//     unitScale: 8,
+//     displayScale: 5,
+//     displayCode: 'mBTC'
+//   },
+//   ETH: {
+//     unitScale: 18,
+//     displayScale: 15,
+//     displayCode: 'mETH'
+//   },
+//   ZEC: {
+//     unitScale: 8,
+//     displayScale: 5,
+//     displayCode: 'mZEC'
+//   },
+//   LTC: {
+//     unitScale: 8,
+//     displayScale: 5,
+//     displayCode: 'mLTC'
+//   },
+//   DASH: {
+//     unitScale: 8,
+//     displayScale: 5,
+//     displayCode: 'mDASH'
+//   },
+//   BCH: {
+//     unitScale: 8,
+//     displayScale: 5,
+//     displayCode: 'mBCH'
+//   },
+//   YEENUS: {
+//     unitScale: 8,
+//     displayScale: 8,
+//     displayCode: 'mYEENUS'
+//   }
+// }
+var coins;
 
 var currentState;
 
@@ -141,6 +147,7 @@ function processData(data) {
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
+  if (data.supportedCoins) setCoins(data.supportedCoins);
 
   if (data.context) {
     $('.js-context').hide();
@@ -403,6 +410,18 @@ function setCryptoSell(coin) {
   var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
 
   cashOut.html(sellStr);
+}
+
+function setCoins(supportedCoins) {
+  coins = supportedCoins;
+}
+
+function getCryptoCurrency(cryptoCode) {
+  var cryptoCurrency = coins.find(function (c) {
+    return c.cryptoCode === cryptoCode;
+  });
+  if (!cryptoCurrency) throw new Error('Unsupported crypto: ' + cryptoCode);
+  return cryptoCurrency;
 }
 
 function switchCoin(coin) {
@@ -1196,7 +1215,7 @@ function setFixedFee(_fee) {
 }
 
 function setCredit(fiat, crypto, lastBill, cryptoCode) {
-  var coin = coins[cryptoCode];
+  var coin = getCryptoCurrency(cryptoCode);
 
   var scale = new BigNumber(10).pow(coin.displayScale);
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
@@ -1283,7 +1302,7 @@ function setExchangeRate(_rates) {
   var cryptoCode = _rates.cryptoCode;
   var rates = _rates.rates;
 
-  var coin = coins[cryptoCode];
+  var coin = getCryptoCurrency(cryptoCode);
   var displayCode = coin.displayCode;
 
   if (rates.cashIn) {
@@ -1508,7 +1527,7 @@ function manageFiatButtons(activeDenominations) {
 }
 
 function displayCrypto(cryptoAtoms, cryptoCode) {
-  var coin = coins[cryptoCode];
+  var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(3).toNumber();
   var cryptoDisplay = formatCrypto(cryptoAmount);
@@ -1524,7 +1543,7 @@ function fiatCredit(data) {
   var tx = data.tx;
   var cryptoCode = tx.cryptoCode;
   var activeDenominations = data.activeDenominations;
-  var coin = coins[cryptoCode];
+  var coin = getCryptoCurrency(cryptoCode);
   var fiat = BN(tx.fiat);
 
   var fiatDisplay = BN(tx.fiat).toNumber().toLocaleString(jsLocaleCode, {
