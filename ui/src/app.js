@@ -81,6 +81,7 @@ function buttonPressed (button, data) {
 function processData (data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
+  if (data.supportedCoins) setCoins(data.supportedCoins)
   if (!locale) return
   if (data.fiatCode) setFiatCode(data.fiatCode)
   if (data.rates) setExchangeRate(data.rates)
@@ -109,7 +110,6 @@ function processData (data) {
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
-  if (data.supportedCoins) setCoins(data.supportedCoins)
 
   if (data.context) {
     $('.js-context').hide()
