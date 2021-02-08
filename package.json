@@ -76,7 +76,7 @@
   },
   "scripts": {
     "test": "ava test",
-    "build": "npm run build:html && npm run build:js-test && npm run build:js && npm run build:sass && npm run build:autoprefix",
+    "build": "npm run build:html && npm run build:js-test && npm run build:js && npm run build:sass && npm run build:autoprefix && npm run build:i18n",
     "build:html": "node ./ui/scripts/inline-html.js",
     "build:js": "babel ui/src/app.js -s -o ui/js/app.js",
     "build:js-test": "babel ui/src/test-app.js -s -o ui/js/test-app.js",
