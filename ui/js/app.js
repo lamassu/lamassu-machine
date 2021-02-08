@@ -1718,13 +1718,12 @@ function setAvailablePromoCodes(areThereAvailablePromoCodes) {
 }
 
 function setCurrentDiscount(currentDiscount) {
-  // $('#insert-first-bill-code-added').html(locale.translate('✔ Promo code added (%s% discount)').fetch(currentDiscount))
-  // $('#choose-fiat-code-added').html(locale.translate('✔ Promo code added (%s% discount)').fetch(currentDiscount))
   if (currentDiscount > 0) {
+    var successMessage = '✔ ' + locale.translate('Promo code added (%s discount)').fetch(currentDiscount + '%');
     $('#insert-first-bill-promo-button').hide();
     $('#choose-fiat-promo-button').hide();
-    $('#insert-first-bill-code-added').html('\u2714 Promo code added (' + currentDiscount + '% discount)');
-    $('#choose-fiat-code-added').html('\u2714 Promo code added (' + currentDiscount + '% discount)');
+    $('#insert-first-bill-code-added').html(successMessage);
+    $('#choose-fiat-code-added').html(successMessage);
     $('#insert-first-bill-code-added').show();
     $('#choose-fiat-code-added').show();
   } else {
