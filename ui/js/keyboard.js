@@ -129,15 +129,6 @@ Keyboard.prototype._backspace = function _backspace (target) {
       inputBox.caretToEnd()
     }, 1000)
   }
-  // target.addClass('active')
-  // var inputBox = this.inputBox
-  // window.clearTimeout(this.backspaceTimeout)
-  // var content = inputBox.data('content').slice(0, -1)
-  // this.backspaceTimeout = window.setTimeout(function () {
-  //   inputBox.data('content', content)
-  //   inputBox.val(content)
-  //   inputBox.caretToEnd()
-  // }, 100)
 }
 
 Keyboard.prototype._backspaceUp = function _backspaceUp (target) {
