@@ -75,6 +75,10 @@ msgid "How much?"
 msgstr "How much?"
 
 #: On screen: choose-fiat
+msgid "Have a promo code?"
+msgstr "Have a promo code?"
+
+#: On screen: choose-fiat
 msgid "Cash Out"
 msgstr "Cash Out"
 
@@ -313,6 +317,10 @@ msgstr "OR"
 #: On screen: insert-more-bills
 msgid "Finished?"
 msgstr "Finished?"
+
+#: On screen: insert-promo-code
+msgid "Type in your promo code"
+msgstr "Type in your promo code"
 
 #: On screen: invalid-address
 msgid "Invalid address"
@@ -921,6 +929,10 @@ msgstr "Transaction limit reached, please cash out"
 #: On screen: dynamic
 msgid "You'll be sending %s %s"
 msgstr "You'll be sending %s %s"
+
+#: On screen: dynamic
+msgid "✔ Promo code added (%s% discount)"
+msgstr "✔ Promo code added (%s% discount)"
 
 #: On screen: coins
 msgid "Bitcoin"
