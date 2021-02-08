@@ -1718,6 +1718,8 @@ function setAvailablePromoCodes(areThereAvailablePromoCodes) {
 }
 
 function setCurrentDiscount(currentDiscount) {
+  // $('#insert-first-bill-code-added').html(locale.translate('✔ Promo code added (%s% discount)').fetch(currentDiscount))
+  // $('#choose-fiat-code-added').html(locale.translate('✔ Promo code added (%s% discount)').fetch(currentDiscount))
   if (currentDiscount > 0) {
     $('#insert-first-bill-promo-button').hide();
     $('#choose-fiat-promo-button').hide();
