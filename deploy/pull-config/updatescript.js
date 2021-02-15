@@ -9,6 +9,7 @@ const report = require('./report').report;
 const hardwareCode = process.argv[2];
 
 const clientFolder = hardwareCode === 'aaeon' ? '/var/lib/lamassu-machine' : '/opt/lamassu-machine/data'
+const lmFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine/lamassu-machine' : '/opt/lamassu-machine'
 const lamassuCertFolder = hardwareCode === 'aaeon' ? '/var/lib/lamassu-machine' : '/opt/certs'
 
 const key = fs.readFileSync(`${clientFolder}/client.key`);
@@ -17,7 +18,7 @@ const ca = fs.readFileSync(`${lamassuCertFolder}/lamassu.pem`);
 
 const TIMEOUT = 600000;
 
-const deviceConfig = `${clientFolder}/device_config.json`
+const deviceConfig = `${lmFolder}/device_config.json`
 const udevRules = hardwareCode === 'aaeon' ? '/etc/udev/rules.d/99-douro.rules' : ('gaia' ? '/etc/udev/rules.d/99-gaia.rules' : '/etc/udev/rules.d/udevssu.rules')
 
 function command(cmd, cb) {
