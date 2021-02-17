@@ -242,6 +242,10 @@
               <span class="js-currency h3"></span>
             </div>
             <div class="d1 digital js-18n" id="js-i18n-choose-digital-amount"></div>
+            <button id="choose-fiat-promo-button" class="js-i18n bordered-progress-button button d2">
+              Have a promo code?
+            </button>
+            <p id="choose-fiat-code-added" class="js-i18n d2" style="display:none">Promo code added (5 discount)</p>
           </section>
           <div class="d2 limit white"></div>
         </section>
@@ -476,7 +480,7 @@
       </main>
     </section>
     <section
-      class="viewport facephoto_state no-action-info cash-in-color"
+      class="viewport scan_face_photo_state no-action-info cash-in-color"
       data-tr-section="facephoto"
       data-screentype="info-no-action-tp"
     >
@@ -492,7 +496,7 @@
     </section>
     
     <section
-      class="viewport facephoto_permission_state info"
+      class="viewport permission_face_photo_state info"
       data-tr-section="facephoto-permission"
       data-screentype="info-action-tp"
     >
@@ -515,7 +519,7 @@
     </section>
     
     <section
-      class="viewport facephoto_failed_state info"
+      class="viewport failed_scan_face_photo_state info"
       data-tr-section="facephoto-failed-number"
       data-screentype="info-action-tp"
     >
@@ -548,7 +552,7 @@
     </section>
     
     <section
-      class="viewport facephoto_retry_state no-action-info cash-in-color"
+      class="viewport retry_scan_face_photo_state no-action-info cash-in-color"
       data-tr-section="facephoto_retry"
       data-screentype="info-no-action-tp"
     >
@@ -642,7 +646,7 @@
       </main>
     </section>
     <section
-      class="viewport id_scan_failed_state info"
+      class="viewport failed_scan_id_data_state info"
       data-tr-section="id-scan-failed"
       data-screentype="info-action-tp"
     >
@@ -665,7 +669,7 @@
       </footer>
     </section>
     <section
-      class="viewport id_verification_state info"
+      class="viewport permission_id_state info"
       data-tr-section="id-verification"
       data-screentype="info-action-tp"
     >
@@ -726,6 +730,13 @@
           <div class="insert-bill-wrapper"><img src="images/insert-bill.svg" /></div>
         </section>
       </main>
+    
+      <footer>
+        <button id="insert-first-bill-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
+          Have a promo code?
+        </button>
+        <p id="insert-first-bill-code-added" class="js-i18n d2" style="display:none">Promo code added (5 discount)</p>
+      </footer>
     </section>
     <section
       class="viewport insert_more_bills_state cash-in-color"
@@ -774,6 +785,83 @@
       </footer>
     </section>
     <section
+      class="viewport insert_promo_code_state"
+      data-tr-section="insert-promo-code"
+      id="promo-code"
+      data-screentype="promo-tp">
+    
+      <header class="promo-code-header">
+        <div id="promo-code-cancel" class="cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main>
+        <div class="promo-code-title-wrapper">
+          <p id="promo-code-title" class="js-i18n d1 promo-code-title">Type in your promo code</p>
+          <input class="promo-code-input passphrase h3" type="text" readonly value="">
+        </div>
+    
+        <section id="promo-keyboard" class="promo-keyboard keys tl2">
+          <div class="keyboard-layout i18n-latin" data-case="uc">
+            <div class="keyboard keyboard-uc">
+              <div class="row">
+                <div class="key" data-ascii="49">1</div>
+                <div class="key" data-ascii="50">2</div>
+                <div class="key" data-ascii="51">3</div>
+                <div class="key" data-ascii="52">4</div>
+                <div class="key" data-ascii="53">5</div>
+                <div class="key" data-ascii="54">6</div>
+                <div class="key" data-ascii="55">7</div>
+                <div class="key" data-ascii="56">8</div>
+                <div class="key" data-ascii="57">9</div>
+                <div class="key" data-ascii="48">0</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="81">Q</div>
+                <div class="key" data-ascii="87">W</div>
+                <div class="key" data-ascii="69">E</div>
+                <div class="key" data-ascii="82">R</div>
+                <div class="key" data-ascii="84">T</div>
+                <div class="key" data-ascii="89">Y</div>
+                <div class="key" data-ascii="85">U</div>
+                <div class="key" data-ascii="73">I</div>
+                <div class="key" data-ascii="79">O</div>
+                <div class="key" data-ascii="80">P</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="65">A</div>
+                <div class="key" data-ascii="83">S</div>
+                <div class="key" data-ascii="68">D</div>
+                <div class="key" data-ascii="70">F</div>
+                <div class="key" data-ascii="71">G</div>
+                <div class="key" data-ascii="72">H</div>
+                <div class="key" data-ascii="74">J</div>
+                <div class="key" data-ascii="75">K</div>
+                <div class="key" data-ascii="76">L</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="90">Z</div>
+                <div class="key" data-ascii="88">X</div>
+                <div class="key" data-ascii="67">C</div>
+                <div class="key" data-ascii="86">V</div>
+                <div class="key" data-ascii="66">B</div>
+                <div class="key" data-ascii="78">N</div>
+                <div class="key" data-ascii="77">M</div>
+                <div class="key backspace promo-backspace-key" data-ascii="08">
+                  <img class="promo-backspace" src="images/delete-keypad.svg"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    
+      <footer>
+        <button id="submit-promo-code" class="filled-progress-button button">Submit</button>
+      </footer>
+      
+    </section><section
       class="viewport invalid_address_state info cash-in-color"
       data-tr-section="invalid-address"
       data-screentype="info-action-tp"
@@ -902,7 +990,7 @@
       </section>
     </section>
     <section
-      class="viewport photo_scan_failed_state info"
+      class="viewport failed_scan_id_photo_state info"
       data-tr-section="photo-scan-failed"
       data-screentype="info-action-tp"
     >
@@ -1025,6 +1113,39 @@
       </main>
     </section>
     <section
+      class="viewport promo_code_not_found_state info"
+      data-tr-section="invalid-promo-code"
+      data-screentype="info-action-tp"
+    >
+      <header>
+        <img src="images/coupon-salmon.svg" />
+      </header>
+    
+      <main>
+        <h3 class="js-i18n xs-margin-bottom">Promo code not found</h3>
+        <div class="text-content sm-margin-top">
+          <p class="js-i18n d2">
+            Sorry! That's not a promo code we could find.
+          </p>
+          <p class="js-i18n d2">
+            You may try a different code, or continue with your transaction.
+          </p>
+          <p class="js-i18n d2">
+            If you are sure of the code, please contact the operator for clarification.
+          </p>
+        </div>
+      </main>
+    
+      <footer>
+        <button id="promo-code-try-again" class="bordered-progress-button button js-i18n">
+          Enter a different code
+        </button>
+        <button id="promo-code-continue" class="filled-progress-button button js-i18n">
+          Continue transaction
+        </button>
+      </footer>
+    </section>
+    <section
       class="viewport register_phone_state"
       data-tr-section="register-phone"
       data-screentype="flow-action-tp"
@@ -1112,7 +1233,7 @@
       </main>
     </section>
     <section
-      class="viewport scan_id_state"
+      class="viewport scan_id_data_state"
       data-tr-section="scan-id"
       data-screentype="flow-no-action-tp"
     >
@@ -1142,7 +1263,43 @@
       </main>
     </section>
     <section
-      class="viewport scan_photo_state"
+      class="viewport scan_manual_id_photo_state"
+      data-tr-section="scan-photo-manual"
+      data-screentype="flow-no-action-tp"
+    >
+      <header>
+        <div id="scan-photo-cancel" class="cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main class="xl-margin-top">
+        <section class="primary-side">
+          <h2 class="js-i18n primary-side-title xs-margin-bottom">Please verify your identity</h2>
+          <p class="d1 no-margin-top js-i18n">
+            In order to proceed, we are required to verify your identity.
+          </p>
+          <p class="d1 no-margin-top js-i18n">
+            Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press "Ready to scan".
+          </p>
+          
+          <footer>
+            <button id="ready-to-scan-id-card-photo" class="filled-progress-button-bg button js-i18n">
+              Ready to scan
+            </button>
+          </footer>
+        </section>
+        <section class="secondary-side">
+          <object class="scan-image only-sintra only-cash-in" data="images/scan/animation/sintra/stateID-amazonite.svg"></object>
+          <object class="scan-image only-sintra only-cash-out" data="images/scan/animation/sintra/stateID-salmon.svg"></object>
+          <object class="scan-image only-douro only-cash-in" data="images/scan/animation/douro/stateID-amazonite.svg"></object>
+          <object class="scan-image only-douro only-cash-out" data="images/scan/animation/douro/stateID-salmon.svg"></object>
+          <object class="scan-image only-gaia" data="images/scan/animation/gaia/stateID-amazonite.svg"></object>
+        </section>
+      </main>
+    </section>
+    <section
+      class="viewport scan_id_photo_state"
       data-tr-section="scan-photo"
       data-screentype="flow-no-action-tp"
     >
@@ -1785,7 +1942,7 @@
     </section>
     
     <section
-      class="viewport id_verification_error_state info-with-contact"
+      class="viewport error_permission_id_state info-with-contact"
       data-tr-section="id-verification-error"
       data-screentype="unaccounted-tp info-contact-tp"
     >
@@ -1909,7 +2066,7 @@
     </section>
     
     <section
-      class="viewport id_code_failed_state info"
+      class="viewport retry_permission_id_state info"
       data-tr-section="id-code-failed"
       data-screentype="info-action-tp"
     >
@@ -2135,7 +2292,7 @@
       </main>
     </section>
     <section
-      class="viewport photo_verification_failed_state info-no-image"
+      class="viewport failed_verifying_id_photo_state info-no-image"
       data-tr-section="photo-verification-failed"
       data-screentype="info-contact-tp"
     >
@@ -2179,7 +2336,7 @@
     </section>
     
     <section
-      class="viewport id_verification_failed_state info-no-image"
+      class="viewport failed_permission_id_state info-no-image"
       data-tr-section="id-verification-failed"
       data-screentype="info-contact-tp"
     >
@@ -2255,7 +2412,7 @@
       </footer>
     </section>
     <section
-      class="viewport verifying_id_state info"
+      class="viewport verifying_id_data_state info"
       data-tr-section="verifying-id"
       data-screentype="info-no-action-tp"
     >
@@ -2267,7 +2424,7 @@
     </section>
     
     <section
-      class="viewport verifying_photo_state info"
+      class="viewport verifying_id_photo_state info"
       data-tr-section="verifying-photo"
       data-screentype="info-no-action-tp"
     >
@@ -2279,7 +2436,7 @@
     </section>
     
     <section
-      class="viewport verifying_facephoto_state info"
+      class="viewport verifying_face_photo_state info"
       data-tr-section="verifying-facephoto"
       data-screentype="info-no-action-tp"
     >

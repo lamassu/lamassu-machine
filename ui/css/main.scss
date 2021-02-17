@@ -586,7 +586,7 @@ footer {
   margin-top: auto;
 }
 
-.choose_fiat_state ,.insert_more_bills_state {
+.choose_fiat_state {
   footer {
     width: auto;
   }
@@ -789,7 +789,14 @@ footer {
 
 .insert_more_bills_state footer {
   height: 39vh;
-  margin-left: 15vh;
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
+  display: block;
+}
+
+.insert_bills_state footer {
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
 }
 
 .insert_more_bills_state .primary-side-title {
@@ -1002,34 +1009,34 @@ footer {
   }
 }
 
-.facephoto_failed_state {
+.failed_scan_face_photo_state {
   img {
     width: 26vh;
     margin-left: 1vh;
   }
 }
 
-.facephoto_permission_state {
+.permission_face_photo_state {
   img {
     width: 25vh;
   }
 }
 
-.facephoto_state {
+.scan_face_photo_state {
   img {
     width: 3vh;
     margin-bottom: 33vh;
   }
 }
 
-.facephoto_retry_state {
+.retry_scan_face_photo_state {
   img {
     width: 6vh;
     margin-bottom: 23vh;
   }
 }
 
-.id_verification_state {
+.permission_id_state {
   img {
     width: 33vh;
   }
@@ -1066,12 +1073,12 @@ footer {
   }
 }
 
-.id_code_failed_state,
-.photo_scan_failed_state,
+.retry_permission_id_state,
+.failed_scan_id_photo_state,
 .wrong_dispenser_currency_state,
-.id_scan_failed_state,
+.failed_scan_id_data_state,
 .suspicious_address_state,
-.id_verification_error_state,
+.error_permission_id_state,
 .fiat_transaction_error_state {
   img {
     width: 28vh;
@@ -1089,6 +1096,120 @@ footer {
   width: 60%;
   background-color: $white;
   margin-bottom: 4vh;
+}
+
+.cash-in-color {
+  .promo-code-input {
+    border-bottom: $amazonite-three 2px solid;
+  }
+  .promo-keyboard {
+    .key {
+      background-color: $amazonite-three;
+      &:active {
+        background-color: $amazonite-two;
+      }
+    }
+  }
+}
+
+.cash-out-color {
+  .promo-code-input {
+    border-bottom: $salmon-three 2px solid;
+  }
+  .promo-keyboard {
+    .key {
+      background-color: $salmon-three;
+      &:active {
+        background-color: $salmon-two;
+      }
+    }
+  }
+}
+
+.promo-keyboard {
+  box-sizing: border-box;
+  width: 100%;
+  .promo-backspace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 3vh;
+    }
+  }
+  .promo-backspace-key {
+    width: 18vh !important;
+  }
+  .row {
+    justify-content: center;
+  }
+  .key {
+    box-sizing: border-box;
+    border: 1px;
+    color: $white;
+    margin: 0.45vh;
+    &:active {
+      border: none;
+    }
+    border-radius: 10px;
+    font-size: 3vh;
+    height: 10vh;
+    width: 10vh;
+    line-height: 10vh;
+  }
+}
+
+#promo-code-title {
+  color: $white;
+}
+
+.promo-code-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none;
+}
+
+.insert_promo_code_state footer {
+  margin-bottom: 6vh;
+}
+
+.insert_promo_code_state footer button {
+  margin: 0 auto;
+  display: block;
+}
+
+.insert_promo_code_state main {
+  display: block;
+  margin-top: -10vh;
+  margin-bottom: -26vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+#scan-address-promo-button {
+  margin: 0 auto;
+  display: block;
+}
+
+.promo-code-title-wrapper {
+  text-align: left;
+}
+
+#promo-code-cancel {
+  float: right;
+}
+
+.choose_fiat_state #choose-fiat-promo-button {
+  margin-top: 8vh;
+}
+
+.choose_fiat_state #choose-fiat-code-added {
+  margin-top: 8vh;
 }
 
 #wifi-keyboard {

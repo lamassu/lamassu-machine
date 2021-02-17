@@ -64,6 +64,7 @@ var currentState
 var accepting = false
 var websocket = null
 var wifiKeyboard = null
+var promoKeyboard = null
 var usSsnKeypad = null
 var phoneKeypad = null
 var securityKeypad = null
@@ -96,10 +97,12 @@ function verifyConnection () {
 function buttonPressed (button, data) {
   if (!buttonActive) return
   wifiKeyboard.deactivate()
+  promoKeyboard.deactivate()
   buttonActive = false
   setTimeout(function () {
     buttonActive = true
     wifiKeyboard.activate()
+    promoKeyboard.activate()
   }, 300)
   var res = {button: button}
   if (data || data === null) res.data = data
@@ -135,6 +138,8 @@ function processData (data) {
   if (data.operatorInfo) setOperatorInfo(data.operatorInfo)
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
+  if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
+  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
 
   if (data.context) {
     $('.js-context').hide()
@@ -255,10 +260,10 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
-    case 'idVerification':
+    case 'permission_id':
       idVerification()
       break
-    case 'facephotoPermission':
+    case 'permission_face_photo':
       facephotoPermission()
       break
     case 'usSsnPermission':
@@ -267,13 +272,20 @@ function processData (data) {
     case 'blockedCustomer':
       blockedCustomer()
       break
+    case 'insertPromoCode':
+      promoKeyboard.activate()
+      setState('insert_promo_code')
+      break
+    case 'invalidPromoCode':
+      setState('promo_code_not_found')
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
 }
 
 function facephotoPermission () {
-  setScreen('facephoto_permission')
+  setScreen('permission_face_photo')
 }
 
 function usSsnPermission () {
@@ -281,7 +293,7 @@ function usSsnPermission () {
 }
 
 function idVerification () {
-  setScreen('id_verification')
+  setScreen('permission_id')
 }
 
 function smsVerification (threshold) {
@@ -463,6 +475,11 @@ $(document).ready(function () {
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
+  promoKeyboard = new Keyboard('promo-keyboard').init(function () {
+    if (currentState !== 'insert_promo_code') return
+    buttonPressed('cancelPromoCode')
+  })
+
   usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
     if (currentState !== 'register_us_ssn') return
     buttonPressed('usSsn', result)
@@ -553,6 +570,28 @@ $(document).ready(function () {
   setupButton('printer-print-again', 'printAgain')
   setupButton('printer-print-again2', 'printAgain')
   setupButton('printer-scan-again', 'printerScanAgain')
+
+  setupButton('insert-first-bill-promo-button', 'insertPromoCode')
+  setupButton('choose-fiat-promo-button', 'insertPromoCode')
+
+  var promoCodeCancelButton = document.getElementById('promo-code-cancel')
+  touchImmediateEvent(promoCodeCancelButton, function () {
+    promoKeyboard.deactivate.bind(promoKeyboard)
+    buttonPressed('cancelPromoCode')
+  })
+
+  var submitCodeButton = document.getElementById('submit-promo-code')
+  touchEvent(submitCodeButton, function () {
+    promoKeyboard.deactivate.bind(promoKeyboard)
+    var code = $('.promo-code-input').data('content')
+    buttonPressed('submitPromoCode', { input: code })
+  })
+
+  setupButton('submit-promo-code', 'submitPromoCode', {
+    input: $('.promo-code-input').data('content')
+  })
+  setupButton('promo-code-try-again', 'insertPromoCode')
+  setupButton('promo-code-continue', 'cancelPromoCode')
 
   setupButton('initialize', 'initialize')
   // setupButton('test-mode', 'testMode')
@@ -645,6 +684,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-retry', 'retryFacephoto')
   setupButton('id-start-verification', 'permissionIdCompliance')
   setupButton('sms-start-verification', 'permissionSmsCompliance')
+  setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
 
@@ -813,6 +853,7 @@ function setState (state, delay) {
   currentState = state
 
   wifiKeyboard.reset()
+  promoKeyboard.reset()
 
   if (state === 'idle') {
     $('.qr-code').empty()
@@ -906,37 +947,40 @@ function setCryptomatModel (model) {
 
 function setDirection (direction) {
   let states = [
-    $('.scan_photo_state'),
-    $('.scan_id_state'),
+    $('.scan_id_photo_state'),
+    $('.scan_manual_id_photo_state'),
+    $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_us_ssn_state'),
     $('.us_ssn_permission_state'),
     $('.register_phone_state'),
     $('.terms_screen_state'),
-    $('.verifying_photo_state'),
-    $('.verifying_facephoto_state'),
-    $('.verifying_id_state'),
-    $('.id_verification_state'),
+    $('.verifying_id_photo_state'),
+    $('.verifying_face_photo_state'),
+    $('.verifying_id_data_state'),
+    $('.permission_id_state'),
     $('.sms_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
-    $('.id_verification_failed_state'),
-    $('.photo_verification_failed_state'),
+    $('.failed_permission_id_state'),
+    $('.failed_verifying_id_photo_state'),
     $('.blocked_customer_state'),
     $('.fiat_error_state'),
     $('.fiat_transaction_error_state'),
-    $('.id_scan_failed_state'),
+    $('.failed_scan_id_data_state'),
     $('.sanctions_failure_state'),
-    $('.id_verification_error_state'),
-    $('.facephoto_state'),
-    $('.facephoto_retry_state'),
-    $('.facephoto_permission_state'),
-    $('.facephoto_failed_state'),
+    $('.error_permission_id_state'),
+    $('.scan_face_photo_state'),
+    $('.retry_scan_face_photo_state'),
+    $('.permission_face_photo_state'),
+    $('.failed_scan_face_photo_state'),
     $('.hard_limit_reached_state'),
-    $('.photo_scan_failed_state'),
-    $('.id_code_failed_state'),
-    $('.waiting_state')
+    $('.failed_scan_id_photo_state'),
+    $('.retry_permission_id_state'),
+    $('.waiting_state'),
+    $('.insert_promo_code_state'),
+    $('.promo_code_not_found_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1289,10 +1333,12 @@ function setExchangeRate (_rates) {
   var coin = coins[cryptoCode]
   var displayCode = coin.displayCode
 
-  var cryptoToFiat = new BigNumber(rates.cashIn)
+  if (rates.cashIn) {
+    var cryptoToFiat = new BigNumber(rates.cashIn)
+    var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
 
-  var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2)
-  $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
+    $('.crypto-rate-cash-in').html(`1 ${cryptoCode} = ${rateStr}`)
+  }
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut)
@@ -1727,4 +1773,33 @@ function shouldEnableTouch () {
   const chromePlus73 = chromeVersion && chromeVersion[1] >= 73
 
   return chromiumPlus73 || chromePlus73
+}
+
+function setAvailablePromoCodes (areThereAvailablePromoCodes) {
+  if (areThereAvailablePromoCodes) {
+    $('#insert-first-bill-code-added').hide()
+    $('#choose-fiat-code-added').hide()
+    $('#insert-first-bill-promo-button').show()
+    $('#choose-fiat-promo-button').show()
+  } else {
+    $('#insert-first-bill-promo-button').hide()
+    $('#choose-fiat-promo-button').hide()
+  }
+}
+
+function setCurrentDiscount (currentDiscount) {
+  if (currentDiscount > 0) {
+    const successMessage = '✔ ' + locale.translate('Promo code added (%s discount)').fetch(`${currentDiscount}%`)
+    $('#insert-first-bill-promo-button').hide()
+    $('#choose-fiat-promo-button').hide()
+    $('#insert-first-bill-code-added').html(successMessage)
+    $('#choose-fiat-code-added').html(successMessage)
+    $('#insert-first-bill-code-added').show()
+    $('#choose-fiat-code-added').show()
+  } else {
+    $('#insert-first-bill-promo-button').show()
+    $('#choose-fiat-promo-button').show()
+    $('#insert-first-bill-code-added').hide()
+    $('#choose-fiat-code-added').hide()
+  }
 }

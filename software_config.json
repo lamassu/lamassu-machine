@@ -14,6 +14,7 @@
     "exitTime": 10800000,
     "checkPowerTime": 1000,
     "checkPowerTimeout": 4000,
+    "promoCodeTimeout": 15000,
     "locale": {
       "localeInfo": {
         "primaryLocale": "en-US",

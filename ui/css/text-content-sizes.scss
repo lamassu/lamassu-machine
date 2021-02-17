@@ -18,7 +18,7 @@
   }
 }
 
-.facephoto_permission_state {
+.permission_face_photo_state {
   .text-content {
     max-width: 65vh;
   }
@@ -42,7 +42,7 @@
   }
 }
 
-.id_verification_state,
+.permission_id_state,
 .bad_phone_number_state,
 .printer_scanning_error_state,
 .blocked_customer_state {
