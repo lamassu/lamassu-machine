@@ -20,7 +20,7 @@ const ca = fs.readFileSync(`${lamassuCertFolder}/lamassu.pem`)
 const TIMEOUT = 600000
 
 const deviceConfig = `${lmFolder}/device_config.json`
-const udevRules = isAaeon ? '/etc/udev/rules.d/99-douro.rules' : ('gaia' ? '/etc/udev/rules.d/99-gaia.rules' : '/etc/udev/rules.d/udevssu.rules')
+const udevRules = '/etc/udev/rules.d/'
 
 function command(cmd, cb) {
   cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
