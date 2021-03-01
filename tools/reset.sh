@@ -13,6 +13,8 @@ rm -rf /opt/lamassu-machine/data/connection_info.json \
        /opt/lamassu-machine/data/u2f.json \
        /opt/lamassu-machine/data/tx-db \
        /opt/lamassu-machine/data/operator-info.json \
+       /opt/lamassu-machine/data/machine-info.json \
+
 
 if [ -d "/home/machine" ]; then
   touch /home/machine/.bash_logout
