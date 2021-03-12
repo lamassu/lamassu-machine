@@ -3,7 +3,7 @@ import cryptoValidator from '../../lib/coins/validators'
 import {base58Opts as BTCBase58Opts, bech32Opts as BTCBech32Opts} from '../../lib/coins/btc'
 import {base58Opts as LTCBase58Opts, bech32Opts as LTCBech32Opts} from '../../lib/coins/ltc'
 import {base58Opts as DASHBase58Opts} from '../../lib/coins/dash'
-import {base58Opts as ZECBase58Opts} from '../../lib/coins/zec'
+import {base58Opts as ZECBase58Opts, bech32Opts as ZECBech32Opts} from '../../lib/coins/zec'
 
 test('Should validate BTC P2PKH', t => {
   t.plan(2)
@@ -82,6 +82,16 @@ test('Should validate ZEC P2SH', t => {
   const validatedTest = cryptoValidator.base58Validator('test', testNetaddr, ZECBase58Opts)
   t.true(validatedTest)
   t.true(validatedMain)
+})
+
+test('Should validate ZEC bech32', t => {
+  t.plan(2)
+  const mainNetaddr = 'zs1kpat3qseujnnukms9yjkx7w3kgzev7jxhauc6cy2s3mupmvsvkvw04u3s35sffmv57leznctn5h'
+  const testNetaddr = 'ztestsapling1kdp74adyfsmm9838jaupgfyx3npgw8ut63stjjx757pc248cuc0ymzphqeux60c64qe5qt68ygh'
+  const validatedMain = cryptoValidator.zecBech32Validator('main', mainNetaddr, ZECBech32Opts)
+  const validatedTest = cryptoValidator.zecBech32Validator('test', testNetaddr, ZECBech32Opts)
+  t.true(validatedMain)
+  t.true(validatedTest)
 })
 
 test('Should validate BTC bech32', t => {
