@@ -3,7 +3,6 @@
   "license": "Unlicense",
   "version": "7.5.0-beta.3",
   "dependencies": {
-    "@joepie91/v4l2camera": "^1.0.5",
     "@lamassu/supyo": "1.0.0",
     "async": "~1.5.2",
     "base-x": "^3.0.0",
