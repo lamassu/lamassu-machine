@@ -49,7 +49,6 @@ function updateSupervisor (cb) {
     }
 
     async.series([ 
-      async.apply(command, 'rm /etc/supervisor/conf.d/*'),
       async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
       async.apply(command, `users | grep -q ubilinux && sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
       async.apply(command, 'supervisorctl update'),
