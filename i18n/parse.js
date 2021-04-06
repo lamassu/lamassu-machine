@@ -67,7 +67,7 @@ const app = fs.readFileSync(appPath, {encoding: 'utf8'})
 const outPath = path.resolve(__dirname, '../i18n/ui/lbm-ui_en-US.po')
 
 const coins = [
-  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash'
+  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash', 'Ducatus'
 ]
 
 parseHtml(html)
