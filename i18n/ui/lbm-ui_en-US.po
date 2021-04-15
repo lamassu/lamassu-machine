@@ -927,10 +927,6 @@ msgid "Invalid %s address"
 msgstr "Invalid %s address"
 
 #: On screen: dynamic
-msgid "This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute."
-msgstr "This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute."
-
-#: On screen: dynamic
 msgid "Transaction limit reached, please cash out"
 msgstr "Transaction limit reached, please cash out"
 
