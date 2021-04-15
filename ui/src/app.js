@@ -1476,10 +1476,6 @@ function translateCoin (cryptoCode) {
   $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode))
   $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode))
   $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode))
-
-  if (cryptoCode === 'ETH') {
-    $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode))
-  }
 }
 
 function initTranslatePage () {
