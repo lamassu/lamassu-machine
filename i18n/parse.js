@@ -1,11 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+const cheerio = require('cheerio');
 const _ = require('lodash/fp')
-const Xray = require('x-ray')
-const x = Xray({
-  filters: {strip}
-})
 
 const uiPath = path.resolve(__dirname, '..', 'ui')
 const startPath = path.resolve(uiPath, 'start.html')
@@ -14,6 +11,10 @@ const keys = {}
 
 function strip (s) {
   return s.trim().replace(/[\n ]+/g, ' ')
+}
+
+function escapeDoubleQuotes(s){
+  return s.replace(/\\([\s\S])|(")/g,"\\$1$2")
 }
 
 function parseAppLine (line) {
@@ -28,16 +29,22 @@ function parseJs (s) {
   return results
 }
 
-function parseHtml (s) {
-  return new Promise((resolve, reject) => {
-    const stream = x(html, '.viewport', [{
-      screen: '@data-tr-section',
-      str: ['.js-i18n | strip']
-    }]).stream()
-
-    stream.on('data', data => resolve(JSON.parse(data.toString())))
-    stream.on('error', err => reject(err))
+function parseHtml2 (s) {
+  const $ = cheerio.load(s)
+  const data = []
+  $('.viewport').each((i, node) => {
+    const screen = node.attribs['data-tr-section']
+    const screenText = {
+      screen: screen,
+      str: []
+    }
+    $(node).find('.js-i18n').each((k, elem) => {
+      const strings = $(elem).html()
+      screenText.str.push(escapeDoubleQuotes(strip(strings)))
+    })
+    data.push(screenText)
   })
+  return data
 }
 
 function recToPo (string, screen) {
@@ -70,12 +77,18 @@ const coins = [
   'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash'
 ]
 
-parseHtml(html)
-  .then(htmlResults => {
+function run (){
+  try{
+    const htmlResults = parseHtml2(html)
     const appResults = parseJs(app)
     htmlResults.push({screen: 'dynamic', str: appResults})
     htmlResults.push({screen: 'coins', str: coins})
     fs.writeFileSync(outPath, toPo(htmlResults))
-  })
+  }
+  catch(err){
+    err => console.log('Error ', err)
+  }
+}
+run()
 
 console.log('Success. To update, run: crowdin-cli upload sources')
