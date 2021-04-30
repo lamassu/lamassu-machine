@@ -110,6 +110,7 @@ function processData (data) {
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
+  if (data.receiptStatus) setReceiptPrint(data.receiptStatus)
 
   if (data.context) {
     $('.js-context').hide()
@@ -621,6 +622,10 @@ $(document).ready(function () {
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('tx-not-seen-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
+  
+  setupButton('print-receipt-cash-in-button', 'printReceipt')
+  setupButton('print-receipt-cash-out-button', 'printReceipt')
+  setupButton('print-receipt-cash-in-fail-button', 'printReceipt')
 
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
@@ -1781,5 +1786,50 @@ function setCurrentDiscount (currentDiscount) {
     $('#choose-fiat-promo-button').show()
     $('#insert-first-bill-code-added').hide()
     $('#choose-fiat-code-added').hide()
+  }
+}
+
+function setReceiptPrint (receiptStatus) {
+  switch (receiptStatus) {
+    case 'disabled':
+      $('#print-receipt-cash-in-message').addClass('hide')
+      $('#print-receipt-cash-in-button').addClass('hide')
+      $('#print-receipt-cash-out-message').addClass('hide')
+      $('#print-receipt-cash-out-button').addClass('hide')
+      $('#print-receipt-cash-in-fail-message').addClass('hide')
+      $('#print-receipt-cash-in-fail-button').addClass('hide')
+      break
+    case 'available':
+      $('#print-receipt-cash-in-message').addClass('hide')
+      $('#print-receipt-cash-in-button').removeClass('hide')
+      $('#print-receipt-cash-out-message').addClass('hide')
+      $('#print-receipt-cash-out-button').removeClass('hide')
+      $('#print-receipt-cash-in-fail-message').addClass('hide')
+      $('#print-receipt-cash-in-fail-button').removeClass('hide')
+      break
+    case 'printing':
+      const message = locale.translate('Printing receipt...').fetch()
+      $('#print-receipt-cash-in-button').addClass('hide')
+      $('#print-receipt-cash-in-message').html(message)
+      $('#print-receipt-cash-in-message').removeClass('hide')
+      $('#print-receipt-cash-out-button').addClass('hide')
+      $('#print-receipt-cash-out-message').html(message)
+      $('#print-receipt-cash-out-message').removeClass('hide')
+      $('#print-receipt-cash-in-fail-button').addClass('hide')
+      $('#print-receipt-cash-in-fail-message').html(message)
+      $('#print-receipt-cash-in-fail-message').removeClass('hide')
+      break
+    case 'success':
+      const successMessage = '✔ ' + locale.translate('Receipt printed successfully!').fetch()
+      $('#print-receipt-cash-in-button').addClass('hide')
+      $('#print-receipt-cash-in-message').html(successMessage)
+      $('#print-receipt-cash-in-message').removeClass('hide')
+      $('#print-receipt-cash-out-button').addClass('hide')
+      $('#print-receipt-cash-out-message').html(successMessage)
+      $('#print-receipt-cash-out-message').removeClass('hide')
+      $('#print-receipt-cash-in-fail-button').addClass('hide')
+      $('#print-receipt-cash-in-fail-message').html(successMessage)
+      $('#print-receipt-cash-in-fail-message').removeClass('hide')
+      break
   }
 }
