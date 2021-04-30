@@ -1250,7 +1250,7 @@ footer {
   direction: ltr; }
 
 .coins-to-address {
-  margin-top: 8vh;
+  margin-top: 3vh;
   margin-bottom: 0; }
 
 .insert-bill-wrapper img {
@@ -1940,6 +1940,12 @@ footer {
 #scan-address-promo-button {
   margin: 0 auto;
   display: block; }
+
+#print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {
+  width: 20vw; }
+
+#print-receipt-cash-in-message, #print-receipt-cash-out-message, #print-receipt-cash-in-fail-message {
+  margin-top: 1vh; }
 
 .promo-code-title-wrapper {
   text-align: left; }
