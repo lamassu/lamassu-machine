@@ -21,6 +21,7 @@
     "got": "^7.1.0",
     "immutable": "^3.8.1",
     "jsqr": "^1.3.1",
+    "lamassu-coins": "git+https://github.com/lamassu/lamassu-coins.git",
     "left-pad": "^1.1.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
