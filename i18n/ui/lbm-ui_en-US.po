@@ -103,6 +103,14 @@ msgid "Your coins are on their way to:"
 msgstr "Your coins are on their way to:"
 
 #: On screen: completed
+msgid "Print receipt"
+msgstr "Print receipt"
+
+#: On screen: completed
+msgid ""
+msgstr ""
+
+#: On screen: completed
 msgid "Take a picture of this screen for your electronic receipt"
 msgstr "Take a picture of this screen for your electronic receipt"
 
@@ -475,8 +483,8 @@ msgid "Please press the back of your driver's license against the scan window."
 msgstr "Please press the back of your driver's license against the scan window."
 
 #: On screen: scan-photo-manual
-msgid "Please press the front of your state ID card against the scan window, hold it there, and then press \"Ready to scan\"."
-msgstr "Please press the front of your state ID card against the scan window, hold it there, and then press \"Ready to scan\"."
+msgid "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
+msgstr "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
 
 #: On screen: scan-photo-manual
 msgid "Ready to scan"
@@ -937,6 +945,14 @@ msgstr "You'll be sending %s %s"
 #: On screen: dynamic
 msgid "Promo code added (%s discount)"
 msgstr "Promo code added (%s discount)"
+
+#: On screen: dynamic
+msgid "Printing receipt..."
+msgstr "Printing receipt..."
+
+#: On screen: dynamic
+msgid "Receipt printed successfully!"
+msgstr "Receipt printed successfully!"
 
 #: On screen: coins
 msgid "Bitcoin"

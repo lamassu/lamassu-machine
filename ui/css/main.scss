@@ -64,12 +64,24 @@ footer {
   min-height: 12vh;
 }
 
-.take-a-photo {
-  display: flex;
-  flex-direction: row;
-  max-width: 24vw;
-  margin-top: 16.2vh;
-  margin-right: 2vw;
+@media (max-height: 900px) {
+  .take-a-photo {
+    display: flex;
+    flex-direction: row;
+    max-width: 28vw;
+    margin-top: 16.2vh;
+    margin-right: 2vw;
+  }
+}
+
+@media (min-height: 900px) {
+  .take-a-photo {
+    display: flex;
+    flex-direction: row;
+    max-width: 26vw;
+    margin-top: 16.2vh;
+    margin-right: 2vw;
+  }
 }
 
 #take-a-photo-message {

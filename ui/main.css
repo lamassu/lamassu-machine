@@ -913,17 +913,31 @@ footer {
           align-items: center;
   min-height: 12vh; }
 
-.take-a-photo {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  max-width: 24vw;
-  margin-top: 16.2vh;
-  margin-right: 2vw; }
+@media (max-height: 900px) {
+  .take-a-photo {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    max-width: 28vw;
+    margin-top: 16.2vh;
+    margin-right: 2vw; } }
+
+@media (min-height: 900px) {
+  .take-a-photo {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    max-width: 26vw;
+    margin-top: 16.2vh;
+    margin-right: 2vw; } }
 
 #take-a-photo-message {
   margin-left: 1vw;
