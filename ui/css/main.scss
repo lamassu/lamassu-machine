@@ -58,10 +58,24 @@ footer {
   width: 100%;
 }
 
-.take-a-photo {
+.receipt-footer {
   flex-direction: column;
   align-items: center;
-  min-height: 23vh;
+  min-height: 12vh;
+}
+
+.take-a-photo {
+  display: flex;
+  flex-direction: row;
+  max-width: 24vw;
+  margin-top: 16.2vh;
+  margin-right: 2vw;
+}
+
+#take-a-photo-message {
+  margin-left: 1vw;
+  font-size: 2.3vh;
+  line-height: 1.2;
 }
 
 .sapphire {
@@ -370,7 +384,6 @@ footer {
 
 .camera {
   width: 5vh;
-  margin-bottom: 2vh;
 }
 
 .scan-image {
@@ -1197,11 +1210,17 @@ footer {
 }
 
 #print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {
+  margin-top: 3vh;
+  width: 20vw;
+}
+
+#fiat_complete_viewport #print-receipt-cash-out-button {
+  margin-top: 18vh;
   width: 20vw;
 }
 
 #print-receipt-cash-in-message, #print-receipt-cash-out-message, #print-receipt-cash-in-fail-message {
-  margin-top: 1vh;
+  margin-top: 4vh;
 }
 
 .promo-code-title-wrapper {

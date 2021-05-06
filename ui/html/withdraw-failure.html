@@ -19,7 +19,7 @@
       <p class="tl2 amount-deposited sm-margin-top"></p>
       <p class="js-i18n d2 no-margin-bottom sm-margin-top">Your coins are on their way to:</p>
       <p class="m2 crypto-address"></p>
-      <button id="print-receipt-cash-in-fail-button" class="js-i18n bordered-progress-button button d2">
+      <button id="print-receipt-cash-in-fail-button" class="js-i18n bordered-progress-button button tl2">
         Print receipt
       </button>
       <p id="print-receipt-cash-in-fail-message" class="js-i18n d2 hide"></p>
@@ -30,14 +30,16 @@
           <div id="cash-in-fail-qr-code" class="qr"></div>
         </div>
       </section>
+      <div class="take-a-photo">
+        <img class="camera" src="images/camera/small-camera-amazonite.svg" />
+        <span id="take-a-photo-message" class="h4 sapphire js-i18n">
+          Take a picture of this screen for your electronic receipt
+        </span>
+      </div>
     </section>
   </main>
 
-  <footer class="take-a-photo">
-    <img class="camera" src="images/camera/small-camera-amazonite.svg" />
-    <span class="h4 sapphire js-i18n">
-      Take a picture of this screen for your electronic receipt
-    </span>
+  <footer class="receipt-footer">
     <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
   </footer>
 </section>
