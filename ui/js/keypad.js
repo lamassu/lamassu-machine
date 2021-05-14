@@ -3,7 +3,8 @@ var TIMEOUT = 120000
 var LENGTHS = {
   phoneNumber: 15,
   code: 10,
-  usSsn: 9
+  usSsn: 9,
+  custom: Infinity
 }
 
 var Keypad = function (keypadId, opts, callback) {
@@ -15,6 +16,9 @@ var Keypad = function (keypadId, opts, callback) {
   this.opts = opts
   this.callback = callback
   this.timeoutRef = null
+
+  if (this.opts.constraint && this.opts.constraint === 'length') LENGTHS.custom = this.opts.maxLength
+
   var self = this
 
   function keyHandler (e) {
@@ -76,7 +80,7 @@ Keypad.prototype.setCountry = function setCountry (country) {
 }
 
 Keypad.prototype.reset = function reset () {
-  this.keypad.find('.box').text('')
+  this.keypad.find('.box').text(this.opts.constraint === 'date' ? 'YYYY-MM-DD' : '')
   this.count = 0
   this.result = ''
   this.keypad.find('.phone-separator').addClass('hidden')
@@ -92,7 +96,7 @@ Keypad.prototype.backspace = function backspace () {
 
   this.result = this.result.substring(0, this.result.length - 1)
 
-  var display = getDisplay(this.result, this.type, this.opts.country)
+  var display = getDisplay(this.result, this.type, this.opts.country, this.opts)
 
   if (!display) {
     this.keypad.find('.phone-separator').addClass('hidden')
@@ -137,12 +141,23 @@ function isValidSsn (ssn) {
     ssn.substr(5) !== '0000'
 }
 
-function getDisplay (result, type, country) {
+function customFormat (text, opts) {
+  if (opts.constraint === 'date') {
+    const year = text.slice(0, 4)
+    const month = text.slice(4, 6)
+    const day = text.slice(6, 8)
+    return `${year || 'YYYY'}-${month || 'MM'}-${day || 'DD'}`
+  }
+  // TODO other cosntraints for custom info request
+  return text
+}
+
+function getDisplay (result, type, country, opts) {
   if (!result) return result
 
   if (type === 'phoneNumber') return new libphonenumber.AsYouType(country).input(result)
   if (type === 'usSsn') return ssnFormat(result)
-
+  if (type === 'custom') return customFormat(result, opts)
   return result
 }
 
@@ -151,7 +166,7 @@ Keypad.prototype._keyPress = function _keyPress (target) {
   var numeral = target.text()
   this.result += numeral
 
-  var display = getDisplay(this.result, this.type, this.opts.country)
+  var display = getDisplay(this.result, this.type, this.opts.country, this.opts)
 
   if (display) {
     this.keypad.find('.phone-separator').removeClass('hidden')
