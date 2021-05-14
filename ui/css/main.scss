@@ -534,7 +534,7 @@ footer {
   width: 39vh;
 }
 
-#phone-keypad, #security-keypad, #us-ssn-keypad {
+#phone-keypad, #security-keypad, #us-ssn-keypad, #custom-requirement-numeric-keypad  {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -546,7 +546,12 @@ footer {
   }
 }
 
-#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button {
+#custom-requirement-numeric-keypad .progress-button-wrapper  {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button  {
   float: right;
   margin-top: 5vh;
 }
@@ -1397,4 +1402,8 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.custom-requirement-margin {
+  margin: 50px;
 }
