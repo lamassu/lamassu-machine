@@ -1,0 +1,335 @@
+<section
+  class="viewport custom_permission_state info"
+  data-tr-section="custom-permission"
+  data-screentype="info-action-tp"
+>
+  <div class="flex-center-verical custom-requirement-margin">
+    <main>
+      <h3 class="js-i18n nm-margin-bottom" id="custom-screen1-title"></h3>
+      <p class="js-i18n d2" id="custom-screen1-text"></p>
+      <p class="js-i18n tl2 no-margin-top">
+        Continue?
+      </p>
+    </main>
+    <footer>
+      <button id="custom-permission-yes" class="filled-progress-button button js-i18n">Yes</button>
+      <button id="custom-permission-no" class="bordered-progress-button button js-i18n">No</button>
+    </footer>
+  </div>
+</section>
+
+<section
+  class="viewport custom_permission_screen2_numerical_state"
+  data-tr-section="custom-permission-screen2-numerical"
+  data-screentype="flow-action-tp"
+>
+  <header>
+    <div id="custom-permission-cancel-numerical" class="delay cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main>
+    <section class="primary-side">
+      <h2 class="js-i18n primary-side-title xs-margin-bottom" id="custom-screen2-numerical-title"></h2>
+      <div class="d1">
+        <span class="js-i18n" id="custom-screen2-numerical-text"></span>
+      </div>
+    </section>
+    <section class="secondary-side">
+      <section id="custom-requirement-numeric-keypad" class="keypad">
+        <section class="entry h5">
+          <div class="box full-box"></div>
+        </section>
+        <div class="phone-separator hidden"></div>
+        <section class="keys tl2 white">
+          <div class="row">
+            <div class="key numeric key1">1</div>
+            <div class="key numeric key2">2</div>
+            <div class="key numeric key3">3</div>
+          </div>
+          <div class="row">
+            <div class="key numeric key4">4</div>
+            <div class="key numeric key5">5</div>
+            <div class="key numeric key6">6</div>
+          </div>
+          <div class="row">
+            <div class="key numeric key7">7</div>
+            <div class="key numeric key8">8</div>
+            <div class="key numeric key9">9</div>
+          </div>
+          <div class="row">
+            <div class="key clear js-i18n">Clear</div>
+            <div class="key numeric">0</div>
+            <div class="key backspace">
+              <img class="backspace" src="images/delete-keypad.svg"/>
+            </div>
+          </div>
+        </section>
+        <section class="progress-button-wrapper">
+          <button class="progress-button enter js-i18n">Submit</button>
+        </section>
+      </section>
+    </section>
+  </main>
+</section>
+
+<section
+  class="viewport custom_permission_screen2_text_state"
+  data-tr-section="custom-permission-screen2-text"
+  id="custom-permission-screen2-text"
+  data-screentype="custom-permission-screen2-text">
+
+  <header class="custom-info-request-text-header">
+    <div id="custom-permission-cancel-text" class="cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="custom-permission-text-input-main">
+    <div class="text-input-fields-wrapper">
+      <div class="text-input-field">
+        <p id="custom-requirement-text-label1" class="js-i18n d1 custom-requirement-text-label"></p>
+        <input class="text-input-field-1 custom-requirement-text-input text-requirement-input passphrase h3" type="text" readonly value="">
+      </div>
+      <div id="optional-text-field-2" class="text-input-field">
+        <p id="custom-requirement-text-label2" class="js-i18n d1 custom-requirement-text-label"></p>
+        <input class="text-input-field-2 custom-requirement-text-input text-requirement-input faded passphrase h3" type="text" readonly value="">
+      </div>
+    </div>
+
+    <section id="custom-requirement-text-keyboard" class="standard-keyboard keys tl2">
+      <div class="keyboard-layout i18n-latin" data-case="uc">
+        <div class="keyboard keyboard-lc">
+          <div class="row">
+            <div class="key" data-ascii="49">1</div>
+            <div class="key" data-ascii="50">2</div>
+            <div class="key" data-ascii="51">3</div>
+            <div class="key" data-ascii="52">4</div>
+            <div class="key" data-ascii="53">5</div>
+            <div class="key" data-ascii="54">6</div>
+            <div class="key" data-ascii="55">7</div>
+            <div class="key" data-ascii="56">8</div>
+            <div class="key" data-ascii="57">9</div>
+            <div class="key" data-ascii="48">0</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="113">q</div>
+            <div class="key" data-ascii="119">w</div>
+            <div class="key" data-ascii="101">e</div>
+            <div class="key" data-ascii="114">r</div>
+            <div class="key" data-ascii="116">t</div>
+            <div class="key" data-ascii="121">y</div>
+            <div class="key" data-ascii="117">u</div>
+            <div class="key" data-ascii="105">i</div>
+            <div class="key" data-ascii="111">o</div>
+            <div class="key" data-ascii="112">p</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="97">a</div>
+            <div class="key" data-ascii="115">s</div>
+            <div class="key" data-ascii="100">d</div>
+            <div class="key" data-ascii="102">f</div>
+            <div class="key" data-ascii="103">g</div>
+            <div class="key" data-ascii="104">h</div>
+            <div class="key" data-ascii="106">j</div>
+            <div class="key" data-ascii="107">k</div>
+            <div class="key" data-ascii="108">l</div>
+          </div>
+          <div class="row">
+            <div class="key shift special">Shift</div>
+            <div class="key" data-ascii="122">z</div>
+            <div class="key" data-ascii="120">x</div>
+            <div class="key" data-ascii="99">c</div>
+            <div class="key" data-ascii="118">v</div>
+            <div class="key" data-ascii="98">b</div>
+            <div class="key" data-ascii="110">n</div>
+            <div class="key" data-ascii="109">m</div>
+            <div class="key sym special">Sym</div>
+          </div>
+          <div class="row">
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
+          </div>
+        </div>
+        <div class="keyboard keyboard-uc" style="display:none">
+          <div class="row">
+            <div class="key" data-ascii="49">1</div>
+            <div class="key" data-ascii="50">2</div>
+            <div class="key" data-ascii="51">3</div>
+            <div class="key" data-ascii="52">4</div>
+            <div class="key" data-ascii="53">5</div>
+            <div class="key" data-ascii="54">6</div>
+            <div class="key" data-ascii="55">7</div>
+            <div class="key" data-ascii="56">8</div>
+            <div class="key" data-ascii="57">9</div>
+            <div class="key" data-ascii="48">0</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="81">Q</div>
+            <div class="key" data-ascii="87">W</div>
+            <div class="key" data-ascii="69">E</div>
+            <div class="key" data-ascii="82">R</div>
+            <div class="key" data-ascii="84">T</div>
+            <div class="key" data-ascii="89">Y</div>
+            <div class="key" data-ascii="85">U</div>
+            <div class="key" data-ascii="73">I</div>
+            <div class="key" data-ascii="79">O</div>
+            <div class="key" data-ascii="80">P</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="65">A</div>
+            <div class="key" data-ascii="83">S</div>
+            <div class="key" data-ascii="68">D</div>
+            <div class="key" data-ascii="70">F</div>
+            <div class="key" data-ascii="71">G</div>
+            <div class="key" data-ascii="72">H</div>
+            <div class="key" data-ascii="74">J</div>
+            <div class="key" data-ascii="75">K</div>
+            <div class="key" data-ascii="76">L</div>
+          </div>
+          <div class="row">
+            <div class="key active shift special">Shift</div>
+            <div class="key" data-ascii="90">Z</div>
+            <div class="key" data-ascii="88">X</div>
+            <div class="key" data-ascii="67">C</div>
+            <div class="key" data-ascii="86">V</div>
+            <div class="key" data-ascii="66">B</div>
+            <div class="key" data-ascii="78">N</div>
+            <div class="key" data-ascii="77">M</div>
+            <div class="key sym special">Sym</div>
+          </div>
+          <div class="row">
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
+          </div>
+        </div>
+        <div class="keyboard keyboard-sym" style="display:none">
+          <div class="row">
+            <div class="key" data-ascii="126">~</div>
+            <div class="key" data-ascii="33">!</div>
+            <div class="key" data-ascii="64">@</div>
+            <div class="key" data-ascii="35">#</div>
+            <div class="key" data-ascii="36">$</div>
+            <div class="key" data-ascii="37">%</div>
+            <div class="key" data-ascii="94">^</div>
+            <div class="key" data-ascii="38">&amp;</div>
+            <div class="key" data-ascii="42">*</div>
+            <div class="key" data-ascii="61">=</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="45">-</div>
+            <div class="key" data-ascii="95">_</div>
+            <div class="key" data-ascii="43">+</div>
+            <div class="key" data-ascii="92">\</div>
+            <div class="key" data-ascii="40">(</div>
+            <div class="key" data-ascii="41">)</div>
+            <div class="key" data-ascii="91">[</div>
+            <div class="key" data-ascii="93">]</div>
+            <div class="key" data-ascii="123">{</div>
+            <div class="key" data-ascii="125">}</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="124">|</div>
+            <div class="key" data-ascii="59">;</div>
+            <div class="key" data-ascii="58">:</div>
+            <div class="key" data-ascii="39">'</div>
+            <div class="key" data-ascii="34">"</div>
+            <div class="key" data-ascii="44">,</div>
+            <div class="key" data-ascii="46">.</div>
+          </div>
+          <div class="row">
+            <div class="key" data-ascii="60">&lt;</div>
+            <div class="key" data-ascii="62">&gt;</div>
+            <div class="key" data-ascii="47">/</div>
+            <div class="key" data-ascii="63">?</div>
+            <div class="key sym special">ABC</div>
+          </div>
+          <div class="row">
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="submit-text-requirement-button-wrapper">
+      <button data-target-class="text-input-field-1" id="previous-text-requirement" class="filled-progress-button button submit-text-requirement-button">Previous</button>
+      <button data-target-class="text-input-field-2" id="next-text-requirement" class="filled-progress-button button submit-text-requirement-button">Next</button>
+      <button id="submit-text-requirement" class="filled-progress-button button submit-text-requirement-button">Submit</button>
+    </footer>
+  </main>
+</section>
+
+<section
+  class="viewport custom_permission_screen2_choiceList_state"
+  data-tr-section="custom-permission-screen2-choiceList"
+  id="custom-permission-screen2-choiceList"
+  data-screentype="custom-permission-screen2-choiceList">
+
+  <header class="custom-info-request-choiceList-header">
+    <div id="custom-permission-cancel-choiceList" class="cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="custom-permission-text-input-main">
+    <section id="custom-requirement-choicelist-wrapper">
+        <div>
+          <h2 class="js-i18n primary-side-title xs-margin-bottom" id="custom-screen2-choiceList-title"></h2>
+          <div class="d1">
+            <span class="js-i18n" id="custom-screen2-choiceList-text"></span>
+          </div>
+        </div>
+        <div class="choice-list-grid-wrapper">
+          <div class="choice-list-item choice-list-button choice-list-item-1-button">
+            <div id="choice-list-item-1">Choice 1</div>
+          </div>
+          <div class="choice-list-item choice-list-button choice-list-item-2-button">
+            <div id="choice-list-item-2">Choice 2</div>
+          </div>
+          <div class="choice-list-item choice-list-button choice-list-item-3-button">
+            <div id="choice-list-item-3">Choice 3</div>
+          </div>
+          <div class="choice-list-item choice-list-button choice-list-item-4-button">
+            <div id="choice-list-item-4">Choice 4</div>
+          </div>
+        </div>
+        <div class="choice-list-actions-wrapper">
+          <div class="choice-list-arrows-wrapper">
+            <button class="scroll-button js-scroll-up-button round-progress-button choice-list-arrow-up choice-list-button">
+              <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                <path fill-rule="evenodd" d="M34.89 18.71c-1.48 1.339-3.878 1.339-5.358 0l-7.742-7.005v20.866C21.79 34.464 20.093 36 18 36s-3.788-1.536-3.788-3.429V11.705L6.468 18.71c-1.48 1.339-3.878 1.339-5.358 0-1.48-1.34-1.48-3.511 0-4.848L15.318 1.008c.178-.161.373-.305.582-.432.09-.053.187-.09.28-.137.123-.06.243-.127.372-.178.125-.045.252-.072.378-.105.11-.03.216-.069.328-.09.247-.042.495-.066.743-.066s.496.024.743.067c.111.02.218.06.326.089.128.033.255.06.38.105.13.051.247.118.372.178.093.046.187.084.28.137.209.127.404.27.582.432L34.89 13.862c1.48 1.339 1.48 3.509 0 4.848" class="up-arrow-svg"/>
+              </svg>
+            </button>
+            <div class="choice-list-pager">1/2</div>
+            <button class="scroll-button js-scroll-up-button round-progress-button choice-list-arrow-down choice-list-button">
+              <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                <path fill-rule="evenodd" d="M34.89 17.29c-1.48-1.339-3.878-1.339-5.358 0l-7.742 7.005V3.429C21.79 1.536 20.093 0 18 0s-3.788 1.536-3.788 3.429v20.866L6.468 17.29c-1.48-1.339-3.878-1.339-5.358 0-1.48 1.34-1.48 3.511 0 4.848l14.208 12.854c.178.161.373.305.582.432.09.053.187.09.28.137.123.06.243.127.372.178.125.045.252.072.378.105.11.03.216.069.328.09.247.042.495.066.743.066s.496-.024.743-.067c.111-.02.218-.06.326-.089.128-.033.255-.06.38-.105.13-.051.247-.118.372-.178.093-.046.187-.084.28-.137.209-.127.404-.27.582-.432L34.89 22.138c1.48-1.339 1.48-3.509 0-4.848" class="down-arrow-svg"/>
+              </svg>
+            </button>
+          </div>
+          <div class="submit-choice-list-button-wrapper">
+            <button class="progress-button enter js-i18n choice-list-button submit-choice-list-button">Submit</button>
+          </div>
+        </div>
+      </section>
+  </main>
+</section>
