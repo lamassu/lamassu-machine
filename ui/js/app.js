@@ -309,6 +309,11 @@ function customPermission(customInfoRequest, screen) {
   if (screen === 2) {
     $('#custom-screen2-title').text(customInfoRequest.screen2.title);
     $('#custom-screen2-text').text(customInfoRequest.screen2.text);
+    customRequirementNumericalKeypad.setOpts({
+      type: 'custom',
+      constraint: customInfoRequest.input.constraintType,
+      maxLength: customInfoRequest.input.numDigits
+    });
     customRequirementNumericalKeypad.activate();
     setState('custom_permission_screen2');
     setScreen('custom_permission_screen2');
@@ -505,7 +510,9 @@ $(document).ready(function () {
     buttonPressed('securityCode', result);
   });
 
-  customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', { type: 'custom', constraint: 'date', maxLength: 8 }, function (result) {
+  customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', {
+    type: 'custom'
+  }, function (result) {
     if (currentState !== 'custom_permission_screen2') return;
     buttonPressed('customRequirement', result);
   });
@@ -721,7 +728,9 @@ $(document).ready(function () {
   setupButton('custom-permission-yes', 'permissionCustomPermission');
   setupButton('custom-permission-no', 'finishBeforeSms');
   setupButton('custom-permission-cancel', 'finishBeforeSms');
-  setupImmediateButton('custom-permission-cancel', 'cancelCustomPermission', customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad));
+  setupImmediateButton('custom-permission-cancel', 'cancelCustomPermission', function () {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
+  });
 
   touchEvent(document.getElementById('change-language-section'), function () {
     if (_primaryLocales.length === 2) {
