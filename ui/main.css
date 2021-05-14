@@ -2123,3 +2123,16 @@ footer {
   position: absolute;
   right: 4vh;
   bottom: 0; }
+
+.flex-center-verical {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center; }

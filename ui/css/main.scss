@@ -1391,3 +1391,10 @@ footer {
   right: 4vh;
   bottom: 0;
 }
+
+.flex-center-verical {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
