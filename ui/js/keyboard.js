@@ -1,26 +1,26 @@
 /* globals $ */
 
 const KEYBOARD_TIMEOUT = 30000
-
-var Keyboard = function (keyboardId) {
-  this.keyboardId = keyboardId
-  this.keyboard = $('#' + keyboardId)
-  this.inputBox = this.keyboardId === 'wifi-keyboard' ? this.keyboard.find('input.passphrase') : $('.promo-code-input')
-  this.keyCase = 'lc'
-  this.backspaceTimeout = null
-  this.active = true
-  this.timeoutRef = null
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+var Keyboard = function (options) {
+  this.keyboardId = options.id
+  this.keyboard = $('#' + options.id)
+  this.inputBox = $(options.inputBox)
+  this.keyCase = options.keyCase || 'lc'
+  this.backspaceTimeout = options.backspaceTimeout || null
+  this.active = options.active || true
+  this.timeoutRef = options.timeoutRef || null
+  this.constraint = options.constraint || null
+  this.constraintButtons = []
 }
 
 Keyboard.prototype.init = function init (callback) {
   this.callback = callback ? callback : null
-
   var keyboard = document.getElementById(this.keyboardId)
   var self = this
   keyboard.addEventListener('mousedown', function (e) {
     self._restartTimeout()
     if (!self.active) return
-
     var target = $(e.target)
     if (target.hasClass('shift')) {
       self._toggleShift()
@@ -31,6 +31,7 @@ Keyboard.prototype.init = function init (callback) {
     } else if (target.hasClass('key')) {
       self._keyPress(target)
     }
+    self._validateInput()
   })
 
   if (this.keyboardId === 'wifi-keyboard') {
@@ -39,7 +40,6 @@ Keyboard.prototype.init = function init (callback) {
       self._backspaceUp(target)
     })
   }
-
   return this
 }
 
@@ -111,7 +111,7 @@ Keyboard.prototype._keyPress = function _keyPress (target) {
 }
 
 Keyboard.prototype._backspace = function _backspace (target) {
-  if (this.keyboardId === 'promo-keyboard') {
+  if (this.keyboardId !== 'wifi-keyboard') {
     var inputBox = this.inputBox
     var content = inputBox.data('content')
     var result = content.substring(0, content.length - 1)
@@ -223,3 +223,75 @@ Keyboard.prototype._backspaceUp = function _backspaceUp (target) {
     })
   }
 }(jQuery))
+
+// pass the class or id of the new input box to put text into, include the . or # as well
+Keyboard.prototype.setInputBox = function setInputBox(newInputBox, constraintButtons = []) {
+  this.inputBox = $(newInputBox)
+  if (!this.inputBox.data('content'))
+    this.inputBox.data('content', '').val('')
+  if (constraintButtons.length > 0) {
+    this.constraintButtons = constraintButtons
+  }
+  this._validateInput()
+}
+
+Keyboard.prototype.setConstraint = function setConstraint(constraintType, constraintButtons = []) {
+  this.constraint = constraintType
+  this.constraintButtons = constraintButtons
+  this._validateInput()
+}
+
+Keyboard.prototype._validateInput = function _validateInput() {
+  switch(this.constraint) {
+    case "spaceSeparation":
+      this._validateSpaceSeparation()
+      break
+    case "none":
+      this._validateNoConstraint()
+      break
+    case "email":
+      this._validateEmail()
+    default:
+      break
+  }
+}
+
+Keyboard.prototype._validateSpaceSeparation = function _validateSpaceSeparation() {
+  // no spaces allowed inside field
+  // minimum 1 character per field
+  if (!!this.inputBox.data('content') && !this.inputBox.data('content').includes(' ')) {
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
+}
+
+Keyboard.prototype._validateNoConstraint = function _validateSpaceSeparation() {
+  // minimum 1 non space character
+  if (!!this.inputBox.data('content') && !!this.inputBox.data('content').trim()) {
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
+}
+
+Keyboard.prototype._validateEmail = function _validateEmail() {
+  const content = this.inputBox.data('content') || ''
+  if (emailRegex.test(content)) {
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
+}
