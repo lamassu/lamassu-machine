@@ -186,3 +186,8 @@ Keypad.prototype._keyPress = function _keyPress (target) {
     this.keypad.find('.enter')[0].disabled = false
   }
 }
+
+Keypad.prototype.setOpts = function setOpts (newOpts) {
+  this.opts = newOpts
+  if (this.opts.constraint && this.opts.constraint === 'length') LENGTHS.custom = this.opts.maxLength
+}
