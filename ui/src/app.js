@@ -47,6 +47,7 @@ let currentCoin = null
 let currentCoins = []
 let customRequirementNumericalKeypad = null
 let customRequirementTextKeyboard = null
+let customRequirementChoiceList = null
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -314,6 +315,13 @@ function customInfoRequest (customInfoRequest, screen) {
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
       break
+    case 'choiceList':
+      $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text)
+      customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType)
+      setState('custom_permission_screen2_choiceList')
+      setScreen('custom_permission_screen2_choiceList')
+      break
     default:
       return blockedCustomer()
   }
@@ -554,6 +562,13 @@ $(document).ready(function () {
     buttonPressed('customInfoRequestSubmit')
   })
 
+  customRequirementChoiceList = new ChoiceList({
+    id: 'custom-requirement-choicelist-wrapper'
+  }).init(function (result) {
+    if (currentState !== 'custom_permission_screen2_choiceList') return
+    buttonPressed('customInfoRequestSubmit', result)
+  })
+
   if (DEBUG_MODE !== 'demo') {
     connect()
     setInterval(verifyConnection, 1000)
@@ -792,6 +807,20 @@ $(document).ready(function () {
   setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
+
+  setupButton('custom-permission-yes', 'customInfoRequestPermission')
+  setupButton('custom-permission-no', 'finishBeforeSms')
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
+  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
+    $('.text-input-field-2').addClass('faded').data('content', '').val('')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
+  })
 
   setupButton('custom-permission-yes', 'customInfoRequestPermission')
   setupButton('custom-permission-no', 'finishBeforeSms')
@@ -1091,7 +1120,8 @@ function setDirection (direction) {
     $('.promo_code_not_found_state'),
     $('.custom_permission_state'),
     $('.custom_permission_screen2_numerical_state'),
-    $('.custom_permission_screen2_text_state')
+    $('.custom_permission_screen2_text_state'),
+    $('.custom_permission_screen2_choiceList_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)

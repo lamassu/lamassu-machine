@@ -103,7 +103,7 @@ Keypad.prototype.backspace = function backspace () {
 
   this.result = this.result.substring(0, this.result.length - 1)
 
-  var display = getDisplay(this.result, this.type, this.opts.country, this.opts)
+  var display = getDisplay(this.result, this.type, this.opts)
 
   if (!display) {
     this.keypad.find('.phone-separator').addClass('hidden')
@@ -163,10 +163,10 @@ function validateDate (text) {
   return !!Date.parse(`${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`)
 }
 
-function getDisplay (result, type, country, opts) {
+function getDisplay (result, type, opts) {
   if (!result) return result
 
-  if (type === 'phoneNumber') return new libphonenumber.AsYouType(country).input(result)
+  if (type === 'phoneNumber') return new libphonenumber.AsYouType(opts.country).input(result)
   if (type === 'usSsn') return ssnFormat(result)
   if (type === 'custom') return customFormat(result, opts)
   return result
@@ -177,7 +177,7 @@ Keypad.prototype._keyPress = function _keyPress (target) {
   var numeral = target.text()
   this.result += numeral
 
-  var display = getDisplay(this.result, this.type, this.opts.country, this.opts)
+  var display = getDisplay(this.result, this.type, this.opts)
 
   if (display) {
     this.keypad.find('.phone-separator').removeClass('hidden')
@@ -214,5 +214,21 @@ Keypad.prototype.setOpts = function setOpts (newOpts) {
       break
     default:
       break
+  }
+}
+
+Keypad.prototype.setOpts = function setOpts (newOpts) {
+  this.opts = newOpts
+  if (this.opts.constraint) {
+    switch (this.opts.constraint) {
+      case 'length':
+        LENGTHS.custom = this.opts.maxLength
+        break
+      case 'date':
+        LENGTHS.custom = 8
+        break
+      default:
+        break
+    }
   }
 }

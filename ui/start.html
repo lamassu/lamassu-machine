@@ -30,6 +30,7 @@
     <script src="js/vendor/kjua-0.1.1.min.js"></script>
     <script src="js/vendor/jquery.transit.min.js"></script>
     <script src="js/keyboard.js"></script>
+    <script src="js/choice-list.js"></script>
     <script src="js/vendor/libphonenumber-js.min.js"></script>
     <script src="js/keypad.js"></script>
     <script src="js/vendor/jed.js"></script>
@@ -667,6 +668,62 @@
           <button data-target-class="text-input-field-2" id="next-text-requirement" class="filled-progress-button button submit-text-requirement-button">Next</button>
           <button id="submit-text-requirement" class="filled-progress-button button submit-text-requirement-button">Submit</button>
         </footer>
+      </main>
+    </section>
+    
+    <section
+      class="viewport custom_permission_screen2_choiceList_state"
+      data-tr-section="custom-permission-screen2-choiceList"
+      id="custom-permission-screen2-choiceList"
+      data-screentype="custom-permission-screen2-choiceList">
+    
+      <header class="custom-info-request-choiceList-header">
+        <div id="custom-permission-cancel-choiceList" class="cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main class="custom-permission-text-input-main">
+        <section id="custom-requirement-choicelist-wrapper">
+            <div>
+              <h2 class="js-i18n primary-side-title xs-margin-bottom" id="custom-screen2-choiceList-title"></h2>
+              <div class="d1">
+                <span class="js-i18n" id="custom-screen2-choiceList-text"></span>
+              </div>
+            </div>
+            <div class="choice-list-grid-wrapper">
+              <div class="choice-list-item choice-list-button choice-list-item-1-button">
+                <div id="choice-list-item-1">Choice 1</div>
+              </div>
+              <div class="choice-list-item choice-list-button choice-list-item-2-button">
+                <div id="choice-list-item-2">Choice 2</div>
+              </div>
+              <div class="choice-list-item choice-list-button choice-list-item-3-button">
+                <div id="choice-list-item-3">Choice 3</div>
+              </div>
+              <div class="choice-list-item choice-list-button choice-list-item-4-button">
+                <div id="choice-list-item-4">Choice 4</div>
+              </div>
+            </div>
+            <div class="choice-list-actions-wrapper">
+              <div class="choice-list-arrows-wrapper">
+                <button class="scroll-button js-scroll-up-button round-progress-button choice-list-arrow-up choice-list-button">
+                  <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                    <path fill-rule="evenodd" d="M34.89 18.71c-1.48 1.339-3.878 1.339-5.358 0l-7.742-7.005v20.866C21.79 34.464 20.093 36 18 36s-3.788-1.536-3.788-3.429V11.705L6.468 18.71c-1.48 1.339-3.878 1.339-5.358 0-1.48-1.34-1.48-3.511 0-4.848L15.318 1.008c.178-.161.373-.305.582-.432.09-.053.187-.09.28-.137.123-.06.243-.127.372-.178.125-.045.252-.072.378-.105.11-.03.216-.069.328-.09.247-.042.495-.066.743-.066s.496.024.743.067c.111.02.218.06.326.089.128.033.255.06.38.105.13.051.247.118.372.178.093.046.187.084.28.137.209.127.404.27.582.432L34.89 13.862c1.48 1.339 1.48 3.509 0 4.848" class="up-arrow-svg"/>
+                  </svg>
+                </button>
+                <div class="choice-list-pager">1/2</div>
+                <button class="scroll-button js-scroll-up-button round-progress-button choice-list-arrow-down choice-list-button">
+                  <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+                    <path fill-rule="evenodd" d="M34.89 17.29c-1.48-1.339-3.878-1.339-5.358 0l-7.742 7.005V3.429C21.79 1.536 20.093 0 18 0s-3.788 1.536-3.788 3.429v20.866L6.468 17.29c-1.48-1.339-3.878-1.339-5.358 0-1.48 1.34-1.48 3.511 0 4.848l14.208 12.854c.178.161.373.305.582.432.09.053.187.09.28.137.123.06.243.127.372.178.125.045.252.072.378.105.11.03.216.069.328.09.247.042.495.066.743.066s.496-.024.743-.067c.111-.02.218-.06.326-.089.128-.033.255-.06.38-.105.13-.051.247-.118.372-.178.093-.046.187-.084.28-.137.209-.127.404-.27.582-.432L34.89 22.138c1.48-1.339 1.48-3.509 0-4.848" class="down-arrow-svg"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="submit-choice-list-button-wrapper">
+                <button class="progress-button enter js-i18n choice-list-button submit-choice-list-button">Submit</button>
+              </div>
+            </div>
+          </section>
       </main>
     </section>
     <section class="viewport deposit_timeout_state info cash-out-color" data-tr-section="deposit-timeout">

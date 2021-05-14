@@ -104,6 +104,7 @@
       "ui/js/locales.js",
       "ui/js/debug.js",
       "ui/js/keyboard.js",
+      "ui/js/choice-list.js",
       "ui/flag-icon-css/**",
       "tools/**",
       "test/**",
