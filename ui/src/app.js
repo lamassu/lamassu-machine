@@ -269,6 +269,9 @@ function processData (data) {
     case 'usSsnPermission':
       usSsnPermission()
       break
+    case 'customPermission':
+      customPermission(data.customInfoRequest)
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
@@ -290,6 +293,12 @@ function facephotoPermission () {
 
 function usSsnPermission () {
   setScreen('us_ssn_permission')
+}
+
+function customPermission (customInfoRequest) {
+  $('#custom-screen1-title').text(customInfoRequest.screen1.title)
+  $('#custom-screen1-text').text(customInfoRequest.screen1.text)
+  setScreen('custom_permission')
 }
 
 function idVerification () {
@@ -687,6 +696,7 @@ $(document).ready(function () {
   setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
+  setupButton('custom-permission-yes', 'permissionCustomPermission')
 
   setupButton('send-coins-id', 'finishBeforeSms')
   setupButton('send-coins-id-2', 'finishBeforeSms')
@@ -698,6 +708,7 @@ $(document).ready(function () {
   setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
+  setupButton('custom-permission-no', 'finishBeforeSms')
 
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
@@ -980,7 +991,8 @@ function setDirection (direction) {
     $('.retry_permission_id_state'),
     $('.waiting_state'),
     $('.insert_promo_code_state'),
-    $('.promo_code_not_found_state')
+    $('.promo_code_not_found_state'),
+    $('.custom_permission_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
