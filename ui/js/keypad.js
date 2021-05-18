@@ -30,9 +30,16 @@ var Keypad = function (keypadId, opts, callback) {
 
     if (target.hasClass('enter')) {
       self.deactivate()
+      let result = self.result
 
-      const phoneResult = libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country)
-      const result = self.type === 'phoneNumber' && phoneResult ? phoneResult.number : self.result
+      if (self.type === 'phoneNumber') {
+        const phoneResult = libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country)
+        if (phoneResult) result = phoneResult
+      }
+
+      if (self.type === 'custom' && self.opts.constraint === 'date') {
+        result = `${self.result.slice(0, 4)}-${self.result.slice(4, 6)}-${self.result.slice(6, 8)}`
+      }
 
       self.reset()
       return self.callback(result)
@@ -143,13 +150,17 @@ function isValidSsn (ssn) {
 
 function customFormat (text, opts) {
   if (opts.constraint === 'date') {
-    const year = text.slice(0, 4)
-    const month = text.slice(4, 6)
-    const day = text.slice(6, 8)
-    return `${year || 'YYYY'}-${month || 'MM'}-${day || 'DD'}`
+    const year = text.slice(0, 4).padEnd(4, 'Y')
+    const month = text.slice(4, 6).padEnd(2, 'M')
+    const day = text.slice(6, 8).padEnd(2, 'D')
+    return `${year}-${month}-${day}`
   }
-  // TODO other cosntraints for custom info request
   return text
+}
+
+function validateDate (text) {
+  if (text.length !== 8) return false
+  return !!Date.parse(`${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}`)
 }
 
 function getDisplay (result, type, country, opts) {
@@ -185,9 +196,24 @@ Keypad.prototype._keyPress = function _keyPress (target) {
   if (this.type === 'usSsn' && isValidSsn((this.result))) {
     this.keypad.find('.enter')[0].disabled = false
   }
+
+  if (this.type === 'custom' && this.opts.constraint === 'date') {
+    this.keypad.find('.enter')[0].disabled = !validateDate(this.result)
+  }
 }
 
 Keypad.prototype.setOpts = function setOpts (newOpts) {
   this.opts = newOpts
-  if (this.opts.constraint && this.opts.constraint === 'length') LENGTHS.custom = this.opts.maxLength
+  if (this.opts.constraint) {
+    switch (this.opts.constraint) {
+      case 'length':
+        LENGTHS.custom = this.opts.maxLength
+        break
+      case 'date':
+        LENGTHS.custom = 8
+        break
+      default:
+        break
+    }
+  }
 }

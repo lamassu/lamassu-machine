@@ -281,11 +281,11 @@ function processData(data) {
     case 'invalidPromoCode':
       setState('promo_code_not_found');
       break;
-    case 'customPermission':
-      customPermission(data.customInfoRequest, 1);
+    case 'customInfoRequest':
+      customInfoRequest(data.customInfoRequest, 1);
       break;
-    case 'customPermissionScreen2':
-      customPermission(data.customInfoRequest, 2);
+    case 'customInfoRequestScreen2':
+      customInfoRequest(data.customInfoRequest, 2);
       break;
     default:
       if (data.action) setState(window.snakecase(data.action));
@@ -300,7 +300,7 @@ function usSsnPermission() {
   setScreen('us_ssn_permission');
 }
 
-function customPermission(customInfoRequest, screen) {
+function customInfoRequest(customInfoRequest, screen) {
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title);
     $('#custom-screen1-text').text(customInfoRequest.screen1.text);
@@ -514,7 +514,7 @@ $(document).ready(function () {
     type: 'custom'
   }, function (result) {
     if (currentState !== 'custom_permission_screen2') return;
-    buttonPressed('customRequirement', result);
+    buttonPressed('customInfoRequestSubmit', result);
   });
 
   if (DEBUG_MODE !== 'demo') {
@@ -725,10 +725,10 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms');
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms');
 
-  setupButton('custom-permission-yes', 'permissionCustomPermission');
+  setupButton('custom-permission-yes', 'customInfoRequestPermission');
   setupButton('custom-permission-no', 'finishBeforeSms');
   setupButton('custom-permission-cancel', 'finishBeforeSms');
-  setupImmediateButton('custom-permission-cancel', 'cancelCustomPermission', function () {
+  setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
   });
 
