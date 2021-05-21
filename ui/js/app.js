@@ -1763,6 +1763,18 @@ function setReceiptPrint(receiptStatus) {
       $('#print-receipt-cash-in-fail-message').html(successMessage);
       $('#print-receipt-cash-in-fail-message').removeClass('hide');
       break;
+    case 'failed':
+      var failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch();
+      $('#print-receipt-cash-in-button').addClass('hide');
+      $('#print-receipt-cash-in-message').html(failMessage);
+      $('#print-receipt-cash-in-message').removeClass('hide');
+      $('#print-receipt-cash-out-button').addClass('hide');
+      $('#print-receipt-cash-out-message').html(failMessage);
+      $('#print-receipt-cash-out-message').removeClass('hide');
+      $('#print-receipt-cash-in-fail-button').addClass('hide');
+      $('#print-receipt-cash-in-fail-message').html(failMessage);
+      $('#print-receipt-cash-in-fail-message').removeClass('hide');
+      break;
   }
 }
 
