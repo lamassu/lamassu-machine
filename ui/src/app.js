@@ -105,7 +105,7 @@ function buttonPressed (button, data) {
     wifiKeyboard.activate()
     promoKeyboard.activate()
   }, 300)
-  var res = {button: button}
+  var res = { button: button }
   if (data || data === null) res.data = data
   if (websocket) websocket.send(JSON.stringify(res))
 }
@@ -303,19 +303,24 @@ function customInfoRequest (customInfoRequest, screen) {
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title)
     $('#custom-screen1-text').text(customInfoRequest.screen1.text)
-    setScreen('custom_permission')
+    return setScreen('custom_permission')
   }
-  if (screen === 2) {
-    $('#custom-screen2-title').text(customInfoRequest.screen2.title)
-    $('#custom-screen2-text').text(customInfoRequest.screen2.text)
-    customRequirementNumericalKeypad.setOpts({
-      type: 'custom',
-      constraint: customInfoRequest.input.constraintType,
-      maxLength: customInfoRequest.input.numDigits
-    })
-    customRequirementNumericalKeypad.activate()
-    setState('custom_permission_screen2')
-    setScreen('custom_permission_screen2')
+  // screen 2
+  switch (customInfoRequest.input.type) {
+    case 'numerical':
+      $('#custom-screen2-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-text').text(customInfoRequest.screen2.text)
+      customRequirementNumericalKeypad.setOpts({
+        type: 'custom',
+        constraint: customInfoRequest.input.constraintType,
+        maxLength: customInfoRequest.input.numDigits
+      })
+      customRequirementNumericalKeypad.activate()
+      setState('custom_permission_screen2')
+      setScreen('custom_permission_screen2')
+      break
+    default:
+      return blockedCustomer()
   }
 }
 
@@ -473,7 +478,7 @@ function switchCoin (coin) {
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
 
-  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode)) 
+  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode))
   if (currentCoins.length > 4 && selectedIndex > 2) {
     currentCoins.splice(2, 0, currentCoins.splice(selectedIndex, 1)[0])
   }
@@ -498,7 +503,7 @@ $(document).ready(function () {
           window.onmouseup =
             function () { return false }
 
-  BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
+  BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN })
 
   wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
@@ -507,17 +512,17 @@ $(document).ready(function () {
     buttonPressed('cancelPromoCode')
   })
 
-  usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
+  usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     if (currentState !== 'register_us_ssn') return
     buttonPressed('usSsn', result)
   })
 
-  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
+  phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
     if (currentState !== 'register_phone') return
     buttonPressed('phoneNumber', result)
   })
 
-  securityKeypad = new Keypad('security-keypad', {type: 'code'}, function (result) {
+  securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     if (currentState !== 'security_code') return
     buttonPressed('securityCode', result)
   })
@@ -552,7 +557,7 @@ $(document).ready(function () {
         var displaySsid = ssidEl.text()
         var rawSsid = ssidEl.data('raw-ssid')
         buttonPressed('wifiSelect',
-          {ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid})
+          { ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid })
       }
     }
   })
@@ -565,7 +570,7 @@ $(document).ready(function () {
     var pass = $('#wifi-keyboard input.passphrase').data('content')
     var ssid = $('#js-i18n-wifi-for-ssid').data('ssid')
     var rawSsid = $('#js-i18n-wifi-for-ssid').data('raw-ssid')
-    buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid})
+    buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid })
   })
 
   var sendCoinsButton = document.getElementById('send-coins')
@@ -634,8 +639,8 @@ $(document).ready(function () {
   setupButton('pairing-error-ok', 'pairingErrorOk')
   setupButton('cash-out-button', 'cashOut')
 
-  setupImmediateButton('scan-id-cancel', 'idDataActionCancel');
-  setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel');
+  setupImmediateButton('scan-id-cancel', 'idDataActionCancel')
+  setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel')
   setupImmediateButton('us-ssn-cancel', 'cancelUsSsn',
     usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
@@ -800,7 +805,7 @@ $(document).ready(function () {
     if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat')
     var denominationIndex = cashButtonJ.attr('data-denomination-index')
     var denominationRec = cassettes[denominationIndex]
-    buttonPressed('fiatButton', {denomination: denominationRec.denomination})
+    buttonPressed('fiatButton', { denomination: denominationRec.denomination })
   })
 
   initDebug()
@@ -873,7 +878,7 @@ function setScreen (newScreen, oldScreen) {
 
   if (newScreen === 'insert_bills') {
     $('.js-processing-bill').html(locale.translate('Lamassu Cryptomat').fetch())
-    $('.bill img').css({'-webkit-transform': 'none', top: 0, left: 0})
+    $('.bill img').css({ '-webkit-transform': 'none', top: 0, left: 0 })
   }
 
   var newView = $('.' + newScreen + '_state')
@@ -919,7 +924,7 @@ function setWifiList (recs, requestedPage) {
     offset = 0
     page = 0
   }
-  $('#more-networks').css({'display': 'none'})
+  $('#more-networks').css({ 'display': 'none' })
   networks.empty()
   networks.data('page', page)
   networks.data('recs', recs)
@@ -963,7 +968,7 @@ function setOperatorInfo (operator) {
   }
 }
 
-function setHardLimit(limits) {
+function setHardLimit (limits) {
   const component = $('#hard-limit-hours')
 
   if (limits.hardLimitWeeks >= 1) {
@@ -1464,9 +1469,9 @@ function setBuyerAddress (address) {
 function setAccepting (currentAccepting) {
   accepting = currentAccepting
   if (accepting) {
-    $('.bill img').transition({x: 0, y: -303}, 1000, 'ease-in')
+    $('.bill img').transition({ x: 0, y: -303 }, 1000, 'ease-in')
   } else {
-    $('.bill img').transition({x: 0, y: 0}, 1000, 'ease-out')
+    $('.bill img').transition({ x: 0, y: 0 }, 1000, 'ease-out')
   }
 }
 
@@ -1726,9 +1731,9 @@ function initDebug () {
 
     if (!SCREEN) {
       return chooseCoin([
-        {display: 'Bitcoin', cryptoCode: 'BTC'},
-        {display: 'Ethereum', cryptoCode: 'ETH'},
-        {display: 'ZCash', cryptoCode: 'ZEC'}
+        { display: 'Bitcoin', cryptoCode: 'BTC' },
+        { display: 'Ethereum', cryptoCode: 'ETH' },
+        { display: 'ZCash', cryptoCode: 'ZEC' }
       ], true)
     }
 

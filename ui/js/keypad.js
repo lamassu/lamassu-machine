@@ -134,13 +134,13 @@ function ssnFormat (ssn) {
   }
 
   if ((ssn.length > 5)) {
-    return ssn.substr(0, 3) + '-' + ssn.substr(3, 2) + '-' + ssn.substr(5);
+    return ssn.substr(0, 3) + '-' + ssn.substr(3, 2) + '-' + ssn.substr(5)
   }
 }
 
 function isValidSsn (ssn) {
-  return ssn && 
-    ssn.length === LENGTHS.usSsn && 
+  return ssn &&
+    ssn.length === LENGTHS.usSsn &&
     ssn.substr(0, 1) !== '9' &&
     ssn.substr(0, 3) !== '000' &&
     ssn.substr(0, 3) !== '666' &&
@@ -204,16 +204,15 @@ Keypad.prototype._keyPress = function _keyPress (target) {
 
 Keypad.prototype.setOpts = function setOpts (newOpts) {
   this.opts = newOpts
-  if (this.opts.constraint) {
-    switch (this.opts.constraint) {
-      case 'length':
-        LENGTHS.custom = this.opts.maxLength
-        break
-      case 'date':
-        LENGTHS.custom = 8
-        break
-      default:
-        break
-    }
+  if (!this.opts.constraint) return
+  switch (this.opts.constraint) {
+    case 'length':
+      LENGTHS.custom = this.opts.maxLength
+      break
+    case 'date':
+      LENGTHS.custom = 8
+      break
+    default:
+      break
   }
 }

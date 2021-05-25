@@ -304,19 +304,24 @@ function customInfoRequest(customInfoRequest, screen) {
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title);
     $('#custom-screen1-text').text(customInfoRequest.screen1.text);
-    setScreen('custom_permission');
+    return setScreen('custom_permission');
   }
-  if (screen === 2) {
-    $('#custom-screen2-title').text(customInfoRequest.screen2.title);
-    $('#custom-screen2-text').text(customInfoRequest.screen2.text);
-    customRequirementNumericalKeypad.setOpts({
-      type: 'custom',
-      constraint: customInfoRequest.input.constraintType,
-      maxLength: customInfoRequest.input.numDigits
-    });
-    customRequirementNumericalKeypad.activate();
-    setState('custom_permission_screen2');
-    setScreen('custom_permission_screen2');
+  // screen 2
+  switch (customInfoRequest.input.type) {
+    case 'numerical':
+      $('#custom-screen2-title').text(customInfoRequest.screen2.title);
+      $('#custom-screen2-text').text(customInfoRequest.screen2.text);
+      customRequirementNumericalKeypad.setOpts({
+        type: 'custom',
+        constraint: customInfoRequest.input.constraintType,
+        maxLength: customInfoRequest.input.numDigits
+      });
+      customRequirementNumericalKeypad.activate();
+      setState('custom_permission_screen2');
+      setScreen('custom_permission_screen2');
+      break;
+    default:
+      return blockedCustomer();
   }
 }
 
