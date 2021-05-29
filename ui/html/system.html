@@ -117,7 +117,7 @@
 </section>
 
 <section
-  class="viewport pairing_scan_state info system-color"
+  class="viewport pairing_scan_state system-color"
   data-tr-section="pairing-scan"
   data-screentype="system-tp"
 >
@@ -125,15 +125,19 @@
     <!-- TODO correct SVG -->
     <!-- <img src="images/lamassu-logo.svg"/> -->
   </header>
-  <main>
-    <h3 class="js-i18n no-margin-bottom">Pair with remote server</h3>
-    <p class="js-i18n d2">
-      Please scan the pairing QR code you got from your remote server.
-    </p>
+  <main class="xl-margin-top">
+    <section class="primary-side fade-in">
+      <h2 class="primary-side-title xs-margin-bottom js-i18n">Scan QR code</h2>
+      <p class="js-i18n no-margin-top d1">
+        Please scan the pairing QR code you got from your remote server.
+      </p>
+    </section>
+    <section class="secondary-side fade-in-delay">
+      <object class="scan-image only-sintra" data="images/scan/animation/sintra/BTC-amazonite.svg"></object>
+      <object class="scan-image only-douro" data="images/scan/animation/douro/BTC-amazonite.svg"></object>
+      <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
+    </section>
   </main>
-  <footer>
-    <button id="pairing-scan-cancel" class="filled-progress-button button js-i18n">Cancel</button>
-  </footer>
 </section>
 
 <section
