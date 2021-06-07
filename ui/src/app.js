@@ -323,6 +323,16 @@ function customInfoRequest (customInfoRequest, screen) {
       setScreen('custom_permission_screen2_numerical')
       break
     case 'text':
+      $('#custom-requirement-text-label1').text(customInfoRequest.input.label1)
+      $('#custom-requirement-text-label2').text(customInfoRequest.input.label2)
+      $('#previous-text-requirement').hide()
+      $('#submit-text-requirement').hide()
+      $('#next-text-requirement').show()
+      if (customInfoRequest.input.constraintType !== 'spaceSeparation') {
+        $('#optional-text-field-2').hide()
+        $('#next-text-requirement').hide()
+        $('#submit-text-requirement').show()
+      }
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
       break
@@ -647,6 +657,34 @@ $(document).ready(function () {
     buttonPressed('submitPromoCode', { input: code })
   })
 
+  const submitTextRequirementButton = document.getElementById('submit-text-requirement')
+  const nextFieldTextRequirementButton = document.getElementById('next-text-requirement')
+  const previousFieldTextRequirementButton = document.getElementById('previous-text-requirement')
+  touchEvent(submitTextRequirementButton, function () {
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    var text = `${$('.text-input-field-1').data('content')} ${$('.text-input-field-2').data('content') || ''}`
+    buttonPressed('customInfoRequestSubmit', text)
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
+    $('.text-input-field-2').addClass('faded').data('content', '').val('')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+  touchEvent(nextFieldTextRequirementButton, function() {
+    $('.text-input-field-1').addClass('faded')
+    $('.text-input-field-2').removeClass('faded')
+    $('#next-text-requirement').hide()
+    $('#previous-text-requirement').show()
+    $('#submit-text-requirement').show()
+    customRequirementTextKeyboard.setInputBox('.text-input-field-2')
+  })
+  touchEvent(previousFieldTextRequirementButton, function() {
+    $('.text-input-field-1').removeClass('faded')
+    $('.text-input-field-2').addClass('faded')
+    $('#next-text-requirement').show()
+    $('#previous-text-requirement').hide()
+    $('#submit-text-requirement').hide()
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+
   setupButton('submit-promo-code', 'submitPromoCode', {
     input: $('.promo-code-input').data('content')
   })
@@ -764,6 +802,8 @@ $(document).ready(function () {
   setupButton('custom-permission-cancel', 'finishBeforeSms')
   setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', () => {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
+  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
   })
 
@@ -896,7 +936,6 @@ function setupButton (buttonClass, buttonAction, actionData) {
 }
 
 function setScreen (newScreen, oldScreen) {
-  console.log(newScreen, oldScreen)
   if (newScreen === oldScreen) return
 
   if (newScreen === 'insert_bills') {

@@ -1871,12 +1871,18 @@ footer {
 .cash-in-color .promo-code-input {
   border-bottom: #34d9c8 2px solid; }
 
+.cash-in-color .text-requirement-input {
+  border-bottom: #34d9c8 2px solid; }
+
 .cash-in-color .promo-keyboard .key {
   background-color: #34d9c8; }
   .cash-in-color .promo-keyboard .key:active {
     background-color: #2cb9ac; }
 
 .cash-out-color .promo-code-input {
+  border-bottom: #e6746d 2px solid; }
+
+.cash-out-color .text-requirement-input {
   border-bottom: #e6746d 2px solid; }
 
 .cash-out-color .promo-keyboard .key {
@@ -1917,6 +1923,8 @@ footer {
     line-height: 10vh; }
     .promo-keyboard .key:active {
       border: none; }
+  .promo-keyboard .space {
+    width: 71vh; }
 
 #promo-code-title {
   color: #ffffff; }
@@ -2147,3 +2155,73 @@ footer {
 
 .custom-requirement-margin {
   margin: 50px; }
+
+.quick-keys {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex; }
+
+.text-input-fields-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center; }
+
+.custom-permission-text-input-main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 0vh 6vh 6vh 6vh; }
+
+.text-input-field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 45%; }
+
+.custom-requirement-text-label {
+  color: #ffffff;
+  margin: 0px;
+  padding: 0px; }
+
+.custom-requirement-text-input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none; }
+
+.submit-text-requirement-button-wrapper {
+  -webkit-box-pack: end;
+  -webkit-justify-content: end;
+          justify-content: end;
+  margin-right: 24vh; }
+
+.submit-text-requirement-button {
+  margin-right: 160px;
+  margin-top: 20px; }
+
+.faded {
+  color: #403c51;
+  border-bottom: none !important; }
+
+.text-requirement-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none; }

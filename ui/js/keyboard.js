@@ -14,13 +14,11 @@ var Keyboard = function (options) {
 
 Keyboard.prototype.init = function init (callback) {
   this.callback = callback ? callback : null
-  console.log(document.getElementById(this.keyboardId))
   var keyboard = document.getElementById(this.keyboardId)
   var self = this
   keyboard.addEventListener('mousedown', function (e) {
     self._restartTimeout()
     if (!self.active) return
-
     var target = $(e.target)
     if (target.hasClass('shift')) {
       self._toggleShift()
@@ -111,7 +109,7 @@ Keyboard.prototype._keyPress = function _keyPress (target) {
 }
 
 Keyboard.prototype._backspace = function _backspace (target) {
-  if (this.keyboardId === 'promo-keyboard') {
+  if (this.keyboardId !== 'wifi-keyboard') {
     var inputBox = this.inputBox
     var content = inputBox.data('content')
     var result = content.substring(0, content.length - 1)
@@ -223,3 +221,10 @@ Keyboard.prototype._backspaceUp = function _backspaceUp (target) {
     })
   }
 }(jQuery))
+
+// pass the class or id of the new input box to put text into, include the . or # as well
+Keyboard.prototype.setInputBox = function setInputBox(newInputBox) {
+  this.inputBox = $(newInputBox)
+  if (!this.inputBox.data('content'))
+    this.inputBox.data('content', '').val('')
+}
