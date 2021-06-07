@@ -2,19 +2,19 @@
 
 const KEYBOARD_TIMEOUT = 30000
 
-var Keyboard = function (keyboardId) {
-  this.keyboardId = keyboardId
-  this.keyboard = $('#' + keyboardId)
-  this.inputBox = this.keyboardId === 'wifi-keyboard' ? this.keyboard.find('input.passphrase') : $('.promo-code-input')
-  this.keyCase = 'lc'
-  this.backspaceTimeout = null
-  this.active = true
-  this.timeoutRef = null
+var Keyboard = function (options) {
+  this.keyboardId = options.id
+  this.keyboard = $('#' + options.id)
+  this.inputBox = $(options.inputBox)
+  this.keyCase = options.keyCase || 'lc'
+  this.backspaceTimeout = options.backspaceTimeout || null
+  this.active = options.active || true
+  this.timeoutRef = options.timeoutRef || null
 }
 
 Keyboard.prototype.init = function init (callback) {
   this.callback = callback ? callback : null
-
+  console.log(document.getElementById(this.keyboardId))
   var keyboard = document.getElementById(this.keyboardId)
   var self = this
   keyboard.addEventListener('mousedown', function (e) {

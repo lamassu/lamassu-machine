@@ -75,6 +75,7 @@ var currentCryptoCode = null;
 var currentCoin = null;
 var currentCoins = [];
 var customRequirementNumericalKeypad = null;
+var customRequirementTextKeyboard = null;
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
@@ -100,11 +101,13 @@ function buttonPressed(button, data) {
   if (!buttonActive) return;
   wifiKeyboard.deactivate();
   promoKeyboard.deactivate();
+  customRequirementTextKeyboard.deactivate();
   buttonActive = false;
   setTimeout(function () {
     buttonActive = true;
     wifiKeyboard.activate();
     promoKeyboard.activate();
+    customRequirementTextKeyboard.activate();
   }, 300);
   var res = { button: button };
   if (data || data === null) res.data = data;
@@ -309,16 +312,20 @@ function customInfoRequest(customInfoRequest, screen) {
   // screen 2
   switch (customInfoRequest.input.type) {
     case 'numerical':
-      $('#custom-screen2-title').text(customInfoRequest.screen2.title);
-      $('#custom-screen2-text').text(customInfoRequest.screen2.text);
+      $('#custom-screen2-numerical-title').text(customInfoRequest.screen2.title);
+      $('#custom-screen2-numerical-text').text(customInfoRequest.screen2.text);
       customRequirementNumericalKeypad.setOpts({
         type: 'custom',
         constraint: customInfoRequest.input.constraintType,
         maxLength: customInfoRequest.input.numDigits
       });
       customRequirementNumericalKeypad.activate();
-      setState('custom_permission_screen2');
-      setScreen('custom_permission_screen2');
+      setState('custom_permission_screen2_numerical');
+      setScreen('custom_permission_screen2_numerical');
+      break;
+    case 'text':
+      setState('custom_permission_screen2_text');
+      setScreen('custom_permission_screen2_text');
       break;
     default:
       return blockedCustomer();
@@ -493,9 +500,15 @@ $(document).ready(function () {
 
   BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN });
 
-  wifiKeyboard = new Keyboard('wifi-keyboard').init();
+  wifiKeyboard = new Keyboard({
+    id: 'wifi-keyboard',
+    inputBox: '#input-passphrase'
+  }).init();
 
-  promoKeyboard = new Keyboard('promo-keyboard').init(function () {
+  promoKeyboard = new Keyboard({
+    id: 'promo-keyboard',
+    inputBox: '.promo-code-input'
+  }).init(function () {
     if (currentState !== 'insert_promo_code') return;
     buttonPressed('cancelPromoCode');
   });
@@ -518,8 +531,16 @@ $(document).ready(function () {
   customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', {
     type: 'custom'
   }, function (result) {
-    if (currentState !== 'custom_permission_screen2') return;
+    if (currentState !== 'custom_permission_screen2_numerical') return;
     buttonPressed('customInfoRequestSubmit', result);
+  });
+
+  customRequirementTextKeyboard = new Keyboard({
+    id: 'custom-requirement-text-keyboard',
+    inputBox: '.text-input-field-1'
+  }).init(function () {
+    if (currentState !== 'custom_permission_screen2_text') return;
+    buttonPressed('customInfoRequestSubmit');
   });
 
   if (DEBUG_MODE !== 'demo') {
@@ -735,6 +756,7 @@ $(document).ready(function () {
   setupButton('custom-permission-cancel', 'finishBeforeSms');
   setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
   });
 
   touchEvent(document.getElementById('change-language-section'), function () {
@@ -865,6 +887,7 @@ function setupButton(buttonClass, buttonAction, actionData) {
 }
 
 function setScreen(newScreen, oldScreen) {
+  console.log(newScreen, oldScreen);
   if (newScreen === oldScreen) return;
 
   if (newScreen === 'insert_bills') {
@@ -891,6 +914,7 @@ function setState(state, delay) {
 
   wifiKeyboard.reset();
   promoKeyboard.reset();
+  customRequirementTextKeyboard.reset();
 
   if (state === 'idle') {
     $('.qr-code').empty();
@@ -984,7 +1008,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
