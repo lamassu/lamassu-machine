@@ -329,12 +329,13 @@ function customInfoRequest(customInfoRequest, screen) {
       $('#custom-requirement-text-label2').text(customInfoRequest.input.label2);
       $('#previous-text-requirement').hide();
       $('#submit-text-requirement').hide();
-      $('#next-text-requirement').hide
+      $('#next-text-requirement').hide();
+      $('#optional-text-field-2').hide();
+      customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']
       // set type of constraint and buttons where that constraint should apply to disable/ enable
-      ();customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement']);
-      if (customInfoRequest.input.constraintType !== 'spaceSeparation') {
-        $('#optional-text-field-2').hide();
-        customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']);
+      );if (customInfoRequest.input.constraintType === 'spaceSeparation') {
+        $('#optional-text-field-2').show();
+        customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement']);
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');

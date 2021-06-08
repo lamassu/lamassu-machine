@@ -1,7 +1,7 @@
 /* globals $ */
 
 const KEYBOARD_TIMEOUT = 30000
-const emailRegex = /^[^\s@]+@[^\s@]+$/
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 var Keyboard = function (options) {
   this.keyboardId = options.id
   this.keyboard = $('#' + options.id)
