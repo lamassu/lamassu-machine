@@ -236,14 +236,12 @@ Keyboard.prototype.setInputBox = function setInputBox(newInputBox, constraintBut
 }
 
 Keyboard.prototype.setConstraint = function setConstraint(constraintType, constraintButtons = []) {
-  console.log(constraintButtons)
   this.constraint = constraintType
   this.constraintButtons = constraintButtons
   this._validateInput()
 }
 
 Keyboard.prototype._validateInput = function _validateInput() {
-  console.log(this.constraint)
   switch(this.constraint) {
     case "spaceSeparation":
       this._validateSpaceSeparation()
@@ -262,7 +260,6 @@ Keyboard.prototype._validateSpaceSeparation = function _validateSpaceSeparation(
   // no spaces allowed inside field
   // minimum 1 character per field
   if (!!this.inputBox.data('content') && !this.inputBox.data('content').includes(' ')) {
-    console.log('valid input, enabling buttons')
     this.constraintButtons.forEach(buttonId => {
       $(buttonId).show()
     })
