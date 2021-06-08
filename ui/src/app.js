@@ -303,7 +303,6 @@ function usSsnPermission () {
 }
 
 function customInfoRequest (customInfoRequest, screen) {
-  testFuncA()
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title)
     $('#custom-screen1-text').text(customInfoRequest.screen1.text)
@@ -677,7 +676,8 @@ $(document).ready(function () {
     $('#next-text-requirement').hide()
     $('#previous-text-requirement').show()
     $('#submit-text-requirement').show()
-    customRequirementTextKeyboard.setInputBox('.text-input-field-2')
+    // changing input box changes buttons where validation works on
+    customRequirementTextKeyboard.setInputBox('.text-input-field-2', ['#submit-text-requirement'])
   })
   touchEvent(previousFieldTextRequirementButton, function() {
     $('.text-input-field-1').removeClass('faded')
@@ -685,7 +685,7 @@ $(document).ready(function () {
     $('#next-text-requirement').show()
     $('#previous-text-requirement').hide()
     $('#submit-text-requirement').hide()
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1', ['#next-text-requirement'])
   })
 
   setupButton('submit-promo-code', 'submitPromoCode', {

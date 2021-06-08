@@ -225,10 +225,14 @@ Keyboard.prototype._backspaceUp = function _backspaceUp (target) {
 }(jQuery))
 
 // pass the class or id of the new input box to put text into, include the . or # as well
-Keyboard.prototype.setInputBox = function setInputBox(newInputBox) {
+Keyboard.prototype.setInputBox = function setInputBox(newInputBox, constraintButtons = []) {
   this.inputBox = $(newInputBox)
   if (!this.inputBox.data('content'))
     this.inputBox.data('content', '').val('')
+  if (constraintButtons.length > 0) {
+    this.constraintButtons = constraintButtons
+  }
+  this._validateInput()
 }
 
 Keyboard.prototype.setConstraint = function setConstraint(constraintType, constraintButtons = []) {
