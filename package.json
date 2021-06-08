@@ -79,7 +79,7 @@
     "test": "ava test",
     "build": "npm run build:html && npm run build:js-test && npm run build:js && npm run build:sass && npm run build:autoprefix && npm run build:i18n",
     "build:html": "node ./ui/scripts/inline-html.js",
-    "build:js": "babel ui/src/app.js -s -o ui/js/app.js",
+    "build:js": "babel ui/src/*.js -s --ignore 'test-app.js' -o ui/js/app.js",
     "build:js-test": "babel ui/src/test-app.js -s -o ui/js/test-app.js",
     "build:sass": "node-sass ui/css/main.scss ui/css/build/main.css",
     "build:autoprefix": "postcss ui/css/build/main.css --no-map --use autoprefixer -d ui/",

@@ -304,6 +304,7 @@ function usSsnPermission() {
 }
 
 function customInfoRequest(customInfoRequest, screen) {
+  testFuncA();
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title);
     $('#custom-screen1-text').text(customInfoRequest.screen1.text);
@@ -328,11 +329,12 @@ function customInfoRequest(customInfoRequest, screen) {
       $('#custom-requirement-text-label2').text(customInfoRequest.input.label2);
       $('#previous-text-requirement').hide();
       $('#submit-text-requirement').hide();
-      $('#next-text-requirement').show();
+      $('#next-text-requirement').hide
+      // set type of constraint and buttons where that constraint should apply to disable/ enable
+      ();customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement']);
       if (customInfoRequest.input.constraintType !== 'spaceSeparation') {
         $('#optional-text-field-2').hide();
-        $('#next-text-requirement').hide();
-        $('#submit-text-requirement').show();
+        customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']);
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');
@@ -547,7 +549,8 @@ $(document).ready(function () {
 
   customRequirementTextKeyboard = new Keyboard({
     id: 'custom-requirement-text-keyboard',
-    inputBox: '.text-input-field-1'
+    inputBox: '.text-input-field-1',
+    submitButtonWrapper: '.submit-text-requirement-button-wrapper'
   }).init(function () {
     if (currentState !== 'custom_permission_screen2_text') return;
     buttonPressed('customInfoRequestSubmit');
@@ -797,6 +800,9 @@ $(document).ready(function () {
   });
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('');
+    $('.text-input-field-2').addClass('faded').data('content', '').val('');
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1');
   });
 
   touchEvent(document.getElementById('change-language-section'), function () {
@@ -1842,5 +1848,10 @@ function setCurrentDiscount(currentDiscount) {
     $('#choose-fiat-code-added').hide();
   }
 }
+'use strict';
+
+var testFuncA = function testFuncA() {
+  return console.log('AAAAAAAAAAA TEST FUNC');
+};
 
 //# sourceMappingURL=app.js.map

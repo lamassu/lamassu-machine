@@ -10,6 +10,8 @@ var Keyboard = function (options) {
   this.backspaceTimeout = options.backspaceTimeout || null
   this.active = options.active || true
   this.timeoutRef = options.timeoutRef || null
+  this.constraint = options.constraint || null
+  this.constraintButtons = []
 }
 
 Keyboard.prototype.init = function init (callback) {
@@ -29,6 +31,7 @@ Keyboard.prototype.init = function init (callback) {
     } else if (target.hasClass('key')) {
       self._keyPress(target)
     }
+    self._validateInput()
   })
 
   if (this.keyboardId === 'wifi-keyboard') {
@@ -37,7 +40,6 @@ Keyboard.prototype.init = function init (callback) {
       self._backspaceUp(target)
     })
   }
-
   return this
 }
 
@@ -227,4 +229,40 @@ Keyboard.prototype.setInputBox = function setInputBox(newInputBox) {
   this.inputBox = $(newInputBox)
   if (!this.inputBox.data('content'))
     this.inputBox.data('content', '').val('')
+}
+
+Keyboard.prototype.setConstraint = function setConstraint(constraintType, constraintButtons = []) {
+  this.constraint = constraintType
+  this.constraintButtons = constraintButtons
+  this._validateInput()
+}
+
+Keyboard.prototype._validateInput = function _validateInput() {
+  switch(this.constraint) {
+    case "spaceSeparation":
+      this._validateSpaceSeparation()
+      break
+    default:
+      break
+  }
+}
+
+Keyboard.prototype._validateSpaceSeparation = function _validateSpaceSeparation() {
+  // no spaces allowed inside field
+  // minimum 1 character per field
+/*   $('.submit-text-requirement-button-wrapper').children().each(function() {
+    $(this).hide()
+  }, 3000) */
+  if (!!this.inputBox.data('content') && !this.inputBox.data('content').includes(' ')) {
+    console.log('valid input, enabling buttons')
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
+  console.log('invalid input, hiding buttons')
+  // change text to some error color and make bottom border error color as well
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
 }
