@@ -303,7 +303,6 @@ function usSsnPermission () {
 }
 
 function customInfoRequest (customInfoRequest, screen) {
-  console.log(customInfoRequest)
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title)
     $('#custom-screen1-text').text(customInfoRequest.screen1.text)
@@ -330,11 +329,15 @@ function customInfoRequest (customInfoRequest, screen) {
       $('#submit-text-requirement').hide()
       $('#next-text-requirement').hide()
       $('#optional-text-field-2').hide()
+      // $('.custom-info-request-space-key').hide()
       customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement'])
       // set type of constraint and buttons where that constraint should apply to disable/ enable
       if (customInfoRequest.input.constraintType === 'spaceSeparation') {
         $('#optional-text-field-2').show()
         customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement'])
+      }
+      if (customInfoRequest.input.constraintType === 'none') {
+        $('.custom-info-request-space-key').show()
       }
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
@@ -804,8 +807,7 @@ $(document).ready(function () {
 
   setupButton('custom-permission-yes', 'customInfoRequestPermission')
   setupButton('custom-permission-no', 'finishBeforeSms')
-  setupButton('custom-permission-cancel', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', () => {
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
   })
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
