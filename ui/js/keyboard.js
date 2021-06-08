@@ -1,7 +1,7 @@
 /* globals $ */
 
 const KEYBOARD_TIMEOUT = 30000
-
+const emailRegex = /^[^\s@]+@[^\s@]+$/
 var Keyboard = function (options) {
   this.keyboardId = options.id
   this.keyboard = $('#' + options.id)
@@ -236,16 +236,23 @@ Keyboard.prototype.setInputBox = function setInputBox(newInputBox, constraintBut
 }
 
 Keyboard.prototype.setConstraint = function setConstraint(constraintType, constraintButtons = []) {
+  console.log(constraintButtons)
   this.constraint = constraintType
   this.constraintButtons = constraintButtons
   this._validateInput()
 }
 
 Keyboard.prototype._validateInput = function _validateInput() {
+  console.log(this.constraint)
   switch(this.constraint) {
     case "spaceSeparation":
       this._validateSpaceSeparation()
       break
+    case "none":
+      this._validateNoConstraint()
+      break
+    case "email":
+      this._validateEmail()
     default:
       break
   }
@@ -254,9 +261,6 @@ Keyboard.prototype._validateInput = function _validateInput() {
 Keyboard.prototype._validateSpaceSeparation = function _validateSpaceSeparation() {
   // no spaces allowed inside field
   // minimum 1 character per field
-/*   $('.submit-text-requirement-button-wrapper').children().each(function() {
-    $(this).hide()
-  }, 3000) */
   if (!!this.inputBox.data('content') && !this.inputBox.data('content').includes(' ')) {
     console.log('valid input, enabling buttons')
     this.constraintButtons.forEach(buttonId => {
@@ -264,8 +268,32 @@ Keyboard.prototype._validateSpaceSeparation = function _validateSpaceSeparation(
     })
     return
   }
-  console.log('invalid input, hiding buttons')
-  // change text to some error color and make bottom border error color as well
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
+}
+
+Keyboard.prototype._validateNoConstraint = function _validateSpaceSeparation() {
+  // minimum 1 non space character
+  if (!!this.inputBox.data('content') && !!this.inputBox.data('content').trim()) {
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
+  this.constraintButtons.forEach(buttonId => {
+    $(buttonId).hide()
+  })
+}
+
+Keyboard.prototype._validateEmail = function _validateEmail() {
+  const content = this.inputBox.data('content') || ''
+  if (emailRegex.test(content)) {
+    this.constraintButtons.forEach(buttonId => {
+      $(buttonId).show()
+    })
+    return
+  }
   this.constraintButtons.forEach(buttonId => {
     $(buttonId).hide()
   })

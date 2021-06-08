@@ -304,6 +304,7 @@ function usSsnPermission() {
 }
 
 function customInfoRequest(customInfoRequest, screen) {
+  console.log(customInfoRequest);
   if (screen === 1) {
     $('#custom-screen1-title').text(customInfoRequest.screen1.title);
     $('#custom-screen1-text').text(customInfoRequest.screen1.text);
