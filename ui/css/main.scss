@@ -1110,7 +1110,7 @@ footer {
   .text-requirement-input {
     border-bottom: $amazonite-three 2px solid;
   }
-  .promo-keyboard {
+  .standard-keyboard {
     .key {
       background-color: $amazonite-three;
       &:active {
@@ -1127,7 +1127,7 @@ footer {
   .text-requirement-input {
     border-bottom: $salmon-three 2px solid;
   }
-  .promo-keyboard {
+  .standard-keyboard {
     .key {
       background-color: $salmon-three;
       &:active {
@@ -1137,10 +1137,10 @@ footer {
   }
 }
 
-.promo-keyboard {
+.standard-keyboard {
   box-sizing: border-box;
   width: 100%;
-  .promo-backspace {
+  .standard-backspace {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1148,7 +1148,7 @@ footer {
       width: 3vh;
     }
   }
-  .promo-backspace-key {
+  .standard-backspace-key {
     width: 18vh !important;
   }
   .row {
@@ -1477,4 +1477,8 @@ footer {
   box-sizing: border-box;
   padding-bottom: 5px;
   outline: none;
+}
+
+.backspace-margin-left-override {
+  margin-left: 20vw !important;
 }

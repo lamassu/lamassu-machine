@@ -329,10 +329,14 @@ function customInfoRequest (customInfoRequest, screen) {
       $('#submit-text-requirement').hide()
       $('#next-text-requirement').hide()
       $('#optional-text-field-2').hide()
-      customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement'])
+      $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override')
+      $('.custom-info-request-space-key').show()
       // set type of constraint and buttons where that constraint should apply to disable/ enable
+      customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement'])
       if (customInfoRequest.input.constraintType === 'spaceSeparation') {
         $('#optional-text-field-2').show()
+        $('.key.backspace.standard-backspace-key').addClass('backspace-margin-left-override')
+        $('.custom-info-request-space-key').hide()
         customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement'])
       }
       setState('custom_permission_screen2_text')

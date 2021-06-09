@@ -329,16 +329,16 @@ function customInfoRequest(customInfoRequest, screen) {
       $('#previous-text-requirement').hide();
       $('#submit-text-requirement').hide();
       $('#next-text-requirement').hide();
-      $('#optional-text-field-2').hide
-      // $('.custom-info-request-space-key').hide()
-      ();customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']
+      $('#optional-text-field-2').hide();
+      $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override');
+      $('.custom-info-request-space-key').show
       // set type of constraint and buttons where that constraint should apply to disable/ enable
-      );if (customInfoRequest.input.constraintType === 'spaceSeparation') {
+      ();customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']);
+      if (customInfoRequest.input.constraintType === 'spaceSeparation') {
         $('#optional-text-field-2').show();
+        $('.key.backspace.standard-backspace-key').addClass('backspace-margin-left-override');
+        $('.custom-info-request-space-key').hide();
         customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement']);
-      }
-      if (customInfoRequest.input.constraintType === 'none') {
-        $('.custom-info-request-space-key').show();
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');

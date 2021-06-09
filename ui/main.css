@@ -1874,9 +1874,9 @@ footer {
 .cash-in-color .text-requirement-input {
   border-bottom: #34d9c8 2px solid; }
 
-.cash-in-color .promo-keyboard .key {
+.cash-in-color .standard-keyboard .key {
   background-color: #34d9c8; }
-  .cash-in-color .promo-keyboard .key:active {
+  .cash-in-color .standard-keyboard .key:active {
     background-color: #2cb9ac; }
 
 .cash-out-color .promo-code-input {
@@ -1885,15 +1885,15 @@ footer {
 .cash-out-color .text-requirement-input {
   border-bottom: #e6746d 2px solid; }
 
-.cash-out-color .promo-keyboard .key {
+.cash-out-color .standard-keyboard .key {
   background-color: #e6746d; }
-  .cash-out-color .promo-keyboard .key:active {
+  .cash-out-color .standard-keyboard .key:active {
     background-color: #cb6560; }
 
-.promo-keyboard {
+.standard-keyboard {
   box-sizing: border-box;
   width: 100%; }
-  .promo-keyboard .promo-backspace {
+  .standard-keyboard .standard-backspace {
     display: -webkit-box;
     display: -webkit-flex;
     display: flex;
@@ -1903,15 +1903,15 @@ footer {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
             justify-content: center; }
-    .promo-keyboard .promo-backspace img {
+    .standard-keyboard .standard-backspace img {
       width: 3vh; }
-  .promo-keyboard .promo-backspace-key {
+  .standard-keyboard .standard-backspace-key {
     width: 18vh !important; }
-  .promo-keyboard .row {
+  .standard-keyboard .row {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
             justify-content: center; }
-  .promo-keyboard .key {
+  .standard-keyboard .key {
     box-sizing: border-box;
     border: 1px;
     color: #ffffff;
@@ -1921,9 +1921,9 @@ footer {
     height: 10vh;
     width: 10vh;
     line-height: 10vh; }
-    .promo-keyboard .key:active {
+    .standard-keyboard .key:active {
       border: none; }
-  .promo-keyboard .space {
+  .standard-keyboard .space {
     width: 71vh; }
 
 #promo-code-title {
@@ -2225,3 +2225,6 @@ footer {
   box-sizing: border-box;
   padding-bottom: 5px;
   outline: none; }
+
+.backspace-margin-left-override {
+  margin-left: 20vw !important; }
