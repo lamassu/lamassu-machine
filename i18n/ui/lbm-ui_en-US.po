@@ -471,20 +471,20 @@ msgid "In order to proceed, we are required to verify your identity."
 msgstr "In order to proceed, we are required to verify your identity."
 
 #: On screen: scan-id
-msgid "Please press the back of your driver's license against the scan window."
-msgstr "Please press the back of your driver's license against the scan window."
+msgid "Please press the back of your <strong>driver's license</strong> against the scan window."
+msgstr "Please press the back of your <strong>driver's license</strong> against the scan window."
 
 #: On screen: scan-photo-manual
-msgid "Please press the front of your state ID card against the scan window, hold it there, and then press \"Ready to scan\"."
-msgstr "Please press the front of your state ID card against the scan window, hold it there, and then press \"Ready to scan\"."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press \"Ready to scan\"."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press \"Ready to scan\"."
 
 #: On screen: scan-photo-manual
 msgid "Ready to scan"
 msgstr "Ready to scan"
 
 #: On screen: scan-photo
-msgid "Please press the front of your state ID card against the scan window."
-msgstr "Please press the front of your state ID card against the scan window."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window."
 
 #: On screen: security-code
 msgid "Security Code"
@@ -527,8 +527,8 @@ msgid "Initializing hardware."
 msgstr "Initializing hardware."
 
 #: On screen: booting
-msgid "We'll be up in a moment."
-msgstr "We'll be up in a moment."
+msgid "<strong>We'll be up in a moment.</strong>"
+msgstr "<strong>We'll be up in a moment.</strong>"
 
 #: On screen: initializing
 msgid "Initializing..."
@@ -539,8 +539,8 @@ msgid "Generating cryptographic identity."
 msgstr "Generating cryptographic identity."
 
 #: On screen: initializing
-msgid "Please wait a few minutes."
-msgstr "Please wait a few minutes."
+msgid "<strong>Please wait a few minutes.</strong>"
+msgstr "<strong>Please wait a few minutes.</strong>"
 
 #: On screen: connecting
 msgid "Connecting..."
@@ -687,8 +687,8 @@ msgid "We see your transaction but we're still waiting for confirmation. This ta
 msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
-msgid "Please come back for your cash and press Redeem when you get our text message."
-msgstr "Please come back for your cash and press Redeem when you get our text message."
+msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
