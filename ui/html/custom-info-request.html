@@ -1,38 +1,106 @@
-<section id="wifi-viewport" class="viewport wifi_state system-color" data-tr-section="wifi" data-screentype="wifi-tp">
+<section
+  class="viewport custom_permission_state info"
+  data-tr-section="custom-permission"
+  data-screentype="info-action-tp"
+>
+  <div class="flex-center-verical custom-requirement-margin">
+    <main>
+      <h3 class="js-i18n nm-margin-bottom" id="custom-screen1-title"></h3>
+      <p class="js-i18n d2" id="custom-screen1-text"></p>
+      <p class="js-i18n tl2 no-margin-top">
+        Continue?
+      </p>
+    </main>
+    <footer>
+      <button id="custom-permission-yes" class="filled-progress-button button js-i18n">Yes</button>
+      <button id="custom-permission-no" class="bordered-progress-button button js-i18n">No</button>
+    </footer>
+  </div>
+</section>
+
+<section
+  class="viewport custom_permission_screen2_numerical_state"
+  data-tr-section="custom-permission-screen2-numerical"
+  data-screentype="flow-action-tp"
+>
   <header>
+    <div id="custom-permission-cancel-numerical" class="delay cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
   </header>
+
   <main>
     <section class="primary-side">
-      <h3 class="js-i18n no-margin-bottom">Select a WiFi network</h3>
-      <p class="js-i18n d2">Only secured networks are shown.</p>
-      <h3 class="js-i18n no-margin-bottom">Or connect Ethernet</h3>
-      <p class="js-i18n d2">A wired connection is preferred for stability.</p>
+      <h2 class="js-i18n primary-side-title xs-margin-bottom" id="custom-screen2-numerical-title"></h2>
+      <div class="d1">
+        <span class="js-i18n" id="custom-screen2-numerical-text"></span>
+      </div>
     </section>
     <section class="secondary-side">
-      <div id="networks" class="i18n-latin">
-      </div>
+      <section id="custom-requirement-numeric-keypad" class="keypad">
+        <section class="entry h5">
+          <div class="box full-box"></div>
+        </section>
+        <div class="phone-separator hidden"></div>
+        <section class="keys tl2 white">
+          <div class="row">
+            <div class="key numeric key1">1</div>
+            <div class="key numeric key2">2</div>
+            <div class="key numeric key3">3</div>
+          </div>
+          <div class="row">
+            <div class="key numeric key4">4</div>
+            <div class="key numeric key5">5</div>
+            <div class="key numeric key6">6</div>
+          </div>
+          <div class="row">
+            <div class="key numeric key7">7</div>
+            <div class="key numeric key8">8</div>
+            <div class="key numeric key9">9</div>
+          </div>
+          <div class="row">
+            <div class="key clear js-i18n">Clear</div>
+            <div class="key numeric">0</div>
+            <div class="key backspace">
+              <img class="backspace" src="images/delete-keypad.svg"/>
+            </div>
+          </div>
+        </section>
+        <section class="progress-button-wrapper">
+          <button class="progress-button enter js-i18n">Submit</button>
+        </section>
+      </section>
     </section>
   </main>
 </section>
 
-<section class="viewport wifi_password_state system-color info" data-tr-section="wifi-password" id="wifi-password" data-screentype="wifi-tp">
-  <section id="wifi-keyboard" class="wifi-network pass-screen">
-    <section class="pass-top">
-      <div id="wifiPassCancel" class="delay cancel-button-wrapper">
-        <img class="cancel-button" src="images/close-icon-amaz.svg" />
-      </div>
-      <h3 class="js-i18n no-margin-bottom">WiFi password</h3>
-      <p id="js-i18n-wifi-for-ssid" class="ssid-container d2"></p>
-      <div class="entry">
-        <input id="input-passphrase" class="passphrase h5" type="password" readonly="readonly" data-content=""/>
-        <button class="filled-progress-button button backspace">←</button>
-        <button id="wifiConnect" class="bordered-progress-button button connect"><span class="js-i18n">Connect</span></button>
-      </div>
-    </section>
+<section
+  class="viewport custom_permission_screen2_text_state"
+  data-tr-section="custom-permission-screen2-text"
+  id="custom-permission-screen2-text"
+  data-screentype="custom-permission-screen2-text">
 
-    <section class="pass-bottom keys tl2">
-      <div class="keyboard-layout i18n-latin" data-case="lc">
-        <div class="keypad keyboard keyboard-lc">
+  <header class="custom-info-request-text-header">
+    <div id="custom-permission-cancel-text" class="cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="custom-permission-text-input-main">
+    <div class="text-input-fields-wrapper">
+      <div class="text-input-field">
+        <p id="custom-requirement-text-label1" class="js-i18n d1 custom-requirement-text-label"></p>
+        <input class="text-input-field-1 custom-requirement-text-input text-requirement-input passphrase h3" type="text" readonly value="">
+      </div>
+      <div id="optional-text-field-2" class="text-input-field">
+        <p id="custom-requirement-text-label2" class="js-i18n d1 custom-requirement-text-label"></p>
+        <input class="text-input-field-2 custom-requirement-text-input text-requirement-input faded passphrase h3" type="text" readonly value="">
+      </div>
+    </div>
+
+    <section id="custom-requirement-text-keyboard" class="standard-keyboard keys tl2">
+      <div class="keyboard-layout i18n-latin" data-case="uc">
+        <div class="keyboard keyboard-lc">
           <div class="row">
             <div class="key" data-ascii="49">1</div>
             <div class="key" data-ascii="50">2</div>
@@ -80,7 +148,14 @@
             <div class="key sym special">Sym</div>
           </div>
           <div class="row">
-            <div class="key space" data-ascii="32">Space</div>
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
           </div>
         </div>
         <div class="keyboard keyboard-uc" style="display:none">
@@ -131,7 +206,14 @@
             <div class="key sym special">Sym</div>
           </div>
           <div class="row">
-            <div class="key space" data-ascii="32">Space</div>
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
           </div>
         </div>
         <div class="keyboard keyboard-sym" style="display:none">
@@ -176,25 +258,22 @@
             <div class="key sym special">ABC</div>
           </div>
           <div class="row">
-            <div class="key space" data-ascii="32">Space</div>
+            <div class="quick-keys">
+              <div class="key" data-ascii="64">@</div>
+              <div class="key" data-ascii="46">.</div>
+            </div>
+            <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+            <div class="key backspace standard-backspace-key" data-ascii="08">
+              <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
-  </section>
-</section>
-
-<section class="viewport wifi_connecting_state no-action-info system-color" data-tr-section="wifi-connecting" data-screentype="wifi-tp system-tp">
-  <header>
-    <!-- TODO correct SVG -->
-    <!-- <img src="images/lamassu-logo.svg"/> -->
-  </header>
-  <main>
-    <h2 class="js-i18n no-margin-bottom">Connecting...</h2>
-    <p class="js-i18n-wifi-connect d1"></p>
-    <p class="d1 no-margin-top">
-      <strong class="js-i18n-wifi-connecting"></strong>
-    </p>
+    <footer class="submit-text-requirement-button-wrapper">
+      <button data-target-class="text-input-field-1" id="previous-text-requirement" class="filled-progress-button button submit-text-requirement-button">Previous</button>
+      <button data-target-class="text-input-field-2" id="next-text-requirement" class="filled-progress-button button submit-text-requirement-button">Next</button>
+      <button id="submit-text-requirement" class="filled-progress-button button submit-text-requirement-button">Submit</button>
+    </footer>
   </main>
 </section>
