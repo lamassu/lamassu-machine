@@ -346,10 +346,6 @@ msgstr "We're all out of coins!"
 msgid "Please try again later."
 msgstr "Please try again later."
 
-#: On screen: limit-reached
-msgid "<div> OK </div>"
-msgstr "<div> OK </div>"
-
 #: On screen: max-phone-retries
 msgid "Oops, this isn't working"
 msgstr "Oops, this isn't working"
