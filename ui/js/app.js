@@ -343,6 +343,10 @@ function customInfoRequest(customInfoRequest, screen) {
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');
       break;
+    case 'choiceList':
+      setState('custom_permission_screen2_choiceList');
+      setScreen('custom_permission_screen2_choiceList');
+      break;
     default:
       return blockedCustomer();
   }
@@ -808,6 +812,7 @@ $(document).ready(function () {
     $('.text-input-field-2').addClass('faded').data('content', '').val('');
     customRequirementTextKeyboard.setInputBox('.text-input-field-1');
   });
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', function () {});
 
   touchEvent(document.getElementById('change-language-section'), function () {
     if (_primaryLocales.length === 2) {
@@ -1057,7 +1062,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state'), $('.custom_permission_screen2_choiceList_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });

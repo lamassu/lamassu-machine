@@ -1482,3 +1482,53 @@ footer {
 .backspace-margin-left-override {
   margin-left: 20vw !important;
 }
+
+#custom-requirement-choicelist-wrapper {
+  height: 90%;
+  margin-right: 6vw;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 0.5fr;
+}
+
+.choice-list-grid-wrapper {
+  min-height: 60vh;
+}
+
+.choice-list-item {
+  height: 25%;
+  width: 95%;
+  padding-left: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+}
+
+.choice-list-arrows-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.choice-list-arrow {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choice-list-pager {
+  margin-top: 50px;
+  font-size: x-large;
+}
+
+.submit-choice-list-button {
+  margin-top: 50px;
+  margin-left: 20px;
+}

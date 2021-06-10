@@ -342,6 +342,10 @@ function customInfoRequest (customInfoRequest, screen) {
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
       break
+    case 'choiceList':
+      setState('custom_permission_screen2_choiceList')
+      setScreen('custom_permission_screen2_choiceList')
+      break
     default:
       return blockedCustomer()
   }
@@ -816,6 +820,8 @@ $(document).ready(function () {
     $('.text-input-field-2').addClass('faded').data('content', '').val('')
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
   })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
+  })
 
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
@@ -1102,7 +1108,8 @@ function setDirection (direction) {
     $('.promo_code_not_found_state'),
     $('.custom_permission_state'),
     $('.custom_permission_screen2_numerical_state'),
-    $('.custom_permission_screen2_text_state')
+    $('.custom_permission_screen2_text_state'),
+    $('.custom_permission_screen2_choiceList_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
