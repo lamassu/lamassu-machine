@@ -76,6 +76,7 @@ var currentCoin = null;
 var currentCoins = [];
 var customRequirementNumericalKeypad = null;
 var customRequirementTextKeyboard = null;
+var customRequirementChoiceList = null;
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
@@ -344,6 +345,7 @@ function customInfoRequest(customInfoRequest, screen) {
       setScreen('custom_permission_screen2_text');
       break;
     case 'choiceList':
+      customRequirementChoiceList.init(customInfoRequest.input.choiceList);
       setState('custom_permission_screen2_choiceList');
       setScreen('custom_permission_screen2_choiceList');
       break;
@@ -562,6 +564,10 @@ $(document).ready(function () {
   }).init(function () {
     if (currentState !== 'custom_permission_screen2_text') return;
     buttonPressed('customInfoRequestSubmit');
+  });
+
+  customRequirementChoiceList = new ChoiceList({
+    id: 'custom-requirement-choicelist-wrapper'
   });
 
   if (DEBUG_MODE !== 'demo') {

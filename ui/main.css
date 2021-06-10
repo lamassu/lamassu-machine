@@ -2290,3 +2290,6 @@ footer {
 .submit-choice-list-button {
   margin-top: 50px;
   margin-left: 20px; }
+
+.testActive {
+  background-color: red; }
