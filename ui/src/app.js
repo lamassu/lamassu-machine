@@ -74,6 +74,7 @@ var cassettes = null
 let currentCryptoCode = null
 let currentCoin = null
 let currentCoins = []
+let customRequirementNumericalKeypad = null
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -279,6 +280,12 @@ function processData (data) {
     case 'invalidPromoCode':
       setState('promo_code_not_found')
       break
+    case 'customInfoRequest':
+      customInfoRequest(data.customInfoRequest, 1)
+      break
+    case 'customInfoRequestScreen2':
+      customInfoRequest(data.customInfoRequest, 2)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -290,6 +297,31 @@ function facephotoPermission () {
 
 function usSsnPermission () {
   setScreen('us_ssn_permission')
+}
+
+function customInfoRequest (customInfoRequest, screen) {
+  if (screen === 1) {
+    $('#custom-screen1-title').text(customInfoRequest.screen1.title)
+    $('#custom-screen1-text').text(customInfoRequest.screen1.text)
+    return setScreen('custom_permission')
+  }
+  // screen 2
+  switch (customInfoRequest.input.type) {
+    case 'numerical':
+      $('#custom-screen2-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-text').text(customInfoRequest.screen2.text)
+      customRequirementNumericalKeypad.setOpts({
+        type: 'custom',
+        constraint: customInfoRequest.input.constraintType,
+        maxLength: customInfoRequest.input.numDigits
+      })
+      customRequirementNumericalKeypad.activate()
+      setState('custom_permission_screen2')
+      setScreen('custom_permission_screen2')
+      break
+    default:
+      return blockedCustomer()
+  }
 }
 
 function idVerification () {
@@ -446,7 +478,7 @@ function switchCoin (coin) {
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
 
-  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode)) 
+  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode))
   if (currentCoins.length > 4 && selectedIndex > 2) {
     currentCoins.splice(2, 0, currentCoins.splice(selectedIndex, 1)[0])
   }
@@ -493,6 +525,13 @@ $(document).ready(function () {
   securityKeypad = new Keypad('security-keypad', {type: 'code'}, function (result) {
     if (currentState !== 'security_code') return
     buttonPressed('securityCode', result)
+  })
+
+  customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', {
+    type: 'custom'
+  }, function (result) {
+    if (currentState !== 'custom_permission_screen2') return
+    buttonPressed('customInfoRequestSubmit', result)
   })
 
   if (DEBUG_MODE !== 'demo') {
@@ -698,6 +737,13 @@ $(document).ready(function () {
   setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
+
+  setupButton('custom-permission-yes', 'customInfoRequestPermission')
+  setupButton('custom-permission-no', 'finishBeforeSms')
+  setupButton('custom-permission-cancel', 'finishBeforeSms')
+  setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', () => {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
 
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
@@ -980,7 +1026,9 @@ function setDirection (direction) {
     $('.retry_permission_id_state'),
     $('.waiting_state'),
     $('.insert_promo_code_state'),
-    $('.promo_code_not_found_state')
+    $('.promo_code_not_found_state'),
+    $('.custom_permission_state'),
+    $('.custom_permission_screen2_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)

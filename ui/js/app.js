@@ -74,6 +74,7 @@ var cassettes = null;
 var currentCryptoCode = null;
 var currentCoin = null;
 var currentCoins = [];
+var customRequirementNumericalKeypad = null;
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
@@ -280,6 +281,12 @@ function processData(data) {
     case 'invalidPromoCode':
       setState('promo_code_not_found');
       break;
+    case 'customInfoRequest':
+      customInfoRequest(data.customInfoRequest, 1);
+      break;
+    case 'customInfoRequestScreen2':
+      customInfoRequest(data.customInfoRequest, 2);
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -291,6 +298,31 @@ function facephotoPermission() {
 
 function usSsnPermission() {
   setScreen('us_ssn_permission');
+}
+
+function customInfoRequest(customInfoRequest, screen) {
+  if (screen === 1) {
+    $('#custom-screen1-title').text(customInfoRequest.screen1.title);
+    $('#custom-screen1-text').text(customInfoRequest.screen1.text);
+    return setScreen('custom_permission');
+  }
+  // screen 2
+  switch (customInfoRequest.input.type) {
+    case 'numerical':
+      $('#custom-screen2-title').text(customInfoRequest.screen2.title);
+      $('#custom-screen2-text').text(customInfoRequest.screen2.text);
+      customRequirementNumericalKeypad.setOpts({
+        type: 'custom',
+        constraint: customInfoRequest.input.constraintType,
+        maxLength: customInfoRequest.input.numDigits
+      });
+      customRequirementNumericalKeypad.activate();
+      setState('custom_permission_screen2');
+      setScreen('custom_permission_screen2');
+      break;
+    default:
+      return blockedCustomer();
+  }
 }
 
 function idVerification() {
@@ -481,6 +513,13 @@ $(document).ready(function () {
   securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     if (currentState !== 'security_code') return;
     buttonPressed('securityCode', result);
+  });
+
+  customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', {
+    type: 'custom'
+  }, function (result) {
+    if (currentState !== 'custom_permission_screen2') return;
+    buttonPressed('customInfoRequestSubmit', result);
   });
 
   if (DEBUG_MODE !== 'demo') {
@@ -690,6 +729,13 @@ $(document).ready(function () {
   setupButton('us-ssn-cancel', 'finishBeforeSms');
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms');
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms');
+
+  setupButton('custom-permission-yes', 'customInfoRequestPermission');
+  setupButton('custom-permission-no', 'finishBeforeSms');
+  setupButton('custom-permission-cancel', 'finishBeforeSms');
+  setupImmediateButton('custom-permission-cancel', 'cancelCustomInfoRequest', function () {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
+  });
 
   touchEvent(document.getElementById('change-language-section'), function () {
     if (_primaryLocales.length === 2) {
@@ -938,7 +984,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
