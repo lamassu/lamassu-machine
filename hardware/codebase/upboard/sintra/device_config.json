@@ -32,8 +32,8 @@
       "height": 480
     },
     "photoId": {
-      "width": 1280,
-      "height": 720,
+      "width": 2592,
+      "height": 1944,
       "threshold": 20,
       "minFaceSize": 180
     }
