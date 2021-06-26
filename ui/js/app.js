@@ -89,7 +89,7 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill;
-    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode);
+    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode, data.credit.cryptoUnits);
   }
   if (data.tx) setTx(data.tx);
   if (data.wifiList) setWifiList(data.wifiList);
@@ -1177,12 +1177,10 @@ function setFixedFee(_fee) {
   }
 }
 
-function setCredit(fiat, crypto, lastBill, cryptoCode) {
-  var coin = getCryptoCurrency(cryptoCode);
-
-  var scale = new BigNumber(10).pow(coin.displayScale);
+function setCredit(fiat, crypto, lastBill, cryptoCode, cryptoUnit) {
+  var scale = new BigNumber(10).pow(cryptoUnit.displayScale);
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
-  var cryptoDisplayCode = coin.displayCode;
+  var cryptoDisplayCode = cryptoUnit.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
   $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
   $('.fiat .js-amount').html(fiat);
