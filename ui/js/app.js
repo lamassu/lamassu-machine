@@ -1239,7 +1239,7 @@ function splitNumber(localize, localeCode) {
 function formatNumber(num) {
   var localized = num.toLocaleString(jsLocaleCode, {
     useGrouping: true,
-    maximumFractionDigits: 3,
+    maximumFractionDigits: 6,
     minimumFractionDigits: 3
   });
 
@@ -1491,15 +1491,13 @@ function manageFiatButtons(activeDenominations) {
 }
 
 function displayCrypto(cryptoAtoms, cryptoCode) {
-  console.log(cryptoAtoms.toString())
   var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
   var decimalPlaces = (coin.displayScale - coin.unitScale) + 6
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
+  var cryptoDisplay = formatCrypto(cryptoAmount);
 
-  // var cryptoDisplay = formatCrypto(cryptoAmount);
-
-  return cryptoAmount;
+  return cryptoDisplay;
 }
 
 function BN(s) {
