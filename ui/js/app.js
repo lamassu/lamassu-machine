@@ -1184,7 +1184,7 @@ function setCredit(credit, lastBill) {
   var scale = new BigNumber(10).pow(coin.displayScale);
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).toNumber();
   var cryptoDisplayCode = coin.displayCode;
-  updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
+  updateCrypto('.total-crypto-rec', formatCrypto(cryptoAmount), cryptoDisplayCode);
   $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
   $('.fiat .js-amount').html(fiat);
 
