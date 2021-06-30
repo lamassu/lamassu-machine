@@ -89,7 +89,7 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill;
-    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode, data.credit.cryptoUnits);
+    setCredit(data.credit, lastBill);
   }
   if (data.tx) setTx(data.tx);
   if (data.wifiList) setWifiList(data.wifiList);
@@ -1177,10 +1177,13 @@ function setFixedFee(_fee) {
   }
 }
 
-function setCredit(fiat, crypto, lastBill, cryptoCode, cryptoUnit) {
-  var scale = new BigNumber(10).pow(cryptoUnit.displayScale);
-  var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
-  var cryptoDisplayCode = cryptoUnit.displayCode;
+function setCredit(credit, lastBill) {
+  const { fiat, cryptoAtoms, cryptoCode } = credit
+  var coin = getCryptoCurrency(cryptoCode);
+
+  var scale = new BigNumber(10).pow(coin.displayScale);
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).toNumber();
+  var cryptoDisplayCode = coin.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
   $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
   $('.fiat .js-amount').html(fiat);
@@ -1207,7 +1210,7 @@ function setupCassettes(_cassettes) {
 }
 
 function updateCrypto(selector, cryptoAmount, cryptoDisplayCode) {
-  $(selector).find('.crypto-amount').html(formatCrypto(cryptoAmount));
+  $(selector).find('.crypto-amount').html(cryptoAmount);
   $(selector).find('.crypto-units').html(cryptoDisplayCode);
 }
 
@@ -1488,12 +1491,15 @@ function manageFiatButtons(activeDenominations) {
 }
 
 function displayCrypto(cryptoAtoms, cryptoCode) {
+  console.log(cryptoAtoms.toString())
   var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
-  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(3).toNumber();
-  var cryptoDisplay = formatCrypto(cryptoAmount);
+  var decimalPlaces = (coin.displayScale - coin.unitScale) + 6
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
 
-  return cryptoDisplay;
+  // var cryptoDisplay = formatCrypto(cryptoAmount);
+
+  return cryptoAmount;
 }
 
 function BN(s) {
