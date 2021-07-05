@@ -2078,6 +2078,9 @@ footer {
   .i18n-rtl .insert_more_bills_state footer {
     margin-right: 15vh;
     margin-left: 0; }
+  .i18n-rtl .insert_bills_state footer {
+    padding-left: 0;
+    padding-right: 9.4vw; }
   .i18n-rtl #networks img {
     margin-right: 14vh;
     margin-left: 0; }
