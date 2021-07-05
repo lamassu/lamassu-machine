@@ -1178,7 +1178,10 @@ function setFixedFee(_fee) {
 }
 
 function setCredit(credit, lastBill) {
-  const { fiat, cryptoAtoms, cryptoCode } = credit
+  var fiat = credit.fiat,
+      cryptoAtoms = credit.cryptoAtoms,
+      cryptoCode = credit.cryptoCode;
+
   var coin = getCryptoCurrency(cryptoCode);
 
   var scale = new BigNumber(10).pow(coin.displayScale);
@@ -1493,7 +1496,7 @@ function manageFiatButtons(activeDenominations) {
 function displayCrypto(cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
-  var decimalPlaces = (coin.displayScale - coin.unitScale) + 6
+  var decimalPlaces = coin.displayScale - coin.unitScale + 6;
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
   var cryptoDisplay = formatCrypto(cryptoAmount);
 
