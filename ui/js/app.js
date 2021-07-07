@@ -345,7 +345,7 @@ function customInfoRequest(customInfoRequest, screen) {
       setScreen('custom_permission_screen2_text');
       break;
     case 'choiceList':
-      customRequirementChoiceList.init(customInfoRequest.input.choiceList);
+      customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList);
       setState('custom_permission_screen2_choiceList');
       setScreen('custom_permission_screen2_choiceList');
       break;
@@ -568,6 +568,10 @@ $(document).ready(function () {
 
   customRequirementChoiceList = new ChoiceList({
     id: 'custom-requirement-choicelist-wrapper'
+  }).init(function (result) {
+    console.log(result);
+    if (currentState !== 'custom_permission_screen2_choiceList') return;
+    buttonPressed('customInfoRequestSubmit', result);
   });
 
   if (DEBUG_MODE !== 'demo') {
