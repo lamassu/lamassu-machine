@@ -2236,13 +2236,15 @@ footer {
   grid-template-columns: 2fr 1.5fr 0.5fr; }
 
 .choice-list-grid-wrapper {
-  min-height: 60vh; }
+  min-height: 60vh;
+  margin-right: 20px; }
 
 .choice-list-item {
   height: 25%;
   width: 95%;
   padding-left: 20px;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 10px;
   background-color: pink;
   display: -webkit-box;
@@ -2253,26 +2255,19 @@ footer {
           align-items: center; }
 
 .choice-list-arrows-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: end;
-  -webkit-justify-content: end;
-          justify-content: end;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center; }
+  /* display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center; */
+  position: relative;
+  width: 100%;
+  height: 100%; }
 
 .choice-list-arrow {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: white;
-  margin-top: 50px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -2283,13 +2278,27 @@ footer {
   -webkit-align-items: center;
           align-items: center; }
 
+.choice-list-arrow-down {
+  position: absolute;
+  bottom: 100px;
+  left: 20px; }
+
+.choice-list-arrow-up {
+  position: absolute;
+  bottom: 255px;
+  left: 20px; }
+
 .choice-list-pager {
-  margin-top: 50px;
-  font-size: x-large; }
+  font-size: x-large;
+  position: absolute;
+  bottom: 210px;
+  left: 50px; }
 
 .submit-choice-list-button {
-  margin-top: 50px;
-  margin-left: 20px; }
+  /* margin-top: 50px;
+  margin-left: 20px; */
+  position: absolute;
+  bottom: 0; }
 
 .testActive {
   background-color: red; }

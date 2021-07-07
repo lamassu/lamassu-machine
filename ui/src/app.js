@@ -344,6 +344,8 @@ function customInfoRequest (customInfoRequest, screen) {
       setScreen('custom_permission_screen2_text')
       break
     case 'choiceList':
+      $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text)
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList)
       setState('custom_permission_screen2_choiceList')
       setScreen('custom_permission_screen2_choiceList')
@@ -581,7 +583,6 @@ $(document).ready(function () {
   customRequirementChoiceList = new ChoiceList({
     id: 'custom-requirement-choicelist-wrapper'
   }).init(function (result) {
-    console.log(result)
     if (currentState !== 'custom_permission_screen2_choiceList') return
     buttonPressed('customInfoRequestSubmit', result)
   })

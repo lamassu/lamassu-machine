@@ -7,32 +7,11 @@ const ChoiceList = function(options) {
   this.choices = []
   this.currentPage = 0
   this.active = options.active || true
+  // this.choiceType = options.choiceType || 'single'
 }
-
-/* ChoiceList.prototype.init = function init (availableChoices, cb) {
-  this.callback = cb || null
-  let _choices = [...availableChoices]
-  this.choices = []
-  while (_choices.length > 0) {
-    this.choices.push(_choices.splice(0,4))
-  }
-  this.choiceList.find('.choice-list-pager').text(`${currentPage + 1}/${this.choices.length}`)
-  this.choiceList.find('.choice-list-arrow-up').hide()
-  if (this.choices.length === 1) {
-    this.choiceList.find('.choice-list-arrow-down').hide()
-    this.choiceList.find('.choice-list-pager').hide()
-  }
-
-  this._setupChoices(this.currentPage)
-
-  const choiceList = document.getElementById(this.choiceListId)
-  const self = this
-  choiceList.addEventListener('mousedown', this._toggleChoiceEventListener(self))
-} */
 
 ChoiceList.prototype.init = function init (cb) {
   this.callback = cb
-  this.choiceList.find('.choice-list-pager').text(`${currentPage + 1}/${this.choices.length}`)
   this.choiceList.find('.choice-list-arrow-up').hide()
   const choiceList = document.getElementById(this.choiceListId)
   const self = this
@@ -42,15 +21,13 @@ ChoiceList.prototype.init = function init (cb) {
 
 ChoiceList.prototype.replaceChoices = function (availableChoices) {
   this.reset()
+
   let _choices = [...availableChoices]
   this.choices = []
   while (_choices.length > 0) {
     this.choices.push(_choices.splice(0,4))
   }
-  if (this.choices.length === 1) {
-    this.choiceList.find('.choice-list-arrow-down').hide()
-    this.choiceList.find('.choice-list-pager').hide()
-  }
+  this._setupPager()
 
   this._setupChoices(this.currentPage)
 }
@@ -62,9 +39,48 @@ ChoiceList.prototype._toggleChoiceEventListener = function _toggleChoiceEventLis
     if (target.hasClass('submit-choice-list-button')) {
       return self.callback(self.selectedChoices)
     }
+    if (target.hasClass('choice-list-arrow-up')) {
+      self.currentPage -= 1
+      self._setupPager()
+      return self._setupChoices(self.currentPage)
+    }
+    if (target.hasClass('choice-list-arrow-down')) {
+      self.currentPage += 1
+      self._setupPager()
+      return self._setupChoices(self.currentPage)
+    }
     if (target.hasClass('choice-list-item'))
       self._toggleChoice(target[0].innerText)
   }
+}
+
+ChoiceList.prototype._setupPager = function _setupPager () {
+  this.choiceList.find('.choice-list-pager').text(`${this.currentPage + 1}/${this.choices.length}`)
+  // if only one page of choices
+  if (this.choices.length < 2) {
+    this.choiceList.find('.choice-list-arrow-up').hide()
+    this.choiceList.find('.choice-list-arrow-down').hide()
+    this.choiceList.find('.choice-list-pager').hide()
+    return
+  }
+  // if multiple pages and on page 0 (visually shows as 1)
+  if (this.currentPage === 0) {
+    this.choiceList.find('.choice-list-arrow-up').hide()
+    this.choiceList.find('.choice-list-pager').show()
+    this.choiceList.find('.choice-list-arrow-down').show()
+    return
+  }
+  // on the last page
+  if (this.currentPage + 1 === this.choices.length) {
+    this.choiceList.find('.choice-list-arrow-up').show()
+    this.choiceList.find('.choice-list-pager').show()
+    this.choiceList.find('.choice-list-arrow-down').hide()
+    return
+  }
+  // middle pages
+  this.choiceList.find('.choice-list-arrow-up').show()
+  this.choiceList.find('.choice-list-pager').show()
+  this.choiceList.find('.choice-list-arrow-down').show()
 }
 
 ChoiceList.prototype._setupChoices = function _setupChoices(page) {
@@ -72,7 +88,9 @@ ChoiceList.prototype._setupChoices = function _setupChoices(page) {
   const choiceButtons = this.choiceList.find('.choice-list-grid-wrapper')[0].children
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
+    button.removeClass('testActive')
     if (choices[i]) {
+      if (this.selectedChoices.includes(choices[i])) button.addClass('testActive')
       button.show()
       button.text(choices[i])
       continue
@@ -80,8 +98,8 @@ ChoiceList.prototype._setupChoices = function _setupChoices(page) {
     button.hide()
   }
 }
-
-ChoiceList.prototype._toggleChoice = function _toggleChoice(choice) {
+ 
+ChoiceList.prototype._toggleChoice = function _toggleChoice(choice) { 
   const choiceIndex = this.selectedChoices.indexOf(choice)
   if (choiceIndex > -1) {
     this.selectedChoices.splice(choiceIndex, 1)
@@ -117,4 +135,5 @@ ChoiceList.prototype.reset = function reset() {
     const button = $(choiceButtons[i])
     button.removeClass('testActive')
   }
+  this._setupPager()
 }
