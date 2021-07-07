@@ -1627,8 +1627,12 @@ function fiatCredit (data) {
 
   manageFiatButtons(activeDenominations.activeMap)
   $('.choose_fiat_state .fiat-amount').text(fiatDisplay)
-  t('choose-digital-amount',
-    locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode))
+  try {
+    t('choose-digital-amount',
+      locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode))
+  } catch (error) {
+    console.error('Error while translating: ', error)
+  }
 
   reachFiatLimit(activeDenominations)
 }
