@@ -13,17 +13,19 @@ const ChoiceList = function(options) {
 ChoiceList.prototype.init = function init (cb) {
   this.callback = cb
   this.choiceList.find('.choice-list-arrow-up').hide()
-  const choiceList = document.getElementById(this.choiceListId)
   const self = this
-  choiceList.addEventListener('mousedown', this._toggleChoiceEventListener(self))
+  document.querySelector(`#${this.choiceListId}`).querySelectorAll('.choice-list-button').forEach(button => {
+    button.addEventListener('mousedown', e => this._buttonClickEventListener(self, e))
+  })
   return this
 }
 
-ChoiceList.prototype._toggleChoiceEventListener = function _toggleChoiceEventListener(self) {
-  return function(e) {
+ChoiceList.prototype._buttonClickEventListener = function _buttonClickEventListener(self, e) {
     if (!self.active) return
     const target = $(e.target)
     if (target.hasClass('submit-choice-list-button')) {
+      // do not submit if at least one choice is not selected
+      if (self.selectedChoices.length === 0) return
       return self.callback(self.selectedChoices)
     }
     if (target.hasClass('choice-list-arrow-up')) {
@@ -41,7 +43,7 @@ ChoiceList.prototype._toggleChoiceEventListener = function _toggleChoiceEventLis
       // then deselect the previous choice before selecting the new one
       if (self.choiceType !== 'selectMultiple') self._deselectChoices()
       self._toggleChoice(target[0].innerText)
-  }
+
 }
 
 ChoiceList.prototype.replaceChoices = function (availableChoices, choiceType = 'single') {
@@ -121,6 +123,13 @@ ChoiceList.prototype._toggleButton = function _toggleButton(choice) {
       break
     }
   }
+  // check if should enable/disable submit button
+  if (this.selectedChoices.length === 0) {
+    this.choiceList.find('.submit-choice-list-button')[0].disabled = true
+  }
+  else {
+    this.choiceList.find('.submit-choice-list-button')[0].disabled = false
+  }
 }
 
 ChoiceList.prototype.deactivate = function deactivate() {
@@ -139,6 +148,7 @@ ChoiceList.prototype._deselectChoices = function _deselectChoices() {
 
 ChoiceList.prototype.reset = function reset() {
   this._deselectChoices()
+  this.choiceList.find('.submit-choice-list-button')[0].disabled = true
   this.choices = []
   this.currentPage = 0
   this._setupPager(this.currentPage)
