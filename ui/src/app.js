@@ -346,7 +346,7 @@ function customInfoRequest (customInfoRequest, screen) {
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
       $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text)
-      customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList)
+      customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType)
       setState('custom_permission_screen2_choiceList')
       setScreen('custom_permission_screen2_choiceList')
       break

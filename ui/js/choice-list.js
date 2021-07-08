@@ -7,7 +7,7 @@ const ChoiceList = function(options) {
   this.choices = []
   this.currentPage = 0
   this.active = options.active || true
-  // this.choiceType = options.choiceType || 'single'
+  this.choiceType = 'single' // default
 }
 
 ChoiceList.prototype.init = function init (cb) {
@@ -19,19 +19,6 @@ ChoiceList.prototype.init = function init (cb) {
   return this
 }
 
-ChoiceList.prototype.replaceChoices = function (availableChoices) {
-  this.reset()
-
-  let _choices = [...availableChoices]
-  this.choices = []
-  while (_choices.length > 0) {
-    this.choices.push(_choices.splice(0,4))
-  }
-  this._setupPager()
-
-  this._setupChoices(this.currentPage)
-}
-
 ChoiceList.prototype._toggleChoiceEventListener = function _toggleChoiceEventListener(self) {
   return function(e) {
     if (!self.active) return
@@ -41,21 +28,36 @@ ChoiceList.prototype._toggleChoiceEventListener = function _toggleChoiceEventLis
     }
     if (target.hasClass('choice-list-arrow-up')) {
       self.currentPage -= 1
-      self._setupPager()
+      self._setupPager(self.currentPage)
       return self._setupChoices(self.currentPage)
     }
     if (target.hasClass('choice-list-arrow-down')) {
       self.currentPage += 1
-      self._setupPager()
+      self._setupPager(self.currentPage)
       return self._setupChoices(self.currentPage)
     }
     if (target.hasClass('choice-list-item'))
+      // if it's not a selectMultiple (choose multiple options) type of choice list,
+      // then deselect the previous choice before selecting the new one
+      if (self.choiceType !== 'selectMultiple') self._deselectChoices()
       self._toggleChoice(target[0].innerText)
   }
 }
 
-ChoiceList.prototype._setupPager = function _setupPager () {
-  this.choiceList.find('.choice-list-pager').text(`${this.currentPage + 1}/${this.choices.length}`)
+ChoiceList.prototype.replaceChoices = function (availableChoices, choiceType = 'single') {
+  this.reset()
+  this.choiceType = choiceType
+  let _choices = [...availableChoices]
+  this.choices = []
+  while (_choices.length > 0) {
+    this.choices.push(_choices.splice(0,4))
+  }
+  this._setupPager(this.currentPage)
+  this._setupChoices(this.currentPage)
+}
+
+ChoiceList.prototype._setupPager = function _setupPager (targetPage) {
+  this.choiceList.find('.choice-list-pager').text(`${targetPage + 1}/${this.choices.length}`)
   // if only one page of choices
   if (this.choices.length < 2) {
     this.choiceList.find('.choice-list-arrow-up').hide()
@@ -64,14 +66,14 @@ ChoiceList.prototype._setupPager = function _setupPager () {
     return
   }
   // if multiple pages and on page 0 (visually shows as 1)
-  if (this.currentPage === 0) {
+  if (targetPage === 0) {
     this.choiceList.find('.choice-list-arrow-up').hide()
     this.choiceList.find('.choice-list-pager').show()
     this.choiceList.find('.choice-list-arrow-down').show()
     return
   }
   // on the last page
-  if (this.currentPage + 1 === this.choices.length) {
+  if (targetPage + 1 === this.choices.length) {
     this.choiceList.find('.choice-list-arrow-up').show()
     this.choiceList.find('.choice-list-pager').show()
     this.choiceList.find('.choice-list-arrow-down').hide()
@@ -99,7 +101,7 @@ ChoiceList.prototype._setupChoices = function _setupChoices(page) {
   }
 }
  
-ChoiceList.prototype._toggleChoice = function _toggleChoice(choice) { 
+ChoiceList.prototype._toggleChoice = function _toggleChoice(choice) {
   const choiceIndex = this.selectedChoices.indexOf(choice)
   if (choiceIndex > -1) {
     this.selectedChoices.splice(choiceIndex, 1)
@@ -126,14 +128,18 @@ ChoiceList.prototype.deactivate = function deactivate() {
   this.reset()
 }
 
-ChoiceList.prototype.reset = function reset() {
+ChoiceList.prototype._deselectChoices = function _deselectChoices() {
   this.selectedChoices = []
-  this.choices = []
-  this.currentPage = 0
   const choiceButtons = this.choiceList.find('.choice-list-grid-wrapper')[0].children
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
     button.removeClass('testActive')
   }
-  this._setupPager()
+}
+
+ChoiceList.prototype.reset = function reset() {
+  this._deselectChoices()
+  this.choices = []
+  this.currentPage = 0
+  this._setupPager(this.currentPage)
 }
