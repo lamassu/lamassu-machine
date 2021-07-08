@@ -12,7 +12,7 @@ const ChoiceList = function(options) {
 
 ChoiceList.prototype.init = function init (cb) {
   this.callback = cb
-  this.choiceList.find('.choice-list-arrow-up').hide()
+  // this.choiceList.find('.choice-list-arrow-up').hide()
   const self = this
   document.querySelector(`#${this.choiceListId}`).querySelectorAll('.choice-list-button').forEach(button => {
     button.addEventListener('mousedown', e => this._buttonClickEventListener(self, e))
@@ -29,20 +29,23 @@ ChoiceList.prototype._buttonClickEventListener = function _buttonClickEventListe
       return self.callback(self.selectedChoices)
     }
     if (target.hasClass('choice-list-arrow-up')) {
+      if (self.currentPage === 0) return 
       self.currentPage -= 1
       self._setupPager(self.currentPage)
       return self._setupChoices(self.currentPage)
     }
     if (target.hasClass('choice-list-arrow-down')) {
+      if (self.currentPage === this.choices.length - 1) return
       self.currentPage += 1
       self._setupPager(self.currentPage)
       return self._setupChoices(self.currentPage)
     }
-    if (target.hasClass('choice-list-item'))
+    if (target.hasClass('choice-list-item')) {
       // if it's not a selectMultiple (choose multiple options) type of choice list,
       // then deselect the previous choice before selecting the new one
       if (self.choiceType !== 'selectMultiple') self._deselectChoices()
       self._toggleChoice(target[0].innerText)
+    }
 
 }
 
@@ -60,31 +63,6 @@ ChoiceList.prototype.replaceChoices = function (availableChoices, choiceType = '
 
 ChoiceList.prototype._setupPager = function _setupPager (targetPage) {
   this.choiceList.find('.choice-list-pager').text(`${targetPage + 1}/${this.choices.length}`)
-  // if only one page of choices
-  if (this.choices.length < 2) {
-    this.choiceList.find('.choice-list-arrow-up').hide()
-    this.choiceList.find('.choice-list-arrow-down').hide()
-    this.choiceList.find('.choice-list-pager').hide()
-    return
-  }
-  // if multiple pages and on page 0 (visually shows as 1)
-  if (targetPage === 0) {
-    this.choiceList.find('.choice-list-arrow-up').hide()
-    this.choiceList.find('.choice-list-pager').show()
-    this.choiceList.find('.choice-list-arrow-down').show()
-    return
-  }
-  // on the last page
-  if (targetPage + 1 === this.choices.length) {
-    this.choiceList.find('.choice-list-arrow-up').show()
-    this.choiceList.find('.choice-list-pager').show()
-    this.choiceList.find('.choice-list-arrow-down').hide()
-    return
-  }
-  // middle pages
-  this.choiceList.find('.choice-list-arrow-up').show()
-  this.choiceList.find('.choice-list-pager').show()
-  this.choiceList.find('.choice-list-arrow-down').show()
 }
 
 ChoiceList.prototype._setupChoices = function _setupChoices(page) {

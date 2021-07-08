@@ -1508,10 +1508,20 @@ footer {
   font-family: $font-secondary;
 }
 
-.choice-list-arrows-wrapper {
+.choice-list-actions-wrapper {
   position: relative;
-  width: 100%;
+  // width: 100%;
   height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 8vh;
+  margin-top: 6vh;
+  p {
+    margin: 4vh 0;
+  }
+  justify-content: center;
+  margin-left: 25%;
 }
 
 .choice-list-arrow {
@@ -1525,32 +1535,32 @@ footer {
   font-family: $font-secondary;
 }
 
-.choice-list-arrow-down {
-  position: absolute;
-  bottom: 100px;
-  left: 20px;
-}
-
-.choice-list-arrow-up {
-  position: absolute;
-  bottom: 255px;
-  left: 20px;
-}
-
 .choice-list-pager {
-  font-size: x-large;
-  position: absolute;
-  bottom: 210px;
-  left: 50px;
+  font-size: xx-large;
+  font-weight: bold;
   font-family: $font-secondary;
+  color: $ligth-color;
+  text-align: center;
 }
 
-.submit-choice-list-button {
-  position: absolute;
-  bottom: 0;
+.submit-choice-list-button-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: auto;
 }
 
 .choice-selected {
-  background-color: $purple-grey;
-  color: $ligth-color;
+  @include cash-background-colors;
+  color: $ligth-color; 
+  &:active, .active {
+    background-color: $white;
+    @include cash-colors;
+  }
+  &:disabled {
+    @include cash-disabled-background-colors;
+  }
+}
+
+.arrow {
+  pointer-events: none;
 }
