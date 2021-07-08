@@ -90,9 +90,9 @@ ChoiceList.prototype._setupChoices = function _setupChoices(page) {
   const choiceButtons = this.choiceList.find('.choice-list-grid-wrapper')[0].children
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
-    button.removeClass('testActive')
+    button.removeClass('choice-selected')
     if (choices[i]) {
-      if (this.selectedChoices.includes(choices[i])) button.addClass('testActive')
+      if (this.selectedChoices.includes(choices[i])) button.addClass('choice-selected')
       button.show()
       button.text(choices[i])
       continue
@@ -117,7 +117,7 @@ ChoiceList.prototype._toggleButton = function _toggleButton(choice) {
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
     if (button[0].innerText === choice) {
-      button.toggleClass('testActive')
+      button.toggleClass('choice-selected')
       break
     }
   }
@@ -133,7 +133,7 @@ ChoiceList.prototype._deselectChoices = function _deselectChoices() {
   const choiceButtons = this.choiceList.find('.choice-list-grid-wrapper')[0].children
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
-    button.removeClass('testActive')
+    button.removeClass('choice-selected')
   }
 }
 

@@ -2246,19 +2246,16 @@ footer {
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-  background-color: pink;
+  background-color: #f2f2f2;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
-          align-items: center; }
+          align-items: center;
+  font-family: "MuseoSans", sans-serif; }
 
 .choice-list-arrows-wrapper {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center; */
   position: relative;
   width: 100%;
   height: 100%; }
@@ -2267,7 +2264,7 @@ footer {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: white;
+  background-color: #f2f2f2;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -2276,7 +2273,8 @@ footer {
           justify-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-          align-items: center; }
+          align-items: center;
+  font-family: "MuseoSans", sans-serif; }
 
 .choice-list-arrow-down {
   position: absolute;
@@ -2292,7 +2290,8 @@ footer {
   font-size: x-large;
   position: absolute;
   bottom: 210px;
-  left: 50px; }
+  left: 50px;
+  font-family: "MuseoSans", sans-serif; }
 
 .submit-choice-list-button {
   /* margin-top: 50px;
@@ -2300,5 +2299,6 @@ footer {
   position: absolute;
   bottom: 0; }
 
-.testActive {
-  background-color: red; }
+.choice-selected {
+  background-color: #403c51;
+  color: #f2f2f2; }
