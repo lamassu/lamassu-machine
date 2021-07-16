@@ -362,19 +362,27 @@ function setupCoinsButtons() {
 }
 
 function setCryptoBuy(coin) {
-  var cashIn = $('.cash-in');
-  var translatedCoin = locale.translate(coin.display).fetch();
-  var buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin);
+  try {
+    var cashIn = $('.cash-in');
+    var translatedCoin = locale.translate(coin.display).fetch();
+    var buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin);
 
-  cashIn.html(buyStr);
+    cashIn.html(buyStr);
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 }
 
 function setCryptoSell(coin) {
-  var cashOut = $('.cash-out');
-  var translatedCoin = locale.translate(coin.display).fetch();
-  var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
+  try {
+    var cashOut = $('.cash-out');
+    var translatedCoin = locale.translate(coin.display).fetch();
+    var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
 
-  cashOut.html(sellStr);
+    cashOut.html(sellStr);
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 }
 
 function setCoins(supportedCoins) {
@@ -905,15 +913,15 @@ function setOperatorInfo(operator) {
 
 function setHardLimit(limits) {
   var component = $('#hard-limit-hours');
-
-  if (limits.hardLimitWeeks >= 1) {
-    return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks));
-  }
-
-  if (limits.hardLimitDays >= 1) {
-    return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours));
-  }
   try {
+    if (limits.hardLimitWeeks >= 1) {
+      return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks));
+    }
+
+    if (limits.hardLimitDays >= 1) {
+      return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours));
+    }
+
     component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours));
   } catch (error) {
     console.error('Error while translating: ', error);
