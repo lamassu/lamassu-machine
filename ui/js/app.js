@@ -390,19 +390,27 @@ function setupCoinsButtons() {
 }
 
 function setCryptoBuy(coin) {
-  var cashIn = $('.cash-in');
-  var translatedCoin = locale.translate(coin.display).fetch();
-  var buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin);
+  try {
+    var cashIn = $('.cash-in');
+    var translatedCoin = locale.translate(coin.display).fetch();
+    var buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin);
 
-  cashIn.html(buyStr);
+    cashIn.html(buyStr);
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 }
 
 function setCryptoSell(coin) {
-  var cashOut = $('.cash-out');
-  var translatedCoin = locale.translate(coin.display).fetch();
-  var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
+  try {
+    var cashOut = $('.cash-out');
+    var translatedCoin = locale.translate(coin.display).fetch();
+    var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
 
-  cashOut.html(sellStr);
+    cashOut.html(sellStr);
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 }
 
 function switchCoin(coin) {
@@ -914,16 +922,19 @@ function setOperatorInfo(operator) {
 
 function setHardLimit(limits) {
   var component = $('#hard-limit-hours');
+  try {
+    if (limits.hardLimitWeeks >= 1) {
+      return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks));
+    }
 
-  if (limits.hardLimitWeeks >= 1) {
-    return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks));
+    if (limits.hardLimitDays >= 1) {
+      return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours));
+    }
+
+    component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours));
+  } catch (error) {
+    console.error('Error while translating: ', error);
   }
-
-  if (limits.hardLimitDays >= 1) {
-    return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours));
-  }
-
-  component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours));
 }
 
 function setCryptomatModel(model) {
@@ -1054,8 +1065,12 @@ function moreNetworks() {
 function setWifiSsid(data) {
   $('#js-i18n-wifi-for-ssid').data('ssid', data.ssid);
   $('#js-i18n-wifi-for-ssid').data('raw-ssid', data.rawSsid);
-  t('wifi-for-ssid', locale.translate('for %s').fetch('<strong>' + data.ssid + '</strong>'));
-  t('wifi-connect', locale.translate("You're connecting to the WiFi network %s").fetch('<strong>' + data.ssid + '</strong>'));
+  try {
+    t('wifi-for-ssid', locale.translate('for %s').fetch('<strong>' + data.ssid + '</strong>'));
+    t('wifi-connect', locale.translate("You're connecting to the WiFi network %s").fetch('<strong>' + data.ssid + '</strong>'));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 }
 
 function setLocaleInfo(data) {
@@ -1186,10 +1201,13 @@ function setFiatCode(data) {
 
 function setFixedFee(_fee) {
   var fee = parseFloat(_fee);
-
   if (fee > 0) {
-    var fixedFee = locale.translate('Transaction Fee: %s').fetch(formatFiat(fee, 2));
-    $('.js-i18n-fixed-fee').html(fixedFee);
+    try {
+      var fixedFee = locale.translate('Transaction Fee: %s').fetch(formatFiat(fee, 2));
+      $('.js-i18n-fixed-fee').html(fixedFee);
+    } catch (error) {
+      console.error('Error while translating: ', error);
+    }
   } else {
     $('.js-i18n-fixed-fee').html('');
   }
@@ -1202,11 +1220,14 @@ function setCredit(fiat, crypto, lastBill, cryptoCode) {
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
   var cryptoDisplayCode = coin.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
-  $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
-  $('.fiat .js-amount').html(fiat);
+  try {
+    $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
+    $('.fiat .js-amount').html(fiat);
 
-  var inserted = lastBill ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill)) : locale.translate('Lamassu Cryptomat').fetch();
-
+    var inserted = lastBill ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill)) : locale.translate('Lamassu Cryptomat').fetch();
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
   $('.js-processing-bill').html(inserted);
 
   $('.js-send-crypto-disable').hide();
@@ -1384,19 +1405,32 @@ function highBill(highestBill, reason) {
   var reasonText = reason === 'transactionLimit' ? locale.translate('Transaction limit reached.').fetch() : locale.translate("We're a little low on crypto.").fetch();
 
   t('high-bill-header', reasonText);
-  t('highest-bill', locale.translate('Please insert %s or less.').fetch(formatFiat(highestBill)));
+  try {
+    t('highest-bill', locale.translate('Please insert %s or less.').fetch(formatFiat(highestBill)));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
+
   setScreen('high_bill');
   window.setTimeout(revertScreen, 3000);
 }
 
 function minimumTx(lowestBill) {
-  t('lowest-bill', locale.translate('Minimum first bill is %s.').fetch(formatFiat(lowestBill)));
+  try {
+    t('lowest-bill', locale.translate('Minimum first bill is %s.').fetch(formatFiat(lowestBill)));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
   setScreen('minimum_tx');
   window.setTimeout(revertScreen, 3000);
 }
 
 function readingBill(bill) {
-  $('.js-processing-bill').html(locale.translate('Processing %s ...').fetch(formatFiat(bill)));
+  try {
+    $('.js-processing-bill').html(locale.translate('Processing %s ...').fetch(formatFiat(bill)));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
   $('.js-send-crypto-enable').hide();
   $('.js-send-crypto-disable').show();
 }
@@ -1434,12 +1468,15 @@ function t(id, str) {
 }
 
 function translateCoin(cryptoCode) {
-  $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode));
-  $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode));
-  $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode));
-  $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode));
-  $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode));
-
+  try {
+    $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode));
+    $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode));
+    $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode));
+    $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode));
+    $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
   if (cryptoCode === 'ETH') {
     $('.js-i18n-authorizing-note').html(locale.translate('This should take <strong>15 seconds</strong> on average.<br/>Occasionally, it will take over a minute.').fetch(cryptoCode));
   }
@@ -1544,7 +1581,11 @@ function fiatCredit(data) {
 
   manageFiatButtons(activeDenominations.activeMap);
   $('.choose_fiat_state .fiat-amount').text(fiatDisplay);
-  t('choose-digital-amount', locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode));
+  try {
+    t('choose-digital-amount', locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode));
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
 
   reachFiatLimit(activeDenominations);
 }
@@ -1719,13 +1760,17 @@ function setAvailablePromoCodes(areThereAvailablePromoCodes) {
 
 function setCurrentDiscount(currentDiscount) {
   if (currentDiscount > 0) {
-    var successMessage = '✔ ' + locale.translate('Promo code added (%s discount)').fetch(currentDiscount + '%');
-    $('#insert-first-bill-promo-button').hide();
-    $('#choose-fiat-promo-button').hide();
-    $('#insert-first-bill-code-added').html(successMessage);
-    $('#choose-fiat-code-added').html(successMessage);
-    $('#insert-first-bill-code-added').show();
-    $('#choose-fiat-code-added').show();
+    try {
+      var successMessage = '✔ ' + locale.translate('Promo code added (%s discount)').fetch(currentDiscount + '%');
+      $('#insert-first-bill-promo-button').hide();
+      $('#choose-fiat-promo-button').hide();
+      $('#insert-first-bill-code-added').html(successMessage);
+      $('#choose-fiat-code-added').html(successMessage);
+      $('#insert-first-bill-code-added').show();
+      $('#choose-fiat-code-added').show();
+    } catch (error) {
+      console.error('Error while translating: ', error);
+    }
   } else {
     $('#insert-first-bill-promo-button').show();
     $('#choose-fiat-promo-button').show();
