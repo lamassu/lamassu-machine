@@ -226,7 +226,7 @@ function processData (data) {
       setState('restart')
       break
     case 'chooseCoin':
-      chooseCoin(data.coins, data.twoWayMode)
+      chooseCoin(data.coins, data.twoWayMode, data.billValidatorErrorFlag)
       break
     case 'smsVerification':
       smsVerification(data.threshold)
@@ -276,14 +276,14 @@ function blockedCustomer () {
   return setScreen('blocked_customer')
 }
 
-function chooseCoin (coins, twoWayMode) {
-  if (twoWayMode) {
+function chooseCoin (coins, twoWayMode, billValidatorErrorFlag) {
+  if (twoWayMode && !billValidatorErrorFlag) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way')
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in')
   }
 
-  isTwoWay = twoWayMode
+  isTwoWay = twoWayMode && !billValidatorErrorFlag
   setChooseCoinColors()
   // setupAnimation(twoWayMode, aspectRatio800)
 
