@@ -58,6 +58,18 @@ msgstr "The code you entered was incorrect."
 msgid "Please make sure you're entering the six digit code you receive from us."
 msgstr "Please make sure you're entering the six digit code you receive from us."
 
+#: On screen: cash-in-disabled
+msgid "Cash-in temporarily unavailable"
+msgstr "Cash-in temporarily unavailable"
+
+#: On screen: cash-in-disabled
+msgid "Apologies. Buying operations are temporarily offline."
+msgstr "Apologies. Buying operations are temporarily offline."
+
+#: On screen: cash-in-disabled
+msgid "Please contact the operator to sort this out, or try again later."
+msgstr "Please contact the operator to sort this out, or try again later."
+
 #: On screen: cash-in-waiting
 msgid "One moment..."
 msgstr "One moment..."
@@ -569,6 +581,10 @@ msgstr "Pairing failed"
 #: On screen: pairing-error
 msgid "When attempting to pair, we experienced an error:"
 msgstr "When attempting to pair, we experienced an error:"
+
+#: On screen: pairing-scan
+msgid "Scan QR code"
+msgstr "Scan QR code"
 
 #: On screen: pairing-scan
 msgid "Please scan the pairing QR code you got from your remote server."
