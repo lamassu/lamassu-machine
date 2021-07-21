@@ -378,6 +378,22 @@ msgstr "More, please"
 msgid "We're all out of cash!"
 msgstr "We're all out of cash!"
 
+#: On screen: out-of-coins
+msgid "Don't worry!"
+msgstr "Don't worry!"
+
+#: On screen: out-of-coins
+msgid "Your funds are safe, but we had an issue when sending your coins."
+msgstr "Your funds are safe, but we had an issue when sending your coins."
+
+#: On screen: out-of-coins
+msgid "Please take a photo of this screen and contact the operator to push through your order."
+msgstr "Please take a photo of this screen and contact the operator to push through your order."
+
+#: On screen: out-of-coins
+msgid "Your receiving address:"
+msgstr "Your receiving address:"
+
 #: On screen: pending-deposit
 msgid "Funds Received!"
 msgstr "Funds Received!"

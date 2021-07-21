@@ -1443,3 +1443,31 @@ footer {
   right: 4vh;
   bottom: 0;
 }
+
+.out_of_coins_state .contacts {
+  margin-top: 15vh;
+}
+
+.out_of_coins_state .qr-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26vh;
+  height: 26vh;
+  border-radius: 2.5vh;
+  margin-top: 0px;
+  background-color: $white;
+}
+
+.out_of_coins_state .qr {
+  width: 22vh;
+  height: 22vh;
+  box-shadow: $shadow;
+}
+
+.out_of_coins_state .secondary-side {
+  margin-left: 7.5vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

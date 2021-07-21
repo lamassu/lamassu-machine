@@ -1028,7 +1028,56 @@
         </section>
       </section>
     </section>
-    <section class="viewport pending_deposit_state cash-out-color" data-tr-section="pending-deposit">
+    <section
+      id="out_of_coins_viewport"
+      class="viewport out_of_coins_state cash-in-color"
+      data-tr-section="out-of-coins"
+      data-screentype="flow-action-tp"
+    >
+      <header></header>
+      <main>
+        <section class="primary-side">
+          <h2 class="js-i18n no-margin-top sm-margin-bottom">Don't worry!</h2>
+          <p class="js-i18n d2 no-margin-top sm-margin-bottom">Your funds are safe, but we had an issue when sending your coins.</p>
+          <p class="js-i18n d2 no-margin-top no-margin-bottom">Please take a photo of this screen and <b>contact the operator</b> to push through your order.</p>
+          <table class="contacts">
+            <tr>
+              <td>
+                <img src="images/contact/operator.svg" />
+                <span class="d2 operator-name"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/contact/phone.svg" />
+                <span class="d2 operator-phone"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/contact/email.svg" />
+                <span class="d2 operator-email"></span>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section class="secondary-side qr-secondary-side">
+          <section class="qr-section">
+            <div class="qr-wrapper">
+              <div id="cash-in-no-funds-qr-code" class="qr"></div>
+            </div>
+          </section>
+          <p class="js-i18n d2 white xs-margin-bottom">You Purchased</p>
+          <div class="total-crypto-rec i18n-latin">
+            <span class="h3 crypto-amount i18n-latin"></span>
+            <span class="h4 crypto-units i18n-latin"></span>
+          </div>
+          <p class="tl2 amount-deposited sm-margin-top"></p>
+          <p class="js-i18n d2 no-margin-bottom sm-margin-top">Your receiving address:</p>
+          <p class="m2 crypto-address"></p>
+        </section>
+      </main>
+    </section><section class="viewport pending_deposit_state cash-out-color" data-tr-section="pending-deposit">
       <section class="mainv">
         <section class="header">
           <img src="images/funds-received.svg"/>

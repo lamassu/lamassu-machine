@@ -199,7 +199,8 @@ function processData(data) {
       break;
     case 'balanceLow':
     case 'insufficientFunds':
-      setState('limit_reached');
+      // setState('limit_reached')
+      setState('out_of_coins');
       break;
     case 'highBill':
       highBill(data.highestBill, data.reason);
@@ -534,6 +535,7 @@ $(document).ready(function () {
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
   setupImmediateButton('withdraw_failure_viewport', 'completed');
+  setupImmediateButton('out_of_coins_viewport', 'completed');
   setupImmediateButton('fiat_receipt_viewport', 'completed');
   setupImmediateButton('fiat_complete_viewport', 'completed');
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
@@ -1292,15 +1294,17 @@ function setExchangeRate(_rates) {
 }
 
 function qrize(text, target, color, lightning) {
+  var size = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'normal';
+
   var image = document.getElementById('bolt-img'
   // Hack for surf browser
-  );var size = document.body.clientHeight * 0.36;
+  );var _size = size === 'normal' ? document.body.clientHeight * 0.36 : document.body.clientHeight * 0.22;
 
   var opts = {
     crisp: true,
     fill: color || 'black',
     text: text,
-    size: size,
+    size: _size,
     render: 'canvas',
     rounded: 50,
     quiet: 2,
@@ -1337,6 +1341,7 @@ function setTx(tx) {
   setTimeout(function () {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR);
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR);
+    qrize(txId, $('#cash-in-no-funds-qr-code'), CASH_IN_QR_COLOR, null, 'small');
     qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR);
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR);
   }, 1000);
