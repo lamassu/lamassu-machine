@@ -969,6 +969,13 @@ footer {
   }
 }
 
+.info-with-contact-and-info {
+  @extend .info;
+  header {
+    height: 30vh;
+  }
+}
+
 .info-no-image {
   @extend .info;
   header {
@@ -1013,6 +1020,12 @@ footer {
     width: 21vh;
     margin-left: 5vh;
   }
+}
+.cash_in_disabled_state {  
+  header img {
+  width: 30vh;
+  margin-left: 3vh;
+ }
 }
 
 .locked_state,

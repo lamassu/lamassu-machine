@@ -227,7 +227,7 @@ function processData(data) {
       setState('restart');
       break;
     case 'chooseCoin':
-      chooseCoin(data.coins, data.twoWayMode, data.billValidatorErrorFlag);
+      chooseCoin(data.coins, data.twoWayMode);
       break;
     case 'smsVerification':
       smsVerification(data.threshold);
@@ -277,14 +277,14 @@ function blockedCustomer() {
   return setScreen('blocked_customer');
 }
 
-function chooseCoin(coins, twoWayMode, billValidatorErrorFlag) {
-  if (twoWayMode && !billValidatorErrorFlag) {
+function chooseCoin(coins, twoWayMode) {
+  if (twoWayMode) {
     $('.choose_coin_state').removeClass('choose-coin-cash-in').addClass('choose-coin-two-way');
   } else {
     $('.choose_coin_state').removeClass('choose-coin-two-way').addClass('choose-coin-cash-in');
   }
 
-  isTwoWay = twoWayMode && !billValidatorErrorFlag;
+  isTwoWay = twoWayMode;
   setChooseCoinColors
   // setupAnimation(twoWayMode, aspectRatio800)
 
@@ -598,6 +598,7 @@ $(document).ready(function () {
   setupButton('deposit-timeout-sent-yes', 'depositTimeout');
   setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent');
   setupButton('out-of-cash-ok', 'idle');
+  setupButton('cash-in-disabled-ok', 'idle');
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');

@@ -1110,13 +1110,13 @@ footer {
   margin-top: 5.9vh;
   margin-bottom: 0; }
 
-.hard_limit_reached_state .mainv .info, .hard_limit_reached_state .mainv .no-action-info, .hard_limit_reached_state .mainv .info-with-contact, .hard_limit_reached_state .mainv .info-no-image {
+.hard_limit_reached_state .mainv .info, .hard_limit_reached_state .mainv .no-action-info, .hard_limit_reached_state .mainv .info-with-contact, .hard_limit_reached_state .mainv .info-with-contact-and-info, .hard_limit_reached_state .mainv .info-no-image {
   margin-top: 4.5vh; }
 
-.hard_limit_reached_state .mainv .info .d2, .hard_limit_reached_state .mainv .no-action-info .d2, .hard_limit_reached_state .mainv .info-with-contact .d2, .hard_limit_reached_state .mainv .info-no-image .d2 {
+.hard_limit_reached_state .mainv .info .d2, .hard_limit_reached_state .mainv .no-action-info .d2, .hard_limit_reached_state .mainv .info-with-contact .d2, .hard_limit_reached_state .mainv .info-with-contact-and-info .d2, .hard_limit_reached_state .mainv .info-no-image .d2 {
   margin-bottom: 0vh; }
 
-.hard_limit_reached_state .mainv .info .d2b, .hard_limit_reached_state .mainv .no-action-info .d2b, .hard_limit_reached_state .mainv .info-with-contact .d2b, .hard_limit_reached_state .mainv .info-no-image .d2b {
+.hard_limit_reached_state .mainv .info .d2b, .hard_limit_reached_state .mainv .no-action-info .d2b, .hard_limit_reached_state .mainv .info-with-contact .d2b, .hard_limit_reached_state .mainv .info-with-contact-and-info .d2b, .hard_limit_reached_state .mainv .info-no-image .d2b {
   margin-top: 2vh;
   padding-left: 0.7vw; }
 
@@ -1142,11 +1142,11 @@ footer {
   margin-top: 6.5vh;
   margin-bottom: 0vh; }
 
-.out_of_cash_state .mainv .info, .out_of_cash_state .mainv .no-action-info, .out_of_cash_state .mainv .info-with-contact, .out_of_cash_state .mainv .info-no-image {
+.out_of_cash_state .mainv .info, .out_of_cash_state .mainv .no-action-info, .out_of_cash_state .mainv .info-with-contact, .out_of_cash_state .mainv .info-with-contact-and-info, .out_of_cash_state .mainv .info-no-image {
   margin-top: 4.7vh;
   margin-bottom: 0vh; }
 
-.out_of_cash_state .mainv .info .d2, .out_of_cash_state .mainv .no-action-info .d2, .out_of_cash_state .mainv .info-with-contact .d2, .out_of_cash_state .mainv .info-no-image .d2 {
+.out_of_cash_state .mainv .info .d2, .out_of_cash_state .mainv .no-action-info .d2, .out_of_cash_state .mainv .info-with-contact .d2, .out_of_cash_state .mainv .info-with-contact-and-info .d2, .out_of_cash_state .mainv .info-no-image .d2 {
   margin: 0; }
 
 .out_of_cash_state .mainv .actions {
@@ -1168,7 +1168,7 @@ footer {
   margin-bottom: 0;
   line-height: 1.33; }
 
-.minimum_tx_state .mainv .info .d1, .minimum_tx_state .mainv .no-action-info .d1, .minimum_tx_state .mainv .info-with-contact .d1, .minimum_tx_state .mainv .info-no-image .d1 {
+.minimum_tx_state .mainv .info .d1, .minimum_tx_state .mainv .no-action-info .d1, .minimum_tx_state .mainv .info-with-contact .d1, .minimum_tx_state .mainv .info-with-contact-and-info .d1, .minimum_tx_state .mainv .info-no-image .d1 {
   margin-top: 2.2vh;
   line-height: 1.25; }
 
@@ -1183,7 +1183,7 @@ footer {
   margin-bottom: 0;
   line-height: 1.33; }
 
-.pending_deposit_state .mainv .info .tl2, .pending_deposit_state .mainv .no-action-info .tl2, .pending_deposit_state .mainv .info-with-contact .tl2, .pending_deposit_state .mainv .info-no-image .tl2 {
+.pending_deposit_state .mainv .info .tl2, .pending_deposit_state .mainv .no-action-info .tl2, .pending_deposit_state .mainv .info-with-contact .tl2, .pending_deposit_state .mainv .info-with-contact-and-info .tl2, .pending_deposit_state .mainv .info-no-image .tl2 {
   margin-top: 2.5vh;
   line-height: 1.25; }
 
@@ -1742,12 +1742,12 @@ footer {
 .restart_state .img {
   width: 44vw; }
 
-.info, .no-action-info, .info-with-contact, .info-no-image {
+.info, .no-action-info, .info-with-contact, .info-with-contact-and-info, .info-no-image {
   text-align: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center; }
-  .info header, .no-action-info header, .info-with-contact header, .info-no-image header {
+  .info header, .no-action-info header, .info-with-contact header, .info-with-contact-and-info header, .info-no-image header {
     padding: 0;
     height: 37vh;
     -webkit-box-pack: center;
@@ -1757,7 +1757,7 @@ footer {
     -webkit-align-items: flex-end;
             align-items: flex-end;
     width: 100%; }
-  .info main, .no-action-info main, .info-with-contact main, .info-no-image main {
+  .info main, .no-action-info main, .info-with-contact main, .info-with-contact-and-info main, .info-no-image main {
     height: auto;
     min-height: 37vh;
     -webkit-box-align: center;
@@ -1767,23 +1767,23 @@ footer {
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
             flex-direction: column; }
-    .info main .text-content, .no-action-info main .text-content, .info-with-contact main .text-content, .info-no-image main .text-content {
+    .info main .text-content, .no-action-info main .text-content, .info-with-contact main .text-content, .info-with-contact-and-info main .text-content, .info-no-image main .text-content {
       text-align: left; }
-      .info main .text-content p, .no-action-info main .text-content p, .info-with-contact main .text-content p, .info-no-image main .text-content p {
+      .info main .text-content p, .no-action-info main .text-content p, .info-with-contact main .text-content p, .info-with-contact-and-info main .text-content p, .info-no-image main .text-content p {
         margin: 1vh 0; }
-      .info main .text-content .no-margin-bottom, .no-action-info main .text-content .no-margin-bottom, .info-with-contact main .text-content .no-margin-bottom, .info-no-image main .text-content .no-margin-bottom {
+      .info main .text-content .no-margin-bottom, .no-action-info main .text-content .no-margin-bottom, .info-with-contact main .text-content .no-margin-bottom, .info-with-contact-and-info main .text-content .no-margin-bottom, .info-no-image main .text-content .no-margin-bottom {
         margin-bottom: 0; }
-      .info main .text-content .sm-margin-bottom, .no-action-info main .text-content .sm-margin-bottom, .info-with-contact main .text-content .sm-margin-bottom, .info-no-image main .text-content .sm-margin-bottom {
+      .info main .text-content .sm-margin-bottom, .no-action-info main .text-content .sm-margin-bottom, .info-with-contact main .text-content .sm-margin-bottom, .info-with-contact-and-info main .text-content .sm-margin-bottom, .info-no-image main .text-content .sm-margin-bottom {
         margin-bottom: 2vh; }
-      .info main .text-content .no-margin-top, .no-action-info main .text-content .no-margin-top, .info-with-contact main .text-content .no-margin-top, .info-no-image main .text-content .no-margin-top {
+      .info main .text-content .no-margin-top, .no-action-info main .text-content .no-margin-top, .info-with-contact main .text-content .no-margin-top, .info-with-contact-and-info main .text-content .no-margin-top, .info-no-image main .text-content .no-margin-top {
         margin-top: 0; }
-  .info footer, .no-action-info footer, .info-with-contact footer, .info-no-image footer {
+  .info footer, .no-action-info footer, .info-with-contact footer, .info-with-contact-and-info footer, .info-no-image footer {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
             justify-content: center; }
-    .info footer button, .no-action-info footer button, .info-with-contact footer button, .info-no-image footer button {
+    .info footer button, .no-action-info footer button, .info-with-contact footer button, .info-with-contact-and-info footer button, .info-no-image footer button {
       margin: 0 3vh; }
-  .info .tl2, .no-action-info .tl2, .info-with-contact .tl2, .info-no-image .tl2 {
+  .info .tl2, .no-action-info .tl2, .info-with-contact .tl2, .info-with-contact-and-info .tl2, .info-no-image .tl2 {
     line-height: 1.4; }
 
 .no-action-info main {
@@ -1797,6 +1797,9 @@ footer {
 
 .info-with-contact main {
   min-height: 38vh; }
+
+.info-with-contact-and-info header {
+  height: 30vh; }
 
 .info-no-image header {
   height: 14vh; }
@@ -1824,6 +1827,10 @@ footer {
 .max_phone_retries_state header img, .bad_phone_number_state header img {
   width: 21vh;
   margin-left: 5vh; }
+
+.cash_in_disabled_state header img {
+  width: 30vh;
+  margin-left: 3vh; }
 
 .locked_state img,
 .maintenance_state img {
@@ -2114,7 +2121,7 @@ footer {
   .i18n-rtl .contacts td div svg {
     margin-left: 1.25vw;
     margin-right: 0; }
-  .i18n-rtl .info main .text-content, .i18n-rtl .no-action-info main .text-content, .i18n-rtl .info-with-contact main .text-content, .i18n-rtl .info-no-image main .text-content {
+  .i18n-rtl .info main .text-content, .i18n-rtl .no-action-info main .text-content, .i18n-rtl .info-with-contact main .text-content, .i18n-rtl .info-with-contact-and-info main .text-content, .i18n-rtl .info-no-image main .text-content {
     text-align: right; }
   .i18n-rtl .insert_more_bills_state footer {
     margin-right: 15vh;
