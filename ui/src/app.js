@@ -198,7 +198,8 @@ function processData (data) {
       break
     case 'balanceLow':
     case 'insufficientFunds':
-      setState('limit_reached')
+      // setState('limit_reached')
+      setState('out_of_coins')
       break
     case 'highBill':
       highBill(data.highestBill, data.reason)
@@ -541,6 +542,7 @@ $(document).ready(function () {
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
+  setupImmediateButton('out_of_coins_viewport', 'completed')
   setupImmediateButton('fiat_receipt_viewport', 'completed')
   setupImmediateButton('fiat_complete_viewport', 'completed')
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel')
@@ -1336,16 +1338,18 @@ function setExchangeRate (_rates) {
   $('.js-crypto-display-units').text(displayCode)
 }
 
-function qrize (text, target, color, lightning) {
+function qrize (text, target, color, lightning, size = 'normal') {
   const image = document.getElementById('bolt-img')
   // Hack for surf browser
-  const size = document.body.clientHeight * 0.36
+  const _size = size === 'normal'
+    ? document.body.clientHeight * 0.36
+    : document.body.clientHeight * 0.22
 
   const opts = {
     crisp: true,
     fill: color || 'black',
     text,
-    size,
+    size: _size,
     render: 'canvas',
     rounded: 50,
     quiet: 2,
@@ -1382,6 +1386,7 @@ function setTx (tx) {
   setTimeout(() => {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR)
+    qrize(txId, $('#cash-in-no-funds-qr-code'), CASH_IN_QR_COLOR, null, 'small')
     qrize(txId, $('#qr-code-fiat-receipt'), CASH_OUT_QR_COLOR)
     qrize(txId, $('#qr-code-fiat-complete'), CASH_OUT_QR_COLOR)
   }, 1000)
