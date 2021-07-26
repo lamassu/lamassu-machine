@@ -199,7 +199,6 @@ function processData(data) {
       break;
     case 'balanceLow':
     case 'insufficientFunds':
-      // setState('limit_reached')
       setState('out_of_coins');
       break;
     case 'highBill':
@@ -1298,7 +1297,7 @@ function qrize(text, target, color, lightning) {
 
   var image = document.getElementById('bolt-img'
   // Hack for surf browser
-  );var _size = size === 'normal' ? document.body.clientHeight * 0.36 : document.body.clientHeight * 0.22;
+  );var _size = size === 'normal' ? document.body.clientHeight * 0.36 : document.body.clientHeight * 0.25;
 
   var opts = {
     crisp: true,

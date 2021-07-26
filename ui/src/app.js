@@ -198,7 +198,6 @@ function processData (data) {
       break
     case 'balanceLow':
     case 'insufficientFunds':
-      // setState('limit_reached')
       setState('out_of_coins')
       break
     case 'highBill':
@@ -1343,7 +1342,7 @@ function qrize (text, target, color, lightning, size = 'normal') {
   // Hack for surf browser
   const _size = size === 'normal'
     ? document.body.clientHeight * 0.36
-    : document.body.clientHeight * 0.22
+    : document.body.clientHeight * 0.25
 
   const opts = {
     crisp: true,
