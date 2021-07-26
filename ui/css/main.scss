@@ -1452,17 +1452,25 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 26vh;
-  height: 26vh;
+  width: 29vh;
+  height: 29vh;
   border-radius: 2.5vh;
   margin-top: 0px;
   background-color: $white;
 }
 
 .out_of_coins_state .qr {
-  width: 22vh;
-  height: 22vh;
+  width: 25vh;
+  height: 25vh;
   box-shadow: $shadow;
+}
+
+.out_of_coins_state .primary-side {
+  flex-basis: 47%;
+  padding-left: 9.4vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .out_of_coins_state .secondary-side {

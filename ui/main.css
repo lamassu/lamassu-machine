@@ -2185,16 +2185,29 @@ footer {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  width: 26vh;
-  height: 26vh;
+  width: 29vh;
+  height: 29vh;
   border-radius: 2.5vh;
   margin-top: 0px;
   background-color: #ffffff; }
 
 .out_of_coins_state .qr {
-  width: 22vh;
-  height: 22vh;
+  width: 25vh;
+  height: 25vh;
   box-shadow: 0 0 1vh 0 rgba(0, 0, 0, 0.08); }
+
+.out_of_coins_state .primary-side {
+  -webkit-flex-basis: 47%;
+          flex-basis: 47%;
+  padding-left: 9.4vw;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column; }
 
 .out_of_coins_state .secondary-side {
   margin-left: 7.5vw;
