@@ -1547,6 +1547,7 @@ function manageFiatButtons (activeDenominations) {
 function displayCrypto (cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode)
   var scale = new BigNumber(10).pow(coin.displayScale)
+  // number of decimal places vary based on displayScale value
   var decimalPlaces = (coin.displayScale - coin.unitScale) + 6
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber()
   var cryptoDisplay = formatCrypto(cryptoAmount)
