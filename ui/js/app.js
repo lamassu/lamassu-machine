@@ -112,7 +112,6 @@ function processData(data) {
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
-  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus);
 
   if (data.context) {
@@ -1375,6 +1374,8 @@ function setTx(tx) {
 
   $('.js-paper-wallet').toggleClass('hide', !isPaperWallet);
 
+  setCurrentDiscount(tx.discount);
+
   setTimeout(function () {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR);
     qrize(txId, $('#cash-in-fail-qr-code'), CASH_IN_QR_COLOR);
@@ -1733,8 +1734,6 @@ function shouldEnableTouch() {
 
 function setAvailablePromoCodes(areThereAvailablePromoCodes) {
   if (areThereAvailablePromoCodes) {
-    $('#insert-first-bill-code-added').hide();
-    $('#choose-fiat-code-added').hide();
     $('#insert-first-bill-promo-button').show();
     $('#choose-fiat-promo-button').show();
   } else {
@@ -1744,7 +1743,10 @@ function setAvailablePromoCodes(areThereAvailablePromoCodes) {
 }
 
 function setCurrentDiscount(currentDiscount) {
-  if (currentDiscount > 0) {
+  if (!currentDiscount) {
+    $('#insert-first-bill-code-added').hide();
+    $('#choose-fiat-code-added').hide();
+  } else if (currentDiscount > 0) {
     var successMessage = '✔ ' + locale.translate('Promo code added (%s discount)').fetch(currentDiscount + '%');
     $('#insert-first-bill-promo-button').hide();
     $('#choose-fiat-promo-button').hide();
