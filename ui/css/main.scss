@@ -820,8 +820,12 @@ footer {
 }
 
 .insert_bills_state footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding-left: 9.4vw;
   margin-bottom: 6vh;
+  margin-top: -6vh;
 }
 
 .insert_more_bills_state .primary-side-title {

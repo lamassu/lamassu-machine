@@ -1659,8 +1659,19 @@ footer {
   display: block; }
 
 .insert_bills_state footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
   padding-left: 9.4vw;
-  margin-bottom: 6vh; }
+  margin-bottom: 6vh;
+  margin-top: -6vh; }
 
 .insert_more_bills_state .primary-side-title {
   max-width: 80vh; }
