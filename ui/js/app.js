@@ -18,7 +18,11 @@ var isRTL = false;
 var two = null;
 var cryptomatModel = null;
 var termsConditionsTimeout = null;
+var termsConditionsAcceptanceInterval = null;
+var termsConditionsAcceptanceTimeout = null;
+var secondsDelayTermsConditions = 7;
 var T_C_TIMEOUT = 30000;
+var T_C_ACCEPTANCE_DELAY = 10000;
 
 var fiatCode = null;
 var locale = null;
@@ -827,6 +831,7 @@ function setState(state, delay) {
 
   if (currentState === 'terms_screen') {
     clearTermsConditionsTimeout();
+    clearTermsConditionsAcceptanceDelay();
   }
 
   previousState = currentState;
@@ -946,9 +951,16 @@ function setTermsScreen(data) {
   var $screen = $('.terms_screen_state');
   $screen.find('.js-terms-title').html(data.title);
   startPage(data.text);
-  $screen.find('.js-terms-accept-button').html(data.accept);
   $screen.find('.js-terms-cancel-button').html(data.cancel);
   setTermsConditionsTimeout();
+  if (data.delay) {
+    $screen.find('.js-terms-accept-button').prop('disabled', true);
+    setTermsConditionsAcceptanceDelay($screen, data);
+    $screen.find('.js-terms-accept-button').html(data.accept + ' (' + secondsDelayTermsConditions + ')');
+    setAcceptanceDelayTimeout();
+  } else {
+    $screen.find('.js-terms-accept-button').html(data.accept);
+  }
 }
 
 function clearTermsConditionsTimeout() {
@@ -961,6 +973,32 @@ function setTermsConditionsTimeout() {
       buttonPressed('idle');
     }
   }, T_C_TIMEOUT);
+}
+
+function setTermsConditionsAcceptanceDelay(screen, data) {
+  termsConditionsAcceptanceInterval = setInterval(function () {
+    if (currentState === 'terms_screen' && secondsDelayTermsConditions > 0) {
+      screen.find('.js-terms-accept-button').html(data.accept + ' (' + secondsDelayTermsConditions + ')');
+    }
+    if (currentState === 'terms_screen' && secondsDelayTermsConditions <= 0) {
+      screen.find('.js-terms-accept-button').prop('disabled', false);
+      screen.find('.js-terms-accept-button').html(data.accept);
+    }
+    secondsDelayTermsConditions--;
+  }, 1000);
+}
+
+function setAcceptanceDelayTimeout() {
+  termsConditionsAcceptanceTimeout = setTimeout(function () {
+    clearInterval(termsConditionsAcceptanceInterval);
+    secondsDelayTermsConditions = 7;
+  }, T_C_ACCEPTANCE_DELAY);
+}
+
+function clearTermsConditionsAcceptanceDelay() {
+  clearInterval(termsConditionsAcceptanceInterval);
+  clearTimeout(termsConditionsAcceptanceTimeout);
+  secondsDelayTermsConditions = 7;
 }
 
 function resetTermsConditionsTimeout() {
