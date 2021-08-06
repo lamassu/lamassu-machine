@@ -91,8 +91,8 @@ msgid "Have a promo code?"
 msgstr "Have a promo code?"
 
 #: On screen: choose-fiat
-msgid "Discount added (5 discount)"
-msgstr "Discount added (5 discount)"
+msgid "Discount added (5 off commissions)"
+msgstr "Discount added (5 off commissions)"
 
 #: On screen: choose-fiat
 msgid "Cash Out"
@@ -967,8 +967,8 @@ msgid "You'll be sending %s %s"
 msgstr "You'll be sending %s %s"
 
 #: On screen: dynamic
-msgid "Discount added (%s discount)"
-msgstr "Discount added (%s discount)"
+msgid "Discount added (%s off commissions)"
+msgstr "Discount added (%s off commissions)"
 
 #: On screen: dynamic
 msgid "Printing receipt..."

@@ -1374,7 +1374,7 @@ function setTx(tx) {
 
   $('.js-paper-wallet').toggleClass('hide', !isPaperWallet);
 
-  setCurrentDiscount(tx.discount, tx.discountSource);
+  setCurrentDiscount(tx.discount, tx.promoCodeApplied);
 
   setTimeout(function () {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR);
@@ -1565,6 +1565,8 @@ function fiatCredit(data) {
 
   var cryptoDisplayCode = coin.displayCode;
 
+  setCurrentDiscount(tx.discount, tx.promoCodeApplied);
+
   if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide();else $('#js-i18n-choose-digital-amount').show();
 
   if (fiat.eq(0)) $('#cash-out-button').prop('disabled', true);else $('#cash-out-button').prop('disabled', false);
@@ -1742,22 +1744,19 @@ function setAvailablePromoCodes(areThereAvailablePromoCodes) {
   }
 }
 
-function setCurrentDiscount(currentDiscount, discountSource) {
+function setCurrentDiscount(currentDiscount, promoCodeApplied) {
+  if (promoCodeApplied) {
+    $('#insert-first-bill-promo-button').hide();
+    $('#choose-fiat-promo-button').hide();
+  }
+
   if (!currentDiscount) {
     $('#insert-first-bill-code-added').hide();
     $('#choose-fiat-code-added').hide();
-  } else if (currentDiscount > 0 && discountSource !== 'promoCode') {
-    var successMessage = '✔ ' + locale.translate('Discount added (%s discount)').fetch(currentDiscount + '%');
+  } else if (currentDiscount > 0) {
+    var successMessage = '✔ ' + locale.translate('Discount added (%s off commissions)').fetch(currentDiscount + '%');
     $('#insert-first-bill-code-added').html(successMessage);
     $('#choose-fiat-code-added').html(successMessage);
-    $('#insert-first-bill-code-added').show();
-    $('#choose-fiat-code-added').show();
-  } else if (currentDiscount > 0 && discountSource === 'promoCode') {
-    var _successMessage = '✔ ' + locale.translate('Discount added (%s discount)').fetch(currentDiscount + '%');
-    $('#insert-first-bill-promo-button').hide();
-    $('#choose-fiat-promo-button').hide();
-    $('#insert-first-bill-code-added').html(_successMessage);
-    $('#choose-fiat-code-added').html(_successMessage);
     $('#insert-first-bill-code-added').show();
     $('#choose-fiat-code-added').show();
   } else {

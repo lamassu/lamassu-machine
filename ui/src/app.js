@@ -1419,7 +1419,7 @@ function setTx (tx) {
 
   $('.js-paper-wallet').toggleClass('hide', !isPaperWallet)
 
-  setCurrentDiscount(tx.discount, tx.discountSource)
+  setCurrentDiscount(tx.discount, tx.promoCodeApplied)
 
   setTimeout(() => {
     qrize(txId, $('#cash-in-qr-code'), CASH_IN_QR_COLOR)
@@ -1617,6 +1617,8 @@ function fiatCredit (data) {
 
   var cryptoDisplayCode = coin.displayCode
 
+  setCurrentDiscount(tx.discount, tx.promoCodeApplied)
+
   if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
@@ -1810,20 +1812,17 @@ function setAvailablePromoCodes (areThereAvailablePromoCodes) {
   }
 }
 
-function setCurrentDiscount (currentDiscount, discountSource) {
+function setCurrentDiscount (currentDiscount, promoCodeApplied) {
+  if (promoCodeApplied) {
+    $('#insert-first-bill-promo-button').hide()
+    $('#choose-fiat-promo-button').hide()
+  }
+
   if (!currentDiscount) {
     $('#insert-first-bill-code-added').hide()
     $('#choose-fiat-code-added').hide()
-  } else if (currentDiscount > 0 && discountSource !== 'promoCode') {
-    const successMessage = '✔ ' + locale.translate('Discount added (%s discount)').fetch(`${currentDiscount}%`)
-    $('#insert-first-bill-code-added').html(successMessage)
-    $('#choose-fiat-code-added').html(successMessage)
-    $('#insert-first-bill-code-added').show()
-    $('#choose-fiat-code-added').show()
-  } else if (currentDiscount > 0 && discountSource === 'promoCode') {
-    const successMessage = '✔ ' + locale.translate('Discount added (%s discount)').fetch(`${currentDiscount}%`)
-    $('#insert-first-bill-promo-button').hide()
-    $('#choose-fiat-promo-button').hide()
+  } else if (currentDiscount > 0) {
+    const successMessage = '✔ ' + locale.translate('Discount added (%s off commissions)').fetch(`${currentDiscount}%`)
     $('#insert-first-bill-code-added').html(successMessage)
     $('#choose-fiat-code-added').html(successMessage)
     $('#insert-first-bill-code-added').show()
