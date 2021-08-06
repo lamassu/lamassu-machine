@@ -989,7 +989,7 @@ function setDirection (direction) {
  * @param {String} data.cancel
  */
 function setTermsScreen (data) {
-  var $screen = $('.terms_screen_state')
+  const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-title').html(data.title)
   startPage(data.text)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
