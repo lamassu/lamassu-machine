@@ -1267,7 +1267,13 @@ footer {
 
 #print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {
   margin-top: 3vh;
-  width: 20vw;
+  width: 15vw;
+}
+
+#send-sms-receipt-cash-in-button, #send-sms-receipt-cash-out-button, #send-sms-receipt-cash-in-fail-button {
+  margin-left: 3vh;
+  margin-top: 3vh;
+  width: 15vw;
 }
 
 #fiat_complete_viewport #print-receipt-cash-out-button {
@@ -1276,6 +1282,11 @@ footer {
 }
 
 #print-receipt-cash-in-message, #print-receipt-cash-out-message, #print-receipt-cash-in-fail-message {
+  margin-top: 4vh;
+}
+
+#send-sms-receipt-cash-in-message, #send-sms-receipt-cash-out-message, #send-sms-receipt-cash-in-fail-message {
+  margin-left: 3vh;
   margin-top: 4vh;
 }
 
