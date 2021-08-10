@@ -21,6 +21,7 @@
     "fstream": "~0.1.24",
     "got": "^7.1.0",
     "immutable": "^3.8.1",
+    "jsqr": "^1.3.1",
     "left-pad": "^1.1.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
@@ -44,7 +45,7 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
-    "jpeg-turbo": "lamassu/node-jpeg-turbo",
+    "jpeg-turbo": "github:lamassu/node-jpeg-turbo",
     "manatee": "2.0.2",
     "v4l2camera": "1.0.4",
     "nfc-pcsc": "^0.6.1",
