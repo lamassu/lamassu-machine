@@ -131,11 +131,11 @@ function processData(data) {
       setState('wifi_password');
       break;
     case 'wifiConnecting':
-      t('wifi-connecting', locale.translate('This could take a few moments.').fetch());
+      t('wifi-connecting', translate('This could take a few moments.'));
       setState('wifi_connecting');
       break;
     case 'wifiConnected':
-      t('wifi-connecting', locale.translate('Connected. Waiting for ticker.').fetch());
+      t('wifi-connecting', translate('Connected. Waiting for ticker.'));
       setState('wifi_connecting' // in case we didn't go through wifi-connecting
       );break;
     case 'pairing':
@@ -257,6 +257,14 @@ function processData(data) {
   }
 }
 
+function translate(data, fetch) {
+  try {
+    return fetch ? locale.translate(data).fetch(fetch) : locale.translate(data).fetch();
+  } catch (error) {
+    console.error('Error while translating: ', error);
+  }
+}
+
 function facephotoPermission() {
   setScreen('permission_face_photo');
 }
@@ -351,38 +359,30 @@ function setupCoinsButtons() {
     $('.crypto-buttons').append(el);
   });
   if (showMoreButton) {
-    $('.crypto-buttons').append('\n      <div class="choose-coin-button h4" data-more="true">\n        <div id="crypto-dropdown-toggle" data-more="true">\n          <span class="js-i18n">' + locale.translate('More').fetch() + '</span>\n          <span class="choose-coin-svg-wrapper">\n            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">\n              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>\n            </svg>\n          </span>\n        </div>\n        <div id="cryptos" class="dropdown hide"></div>\n      </div>\n    ');
+    $('.crypto-buttons').append('\n      <div class="choose-coin-button h4" data-more="true">\n        <div id="crypto-dropdown-toggle" data-more="true">\n          <span class="js-i18n">' + translate('More') + '</span>\n          <span class="choose-coin-svg-wrapper">\n            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="8" viewBox="0 0 52 8">\n              <path fill="none" fill-rule="evenodd" stroke="#FFF" stroke-linecap="round" stroke-width="8" d="M4 4h44"/>\n            </svg>\n          </span>\n        </div>\n        <div id="cryptos" class="dropdown hide"></div>\n      </div>\n    ');
     dropdownCoins.forEach(function (coin) {
       var el = '<button class="h4 sapphire button small-action-button coin-' + coin.cryptoCode.toLowerCase() + '"\n        data-crypto-code="' + coin.cryptoCode + '">' + coin.display + '</button>';
       $('#cryptos').append(el);
     });
-    var el = '<button class="h4 sapphire button small-action-button js-i18n" data-less="true">' + locale.translate('Less').fetch() + '</button>';
+    var el = '<button class="h4 sapphire button small-action-button js-i18n" data-less="true">' + translate('Less') + '</button>';
     $('#cryptos').append(el);
   }
 }
 
 function setCryptoBuy(coin) {
-  try {
-    var cashIn = $('.cash-in');
-    var translatedCoin = locale.translate(coin.display).fetch();
-    var buyStr = locale.translate('Buy<br/>%s').fetch(translatedCoin);
+  var cashIn = $('.cash-in');
+  var translatedCoin = translate(coin.display);
+  var buyStr = translate('Buy<br/>%s', translatedCoin);
 
-    cashIn.html(buyStr);
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  cashIn.html(buyStr);
 }
 
 function setCryptoSell(coin) {
-  try {
-    var cashOut = $('.cash-out');
-    var translatedCoin = locale.translate(coin.display).fetch();
-    var sellStr = locale.translate('Sell<br/>%s').fetch(translatedCoin);
+  var cashOut = $('.cash-out');
+  var translatedCoin = translate(coin.display);
+  var sellStr = translate('Sell<br/>%s', translatedCoin);
 
-    cashOut.html(sellStr);
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  cashOut.html(sellStr);
 }
 
 function setCoins(supportedCoins) {
@@ -820,7 +820,7 @@ function setScreen(newScreen, oldScreen) {
   if (newScreen === oldScreen) return;
 
   if (newScreen === 'insert_bills') {
-    $('.js-processing-bill').html(locale.translate('Lamassu Cryptomat').fetch());
+    $('.js-processing-bill').html(translate('Lamassu Cryptomat'));
     $('.bill img').css({ '-webkit-transform': 'none', top: 0, left: 0 });
   }
 
@@ -883,7 +883,7 @@ function setWifiList(recs, requestedPage) {
     networks.append(html);
   }
 
-  var moreTxt = locale.translate('MORE').fetch();
+  var moreTxt = translate('MORE');
   var button = '<span display="inline-block" id="more-networks" class="button filled-action-button tl2">' + moreTxt + '</span>';
   if (recs.length > 4) {
     networks.append(button);
@@ -913,19 +913,15 @@ function setOperatorInfo(operator) {
 
 function setHardLimit(limits) {
   var component = $('#hard-limit-hours');
-  try {
-    if (limits.hardLimitWeeks >= 1) {
-      return component.text(locale.translate('Please come back in %s weeks').fetch(limits.hardLimitWeeks));
-    }
-
-    if (limits.hardLimitDays >= 1) {
-      return component.text(locale.translate('Please come back in %s days and %s hours').fetch(limits.hardLimitDays, limits.hardLimitHours));
-    }
-
-    component.text(locale.translate('Please come back in %s hours').fetch(limits.hardLimitHours));
-  } catch (error) {
-    console.error('Error while translating: ', error);
+  if (limits.hardLimitWeeks >= 1) {
+    return component.text(translate('Please come back in %s weeks', limits.hardLimitWeeks));
   }
+
+  if (limits.hardLimitDays >= 1) {
+    return component.text(translate('Please come back in %s days and %s hours', limits.hardLimitDays, limits.hardLimitHours));
+  }
+
+  component.text(translate('Please come back in %s hours', limits.hardLimitHours));
 }
 
 function setCryptomatModel(model) {
@@ -1091,12 +1087,8 @@ function moreNetworks() {
 function setWifiSsid(data) {
   $('#js-i18n-wifi-for-ssid').data('ssid', data.ssid);
   $('#js-i18n-wifi-for-ssid').data('raw-ssid', data.rawSsid);
-  try {
-    t('wifi-for-ssid', locale.translate('for %s').fetch('<strong>' + data.ssid + '</strong>'));
-    t('wifi-connect', locale.translate("You're connecting to the WiFi network %s").fetch('<strong>' + data.ssid + '</strong>'));
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  t('wifi-for-ssid', translate('for %s').fetch('<strong>' + data.ssid + '</strong>'));
+  t('wifi-connect', translate("You're connecting to the WiFi network %s").fetch('<strong>' + data.ssid + '</strong>'));
 }
 
 function setLocaleInfo(data) {
@@ -1228,12 +1220,8 @@ function setFiatCode(data) {
 function setFixedFee(_fee) {
   var fee = parseFloat(_fee);
   if (fee > 0) {
-    try {
-      var fixedFee = locale.translate('Transaction Fee: %s').fetch(formatFiat(fee, 2));
-      $('.js-i18n-fixed-fee').html(fixedFee);
-    } catch (error) {
-      console.error('Error while translating: ', error);
-    }
+    var fixedFee = translate('Transaction Fee: %s', formatFiat(fee, 2));
+    $('.js-i18n-fixed-fee').html(fixedFee);
   } else {
     $('.js-i18n-fixed-fee').html('');
   }
@@ -1246,14 +1234,11 @@ function setCredit(fiat, crypto, lastBill, cryptoCode) {
   var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
   var cryptoDisplayCode = coin.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
-  try {
-    $('.amount-deposited').html(locale.translate('You deposited %s').fetch(fiat + ' ' + fiatCode));
-    $('.fiat .js-amount').html(fiat);
+  $('.amount-deposited').html(translate('You deposited %s', fiat + ' ' + fiatCode));
+  $('.fiat .js-amount').html(fiat);
 
-    var inserted = lastBill ? locale.translate('You inserted a %s bill').fetch(formatFiat(lastBill)) : locale.translate('Lamassu Cryptomat').fetch();
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  var inserted = lastBill ? translate('You inserted a %s bill', formatFiat(lastBill)) : translate('Lamassu Cryptomat');
+
   $('.js-processing-bill').html(inserted);
 
   $('.js-send-crypto-disable').hide();
@@ -1433,35 +1418,24 @@ function setAccepting(currentAccepting) {
 }
 
 function highBill(highestBill, reason) {
-  var reasonText = reason === 'transactionLimit' ? locale.translate('Transaction limit reached.').fetch() : locale.translate("We're a little low on crypto.").fetch();
+  var reasonText = reason === 'transactionLimit' ? translate('Transaction limit reached.') : translate("We're a little low on crypto.");
 
   t('high-bill-header', reasonText);
-  try {
-    t('highest-bill', locale.translate('Please insert %s or less.').fetch(formatFiat(highestBill)));
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  t('highest-bill', translate('Please insert %s or less.').fetch(formatFiat(highestBill)));
 
   setScreen('high_bill');
   window.setTimeout(revertScreen, 3000);
 }
 
 function minimumTx(lowestBill) {
-  try {
-    t('lowest-bill', locale.translate('Minimum first bill is %s.').fetch(formatFiat(lowestBill)));
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  t('lowest-bill', translate('Minimum first bill is %s.').fetch(formatFiat(lowestBill)));
+
   setScreen('minimum_tx');
   window.setTimeout(revertScreen, 3000);
 }
 
 function readingBill(bill) {
-  try {
-    $('.js-processing-bill').html(locale.translate('Processing %s ...').fetch(formatFiat(bill)));
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  $('.js-processing-bill').html(translate('Processing %s ...', formatFiat(bill)));
   $('.js-send-crypto-enable').hide();
   $('.js-send-crypto-disable').show();
 }
@@ -1471,17 +1445,17 @@ function sendOnly(reason) {
   if (currentState === 'send_only') return;
 
   var errorMessages = {
-    transactionLimit: locale.translate('Transaction limit reached').fetch(),
-    validatorError: locale.translate('Error in validation').fetch(),
-    lowBalance: locale.translate("We're out of coins!").fetch(),
-    blockedCustomer: locale.translate('Transaction limit reached').fetch()
+    transactionLimit: translate('Transaction limit reached'),
+    validatorError: translate('Error in validation'),
+    lowBalance: translate("We're out of coins!"),
+    blockedCustomer: translate('Transaction limit reached')
 
     // If no reason provided defaults to lowBalance
   };var reasonText = errorMessages[reason] || errorMessages.lowBalance;
   $('#send-only-title').text(reasonText);
 
   if (reason === 'blockedCustomer') {
-    $('.js-send-only-text').text(locale.translate("Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit.").fetch());
+    $('.js-send-only-text').text(translate("Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."));
   } else {
     $('.js-send-only-text').text('');
   }
@@ -1499,11 +1473,11 @@ function t(id, str) {
 }
 
 function translateCoin(cryptoCode) {
-  $('.js-i18n-scan-your-address').html(locale.translate('Scan your <br/> %s address').fetch(cryptoCode));
-  $('.js-i18n-please-scan').html(locale.translate('Please scan the QR code <br/> to send us your %s.').fetch(cryptoCode));
-  $('.js-i18n-did-send-coins').html(locale.translate('Have you sent the %s yet?').fetch(cryptoCode));
-  $('.js-i18n-scan-address').html(locale.translate('Scan your %s address').fetch(cryptoCode));
-  $('.js-i18n-invalid-address').html(locale.translate('Invalid %s address').fetch(cryptoCode));
+  $('.js-i18n-scan-your-address').html(translate('Scan your <br/> %s address', cryptoCode));
+  $('.js-i18n-please-scan').html(translate('Please scan the QR code <br/> to send us your %s.', cryptoCode));
+  $('.js-i18n-did-send-coins').html(translate('Have you sent the %s yet?', cryptoCode));
+  $('.js-i18n-scan-address').html(translate('Scan your %s address', cryptoCode));
+  $('.js-i18n-invalid-address').html(translate('Invalid %s address', cryptoCode));
 }
 
 function initTranslatePage() {
@@ -1521,12 +1495,12 @@ function translatePage() {
   $('.js-i18n').each(function () {
     var el = $(this);
     var base = el.data('baseTranslation');
-    el.html(locale.translate(base).fetch());
+    el.html(translate(base));
   });
   $('input[placeholder]').each(function () {
     var el = $(this);
     var base = el.data('baseTranslation');
-    el.attr('placeholder', locale.translate(base).fetch());
+    el.attr('placeholder', translate(base));
   }
 
   // Adjust send coins button
@@ -1547,7 +1521,7 @@ function loadI18n(localeCode) {
 
 function reachFiatLimit(rec) {
   var msg = null;
-  if (rec.isEmpty) msg = locale.translate('We\'re a little low, please cash out');else if (rec.txLimitReached) msg = locale.translate('Transaction limit reached, please cash out');
+  if (rec.isEmpty) msg = translate('We\'re a little low, please cash out');else if (rec.txLimitReached) msg = translate('Transaction limit reached, please cash out');
 
   var el = $('.choose_fiat_state .limit');
   if (msg) el.html(msg).show();else el.hide();
@@ -1607,11 +1581,7 @@ function fiatCredit(data) {
 
   manageFiatButtons(activeDenominations.activeMap);
   $('.choose_fiat_state .fiat-amount').text(fiatDisplay);
-  try {
-    t('choose-digital-amount', locale.translate("You'll be sending %s %s").fetch(cryptoDisplay, cryptoDisplayCode));
-  } catch (error) {
-    console.error('Error while translating: ', error);
-  }
+  t('choose-digital-amount', translate("You'll be sending %s %s", cryptoDisplay, cryptoDisplayCode));
 
   reachFiatLimit(activeDenominations);
 }
@@ -1792,7 +1762,7 @@ function setCurrentDiscount(currentDiscount, promoCodeApplied) {
     $('#insert-first-bill-code-added').hide();
     $('#choose-fiat-code-added').hide();
   } else if (currentDiscount > 0) {
-    var successMessage = '✔ ' + locale.translate('Discount added (%s off commissions)').fetch(currentDiscount + '%');
+    var successMessage = '✔ ' + translate('Discount added (%s off commissions)', currentDiscount + '%');
     $('#insert-first-bill-code-added').html(successMessage);
     $('#choose-fiat-code-added').html(successMessage);
     $('#insert-first-bill-code-added').show();
