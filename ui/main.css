@@ -2029,14 +2029,14 @@ footer {
 
 #print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {
   margin-top: 3vh;
-  width: 15vw; }
+  width: 20vw; }
 
 #send-sms-receipt-cash-in-button, #send-sms-receipt-cash-out-button, #send-sms-receipt-cash-in-fail-button {
   margin-left: 3vh;
   margin-top: 3vh;
-  width: 15vw; }
+  width: 20vw; }
 
-#fiat_complete_viewport #print-receipt-cash-out-button {
+#fiat_complete_viewport #print-receipt-cash-out-button #send-sms-receipt-cash-out-button {
   margin-top: 18vh;
   width: 20vw; }
 
