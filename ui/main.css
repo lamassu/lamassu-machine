@@ -471,6 +471,16 @@ button {
       color: #0e4160; }
     .cash-out-color .filled-progress-button:active, .cash-out-color .filled-progress-button .active {
       color: #403c51; }
+  .cash-in-color .filled-progress-button:disabled, .system-color .filled-progress-button:disabled {
+    background-color: #2cb9ac; }
+  .cash-out-color .filled-progress-button:disabled {
+    background-color: #cb6560; }
+
+.cash-in-color .filled-progress-button:disabled {
+  color: #37e8d7; }
+
+.cash-out-color .filled-progress-button:disabled {
+  color: #fe7f78; }
 
 .filled-progress-button-bg {
   font-family: 'Rubik', 'MuseoSans', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic';

@@ -22,7 +22,6 @@ var termsConditionsAcceptanceInterval = null;
 var termsConditionsAcceptanceTimeout = null;
 var secondsDelayTermsConditions = 7;
 var T_C_TIMEOUT = 30000;
-var T_C_ACCEPTANCE_DELAY = 10000;
 
 var fiatCode = null;
 var locale = null;
@@ -952,15 +951,9 @@ function setTermsScreen(data) {
   $screen.find('.js-terms-title').html(data.title);
   startPage(data.text);
   $screen.find('.js-terms-cancel-button').html(data.cancel);
+  $screen.find('.js-terms-accept-button').html(data.accept);
   setTermsConditionsTimeout();
-  if (data.delay) {
-    $screen.find('.js-terms-accept-button').prop('disabled', true);
-    setTermsConditionsAcceptanceDelay($screen, data);
-    $screen.find('.js-terms-accept-button').html(data.accept + ' (' + secondsDelayTermsConditions + ')');
-    setAcceptanceDelayTimeout();
-  } else {
-    $screen.find('.js-terms-accept-button').html(data.accept);
-  }
+  setTermsConditionsAcceptanceDelay($screen, data);
 }
 
 function clearTermsConditionsTimeout() {
@@ -976,29 +969,37 @@ function setTermsConditionsTimeout() {
 }
 
 function setTermsConditionsAcceptanceDelay(screen, data) {
-  termsConditionsAcceptanceInterval = setInterval(function () {
-    if (currentState === 'terms_screen' && secondsDelayTermsConditions > 0) {
-      screen.find('.js-terms-accept-button').html(data.accept + ' (' + secondsDelayTermsConditions + ')');
-    }
-    if (currentState === 'terms_screen' && secondsDelayTermsConditions <= 0) {
-      screen.find('.js-terms-accept-button').prop('disabled', false);
-      screen.find('.js-terms-accept-button').html(data.accept);
-    }
-    secondsDelayTermsConditions--;
-  }, 1000);
-}
+  var acceptButton = screen.find('.js-terms-accept-button');
+  acceptButton.css({ 'min-width': 0 });
 
-function setAcceptanceDelayTimeout() {
-  termsConditionsAcceptanceTimeout = setTimeout(function () {
-    clearInterval(termsConditionsAcceptanceInterval);
-    secondsDelayTermsConditions = 7;
-  }, T_C_ACCEPTANCE_DELAY);
+  if (!data.delay) return;
+
+  var seconds = secondsDelayTermsConditions;
+  acceptButton.prop('disabled', true);
+  acceptButton.html(data.accept + ' (' + seconds + ')');
+
+  var tmpbtn = acceptButton.clone().appendTo('body').css({ 'display': 'block', 'visibility': 'hidden' });
+  var width = tmpbtn.outerWidth();
+  tmpbtn.remove();
+  acceptButton.css({ 'min-width': width + 'px' });
+  termsConditionsAcceptanceInterval = setInterval(function () {
+    seconds--;
+    if (currentState === 'terms_screen' && seconds > 0) {
+      acceptButton.html(data.accept + ' (' + seconds + ')');
+    }
+    if (currentState === 'terms_screen' && seconds <= 0) {
+      acceptButton.prop('disabled', false);
+      acceptButton.html('' + data.accept);
+    }
+    if (seconds <= 0) {
+      clearInterval(termsConditionsAcceptanceInterval);
+    }
+  }, 1000);
 }
 
 function clearTermsConditionsAcceptanceDelay() {
   clearInterval(termsConditionsAcceptanceInterval);
   clearTimeout(termsConditionsAcceptanceTimeout);
-  secondsDelayTermsConditions = 7;
 }
 
 function resetTermsConditionsTimeout() {

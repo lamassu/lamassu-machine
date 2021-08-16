@@ -131,7 +131,19 @@ button {
     background-color: $white;
     @include cash-colors;
   }
+  &:disabled {
+    @include cash-disabled-background-colors;
+  }
 }
+
+.cash-in-color .filled-progress-button:disabled {
+  color: $amazonite;
+}
+
+.cash-out-color .filled-progress-button:disabled {
+  color: $salmon;
+}
+
 
 .filled-progress-button-bg {
   @include Tagline-2;
