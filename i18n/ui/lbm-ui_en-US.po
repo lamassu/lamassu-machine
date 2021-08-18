@@ -91,8 +91,8 @@ msgid "Have a promo code?"
 msgstr "Have a promo code?"
 
 #: On screen: choose-fiat
-msgid "Promo code added (5 discount)"
-msgstr "Promo code added (5 discount)"
+msgid "Discount added (5 off commissions)"
+msgstr "Discount added (5 off commissions)"
 
 #: On screen: choose-fiat
 msgid "Cash Out"
@@ -133,6 +133,26 @@ msgstr "Tap anywhere on the screen when you're done."
 #: On screen: connect_ethernet
 msgid "Network down"
 msgstr "Network down"
+
+#: On screen: custom-permission
+msgid ""
+msgstr ""
+
+#: On screen: custom-permission
+msgid "Continue?"
+msgstr "Continue?"
+
+#: On screen: custom-permission
+msgid "Yes"
+msgstr "Yes"
+
+#: On screen: custom-permission
+msgid "No"
+msgstr "No"
+
+#: On screen: custom-permission-screen2-numerical
+msgid "Submit"
+msgstr "Submit"
 
 #: On screen: deposit-timeout
 msgid "Nothing yet."
@@ -382,6 +402,22 @@ msgstr "More, please"
 msgid "We're all out of cash!"
 msgstr "We're all out of cash!"
 
+#: On screen: out-of-coins
+msgid "Don't worry!"
+msgstr "Don't worry!"
+
+#: On screen: out-of-coins
+msgid "Your funds are safe, but we had an issue when sending your coins."
+msgstr "Your funds are safe, but we had an issue when sending your coins."
+
+#: On screen: out-of-coins
+msgid "Please take a photo of this screen and <b>contact the operator</b> to push through your order."
+msgstr "Please take a photo of this screen and <b>contact the operator</b> to push through your order."
+
+#: On screen: out-of-coins
+msgid "Your receiving address:"
+msgstr "Your receiving address:"
+
 #: On screen: pending-deposit
 msgid "Funds Received!"
 msgstr "Funds Received!"
@@ -474,10 +510,6 @@ msgstr "Please enter the mobile number you used when you placed your order."
 msgid "Please enter your mobile number for ID verification."
 msgstr "Please enter your mobile number for ID verification."
 
-#: On screen: register-phone
-msgid "Submit"
-msgstr "Submit"
-
 #: On screen: scan-address
 msgid "Hold your QR code up to the scan window to proceed."
 msgstr "Hold your QR code up to the scan window to proceed."
@@ -491,20 +523,20 @@ msgid "In order to proceed, we are required to verify your identity."
 msgstr "In order to proceed, we are required to verify your identity."
 
 #: On screen: scan-id
-msgid "Please press the back of your driver's license against the scan window."
-msgstr "Please press the back of your driver's license against the scan window."
+msgid "Please press the back of your <strong>driver's license</strong> against the scan window."
+msgstr "Please press the back of your <strong>driver's license</strong> against the scan window."
 
 #: On screen: scan-photo-manual
-msgid "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
-msgstr "Please press the front of your state ID card against the scan window, hold it there, and then press "Ready to scan"."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press \"Ready to scan\"."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press \"Ready to scan\"."
 
 #: On screen: scan-photo-manual
 msgid "Ready to scan"
 msgstr "Ready to scan"
 
 #: On screen: scan-photo
-msgid "Please press the front of your state ID card against the scan window."
-msgstr "Please press the front of your state ID card against the scan window."
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgstr "Please press the front of your <strong>state ID card</strong> against the scan window."
 
 #: On screen: security-code
 msgid "Security Code"
@@ -547,8 +579,8 @@ msgid "Initializing hardware."
 msgstr "Initializing hardware."
 
 #: On screen: booting
-msgid "We'll be up in a moment."
-msgstr "We'll be up in a moment."
+msgid "<strong>We'll be up in a moment.</strong>"
+msgstr "<strong>We'll be up in a moment.</strong>"
 
 #: On screen: initializing
 msgid "Initializing..."
@@ -559,8 +591,8 @@ msgid "Generating cryptographic identity."
 msgstr "Generating cryptographic identity."
 
 #: On screen: initializing
-msgid "Please wait a few minutes."
-msgstr "Please wait a few minutes."
+msgid "<strong>Please wait a few minutes.</strong>"
+msgstr "<strong>Please wait a few minutes.</strong>"
 
 #: On screen: connecting
 msgid "Connecting..."
@@ -711,8 +743,8 @@ msgid "We see your transaction but we're still waiting for confirmation. This ta
 msgstr "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
 
 #: On screen: unconfirmed-deposit
-msgid "Please come back for your cash and press Redeem when you get our text message."
-msgstr "Please come back for your cash and press Redeem when you get our text message."
+msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
@@ -831,152 +863,12 @@ msgid "We got this"
 msgstr "We got this"
 
 #: On screen: dynamic
-msgid "This could take a few moments."
-msgstr "This could take a few moments."
-
-#: On screen: dynamic
-msgid "Connected. Waiting for ticker."
-msgstr "Connected. Waiting for ticker."
-
-#: On screen: dynamic
-msgid "More"
-msgstr "More"
-
-#: On screen: dynamic
-msgid "Less"
-msgstr "Less"
-
-#: On screen: dynamic
-msgid "Buy<br/>%s"
-msgstr "Buy<br/>%s"
-
-#: On screen: dynamic
-msgid "Sell<br/>%s"
-msgstr "Sell<br/>%s"
-
-#: On screen: dynamic
 msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
 
 #: On screen: dynamic
-msgid "MORE"
-msgstr "MORE"
-
-#: On screen: dynamic
-msgid "Please come back in %s weeks"
-msgstr "Please come back in %s weeks"
-
-#: On screen: dynamic
-msgid "Please come back in %s days and %s hours"
-msgstr "Please come back in %s days and %s hours"
-
-#: On screen: dynamic
-msgid "Please come back in %s hours"
-msgstr "Please come back in %s hours"
-
-#: On screen: dynamic
-msgid "for %s"
-msgstr "for %s"
-
-#: On screen: dynamic
-msgid "You're connecting to the WiFi network %s"
-msgstr "You're connecting to the WiFi network %s"
-
-#: On screen: dynamic
-msgid "Transaction Fee: %s"
-msgstr "Transaction Fee: %s"
-
-#: On screen: dynamic
-msgid "You deposited %s"
-msgstr "You deposited %s"
-
-#: On screen: dynamic
-msgid "You inserted a %s bill"
-msgstr "You inserted a %s bill"
-
-#: On screen: dynamic
-msgid "Transaction limit reached."
-msgstr "Transaction limit reached."
-
-#: On screen: dynamic
-msgid "We're a little low on crypto."
-msgstr "We're a little low on crypto."
-
-#: On screen: dynamic
-msgid "Please insert %s or less."
-msgstr "Please insert %s or less."
-
-#: On screen: dynamic
-msgid "Minimum first bill is %s."
-msgstr "Minimum first bill is %s."
-
-#: On screen: dynamic
-msgid "Processing %s ..."
-msgstr "Processing %s ..."
-
-#: On screen: dynamic
-msgid "Transaction limit reached"
-msgstr "Transaction limit reached"
-
-#: On screen: dynamic
-msgid "Error in validation"
-msgstr "Error in validation"
-
-#: On screen: dynamic
-msgid "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
-msgstr "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
-
-#: On screen: dynamic
-msgid "Scan your <br/> %s address"
-msgstr "Scan your <br/> %s address"
-
-#: On screen: dynamic
-msgid "Please scan the QR code <br/> to send us your %s."
-msgstr "Please scan the QR code <br/> to send us your %s."
-
-#: On screen: dynamic
-msgid "Have you sent the %s yet?"
-msgstr "Have you sent the %s yet?"
-
-#: On screen: dynamic
-msgid "Scan your %s address"
-msgstr "Scan your %s address"
-
-#: On screen: dynamic
-msgid "Invalid %s address"
-msgstr "Invalid %s address"
-
-#: On screen: dynamic
-msgid "Transaction limit reached, please cash out"
-msgstr "Transaction limit reached, please cash out"
-
-#: On screen: dynamic
-msgid "You'll be sending %s %s"
-msgstr "You'll be sending %s %s"
-
-#: On screen: dynamic
-msgid "Promo code added (%s discount)"
-msgstr "Promo code added (%s discount)"
-
-#: On screen: dynamic
-msgid "Printing receipt..."
-msgstr "Printing receipt..."
-
-#: On screen: dynamic
-msgid "Receipt printed successfully!"
-msgstr "Receipt printed successfully!"
-
-#: On screen: dynamic
 msgid "An error occurred, try again."
 msgstr "An error occurred, try again."
-
-#: On screen: dynamic
-msgid "Sending receipt..."
-msgstr "Sending receipt..."
-
-#: On screen: dynamic
-msgid "Receipt sent successfully!"
-msgstr "Receipt sent successfully!"
 
 #: On screen: coins
 msgid "Bitcoin"

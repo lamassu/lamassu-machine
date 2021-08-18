@@ -117,8 +117,10 @@ function processData (data) {
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
-  if (data.receiptStatus) setReceiptPrint(data.receiptStatus)
-  if (data.smsReceiptStatus) setSmsReceipt(data.smsReceiptStatus)
+
+  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
+  if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
+  if (data.smsReceiptStatus) setReceiptPrint(null, data.smsReceiptStatus)
 
   if (data.context) {
     $('.js-context').hide()
@@ -2005,116 +2007,67 @@ function setCurrentDiscount (currentDiscount, promoCodeApplied) {
   }
 }
 
-function setReceiptPrint (receiptStatus) {
-  switch (receiptStatus) {
-    case 'disabled':
-      $('#print-receipt-cash-in-message').addClass('hide')
-      $('#print-receipt-cash-in-button').addClass('hide')
-      $('#print-receipt-cash-out-message').addClass('hide')
-      $('#print-receipt-cash-out-button').addClass('hide')
-      $('#print-receipt-cash-in-fail-message').addClass('hide')
-      $('#print-receipt-cash-in-fail-button').addClass('hide')
-      break
-    case 'available':
-      $('#print-receipt-cash-in-message').addClass('hide')
-      $('#print-receipt-cash-in-button').removeClass('hide')
-      $('#print-receipt-cash-out-message').addClass('hide')
-      $('#print-receipt-cash-out-button').removeClass('hide')
-      $('#print-receipt-cash-in-fail-message').addClass('hide')
-      $('#print-receipt-cash-in-fail-button').removeClass('hide')
-      break
-    case 'printing':
-      const message = locale.translate('Printing receipt...').fetch()
-      $('#print-receipt-cash-in-button').addClass('hide')
-      $('#print-receipt-cash-in-message').html(message)
-      $('#print-receipt-cash-in-message').removeClass('hide')
-      $('#print-receipt-cash-out-button').addClass('hide')
-      $('#print-receipt-cash-out-message').html(message)
-      $('#print-receipt-cash-out-message').removeClass('hide')
-      $('#print-receipt-cash-in-fail-button').addClass('hide')
-      $('#print-receipt-cash-in-fail-message').html(message)
-      $('#print-receipt-cash-in-fail-message').removeClass('hide')
-      break
-    case 'success':
-      const successMessage = '✔ ' + locale.translate('Receipt printed successfully!').fetch()
-      $('#print-receipt-cash-in-button').addClass('hide')
-      $('#print-receipt-cash-in-message').html(successMessage)
-      $('#print-receipt-cash-in-message').removeClass('hide')
-      $('#print-receipt-cash-out-button').addClass('hide')
-      $('#print-receipt-cash-out-message').html(successMessage)
-      $('#print-receipt-cash-out-message').removeClass('hide')
-      $('#print-receipt-cash-in-fail-button').addClass('hide')
-      $('#print-receipt-cash-in-fail-message').html(successMessage)
-      $('#print-receipt-cash-in-fail-message').removeClass('hide')
-      break
-    case 'failed':
-      const failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch()
-      $('#print-receipt-cash-in-button').addClass('hide')
-      $('#print-receipt-cash-in-message').html(failMessage)
-      $('#print-receipt-cash-in-message').removeClass('hide')
-      $('#print-receipt-cash-out-button').addClass('hide')
-      $('#print-receipt-cash-out-message').html(failMessage)
-      $('#print-receipt-cash-out-message').removeClass('hide')
-      $('#print-receipt-cash-in-fail-button').addClass('hide')
-      $('#print-receipt-cash-in-fail-message').html(failMessage)
-      $('#print-receipt-cash-in-fail-message').removeClass('hide')
-      break
-  }
-}
+function setReceiptPrint (receiptStatus, smsReceiptStatus) {
+  let status = null
+  if (receiptStatus) status = receiptStatus
+  else status = smsReceiptStatus
 
-function setSmsReceipt (smsReceiptStatus) {
-  switch (smsReceiptStatus) {
+  const className = receiptStatus ? 'print-receipt' : 'send-sms-receipt'
+  const printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...'
+  const success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!'
+
+  switch (status) {
     case 'disabled':
-      $('#send-sms-receipt-cash-in-message').addClass('hide')
-      $('#send-sms-receipt-cash-in-button').addClass('hide')
-      $('#send-sms-receipt-cash-out-message').addClass('hide')
-      $('#send-sms-receipt-cash-out-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-message').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-button').addClass('hide')
+      $(`#${className}-cash-in-message`).addClass('hide')
+      $(`#${className}-cash-in-button`).addClass('hide')
+      $(`#${className}-cash-out-message`).addClass('hide')
+      $(`#${className}-cash-out-button`).addClass('hide')
+      $(`#${className}-cash-in-fail-message`).addClass('hide')
+      $(`#${className}-cash-in-fail-button`).addClass('hide')
       break
     case 'available':
-      $('#send-sms-receipt-cash-in-message').addClass('hide')
-      $('#send-sms-receipt-cash-in-button').removeClass('hide')
-      $('#send-sms-receipt-cash-out-message').addClass('hide')
-      $('#send-sms-receipt-cash-out-button').removeClass('hide')
-      $('#send-sms-receipt-cash-in-fail-message').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-button').removeClass('hide')
+      $(`#${className}-cash-in-message`).addClass('hide')
+      $(`#${className}-cash-in-button`).removeClass('hide')
+      $(`#${className}-cash-out-message`).addClass('hide')
+      $(`#${className}-cash-out-button`).removeClass('hide')
+      $(`#${className}-cash-in-fail-message`).addClass('hide')
+      $(`#${className}-cash-in-fail-button`).removeClass('hide')
       break
     case 'printing':
-      const message = locale.translate('Sending receipt...').fetch()
-      $('#send-sms-receipt-cash-in-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-message').html(message)
-      $('#send-sms-receipt-cash-in-message').removeClass('hide')
-      $('#send-sms-receipt-cash-out-button').addClass('hide')
-      $('#send-sms-receipt-cash-out-message').html(message)
-      $('#send-sms-receipt-cash-out-message').removeClass('hide')
-      $('#send-sms-receipt-cash-in-fail-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-message').html(message)
-      $('#send-sms-receipt-cash-in-fail-message').removeClass('hide')
+      const message = locale.translate(printing).fetch()
+      $(`#${className}-cash-in-button`).addClass('hide')
+      $(`#${className}-cash-in-message`).html(message)
+      $(`#${className}-cash-in-message`).removeClass('hide')
+      $(`#${className}-cash-out-button`).addClass('hide')
+      $(`#${className}-cash-out-message`).html(message)
+      $(`#${className}-cash-out-message`).removeClass('hide')
+      $(`#${className}-cash-in-fail-button`).addClass('hide')
+      $(`#${className}-cash-in-fail-message`).html(message)
+      $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'success':
-      const successMessage = '✔ ' + locale.translate('Receipt sent successfully!').fetch()
-      $('#send-sms-receipt-cash-in-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-message').html(successMessage)
-      $('#send-sms-receipt-cash-in-message').removeClass('hide')
-      $('#send-sms-receipt-cash-out-button').addClass('hide')
-      $('#send-sms-receipt-cash-out-message').html(successMessage)
-      $('#send-sms-receipt-cash-out-message').removeClass('hide')
-      $('#send-sms-receipt-cash-in-fail-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-message').html(successMessage)
-      $('#send-sms-receipt-cash-in-fail-message').removeClass('hide')
+      const successMessage = '✔ ' + locale.translate(success).fetch()
+      $(`#${className}-cash-in-button`).addClass('hide')
+      $(`#${className}-cash-in-message`).html(successMessage)
+      $(`#${className}-cash-in-message`).removeClass('hide')
+      $(`#${className}-cash-out-button`).addClass('hide')
+      $(`#${className}-cash-out-message`).html(successMessage)
+      $(`#${className}-cash-out-message`).removeClass('hide')
+      $(`#${className}-cash-in-fail-button`).addClass('hide')
+      $(`#${className}-cash-in-fail-message`).html(successMessage)
+      $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'failed':
       const failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch()
-      $('#send-sms-receipt-cash-in-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-message').html(failMessage)
-      $('#send-sms-receipt-cash-in-message').removeClass('hide')
-      $('#send-sms-receipt-cash-out-button').addClass('hide')
-      $('#send-sms-receipt-cash-out-message').html(failMessage)
-      $('#send-sms-receipt-cash-out-message').removeClass('hide')
-      $('#send-sms-receipt-cash-in-fail-button').addClass('hide')
-      $('#send-sms-receipt-cash-in-fail-message').html(failMessage)
-      $('#send-sms-receipt-cash-in-fail-message').removeClass('hide')
+      $(`#${className}-cash-in-button`).addClass('hide')
+      $(`#${className}-cash-in-message`).html(failMessage)
+      $(`#${className}-cash-in-message`).removeClass('hide')
+      $(`#${className}-cash-out-button`).addClass('hide')
+      $(`#${className}-cash-out-message`).html(failMessage)
+      $(`#${className}-cash-out-message`).removeClass('hide')
+      $(`#${className}-cash-in-fail-button`).addClass('hide')
+      $(`#${className}-cash-in-fail-message`).html(failMessage)
+      $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
   }
 }
