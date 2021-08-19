@@ -130,13 +130,11 @@ function processData (data) {
       setState('wifi_password')
       break
     case 'wifiConnecting':
-      t('wifi-connecting',
-        translate('This could take a few moments.'))
+      t('wifi-connecting', translate('This could take a few moments.'))
       setState('wifi_connecting')
       break
     case 'wifiConnected':
-      t('wifi-connecting',
-        translate('Connected. Waiting for ticker.'))
+      t('wifi-connecting', translate('Connected. Waiting for ticker.'))
       setState('wifi_connecting') // in case we didn't go through wifi-connecting
       break
     case 'pairing':
@@ -256,10 +254,10 @@ function processData (data) {
   }
 }
 
-function translate (data, fetch) {
+function translate (data, fetchArgs) {
   try {
-    return fetch
-      ? locale.translate(data).fetch(...fetch)
+    return fetchArgs
+      ? locale.translate(data).fetch(...fetchArgs)
       : locale.translate(data).fetch()
   } catch (error) {
     console.error('Error while translating: ', error)
