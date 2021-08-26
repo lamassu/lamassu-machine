@@ -20,7 +20,6 @@ var cryptomatModel = null;
 var termsConditionsTimeout = null;
 var termsConditionsAcceptanceInterval = null;
 var termsConditionsAcceptanceTimeout = null;
-var secondsDelayTermsConditions = 7;
 var T_C_TIMEOUT = 30000;
 
 var fiatCode = null;
@@ -974,7 +973,7 @@ function setTermsConditionsAcceptanceDelay(screen, data) {
 
   if (!data.delay) return;
 
-  var seconds = secondsDelayTermsConditions;
+  var seconds = data.delayTimer / 1000;
   acceptButton.prop('disabled', true);
   acceptButton.html(data.accept + ' (' + seconds + ')');
 
