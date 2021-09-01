@@ -5,8 +5,10 @@ WORKDIR /lamassu
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y build-essential cmake curl git pkg-config yasm \
-  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev && \
-  curl -sS https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
+  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev
+
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - 
+RUN curl -sS https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
 
 RUN curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.txz | xz -dc | \
   tar -x -C /usr/local/lib --strip-components=2 barcodescannerlibs/ia32/libBarcodeScanner.so
@@ -18,8 +20,10 @@ WORKDIR /lamassu
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y build-essential cmake curl git pkg-config yasm \ 
-  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev && \
-  curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
+  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev
+
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - 
+RUN curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
 
 RUN curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.txz | xz -dc | \
   tar -x -C /usr/local/lib --strip-components=2 barcodescannerlibs/arm32/libBarcodeScanner.a
@@ -31,8 +35,10 @@ WORKDIR /lamassu
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y build-essential curl git pkg-config yasm \
-  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev && \
-  curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
+  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev
+
+RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - 
+RUN curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
 
 RUN curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.txz | xz -dc | \
   tar -x -C /usr/local/lib --strip-components=2 barcodescannerlibs/amd64/libBarcodeScanner.a
