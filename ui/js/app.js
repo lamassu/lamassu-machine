@@ -26,6 +26,7 @@ var T_C_TIMEOUT = 30000;
 
 var fiatCode = null;
 var locale = null;
+var defaultLocale = loadI18n('en-US') || null;
 var localeCode = null;
 var jsLocaleCode = null; // Sometimes slightly different than localeCode
 var _primaryLocales = [];
@@ -259,13 +260,17 @@ function processData(data) {
   }
 }
 
-function translate(data, fetch) {
+function translate(data, fetchArgs) {
   try {
     var _locale$translate;
 
-    return fetch ? (_locale$translate = locale.translate(data)).fetch.apply(_locale$translate, _toConsumableArray(fetch)) : locale.translate(data).fetch();
+    return fetchArgs ? (_locale$translate = locale.translate(data)).fetch.apply(_locale$translate, _toConsumableArray(fetchArgs)) : locale.translate(data).fetch();
   } catch (error) {
-    console.error('Error while translating: ', error);
+    if (!defaultLocale) console.error('Error while translating: ', error);else {
+      var _defaultLocale$transl;
+
+      return fetchArgs ? (_defaultLocale$transl = defaultLocale.translate(data)).fetch.apply(_defaultLocale$transl, _toConsumableArray(fetchArgs)) : defaultLocale.translate(data).fetch();
+    }
   }
 }
 
