@@ -22,6 +22,7 @@ var T_C_TIMEOUT = 30000
 
 var fiatCode = null
 var locale = null
+var defaultLocale = loadI18n('en-US') || null
 var localeCode = null
 var jsLocaleCode = null // Sometimes slightly different than localeCode
 var _primaryLocales = []
@@ -288,7 +289,12 @@ function translate (data, fetchArgs) {
       ? locale.translate(data).fetch(...fetchArgs)
       : locale.translate(data).fetch()
   } catch (error) {
-    console.error('Error while translating: ', error)
+    if (!defaultLocale) console.error('Error while translating: ', error)
+    else {
+      return fetchArgs
+        ? defaultLocale.translate(data).fetch(...fetchArgs)
+        : defaultLocale.translate(data).fetch()
+    }
   }
 }
 
