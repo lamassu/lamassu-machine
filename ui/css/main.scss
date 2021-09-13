@@ -1395,3 +1395,32 @@ footer {
   right: 4vh;
   bottom: 0;
 }
+
+.sm-text-height {
+  max-height: 12.5em;
+}
+
+.md-text-height {
+  max-height: 30em;
+}
+
+.lg-text-height {
+  max-height: 47.5em;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.slow-autoscroll-inner-wrapper {
+  animation: autoscroll 20s linear infinite;
+}
+
+@keyframes autoscroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -35%, 0);
+  }
+}
