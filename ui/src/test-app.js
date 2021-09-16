@@ -298,7 +298,9 @@ function setupFakes () {
     $('.hard_limit_reached_state'),
     $('.failed_scan_id_photo_state'),
     $('.retry_permission_id_state'),
-    $('.waiting_state')
+    $('.waiting_state'),
+    $('.scan_manual_id_photo_state'),
+    $('.promo_code_not_found_state')
   ]
 
   states.forEach(it => {
