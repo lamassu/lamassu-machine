@@ -678,7 +678,9 @@ $(document).ready(function () {
       return
     }
 
-    const coin = { cryptoCode: el.data('cryptoCode'), display: el.text() }
+    const cryptoCode = el.data('cryptoCode')
+    const display = currentCoins.find(it => it.cryptoCode === cryptoCode).display
+    const coin = { cryptoCode, display }
     if (!coin.cryptoCode) return
     switchCoin(coin)
   })

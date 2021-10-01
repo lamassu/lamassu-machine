@@ -669,7 +669,11 @@ $(document).ready(function () {
       return;
     }
 
-    var coin = { cryptoCode: el.data('cryptoCode'), display: el.text() };
+    var cryptoCode = el.data('cryptoCode');
+    var display = currentCoins.find(function (it) {
+      return it.cryptoCode === cryptoCode;
+    }).display;
+    var coin = { cryptoCode: cryptoCode, display: display };
     if (!coin.cryptoCode) return;
     switchCoin(coin);
   });
