@@ -670,11 +670,14 @@ $(document).ready(function () {
     }
 
     var cryptoCode = el.data('cryptoCode');
-    var display = currentCoins.find(function (it) {
+    if (!cryptoCode) return;
+
+    var wantedCoin = currentCoins.find(function (it) {
       return it.cryptoCode === cryptoCode;
-    }).display;
-    var coin = { cryptoCode: cryptoCode, display: display };
-    if (!coin.cryptoCode) return;
+    });
+    if (!wantedCoin) return;
+
+    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display };
     switchCoin(coin);
   });
 
