@@ -7,14 +7,14 @@ PRINTER=$3
 
 if [ -z $1 ] || [ -z $2 ]; then
   echo 'usage: install_script <machine> <version> [printer]'
-  echo 'machines: "gaia" or "sintra"'
+  echo 'machines: "gaia", "sintra" or "tejo"'
   echo 'version: git tag'
   echo 'printer [optional]: "nippon" or "zebra"'
   exit 1
 fi
 
-if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ]; then
-  echo 'Install script expects "gaia" or "sintra" as machine parameter'
+if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ]; then
+  echo 'Install script expects "gaia", "sintra" or "tejo" as machine parameter'
   exit 1
 fi
 
