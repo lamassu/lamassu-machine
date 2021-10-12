@@ -4,6 +4,11 @@ const fs = require('fs')
 const path = require('path')
 const deviceConfig = require('../device_config.json')
 
+if (deviceConfig.cryptomatModel !== 'tejo') {
+  console.log('This script can only be run on setup Tejo devices')
+  process.exit(2)
+}
+
 if (process.argv.length !== 2) {
   console.log('Usage: node bin/set-tejo-cassettes.js <number of cassettes>')
   console.log('Ex: node bin/set-tejo-cassettes.js 3')

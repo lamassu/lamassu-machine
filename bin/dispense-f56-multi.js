@@ -1,7 +1,7 @@
 const f56 = require('./multi-cassette/f56-rs232-multi')
 const deviceConfig = require('../device-config.json')
 
-if (!deviceConfig.cryptomatModel === 'tejo') {
+if (deviceConfig.cryptomatModel !== 'tejo') {
   console.log('This script can only be run on setup Tejo devices')
   process.exit(2)
 }
