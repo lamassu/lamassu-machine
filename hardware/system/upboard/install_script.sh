@@ -35,6 +35,14 @@ if [ "$PRINTER" == "zebra" ]; then
   PRINTER='Zebra-KR-403'
 fi
 
+# Cert workaround
+cat > 99-lamassu << EOL
+Acquire::https::ubilinux.org/ubilinux::Verify-Peer "false";
+Acquire::https::ubilinux.org/ubilinux::Verify-Host "false";
+EOL
+
+sudo mv 99-lamassu /etc/apt/apt.conf.d/
+
 sudo apt update && sudo apt full-upgrade -y
 
 # install dependencies
@@ -118,5 +126,7 @@ sudo systemctl enable supervisor
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sudo update-grub
+
+sudo rm /etc/apt/apt.conf.d/99-lamassu 
 
 sudo reboot
