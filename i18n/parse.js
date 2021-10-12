@@ -3,10 +3,6 @@ const path = require('path')
 
 const cheerio = require('cheerio');
 const _ = require('lodash/fp')
-const Xray = require('x-ray')
-const x = Xray({
-  filters: {strip}
-})
 
 const uiPath = path.resolve(__dirname, '..', 'ui')
 const startPath = path.resolve(uiPath, 'start.html')
@@ -22,7 +18,7 @@ function escapeDoubleQuotes(s){
 }
 
 function parseAppLine (line) {
-  const re = /locale\.translate\(["'](.+)["']\)/
+  const re = /translate\(["'](.+)["'][,\)]/
   const res = line.match(re)
   return res && res[1]
 }
