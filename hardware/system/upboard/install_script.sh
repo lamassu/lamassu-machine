@@ -37,8 +37,8 @@ fi
 
 # Cert workaround
 cat > 99-lamassu << EOL
-Acquire::https::ubilinux.org/ubilinux::Verify-Peer "false";
-Acquire::https::ubilinux.org/ubilinux::Verify-Host "false";
+Acquire::https::ubilinux.org::Verify-Peer "false";
+Acquire::https::ubilinux.org::Verify-Host "false";
 EOL
 
 sudo mv 99-lamassu /etc/apt/apt.conf.d/
