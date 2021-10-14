@@ -1,5 +1,5 @@
 const f56 = require('./multi-cassette/f56-rs232-multi')
-const deviceConfig = require('../device-config.json')
+const deviceConfig = require('../device_config.json')
 
 if (deviceConfig.cryptomatModel !== 'tejo') {
   console.log('This script can only be run on setup Tejo devices')
@@ -32,11 +32,11 @@ for (let i = 3; i < 3 + parseInt(deviceConfig.billDispenser.cassettes); i++) {
 }
 
 f56.create(process.argv[2])
-.then(() => f56.initialize('EUR', denominations))
-.then(res => console.dir(res))
-.then(() => process.exit(0))
-.catch(e => {
-  console.log('DEBUG1')
-  console.log(e)
-  process.exit(1)
-})
+  .then(() => f56.initialize('EUR', denominations))
+  .then(res => console.dir(res))
+  .then(() => process.exit(0))
+  .catch(e => {
+    console.log('DEBUG1')
+    console.log(e)
+    process.exit(1)
+  })
