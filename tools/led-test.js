@@ -7,11 +7,15 @@ const ledManager = process.argv[2] === 'gaia' ?
   :
   require('../lib/ssuboard/led-manager')
 
+const ledAddresses = process.argv[2] === 'tejo'
+  ? require('../lib/upboard/tejo/led-addresses')
+  : null
+
 function emit (subsystem, action) {
   return () => actionEmitter.emit(subsystem, {action})
 }
 
-ledManager.run()
+ledManager.run(ledAddresses)
   .then(emit('brain', 'billValidatorPending'))
   .then(() => delay(3000))
   .then(emit('brain', 'billValidatorAccepting'))
