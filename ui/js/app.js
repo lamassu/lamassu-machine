@@ -669,8 +669,15 @@ $(document).ready(function () {
       return;
     }
 
-    var coin = { cryptoCode: el.data('cryptoCode'), display: el.text() };
-    if (!coin.cryptoCode) return;
+    var cryptoCode = el.data('cryptoCode');
+    if (!cryptoCode) return;
+
+    var wantedCoin = currentCoins.find(function (it) {
+      return it.cryptoCode === cryptoCode;
+    });
+    if (!wantedCoin) return;
+
+    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display };
     switchCoin(coin);
   });
 
@@ -944,7 +951,7 @@ function setHardLimit(limits) {
 
 function setCryptomatModel(model) {
   cryptomatModel = model;
-  var versions = ['sintra', 'douro', 'gaia'];
+  var versions = ['sintra', 'douro', 'gaia', 'tejo'];
   var body = $('body');
 
   versions.forEach(function (it) {

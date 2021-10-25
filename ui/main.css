@@ -1210,7 +1210,7 @@ footer {
 .only-sintra {
   margin-top: 1vh; }
 
-.sintra .only-sintra, .douro .only-douro, .gaia .only-gaia {
+.sintra .only-sintra, .douro .only-douro, .gaia .only-gaia, .tejo .only-tejo {
   display: block; }
 
 .cash-in-color .only-cash-out, .cash-out-color .only-cash-in {
@@ -2126,3 +2126,35 @@ footer {
   position: absolute;
   right: 4vh;
   bottom: 0; }
+
+.sm-text-height {
+  max-height: 8.5em; }
+
+.md-text-height {
+  max-height: 30em; }
+
+.lg-text-height {
+  max-height: 47.5em; }
+
+.overflow-y-hidden {
+  overflow-y: hidden; }
+
+.slow-autoscroll-inner-wrapper {
+  -webkit-animation: autoscroll 20s linear infinite;
+          animation: autoscroll 20s linear infinite; }
+
+@-webkit-keyframes autoscroll {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, -35%, 0);
+            transform: translate3d(0, -35%, 0); } }
+
+@keyframes autoscroll {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); }
+  to {
+    -webkit-transform: translate3d(0, -35%, 0);
+            transform: translate3d(0, -35%, 0); } }

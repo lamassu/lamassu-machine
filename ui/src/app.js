@@ -678,8 +678,13 @@ $(document).ready(function () {
       return
     }
 
-    const coin = { cryptoCode: el.data('cryptoCode'), display: el.text() }
-    if (!coin.cryptoCode) return
+    const cryptoCode = el.data('cryptoCode')
+    if (!cryptoCode) return
+
+    const wantedCoin = currentCoins.find(it => it.cryptoCode === cryptoCode)
+    if (!wantedCoin) return
+
+    const coin = { cryptoCode, display: wantedCoin.display }
     switchCoin(coin)
   })
 
@@ -951,7 +956,7 @@ function setHardLimit (limits) {
 
 function setCryptomatModel (model) {
   cryptomatModel = model
-  const versions = ['sintra', 'douro', 'gaia']
+  const versions = ['sintra', 'douro', 'gaia', 'tejo']
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))
