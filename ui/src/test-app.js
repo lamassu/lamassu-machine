@@ -1,4 +1,4 @@
-/* globals $, Keypad, TimelineMax, requestAnimationFrame, kjua, Keyboard */
+/* globals $, Keypad, TimelineMax, requestAnimationFrame, kjua, Keyboard, locales, Jed */
 
 /*
 How this currently works: change the app.js import on start.html to test-app.js
@@ -17,6 +17,8 @@ var securityKeypad = null
 var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
+let locale = null
+let localeCode = 'bg-BG'
 
 $(function () {
   $('body').css('cursor', 'default')
@@ -142,7 +144,51 @@ $(function () {
     })
     tList.appendChild(newElement)
   })
+
+  initTranslatePage()
+  locale = loadI18n(localeCode)
+  try { translatePage() } catch (ex) {}
 })
+
+function loadI18n (localeCode) {
+  var messages = locales[localeCode] || locales['en-US']
+
+  return new Jed({
+    'missing_key_callback': function () {},
+    'locale_data': {
+      'messages': messages
+    }
+  })
+}
+
+function initTranslatePage () {
+  $('.js-i18n').each(function () {
+    var el = $(this)
+    el.data('baseTranslation', el.html().trim())
+  })
+  $('input[placeholder]').each(function () {
+    var el = $(this)
+    el.data('baseTranslation', el.attr('placeholder'))
+  })
+}
+
+function translatePage () {
+  $('.js-i18n').each(function () {
+    var el = $(this)
+    var base = el.data('baseTranslation')
+    el.html(locale.translate(base).fetch())
+  })
+  $('input[placeholder]').each(function () {
+    var el = $(this)
+    var base = el.data('baseTranslation')
+    el.attr('placeholder', locale.translate(base).fetch())
+  })
+
+  // Adjust send coins button
+  var length = $('#send-coins span').text().length
+  if (length > 17) $('body').addClass('i18n-long-send-coins')
+  else $('body').removeClass('i18n-long-send-coins')
+}
 
 function click (e) {
   setTimeout(() => {
@@ -252,7 +298,9 @@ function setupFakes () {
     $('.hard_limit_reached_state'),
     $('.failed_scan_id_photo_state'),
     $('.retry_permission_id_state'),
-    $('.waiting_state')
+    $('.waiting_state'),
+    $('.scan_manual_id_photo_state'),
+    $('.promo_code_not_found_state')
   ]
 
   states.forEach(it => {
