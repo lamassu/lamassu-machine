@@ -681,11 +681,20 @@ footer {
 }
 
 .change-language {
-  width: 24vh;
+  width: 30vh;
 }
 
-.change-language #language-dropdown-toggle {
-  justify-content: flex-start;
+#change-language-section #language-dropdown-toggle {
+  align-items: center;
+}
+
+#change-language-section #language-globe-icon {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#change-language-section #languages {
+  align-items: center;
 }
 
 .dropdown {
@@ -800,6 +809,10 @@ footer {
 .choose_coin_state main {
   justify-content: space-around;
   align-items: center;
+}
+
+.choose_coin_state .change-language img {
+  height: 3vh;
 }
 
 .bg-image {
