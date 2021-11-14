@@ -46,6 +46,9 @@ var cassettes = null
 let currentCryptoCode = null
 let currentCoin = null
 let currentCoins = []
+let customRequirementNumericalKeypad = null
+let customRequirementTextKeyboard = null
+let customRequirementChoiceList = null
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -70,13 +73,15 @@ function buttonPressed (button, data) {
   if (!buttonActive) return
   wifiKeyboard.deactivate()
   promoKeyboard.deactivate()
+  customRequirementTextKeyboard.deactivate()
   buttonActive = false
   setTimeout(function () {
     buttonActive = true
     wifiKeyboard.activate()
     promoKeyboard.activate()
+    customRequirementTextKeyboard.activate()
   }, 300)
-  var res = {button: button}
+  var res = { button: button }
   if (data || data === null) res.data = data
   if (websocket) websocket.send(JSON.stringify(res))
 }
@@ -250,6 +255,12 @@ function processData (data) {
     case 'invalidPromoCode':
       setState('promo_code_not_found')
       break
+    case 'customInfoRequest':
+      customInfoRequest(data.customInfoRequest, 1)
+      break
+    case 'customInfoRequestScreen2':
+      customInfoRequest(data.customInfoRequest, 2)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -276,6 +287,58 @@ function facephotoPermission () {
 
 function usSsnPermission () {
   setScreen('us_ssn_permission')
+}
+
+function customInfoRequest (customInfoRequest, screen) {
+  if (screen === 1) {
+    $('#custom-screen1-title').text(customInfoRequest.screen1.title)
+    $('#custom-screen1-text').text(customInfoRequest.screen1.text)
+    return setScreen('custom_permission')
+  }
+  // screen 2
+  switch (customInfoRequest.input.type) {
+    case 'numerical':
+      $('#custom-screen2-numerical-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-numerical-text').text(customInfoRequest.screen2.text)
+      customRequirementNumericalKeypad.setOpts({
+        type: 'custom',
+        constraint: customInfoRequest.input.constraintType,
+        maxLength: customInfoRequest.input.numDigits
+      })
+      customRequirementNumericalKeypad.activate()
+      setState('custom_permission_screen2_numerical')
+      setScreen('custom_permission_screen2_numerical')
+      break
+    case 'text':
+      $('#custom-requirement-text-label1').text(customInfoRequest.input.label1)
+      $('#custom-requirement-text-label2').text(customInfoRequest.input.label2)
+      $('#previous-text-requirement').hide()
+      $('#submit-text-requirement').hide()
+      $('#next-text-requirement').hide()
+      $('#optional-text-field-2').hide()
+      $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override')
+      $('.custom-info-request-space-key').show()
+      // set type of constraint and buttons where that constraint should apply to disable/ enable
+      customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement'])
+      if (customInfoRequest.input.constraintType === 'spaceSeparation') {
+        $('#optional-text-field-2').show()
+        $('.key.backspace.standard-backspace-key').addClass('backspace-margin-left-override')
+        $('.custom-info-request-space-key').hide()
+        customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement'])
+      }
+      setState('custom_permission_screen2_text')
+      setScreen('custom_permission_screen2_text')
+      break
+    case 'choiceList':
+      $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
+      $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text)
+      customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType)
+      setState('custom_permission_screen2_choiceList')
+      setScreen('custom_permission_screen2_choiceList')
+      break
+    default:
+      return blockedCustomer()
+  }
 }
 
 function idVerification () {
@@ -442,7 +505,7 @@ function switchCoin (coin) {
     setTimeout(() => cashOut.removeClass('crypto-switch'), 1000)
   }, 80)
 
-  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode)) 
+  const selectedIndex = currentCoins.indexOf(currentCoins.find(it => it.cryptoCode === cryptoCode))
   if (currentCoins.length > 4 && selectedIndex > 2) {
     currentCoins.splice(2, 0, currentCoins.splice(selectedIndex, 1)[0])
   }
@@ -467,28 +530,57 @@ $(document).ready(function () {
           window.onmouseup =
             function () { return false }
 
-  BigNumber.config({ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN})
+  BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN })
 
-  wifiKeyboard = new Keyboard('wifi-keyboard').init()
+  wifiKeyboard = new Keyboard({
+    id: 'wifi-keyboard',
+    inputBox: '#input-passphrase'
+  }).init()
 
-  promoKeyboard = new Keyboard('promo-keyboard').init(function () {
+  promoKeyboard = new Keyboard({
+    id: 'promo-keyboard',
+    inputBox: '.promo-code-input'
+  }).init(function () {
     if (currentState !== 'insert_promo_code') return
     buttonPressed('cancelPromoCode')
   })
 
-  usSsnKeypad = new Keypad('us-ssn-keypad', {type: 'usSsn'}, function (result) {
+  usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     if (currentState !== 'register_us_ssn') return
     buttonPressed('usSsn', result)
   })
 
-  phoneKeypad = new Keypad('phone-keypad', {type: 'phoneNumber', country: 'US'}, function (result) {
+  phoneKeypad = new Keypad('phone-keypad', { type: 'phoneNumber', country: 'US' }, function (result) {
     if (currentState !== 'register_phone') return
     buttonPressed('phoneNumber', result)
   })
 
-  securityKeypad = new Keypad('security-keypad', {type: 'code'}, function (result) {
+  securityKeypad = new Keypad('security-keypad', { type: 'code' }, function (result) {
     if (currentState !== 'security_code') return
     buttonPressed('securityCode', result)
+  })
+
+  customRequirementNumericalKeypad = new Keypad('custom-requirement-numeric-keypad', {
+    type: 'custom'
+  }, function (result) {
+    if (currentState !== 'custom_permission_screen2_numerical') return
+    buttonPressed('customInfoRequestSubmit', result)
+  })
+
+  customRequirementTextKeyboard = new Keyboard({
+    id: 'custom-requirement-text-keyboard',
+    inputBox: '.text-input-field-1',
+    submitButtonWrapper: '.submit-text-requirement-button-wrapper'
+  }).init(function () {
+    if (currentState !== 'custom_permission_screen2_text') return
+    buttonPressed('customInfoRequestSubmit')
+  })
+
+  customRequirementChoiceList = new ChoiceList({
+    id: 'custom-requirement-choicelist-wrapper'
+  }).init(function (result) {
+    if (currentState !== 'custom_permission_screen2_choiceList') return
+    buttonPressed('customInfoRequestSubmit', result)
   })
 
   if (DEBUG_MODE !== 'demo') {
@@ -514,7 +606,7 @@ $(document).ready(function () {
         var displaySsid = ssidEl.text()
         var rawSsid = ssidEl.data('raw-ssid')
         buttonPressed('wifiSelect',
-          {ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid})
+          { ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid })
       }
     }
   })
@@ -527,7 +619,7 @@ $(document).ready(function () {
     var pass = $('#wifi-keyboard input.passphrase').data('content')
     var ssid = $('#js-i18n-wifi-for-ssid').data('ssid')
     var rawSsid = $('#js-i18n-wifi-for-ssid').data('raw-ssid')
-    buttonPressed('wifiConnect', {pass: pass, ssid: ssid, rawSsid: rawSsid})
+    buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid })
   })
 
   var sendCoinsButton = document.getElementById('send-coins')
@@ -582,6 +674,35 @@ $(document).ready(function () {
     promoKeyboard.deactivate.bind(promoKeyboard)
     var code = $('.promo-code-input').data('content')
     buttonPressed('submitPromoCode', { input: code })
+  })
+
+  const submitTextRequirementButton = document.getElementById('submit-text-requirement')
+  const nextFieldTextRequirementButton = document.getElementById('next-text-requirement')
+  const previousFieldTextRequirementButton = document.getElementById('previous-text-requirement')
+  touchEvent(submitTextRequirementButton, function () {
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    var text = `${$('.text-input-field-1').data('content')} ${$('.text-input-field-2').data('content') || ''}`
+    buttonPressed('customInfoRequestSubmit', text)
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
+    $('.text-input-field-2').addClass('faded').data('content', '').val('')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+  touchEvent(nextFieldTextRequirementButton, function() {
+    $('.text-input-field-1').addClass('faded')
+    $('.text-input-field-2').removeClass('faded')
+    $('#next-text-requirement').hide()
+    $('#previous-text-requirement').show()
+    $('#submit-text-requirement').show()
+    // changing input box changes buttons where validation works on
+    customRequirementTextKeyboard.setInputBox('.text-input-field-2', ['#submit-text-requirement'])
+  })
+  touchEvent(previousFieldTextRequirementButton, function() {
+    $('.text-input-field-1').removeClass('faded')
+    $('.text-input-field-2').addClass('faded')
+    $('#next-text-requirement').show()
+    $('#previous-text-requirement').hide()
+    $('#submit-text-requirement').hide()
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1', ['#next-text-requirement'])
   })
 
   setupButton('submit-promo-code', 'submitPromoCode', {
@@ -701,6 +822,32 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
+  setupButton('custom-permission-yes', 'customInfoRequestPermission')
+  setupButton('custom-permission-no', 'finishBeforeSms')
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
+  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
+    $('.text-input-field-2').addClass('faded').data('content', '').val('')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
+  })
+
+  setupButton('custom-permission-yes', 'customInfoRequestPermission')
+  setupButton('custom-permission-no', 'finishBeforeSms')
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
+  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
+    $('.text-input-field-2').addClass('faded').data('content', '').val('')
+    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
+  })
+
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
       setLocale(otherLocale())
@@ -761,7 +908,7 @@ $(document).ready(function () {
     if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat')
     var denominationIndex = cashButtonJ.attr('data-denomination-index')
     var denominationRec = cassettes[denominationIndex]
-    buttonPressed('fiatButton', {denomination: denominationRec.denomination})
+    buttonPressed('fiatButton', { denomination: denominationRec.denomination })
   })
 
   initDebug()
@@ -833,7 +980,7 @@ function setScreen (newScreen, oldScreen) {
   if (newScreen === oldScreen) return
 
   if (newScreen === 'insert_bills') {
-    $('.js-processing-bill').html(translate('Lamassu Cryptomat'))
+    $('.js-processing-bill').html(locale.translate('Lamassu Cryptomat').fetch())
     $('.bill img').css({'-webkit-transform': 'none', top: 0, left: 0})
   }
 
@@ -857,6 +1004,7 @@ function setState (state, delay) {
 
   wifiKeyboard.reset()
   promoKeyboard.reset()
+  customRequirementTextKeyboard.reset()
 
   if (state === 'idle') {
     $('.qr-code').empty()
@@ -881,7 +1029,7 @@ function setWifiList (recs, requestedPage) {
     offset = 0
     page = 0
   }
-  $('#more-networks').css({'display': 'none'})
+  $('#more-networks').css({ 'display': 'none' })
   networks.empty()
   networks.data('page', page)
   networks.data('recs', recs)
@@ -982,7 +1130,11 @@ function setDirection (direction) {
     $('.retry_permission_id_state'),
     $('.waiting_state'),
     $('.insert_promo_code_state'),
-    $('.promo_code_not_found_state')
+    $('.promo_code_not_found_state'),
+    $('.custom_permission_state'),
+    $('.custom_permission_screen2_numerical_state'),
+    $('.custom_permission_screen2_text_state'),
+    $('.custom_permission_screen2_choiceList_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -1461,9 +1613,9 @@ function setBuyerAddress (address) {
 function setAccepting (currentAccepting) {
   accepting = currentAccepting
   if (accepting) {
-    $('.bill img').transition({x: 0, y: -303}, 1000, 'ease-in')
+    $('.bill img').transition({ x: 0, y: -303 }, 1000, 'ease-in')
   } else {
-    $('.bill img').transition({x: 0, y: 0}, 1000, 'ease-out')
+    $('.bill img').transition({ x: 0, y: 0 }, 1000, 'ease-out')
   }
 }
 
@@ -1723,9 +1875,9 @@ function initDebug () {
 
     if (!SCREEN) {
       return chooseCoin([
-        {display: 'Bitcoin', cryptoCode: 'BTC'},
-        {display: 'Ethereum', cryptoCode: 'ETH'},
-        {display: 'ZCash', cryptoCode: 'ZEC'}
+        { display: 'Bitcoin', cryptoCode: 'BTC' },
+        { display: 'Ethereum', cryptoCode: 'ETH' },
+        { display: 'ZCash', cryptoCode: 'ZEC' }
       ], true)
     }
 

@@ -559,7 +559,7 @@ footer {
   width: 39vh;
 }
 
-#phone-keypad, #security-keypad, #us-ssn-keypad {
+#phone-keypad, #security-keypad, #us-ssn-keypad, #custom-requirement-numeric-keypad  {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -571,7 +571,12 @@ footer {
   }
 }
 
-#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button {
+#custom-requirement-numeric-keypad .progress-button-wrapper  {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#phone-keypad .progress-button, #security-keypad .progress-button, #us-ssn-keypad .progress-button  {
   float: right;
   margin-top: 5vh;
 }
@@ -1157,7 +1162,10 @@ footer {
   .promo-code-input {
     border-bottom: $amazonite-three 2px solid;
   }
-  .promo-keyboard {
+  .text-requirement-input {
+    border-bottom: $amazonite-three 2px solid;
+  }
+  .standard-keyboard {
     .key {
       background-color: $amazonite-three;
       &:active {
@@ -1171,7 +1179,10 @@ footer {
   .promo-code-input {
     border-bottom: $salmon-three 2px solid;
   }
-  .promo-keyboard {
+  .text-requirement-input {
+    border-bottom: $salmon-three 2px solid;
+  }
+  .standard-keyboard {
     .key {
       background-color: $salmon-three;
       &:active {
@@ -1181,10 +1192,10 @@ footer {
   }
 }
 
-.promo-keyboard {
+.standard-keyboard {
   box-sizing: border-box;
   width: 100%;
-  .promo-backspace {
+  .standard-backspace {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1192,7 +1203,7 @@ footer {
       width: 3vh;
     }
   }
-  .promo-backspace-key {
+  .standard-backspace-key {
     width: 18vh !important;
   }
   .row {
@@ -1211,6 +1222,9 @@ footer {
     height: 10vh;
     width: 10vh;
     line-height: 10vh;
+  }
+  .space {
+    width: 71vh;
   }
 }
 
@@ -1528,4 +1542,162 @@ footer {
   to {
     transform: translate3d(0, -35%, 0);
   }
+}
+
+.flex-center-verical {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.custom-requirement-margin {
+  margin: 50px;
+}
+
+.quick-keys {
+  display: flex;
+}
+
+.text-input-fields-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-permission-text-input-main {
+  display: flex;
+  flex-direction: column;
+  margin: 0vh 6vh 6vh 6vh;
+}
+
+.text-input-field {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.custom-requirement-text-label {
+  color: $white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.custom-requirement-text-input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none;
+}
+
+.submit-text-requirement-button-wrapper {
+  justify-content: flex-end;
+  margin-right: 24vh;
+}
+
+.submit-text-requirement-button {
+  margin-right: 160px;
+  margin-top: 20px;
+}
+
+.faded {
+  color: $purple-grey;
+  border-bottom: none !important;
+}
+
+.text-requirement-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 3vh;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  outline: none;
+}
+
+.backspace-margin-left-override {
+  margin-left: 20vw !important;
+}
+
+#custom-requirement-choicelist-wrapper {
+  height: 90%;
+  margin-right: 6vw;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 0.5fr;
+}
+
+.choice-list-grid-wrapper {
+  min-height: 60vh;
+  margin-right: 20px;
+}
+
+.choice-list-item {
+  height: 25%;
+  width: 95%;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: $ligth-color;
+  display: flex;
+  align-items: center;
+  font-family: $font-secondary;
+}
+
+.choice-list-actions-wrapper {
+  position: relative;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 8vh;
+  margin-top: 6vh;
+  p {
+    margin: 4vh 0;
+  }
+  justify-content: center;
+  margin-left: 25%;
+}
+
+.choice-list-arrow {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: $ligth-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-secondary;
+}
+
+.choice-list-pager {
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: $font-secondary;
+  color: $ligth-color;
+  text-align: center;
+}
+
+.submit-choice-list-button-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: auto;
+}
+
+.choice-selected {
+  @include cash-background-colors;
+  color: $ligth-color; 
+  &:active, .active {
+    background-color: $white;
+    @include cash-colors;
+  }
+  &:disabled {
+    @include cash-disabled-background-colors;
+  }
+}
+
+.arrow {
+  pointer-events: none;
 }
