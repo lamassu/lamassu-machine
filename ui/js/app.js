@@ -94,7 +94,7 @@ function processData(data) {
   if (data.buyerAddress) setBuyerAddress(data.buyerAddress);
   if (data.credit) {
     var lastBill = data.action === 'rejectedBill' ? null : data.credit.lastBill;
-    setCredit(data.credit.fiat, data.credit.cryptoAtoms, lastBill, data.credit.cryptoCode);
+    setCredit(data.credit, lastBill);
   }
   if (data.tx) setTx(data.tx);
   if (data.wifiList) setWifiList(data.wifiList);
@@ -1236,11 +1236,15 @@ function setFixedFee(_fee) {
   }
 }
 
-function setCredit(fiat, crypto, lastBill, cryptoCode) {
+function setCredit(credit, lastBill) {
+  var fiat = credit.fiat,
+      cryptoAtoms = credit.cryptoAtoms,
+      cryptoCode = credit.cryptoCode;
+
   var coin = getCryptoCurrency(cryptoCode);
 
   var scale = new BigNumber(10).pow(coin.displayScale);
-  var cryptoAmount = new BigNumber(crypto).div(scale).toNumber();
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).toNumber();
   var cryptoDisplayCode = coin.displayCode;
   updateCrypto('.total-crypto-rec', cryptoAmount, cryptoDisplayCode);
   $('.amount-deposited').html(translate('You deposited %s', [fiat + ' ' + fiatCode]));
@@ -1297,7 +1301,7 @@ function splitNumber(localize, localeCode) {
 function formatNumber(num) {
   var localized = num.toLocaleString(jsLocaleCode, {
     useGrouping: true,
-    maximumFractionDigits: 3,
+    maximumFractionDigits: 6,
     minimumFractionDigits: 3
   });
 
@@ -1554,7 +1558,8 @@ function manageFiatButtons(activeDenominations) {
 function displayCrypto(cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
-  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(3).toNumber();
+  var decimalPlaces = coin.displayScale - coin.unitScale + 6;
+  var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
   var cryptoDisplay = formatCrypto(cryptoAmount);
 
   return cryptoDisplay;
