@@ -34,7 +34,7 @@ var Keypad = function (keypadId, opts, callback) {
 
       if (self.type === 'phoneNumber') {
         const phoneResult = libphonenumber.parsePhoneNumberFromString(self.result, self.opts.country)
-        if (phoneResult) result = phoneResult
+        if (phoneResult) result = phoneResult.number
       }
 
       if (self.type === 'custom' && self.opts.constraint === 'date') {
