@@ -863,8 +863,132 @@ msgid "We got this"
 msgstr "We got this"
 
 #: On screen: dynamic
+msgid "This could take a few moments."
+msgstr "This could take a few moments."
+
+#: On screen: dynamic
+msgid "Connected. Waiting for ticker."
+msgstr "Connected. Waiting for ticker."
+
+#: On screen: dynamic
+msgid "More"
+msgstr "More"
+
+#: On screen: dynamic
+msgid "Less"
+msgstr "Less"
+
+#: On screen: dynamic
+msgid "Buy<br/>%s"
+msgstr "Buy<br/>%s"
+
+#: On screen: dynamic
+msgid "Sell<br/>%s"
+msgstr "Sell<br/>%s"
+
+#: On screen: dynamic
 msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
+
+#: On screen: dynamic
+msgid "MORE"
+msgstr "MORE"
+
+#: On screen: dynamic
+msgid "Please come back in %s weeks"
+msgstr "Please come back in %s weeks"
+
+#: On screen: dynamic
+msgid "Please come back in %s days and %s hours"
+msgstr "Please come back in %s days and %s hours"
+
+#: On screen: dynamic
+msgid "Please come back in %s hours"
+msgstr "Please come back in %s hours"
+
+#: On screen: dynamic
+msgid "for %s"
+msgstr "for %s"
+
+#: On screen: dynamic
+msgid "You're connecting to the WiFi network %s"
+msgstr "You're connecting to the WiFi network %s"
+
+#: On screen: dynamic
+msgid "Transaction Fee: %s"
+msgstr "Transaction Fee: %s"
+
+#: On screen: dynamic
+msgid "You deposited %s"
+msgstr "You deposited %s"
+
+#: On screen: dynamic
+msgid "You inserted a %s bill"
+msgstr "You inserted a %s bill"
+
+#: On screen: dynamic
+msgid "Transaction limit reached."
+msgstr "Transaction limit reached."
+
+#: On screen: dynamic
+msgid "We're a little low on crypto."
+msgstr "We're a little low on crypto."
+
+#: On screen: dynamic
+msgid "Please insert %s or less."
+msgstr "Please insert %s or less."
+
+#: On screen: dynamic
+msgid "Minimum first bill is %s."
+msgstr "Minimum first bill is %s."
+
+#: On screen: dynamic
+msgid "Processing %s ..."
+msgstr "Processing %s ..."
+
+#: On screen: dynamic
+msgid "Transaction limit reached"
+msgstr "Transaction limit reached"
+
+#: On screen: dynamic
+msgid "Error in validation"
+msgstr "Error in validation"
+
+#: On screen: dynamic
+msgid "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
+msgstr "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
+
+#: On screen: dynamic
+msgid "Scan your <br/> %s address"
+msgstr "Scan your <br/> %s address"
+
+#: On screen: dynamic
+msgid "Please scan the QR code <br/> to send us your %s."
+msgstr "Please scan the QR code <br/> to send us your %s."
+
+#: On screen: dynamic
+msgid "Have you sent the %s yet?"
+msgstr "Have you sent the %s yet?"
+
+#: On screen: dynamic
+msgid "Scan your %s address"
+msgstr "Scan your %s address"
+
+#: On screen: dynamic
+msgid "Invalid %s address"
+msgstr "Invalid %s address"
+
+#: On screen: dynamic
+msgid "Transaction limit reached, please cash out"
+msgstr "Transaction limit reached, please cash out"
+
+#: On screen: dynamic
+msgid "You'll be sending %s %s"
+msgstr "You'll be sending %s %s"
+
+#: On screen: dynamic
+msgid "Discount added (%s off commissions)"
+msgstr "Discount added (%s off commissions)"
 
 #: On screen: dynamic
 msgid "An error occurred, try again."
