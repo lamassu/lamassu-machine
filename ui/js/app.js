@@ -120,7 +120,10 @@ function processData(data) {
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
-  if (data.receiptStatus) setReceiptPrint(data.receiptStatus);
+
+  if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
+  if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null);
+  if (data.smsReceiptStatus) setReceiptPrint(null, data.smsReceiptStatus);
 
   if (data.context) {
     $('.js-context').hide();
@@ -757,6 +760,10 @@ $(document).ready(function () {
   setupButton('print-receipt-cash-in-button', 'printReceipt');
   setupButton('print-receipt-cash-out-button', 'printReceipt');
   setupButton('print-receipt-cash-in-fail-button', 'printReceipt');
+
+  setupButton('send-sms-receipt-cash-in-button', 'sendSmsReceipt');
+  setupButton('send-sms-receipt-cash-out-button', 'sendSmsReceipt');
+  setupButton('send-sms-receipt-cash-in-fail-button', 'sendSmsReceipt');
 
   setupButton('terms-ok', 'termsAccepted');
   setupButton('terms-ko', 'idle');
@@ -1704,8 +1711,9 @@ function manageFiatButtons(activeDenominations) {
 
 function displayCrypto(cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode);
-  var scale = new BigNumber(10).pow(coin.displayScale);
-  var decimalPlaces = coin.displayScale - coin.unitScale + 6;
+  var scale = new BigNumber(10).pow(coin.displayScale
+  // number of decimal places vary based on displayScale value
+  );var decimalPlaces = coin.displayScale - coin.unitScale + 6;
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
   var cryptoDisplay = formatCrypto(cryptoAmount);
 
@@ -1936,59 +1944,66 @@ function setCurrentDiscount(currentDiscount, promoCodeApplied) {
   }
 }
 
-function setReceiptPrint(receiptStatus) {
-  switch (receiptStatus) {
+function setReceiptPrint(receiptStatus, smsReceiptStatus) {
+  var status = null;
+  if (receiptStatus) status = receiptStatus;else status = smsReceiptStatus;
+
+  var className = receiptStatus ? 'print-receipt' : 'send-sms-receipt';
+  var printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...';
+  var success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!';
+
+  switch (status) {
     case 'disabled':
-      $('#print-receipt-cash-in-message').addClass('hide');
-      $('#print-receipt-cash-in-button').addClass('hide');
-      $('#print-receipt-cash-out-message').addClass('hide');
-      $('#print-receipt-cash-out-button').addClass('hide');
-      $('#print-receipt-cash-in-fail-message').addClass('hide');
-      $('#print-receipt-cash-in-fail-button').addClass('hide');
+      $('#' + className + '-cash-in-message').addClass('hide');
+      $('#' + className + '-cash-in-button').addClass('hide');
+      $('#' + className + '-cash-out-message').addClass('hide');
+      $('#' + className + '-cash-out-button').addClass('hide');
+      $('#' + className + '-cash-in-fail-message').addClass('hide');
+      $('#' + className + '-cash-in-fail-button').addClass('hide');
       break;
     case 'available':
-      $('#print-receipt-cash-in-message').addClass('hide');
-      $('#print-receipt-cash-in-button').removeClass('hide');
-      $('#print-receipt-cash-out-message').addClass('hide');
-      $('#print-receipt-cash-out-button').removeClass('hide');
-      $('#print-receipt-cash-in-fail-message').addClass('hide');
-      $('#print-receipt-cash-in-fail-button').removeClass('hide');
+      $('#' + className + '-cash-in-message').addClass('hide');
+      $('#' + className + '-cash-in-button').removeClass('hide');
+      $('#' + className + '-cash-out-message').addClass('hide');
+      $('#' + className + '-cash-out-button').removeClass('hide');
+      $('#' + className + '-cash-in-fail-message').addClass('hide');
+      $('#' + className + '-cash-in-fail-button').removeClass('hide');
       break;
     case 'printing':
-      var message = locale.translate('Printing receipt...').fetch();
-      $('#print-receipt-cash-in-button').addClass('hide');
-      $('#print-receipt-cash-in-message').html(message);
-      $('#print-receipt-cash-in-message').removeClass('hide');
-      $('#print-receipt-cash-out-button').addClass('hide');
-      $('#print-receipt-cash-out-message').html(message);
-      $('#print-receipt-cash-out-message').removeClass('hide');
-      $('#print-receipt-cash-in-fail-button').addClass('hide');
-      $('#print-receipt-cash-in-fail-message').html(message);
-      $('#print-receipt-cash-in-fail-message').removeClass('hide');
+      var message = locale.translate(printing).fetch();
+      $('#' + className + '-cash-in-button').addClass('hide');
+      $('#' + className + '-cash-in-message').html(message);
+      $('#' + className + '-cash-in-message').removeClass('hide');
+      $('#' + className + '-cash-out-button').addClass('hide');
+      $('#' + className + '-cash-out-message').html(message);
+      $('#' + className + '-cash-out-message').removeClass('hide');
+      $('#' + className + '-cash-in-fail-button').addClass('hide');
+      $('#' + className + '-cash-in-fail-message').html(message);
+      $('#' + className + '-cash-in-fail-message').removeClass('hide');
       break;
     case 'success':
-      var successMessage = '✔ ' + locale.translate('Receipt printed successfully!').fetch();
-      $('#print-receipt-cash-in-button').addClass('hide');
-      $('#print-receipt-cash-in-message').html(successMessage);
-      $('#print-receipt-cash-in-message').removeClass('hide');
-      $('#print-receipt-cash-out-button').addClass('hide');
-      $('#print-receipt-cash-out-message').html(successMessage);
-      $('#print-receipt-cash-out-message').removeClass('hide');
-      $('#print-receipt-cash-in-fail-button').addClass('hide');
-      $('#print-receipt-cash-in-fail-message').html(successMessage);
-      $('#print-receipt-cash-in-fail-message').removeClass('hide');
+      var successMessage = '✔ ' + locale.translate(success).fetch();
+      $('#' + className + '-cash-in-button').addClass('hide');
+      $('#' + className + '-cash-in-message').html(successMessage);
+      $('#' + className + '-cash-in-message').removeClass('hide');
+      $('#' + className + '-cash-out-button').addClass('hide');
+      $('#' + className + '-cash-out-message').html(successMessage);
+      $('#' + className + '-cash-out-message').removeClass('hide');
+      $('#' + className + '-cash-in-fail-button').addClass('hide');
+      $('#' + className + '-cash-in-fail-message').html(successMessage);
+      $('#' + className + '-cash-in-fail-message').removeClass('hide');
       break;
     case 'failed':
       var failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch();
-      $('#print-receipt-cash-in-button').addClass('hide');
-      $('#print-receipt-cash-in-message').html(failMessage);
-      $('#print-receipt-cash-in-message').removeClass('hide');
-      $('#print-receipt-cash-out-button').addClass('hide');
-      $('#print-receipt-cash-out-message').html(failMessage);
-      $('#print-receipt-cash-out-message').removeClass('hide');
-      $('#print-receipt-cash-in-fail-button').addClass('hide');
-      $('#print-receipt-cash-in-fail-message').html(failMessage);
-      $('#print-receipt-cash-in-fail-message').removeClass('hide');
+      $('#' + className + '-cash-in-button').addClass('hide');
+      $('#' + className + '-cash-in-message').html(failMessage);
+      $('#' + className + '-cash-in-message').removeClass('hide');
+      $('#' + className + '-cash-out-button').addClass('hide');
+      $('#' + className + '-cash-out-message').html(failMessage);
+      $('#' + className + '-cash-out-message').removeClass('hide');
+      $('#' + className + '-cash-in-fail-button').addClass('hide');
+      $('#' + className + '-cash-in-fail-message').html(failMessage);
+      $('#' + className + '-cash-in-fail-message').removeClass('hide');
       break;
   }
 }

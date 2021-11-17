@@ -119,6 +119,10 @@ msgid "Print receipt"
 msgstr "Print receipt"
 
 #: On screen: completed
+msgid "Send SMS receipt"
+msgstr "Send SMS receipt"
+
+#: On screen: completed
 msgid "Take a picture of this screen for your electronic receipt"
 msgstr "Take a picture of this screen for your electronic receipt"
 
@@ -129,6 +133,26 @@ msgstr "Tap anywhere on the screen when you're done."
 #: On screen: connect_ethernet
 msgid "Network down"
 msgstr "Network down"
+
+#: On screen: custom-permission
+msgid ""
+msgstr ""
+
+#: On screen: custom-permission
+msgid "Continue?"
+msgstr "Continue?"
+
+#: On screen: custom-permission
+msgid "Yes"
+msgstr "Yes"
+
+#: On screen: custom-permission
+msgid "No"
+msgstr "No"
+
+#: On screen: custom-permission-screen2-numerical
+msgid "Submit"
+msgstr "Submit"
 
 #: On screen: deposit-timeout
 msgid "Nothing yet."
@@ -387,8 +411,8 @@ msgid "Your funds are safe, but we had an issue when sending your coins."
 msgstr "Your funds are safe, but we had an issue when sending your coins."
 
 #: On screen: out-of-coins
-msgid "Please take a photo of this screen and contact the operator to push through your order."
-msgstr "Please take a photo of this screen and contact the operator to push through your order."
+msgid "Please take a photo of this screen and <b>contact the operator</b> to push through your order."
+msgstr "Please take a photo of this screen and <b>contact the operator</b> to push through your order."
 
 #: On screen: out-of-coins
 msgid "Your receiving address:"
@@ -485,10 +509,6 @@ msgstr "Please enter the mobile number you used when you placed your order."
 #: On screen: register-phone
 msgid "Please enter your mobile number for ID verification."
 msgstr "Please enter your mobile number for ID verification."
-
-#: On screen: register-phone
-msgid "Submit"
-msgstr "Submit"
 
 #: On screen: scan-address
 msgid "Hold your QR code up to the scan window to proceed."
@@ -969,14 +989,6 @@ msgstr "You'll be sending %s %s"
 #: On screen: dynamic
 msgid "Discount added (%s off commissions)"
 msgstr "Discount added (%s off commissions)"
-
-#: On screen: dynamic
-msgid "Printing receipt..."
-msgstr "Printing receipt..."
-
-#: On screen: dynamic
-msgid "Receipt printed successfully!"
-msgstr "Receipt printed successfully!"
 
 #: On screen: dynamic
 msgid "An error occurred, try again."
