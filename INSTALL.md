@@ -46,7 +46,7 @@ The camera scanner mock reads the wallet addresses from your ``device_config.jso
 
 Example:
 
-```json
+```
 {
   "brain": {
     ...

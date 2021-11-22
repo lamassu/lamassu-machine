@@ -22,7 +22,7 @@ The camera scanner mock reads the wallet addresses from your ``device_config.jso
 
 Example:
 
-```json
+```
 {
   "brain": {
     ...
@@ -46,8 +46,7 @@ node bin/fake-bills.js
 In second terminal window:
 
 ```
-node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam \
---devBoard --mockPair '<totem-from-admin>'
+node bin/lamassu-machine --mockBillValidator --mockBillDispenser --mockCam --devBoard --mockPair '<totem-from-admin>'
 ```
 
 You can find instructions how to get ``<totem-from-admin>`` in install instructions for lamassu-server. **IMPORTANT**: Make sure to use single quotes and not double quotes, or the shell will mess up the totem.
@@ -91,7 +90,7 @@ npm rebuild node-sass
 
 Configure mockPrinter on your device_config.json
 
-```json
+```
 {
   "brain": {
     ...
