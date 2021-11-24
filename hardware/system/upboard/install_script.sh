@@ -7,14 +7,14 @@ PRINTER=$3
 
 if [ -z $1 ] || [ -z $2 ]; then
   echo 'usage: install_script <machine> <version> [printer]'
-  echo 'machines: "gaia" or "sintra"'
+  echo 'machines: "gaia", "sintra" or "tejo"'
   echo 'version: git tag'
   echo 'printer [optional]: "nippon" or "zebra"'
   exit 1
 fi
 
-if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ]; then
-  echo 'Install script expects "gaia" or "sintra" as machine parameter'
+if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ]; then
+  echo 'Install script expects "gaia", "sintra" or "tejo" as machine parameter'
   exit 1
 fi
 
@@ -34,6 +34,14 @@ fi
 if [ "$PRINTER" == "zebra" ]; then
   PRINTER='Zebra-KR-403'
 fi
+
+# Cert workaround
+cat > 99-lamassu << EOL
+Acquire::https::ubilinux.org::Verify-Peer "false";
+Acquire::https::ubilinux.org::Verify-Host "false";
+EOL
+
+sudo mv 99-lamassu /etc/apt/apt.conf.d/
 
 sudo apt update && sudo apt full-upgrade -y
 
@@ -118,5 +126,7 @@ sudo systemctl enable supervisor
 # change grub timeout
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sudo update-grub
+
+sudo rm /etc/apt/apt.conf.d/99-lamassu 
 
 sudo reboot

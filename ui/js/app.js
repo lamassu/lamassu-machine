@@ -787,8 +787,15 @@ $(document).ready(function () {
       return;
     }
 
-    var coin = { cryptoCode: el.data('cryptoCode'), display: el.text() };
-    if (!coin.cryptoCode) return;
+    var cryptoCode = el.data('cryptoCode');
+    if (!cryptoCode) return;
+
+    var wantedCoin = currentCoins.find(function (it) {
+      return it.cryptoCode === cryptoCode;
+    });
+    if (!wantedCoin) return;
+
+    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display };
     switchCoin(coin);
   });
 
@@ -982,7 +989,7 @@ function setScreen(newScreen, oldScreen) {
   if (newScreen === oldScreen) return;
 
   if (newScreen === 'insert_bills') {
-    $('.js-processing-bill').html(locale.translate('Lamassu Cryptomat').fetch());
+    $('.js-processing-bill').html(translate('Lamassu Cryptomat'));
     $('.bill img').css({ '-webkit-transform': 'none', top: 0, left: 0 });
   }
 
@@ -1089,7 +1096,7 @@ function setHardLimit(limits) {
 
 function setCryptomatModel(model) {
   cryptomatModel = model;
-  var versions = ['sintra', 'douro', 'gaia'];
+  var versions = ['sintra', 'douro', 'gaia', 'tejo'];
   var body = $('body');
 
   versions.forEach(function (it) {

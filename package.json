@@ -6,7 +6,7 @@
     "@lamassu/supyo": "1.0.0",
     "async": "~1.5.2",
     "base-x": "3.0.9",
-    "bech32": "^1.1.3",
+    "bech32": "2.0.0",
     "bignumber.js": "^4.0.1",
     "bitcoinjs-lib": "4.0.3",
     "bs58check": "^2.0.2",

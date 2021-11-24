@@ -2,10 +2,10 @@
 
 const SerialPort = require('serialport')
 const EventEmitter = require('events')
-const fsm = require('./f56-fsm')
-const dLevelFsm = require('./f56-dlevel-fsm')
+const fsm = require('../../lib/f56/f56-fsm')
+const dLevelFsm = require('../../lib/f56/f56-dlevel-fsm')
 const _ = require('lodash/fp')
-const bills = require('./bills')
+const bills = require('../../lib/f56/bills')
 const serialOptions = {baudRate: 9600, parity: 'even', dataBits: 8, stopBits: 1, autoOpen: false}
 const FS = 0x1c
 
