@@ -794,8 +794,13 @@ $(document).ready(function () {
       return
     }
 
-    const coin = { cryptoCode: el.data('cryptoCode'), display: el.text() }
-    if (!coin.cryptoCode) return
+    const cryptoCode = el.data('cryptoCode')
+    if (!cryptoCode) return
+
+    const wantedCoin = currentCoins.find(it => it.cryptoCode === cryptoCode)
+    if (!wantedCoin) return
+
+    const coin = { cryptoCode, display: wantedCoin.display }
     switchCoin(coin)
   })
 
@@ -987,7 +992,7 @@ function setScreen (newScreen, oldScreen) {
   if (newScreen === oldScreen) return
 
   if (newScreen === 'insert_bills') {
-    $('.js-processing-bill').html(locale.translate('Lamassu Cryptomat').fetch())
+    $('.js-processing-bill').html(translate('Lamassu Cryptomat'))
     $('.bill img').css({'-webkit-transform': 'none', top: 0, left: 0})
   }
 
@@ -1095,7 +1100,7 @@ function setHardLimit (limits) {
 
 function setCryptomatModel (model) {
   cryptomatModel = model
-  const versions = ['sintra', 'douro', 'gaia']
+  const versions = ['sintra', 'douro', 'gaia', 'tejo']
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))
@@ -1999,6 +2004,7 @@ function setCurrentDiscount (currentDiscount, promoCodeApplied) {
     $('#choose-fiat-code-added').html(successMessage)
     $('#insert-first-bill-code-added').show()
     $('#choose-fiat-code-added').show()
+
   } else {
     $('#insert-first-bill-promo-button').show()
     $('#choose-fiat-promo-button').show()
