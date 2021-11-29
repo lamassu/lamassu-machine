@@ -21,19 +21,25 @@
           <span class="js-crypto-display-units"></span>
         </p>
       </div>
+      <button id="print-receipt-cash-out-button" class="js-i18n bordered-progress-button button tl2">
+        Print receipt
+      </button>
+      <p id="print-receipt-cash-out-message" class="d2 hide"></p>
     </section>
     <section class="secondary-side qr-secondary-side">
       <div class="qr-wrapper">
         <div id="qr-code-fiat-complete" class="qr"></div>
       </div>
+      <div class="take-a-photo">
+        <img class="camera" src="images/camera/small-camera-grey.svg" />
+        <span id="take-a-photo-message" class="h4 purple-grey js-i18n">
+          Take a picture of this screen for your electronic receipt
+        </span>
+      </div>
     </section>
   </main>
 
-  <footer class="take-a-photo">
-    <img class="camera" src="images/camera/small-camera-grey.svg" />
-    <span class="h4 purple-grey js-i18n">
-      Take a picture of this screen for your electronic receipt
-    </span>
+  <footer class="receipt-footer">
     <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
   </footer>
 </section>
