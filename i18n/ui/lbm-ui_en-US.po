@@ -103,6 +103,10 @@ msgid "Your coins are on their way to:"
 msgstr "Your coins are on their way to:"
 
 #: On screen: completed
+msgid "Print receipt"
+msgstr "Print receipt"
+
+#: On screen: completed
 msgid "Take a picture of this screen for your electronic receipt"
 msgstr "Take a picture of this screen for your electronic receipt"
 
@@ -937,6 +941,18 @@ msgstr "You'll be sending %s %s"
 #: On screen: dynamic
 msgid "Promo code added (%s discount)"
 msgstr "Promo code added (%s discount)"
+
+#: On screen: dynamic
+msgid "Printing receipt..."
+msgstr "Printing receipt..."
+
+#: On screen: dynamic
+msgid "Receipt printed successfully!"
+msgstr "Receipt printed successfully!"
+
+#: On screen: dynamic
+msgid "An error occurred, try again."
+msgstr "An error occurred, try again."
 
 #: On screen: coins
 msgid "Bitcoin"

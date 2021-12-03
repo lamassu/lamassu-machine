@@ -297,19 +297,25 @@
           <p class="tl2 amount-deposited"></p>
           <p class="js-i18n d2 coins-to-address">Your coins are on their way to:</p>
           <p class="m2 crypto-address"></p>
+          <button id="print-receipt-cash-in-button" class="js-i18n bordered-progress-button button tl2">
+            Print receipt
+          </button>
+          <p id="print-receipt-cash-in-message" class="d2 hide"></p>
         </section>
         <section class="secondary-side qr-secondary-side">
           <div class="qr-wrapper">
             <div id="cash-in-qr-code" class="qr"></div>
           </div>
+          <div class="take-a-photo">
+            <img class="camera" src="images/camera/small-camera-amazonite.svg" />
+            <span id="take-a-photo-message" class="h4 sapphire js-i18n">
+              Take a picture of this screen for your electronic receipt
+            </span>
+          </div>
         </section>
       </main>
     
-      <footer class="take-a-photo">
-        <img class="camera" src="images/camera/small-camera-amazonite.svg" />
-        <span class="h4 sapphire js-i18n">
-          Take a picture of this screen for your electronic receipt
-        </span>
+      <footer class="receipt-footer">
         <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
       </footer>
     </section>
@@ -592,19 +598,25 @@
               <span class="js-crypto-display-units"></span>
             </p>
           </div>
+          <button id="print-receipt-cash-out-button" class="js-i18n bordered-progress-button button tl2">
+            Print receipt
+          </button>
+          <p id="print-receipt-cash-out-message" class="d2 hide"></p>
         </section>
         <section class="secondary-side qr-secondary-side">
           <div class="qr-wrapper">
             <div id="qr-code-fiat-complete" class="qr"></div>
           </div>
+          <div class="take-a-photo">
+            <img class="camera" src="images/camera/small-camera-grey.svg" />
+            <span id="take-a-photo-message" class="h4 purple-grey js-i18n">
+              Take a picture of this screen for your electronic receipt
+            </span>
+          </div>
         </section>
       </main>
     
-      <footer class="take-a-photo">
-        <img class="camera" src="images/camera/small-camera-grey.svg" />
-        <span class="h4 purple-grey js-i18n">
-          Take a picture of this screen for your electronic receipt
-        </span>
+      <footer class="receipt-footer">
         <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
       </footer>
     </section>
@@ -2025,13 +2037,15 @@
           <div class="qr-wrapper">
             <div id="qr-code-fiat-receipt" class="qr"></div>
           </div>
+          <div class="take-a-photo">
+            <img class="camera" src="images/camera/small-camera-grey.svg" />
+            <span id="take-a-photo-message" class="h4 purple-grey js-i18n">
+              Take a picture of this screen for your electronic receipt
+            </span>
+          </div>
         </section>
       </main>
-      <footer class="take-a-photo">
-        <img class="camera" src="images/camera/small-camera-grey.svg" />
-        <span class="h4 purple-grey js-i18n">
-          Take a picture of this screen for your electronic receipt
-        </span>
+      <footer class="receipt-footer">
         <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
       </footer>
     </section>
@@ -2691,8 +2705,12 @@
             <span class="h4 crypto-units i18n-latin"></span>
           </div>
           <p class="tl2 amount-deposited sm-margin-top"></p>
-          <p class="js-i18n d2 no-margin-bottom">Your coins are on their way to:</p>
+          <p class="js-i18n d2 no-margin-bottom sm-margin-top">Your coins are on their way to:</p>
           <p class="m2 crypto-address"></p>
+          <button id="print-receipt-cash-in-fail-button" class="js-i18n bordered-progress-button button tl2">
+            Print receipt
+          </button>
+          <p id="print-receipt-cash-in-fail-message" class="d2 hide"></p>
         </section>
         <section class="secondary-side qr-secondary-side">
           <section class="qr-section">
@@ -2700,14 +2718,16 @@
               <div id="cash-in-fail-qr-code" class="qr"></div>
             </div>
           </section>
+          <div class="take-a-photo">
+            <img class="camera" src="images/camera/small-camera-amazonite.svg" />
+            <span id="take-a-photo-message" class="h4 sapphire js-i18n">
+              Take a picture of this screen for your electronic receipt
+            </span>
+          </div>
         </section>
       </main>
     
-      <footer class="take-a-photo">
-        <img class="camera" src="images/camera/small-camera-amazonite.svg" />
-        <span class="h4 sapphire js-i18n">
-          Take a picture of this screen for your electronic receipt
-        </span>
+      <footer class="receipt-footer">
         <span class="d2 js-i18n">Tap anywhere on the screen when you're done.</span>
       </footer>
     </section>
