@@ -168,15 +168,15 @@ function processData(data) {
       break;
     case 'wifiConnected':
       t('wifi-connecting', translate('Connected. Waiting for ticker.'));
-      setState('wifi_connecting' // in case we didn't go through wifi-connecting
-      );break;
+      setState('wifi_connecting'); // in case we didn't go through wifi-connecting
+      break;
     case 'pairing':
       setState('pairing');
       break;
     case 'pairingError':
-      $('.js-pairing-error').text(data.err
+      $('.js-pairing-error').text(data.err);
       // Give it some time to update text in background
-      );setTimeout(function () {
+      setTimeout(function () {
         setState('pairing_error');
       }, 500);
       break;
@@ -332,10 +332,10 @@ function chooseCoin(coins, twoWayMode) {
   }
 
   isTwoWay = twoWayMode;
-  setChooseCoinColors
+  setChooseCoinColors();
   // setupAnimation(twoWayMode, aspectRatio800)
 
-  ();var defaultCoin = coins[0];
+  var defaultCoin = coins[0];
 
   currentCryptoCode = defaultCoin.cryptoCode;
   currentCoin = defaultCoin;
@@ -470,10 +470,10 @@ $(document).ready(function () {
   window.addEventListener('resize', function () {
     calculateAspectRatio();
     setChooseCoinColors();
-  }
+  });
 
   // Matt's anti-drag hack
-  );window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
+  window.onclick = window.oncontextmenu = window.onmousedown = window.onmousemove = window.onmouseup = function () {
     return false;
   };
 
@@ -602,9 +602,9 @@ $(document).ready(function () {
   setupButton('promo-code-try-again', 'insertPromoCode');
   setupButton('promo-code-continue', 'cancelPromoCode');
 
-  setupButton('initialize', 'initialize'
+  setupButton('initialize', 'initialize');
   // setupButton('test-mode', 'testMode')
-  );setupButton('pairing-scan', 'pairingScan');
+  setupButton('pairing-scan', 'pairingScan');
   setupButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingErrorOk');
   setupButton('cash-out-button', 'cashOut');
@@ -799,10 +799,10 @@ function touchEvent(element, callback) {
   function handler(e) {
     var target = targetButton(e.target);
 
-    target.classList.add('active'
+    target.classList.add('active');
 
     // Wait for transition to finish
-    );setTimeout(function () {
+    setTimeout(function () {
       target.classList.remove('active');
     }, 300);
 
@@ -1115,10 +1115,10 @@ function setLocale(data) {
   var isHebrew = jsLocaleCode.indexOf('he-') === 0;
   isRTL = isArabic || isHebrew;
 
-  setChooseCoinColors
+  setChooseCoinColors();
   // setupAnimation(isTwoWay, aspectRatio800)
 
-  ();if (isRTL) {
+  if (isRTL) {
     $('body').addClass('i18n-rtl');
   } else {
     $('body').removeClass('i18n-rtl');
@@ -1331,9 +1331,9 @@ function setExchangeRate(_rates) {
 }
 
 function qrize(text, target, color, lightning) {
-  var image = document.getElementById('bolt-img'
+  var image = document.getElementById('bolt-img');
   // Hack for surf browser
-  );var size = document.body.clientHeight * 0.36;
+  var size = document.body.clientHeight * 0.36;
 
   var opts = {
     crisp: true,
@@ -1495,10 +1495,10 @@ function translatePage() {
     var el = $(this);
     var base = el.data('baseTranslation');
     el.attr('placeholder', translate(base));
-  }
+  });
 
   // Adjust send coins button
-  );var length = $('#send-coins span').text().length;
+  var length = $('#send-coins span').text().length;
   if (length > 17) $('body').addClass('i18n-long-send-coins');else $('body').removeClass('i18n-long-send-coins');
 }
 
