@@ -205,6 +205,8 @@ function processData (data) {
       setState('trouble')
       break
     case 'balanceLow':
+      setState('limit_reached')
+      break
     case 'insufficientFunds':
       setState('out_of_coins')
       break
