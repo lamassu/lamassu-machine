@@ -559,8 +559,16 @@ msgid "Sending your coins..."
 msgstr "Sending your coins..."
 
 #: On screen: sms-verification
+msgid "Verify phone to continue"
+msgstr "Verify phone to continue"
+
+#: On screen: sms-verification
 msgid "If you'd like to make a larger purchase we need to ask for your mobile phone number. We'll then send you an SMS code."
 msgstr "If you'd like to make a larger purchase we need to ask for your mobile phone number. We'll then send you an SMS code."
+
+#: On screen: sms-verification
+msgid "Yes, verify phone"
+msgstr "Yes, verify phone"
 
 #: On screen: suspicious-address
 msgid "Suspicious address"
