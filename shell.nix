@@ -12,6 +12,8 @@ stdenv.mkDerivation {
       openssl_1_0_2
       python2Full
       entr
+      libjpeg
+      yasm
     ];
     shellHook = ''
         export PATH="$PWD/node_modules/.bin/:$PATH"
