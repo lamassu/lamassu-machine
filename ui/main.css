@@ -1552,7 +1552,8 @@ footer {
             justify-content: start;
     -webkit-box-align: center;
     -webkit-align-items: center;
-            align-items: center; }
+            align-items: center;
+    white-space: nowrap; }
 
 #cryptos button:last-child {
   color: rgba(14, 65, 96, 0.5); }
