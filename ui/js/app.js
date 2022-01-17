@@ -265,11 +265,11 @@ function processData(data) {
     case 'invalidPromoCode':
       setState('promo_code_not_found');
       break;
-    case 'customInfoRequest':
-      customInfoRequest(data.customInfoRequest, 1);
+    case 'customInfoRequestPermission':
+      customInfoRequestPermission(data.customInfoRequest);
       break;
-    case 'customInfoRequestScreen2':
-      customInfoRequest(data.customInfoRequest, 2);
+    case 'inputCustomInfoRequest':
+      customInfoRequest(data.customInfoRequest);
       break;
     default:
       if (data.action) setState(window.snakecase(data.action));
@@ -298,13 +298,13 @@ function usSsnPermission() {
   setScreen('us_ssn_permission');
 }
 
-function customInfoRequest(customInfoRequest, screen) {
-  if (screen === 1) {
-    $('#custom-screen1-title').text(customInfoRequest.screen1.title);
-    $('#custom-screen1-text').text(customInfoRequest.screen1.text);
-    return setScreen('custom_permission');
-  }
-  // screen 2
+function customInfoRequestPermission(customInfoRequest) {
+  $('#custom-screen1-title').text(customInfoRequest.screen1.title);
+  $('#custom-screen1-text').text(customInfoRequest.screen1.text);
+  return setScreen('custom_permission');
+}
+
+function customInfoRequest(customInfoRequest) {
   switch (customInfoRequest.input.type) {
     case 'numerical':
       $('#custom-screen2-numerical-title').text(customInfoRequest.screen2.title);
@@ -835,7 +835,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms');
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms');
 
-  setupButton('custom-permission-yes', 'customInfoRequestPermission');
+  setupButton('custom-permission-yes', 'permissionCustomInfoRequest');
   setupButton('custom-permission-no', 'finishBeforeSms');
   setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
@@ -848,7 +848,7 @@ $(document).ready(function () {
   });
   setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', function () {});
 
-  setupButton('custom-permission-yes', 'customInfoRequestPermission');
+  setupButton('custom-permission-yes', 'permissionCustomInfoRequest');
   setupButton('custom-permission-no', 'finishBeforeSms');
   setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
