@@ -277,15 +277,22 @@ function processData(data) {
 }
 
 function translate(data, fetchArgs) {
+  if (data === "") return data;
+
   try {
     var _locale$translate;
 
     return fetchArgs ? (_locale$translate = locale.translate(data)).fetch.apply(_locale$translate, _toConsumableArray(fetchArgs)) : locale.translate(data).fetch();
   } catch (error) {
     if (!defaultLocale) console.error('Error while translating: ', error);else {
-      var _defaultLocale$transl;
+      try {
+        var _defaultLocale$transl;
 
-      return fetchArgs ? (_defaultLocale$transl = defaultLocale.translate(data)).fetch.apply(_defaultLocale$transl, _toConsumableArray(fetchArgs)) : defaultLocale.translate(data).fetch();
+        return fetchArgs ? (_defaultLocale$transl = defaultLocale.translate(data)).fetch.apply(_defaultLocale$transl, _toConsumableArray(fetchArgs)) : defaultLocale.translate(data).fetch();
+      } catch (e) {
+        console.error('Error while translating: ', e);
+        return data;
+      }
     }
   }
 }

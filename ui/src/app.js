@@ -272,6 +272,9 @@ function processData (data) {
 }
 
 function translate (data, fetchArgs) {
+  if (data === "")
+    return data
+
   try {
     return fetchArgs
       ? locale.translate(data).fetch(...fetchArgs)
@@ -279,9 +282,14 @@ function translate (data, fetchArgs) {
   } catch (error) {
     if (!defaultLocale) console.error('Error while translating: ', error)
     else {
-      return fetchArgs
-        ? defaultLocale.translate(data).fetch(...fetchArgs)
-        : defaultLocale.translate(data).fetch()
+      try {
+        return fetchArgs
+          ? defaultLocale.translate(data).fetch(...fetchArgs)
+          : defaultLocale.translate(data).fetch()
+      } catch (e) {
+        console.error('Error while translating: ', e)
+        return data
+      }
     }
   }
 }
