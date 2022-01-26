@@ -467,6 +467,12 @@ function setupCoinsButtons () {
     })
     const el = `<button class="h4 sapphire button small-action-button js-i18n" data-less="true">${translate('Less')}</button>`
     $('#cryptos').append(el)
+    // As we add buttons 'more' and 'less' after initTranslate
+    // they don't have baseTranslation translation data attached to them.
+    $('.crypto-buttons .js-i18n').each(function () {
+      var el = $(this)
+      el.data('baseTranslation', el.html().trim())
+    })
   }
 }
 

@@ -135,14 +135,6 @@ msgid "Network down"
 msgstr "Network down"
 
 #: On screen: custom-permission
-msgid ""
-msgstr ""
-
-#: On screen: custom-permission
-msgid "Continue?"
-msgstr "Continue?"
-
-#: On screen: custom-permission
 msgid "Yes"
 msgstr "Yes"
 
