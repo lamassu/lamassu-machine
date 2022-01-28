@@ -1812,7 +1812,7 @@ function fiatCredit (data) {
 
   setCurrentDiscount(tx.discount, tx.promoCodeApplied)
 
-  if (cryptoAtoms.eq(0)) $('#js-i18n-choose-digital-amount').hide()
+  if (cryptoAtoms.eq(0) || cryptoAtoms.isNaN()) $('#js-i18n-choose-digital-amount').hide()
   else $('#js-i18n-choose-digital-amount').show()
 
   if (fiat.eq(0)) $('#cash-out-button').prop('disabled', true)
