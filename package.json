@@ -16,7 +16,7 @@
     "fstream": "~0.1.24",
     "got": "^7.1.0",
     "jsqr": "^1.3.1",
-    "lamassu-coins": "git+https://github.com/lamassu/lamassu-coins.git",
+    "@lamassu/coins": "1.0.0-beta.1",
     "left-pad": "^1.1.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
