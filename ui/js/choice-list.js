@@ -62,6 +62,16 @@ ChoiceList.prototype.replaceChoices = function (availableChoices, choiceType = '
 }
 
 ChoiceList.prototype._setupPager = function _setupPager (targetPage) {
+  if (this.choices.length == 1) this.choiceList.find('.choice-list-arrows-wrapper').hide()
+  else this.choiceList.find('.choice-list-arrows-wrapper').show()
+
+  if (targetPage === 0) this.choiceList.find('.choice-list-arrow-up').prop('disabled', true)
+  else this.choiceList.find('.choice-list-arrow-up').prop('disabled', false)
+
+  if (targetPage === this.choices.length - 1)
+    this.choiceList.find('.choice-list-arrow-down').prop('disabled', true)
+  else this.choiceList.find('.choice-list-arrow-down').prop('disabled', false)
+
   this.choiceList.find('.choice-list-pager').text(`${targetPage + 1}/${this.choices.length}`)
 }
 

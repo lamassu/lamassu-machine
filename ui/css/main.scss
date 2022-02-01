@@ -1643,16 +1643,26 @@ footer {
 }
 
 .choice-list-item {
-  height: 25%;
   width: 95%;
-  padding-left: 20px;
+  padding: 25px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-  background-color: $ligth-color;
-  display: flex;
-  align-items: center;
   font-family: $font-secondary;
+  font-size: 4vh;
+  color: $white;
+}
+
+.cash-in-color {
+  .choice-list-item {
+      background-color: $amazonite-three;
+  }
+}
+
+.cash-out-color {
+  .choice-list-item {
+      background-color: $salmon-three;
+  }
 }
 
 .choice-list-actions-wrapper {
@@ -1679,6 +1689,9 @@ footer {
   justify-content: center;
   align-items: center;
   font-family: $font-secondary;
+  &:disabled {
+    @include cash-disabled-background-colors;
+  }
 }
 
 .choice-list-pager {
@@ -1687,6 +1700,7 @@ footer {
   font-family: $font-secondary;
   color: $ligth-color;
   text-align: center;
+  padding: 30% 0;
 }
 
 .submit-choice-list-button-wrapper {

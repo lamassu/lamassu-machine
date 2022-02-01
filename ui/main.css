@@ -2412,20 +2412,20 @@ footer {
   margin-right: 20px; }
 
 .choice-list-item {
-  height: 25%;
   width: 95%;
-  padding-left: 20px;
+  padding: 25px;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
-  background-color: #f2f2f2;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  font-family: "MuseoSans", sans-serif; }
+  font-family: "MuseoSans", sans-serif;
+  font-size: 4vh;
+  color: #ffffff; }
+
+.cash-in-color .choice-list-item {
+  background-color: #34d9c8; }
+
+.cash-out-color .choice-list-item {
+  background-color: #e6746d; }
 
 .choice-list-actions-wrapper {
   position: relative;
@@ -2464,13 +2464,18 @@ footer {
   -webkit-align-items: center;
           align-items: center;
   font-family: "MuseoSans", sans-serif; }
+  .cash-in-color .choice-list-arrow:disabled, .system-color .choice-list-arrow:disabled {
+    background-color: #2cb9ac; }
+  .cash-out-color .choice-list-arrow:disabled {
+    background-color: #cb6560; }
 
 .choice-list-pager {
   font-size: xx-large;
   font-weight: bold;
   font-family: "MuseoSans", sans-serif;
   color: #f2f2f2;
-  text-align: center; }
+  text-align: center;
+  padding: 30% 0; }
 
 .submit-choice-list-button-wrapper {
   display: -webkit-box;
