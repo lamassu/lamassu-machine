@@ -1651,6 +1651,8 @@ footer {
   font-family: $font-secondary;
   font-size: 4vh;
   color: $white;
+  display: flex;
+  align-items: center;
 }
 
 .cash-in-color {
@@ -1718,6 +1720,27 @@ footer {
   }
   &:disabled {
     @include cash-disabled-background-colors;
+  }
+  .choice-list-radio {
+    border-color: transparent;
+    @include cash-disabled-background-colors;
+  }
+}
+
+.choice-list-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  div {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: $white;
   }
 }
 

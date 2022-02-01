@@ -78,13 +78,14 @@ ChoiceList.prototype._setupPager = function _setupPager (targetPage) {
 ChoiceList.prototype._setupChoices = function _setupChoices(page) {
   const choices = this.choices[page]
   const choiceButtons = this.choiceList.find('.choice-list-grid-wrapper')[0].children
+  const radio = '<div class="choice-list-radio"><div></div></div>'
   for (let i = 0; i < choiceButtons.length; i++) {
     const button = $(choiceButtons[i])
     button.removeClass('choice-selected')
     if (choices[i]) {
       if (this.selectedChoices.includes(choices[i])) button.addClass('choice-selected')
       button.show()
-      button.text(choices[i])
+      button.html(radio).append($('<div></div>').text(choices[i]))
       continue
     }
     button.hide()
