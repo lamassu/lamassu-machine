@@ -1747,3 +1747,21 @@ footer {
 .arrow {
   pointer-events: none;
 }
+
+.cash-in-color {
+  #us-ssn-permission-send-coins {
+     display: initial;
+  }
+  #us-ssn-permission-cancel {
+    display: none;
+  }
+}
+
+.cash-out-color {
+  #us-ssn-permission-send-coins {
+    display: none;
+ }
+ #us-ssn-permission-cancel {
+   display: initial;
+ }
+}
