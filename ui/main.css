@@ -2539,3 +2539,15 @@ footer {
 
 .arrow {
   pointer-events: none; }
+
+.cash-in-color #us-ssn-permission-send-coins {
+  display: initial; }
+
+.cash-in-color #us-ssn-permission-cancel {
+  display: none; }
+
+.cash-out-color #us-ssn-permission-send-coins {
+  display: none; }
+
+.cash-out-color #us-ssn-permission-cancel {
+  display: initial; }

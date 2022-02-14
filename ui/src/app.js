@@ -845,7 +845,8 @@ $(document).ready(function () {
   setupButton('send-coins-sms-2', 'finishBeforeSms')
 
   setupButton('facephoto-permission-no', 'finishBeforeSms')
-  setupButton('us-ssn-permission-no', 'finishBeforeSms')
+  setupButton('us-ssn-permission-send-coins', 'finishBeforeSms')
+  setupButton('us-ssn-permission-cancel', 'finishBeforeSms')
   setupButton('us-ssn-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
