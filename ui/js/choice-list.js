@@ -14,17 +14,23 @@ var ChoiceList = function ChoiceList(options) {
   this.choiceType = 'single'; // default
 };
 
-ChoiceList.prototype.init = function init(cb) {
-  var _this = this;
+function forEach(iter, proc) {
+  for (var i = 0; i < iter.length; i++) {
+    proc(iter[i]);
+  }
+}
 
+ChoiceList.prototype.init = function init(cb) {
   this.callback = cb;
 
   var self = this;
-  document.querySelector('#' + this.choiceListId).querySelectorAll('.choice-list-button').forEach(function (button) {
-    button.addEventListener('mousedown', function (e) {
-      return _this._buttonClickEventListener(self, e);
+  var proc = function proc(button) {
+    return button.addEventListener('mousedown', function (e) {
+      return self._buttonClickEventListener(self, e);
     });
-  });
+  };
+  var buttons = document.querySelector('#' + this.choiceListId).querySelectorAll('.choice-list-button');
+  if (buttons.forEach) buttons.forEach(proc);else forEach(buttons, proc);
   return this;
 };
 

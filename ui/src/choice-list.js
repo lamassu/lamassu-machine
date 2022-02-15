@@ -10,13 +10,21 @@ const ChoiceList = function(options) {
   this.choiceType = 'single' // default
 }
 
+function forEach (iter, proc) {
+  for (let i = 0; i < iter.length; i++)
+    proc(iter[i])
+}
+
 ChoiceList.prototype.init = function init (cb) {
   this.callback = cb
 
   const self = this
-  document.querySelector(`#${this.choiceListId}`).querySelectorAll('.choice-list-button').forEach(button => {
-    button.addEventListener('mousedown', e => this._buttonClickEventListener(self, e))
-  })
+  const proc = button => button.addEventListener('mousedown', e => self._buttonClickEventListener(self, e))
+  const buttons = document.querySelector(`#${this.choiceListId}`).querySelectorAll('.choice-list-button')
+  if (buttons.forEach)
+    buttons.forEach(proc)
+  else
+    forEach(buttons, proc)
   return this
 }
 
