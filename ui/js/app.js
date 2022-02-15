@@ -2030,5 +2030,4 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
       break;
   }
 }
-
 //# sourceMappingURL=app.js.map
