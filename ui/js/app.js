@@ -1954,7 +1954,7 @@ function setCurrentDiscount(currentDiscount, promoCodeApplied) {
     $('#insert-first-bill-code-added').hide();
     $('#choose-fiat-code-added').hide();
   } else if (currentDiscount > 0) {
-    var successMessage = '✔ ' + translate('Discount added (%s off commissions)', currentDiscount + '%');
+    var successMessage = '✔ ' + translate('Discount added (%s off commissions)', [currentDiscount + '%']);
     $('#insert-first-bill-code-added').html(successMessage);
     $('#choose-fiat-code-added').html(successMessage);
     $('#insert-first-bill-code-added').show();
