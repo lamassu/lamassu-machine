@@ -89,9 +89,9 @@ var Keyboard = function (options) {
   this.keyCase = options.keyCase || 'lc'
   this.backspaceTimeout = options.backspaceTimeout || null
   this.active = options.active || true
-  this.timeoutRef = options.timeoutRef || null
   this.constraint = options.constraint || null
   this.constraintButtons = []
+  this.setComplianceTimeout = null
 }
 
 Keyboard.prototype.init = function init (callback) {
@@ -99,7 +99,7 @@ Keyboard.prototype.init = function init (callback) {
   var keyboard = document.getElementById(this.keyboardId)
   var self = this
   keyboard.addEventListener('mousedown', function (e) {
-    self._restartTimeout()
+    setComplianceTimeout()
     if (!self.active) return
     var target = $(e.target)
     if (target.hasClass('shift')) {
@@ -123,16 +123,6 @@ Keyboard.prototype.init = function init (callback) {
   return this
 }
 
-Keyboard.prototype._restartTimeout = function _restartTimeout () {
-  var self = this
-
-  clearTimeout(this.timeoutRef)
-  this.timeoutRef = setTimeout(function () {
-    self.reset()
-    self.callback && self.callback()
-  }, KEYBOARD_TIMEOUT)
-}
-
 Keyboard.prototype.reset = function reset () {
   this.inputBox.data('content', '').val('')
 }
@@ -140,12 +130,10 @@ Keyboard.prototype.reset = function reset () {
 Keyboard.prototype.activate = function activate () {
   this.active = true
   this.reset()
-  this._restartTimeout()
 }
 
 Keyboard.prototype.deactivate = function deactivate () {
   this.active = false
-  clearTimeout(this.timeoutRef)
 }
 
 Keyboard.prototype._toggleShift = function _toggleShift () {

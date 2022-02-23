@@ -23,6 +23,7 @@ var termsConditionsTimeout = null;
 var termsConditionsAcceptanceInterval = null;
 var termsConditionsAcceptanceTimeout = null;
 var T_C_TIMEOUT = 30000;
+var complianceTimeout = null;
 
 var fiatCode = null;
 var locale = null;
@@ -172,6 +173,7 @@ function processData(data) {
       break;
     case 'registerUsSsn':
       usSsnKeypad.activate();
+      setComplianceTimeout();
       setState('register_us_ssn');
       break;
     case 'registerPhone':
@@ -302,13 +304,25 @@ function facephotoPermission() {
 }
 
 function usSsnPermission() {
+  setComplianceTimeout();
   setScreen('us_ssn_permission');
 }
 
 function customInfoRequestPermission(customInfoRequest) {
   $('#custom-screen1-title').text(customInfoRequest.screen1.title);
   $('#custom-screen1-text').text(customInfoRequest.screen1.text);
-  return setScreen('custom_permission');
+  setComplianceTimeout();
+  setScreen('custom_permission');
+}
+
+function setComplianceTimeout(interval) {
+  clearTimeout(complianceTimeout);
+
+  if (interval === 0) return;
+
+  complianceTimeout = setTimeout(function () {
+    buttonPressed('cancelCustomInfoRequest');
+  }, interval == null ? 30000 : interval);
 }
 
 function customInfoRequest(customInfoRequest) {
@@ -334,6 +348,8 @@ function customInfoRequest(customInfoRequest) {
       $('#optional-text-field-2').hide();
       $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override');
       $('.custom-info-request-space-key').show();
+      setComplianceTimeout();
+      customRequirementTextKeyboard.setComplianceTimeout = setComplianceTimeout;
       // set type of constraint and buttons where that constraint should apply to disable/ enable
       customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']);
       if (customInfoRequest.input.constraintType === 'spaceSeparation') {
@@ -348,6 +364,8 @@ function customInfoRequest(customInfoRequest) {
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title);
       $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text);
+      setComplianceTimeout();
+      customRequirementChoiceList.setComplianceTimeout = setComplianceTimeout;
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType);
       setState('custom_permission_screen2_choiceList');
       setScreen('custom_permission_screen2_choiceList');
@@ -1023,6 +1041,8 @@ function setState(state, delay) {
     clearTermsConditionsTimeout();
     clearTermsConditionsAcceptanceDelay();
   }
+
+  setComplianceTimeout(0);
 
   previousState = currentState;
   currentState = state;

@@ -8,6 +8,7 @@ const ChoiceList = function(options) {
   this.currentPage = 0
   this.active = options.active || true
   this.choiceType = 'single' // default
+  this.setComplianceTimeout = null;
 }
 
 function forEach (iter, proc) {
@@ -30,6 +31,7 @@ ChoiceList.prototype.init = function init (cb) {
 
 ChoiceList.prototype._buttonClickEventListener = function _buttonClickEventListener(self, e) {
     if (!self.active) return
+    setComplianceTimeout(30000)
     const target = $(e.target)
     if (target.hasClass('submit-choice-list-button')) {
       // do not submit if at least one choice is not selected
