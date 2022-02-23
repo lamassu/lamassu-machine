@@ -322,7 +322,7 @@ function setComplianceTimeout(interval) {
 
   complianceTimeout = setTimeout(function () {
     buttonPressed('cancelCustomInfoRequest');
-  }, interval == null ? 30000 : interval);
+  }, interval == null ? 60000 : interval);
 }
 
 function customInfoRequest(customInfoRequest) {
