@@ -191,6 +191,9 @@ Keyboard.prototype._keyPress = function _keyPress(target) {
     inputBox.data('content', content);
     inputBox.val(content);
     inputBox.caretToEnd();
+    if (this.keyCase === 'uc') {
+      this._toggleShift();
+    }
   }
 };
 

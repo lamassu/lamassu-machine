@@ -2348,8 +2348,7 @@ footer {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
-          flex-direction: column;
-  margin: 0vh 6vh 6vh 6vh; }
+          flex-direction: column; }
 
 .text-input-field {
   display: -webkit-box;
