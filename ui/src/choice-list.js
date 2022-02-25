@@ -31,7 +31,7 @@ ChoiceList.prototype.init = function init (cb) {
 
 ChoiceList.prototype._buttonClickEventListener = function _buttonClickEventListener(self, e) {
     if (!self.active) return
-    setComplianceTimeout(30000)
+    setComplianceTimeout()
     const target = $(e.target)
     if (target.hasClass('submit-choice-list-button')) {
       // do not submit if at least one choice is not selected

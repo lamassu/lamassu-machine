@@ -173,8 +173,8 @@ function processData(data) {
       break;
     case 'registerUsSsn':
       usSsnKeypad.activate();
-      setComplianceTimeout();
       setState('register_us_ssn');
+      setComplianceTimeout();
       break;
     case 'registerPhone':
       phoneKeypad.activate();
@@ -348,8 +348,6 @@ function customInfoRequest(customInfoRequest) {
       $('#optional-text-field-2').hide();
       $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override');
       $('.custom-info-request-space-key').show();
-      setComplianceTimeout();
-      customRequirementTextKeyboard.setComplianceTimeout = setComplianceTimeout;
       // set type of constraint and buttons where that constraint should apply to disable/ enable
       customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#submit-text-requirement']);
       if (customInfoRequest.input.constraintType === 'spaceSeparation') {
@@ -360,15 +358,15 @@ function customInfoRequest(customInfoRequest) {
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');
+      setComplianceTimeout();
       break;
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title);
       $('#custom-screen2-choiceList-text').text(customInfoRequest.screen2.text);
-      setComplianceTimeout();
-      customRequirementChoiceList.setComplianceTimeout = setComplianceTimeout;
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType);
       setState('custom_permission_screen2_choiceList');
       setScreen('custom_permission_screen2_choiceList');
+      setComplianceTimeout();
       break;
     default:
       return blockedCustomer();
@@ -599,14 +597,16 @@ $(document).ready(function () {
   customRequirementTextKeyboard = new Keyboard({
     id: 'custom-requirement-text-keyboard',
     inputBox: '.text-input-field-1',
-    submitButtonWrapper: '.submit-text-requirement-button-wrapper'
+    submitButtonWrapper: '.submit-text-requirement-button-wrapper',
+    setComplianceTimeout: setComplianceTimeout
   }).init(function () {
     if (currentState !== 'custom_permission_screen2_text') return;
     buttonPressed('customInfoRequestSubmit');
   });
 
   customRequirementChoiceList = new ChoiceList({
-    id: 'custom-requirement-choicelist-wrapper'
+    id: 'custom-requirement-choicelist-wrapper',
+    setComplianceTimeout: setComplianceTimeout
   }).init(function (result) {
     if (currentState !== 'custom_permission_screen2_choiceList') return;
     buttonPressed('customInfoRequestSubmit', result);
