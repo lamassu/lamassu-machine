@@ -21,6 +21,7 @@ var termsConditionsTimeout = null
 var termsConditionsAcceptanceInterval = null
 var termsConditionsAcceptanceTimeout = null
 var T_C_TIMEOUT = 30000
+var complianceTimeout = null;
 
 var fiatCode = null
 var locale = null
@@ -168,6 +169,7 @@ function processData (data) {
     case 'registerUsSsn':
       usSsnKeypad.activate()
       setState('register_us_ssn')
+      setComplianceTimeout()
       break
     case 'registerPhone':
       phoneKeypad.activate()
@@ -299,13 +301,26 @@ function facephotoPermission () {
 }
 
 function usSsnPermission () {
+  setComplianceTimeout()
   setScreen('us_ssn_permission')
 }
 
 function customInfoRequestPermission (customInfoRequest) {
   $('#custom-screen1-title').text(customInfoRequest.screen1.title)
   $('#custom-screen1-text').text(customInfoRequest.screen1.text)
-  return setScreen('custom_permission')
+  setComplianceTimeout()
+  setScreen('custom_permission')
+}
+
+function setComplianceTimeout(interval) {
+  clearTimeout(complianceTimeout)
+
+  if (interval === 0)
+    return
+
+  complianceTimeout = setTimeout(function () {
+      buttonPressed('cancelCustomInfoRequest')
+  }, interval == null ? 60000 : interval)
 }
 
 function customInfoRequest (customInfoRequest) {
@@ -341,6 +356,7 @@ function customInfoRequest (customInfoRequest) {
       }
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
+      setComplianceTimeout()
       break
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
@@ -348,6 +364,7 @@ function customInfoRequest (customInfoRequest) {
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType)
       setState('custom_permission_screen2_choiceList')
       setScreen('custom_permission_screen2_choiceList')
+      setComplianceTimeout()
       break
     default:
       return blockedCustomer()
@@ -589,14 +606,16 @@ $(document).ready(function () {
   customRequirementTextKeyboard = new Keyboard({
     id: 'custom-requirement-text-keyboard',
     inputBox: '.text-input-field-1',
-    submitButtonWrapper: '.submit-text-requirement-button-wrapper'
+    submitButtonWrapper: '.submit-text-requirement-button-wrapper',
+    setComplianceTimeout: setComplianceTimeout
   }).init(function () {
     if (currentState !== 'custom_permission_screen2_text') return
     buttonPressed('customInfoRequestSubmit')
   })
 
   customRequirementChoiceList = new ChoiceList({
-    id: 'custom-requirement-choicelist-wrapper'
+    id: 'custom-requirement-choicelist-wrapper',
+    setComplianceTimeout: setComplianceTimeout
   }).init(function (result) {
     if (currentState !== 'custom_permission_screen2_choiceList') return
     buttonPressed('customInfoRequestSubmit', result)
@@ -1027,6 +1046,8 @@ function setState (state, delay) {
     clearTermsConditionsTimeout()
     clearTermsConditionsAcceptanceDelay()
   }
+
+  setComplianceTimeout(0)
 
   previousState = currentState
   currentState = state
