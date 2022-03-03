@@ -8,7 +8,7 @@ const ChoiceList = function(options) {
   this.currentPage = 0
   this.active = options.active || true
   this.choiceType = 'single' // default
-  this.setComplianceTimeout = null;
+  this.setComplianceTimeout = options.setComplianceTimeout;
 }
 
 function forEach (iter, proc) {
