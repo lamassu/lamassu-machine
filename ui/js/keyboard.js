@@ -93,7 +93,7 @@ var Keyboard = function Keyboard(options) {
   this.active = options.active || true;
   this.constraint = options.constraint || null;
   this.constraintButtons = [];
-  this.setComplianceTimeout = null;
+  this.setComplianceTimeout = options.setComplianceTimeout;
 };
 
 Keyboard.prototype.init = function init(callback) {
