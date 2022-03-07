@@ -59,15 +59,21 @@ FROM acp as acp-build
   
 FROM upboard as upboard-gaia-build
   COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
-  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && npm install &&\
     cp ./hardware/codebase/upboard/gaia/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
 
 FROM upboard as upboard-sintra-build
   COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
-  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && npm install && \
     cp ./hardware/codebase/upboard/sintra/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
+
+FROM upboard as upboard-tejo-build
+  COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && npm install && \
+    cp ./hardware/codebase/upboard/tejo/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
 
 FROM ssuboard as ssuboard-build
   COPY --from=upboard-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine

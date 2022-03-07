@@ -88,6 +88,7 @@ function installDeviceConfig (cb) {
     if (currentDeviceConfig.billDispenser && newDeviceConfig.billDispenser) {
       newDeviceConfig.billDispenser.model = currentDeviceConfig.billDispenser.model
       newDeviceConfig.billDispenser.device = currentDeviceConfig.billDispenser.device
+      newDeviceConfig.billDispenser.cassettes = currentDeviceConfig.billDispenser.cassettes
     }
     if (currentDeviceConfig.billValidator) {
       newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType

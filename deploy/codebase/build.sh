@@ -101,6 +101,17 @@ elif [ $1 == "upboard-gaia" ] ; then
     mkdir $EXPORT_DIR/hardware/upboard/gaia
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/gaia/
   fi
+elif [ $1 == "upboard-tejo" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard/tejo
+
+  cp $SYSTEM_DIR/upboard/tejo/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/tejo
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard/tejo
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/tejo/
+  fi
 else
   echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"
   exit 1
