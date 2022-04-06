@@ -1044,11 +1044,19 @@ footer {
     margin-left: 5vh;
   }
 }
+
 .cash_in_disabled_state {  
   header img {
-  width: 30vh;
-  margin-left: 3vh;
- }
+    width: 30vh;
+    margin-left: 3vh;
+  }
+}
+
+.cash_in_only_coin_state {  
+  header img {
+    width: 30vh;
+    margin-left: 3vh;
+  }
 }
 
 .locked_state,

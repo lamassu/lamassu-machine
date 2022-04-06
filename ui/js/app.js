@@ -224,6 +224,10 @@ function processData(data) {
       minimumTx(data.lowestBill);
       break;
     case 'chooseFiat':
+      if (data.isCashInOnlyCoin) {
+        setState('cash_in_only_coin');
+        break;
+      }
       chooseFiat(data.chooseFiat);
       break;
     case 'deposit':
@@ -775,6 +779,7 @@ $(document).ready(function () {
   setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent');
   setupButton('out-of-cash-ok', 'idle');
   setupButton('cash-in-disabled-ok', 'idle');
+  setupButton('cash-in-only-ok', 'idle');
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');
