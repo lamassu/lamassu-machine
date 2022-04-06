@@ -1514,14 +1514,12 @@ function getUsedCassettes (cassettes) {
 
   // This function only serves to create an array mapping what buttons are shown
   // More UI buttons should allow for simpler solutions to this issue
-  const doesCassette3HaveBills = cassettes.length >= 4 && cassettes[2].count > 0
   const doesCassette4HaveBills = cassettes.length >= 5 && cassettes[3].count > 0
-  const thirdCassette =
-    doesCassette3HaveBills
-      ? cassettes[2]
-      : doesCassette4HaveBills
-        ? cassettes[3]
-        : cassettes[4]
+  // cassette[2] is the virtual cassette in 2-cassette mode and the third cassette on 3-cassette mode
+  const thirdCassette = 
+    doesCassette4HaveBills
+      ? cassettes[3]
+      : cassettes[2]
   return [cassettes[0], cassettes[1], thirdCassette]
 }
 
@@ -1541,8 +1539,7 @@ function setupCassettes (_cassettes) {
       var denomination = formatDenomination(cassette.denomination)
       $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
     }
-    if (doesCassette3HaveBills) $('.cash-button[data-denomination-index=' + 2 + '] .js-denomination').text(formatDenomination(cassettes[2].denomination))
-    if (!doesCassette3HaveBills && doesCassette4HaveBills) $('.cash-button[data-denomination-index=' + 2 + '] .js-denomination').text(formatDenomination(cassettes[3].denomination))
+    $('.cash-button[data-denomination-index=' + 2 + '] .js-denomination').text(formatDenomination(cassettes[doesCassette4HaveBills ? 3 : 2].denomination))
   }
 }
 
@@ -1839,7 +1836,6 @@ function manageFiatButtons (activeDenominations) {
       if (enabled) button.prop('disabled', false)
       else button.prop('disabled', true)
     }
-    return [...cassettes]
   } else {
     for (var i = 0; i < 2; i++) {
       var cassette = cassettes[i]
@@ -1850,8 +1846,10 @@ function manageFiatButtons (activeDenominations) {
       else button.prop('disabled', true)
     }
     // Third button is always enabled
+    const thirdCassette = getUsedCassettes(cassettes)[2]
+    const thirdCassetteEnabled = activeDenominations[thirdCassette.denomination]
     var thirdButton = $('.choose_fiat_state .cash-button[data-denomination-index=' + 2 + ']')
-    thirdButton.prop('disabled', false)
+    thirdButton.prop('disabled', !Boolean(thirdCassetteEnabled))
   }
 }
 
