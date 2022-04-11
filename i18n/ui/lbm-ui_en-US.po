@@ -75,16 +75,16 @@ msgid "One moment..."
 msgstr "One moment..."
 
 #: On screen: cash_in_only_coin
-msgid "Cash-out unavailable for this coin"
-msgstr "Cash-out unavailable for this coin"
+msgid "Selling unavailable for this coin"
+msgstr "Selling unavailable for this coin"
 
 #: On screen: cash_in_only_coin
-msgid "Apologies. This coin is only available for cash-in transactions."
-msgstr "Apologies. This coin is only available for cash-in transactions."
+msgid "Apologies, although this coin is only available to buy."
+msgstr "Apologies, although this coin is only available to buy."
 
 #: On screen: cash_in_only_coin
-msgid "Please contact the operator if you wish to learn more about support for this coin."
-msgstr "Please contact the operator if you wish to learn more about support for this coin."
+msgid "Please contact the operator if you wish to learn more."
+msgstr "Please contact the operator if you wish to learn more."
 
 #: On screen: choose_coin
 msgid "Languages"
