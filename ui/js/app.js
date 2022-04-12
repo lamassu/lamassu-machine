@@ -1156,11 +1156,7 @@ function setTermsScreen(data) {
 
 function setAcceptButtonDisabled(screen, data) {
   var acceptButton = screen.find('.js-terms-accept-button');
-  if (!data.acceptDisabled) {
-    acceptButton.prop('disabled', false);
-  } else {
-    acceptButton.prop('disabled', true);
-  }
+  acceptButton.prop('disabled', Boolean(data.acceptDisabled));
 }
 
 function clearTermsConditionsTimeout() {
