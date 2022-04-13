@@ -1494,46 +1494,17 @@ function formatDenomination (denom) {
 }
 
 function buildCassetteButtons (_cassettes, numberOfButtons) {
-  var activeDenoms = _cassettes.reduce(
-    (acc, value) => {
-      acc[value.denomination] = value.count === null || value.count > 0
-      return acc
-    },
-    {}
-  )
-
-  var selectedDenoms = Object.keys(activeDenoms).reduce(
-    (acc, value) => {
-      acc[value] = false
-      return acc
-    },
-    {}
-  )
-
   cassettes = _cassettes
-  for (var i = 0; i < numberOfButtons; i++) {
-    var cassette = null
-    var denomination = null
+  var activeCassettes = _cassettes.filter(it => it.count === null || it.count > 0)
+  var inactiveCassettes = _cassettes.filter(it => it.count === 0)
 
-    var intersection = Object.keys(activeDenoms).reduce((acc, value) => {
-      acc[value] = Boolean(activeDenoms[value] && selectedDenoms[value])
-      return acc
-    }, {})
+  var allCassettes = activeCassettes.concat(inactiveCassettes)
+  var selectedCassettes = allCassettes.slice(0, numberOfButtons)
+  var sortedCassettes = selectedCassettes.sort((a, b) => a.denomination - b.denomination)
 
-    // If we're on the last available button and no selected cassettes by now are active
-    // This ensures that there's always an available button if there's any bill on a cassette
-    if (i + 1 === numberOfButtons && Object.values(intersection).every(it => it === false)) {
-      const firstActiveDenom = Object.keys(activeDenoms).find(it => activeDenoms[it] === true)
-      cassette = cassettes.find(it => it.denomination === firstActiveDenom && (it.count === null || it.count > 0))
-    } else {
-      cassette = cassettes.find(it => it.denomination === cassettes[i].denomination && (it.count === null || it.count > 0))
-        || cassettes[i]
-        || cassettes[cassettes.length - 1]
-    }
-
-    denomination = formatDenomination(cassette.denomination || 0)
+  for (var i = 0; i < sortedCassettes.length; i++) {
+    var denomination = formatDenomination(sortedCassettes[i].denomination || 0)
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
-    selectedDenoms[denomination] = true
   }
 }
 
