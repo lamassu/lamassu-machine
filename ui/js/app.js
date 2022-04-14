@@ -9,6 +9,7 @@ var SCREEN = params.get('screen');
 var DEBUG_MODE = SCREEN ? 'demo' : params.get('debug');
 var CASH_OUT_QR_COLOR = '#403c51';
 var CASH_IN_QR_COLOR = '#0e4160';
+var NUMBER_OF_BUTTONS = 3;
 
 var scrollSize = 0;
 var textHeightQuantity = 0;
@@ -109,7 +110,7 @@ function processData(data) {
   if (data.fiatCredit) fiatCredit(data.fiatCredit);
   if (data.depositInfo) setDepositAddress(data.depositInfo);
   if (data.version) setVersion(data.version);
-  if (data.cassettes) setupCassettes(data.cassettes);
+  if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS);
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
   if (data.readingBill) readingBill(data.readingBill);
   if (data.cryptoCode) translateCoin(data.cryptoCode);
@@ -912,8 +913,6 @@ $(document).ready(function () {
     buttonPressed('start', { cryptoCode: currentCryptoCode, direction: 'cashOut' });
   });
 
-  var lastTouch = null;
-
   var languageOverlay = document.getElementById('language-overlay');
   touchEvent(languageOverlay, function (e) {
     closeLanguageDropdown();
@@ -941,20 +940,7 @@ $(document).ready(function () {
     closeLanguageDropdown();
   });
 
-  var fiatButtons = document.getElementById('js-fiat-buttons');
-  touchImmediateEvent(fiatButtons, function (e) {
-    var now = Date.now();
-    if (lastTouch && now - lastTouch < 100) return;
-    lastTouch = now;
-    var cashButtonJ = $(e.target).closest('.cash-button');
-    if (cashButtonJ.length === 0) return;
-    if (cashButtonJ.hasClass('disabled')) return;
-    if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
-    var denominationIndex = cashButtonJ.attr('data-denomination-index');
-    var denominationRec = getUsedCassettes(cassettes)[denominationIndex];
-    buttonPressed('fiatButton', { denomination: denominationRec.denomination });
-  });
-
+  buildCassetteButtonEvents();
   initDebug();
 });
 
@@ -1463,38 +1449,49 @@ function formatDenomination(denom) {
   });
 }
 
-function getUsedCassettes(cassettes) {
-  // Current UI uses 3 buttons, on setupCassettes() and manageFiatButtons()
-  // But possibly there are 4 cassettes, which leads to a possible scenario where only the 4th cassette has bills
-  // This solution is not too scalable, but should allow for always having a solution if there are bills to do so
+function buildCassetteButtons(_cassettes, numberOfButtons) {
+  cassettes = _cassettes;
+  var activeCassettes = _cassettes.filter(function (it) {
+    return it.count === null || it.count > 0;
+  });
+  var inactiveCassettes = _cassettes.filter(function (it) {
+    return it.count === 0;
+  });
 
-  // This function only serves to create an array mapping what buttons are shown
-  // More UI buttons should allow for simpler solutions to this issue
-  var doesCassette3HaveBills = cassettes.length >= 4 && cassettes[2].count > 0;
-  var doesCassette4HaveBills = cassettes.length >= 5 && cassettes[3].count > 0;
-  var thirdCassette = doesCassette3HaveBills ? cassettes[2] : doesCassette4HaveBills ? cassettes[3] : cassettes[4];
-  return [cassettes[0], cassettes[1], thirdCassette];
+  var allCassettes = activeCassettes.concat(inactiveCassettes);
+  var selectedCassettes = allCassettes.slice(0, numberOfButtons);
+  var sortedCassettes = selectedCassettes.sort(function (a, b) {
+    return a.denomination - b.denomination;
+  });
+
+  for (var i = 0; i < sortedCassettes.length; i++) {
+    var denomination = formatDenomination(sortedCassettes[i].denomination || 0);
+    $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
+  }
 }
 
-function setupCassettes(_cassettes) {
-  cassettes = _cassettes;
-  var doesCassette3HaveBills = cassettes.length >= 4 && cassettes[2].count > 0;
-  var doesCassette4HaveBills = cassettes.length >= 5 && cassettes[3].count > 0;
-  if (cassettes.length === 3) {
-    for (var i = 0; i < cassettes.length; i++) {
-      var cassette = cassettes[i];
-      var denomination = formatDenomination(cassette.denomination);
-      $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
-    }
-  } else {
-    for (var i = 0; i < 2; i++) {
-      var cassette = cassettes[i];
-      var denomination = formatDenomination(cassette.denomination);
-      $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
-    }
-    if (doesCassette3HaveBills) $('.cash-button[data-denomination-index=' + 2 + '] .js-denomination').text(formatDenomination(cassettes[2].denomination));
-    if (!doesCassette3HaveBills && doesCassette4HaveBills) $('.cash-button[data-denomination-index=' + 2 + '] .js-denomination').text(formatDenomination(cassettes[3].denomination));
+function updateCassetteButtons(activeDenoms, numberOfButtons) {
+  for (var i = 0; i < numberOfButtons; i++) {
+    var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
+    var denomination = button.children('.js-denomination').text();
+    button.prop('disabled', !Boolean(activeDenoms[denomination]));
   }
+}
+
+function buildCassetteButtonEvents() {
+  var fiatButtons = document.getElementById('js-fiat-buttons');
+  var lastTouch = null;
+
+  touchImmediateEvent(fiatButtons, function (e) {
+    var now = Date.now();
+    if (lastTouch && now - lastTouch < 100) return;
+    lastTouch = now;
+    var cashButtonJ = $(e.target).closest('.cash-button');
+    if (cashButtonJ.length === 0) return;
+    if (cashButtonJ.hasClass('disabled')) return;
+    if (cashButtonJ.hasClass('clear')) return buttonPressed('clearFiat');
+    buttonPressed('fiatButton', { denomination: cashButtonJ.children('.js-denomination').text() });
+  });
 }
 
 function updateCrypto(selector, cryptoAmount, cryptoDisplayCode) {
@@ -1771,30 +1768,6 @@ function chooseFiat(data) {
   setState('choose_fiat');
 }
 
-function manageFiatButtons(activeDenominations) {
-  if (cassettes.length === 3) {
-    for (var i = 0; i < cassettes.length; i++) {
-      var cassette = cassettes[i];
-      var denomination = cassette.denomination;
-      var enabled = activeDenominations[denomination];
-      var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
-      if (enabled) button.prop('disabled', false);else button.prop('disabled', true);
-    }
-    return [].concat(_toConsumableArray(cassettes));
-  } else {
-    for (var i = 0; i < 2; i++) {
-      var cassette = cassettes[i];
-      var denomination = cassette.denomination;
-      var enabled = activeDenominations[denomination];
-      var button = $('.choose_fiat_state .cash-button[data-denomination-index=' + i + ']');
-      if (enabled) button.prop('disabled', false);else button.prop('disabled', true);
-    }
-    // Third button is always enabled
-    var thirdButton = $('.choose_fiat_state .cash-button[data-denomination-index=' + 2 + ']');
-    thirdButton.prop('disabled', false);
-  }
-}
-
 function displayCrypto(cryptoAtoms, cryptoCode) {
   var coin = getCryptoCurrency(cryptoCode);
   var scale = new BigNumber(10).pow(coin.displayScale);
@@ -1834,7 +1807,7 @@ function fiatCredit(data) {
 
   if (fiat.eq(0)) $('#cash-out-button').prop('disabled', true);else $('#cash-out-button').prop('disabled', false);
 
-  manageFiatButtons(activeDenominations.activeMap);
+  updateCassetteButtons(activeDenominations.activeMap, NUMBER_OF_BUTTONS);
   $('.choose_fiat_state .fiat-amount').text(fiatDisplay);
   t('choose-digital-amount', translate("You'll be sending %s %s", [cryptoDisplay, cryptoDisplayCode]));
 
