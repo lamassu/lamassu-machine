@@ -1150,7 +1150,13 @@ function setTermsScreen(data) {
   $screen.find('.js-terms-cancel-button').html(data.cancel);
   $screen.find('.js-terms-accept-button').html(data.accept);
   setTermsConditionsTimeout();
+  setAcceptButtonDisabled($screen, data);
   setTermsConditionsAcceptanceDelay($screen, data);
+}
+
+function setAcceptButtonDisabled(screen, data) {
+  var acceptButton = screen.find('.js-terms-accept-button');
+  acceptButton.prop('disabled', Boolean(data.acceptDisabled));
 }
 
 function clearTermsConditionsTimeout() {
