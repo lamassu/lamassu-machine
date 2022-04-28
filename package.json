@@ -4,7 +4,7 @@
   "version": "8.0.0-beta.4",
   "dependencies": {
     "@fczbkk/uuid4": "^3.0.0",
-    "@lamassu/coins": "1.0.0-beta.3",
+    "@lamassu/coins": "1.1.0",
     "@lamassu/supyo": "1.0.0",
     "async": "~1.5.2",
     "base-x": "3.0.9",
