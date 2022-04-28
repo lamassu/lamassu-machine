@@ -74,6 +74,18 @@ msgstr "Please contact the operator to sort this out, or try again later."
 msgid "One moment..."
 msgstr "One moment..."
 
+#: On screen: cash_in_only_coin
+msgid "Selling unavailable for this coin"
+msgstr "Selling unavailable for this coin"
+
+#: On screen: cash_in_only_coin
+msgid "Apologies, although this coin is only available to buy."
+msgstr "Apologies, although this coin is only available to buy."
+
+#: On screen: cash_in_only_coin
+msgid "Please contact the operator if you wish to learn more."
+msgstr "Please contact the operator if you wish to learn more."
+
 #: On screen: choose_coin
 msgid "Languages"
 msgstr "Languages"
@@ -89,6 +101,10 @@ msgstr "How much?"
 #: On screen: choose-fiat
 msgid "Have a promo code?"
 msgstr "Have a promo code?"
+
+#: On screen: choose-fiat
+msgid "Discount added (5 off commissions)"
+msgstr "Discount added (5 off commissions)"
 
 #: On screen: choose-fiat
 msgid "Cash Out"
