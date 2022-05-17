@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "8.0.0-beta.4",
+  "version": "8.0.0",
   "dependencies": {
     "@fczbkk/uuid4": "^3.0.0",
     "@lamassu/coins": "1.1.0",
