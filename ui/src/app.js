@@ -1278,6 +1278,7 @@ function startPage (text) {
     if (textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
+      document.getElementById('actions-scroll').style.display = ''
       div.scrollTo(0, 0)
       totalPages = Math.ceil(textHeightQuantity / scrollSize)
       updatePageCounter()
