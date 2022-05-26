@@ -1262,10 +1262,10 @@ footer {
   .cancel-button-wrapper:after {
     position: absolute;
     content: '';
-    top: -15px;
-    right: -15px;
-    left: -15px;
-    bottom: -20px; }
+    top: -30px;
+    right: -30px;
+    left: -30px;
+    bottom: -30px; }
 
 .cancel-button {
   width: 3.5vh; }
