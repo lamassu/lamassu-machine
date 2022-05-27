@@ -983,9 +983,9 @@ function touchEvent (element, callback) {
   }
 
   if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler)
+    element.addEventListener('touchstart', handler)
   }
-  element.addEventListener('mouseup', handler)
+  element.addEventListener('mousedown', handler)
 }
 
 function touchImmediateEvent (element, callback) {
@@ -995,9 +995,9 @@ function touchImmediateEvent (element, callback) {
     e.preventDefault()
   }
   if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler)
+    element.addEventListener('touchstart', handler)
   }
-  element.addEventListener('mouseup', handler)
+  element.addEventListener('mousedown', handler)
 }
 
 function setupImmediateButton (buttonClass, buttonAction, callback) {
