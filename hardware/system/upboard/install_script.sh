@@ -46,7 +46,7 @@ sudo mv 99-lamassu /etc/apt/apt.conf.d/
 sudo apt update && sudo apt full-upgrade -y
 
 # install dependencies
-sudo apt install build-essential chromium curl git supervisor yasm -y
+sudo apt install build-essential chromium curl git supervisor yasm ntp -y
 
 curl -sL https://deb.nodesource.com/setup_8.x | sed 's/DISTRO=\$(lsb_release -c -s)/DISTRO=stretch/g' > setup_8.x.sh
 
