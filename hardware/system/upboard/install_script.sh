@@ -129,4 +129,12 @@ sudo update-grub
 
 sudo rm /etc/apt/apt.conf.d/99-lamassu 
 
+sudo sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
+echo 'PasswordAuthentication no' | sudo tee -a /etc/ssh/sshd_config
+sudo apt install ufw -y
+sudo ufw enable
+sudo ufw allow 22/tcp
+sudo ufw limit 22/tcp
+sudo ufw allow 30034/tcp
+sudo ufw limit 30034/tcp
 sudo reboot

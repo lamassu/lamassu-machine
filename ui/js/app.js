@@ -225,6 +225,10 @@ function processData(data) {
       minimumTx(data.lowestBill);
       break;
     case 'chooseFiat':
+      if (data.isCashInOnlyCoin) {
+        setState('cash_in_only_coin');
+        break;
+      }
       chooseFiat(data.chooseFiat);
       break;
     case 'deposit':
@@ -776,6 +780,7 @@ $(document).ready(function () {
   setupButton('deposit-timeout-sent-no', 'depositTimeoutNotSent');
   setupButton('out-of-cash-ok', 'idle');
   setupButton('cash-in-disabled-ok', 'idle');
+  setupButton('cash-in-only-ok', 'idle');
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');
@@ -973,9 +978,9 @@ function touchEvent(element, callback) {
   }
 
   if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler);
+    element.addEventListener('touchstart', handler);
   }
-  element.addEventListener('mouseup', handler);
+  element.addEventListener('mousedown', handler);
 }
 
 function touchImmediateEvent(element, callback) {
@@ -985,9 +990,9 @@ function touchImmediateEvent(element, callback) {
     e.preventDefault();
   }
   if (shouldEnableTouch()) {
-    element.addEventListener('touchend', handler);
+    element.addEventListener('touchstart', handler);
   }
-  element.addEventListener('mouseup', handler);
+  element.addEventListener('mousedown', handler);
 }
 
 function setupImmediateButton(buttonClass, buttonAction, callback) {
@@ -1236,6 +1241,7 @@ function startPage(text) {
     if (textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none';
     } else {
+      document.getElementById('actions-scroll').style.display = '';
       div.scrollTo(0, 0);
       totalPages = Math.ceil(textHeightQuantity / scrollSize);
       updatePageCounter();

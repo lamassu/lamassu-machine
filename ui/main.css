@@ -1874,6 +1874,10 @@ footer {
   width: 30vh;
   margin-left: 3vh; }
 
+.cash_in_only_coin_state header img {
+  width: 30vh;
+  margin-left: 3vh; }
+
 .locked_state img,
 .maintenance_state img {
   width: 19vh; }
