@@ -123,24 +123,24 @@ function installDeviceConfig (cb) {
 
 const commands = []
 
-commands.push([
+commands.push(
   async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
-])
+)
 
 if (hardwareCode === 'ssuboard' || hardwareCode === 'upboard') {
   commands.push(async.apply(command, `apt-get update`))
   commands.push(async.apply(command, `apt-get install -y ntp`))
 }
 
-commands.push([
+commands.push(
   async.apply(installDeviceConfig),
   async.apply(updateSupervisor),
   async.apply(updateUdev),
   async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
-])
+)
 
 async.series(commands, function(err) {
   if (err) throw err;
