@@ -142,13 +142,13 @@ if (hardwareCode === 'ssuboard' || hardwareCode === 'upboard') {
   commands.push(async.apply(command, `apt-get install -y ntp`))
 }
 
-commands.push([
+commands.push(
   async.apply(installDeviceConfig),
   async.apply(updateSupervisor),
   async.apply(updateUdev),
   async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
-])
+)
 
 async.series(commands, function(err) {
   if (err) throw err;
