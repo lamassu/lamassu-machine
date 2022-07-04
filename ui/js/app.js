@@ -1022,7 +1022,7 @@ function touchImmediateEvent(element, action, callback) {
   // As such, the reference to the exact handler function needs to be saved to be called when disabling it, hence the need for viewportEvents
   // As the same element can have different actions hooked on the same event, this needs to be stored as an array of <action, handler> pairs
 
-  // The 
+  // The viewportButtonEventsActive ensures that no repeated events are being added to the element
   if (element.id.includes('_viewport')) {
     if (!viewportEvents[element.id]) viewportEvents[element.id] = [];
     viewportEvents[element.id].push({ action: action, handler: handler });
