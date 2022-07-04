@@ -51,6 +51,8 @@ let currentCoins = []
 let customRequirementNumericalKeypad = null
 let customRequirementTextKeyboard = null
 let customRequirementChoiceList = null
+var viewportButtonEventsActive = null
+var viewportEvents = {}
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
@@ -128,6 +130,7 @@ function processData (data) {
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
   if (data.smsReceiptStatus) setReceiptPrint(null, data.smsReceiptStatus)
+  if (data.automaticPrint) setAutomaticPrint(data.automaticPrint)
 
   if (data.context) {
     $('.js-context').hide()
@@ -697,11 +700,7 @@ $(document).ready(function () {
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('scanCancel', 'cancelScan')
-  setupImmediateButton('completed_viewport', 'completed')
-  setupImmediateButton('withdraw_failure_viewport', 'completed')
-  setupImmediateButton('out_of_coins_viewport', 'completed')
-  setupImmediateButton('fiat_receipt_viewport', 'completed')
-  setupImmediateButton('fiat_complete_viewport', 'completed')
+  enableViewportButtonEvents()
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel')
   setupImmediateButton('depositCancel', 'depositCancel')
   setupImmediateButton('printer-scan-cancel', 'cancelScan')
@@ -964,6 +963,24 @@ $(document).ready(function () {
   initDebug()
 })
 
+function disableViewportButtonEvents () {
+  viewportButtonEventsActive = false
+  disableImmediateButton('completed_viewport', 'completed')
+  disableImmediateButton('withdraw_failure_viewport', 'completed')
+  disableImmediateButton('out_of_coins_viewport', 'completed')
+  disableImmediateButton('fiat_receipt_viewport', 'completed')
+  disableImmediateButton('fiat_complete_viewport', 'completed')
+}
+
+function enableViewportButtonEvents () {
+  viewportButtonEventsActive = true
+  setupImmediateButton('completed_viewport', 'completed')
+  setupImmediateButton('withdraw_failure_viewport', 'completed')
+  setupImmediateButton('out_of_coins_viewport', 'completed')
+  setupImmediateButton('fiat_receipt_viewport', 'completed')
+  setupImmediateButton('fiat_complete_viewport', 'completed')
+}
+
 function targetButton (element) {
   var classList = element.classList || []
   var special = classList.contains('button') ||
@@ -999,12 +1016,24 @@ function touchEvent (element, callback) {
   element.addEventListener('mousedown', handler)
 }
 
-function touchImmediateEvent (element, callback) {
+function touchImmediateEvent (element, action, callback) {
   function handler (e) {
     callback(e)
     e.stopPropagation()
     e.preventDefault()
   }
+
+  // Viewport events need to be disabled to improve UX in some cases. e.g. Not allowing to finish the transaction while a receipt is being printed
+  // To remove event listeners, the exact same function reference needs to be provided to removeEventListener().
+  // As such, the reference to the exact handler function needs to be saved to be called when disabling it, hence the need for viewportEvents
+  // As the same element can have different actions hooked on the same event, this needs to be stored as an array of <action, handler> pairs
+
+  // The 
+  if (element.id.includes('_viewport')) {
+    if (!viewportEvents[element.id]) viewportEvents[element.id] = []
+    viewportEvents[element.id].push({ action, handler })
+  }
+
   if (shouldEnableTouch()) {
     element.addEventListener('touchstart', handler)
   }
@@ -1013,7 +1042,25 @@ function touchImmediateEvent (element, callback) {
 
 function setupImmediateButton (buttonClass, buttonAction, callback) {
   var button = document.getElementById(buttonClass)
-  touchImmediateEvent(button, function () {
+  touchImmediateEvent(button, buttonAction, function () {
+    if (callback) callback()
+    buttonPressed(buttonAction)
+  })
+}
+
+function disableTouchImmediateEvent(element, action) {
+  if (shouldEnableTouch()) {
+    element.removeEventListener('touchstart', viewportEvents[element.id].find(it => it.action === action).handler)
+  }
+  element.removeEventListener('mousedown', viewportEvents[element.id].find(it => it.action === action).handler)
+
+  // Trim the viewportEvents obj
+  viewportEvents[element.id] = viewportEvents[element.id].filter(it => it.action !== action)
+}
+
+function disableImmediateButton(buttonClass, buttonAction, callback) {
+  var button = document.getElementById(buttonClass)
+  disableTouchImmediateEvent(button, buttonAction, function () {
     if (callback) callback()
     buttonPressed(buttonAction)
   })
@@ -2095,6 +2142,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
 
   switch (status) {
     case 'disabled':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       $(`#${className}-cash-in-message`).addClass('hide')
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-out-message`).addClass('hide')
@@ -2103,6 +2151,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-button`).addClass('hide')
       break
     case 'available':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       $(`#${className}-cash-in-message`).addClass('hide')
       $(`#${className}-cash-in-button`).removeClass('hide')
       $(`#${className}-cash-out-message`).addClass('hide')
@@ -2111,6 +2160,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-button`).removeClass('hide')
       break
     case 'printing':
+      if (viewportButtonEventsActive) disableViewportButtonEvents()
       const message = locale.translate(printing).fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(message)
@@ -2123,6 +2173,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'success':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       const successMessage = '✔ ' + locale.translate(success).fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(successMessage)
@@ -2135,6 +2186,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'failed':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       const failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(failMessage)
@@ -2172,4 +2224,16 @@ function setRates (allRates, fiat) {
 
   $('#rates-fiat-currency').text(fiat)
   ratesTable.empty().append(tableHeader).append(coinEntries)
+}
+
+function setAutomaticPrint (automaticPrint) {
+  if (automaticPrint) {
+    $('#print-receipt-cash-in-button').hide()
+    $('#print-receipt-cash-out-button').hide()
+    $('#print-receipt-cash-in-fail-button').hide()
+  } else {
+    $('#print-receipt-cash-in-button').show()
+    $('#print-receipt-cash-out-button').show()
+    $('#print-receipt-cash-in-fail-button').show()
+  }
 }
