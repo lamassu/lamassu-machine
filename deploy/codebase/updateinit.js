@@ -138,7 +138,6 @@ if (hardwareCode === 'aaeon') {
 }
 
 if (hardwareCode === 'ssuboard' || hardwareCode === 'upboard') {
-  commands.push(async.apply(command, `apt-get update`))
   commands.push(async.apply(command, `apt-get install -y ntp`))
 }
 
