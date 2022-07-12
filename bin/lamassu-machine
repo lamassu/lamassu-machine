@@ -38,7 +38,7 @@ function startBrain () {
 
 process.on('uncaughtException', err => {
   if (err.code === 'EPIPE') {
-    if (brain) brain.epipeLog()
+    if (brain) brain.epipeLogs()
     console.trace(err)
     return
   }
