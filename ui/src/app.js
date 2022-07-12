@@ -1194,7 +1194,7 @@ function setDirection (direction) {
 function setTermsScreen (data) {
   const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-title').html(data.title)
-  startPage(data.text)
+  startPage(data.text, data.acceptDisabled)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
   $screen.find('.js-terms-accept-button').html(data.accept)
   setTermsConditionsTimeout()
@@ -1225,9 +1225,10 @@ function setTermsConditionsAcceptanceDelay (screen, data) {
 
   if (!data.delay) return
 
-  let seconds = data.delayTimer / 1000
+  const delayTimer = isNaN(data.delayTimer) ? 0 : data.delayTimer
+  let seconds = delayTimer / 1000
   acceptButton.prop('disabled', true)
-  acceptButton.html(`${data.accept} (${seconds})`)
+  acceptButton.html(seconds > 0 ? `${data.accept} (${seconds})` : `${data.accept}`)
 
   var tmpbtn = acceptButton.clone().appendTo('body').css({ 'display': 'block', 'visibility': 'hidden' })
   var width = tmpbtn.outerWidth()
@@ -1271,10 +1272,10 @@ function scrollUp () {
 }
 
 // start page
-function startPage (text) {
+function startPage (text, acceptedTerms) {
   const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-text').html(text)
-  currentPage = 0
+  if (!acceptedTerms) currentPage = 0
   totalPages = 0
   setTimeout(function () {
     const div = document.getElementById('js-terms-text-div')
@@ -1285,7 +1286,7 @@ function startPage (text) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       document.getElementById('actions-scroll').style.display = ''
-      div.scrollTo(0, 0)
+      if (!acceptedTerms) div.scrollTo(0, 0)
       totalPages = Math.ceil(textHeightQuantity / scrollSize)
       updatePageCounter()
     }
