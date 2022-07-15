@@ -89,6 +89,7 @@ function buttonPressed (button, data) {
 }
 
 function processData (data) {
+  if (data.screenOpts) setScreenOptions(data.screenOpts)
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
   if (data.supportedCoins) setCoins(data.supportedCoins)
@@ -119,6 +120,7 @@ function processData (data) {
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
+  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat)
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
@@ -272,6 +274,9 @@ function processData (data) {
       break
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest)
+      break
+    case 'rates':
+      setState('rates')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -821,6 +826,9 @@ $(document).ready(function () {
 
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
+  
+  setupImmediateButton('rates-close', 'idle')
+  setupButton('rates-section-button', 'ratesScreen')
 
   calculateAspectRatio()
 
@@ -2144,4 +2152,31 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
   }
+}
+
+function setScreenOptions (opts) {
+  if (opts.rates) {
+    opts.rates.active ? $('#rates-section').show() : $('#rates-section').hide()
+  }
+}
+
+function setRates (allRates, fiat) {
+  const ratesTable = $('.rates-content')
+  const tableHeader = $(`<div class="xs-margin-bottom">
+  <h4 class="js-i18n">Buy</h4>
+  <h4 class="js-i18n">Crypto</h4>
+  <h4 class="js-i18n">Sell</h4>
+</div>`)
+  const coinEntries = []
+  
+  Object.keys(allRates).forEach(it => {
+    coinEntries.push($(`<div class="xs-margin-bottom">
+    <p class="d2 js-i18n">${allRates[it].cashIn}</p>
+    <h4 class="js-i18n">${it}</h4>
+    <p class="d2 js-i18n">${allRates[it].cashOut}</p>
+  </div>`))
+  })
+
+  $('#rates-fiat-currency').text(fiat)
+  ratesTable.empty().append(tableHeader).append(coinEntries)
 }

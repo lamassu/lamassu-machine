@@ -713,6 +713,14 @@ footer {
   width: 30vh;
 }
 
+#choose-coin-header section {
+  margin-left: 2em;
+}
+
+#choose-coin-header section:first-child {
+  margin-left: 0em;
+}
+
 #change-language-section #language-dropdown-toggle {
   align-items: center;
 }
@@ -1851,7 +1859,6 @@ footer {
     }
   }
 }
-
 
 @media (orientation: portrait) {
   @import "./portrait.scss";
