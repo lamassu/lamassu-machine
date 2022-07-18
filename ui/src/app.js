@@ -2147,9 +2147,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
 }
 
 function setScreenOptions (opts) {
-  if (opts.rates) {
-    opts.rates.active ? $('#rates-section').show() : $('#rates-section').hide()
-  }
+  (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
 }
 
 function setRates (allRates, fiat) {
