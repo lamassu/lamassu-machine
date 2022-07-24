@@ -20,7 +20,7 @@ WORKDIR /lamassu
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y build-essential cmake curl git pkg-config yasm \ 
-  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev
+  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev ntp
 
 RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - 
 RUN curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
@@ -35,7 +35,7 @@ WORKDIR /lamassu
 
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y build-essential curl git pkg-config yasm \
-  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev
+  libasound2-dev libpcsclite-dev libavcodec-dev libavformat-dev libswscale-dev ntp
 
 RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - 
 RUN curl -sS https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
