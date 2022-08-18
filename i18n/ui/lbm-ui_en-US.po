@@ -103,10 +103,6 @@ msgid "Have a promo code?"
 msgstr "Have a promo code?"
 
 #: On screen: choose-fiat
-msgid "Discount added (5 off commissions)"
-msgstr "Discount added (5 off commissions)"
-
-#: On screen: choose-fiat
 msgid "Cash Out"
 msgstr "Cash Out"
 
