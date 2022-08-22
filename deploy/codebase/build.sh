@@ -53,7 +53,9 @@ $MACHINE_DIR/node_modules/.bin/copy-node-modules $MACHINE_DIR $TARGET_MACHINE_DI
 # Remove native modules
 node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --rem-native
 
+rm -rf $TARGET_MACHINE_DIR/verify
 mkdir $TARGET_MACHINE_DIR/verify
+
 
 if [ $1 == "aaeon" ] ; then
   mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
