@@ -53,9 +53,15 @@ $MACHINE_DIR/node_modules/.bin/copy-node-modules $MACHINE_DIR $TARGET_MACHINE_DI
 # Remove native modules
 node $MACHINE_DIR/deploy/remove-modules.js $TARGET_MACHINE_DIR/node_modules --rem-native
 
+rm -rf $TARGET_MACHINE_DIR/verify
+mkdir $TARGET_MACHINE_DIR/verify
+
+
 if [ $1 == "aaeon" ] ; then
   mkdir -p $EXPORT_DIR/hardware/aaeon/node_modules
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/aaeon/
+
+  cp $MACHINE_DIR/verify/verify.386 $TARGET_MACHINE_DIR/verify/verify
 
   # ACP udev update
   mkdir -p $EXPORT_DIR/udev/aaeon
@@ -73,6 +79,8 @@ elif [ $1 == "ssuboard" ] ; then
   mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
   mkdir -p $EXPORT_DIR/supervisor/ssuboard
 
+  cp $MACHINE_DIR/verify/verify.arm32 $TARGET_MACHINE_DIR/verify/verify
+
   cp $SYSTEM_DIR/ssuboard/supervisor/conf.d/* $EXPORT_DIR/supervisor/ssuboard
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
@@ -82,6 +90,8 @@ elif [ $1 == "ssuboard" ] ; then
 elif [ $1 == "upboard-sintra" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   mkdir -p $EXPORT_DIR/supervisor/upboard/sintra
+
+  cp $MACHINE_DIR/verify/verify.amd64 $TARGET_MACHINE_DIR/verify/verify
 
   cp $SYSTEM_DIR/upboard/sintra/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/sintra
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
@@ -94,6 +104,8 @@ elif [ $1 == "upboard-gaia" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   mkdir -p $EXPORT_DIR/supervisor/upboard/gaia
 
+  cp $MACHINE_DIR/verify/verify.amd64 $TARGET_MACHINE_DIR/verify/verify
+
   cp $SYSTEM_DIR/upboard/gaia/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/gaia
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
   node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
@@ -104,6 +116,8 @@ elif [ $1 == "upboard-gaia" ] ; then
 elif [ $1 == "upboard-tejo" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   mkdir -p $EXPORT_DIR/supervisor/upboard/tejo
+
+  cp $MACHINE_DIR/verify/verify.amd64 $TARGET_MACHINE_DIR/verify/verify
 
   cp $SYSTEM_DIR/upboard/tejo/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/tejo
   cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/

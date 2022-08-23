@@ -45,7 +45,7 @@ RUN curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.tx
 
 
 # ACP build 
-FROM acp as acp-build
+FROM lamassu/acp-build:1.0 as acp-build
   ARG VERSION
   ARG PASSWORD
 
@@ -57,7 +57,7 @@ FROM acp as acp-build
     cp ./hardware/codebase/aaeon/device_config.json ./ && \
     bash ./deploy/codebase/build.sh aaeon --copy-device-config
   
-FROM upboard as upboard-gaia-build
+FROM lamassu/upboard-build:1.0 as upboard-gaia-build
   COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN cd lamassu-machine && rm -rf node_modules && npm install && \
     npm install @joepie91/v4l2camera@1.0.5 && \
@@ -66,7 +66,7 @@ FROM upboard as upboard-gaia-build
     cp ./hardware/codebase/upboard/gaia/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
 
-FROM upboard as upboard-sintra-build
+FROM lamassu/upboard-build:1.0 as upboard-sintra-build
   COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN cd lamassu-machine && rm -rf node_modules && npm install && \
     npm install @joepie91/v4l2camera@1.0.5 && \
@@ -75,7 +75,7 @@ FROM upboard as upboard-sintra-build
     cp ./hardware/codebase/upboard/sintra/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
 
-FROM upboard as upboard-tejo-build
+FROM lamassu/upboard-build:1.0 as upboard-tejo-build
   COPY --from=upboard-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN cd lamassu-machine && rm -rf node_modules && npm install && \
     npm install @joepie91/v4l2camera@1.0.5 && \
@@ -84,7 +84,7 @@ FROM upboard as upboard-tejo-build
     cp ./hardware/codebase/upboard/tejo/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
 
-FROM ssuboard as ssuboard-build
+FROM lamassu/ssu-build:1.0 as ssuboard-build
   COPY --from=upboard-tejo-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN cd lamassu-machine && rm -rf node_modules && npm install && \
     cp ./hardware/codebase/ssuboard/device_config.json ./ && \
