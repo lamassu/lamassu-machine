@@ -1064,6 +1064,17 @@
         </section>
       </section>
     </section>
+    <!-- To become silimar to verifying we should have no margin bottom on h3 and should use d1 instead of d2 -->
+    <section
+      class="viewport hcm2_continue_state info cash-in-color"
+      data-tr-section="hcm2-continue"
+      data-screentype="info-no-action-tp"
+    >
+      <header></header>
+      <main>
+        <h2 class="js-i18n sm-margin-bottom">Depositing bills...</h2>
+      </main>
+    </section>
     <section
       class="viewport high_bill_state no-action-info cash-in-color"
       data-tr-section="high-bill"
@@ -1132,6 +1143,51 @@
           No, cancel
         </button>
       </footer>
+    </section>
+    <section
+      class="viewport insert_bills_hcm2_state cash-in-color"
+      data-tr-section="insert-bills-hcm2"
+      data-screentype="flow-no-action-tp"
+    >
+      <header>
+        <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
+        <!-- TODO: wait for nuno finished spec -->
+        <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
+        <div id="insertBillCancel" class="delay cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main class="lg-margin-top">
+        <section class="primary-side">
+          <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert a bill</h2>
+          <div class="text-content">
+            <p class="d1 no-margin-top js-i18n">
+              Please insert your first bill into the machine.
+            </p>
+            <p class="d2 js-i18n-fixed-fee"></p>
+            <p class="d2 js-i18n coins-to-address">Your coins will be sent to:</p>
+            <p class="m2 crypto-address"></p>
+          </div>
+          <div>
+            <button id="insert-first-bill-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
+              Have a promo code?
+            </button>
+            <p id="insert-first-bill-code-added" class="js-i18n d2" style="display:none">Discount added (5 off commissions)</p>
+          </div>
+        </section>
+        <section class="secondary-side">
+          <div id="hcm2-continue" class="send-coins cash-in-color js-send-crypto-enable">
+            <section class="circle-button h3 purple-grey js-send-crypto-enable">
+              <div class="inner-circle-button js-send-crypto-enable">
+                <span class="js-i18n">
+                  Continue
+                </span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
     </section>
     <section
       class="viewport insert_bills_state cash-in-color"

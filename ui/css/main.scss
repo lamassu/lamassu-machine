@@ -855,6 +855,21 @@ footer {
   margin-top: -6vh;
 }
 
+.insert_bills_hcm2_state .secondary-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.insert_bills_hcm2_state footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
+  margin-top: -6vh;
+}
+
 .insert_more_bills_state .primary-side-title {
   max-width: 80vh;
 }
@@ -1451,6 +1466,10 @@ footer {
     margin-left: 0;
   }
   .insert_bills_state footer {
+    padding-left: 0;
+    padding-right: 9.4vw;
+  }
+  .insert_bills_hcm2_state footer {
     padding-left: 0;
     padding-right: 9.4vw;
   }
