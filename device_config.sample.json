@@ -24,11 +24,5 @@
     "_mockedError": {
       "0x51": [0, 4]
     }
-  },
-  "updater": {
-    "caFile": "/var/lib/lamassu-machine/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
-    "updateDir": "/tmp/update"
   }
 }
