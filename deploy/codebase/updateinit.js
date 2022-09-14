@@ -133,6 +133,15 @@ if (hardwareCode === 'ssuboard' || hardwareCode === 'upboard') {
   commands.push(async.apply(command, `apt-get install -y ntp`))
 }
 
+
+if (hardwareCode === 'aaeon') {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.386 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+} else if (hardwareCode === 'ssuboard') {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.arm32 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+} else {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.amd64 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+}
+
 commands.push(
   async.apply(installDeviceConfig),
   async.apply(updateSupervisor),
