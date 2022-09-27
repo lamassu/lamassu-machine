@@ -2407,12 +2407,16 @@ footer {
 #custom-requirement-choicelist-wrapper {
   height: 90%;
   margin: 0 6vw;
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 0.5fr; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex; }
+
+.custom-requirement-question-wrapper {
+  width: 49%; }
 
 .choice-list-grid-wrapper {
   min-height: 60vh;
-  margin-right: 20px; }
+  width: 36%; }
 
 .choice-list-item {
   width: 95%;
@@ -2454,7 +2458,7 @@ footer {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  margin-left: 25%; }
+  margin-left: 5%; }
   .choice-list-actions-wrapper p {
     margin: 4vh 0; }
 
