@@ -278,6 +278,9 @@ function processData (data) {
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest)
       break
+    case 'invalidAddress':
+      invalidAddress(data.lnInvoiceTypeError)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -333,6 +336,17 @@ function setComplianceTimeout (interval, complianceButton) {
   complianceTimeout = setTimeout(function () {
     buttonPressed(complianceButton)
   }, interval == null ? 60000 : interval)
+}
+
+function invalidAddress (lnInvoiceTypeError) {
+  if (lnInvoiceTypeError) {
+    $('#invalid-address').hide()
+    $('#invalid-invoice').show()
+  } else {
+    $('#invalid-invoice').hide()
+    $('#invalid-address').show()
+  }
+  setScreen('invalid_address')
 }
 
 function customInfoRequest (customInfoRequest) {

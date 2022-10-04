@@ -382,6 +382,18 @@ msgstr "It looks like you're using a wallet for a different coin or an address f
 msgid "Please check your QR code and try again."
 msgstr "Please check your QR code and try again."
 
+#: On screen: invalid-address
+msgid "Invalid LN invoice"
+msgstr "Invalid LN invoice"
+
+#: On screen: invalid-address
+msgid "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+msgstr "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+
+#: On screen: invalid-address
+msgid "Please create a new invoice and try again."
+msgstr "Please create a new invoice and try again."
+
 #: On screen: limit-reached
 msgid "We're all out of coins!"
 msgstr "We're all out of coins!"
