@@ -1518,6 +1518,12 @@ footer {
 .change-language {
   width: 30vh; }
 
+#choose-coin-header section {
+  margin-left: 2em; }
+
+#choose-coin-header section:first-child {
+  margin-left: 0em; }
+
 #change-language-section #language-dropdown-toggle {
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -2554,3 +2560,74 @@ footer {
 
 .cash-out-color #us-ssn-permission-cancel {
   display: initial; }
+
+#rates main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center; }
+
+.rates-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center; }
+
+.rates-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 70vw; }
+  .rates-content div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center; }
+    .rates-content div h4 {
+      margin: 0 4rem;
+      width: 10vw;
+      text-align: center;
+      color: #0e4160; }
+    .rates-content div h4:first-child {
+      margin: 0;
+      text-align: right;
+      color: #0e4160;
+      font-weight: normal; }
+    .rates-content div h4:last-child {
+      margin: 0;
+      text-align: left;
+      color: #0e4160;
+      font-weight: normal; }
+    .rates-content div p:first-child {
+      margin: 0;
+      text-align: right;
+      color: #0e4160; }
+    .rates-content div p:last-child {
+      margin: 0;
+      text-align: left;
+      color: #0e4160; }
