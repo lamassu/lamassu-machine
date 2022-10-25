@@ -325,6 +325,9 @@ function processData (data) {
       suspiciousAddress(data.blacklistMessage)
       setState('suspicious_address')
       break
+    case 'hcm2Continue':
+      setState('hcm2_continue')
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -741,7 +744,6 @@ $(document).ready(function () {
   })
 
   touchEvent(hcm2Continue, function () {
-    setState('hcm2_continue')
     buttonPressed('hcm2Continue')
   })
 

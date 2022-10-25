@@ -355,10 +355,6 @@ msgid "Your coins will be sent to:"
 msgstr "Your coins will be sent to:"
 
 #: On screen: insert-bills-hcm2
-msgid "Discount added (5 off commissions)"
-msgstr "Discount added (5 off commissions)"
-
-#: On screen: insert-bills-hcm2
 msgid "Continue"
 msgstr "Continue"
 
