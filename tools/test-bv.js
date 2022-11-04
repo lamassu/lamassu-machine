@@ -6,13 +6,14 @@ if (!device) {
 }
 
 console.log('Connecting to: %s', device)
-const billValidator = process.argv[3] === 'ccnet' ?
+const bv = process.argv[3] === 'ccnet' ?
   require('../lib/ccnet/ccnet')
   :
   require('../lib/id003/id003')
 
 var config = {currency: 'EUR', rs232: {device: device}}
-
+const billValidator = bv.factory(config)
+  
 billValidator.on('error', function (err) { console.log(err) })
 billValidator.on('disconnected', function () { console.log('Disconnnected') })
 billValidator.on('billAccepted', function () { console.log('Bill accepted') })
