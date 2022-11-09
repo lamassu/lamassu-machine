@@ -2092,8 +2092,8 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
   else status = smsReceiptStatus
 
   const className = receiptStatus ? 'print-receipt' : 'send-sms-receipt'
-  const printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...'
-  const success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!'
+  const printing = receiptStatus ? translate('Printing receipt...') : translate('Sending receipt...')
+  const success = receiptStatus ? translate('Receipt printed successfully!') : translate('Receipt sent successfully!')
 
   switch (status) {
     case 'disabled':
