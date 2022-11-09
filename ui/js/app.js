@@ -2042,8 +2042,8 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
   if (receiptStatus) status = receiptStatus;else status = smsReceiptStatus;
 
   var className = receiptStatus ? 'print-receipt' : 'send-sms-receipt';
-  var printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...';
-  var success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!';
+  var printing = receiptStatus ? translate('Printing receipt...') : translate('Sending receipt...');
+  var success = receiptStatus ? translate('Receipt printed successfully!') : translate('Receipt sent successfully!');
 
   switch (status) {
     case 'disabled':
