@@ -318,6 +318,9 @@ function processData (data) {
     case 'invalidAddress':
       invalidAddress(data.lnInvoiceTypeError)
       break
+    case 'externalCompliance':
+      externalCompliance(data.externalComplianceUrl)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -1011,6 +1014,8 @@ $(document).ready(function () {
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
   })
 
+  setupButton('external-validation-ok', 'finishBeforeSms')
+
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
       setLocale(otherLocale())
@@ -1302,7 +1307,8 @@ function setDirection (direction) {
     $('.custom_permission_state'),
     $('.custom_permission_screen2_numerical_state'),
     $('.custom_permission_screen2_text_state'),
-    $('.custom_permission_screen2_choiceList_state')
+    $('.custom_permission_screen2_choiceList_state'),
+    $('.external_compliance_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -2282,4 +2288,9 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
   }
+}
+
+function externalCompliance (url) {
+  setTimeout(() => qrize(url, $('#qr-code-external-validation'), CASH_OUT_QR_COLOR), 1000)
+  return setScreen('external_compliance')
 }

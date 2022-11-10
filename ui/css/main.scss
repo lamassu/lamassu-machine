@@ -1906,3 +1906,26 @@ button[disabled] {
 @media (orientation: portrait) {
   @import "./portrait.scss";
 }
+
+.external_compliance_state {
+  footer: {
+    margin-top: 15px;
+  }
+}
+
+.external_compliance_state footer {
+  margin-top: 5vh;
+}
+
+.external-validation-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  div {
+    margin-right: 15px;
+  };
+  div:last-child {
+    margin-right: 0px;
+  };
+}
