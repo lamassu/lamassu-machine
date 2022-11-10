@@ -315,6 +315,9 @@ function processData (data) {
       suspiciousAddress(data.blacklistMessage)
       setState('suspicious_address')
       break
+    case 'externalCompliance':
+      externalCompliance(data.externalComplianceUrl)
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -961,6 +964,8 @@ $(document).ready(function () {
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
   })
 
+  setupButton('external-validation-ok', 'finishBeforeSms')
+
   touchEvent(document.getElementById('change-language-section'), () => {
     if (_primaryLocales.length === 2) {
       setLocale(otherLocale())
@@ -1282,7 +1287,8 @@ function setDirection (direction) {
     $('.custom_permission_state'),
     $('.custom_permission_screen2_numerical_state'),
     $('.custom_permission_screen2_text_state'),
-    $('.custom_permission_screen2_choiceList_state')
+    $('.custom_permission_screen2_choiceList_state'),
+    $('.external_compliance_state')
   ]
   states.forEach(it => {
     setUpDirectionElement(it, direction)
@@ -2318,4 +2324,9 @@ function suspiciousAddress (blacklistMessage) {
   } else {
     $(`#suspicious-address-message`).html(translate("This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."))
   }
+}
+
+function externalCompliance (url) {
+  setTimeout(() => qrize(url, $('#qr-code-external-validation'), CASH_OUT_QR_COLOR), 1000)
+  return setScreen('external_compliance')
 }

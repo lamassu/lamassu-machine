@@ -57,6 +57,7 @@ var customRequirementTextKeyboard = null;
 var customRequirementChoiceList = null;
 var viewportButtonEventsActive = null;
 var viewportEvents = {};
+var customRequirementTextKeyboardNumberOfBoxes = 2;
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
@@ -221,7 +222,7 @@ function processData(data) {
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
-  if (data.allRates && data.ratesFiat && data.localeInfo) setRates(data.allRates, data.ratesFiat, data.localeInfo);
+  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat);
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null);
@@ -386,6 +387,9 @@ function processData(data) {
       suspiciousAddress(data.blacklistMessage);
       setState('suspicious_address');
       break;
+    case 'externalCompliance':
+      externalCompliance(data.externalComplianceUrl);
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -455,10 +459,12 @@ function customInfoRequest(customInfoRequest) {
     case 'text':
       $('#custom-requirement-text-label1').text(customInfoRequest.input.label1);
       $('#custom-requirement-text-label2').text(customInfoRequest.input.label2);
+      $('#custom-requirement-text-label3').text(customInfoRequest.input.label3);
       $('#previous-text-requirement').hide();
       $('#submit-text-requirement').hide();
       $('#next-text-requirement').hide();
       $('#optional-text-field-2').hide();
+      $('#optional-text-field-3').hide();
       $('.key.backspace.standard-backspace-key').removeClass('backspace-margin-left-override');
       $('.custom-info-request-space-key').show();
       // set type of constraint and buttons where that constraint should apply to disable/ enable
@@ -467,7 +473,15 @@ function customInfoRequest(customInfoRequest) {
         $('#optional-text-field-2').show();
         $('.key.backspace.standard-backspace-key').addClass('backspace-margin-left-override');
         $('.custom-info-request-space-key').hide();
-        customRequirementTextKeyboard.setConstraint(customInfoRequest.input.constraintType, ['#next-text-requirement']);
+
+        if (!!customInfoRequest.input.label3) {
+          $('#optional-text-field-3').show();
+          customRequirementTextKeyboard.setConstraint('spaceSeparationThreeFields', ['#next-text-requirement']);
+          customRequirementTextKeyboardNumberOfBoxes = 3;
+        } else {
+          customRequirementTextKeyboard.setConstraint('spaceSeparation', ['#next-text-requirement']);
+          customRequirementTextKeyboardNumberOfBoxes = 2;
+        }
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');
@@ -709,7 +723,7 @@ $(document).ready(function () {
 
   customRequirementTextKeyboard = new Keyboard({
     id: 'custom-requirement-text-keyboard',
-    inputBox: '.text-input-field-1',
+    inputBox: 1,
     submitButtonWrapper: '.submit-text-requirement-button-wrapper',
     setComplianceTimeout: setComplianceTimeout
   }).init(function () {
@@ -822,28 +836,49 @@ $(document).ready(function () {
   var previousFieldTextRequirementButton = document.getElementById('previous-text-requirement');
   touchEvent(submitTextRequirementButton, function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
-    var text = $('.text-input-field-1').data('content') + ' ' + ($('.text-input-field-2').data('content') || '');
+    var text1 = $('.text-input-field-1').data('content');
+    var text2 = $('.text-input-field-2').data('content') || '';
+    var text3 = $('.text-input-field-3').data('content') || '';
+    var text = [text1, text2, text3].filter(function (t) {
+      return t != '';
+    }).join(' ');
     buttonPressed('customInfoRequestSubmit', text);
     $('.text-input-field-1').removeClass('faded').data('content', '').val('');
     $('.text-input-field-2').addClass('faded').data('content', '').val('');
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1');
+    $('.text-input-field-3').addClass('faded').data('content', '').val('');
+    customRequirementTextKeyboard.setInputBox(1);
   });
   touchEvent(nextFieldTextRequirementButton, function () {
-    $('.text-input-field-1').addClass('faded');
-    $('.text-input-field-2').removeClass('faded');
-    $('#next-text-requirement').hide();
+    var fieldState = customRequirementTextKeyboard.getInputBox();
+    var finalState = customRequirementTextKeyboardNumberOfBoxes;
+
+    $('.text-input-field-' + fieldState).addClass('faded');
     $('#previous-text-requirement').show();
-    $('#submit-text-requirement').show();
-    // changing input box changes buttons where validation works on
-    customRequirementTextKeyboard.setInputBox('.text-input-field-2', ['#submit-text-requirement']);
+
+    fieldState = fieldState == finalState ? fieldState : fieldState + 1;
+
+    $('.text-input-field-' + fieldState).removeClass('faded');
+    customRequirementTextKeyboard.setInputBox(fieldState, ['#submit-text-requirement']);
+
+    if (fieldState === finalState) {
+      $('#next-text-requirement').hide();
+    }
   });
   touchEvent(previousFieldTextRequirementButton, function () {
-    $('.text-input-field-1').removeClass('faded');
-    $('.text-input-field-2').addClass('faded');
+    var fieldState = customRequirementTextKeyboard.getInputBox();
+
+    $('.text-input-field-' + fieldState).addClass('faded');
     $('#next-text-requirement').show();
-    $('#previous-text-requirement').hide();
-    $('#submit-text-requirement').hide();
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1', ['#next-text-requirement']);
+
+    fieldState = fieldState == 1 ? 1 : fieldState - 1;
+
+    $('.text-input-field-' + fieldState).removeClass('faded');
+
+    customRequirementTextKeyboard.setInputBox(fieldState, ['#next-text-requirement']);
+
+    if (fieldState === 1) {
+      $('#previous-text-requirement').hide();
+    }
   });
 
   setupButton('submit-promo-code', 'submitPromoCode', {
@@ -989,8 +1024,11 @@ $(document).ready(function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)();
     $('.text-input-field-1').removeClass('faded').data('content', '').val('');
     $('.text-input-field-2').addClass('faded').data('content', '').val('');
+    $('.text-input-field-3').addClass('faded').data('content', '').val('');
     customRequirementTextKeyboard.setInputBox('.text-input-field-1');
   });
+
+  setupButton('external-validation-ok', 'finishBeforeSms');
 
   touchEvent(document.getElementById('change-language-section'), function () {
     if (_primaryLocales.length === 2) {
@@ -1281,7 +1319,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state'), $('.custom_permission_screen2_choiceList_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state'), $('.custom_permission_screen2_choiceList_state'), $('.external_compliance_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
@@ -2272,13 +2310,13 @@ function thousandSeparator(number, country) {
   return numberFormatter.format(number);
 }
 
-function setRates(allRates, fiat, locales) {
+function setRates(allRates, fiat) {
   var ratesTable = $('.rates-content');
-  var tableHeader = $('<div class="xs-margin-bottom">\n  <h4 class="js-i18n">Buy</h4>\n  <h4 class="js-i18n">Crypto</h4>\n  <h4 class="js-i18n">Sell</h4>\n</div>');
+  var tableHeader = $('<div class="xs-margin-bottom">\n  <h4 class="js-i18n">' + translate('Buy') + '</h4>\n  <h4 class="js-i18n">' + translate('Crypto') + '</h4>\n  <h4 class="js-i18n">' + translate('Sell') + '</h4>\n</div>');
   var coinEntries = [];
 
   Object.keys(allRates).forEach(function (it) {
-    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country) + '</p>\n  </div>'));
+    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), localeCode) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), localeCode) + '</p>\n  </div>'));
   });
 
   $('#rates-fiat-currency').text(fiat);
@@ -2303,5 +2341,12 @@ function suspiciousAddress(blacklistMessage) {
   } else {
     $('#suspicious-address-message').html(translate("This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."));
   }
+}
+
+function externalCompliance(url) {
+  setTimeout(function () {
+    return qrize(url, $('#qr-code-external-validation'), CASH_OUT_QR_COLOR);
+  }, 1000);
+  return setScreen('external_compliance');
 }
 //# sourceMappingURL=app.js.map
