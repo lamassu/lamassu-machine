@@ -91,6 +91,10 @@ msgid "Languages"
 msgstr "Languages"
 
 #: On screen: choose_coin
+msgid "Rates"
+msgstr "Rates"
+
+#: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
 
@@ -101,10 +105,6 @@ msgstr "How much?"
 #: On screen: choose-fiat
 msgid "Have a promo code?"
 msgstr "Have a promo code?"
-
-#: On screen: choose-fiat
-msgid "Discount added (5 off commissions)"
-msgstr "Discount added (5 off commissions)"
 
 #: On screen: choose-fiat
 msgid "Cash Out"
@@ -513,6 +513,22 @@ msgstr "If you are sure of the code, please contact the operator for clarificati
 #: On screen: invalid-promo-code
 msgid "Enter a different code"
 msgstr "Enter a different code"
+
+#: On screen: rates
+msgid "Exchange Rates"
+msgstr "Exchange Rates"
+
+#: On screen: rates
+msgid "Buy"
+msgstr "Buy"
+
+#: On screen: rates
+msgid "Crypto"
+msgstr "Crypto"
+
+#: On screen: rates
+msgid "Sell"
+msgstr "Sell"
 
 #: On screen: register-phone
 msgid "Phone Number"

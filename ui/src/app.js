@@ -94,6 +94,7 @@ const LN = 'LN'
 const BTC = 'BTC'
 
 function processData (data) {
+  if (data.screenOpts) setScreenOptions(data.screenOpts)
   if (data.localeInfo) setLocaleInfo(data.localeInfo)
   if (data.locale) setLocale(data.locale)
   if (data.supportedCoins) setCoins(data.supportedCoins)
@@ -116,7 +117,10 @@ function processData (data) {
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
   if (data.cryptoCode) translateCoin(data.cryptoCode === LN ? BTC : data.crytoCode)
-  if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
+  if (data.tx) {
+    if (data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
+    else if (data.tx.cashOutFee) setFixedFee(data.tx.cashOutFee)
+  }
   if (data.terms) setTermsScreen(data.terms)
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
   if (data.direction) setDirection(data.direction)
@@ -124,6 +128,7 @@ function processData (data) {
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
+  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat)
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
@@ -280,6 +285,9 @@ function processData (data) {
       break
     case 'invalidAddress':
       invalidAddress(data.lnInvoiceTypeError)
+      break
+    case 'rates':
+      setState('rates')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -834,6 +842,9 @@ $(document).ready(function () {
 
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
+  
+  setupImmediateButton('rates-close', 'idle')
+  setupButton('rates-section-button', 'ratesScreen')
 
   calculateAspectRatio()
 
@@ -1213,7 +1224,7 @@ function setDirection (direction) {
 function setTermsScreen (data) {
   const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-title').html(data.title)
-  startPage(data.text)
+  startPage(data.text, data.acceptDisabled)
   $screen.find('.js-terms-cancel-button').html(data.cancel)
   $screen.find('.js-terms-accept-button').html(data.accept)
   setTermsConditionsTimeout()
@@ -1244,9 +1255,10 @@ function setTermsConditionsAcceptanceDelay (screen, data) {
 
   if (!data.delay) return
 
-  let seconds = data.delayTimer / 1000
+  const delayTimer = isNaN(data.delayTimer) ? 0 : data.delayTimer
+  let seconds = delayTimer / 1000
   acceptButton.prop('disabled', true)
-  acceptButton.html(`${data.accept} (${seconds})`)
+  acceptButton.html(seconds > 0 ? `${data.accept} (${seconds})` : `${data.accept}`)
 
   var tmpbtn = acceptButton.clone().appendTo('body').css({ 'display': 'block', 'visibility': 'hidden' })
   var width = tmpbtn.outerWidth()
@@ -1290,10 +1302,10 @@ function scrollUp () {
 }
 
 // start page
-function startPage (text) {
+function startPage (text, acceptedTerms) {
   const $screen = $('.terms_screen_state')
   $screen.find('.js-terms-text').html(text)
-  currentPage = 0
+  if (!acceptedTerms) currentPage = 0
   totalPages = 0
   setTimeout(function () {
     const div = document.getElementById('js-terms-text-div')
@@ -1304,7 +1316,7 @@ function startPage (text) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       document.getElementById('actions-scroll').style.display = ''
-      div.scrollTo(0, 0)
+      if (!acceptedTerms) div.scrollTo(0, 0)
       totalPages = Math.ceil(textHeightQuantity / scrollSize)
       updatePageCounter()
     }
@@ -1425,8 +1437,10 @@ function setChooseCoinColors () {
 
   if (isTwoWay) {
     $('.choose_coin_state .change-language').removeClass('cash-in-color').addClass('cash-out-color')
+    $('.choose_coin_state #rates-section').removeClass('cash-in-color').addClass('cash-out-color')
   } else {
     $('.choose_coin_state .change-language').removeClass('cash-out-color').addClass('cash-in-color')
+    $('.choose_coin_state #rates-section').removeClass('cash-out-color').addClass('cash-in-color')
   }
 }
 
@@ -2159,4 +2173,29 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
   }
+}
+
+function setScreenOptions (opts) {
+  (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
+}
+
+function setRates (allRates, fiat) {
+  const ratesTable = $('.rates-content')
+  const tableHeader = $(`<div class="xs-margin-bottom">
+  <h4 class="js-i18n">Buy</h4>
+  <h4 class="js-i18n">Crypto</h4>
+  <h4 class="js-i18n">Sell</h4>
+</div>`)
+  const coinEntries = []
+  
+  Object.keys(allRates).forEach(it => {
+    coinEntries.push($(`<div class="xs-margin-bottom">
+    <p class="d2 js-i18n">${allRates[it].cashIn}</p>
+    <h4 class="js-i18n">${it}</h4>
+    <p class="d2 js-i18n">${allRates[it].cashOut}</p>
+  </div>`))
+  })
+
+  $('#rates-fiat-currency').text(fiat)
+  ratesTable.empty().append(tableHeader).append(coinEntries)
 }
