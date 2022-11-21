@@ -689,6 +689,14 @@ footer {
   width: 30vh;
 }
 
+#choose-coin-header section {
+  margin-left: 2em;
+}
+
+#choose-coin-header section:first-child {
+  margin-left: 0em;
+}
+
 #change-language-section #language-dropdown-toggle {
   align-items: center;
 }
@@ -1640,13 +1648,16 @@ footer {
 #custom-requirement-choicelist-wrapper {
   height: 90%;
   margin: 0 6vw;
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 0.5fr;
+  display: flex;
+}
+
+.custom-requirement-question-wrapper {
+  width: 49%;
 }
 
 .choice-list-grid-wrapper {
   min-height: 60vh;
-  margin-right: 20px;
+  width: 36%;
 }
 
 .choice-list-item {
@@ -1676,7 +1687,7 @@ footer {
 
 .choice-list-actions-wrapper {
   position: relative;
-  height: 100%;
+  height: 70vh;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -1686,7 +1697,7 @@ footer {
     margin: 4vh 0;
   }
   justify-content: center;
-  margin-left: 25%;
+  margin-left: 5%;
 }
 
 .choice-list-arrow {
@@ -1771,4 +1782,56 @@ footer {
  #us-ssn-permission-cancel {
    display: initial;
  }
+}
+
+#rates main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rates-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rates-content {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    h4 {
+      margin: 0 4rem;
+      width: 10vw;
+      text-align: center;
+      color: $sapphire;
+    }
+    h4:first-child {
+      margin: 0;
+      text-align: right;
+      color: $sapphire;
+      font-weight: normal;
+    }
+    h4:last-child {
+      margin: 0;
+      text-align: left;
+      color: $sapphire;
+      font-weight: normal;
+    }
+    p:first-child {
+      margin: 0;
+      text-align: right;
+      color: $sapphire;
+    }
+    p:last-child {
+      margin: 0;
+      text-align: left;
+      color: $sapphire;
+    }
+  }
 }

@@ -253,7 +253,7 @@
       data-tr-section="choose_coin"
       data-screentype="exception-tp"
     >
-      <header>
+      <header id="choose-coin-header">
         <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
           <div
             id="language-dropdown-toggle"
@@ -264,6 +264,11 @@
           </div>
           <div id="languages" class="dropdown hide"></div>
           <div class="js-two-language small-action-button tl2"></div>
+        </section>
+        <section id="rates-section" class="button cash-out-color">
+          <div id="rates-section-button" class="small-action-button tl2">
+            <div class="js-i18n">Rates</div>
+          </div>
         </section>
       </header>
     
@@ -324,7 +329,7 @@
             <button id="choose-fiat-promo-button" class="js-i18n bordered-progress-button button d2">
               Have a promo code?
             </button>
-            <p id="choose-fiat-code-added" class="js-i18n d2" style="display:none">Discount added (5 off commissions)</p>
+            <p id="choose-fiat-code-added" class="d2" style="display:none"></p>
           </section>
           <div class="d2 limit white"></div>
         </section>
@@ -729,7 +734,7 @@
     
       <main class="custom-permission-text-input-main">
         <section id="custom-requirement-choicelist-wrapper">
-            <div>
+            <div class="custom-requirement-question-wrapper">
               <h2 class="primary-side-title xs-margin-bottom" id="custom-screen2-choiceList-title"></h2>
               <div class="d1">
                 <span id="custom-screen2-choiceList-text"></span>
@@ -1156,7 +1161,7 @@
             <button id="insert-first-bill-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
               Have a promo code?
             </button>
-            <p id="insert-first-bill-code-added" class="js-i18n d2" style="display:none">Discount added (5 off commissions)</p>
+            <p id="insert-first-bill-code-added" class="d2" style="display:none"></p>
           </div>
         </section>
         <section class="secondary-side with-image fade-in-delay">
@@ -1631,6 +1636,32 @@
           Continue transaction
         </button>
       </footer>
+    </section>
+    <section
+      id="rates"
+      class="viewport rates_state system-color"
+      data-tr-section="rates"
+      data-screentype="info-action-tp"
+    >
+      <header>
+        <div id="rates-close" class="cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main>
+        <div class="rates-header">
+          <h2 class="js-i18n xs-margin-bottom">Exchange Rates</h2>
+          <h3 id="rates-fiat-currency">EUR</h3>
+        </div>
+        <div id="rates-content" class="rates-content">
+          <div class="xs-margin-bottom">
+            <h4 class="js-i18n">Buy</h4>
+            <h4 class="js-i18n">Crypto</h4>
+            <h4 class="js-i18n">Sell</h4>
+          </div>
+        </div>
+      </main>
     </section>
     <section
       class="viewport register_phone_state"
