@@ -126,7 +126,6 @@ button {
   @include pill-button;
   @include cash-background-colors;
   color: $white;
-  min-width: 4 * $spacer;
   &:active, .active {
     background-color: $white;
     @include cash-colors;
