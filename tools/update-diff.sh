@@ -16,7 +16,8 @@ FOLDER_2=$TMP_FOLDER/update-2
 NODE_MODULES_PATH_1=package/subpackage/hardware/aaeon/node_modules/
 NODE_MODULES_PATH_2=package/subpackage/hardware/ssuboard/node_modules/
 NODE_MODULES_PATH_3=package/subpackage/hardware/upboard/node_modules/
-NODE_MODULES_PATH_4=package/subpackage/lamassu-machine/node_modules/
+NODE_MODULES_PATH_4=package/subpackage/hardware/upboard-4000/node_modules/
+NODE_MODULES_PATH_5=package/subpackage/lamassu-machine/node_modules/
 
 mkdir -p $TMP_FOLDER
 mkdir -p $FOLDER_1
@@ -55,9 +56,19 @@ echo -e "\nOnly in $2"
 echo -e "--------------------------"
 comm -13 $TMP_FOLDER/upboard-update-1.txt $TMP_FOLDER/upboard-update-2.txt
 
+echo -e "\n\n\n\nRetrieving diff between upboard-4000 folders..."
+(cd $FOLDER_1/$NODE_MODULES_PATH_4 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/upboard-4000-update-1.txt)
+(cd $FOLDER_2/$NODE_MODULES_PATH_4 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/upboard-4000-update-2.txt)
+echo -e "\nOnly in $1"
+echo -e "--------------------------"
+comm -23 $TMP_FOLDER/upboard-4000-update-1.txt $TMP_FOLDER/upboard-4000-update-2.txt
+echo -e "\nOnly in $2"
+echo -e "--------------------------"
+comm -13 $TMP_FOLDER/upboard-4000-update-1.txt $TMP_FOLDER/upboard-4000-update-2.txt
+
 echo -e "\n\n\n\nRetrieving diff between lamassu-machine folders..."
-(cd $FOLDER_1/$NODE_MODULES_PATH_4 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/machine-update-1.txt)
-(cd $FOLDER_2/$NODE_MODULES_PATH_4 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/machine-update-2.txt)
+(cd $FOLDER_1/$NODE_MODULES_PATH_5 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/machine-update-1.txt)
+(cd $FOLDER_2/$NODE_MODULES_PATH_5 ; find -maxdepth 2 -type d | sort > $TMP_FOLDER/machine-update-2.txt)
 echo -e "\nOnly in $1"
 echo -e "--------------------------"
 comm -23 $TMP_FOLDER/machine-update-1.txt $TMP_FOLDER/machine-update-2.txt

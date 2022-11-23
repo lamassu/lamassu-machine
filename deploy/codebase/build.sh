@@ -117,8 +117,41 @@ elif [ $1 == "upboard-tejo" ] ; then
     mkdir $EXPORT_DIR/hardware/upboard/tejo
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/tejo/
   fi
+elif [ $1 == "upboard-4000-sintra" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard-4000/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard-4000/sintra
+
+  cp $SYSTEM_DIR/upboard-4000/sintra/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard-4000/sintra
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard-4000/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard-4000/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard-4000/sintra
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard-4000/sintra/
+  fi
+elif [ $1 == "upboard-4000-gaia" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard-4000/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard-4000/gaia
+
+  cp $SYSTEM_DIR/upboard-4000/gaia/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard-4000/gaia
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard-4000/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard-4000/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard-4000/gaia
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard-4000/gaia/
+  fi
+elif [ $1 == "upboard-4000-tejo" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard-4000/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard-4000/tejo
+
+  cp $SYSTEM_DIR/upboard-4000/tejo/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard-4000/tejo
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard-4000/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard-4000/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard-4000/tejo
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard-4000/tejo/
+  fi
 else
-  echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"
+  echo "The first argument should the target's platform name: aaeon, ssuboard, upboard, upboard-4000"
   exit 1
 fi
 

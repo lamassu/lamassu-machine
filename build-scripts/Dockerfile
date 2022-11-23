@@ -83,6 +83,33 @@ FROM lamassu/upboard-build:1.0 as upboard-tejo-build
     rmdir node_modules/@joepie91 && \
     cp ./hardware/codebase/upboard/tejo/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
+  
+FROM lamassu/upboard-build:1.0 as upboard-4000-gaia-build
+  COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard-4000/gaia/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
+
+FROM lamassu/upboard-build:1.0 as upboard-4000-sintra-build
+  COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard-4000/sintra/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
+
+FROM lamassu/upboard-build:1.0 as upboard-4000-tejo-build
+  COPY --from=upboard-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && npm install && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard-4000/tejo/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
 
 FROM lamassu/ssu-build:1.0 as ssuboard-build
   COPY --from=upboard-tejo-build /lamassu/lamassu-machine /lamassu/lamassu-machine

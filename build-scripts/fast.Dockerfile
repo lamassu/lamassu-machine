@@ -93,6 +93,27 @@ FROM upboard as upboard-tejo-build
     cp ./hardware/codebase/upboard/tejo/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
 
+FROM upboard as upboard-4000-gaia-build
+  COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN rm -rf lamassu-machine/node_modules
+  COPY --from=download-modules /lamassu/package/subpackage/lamassu-machine/node_modules /lamassu/lamassu-machine/node_modules
+  COPY --from=download-modules /lamassu/package/subpackage/hardware/upboard-4000/node_modules /lamassu/lamassu-machine/node_modules/
+  RUN cd lamassu-machine && \
+    cp ./hardware/codebase/upboard-4000/gaia/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
+
+FROM upboard as upboard-4000-sintra-build
+  COPY --from=upboard-4000-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine/
+  RUN cd lamassu-machine && \
+    cp ./hardware/codebase/upboard-4000/sintra/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
+
+FROM upboard as upboard-4000-tejo-build
+  COPY --from=upboard-4000-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine/
+  RUN cd lamassu-machine && \
+    cp ./hardware/codebase/upboard-4000/tejo/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
+
 FROM ssuboard as ssuboard-build
   COPY --from=upboard-tejo-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN rm -rf lamassu-machine/node_modules
