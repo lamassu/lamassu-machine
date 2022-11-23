@@ -18,7 +18,8 @@ var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
 let locale = null
-let localeCode = 'bg-BG'
+let localeCode = 'en-US'
+let shouldShowMetrics = false
 
 $(function () {
   $('body').css('cursor', 'default')
@@ -53,7 +54,7 @@ $(function () {
 
   phoneKeypad.activate()
 
-  let wifiKeyboard = new Keyboard('wifi-keyboard').init()
+  let wifiKeyboard = new Keyboard({ id: 'wifi-keyboard', inputBox: '#input-passphrase' }).init()
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     console.log('phoneNumber', result)
@@ -266,6 +267,14 @@ function setupFakes () {
       <div class="wifiicon-wrapper"><img src="images/wifiicon/1.svg"></span></div>
     </div>
   `)
+  $('.js-i18n .promo-code-title').html('Type in your promo code')
+  $('#custom-screen2-numerical-title #custom-screen2-choiceList-title').html('This is a title')
+  $('#custom-requirement-text-label1').html('Label 1')
+  $('#custom-requirement-text-label2').html('Label 2')
+  $('.choice-list-item-1-button').html('Option 1')
+  $('.choice-list-item-2-button').html('Option 2')
+  $('.choice-list-item-3-button').html('Option 3')
+  $('.choice-list-item-4-button').html('Option 4')
 
   let states = [
     $('.scan_id_photo_state'),
@@ -300,7 +309,13 @@ function setupFakes () {
     $('.retry_permission_id_state'),
     $('.waiting_state'),
     $('.scan_manual_id_photo_state'),
-    $('.promo_code_not_found_state')
+    $('.promo_code_not_found_state'),
+    $('.insert_promo_code_state'),
+    $('.custom_permission_state'),
+    $('.rates_state'),
+    $('.custom_permission_screen2_numerical_state'),
+    $('.custom_permission_screen2_text_state'),
+    $('.custom_permission_screen2_choiceList_state')
   ]
 
   states.forEach(it => {
@@ -407,7 +422,7 @@ function qrize (text, target, color, lightning) {
   }
 
   const metrics = document.querySelector('#metrics')
-  metrics.classList.remove('hide')
+  if (shouldShowMetrics) metrics.classList.remove('hide')
 
   function render (now) {
     const deltaTime = now - then
