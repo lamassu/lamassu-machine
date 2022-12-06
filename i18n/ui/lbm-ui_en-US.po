@@ -194,6 +194,18 @@ msgstr "You will send us"
 msgid "to:"
 msgstr "to:"
 
+#: On screen: disabled
+msgid "Machine down"
+msgstr "Machine down"
+
+#: On screen: disabled
+msgid "Sorry, we are down for the moment."
+msgstr "Sorry, we are down for the moment."
+
+#: On screen: disabled
+msgid "Please contact the operator."
+msgstr "Please contact the operator."
+
 #: On screen: dispensing
 msgid "Dispensing..."
 msgstr "Dispensing..."
@@ -662,17 +674,9 @@ msgstr "Please scan the pairing QR code you got from your remote server."
 msgid "Maintenance Required"
 msgstr "Maintenance Required"
 
-#: On screen: maintenance
-msgid "Please contact the operator."
-msgstr "Please contact the operator."
-
 #: On screen: terms
 msgid "I agree"
 msgstr "I agree"
-
-#: On screen: trouble
-msgid "Sorry, we are down for the moment."
-msgstr "Sorry, we are down for the moment."
 
 #: On screen: tx-not-seen
 msgid "We're taking a look"

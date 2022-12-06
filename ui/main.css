@@ -1930,6 +1930,9 @@ footer {
 .trouble_state img {
   width: 33vh; }
 
+.disabled_state img {
+  width: 33vh; }
+
 .retry_permission_id_state img,
 .failed_scan_id_photo_state img,
 .wrong_dispenser_currency_state img,
