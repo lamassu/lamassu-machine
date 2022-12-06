@@ -10,6 +10,7 @@ var BASE = '/tmp/extract'
 var DONE_PATH = BASE + '/done.txt'
 var SCRIPT_PATH = BASE + '/package/updatescript.js'
 var RUNNING_PATH = BASE + '/running.txt'
+var COMPLETE_PATH = BASE + '/complete.txt'
 var TIMEOUT = 600000
 
 var child = null
@@ -72,6 +73,7 @@ function executeScript () {
     console.log(err)
   })
   child.on('exit', function () {
+    complete()
     cleanUp()
     console.log('done')
   })
@@ -83,6 +85,10 @@ function start () {
   fs.unlinkSync(DONE_PATH)
   fs.writeFileSync(RUNNING_PATH, 'RUNNING\n')
   return fs.existsSync(RUNNING_PATH)   // check for race conditions
+}
+
+function complete () {
+  fs.writeFileSync(COMPLETE_PATH, 'COMPLETE\n')
 }
 
 function cleanUp () {
