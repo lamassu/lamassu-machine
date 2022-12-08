@@ -2155,6 +2155,11 @@ function setScreenOptions (opts) {
   (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
 }
 
+function thousandSeparator (number) {
+  const numberFormatter = Intl.NumberFormat('en-US')
+  return numberFormatter.format(number)
+}
+
 function setRates (allRates, fiat) {
   const ratesTable = $('.rates-content')
   const tableHeader = $(`<div class="xs-margin-bottom">
@@ -2163,12 +2168,12 @@ function setRates (allRates, fiat) {
   <h4 class="js-i18n">Sell</h4>
 </div>`)
   const coinEntries = []
-  
+
   Object.keys(allRates).forEach(it => {
     coinEntries.push($(`<div class="xs-margin-bottom">
-    <p class="d2 js-i18n">${allRates[it].cashIn}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashIn).toFixed(2))}</p>
     <h4 class="js-i18n">${it}</h4>
-    <p class="d2 js-i18n">${allRates[it].cashOut}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashOut).toFixed(2))}</p>
   </div>`))
   })
 
