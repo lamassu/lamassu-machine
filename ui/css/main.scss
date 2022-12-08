@@ -695,12 +695,8 @@ footer {
   width: 30vh;
 }
 
-#choose-coin-header section {
+.rates-section {
   margin-left: 2em;
-}
-
-#choose-coin-header section:first-child {
-  margin-left: 0em;
 }
 
 #change-language-section #language-dropdown-toggle {
@@ -1473,6 +1469,10 @@ footer {
   .crypto-address, .crypto-address-no-br{
     display: flex;
     justify-content: flex-end;
+  }
+  .rates-section {
+    margin-left: 0; 
+    margin-right: 2em;
   }
 }
 
