@@ -57,6 +57,32 @@ var viewportEvents = {}
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
 
+function groupBy (arr, by) {
+  const ret = {}
+  for (const elem of arr) {
+    const key = by(elem)
+    if (Object.hasOwn(ret, key))
+      ret[key].push(elem)
+    else
+      ret[key] = [elem]
+  }
+  return ret
+}
+
+function sumBy (arr, by) {
+  let ret = 0
+  for (const x of arr)
+    ret += by(x)
+  return ret
+}
+
+function partitionBy (arr, by) {
+    const [yes, no] = [[], []]
+    for (const x of arr)
+        (by(x) ? yes : no).push(x)
+    return [yes, no]
+}
+
 function connect () {
   console.log(`ws://${HOST}:${PORT}/`)
   websocket = new WebSocket(`ws://${HOST}:${PORT}/`)
@@ -1556,15 +1582,31 @@ function formatDenomination (denom) {
 
 function buildCassetteButtons (_cassettes, numberOfButtons) {
   cassettes = _cassettes
-  var activeCassettes = _cassettes.filter(it => it.count === null || it.count > 0)
-  var inactiveCassettes = _cassettes.filter(it => it.count === 0)
 
-  var allCassettes = activeCassettes.concat(inactiveCassettes)
-  var selectedCassettes = allCassettes.slice(0, numberOfButtons)
-  var sortedCassettes = selectedCassettes.sort((a, b) => a.denomination - b.denomination)
+  _cassettes = _cassettes.map(c => {
+    const isVirtual = c.count === null
+    const isActive = isVirtual || c.count > 0
+    return Object.assign(c, { isVirtual, isActive })
+  })
 
-  for (var i = 0; i < sortedCassettes.length; i++) {
-    var denomination = formatDenomination(sortedCassettes[i].denomination || 0)
+  let [virtualCassettes, physicalCassettes] = partitionBy(_cassettes, it => it.isVirtual)
+
+  physicalCassettes = Object.entries(groupBy(physicalCassettes, c => c.denomination))
+    .map(([denomination, arr]) => {
+      const count = sumBy(arr, x => x.count)
+      const isActive = count > 0
+      return { denomination, count, isActive }
+    })
+
+  const [activeCassettes, inactiveCassettes] = partitionBy(physicalCassettes, it => it.isActive)
+
+  _cassettes = activeCassettes
+    .concat(virtualCassettes, inactiveCassettes)
+    .slice(0, numberOfButtons)
+    .sort((a, b) => a.denomination - b.denomination)
+
+  for (var i = 0; i < _cassettes.length; i++) {
+    var denomination = formatDenomination(_cassettes[i].denomination || 0)
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
   }
 }
