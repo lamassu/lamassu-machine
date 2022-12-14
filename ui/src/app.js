@@ -693,7 +693,7 @@ $(document).ready(function () {
     buttonPressed('blockedCustomerOk')
   })
   var insertBillCancelButton = document.getElementById('insertBillCancel')
-  touchImmediateEvent(insertBillCancelButton, function () {
+  touchImmediateEvent(insertBillCancelButton, null, function () {
     setBuyerAddress(null)
     buttonPressed('cancelInsertBill')
   })
@@ -714,7 +714,7 @@ $(document).ready(function () {
   setupButton('choose-fiat-promo-button', 'insertPromoCode')
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel')
-  touchImmediateEvent(promoCodeCancelButton, function () {
+  touchImmediateEvent(promoCodeCancelButton, null, function () {
     promoKeyboard.deactivate.bind(promoKeyboard)
     buttonPressed('cancelPromoCode')
   })
@@ -886,27 +886,14 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
-  setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
-  setupButton('custom-permission-no', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
-  })
-  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
-    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
-    $('.text-input-field-2').addClass('faded').data('content', '').val('')
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
-  })
-  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
-  })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest')
 
   setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
   setupButton('custom-permission-no', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
-  })
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest',
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad))
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)()
     $('.text-input-field-1').removeClass('faded').data('content', '').val('')
     $('.text-input-field-2').addClass('faded').data('content', '').val('')
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
@@ -1029,7 +1016,7 @@ function touchImmediateEvent (element, action, callback) {
   // As the same element can have different actions hooked on the same event, this needs to be stored as an array of <action, handler> pairs
 
   // The viewportButtonEventsActive ensures that no repeated events are being added to the element
-  if (element.id.includes('_viewport')) {
+  if (action && element.id.includes('_viewport')) {
     if (!viewportEvents[element.id]) viewportEvents[element.id] = []
     viewportEvents[element.id].push({ action, handler })
   }
@@ -1588,7 +1575,7 @@ function buildCassetteButtonEvents () {
   var fiatButtons = document.getElementById('js-fiat-buttons')
   var lastTouch = null
 
-  touchImmediateEvent(fiatButtons, function (e) {
+  touchImmediateEvent(fiatButtons, null, function (e) {
     var now = Date.now()
     if (lastTouch && now - lastTouch < 100) return
     lastTouch = now
