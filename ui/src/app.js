@@ -896,11 +896,10 @@ $(document).ready(function () {
 
   setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
   setupButton('custom-permission-no', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
-  })
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest',
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad))
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)()
     $('.text-input-field-1').removeClass('faded').data('content', '').val('')
     $('.text-input-field-2').addClass('faded').data('content', '').val('')
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
