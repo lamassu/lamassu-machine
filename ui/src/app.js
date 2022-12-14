@@ -892,8 +892,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
-  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
-  })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest')
 
   setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
   setupButton('custom-permission-no', 'finishBeforeSms')
