@@ -1,389 +1,368 @@
-#. extracted from Lamassu source code
 msgid ""
 msgstr ""
-"Project-Id-Version: lamassu-bitcoin-machine-ui\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-31 15:34-0400\n"
-"PO-Revision-Date: 2015-01-19 17:40-0500\n"
-"Last-Translator: joshmh <josh@lamassubtc.com>\n"
-"Language-Team: Polish\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: crowdin.com\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 "X-Crowdin-Project: lamassu-bitcoin-machine-ui\n"
+"X-Crowdin-Project-ID: 16383\n"
+"X-Crowdin-Language: pl\n"
 "X-Crowdin-File: /ui/lbm-ui_en-US.po\n"
+"X-Crowdin-File-ID: 4\n"
+"Project-Id-Version: lamassu-bitcoin-machine-ui\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Polish\n"
 "Language: pl_PL\n"
+"PO-Revision-Date: 2022-12-01 18:19\n"
 
-#: On screen: locked-password
-msgid "Your passphrase"
-msgstr "Twoje hasło"
+#: On screen: address-reuse
+msgid "Address already used"
+msgstr "Adres został już użyty"
 
-#: On screen: wifi
-msgid "MORE"
-msgstr "WIĘCEJ"
+#: On screen: address-reuse
+msgid "It looks like you've used this address already."
+msgstr "Wygląda na to, że adres został już użyty."
 
-#. %s is the WiFi network name
-#. example: for HomeNetwork
-#: On screen: wifi-password
-msgid "for %s"
-msgstr "dla %s"
+#: On screen: address-reuse
+msgid "For both your privacy and safety against scams, please generate a new one from your wallet and scan that one instead."
+msgstr "Dla twojego bezpieczeństwa i ochrony przed oszustwem, proszę wygeneruj nowy z twojego portfela i go zeskanuj."
 
-#: On screen: wifi-password
-msgid "WiFi password"
-msgstr "Hasło WiFi"
+#: On screen: address-reuse
+msgid "Start over"
+msgstr "Zacznij od nowa"
 
-#. %s is the Bitcoin price
-#. example: Our current Bitcoin price is $123.45
-#: On screen: idle
-msgid "Our current Bitcoin price is %s"
-msgstr "Nasza aktualna cena Bitcoin to %s"
+#: On screen: are-you-sure
+msgid "Are you sure?"
+msgstr "Jesteś pewny?"
 
-#: On screen: idle
-msgid "Loading Bitcoin price..."
-msgstr "Ładowanie ceny Bitcoin..."
+#: On screen: are-you-sure
+msgid "If you've already sent coins and cancel without confirming your phone number, you'll need to manually settle the transaction with the operator."
+msgstr "Jak już wysłałeś swoje monety i anulowałeś bez podania swojego numeru telefonu, będziesz musiał skontaktować się z operatorem w celu dokończenia transakcji. "
 
-#. The name of the language you're translating.
-#. e.g., français, español
-#: On screen: idle
-msgid "LanguageName"
-msgstr "polski"
+#: On screen: are-you-sure
+msgid "Press 'Continue transaction' and wait up to 60 seconds for your deposit to be seen."
+msgstr "Naciśnij 'Dokończ transakcje' i poczekaj do 60 sekund aby wpłata została wysłana. "
 
-#. example: per $1 inserted
-#: On screen: insert-bills
-msgid "per %s inserted"
-msgstr "na każdy %s włożony"
+#: On screen: are-you-sure
+msgid "Or press 'Cancel transaction' to return to the home screen."
+msgstr "Albo naciśnij 'Anuluj transakcje' aby przejść do ekranu głównego"
 
-#. %s is the bill denomination
-#. example: You inserted a $5 bill
-#: On screen: insert-more-bills
-msgid "You inserted a %s bill"
-msgstr "Włożyłeś banknot %s"
+#: On screen: are-you-sure
+msgid "Continue transaction"
+msgstr "Dokończ transakcje"
 
-#: On screen: insert-more-bills
-msgid "We're out of bitcoins."
-msgstr "Skończyły się nam bitcoiny."
-
-#: On screen: insert-more-bills
-msgid "Please touch <strong>Send Bitcoins</strong> to complete your purchase."
-msgstr "Proszę przycisnąć <strong>Wyślij Bitcoiny</strong>, aby sfinalizować zakup."
-
-#: On screen: insert-more-bills
-msgid "Transaction limit reached."
-msgstr "Transaction limit reached."
-
-#. %s is a bill denomination
-#. example: Please insert $10 or less
-#: On screen: high-bill
-msgid "Please insert %s or less."
-msgstr "Proszę wpłacić %s lub mniej."
-
-#: On screen: high-bill
-msgid "We're a little low."
-msgstr "Kończą nam się zapasy."
-
-#: On screen: wifi-connecting
-msgid "This could take a few moments."
-msgstr "To może potrwać kilka chwil."
-
-#: On screen: wifi-connecting
-msgid "Connected. Waiting for ticker."
-msgstr "Połączono. Wczytywanie ceny."
-
-#. %s is the WiFi network name
-#: On screen: wifi-connecting
-msgid "You're connecting to the WiFi network %s"
-msgstr "Łączysz się z siecią Wifi %s"
-
-#. %s is amount of Bitcoins that user is sending
-#: On screen: choose-fiat
-msgid "You'll be sending %s mBTC"
-msgstr "You'll be sending %s mBTC"
-
-#: On screen: locked-password
-msgid "Access passphrase"
-msgstr "Access passphrase"
-
-#: On screen: locked-password
-msgid "Unlock the <strong>Bitcoin Machine</strong>"
-msgstr "Unlock the <strong>Bitcoin Machine</strong>"
-
-#: On screen: locked-password
-msgid "Unlock"
-msgstr "Unlock"
-
-#: On screen: wifi
-msgid "Select a WiFi network"
-msgstr "Wybierz sieć WiFi"
-
-#: On screen: wifi
-msgid "Only secured networks are shown."
-msgstr "Wyświetlane są tylko zabezpieczone sieci."
-
-#: On screen: wifi
-msgid "The Bitcoin Machine"
-msgstr "Maszyna Bitcoin"
-
-#: On screen: wifi-password
-msgid "Connect"
-msgstr "Połącz"
-
-#: On screen: idle
-msgid "Hello."
-msgstr "Witaj."
-
-#: On screen: idle
-msgid "START"
-msgstr "START"
-
-#: On screen: idle
-msgid "Tap to buy bitcoins in 3 steps"
-msgstr "Dotknij, aby kupić bitcoiny w 3 krokach"
-
-#: On screen: dual-idle
-msgid "I want<br>Bitcoin"
-msgstr "I want<br>Bitcoin"
-
-#: On screen: dual-idle
-msgid "I want<br>Cash"
-msgstr "I want<br>Cash"
-
-#: On screen: dual-idle
-msgid "Redeem"
-msgstr "Redeem"
-
-#: On screen: scan-id
-msgid "Please verify your identity"
-msgstr "Please verify your identity"
-
-#: On screen: scan-id
-msgid "In order to proceed, we are required to verify your identity. Please press the back of your <strong>driver's license</strong> against the scan window."
-msgstr "In order to proceed, we are required to verify your identity. Please press the back of your <strong>driver's license</strong> against the scan window."
-
-#: On screen: register-phone
-msgid "Phone Number"
-msgstr "Phone Number"
-
-#: On screen: register-phone
-msgid "Please enter your mobile number so we can text you when your order is confirmed."
-msgstr "Please enter your mobile number so we can text you when your order is confirmed."
-
-#: On screen: register-phone
-msgid "Please enter the mobile number you used when you placed your order."
-msgstr "Please enter the mobile number you used when you placed your order."
-
-#: On screen: register-phone
-msgid "Clear"
-msgstr "Clear"
+#: On screen: are-you-sure
+msgid "Cancel transaction"
+msgstr "Anuluj transakcje"
 
 #: On screen: bad-phone-number
-msgid "Try Again"
-msgstr "Try Again"
+msgid "Try again"
+msgstr "Spróbuj ponownie"
 
 #: On screen: bad-phone-number
-msgid "The phone number you entered didn't work. If you have an international number, please prefix it with <strong>+</strong> and your country's calling code."
-msgstr "The phone number you entered didn't work. If you have an international number, please prefix it with <strong>+</strong> and your country's calling code."
+msgid "The phone number you entered didn't work. If you have an international number, please prefix it with + and your country's calling code."
+msgstr "Wprowadzony numer telefonu nie działa. Jeśli masz numer międzynarodowy, proszę wpisać prefiks z + i numerem kierunkowym kraju."
 
 #: On screen: bad-phone-number
 msgid "For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12 34 56"
-msgstr "For instance, Belgium's calling code is +32, so a Belgian number would look like: +32 455 12 34 56"
-
-#: On screen: unknown-phone-number
-msgid "All set"
-msgstr "All set"
-
-#: On screen: unknown-phone-number
-msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
-msgstr "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
-
-#: On screen: unknown-phone-number
-msgid "If you're sure you have an open order associated with this phone, please contact the operator."
-msgstr "If you're sure you have an open order associated with this phone, please contact the operator."
-
-#: On screen: unknown-phone-number
-msgid "OK"
-msgstr "OK"
-
-#: On screen: unconfirmed-deposit
-msgid "Almost there"
-msgstr "Almost there"
-
-#: On screen: unconfirmed-deposit
-msgid "Your order is in the system, but it hasn't yet been confirmed on the blockchain."
-msgstr "Your order is in the system, but it hasn't yet been confirmed on the blockchain."
-
-#: On screen: unconfirmed-deposit
-msgid "Please wait until you receive a text message from us, then come back for your cash."
-msgstr "Please wait until you receive a text message from us, then come back for your cash."
-
-#: On screen: wrong-dispenser-currency
-msgid "Oops!"
-msgstr "Oops!"
-
-#: On screen: wrong-dispenser-currency
-msgid "This machine does not handle the currency you requested."
-msgstr "This machine does not handle the currency you requested."
-
-#: On screen: wrong-dispenser-currency
-msgid "Please cash out at a machine that handles your currency."
-msgstr "Please cash out at a machine that handles your currency."
-
-#: On screen: fiat-error
-msgid "We're having some difficulties."
-msgstr "We're having some difficulties."
-
-#: On screen: fiat-error
-msgid "Please contact the operator."
-msgstr "Proszę skontaktować się z operatorem."
-
-#: On screen: fiat-transaction-error
-msgid "Please snap a photo of your receipt."
-msgstr "Please snap a photo of your receipt."
-
-#: On screen: fiat-transaction-error
-msgid "Show Receipt"
-msgstr "Show Receipt"
+msgstr "Na przykład, kod kierunkowy Belgii to + 32, więc belgijski numer będzie wyglądać tak: +32 455 12 34 56"
 
 #: On screen: bad-security-code
 msgid "The code you entered was incorrect."
-msgstr "The code you entered was incorrect."
+msgstr "Wprowadzony kod jest nieprawidłowy."
 
 #: On screen: bad-security-code
-msgid "Please make sure you are entering the six digit code you receive from us."
-msgstr "Please make sure you are entering the six digit code you receive from us."
+msgid "Please make sure you're entering the six digit code you receive from us."
+msgstr "Upewnij się, że wprowadzasz sześciocyfrowy kod, który od nas otrzymałeś."
 
-#: On screen: bad-security-code
-msgid "Resend Code"
-msgstr "Resend Code"
+#: On screen: cash-in-disabled
+msgid "Cash-in temporarily unavailable"
+msgstr ""
 
-#: On screen: max-phone-retries
-msgid "Oops, this isn't working"
-msgstr "Oops, this isn't working"
+#: On screen: cash-in-disabled
+msgid "Apologies. Buying operations are temporarily offline."
+msgstr ""
 
-#: On screen: max-phone-retries
-msgid "You've hit the maximum number of retries."
-msgstr "You've hit the maximum number of retries."
-
-#: On screen: max-phone-retries
+#: On screen: cash-in-disabled
 msgid "Please contact the operator to sort this out, or try again later."
-msgstr "Please contact the operator to sort this out, or try again later."
+msgstr ""
 
-#: On screen: pre-receipt
-msgid "What next?"
-msgstr "What next?"
+#: On screen: cash-in-waiting
+msgid "One moment..."
+msgstr "Chwileczkę..."
 
-#: On screen: pre-receipt
-msgid "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
-msgstr "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
+#: On screen: cash_in_only_coin
+msgid "Selling unavailable for this coin"
+msgstr ""
 
-#: On screen: pre-receipt
-msgid "Please snap a photo of the <strong>next screen</strong> for your electronic receipt, then contact the operator."
-msgstr "Please snap a photo of the <strong>next screen</strong> for your electronic receipt, then contact the operator."
+#: On screen: cash_in_only_coin
+msgid "Apologies, although this coin is only available to buy."
+msgstr ""
 
-#: On screen: redeem-later
-msgid "Thank You!"
-msgstr "Thank You!"
+#: On screen: cash_in_only_coin
+msgid "Please contact the operator if you wish to learn more."
+msgstr ""
 
-#: On screen: redeem-later
-msgid "We're waiting for your deposit to confirm on the blockchain."
-msgstr "We're waiting for your deposit to confirm on the blockchain."
+#: On screen: choose_coin
+msgid "Languages"
+msgstr "Języki"
 
-#: On screen: redeem-later
-msgid "You will soon receive a text message notifying you that your transaction has confirmed. When that happens, please come back to this machine and press the <strong>Redeem</strong> button."
-msgstr "You will soon receive a text message notifying you that your transaction has confirmed. When that happens, please come back to this machine and press the <strong>Redeem</strong> button."
+#: On screen: choose_coin
+msgid "Rates"
+msgstr ""
 
-#: On screen: security-code
-msgid "Security Code"
-msgstr "Security Code"
+#: On screen: choose_coin
+msgid "Redeem"
+msgstr "Odbierz"
 
-#: On screen: security-code
-msgid "We've texted you a security code. When you get it, enter it here."
-msgstr "We've texted you a security code. When you get it, enter it here."
+#: On screen: choose-fiat
+msgid "How much?"
+msgstr "Ile?"
 
-#: On screen: security-code
-msgid "Enter"
-msgstr "Enter"
+#: On screen: choose-fiat
+msgid "Have a promo code?"
+msgstr "Masz kod promocyjny?"
 
-#: On screen: verifying-id
-msgid "Verifying identity…"
-msgstr "Verifying identity…"
+#: On screen: choose-fiat
+msgid "Cash Out"
+msgstr "Wypłać"
 
-#: On screen: verifying-id
-msgid "Just making sure you're you."
-msgstr "Just making sure you're you."
+#: On screen: choose-fiat
+msgid "Clear"
+msgstr "Usuń"
 
-#: On screen: verifying-id
-msgid "This could take a few seconds."
-msgstr "This could take a few seconds."
+#: On screen: completed
+msgid "Thank you!"
+msgstr "Dziękujemy!"
 
-#: On screen: id-code-failed
-msgid "Want to try again?"
-msgstr "Want to try again?"
+#: On screen: completed
+msgid "You Purchased"
+msgstr "Kupiłeś"
 
-#: On screen: id-code-failed
-msgid "The code you entered did not match."
-msgstr "The code you entered did not match."
+#: On screen: completed
+msgid "Your coins are on their way to:"
+msgstr "Twoje bitcoiny są w drodze do:"
 
-#: On screen: id-code-failed
-msgid "You might want to <strong>give it another shot</strong>."
-msgstr "You might want to <strong>give it another shot</strong>."
+#: On screen: completed
+msgid "Print receipt"
+msgstr ""
 
-#: On screen: id-code-failed
+#: On screen: completed
+msgid "Send SMS receipt"
+msgstr ""
+
+#: On screen: completed
+msgid "Take a picture of this screen for your electronic receipt"
+msgstr "Zrób zdjęcie ekranu, to twój elektroniczny paragon"
+
+#: On screen: completed
+msgid "Tap anywhere on the screen when you're done."
+msgstr "Jak skończysz dotknij ekran."
+
+#: On screen: connect_ethernet
+msgid "Network down"
+msgstr "Awaria sieci"
+
+#: On screen: custom-permission
+msgid "Would you like to proceed?"
+msgstr ""
+
+#: On screen: custom-permission
+msgid "Yes"
+msgstr ""
+
+#: On screen: custom-permission
+msgid "No"
+msgstr ""
+
+#: On screen: custom-permission-screen2-numerical
+msgid "Submit"
+msgstr "Potwierdz"
+
+#: On screen: deposit-timeout
+msgid "Nothing yet."
+msgstr "Jeszcze nic."
+
+#: On screen: deposit-timeout
+msgid "No coins are showing up."
+msgstr "Bitcoiny nie są wyświetlane."
+
+#: On screen: deposit-timeout
+msgid "Yes, I have"
+msgstr "Tak"
+
+#: On screen: deposit-timeout
+msgid "No, I haven't"
+msgstr "Nie"
+
+#: On screen: deposit
+msgid "Send Coins"
+msgstr "Wyślij monety"
+
+#: On screen: deposit
+msgid "will be dispensed to you."
+msgstr "będzie wydane dla ciebie."
+
+#: On screen: deposit
+msgid "You will send us"
+msgstr "Wyślesz nam"
+
+#: On screen: deposit
+msgid "to:"
+msgstr "do:"
+
+#: On screen: dispensing
+msgid "Dispensing..."
+msgstr "Wypłacanie..."
+
+#: On screen: dispensing
+msgid "Please wait while we dispense your cash."
+msgstr "Proszę poczekaj wypłacamy pieniądze."
+
+#: On screen: dispensing-collect
+msgid "All set"
+msgstr "Wszystko gotowe"
+
+#: On screen: dispensing-collect
+msgid "Please remove your cash from the tray."
+msgstr "Proszę odebrać swoje pieniądze."
+
+#: On screen: dispensing-partial-collect
+msgid "Collect bills"
+msgstr "Odbierz gotówkę"
+
+#: On screen: dispensing-partial-collect
+msgid "To continue dispensing, take your cash from the tray."
+msgstr "Aby kontynuować wypłatę, odbierz gotówkę z tacki."
+
+#: On screen: facephoto
+msgid "Look at the dot"
+msgstr "Patrz na kropkę"
+
+#: On screen: facephoto
+msgid "This should just take a second."
+msgstr "Potrwa to tylko sekundę."
+
+#: On screen: facephoto-permission
+msgid "May we?"
+msgstr "Możemy?"
+
+#: On screen: facephoto-permission
+msgid "In order to continue this transaction, we need to snap a photo of you to comply with local laws. Is this ok?"
+msgstr "W celu kontynuowania transakcji, musimy zrobić ci zdjęcie, wymagają to dodatkowe przepisy. Czy będzie to ok?"
+
+#: On screen: facephoto-permission
+msgid "Yes, take photo"
+msgstr "Tak, zrób zdjęcie"
+
+#: On screen: facephoto-permission
+msgid "No, finish up"
+msgstr "Nie, zakończ"
+
+#: On screen: facephoto-failed-number
+msgid "Try again?"
+msgstr "Spróbuj ponownie?"
+
+#: On screen: facephoto-failed-number
+msgid "Looks like we didn't get a good shot."
+msgstr "Wygląda na to ze nie zrobiliśmy dobrego zdjęcia."
+
+#: On screen: facephoto-failed-number
+msgid "Shall we try another photo?"
+msgstr "Możemy zrobić kolejne zdjęcie?"
+
+#: On screen: facephoto-failed-number
+msgid "Yes, try again"
+msgstr "Tak, spróbuj ponownie"
+
+#: On screen: facephoto-failed-number
+msgid "No, send coins"
+msgstr "Nie, wyślij bitcoiny"
+
+#: On screen: facephoto-failed-number
+msgid "No, cancel"
+msgstr "Nie, anuluj"
+
+#: On screen: facephoto_retry
+msgid "Look into the camera"
+msgstr "Patrz na kamerę"
+
+#: On screen: facephoto_retry
+msgid "We didn't get a good picture of you."
+msgstr "Nie zrobiliśmy dobrego zdjęcia."
+
+#: On screen: facephoto_retry
+msgid "Please look into the camera located above the screen."
+msgstr "Patrz na kamerę umieszczoną na górze ekranu."
+
+#: On screen: fiat-complete
+msgid "We dispensed"
+msgstr "Wypłaciliśmy "
+
+#: On screen: fiat-complete
+msgid "You sent us"
+msgstr "Wysłałeś nam"
+
+#: On screen: goodbye
+msgid "See you!"
+msgstr "Do zobaczenia!"
+
+#: On screen: hard-limit-reached
+msgid "Temporary limit reached"
+msgstr "Osiągnięto limit czasowy"
+
+#: On screen: hard-limit-reached
+msgid "Apologies. We've reached our mandated per-user limit."
+msgstr "Przepraszam. Osiągnęliśmy narzucony limit na użytkownika."
+
+#: On screen: hard-limit-reached
+msgid "OK"
+msgstr "OK"
+
+#: On screen: id-scan-failed
+msgid "Sorry"
+msgstr "Przepraszamy"
+
+#: On screen: id-scan-failed
+msgid "We could not read your ID card."
+msgstr "Nie mogliśmy odczytać twojego dowodu osobistego."
+
+#: On screen: id-scan-failed
+msgid "You might want to give it another shot."
+msgstr "Może chcesz dać to jeszcze raz."
+
+#: On screen: id-scan-failed
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Anuluj"
 
-#: On screen: id-verification-failed
-msgid "Sorry."
-msgstr "Sorry."
+#: On screen: id-verification
+msgid "ID verification"
+msgstr "Weryfikacja tożsamości"
 
-#: On screen: id-verification-failed
-msgid "Our system indicated an identification problem."
-msgstr "Our system indicated an identification problem."
+#: On screen: id-verification
+msgid "If you'd like to make a larger purchase, we'll need to make sure you're you by asking for you to scan your ID."
+msgstr "Jeśli chcesz dokonać większego zakupu, musimy upewnić się, że to Ty, prosząc Cię o zeskanowanie dowodu tożsamości."
 
-#: On screen: id-verification-failed
-msgid "Please contact the operator for more information."
-msgstr "Please contact the operator for more information."
+#: On screen: id-verification
+msgid "Would you like to insert more bills?"
+msgstr "Czy chcesz dokonać większych zakupów?"
 
-#: On screen: id-verification-error
-msgid "It's us, not you."
-msgstr "It's us, not you."
+#: On screen: id-verification
+msgid "Yes, verify ID"
+msgstr "Tak, zweryfikuj tożsamość"
 
-#: On screen: id-verification-error
-msgid "Our system experienced an error."
-msgstr "Our system experienced an error."
-
-#: On screen: id-verification-error
-msgid "Please feel free to try again, or contact the operator."
-msgstr "Please feel free to try again, or contact the operator."
-
-#: On screen: scan-address
-msgid "Scan your Bitcoin address"
-msgstr "Zeskanuj adres Bitcoin"
-
-#: On screen: scan-address
-msgid "Hold your QR code up to the scan window to proceed."
-msgstr "Przytrzymaj swój kod QR przy oknie skanowania, aby kontynuować."
+#: On screen: insert-bills
+msgid "Wallet successfully validated!"
+msgstr "Portfel pomyślnie zweryfikowany!"
 
 #: On screen: insert-bills
 msgid "Insert a bill"
 msgstr "Włóż banknot"
 
 #: On screen: insert-bills
-msgid "Your bitcoins will be sent to:"
+msgid "Please insert your first bill into the machine."
+msgstr "Proszę włóż swój pierwszy banknot do urządzenia."
+
+#: On screen: insert-bills
+msgid "Your coins will be sent to:"
 msgstr "Twoje bitcoiny zostaną wysłane do:"
-
-#: On screen: insert-more-bills
-msgid "Tap to complete purchase"
-msgstr "Dotknij, aby zakończyć zakup"
-
-#: On screen: insert-more-bills
-msgid "SEND BITCOINS"
-msgstr "WYŚLIJ BITCOINY"
-
-#: On screen: insert-more-bills
-msgid "OR"
-msgstr "LUB"
 
 #: On screen: insert-more-bills
 msgid "Insert another bill"
@@ -394,226 +373,718 @@ msgid "deposited so far"
 msgstr "dotychczas zdeponowano"
 
 #: On screen: insert-more-bills
-msgid "total bitcoins purchased"
-msgstr "łączny zakup bitcoinów"
+msgid "total purchased"
+msgstr "łączny zakup "
 
-#: On screen: completed
-msgid "Your bitcoins are on their way to:"
-msgstr "Twoje bitcoiny są w drodze do:"
+#: On screen: insert-more-bills
+msgid "OR"
+msgstr "LUB"
 
-#: On screen: completed
-msgid "Tap anywhere when you're done."
-msgstr "Dotknij ekranu w dowolnym miejscu, gdy skończysz."
+#: On screen: insert-more-bills
+msgid "Finished?"
+msgstr "Skończyłeś?"
 
-#: On screen: withdraw_failure
-msgid "Our Internet was down for a bit. You'll get all your coins but you might receive them in two separate batches."
-msgstr "Our Internet was down for a bit. You'll get all your coins but you might receive them in two separate batches."
+#: On screen: insert-promo-code
+msgid "Type in your promo code"
+msgstr "Wpisz swój kod promocyjny"
 
-#: On screen: goodbye
-msgid "See You!"
-msgstr "Do Zobaczenia!"
+#: On screen: invalid-address
+msgid "Invalid address"
+msgstr "Niepoprawny  adres"
 
-#: On screen: trouble
-msgid "Sorry!"
-msgstr "Przepraszamy!"
+#: On screen: invalid-address
+msgid "It looks like you're using a wallet for a different coin or an address format we don't yet support."
+msgstr "Wygląda na to, że używasz portfela na inną monetę lub inny format adresu, którego jeszcze nie obsługujemy."
 
-#: On screen: trouble
-msgid "We're down for the moment."
-msgstr "Jesteśmy w tej chwili niedostępni."
+#: On screen: invalid-address
+msgid "Please check your QR code and try again."
+msgstr "Sprawdź kod QR i spróbuj ponownie."
+
+#: On screen: limit-reached
+msgid "We're all out of coins!"
+msgstr "Skończyły się nam wszystkie bitcoiny!"
+
+#: On screen: limit-reached
+msgid "Please try again later."
+msgstr "Spróbuj ponownie później."
+
+#: On screen: max-phone-retries
+msgid "Oops, this isn't working"
+msgstr "Oops, to nie działa."
+
+#: On screen: max-phone-retries
+msgid "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
+msgstr "Osiągnięto maksymalną liczbę ponownych prób. Skontaktuj się z operatorem, aby rozwiązać ten problem, lub spróbuj ponownie później."
+
+#: On screen: minimum-tx
+msgid "More, please"
+msgstr "Więcej, proszę"
+
+#: On screen: out-of-cash
+msgid "We're all out of cash!"
+msgstr "Skończyły się nam wszystkie bitcoiny!"
+
+#: On screen: out-of-coins
+msgid "Don't worry!"
+msgstr ""
+
+#: On screen: out-of-coins
+msgid "Your funds are safe, but we had an issue when sending your coins."
+msgstr ""
+
+#: On screen: out-of-coins
+msgid "Please take a photo of this screen and <b>contact the operator</b> to push through your order."
+msgstr ""
+
+#: On screen: out-of-coins
+msgid "Your receiving address:"
+msgstr ""
+
+#: On screen: pending-deposit
+msgid "Funds Received!"
+msgstr "Fundusze otrzymane!"
+
+#: On screen: pending-deposit
+msgid "Authorizing..."
+msgstr "Autoryzowanie..."
+
+#: On screen: photo-scan-failed
+msgid "Want to try again?"
+msgstr "Chcesz spróbować ponownie?"
+
+#: On screen: photo-scan-failed
+msgid "The document you've shown did not match."
+msgstr "Pokazany dokument nie pasuje."
+
+#: On screen: printer-scanning-error
+msgid "QR scanning error"
+msgstr "Błąd skanowania QR"
+
+#: On screen: printer-scanning-error
+msgid "We couldn't properly scan your paper wallet. Make sure you position it correctly on the scanning bay and that it was properly printed."
+msgstr "Nie mogliśmy prawidłowo zeskanować Twojego papierowego portfela. Upewnij się, że umieściłeś go prawidłowo we wnęce skanowania i że został prawidłowo wydrukowany."
+
+#: On screen: printer-scanning-error
+msgid "If the problem persists try printing again."
+msgstr "Jeśli problem nie ustąpi, spróbuj wydrukować ponownie."
+
+#: On screen: printer-scanning-error
+msgid "Scan again"
+msgstr "Skanuj ponownie"
+
+#: On screen: printer-scanning-error
+msgid "Print again"
+msgstr "Wydrukuj ponownie"
+
+#: On screen: printer-error-state
+msgid "Printing Failed"
+msgstr "Wydruk się nie powiódł"
+
+#: On screen: printer-error-state
+msgid "It seems there was a problem while printing your wallet. Please contact the operator for more information or try printing again."
+msgstr "Wygląda na to, że wystąpił problem podczas drukowania portfela. Skontaktuj się z operatorem, aby uzyskać więcej informacji, lub spróbuj wydrukować ponownie."
+
+#: On screen: printer-error-state
+msgid "Back to Home"
+msgstr "Wróć do ekranu głównego"
+
+#: On screen: printer-scan-address
+msgid "To validate, please present the front of your paper wallet to the scan window."
+msgstr "Aby potwierdzić, przyłóż przód swojego papierowego portfela do okienka skanowania."
+
+#: On screen: printer-scan-address
+msgid "IMPORTANT: This paper contains your funds. Once validated, do not show this key to anyone and do not misplace it!"
+msgstr "WAŻNE: Ten dokument zawiera twoje fundusze. Po zweryfikowaniu nie pokazuj nikomu tego klucza i nie zgub go!"
+
+#: On screen: invalid-promo-code
+msgid "Promo code not found"
+msgstr "Kod promocyjny nie znaleziony"
+
+#: On screen: invalid-promo-code
+msgid "Sorry! That's not a promo code we could find."
+msgstr "Przepraszam! To nie jest kod promocyjny, który mogliśmy znaleźć."
+
+#: On screen: invalid-promo-code
+msgid "You may try a different code, or continue with your transaction."
+msgstr "Możesz wypróbować inny kod lub kontynuować transakcję."
+
+#: On screen: invalid-promo-code
+msgid "If you are sure of the code, please contact the operator for clarification."
+msgstr "Jeśli jesteś pewien kodu, skontaktuj się z operatorem w celu uzyskania wyjaśnień."
+
+#: On screen: invalid-promo-code
+msgid "Enter a different code"
+msgstr "Wprowadź inny kod"
+
+#: On screen: rates
+msgid "Exchange Rates"
+msgstr ""
+
+#: On screen: rates
+msgid "Buy"
+msgstr ""
+
+#: On screen: rates
+msgid "Crypto"
+msgstr ""
+
+#: On screen: rates
+msgid "Sell"
+msgstr ""
+
+#: On screen: register-phone
+msgid "Phone Number"
+msgstr "Numer Telefonu"
+
+#: On screen: register-phone
+msgid "Please enter your mobile number so we can text you when your order is confirmed."
+msgstr "Proszę wpisać swój numer telefonu, abyśmy mogli przesłać wiadomość z kodem SMS."
+
+#: On screen: register-phone
+msgid "Please enter the mobile number you used when you placed your order."
+msgstr "Proszę podać numer telefonu, którego użyłeś składając zamówienie."
+
+#: On screen: register-phone
+msgid "Please enter your mobile number for ID verification."
+msgstr "Proszę podać numer telefonu do weryfikacji tożsamości."
+
+#: On screen: scan-address
+msgid "Hold your QR code up to the scan window to proceed."
+msgstr "Przytrzymaj swój kod QR przy oknie skanowania, aby kontynuować."
+
+#: On screen: scan-id
+msgid "Please verify your identity"
+msgstr "Weryfikacja tożsamości"
+
+#: On screen: scan-id
+msgid "In order to proceed, we are required to verify your identity."
+msgstr "Aby kontynuować, musimy zweryfikować Twoją tożsamość."
+
+#: On screen: scan-id
+msgid "Please press the back of your <strong>driver's license</strong> against the scan window."
+msgstr "Proszę przytrzymać drugą stronę prawa jazdy do okienka skanowania."
+
+#: On screen: scan-photo-manual
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window, hold it there, and then press \"Ready to scan\"."
+msgstr "Proszę przytrzymać przód dowodu osobistego do okienka skanowania, a następnie nacisnąć „Gotowy do skanowania”."
+
+#: On screen: scan-photo-manual
+msgid "Ready to scan"
+msgstr "Skanowanie"
+
+#: On screen: scan-photo
+msgid "Please press the front of your <strong>state ID card</strong> against the scan window."
+msgstr "Proszę przytrzymać przód dowodu osobistego do okienka skanowania."
+
+#: On screen: security-code
+msgid "Security Code"
+msgstr "Kod bezpieczeństwa"
+
+#: On screen: security-code
+msgid "We've texted you a security code. When you get it, enter it here."
+msgstr "Wysłaliśmy Ci SMS-a z kodem bezpieczeństwa. Kiedy go otrzymasz, wpisz go tutaj."
+
+#: On screen: send-only
+msgid "We're out of coins!"
+msgstr "Skończyły się nam bitcoiny!"
+
+#: On screen: send-only
+msgid "Send coins"
+msgstr "Wyślij monety"
+
+#: On screen: sending-coins
+msgid "Sending your coins..."
+msgstr "Wysyłanie monet..."
+
+#: On screen: sms-verification
+msgid "Verify phone to continue"
+msgstr ""
+
+#: On screen: sms-verification
+msgid "If you'd like to make a larger purchase we need to ask for your mobile phone number. We'll then send you an SMS code."
+msgstr "Jeśli chcesz dokonać większych zakupów, potrzebna będzie weryfikacja Twojego numeru telefonu. Wyślemy Ci SMS kod w celu autoryzacji."
+
+#: On screen: sms-verification
+msgid "Yes, verify phone"
+msgstr ""
+
+#: On screen: suspicious-address
+msgid "Suspicious address"
+msgstr "Podejrzany adres"
+
+#: On screen: suspicious-address
+msgid "This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet."
+msgstr "Ten adres może być powiązany z oszustwem lub zakazaną grupą. Upewnij się, że używasz adresu z własnego portfela."
 
 #: On screen: booting
 msgid "Booting up..."
-msgstr "Booting up..."
+msgstr "Uruchamianie..."
 
 #: On screen: booting
 msgid "Initializing hardware."
-msgstr "Initializing hardware."
+msgstr "Inicjowanie sprzętu."
 
 #: On screen: booting
-msgid "We'll be up in a moment."
-msgstr "We'll be up in a moment."
+msgid "<strong>We'll be up in a moment.</strong>"
+msgstr "<strong>Za chwilę będziemy gotowi ponownie.</strong>"
 
-#: On screen: maintenance
-msgid "Maintenance required."
-msgstr "Maintenance required."
+#: On screen: initializing
+msgid "Initializing..."
+msgstr "Inicjowanie"
+
+#: On screen: initializing
+msgid "Generating cryptographic identity."
+msgstr "Generowanie tożsamości kryptograficznej."
+
+#: On screen: initializing
+msgid "<strong>Please wait a few minutes.</strong>"
+msgstr "<strong>Poczekaj kilka minut.</strong>"
 
 #: On screen: connecting
 msgid "Connecting..."
-msgstr "Connecting..."
+msgstr "Łączenie..."
+
+#: On screen: pairing
+msgid "Pairing..."
+msgstr "Parowanie..."
+
+#: On screen: unpaired
+msgid "Pair with remote server"
+msgstr "Sparuj ze zdalnym serwerem"
+
+#: On screen: unpaired
+msgid "Scan"
+msgstr "Skan"
+
+#: On screen: pairing-error
+msgid "Pairing failed"
+msgstr "Parowanie nie powiodło się"
+
+#: On screen: pairing-error
+msgid "When attempting to pair, we experienced an error:"
+msgstr "Podczas próby parowania wystąpił błąd:"
+
+#: On screen: pairing-scan
+msgid "Scan QR code"
+msgstr ""
+
+#: On screen: pairing-scan
+msgid "Please scan the pairing QR code you got from your remote server."
+msgstr "Zeskanuj kod QR parowania, który otrzymałeś ze swojego zdalnego serwera."
+
+#: On screen: maintenance
+msgid "Maintenance Required"
+msgstr "Wymagana konserwacja"
+
+#: On screen: maintenance
+msgid "Please contact the operator."
+msgstr "Proszę skontaktować się z operatorem."
+
+#: On screen: terms
+msgid "I agree"
+msgstr "Zgadzam się"
+
+#: On screen: trouble
+msgid "Sorry, we are down for the moment."
+msgstr "Jesteśmy w tej chwili niedostępni."
+
+#: On screen: tx-not-seen
+msgid "We're taking a look"
+msgstr "Przyglądamy się"
+
+#: On screen: tx-not-seen
+msgid "We have your order, but haven't seen your deposit transaction yet. Check whether your wallet sent the coins for your transaction."
+msgstr "Mamy Twoje zamówienie, ale nie widzieliśmy jeszcze Twojej transakcji depozytowej. Sprawdź, czy Twój portfel wysłał monety."
+
+#: On screen: tx-not-seen
+msgid "If you're sure your coins were sent, please contact the operator."
+msgstr "Jeśli masz pewność, że Twoje monety zostały wysłane, skontaktuj się z operatorem."
+
+#: On screen: fiat-error
+msgid "Oops!"
+msgstr "Oops!"
+
+#: On screen: fiat-error
+msgid "We're having some difficulties."
+msgstr "Mamy problem."
+
+#: On screen: fiat-error
+msgid "Please contact the operator for more information."
+msgstr "Aby uzyskać więcej informacji, skontaktuj się z operatorem."
+
+#: On screen: fiat-transaction-error
+msgid "Please snap a photo of your receipt."
+msgstr "Proszę zrób zdjęcie potwierdzenia."
+
+#: On screen: fiat-transaction-error
+msgid "Show receipt"
+msgstr "Pokaż pokwitowanie"
+
+#: On screen: redeem-later
+msgid "We're waiting for your deposit to confirm on the blockchain. You will soon receive a text message notifying you that your transaction has confirmed."
+msgstr "Czekamy na potwierdzenie wpłaty w łańcuchu bloków. Wkrótce otrzymasz wiadomość tekstową z informacją, że transakcja została potwierdzona."
+
+#: On screen: redeem-later
+msgid "When that happens, please come back to this machine and press the Redeem button."
+msgstr "Kiedy tak się stanie, wróć do cryptomatu i naciśnij przycisk Odbierz."
+
+#: On screen: sanctions-failure
+msgid "We are unable to process your transaction."
+msgstr "Nie możemy przetworzyć transakcji."
+
+#: On screen: id-verification-error
+msgid "It's us, not you."
+msgstr "To my, a nie ty."
+
+#: On screen: id-verification-error
+msgid "Our system experienced an error."
+msgstr "Nasz system napotkał błąd."
+
+#: On screen: id-verification-error
+msgid "Please feel free to try again, or contact the operator."
+msgstr "Spróbuj ponownie lub skontaktuj się z operatorem."
+
+#: On screen: fiat-receipt
+msgid "Your Receipt"
+msgstr "Twój rachunek"
+
+#: On screen: fiat-receipt
+msgid "pending confirmation"
+msgstr "oczekiwanie na potwierdzenie"
+
+#: On screen: fiat-receipt
+msgid "Your coins were sent to:"
+msgstr "Twoje bitcoiny zostały wysłane do:"
+
+#: On screen: wrong-dispenser-currency
+msgid "This machine does not handle the currency you requested."
+msgstr "Ta maszyna nie obsługuje żądanej waluty."
+
+#: On screen: wrong-dispenser-currency
+msgid "Please cash out at a machine that handles your currency."
+msgstr "Proszę wypłacić pieniądze z maszyny, która obsługuje twoją walutę."
+
+#: On screen: deposit-network-down
+msgid "Network Down"
+msgstr "Awaria sieci"
+
+#: On screen: deposit-network-down
+msgid "Sorry, we're down for the moment."
+msgstr "Jesteśmy w tej chwili niedostępni."
+
+#: On screen: deposit-network-down
+msgid "Please come back later."
+msgstr "Proszę przyjść później."
+
+#: On screen: id-code-failed
+msgid "The code you entered did not match."
+msgstr "Wprowadzony kod nie pasuje."
+
+#: On screen: unconfirmed-deposit
+msgid "Almost there"
+msgstr "Prawie na miejscu"
+
+#: On screen: unconfirmed-deposit
+msgid "We see your transaction but we're still waiting for confirmation. This takes 10 minutes on average but can take up to an hour or two."
+msgstr "Widzimy Twoją transakcję, ale wciąż czekamy na potwierdzenie. Zajmuje to średnio 10 minut, ale może potrwać nawet godzinę lub dwie."
+
+#: On screen: unconfirmed-deposit
+msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+msgstr "Wróć po gotówkę i naciśnij Odbierz, gdy otrzymasz naszą wiadomość tekstową."
+
+#: On screen: unknown-phone-number
+msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
+msgstr "Nie widzimy żadnych otwartych zamówień powiązanych z Twoim telefonem. Jeśli masz inny telefon, z którego być może korzystasz, możesz spróbować ponownie z tego numeru."
+
+#: On screen: unknown-phone-number
+msgid "If you're sure you have an open order associated with this phone, please contact the operator."
+msgstr "Jeśli masz pewność, że zamówienie związane z Twoim telefonem zostało otwarte, skontaktuj się z operatorem."
 
 #: On screen: locked
-msgid "This machine is locked"
-msgstr "This machine is locked"
+msgid "This Machine Is Locked"
+msgstr "Ta maszyna została zablokowana."
 
 #: On screen: locked
 msgid "Please ask for assistance."
 msgstr "Proszę pytać o pomoc."
 
-#: On screen: limit-reached
-msgid "We're all out of bitcoins!"
-msgstr "Skończyły się nam wszystkie bitcoiny!"
+#: On screen: pre-receipt
+msgid "What next?"
+msgstr "Co dalej?"
 
-#: On screen: wifi-connecting
-msgid "Connecting…"
-msgstr "Łączenie…"
+#: On screen: pre-receipt
+msgid "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
+msgstr "Nie byliśmy w stanie zweryfikować Twojego telefonu, więc możemy nie być w stanie skontaktować się z Tobą, gdy gotówka będzie gotowa."
 
-#: On screen: sending-coins
-msgid "Sending bitcoins…"
-msgstr "Wysyłanie bitcoinów…"
-
-#: On screen: wifi-failed
-msgid "WiFi failed to connect…"
-msgstr "Nie udało połączyć się z siecią WiFi…"
+#: On screen: pre-receipt
+msgid "Please snap a photo of the next screen for your electronic receipt, then contact the operator."
+msgstr "Zrób zdjęcie następnego ekranu będzie to twoje elektroniczne potwierdzenie, a następnie skontaktuj się z operatorem."
 
 #: On screen: wifi-failed
-msgid "Please try the <strong>password</strong> again."
-msgstr "Proszę ponownie wpisać <strong>hasło</strong>."
+msgid "WiFi failed to connect..."
+msgstr "Nie udało połączyć się z siecią WiFi…..."
 
 #: On screen: wifi-failed
-msgid "TRY AGAIN"
-msgstr "SPRÓBUJ PONOWNIE"
+msgid "Please try the password again."
+msgstr "Proszę ponownie wpisać hasło."
 
-#: On screen: unpaired
-msgid "Pair with remote server"
-msgstr "Pair with remote server"
+#: On screen: us-ssn-permission
+msgid "US SSN required"
+msgstr "wymagany US SSN"
 
-#: On screen: unpaired
-msgid "Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server."
-msgstr "Press <strong>SCAN</strong> and present the machine with the pairing QR code from your remote server."
+#: On screen: us-ssn-permission
+msgid "To proceed, we are required to ask you to type in your Social Security Number"
+msgstr "Aby kontynuować, musimy poprosić Cię o wpisanie numeru ubezpieczenia społecznego"
 
-#: On screen: unpaired
-msgid "<strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server."
-msgstr "<strong>IMPORTANT</strong>: Keep machine secure until you have successfully paired with your remote server."
+#: On screen: us-ssn-permission
+msgid "Type in SSN?"
+msgstr "Wpisz numer SSN?"
 
-#: On screen: unpaired
-msgid "SCAN"
-msgstr "SCAN"
+#: On screen: us-ssn-permission
+msgid "Yes, type in"
+msgstr "Tak, wpisz"
 
-#: On screen: pairing-scan
-msgid "Please scan the pairing QR code you got from your remote server."
-msgstr "Please scan the pairing QR code you got from your remote server."
+#: On screen: register-us-ssn
+msgid "Social security number"
+msgstr "Numer ubezpieczenia społecznego"
 
-#: On screen: pairing-scan
-msgid "CANCEL"
-msgstr "CANCEL"
+#: On screen: register-us-ssn
+msgid "To proceed, please enter your social security number."
+msgstr "Aby kontynuować, wprowadź swój numer ubezpieczenia społecznego."
 
-#: On screen: pairing
-msgid "Pairing..."
-msgstr "Pairing..."
+#: On screen: photo-verification-failed
+msgid "Our system indicated an identification problem."
+msgstr "Nasz system wskazał problem z identyfikacją."
 
-#: On screen: pairing-error
-msgid "When attempting to pair, we experienced an error:"
-msgstr "When attempting to pair, we experienced an error:"
+#: On screen: blocked-customer
+msgid "Please contact support"
+msgstr "Skontaktuj się z pomocą techniczną"
 
-#: On screen: choose-fiat
-msgid "How much?"
-msgstr "How much?"
+#: On screen: blocked-customer
+msgid "In order to process your transaction, we need to clarify some information about your account"
+msgstr "Aby kontynuować Twoją transakcję, musimy wyjaśnić niektóre informacje dotyczące Twojego konta"
 
-#: On screen: choose-fiat
-msgid "1 BTC is"
-msgstr "1 BTC is"
+#: On screen: verifying-id
+msgid "Verifying identity..."
+msgstr "Weryfikowanie tożsamości..."
 
-#: On screen: choose-fiat
-msgid "Cash out"
-msgstr "Cash out"
+#: On screen: verifying-id
+msgid "This could take a few seconds."
+msgstr "To może potrwać kilka chwil."
 
-#: On screen: deposit
-msgid "Send Bitcoins"
-msgstr "Send Bitcoins"
+#: On screen: verifying-photo
+msgid "Verifying photo card..."
+msgstr "Weryfikuje zdjęcie..."
 
-#: On screen: deposit
-msgid "Please scan the QR code to send us your bitcoins."
-msgstr "Please scan the QR code to send us your bitcoins."
+#: On screen: verifying-facephoto
+msgid "Verifying photo..."
+msgstr "Weryfikuje zdjęcie..."
 
-#: On screen: deposit
-msgid "will be sent"
-msgstr "will be sent"
+#: On screen: wifi
+msgid "Select a WiFi network"
+msgstr "Wybierz sieć WiFi"
 
-#: On screen: deposit
-msgid "will be dispensed"
-msgstr "will be dispensed"
+#: On screen: wifi
+msgid "Only secured networks are shown."
+msgstr "Wyświetlane są tylko zabezpieczone sieci."
 
-#: On screen: deposit
-msgid "Generating address..."
-msgstr "Generating address..."
+#: On screen: wifi
+msgid "Or connect Ethernet"
+msgstr "Albo podłącz Ethernet"
 
-#: On screen: pending-deposit
-msgid "Bitcoins received!"
-msgstr "Bitcoins received!"
+#: On screen: wifi
+msgid "A wired connection is preferred for stability."
+msgstr "Dla stabilności preferowane jest połączenie przewodowe."
 
-#: On screen: pending-deposit
-msgid "We've received your payment."
-msgstr "We've received your payment."
+#: On screen: wifi-password
+msgid "WiFi password"
+msgstr "Hasło WiFi"
 
-#: On screen: pending-deposit
-msgid "Authorizing..."
-msgstr "Authorizing..."
+#: On screen: wifi-password
+msgid "Connect"
+msgstr "Połącz"
 
-#: On screen: deposit-timeout
-msgid "Nothing yet..."
-msgstr "Nothing yet..."
+#: On screen: withdraw_failure
+msgid "We got this"
+msgstr "Mamy to"
 
-#: On screen: deposit-timeout
-msgid "No bitcoins are showing up."
-msgstr "No bitcoins are showing up."
+#: On screen: withdraw_failure
+msgid "Our Internet was down for a bit but you'll receive your funds as soon as our connection is back."
+msgstr ""
 
-#: On screen: deposit-timeout
-msgid "Have you sent the bitcoins yet?"
-msgstr "Have you sent the bitcoins yet?"
+#: On screen: dynamic
+msgid "This could take a few moments."
+msgstr "To może potrwać kilka chwil."
 
-#: On screen: deposit-timeout
-msgid "Yes, I have"
-msgstr "Yes, I have"
+#: On screen: dynamic
+msgid "Connected. Waiting for ticker."
+msgstr "Połączono. Wczytywanie ceny."
 
-#: On screen: deposit-timeout
-msgid "No, I haven't"
-msgstr "No, I haven't"
+#: On screen: dynamic
+msgid "More"
+msgstr "Więcej"
 
-#: On screen: dispensing
-msgid "Dispensing..."
-msgstr "Dispensing..."
+#: On screen: dynamic
+msgid "Less"
+msgstr "Mniej"
 
-#: On screen: dispensing
-msgid "Please take your cash."
-msgstr "Please take your cash."
+#: On screen: dynamic
+msgid "Buy<br/>%s"
+msgstr "Kup<br/>%s"
 
-#: On screen: fiat-receipt
-msgid "Your Receipt"
-msgstr "Your Receipt"
+#: On screen: dynamic
+msgid "Sell<br/>%s"
+msgstr "Sprzedaj<br/>%s"
 
-#: On screen: fiat-receipt
-msgid "were sent by you"
-msgstr "were sent by you"
+#: On screen: dynamic
+msgid "Lamassu Cryptomat"
+msgstr "Lamassu Cryptomat"
 
-#: On screen: fiat-receipt
-msgid "pending confirmation"
-msgstr "pending confirmation"
+#: On screen: dynamic
+msgid "MORE"
+msgstr "WIĘCEJ"
 
-#: On screen: fiat-receipt
-msgid "Your bitcoins were sent to:"
-msgstr "Your bitcoins were sent to:"
+#: On screen: dynamic
+msgid "Please come back in %s weeks"
+msgstr "Proszę wróć za %s tygodnie"
 
-#: On screen: fiat-receipt
-msgid "Take a photo of the screen for your electronic receipt."
-msgstr "Take a photo of the screen for your electronic receipt."
+#: On screen: dynamic
+msgid "Please come back in %s days and %s hours"
+msgstr "Proszę wróć za %s dni i %s godzin"
 
-#: On screen: fiat-complete
-msgid "Thank you!"
-msgstr "Dziękujemy!"
+#: On screen: dynamic
+msgid "Please come back in %s hours"
+msgstr "Proszę wróć za %s godzin"
 
-#: On screen: fiat-complete
-msgid "were dispensed to you"
-msgstr "were dispensed to you"
+#: On screen: dynamic
+msgid "for %s"
+msgstr "dla %s"
 
-#: On screen: out-of-cash
-msgid "Out of cash"
-msgstr "Out of cash"
+#: On screen: dynamic
+msgid "You're connecting to the WiFi network %s"
+msgstr "Łączysz się z siecią Wifi %s"
 
-#: On screen: out-of-cash
-msgid "Sorry, but we're all out of cash!"
-msgstr "Sorry, but we're all out of cash!"
+#: On screen: dynamic
+msgid "Transaction Fee: %s"
+msgstr "Opłata transakcyjna: %s"
 
-#: On screen: out-of-cash
-msgid "Please contact the operator for assistance."
-msgstr "Please contact the operator for assistance."
+#: On screen: dynamic
+msgid "You deposited %s"
+msgstr "Wpłaciłeś %s"
+
+#: On screen: dynamic
+msgid "You inserted a %s bill"
+msgstr "Włożyłeś banknot %s"
+
+#: On screen: dynamic
+msgid "Transaction limit reached."
+msgstr "Osiągnięto limit transakcji."
+
+#: On screen: dynamic
+msgid "We're a little low on crypto."
+msgstr "Mamy trochę mało kryptowalut."
+
+#: On screen: dynamic
+msgid "Please insert %s or less."
+msgstr "Proszę wpłacić %s lub mniej."
+
+#: On screen: dynamic
+msgid "Minimum first bill is %s."
+msgstr "Minimalny pierwszy banknot to %s."
+
+#: On screen: dynamic
+msgid "Processing %s ..."
+msgstr "Przetwarzanie %s ..."
+
+#: On screen: dynamic
+msgid "Transaction limit reached"
+msgstr "Osiągnięto limit transakcji"
+
+#: On screen: dynamic
+msgid "Error in validation"
+msgstr "Błąd podczas sprawdzania poprawności"
+
+#: On screen: dynamic
+msgid "Due to local regulations, you've reached your transaction limit. Please contact us if you'd like to raise your limit."
+msgstr "Ze względu na lokalne przepisy osiągnąłeś limit transakcji. Skontaktuj się z nami, jeśli chcesz zwiększyć swój limit."
+
+#: On screen: dynamic
+msgid "Scan your <br/> %s address"
+msgstr "Zeskanuj swój %s adres"
+
+#: On screen: dynamic
+msgid "Please scan the QR code <br/> to send us your %s."
+msgstr "Proszę przeskanować kod QR, aby wysłać do nas swoje %s."
+
+#: On screen: dynamic
+msgid "Have you sent the %s yet?"
+msgstr "Czy wysłałeś już %s?"
+
+#: On screen: dynamic
+msgid "Scan your %s address"
+msgstr "Zeskanuj swój %s adres"
+
+#: On screen: dynamic
+msgid "Invalid %s address"
+msgstr "Niepoprawny %s adres"
+
+#: On screen: dynamic
+msgid "Transaction limit reached, please cash out"
+msgstr "Osiągnięto limit transakcji, proszę wypłacić"
+
+#: On screen: dynamic
+msgid "You'll be sending %s %s"
+msgstr "Możesz wysyłać %s %s"
+
+#: On screen: dynamic
+msgid "Discount added (%s off commissions)"
+msgstr ""
+
+#: On screen: dynamic
+msgid "Printing receipt..."
+msgstr ""
+
+#: On screen: dynamic
+msgid "Sending receipt..."
+msgstr ""
+
+#: On screen: dynamic
+msgid "Receipt printed successfully!"
+msgstr ""
+
+#: On screen: dynamic
+msgid "Receipt sent successfully!"
+msgstr ""
+
+#: On screen: dynamic
+msgid "An error occurred, try again."
+msgstr ""
+
+#: On screen: coins
+msgid "Bitcoin"
+msgstr "Bitcoin"
+
+#: On screen: coins
+msgid "Ethereum"
+msgstr "Ethereum"
+
+#: On screen: coins
+msgid "Zcash"
+msgstr "Zcash"
+
+#: On screen: coins
+msgid "Litecoin"
+msgstr "Litecoin"
+
+#: On screen: coins
+msgid "Dash"
+msgstr "Dash"
+
+#: On screen: coins
+msgid "Bitcoin Cash"
+msgstr "Bitcoin Cash"
+
+#: On screen: coins
+msgid "Monero"
+msgstr ""
 
