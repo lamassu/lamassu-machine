@@ -125,7 +125,7 @@ function processData (data) {
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
-  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat)
+  if (data.allRates && data.ratesFiat && data.localeInfo) setRates(data.allRates, data.ratesFiat, data.localeInfo)
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
@@ -2194,7 +2194,12 @@ function setScreenOptions (opts) {
   (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
 }
 
-function setRates (allRates, fiat) {
+function thousandSeparator (number, country) {
+  const numberFormatter = Intl.NumberFormat(country)
+  return numberFormatter.format(number)
+}
+
+function setRates (allRates, fiat, locales) {
   const ratesTable = $('.rates-content')
   const tableHeader = $(`<div class="xs-margin-bottom">
   <h4 class="js-i18n">Buy</h4>
@@ -2202,12 +2207,12 @@ function setRates (allRates, fiat) {
   <h4 class="js-i18n">Sell</h4>
 </div>`)
   const coinEntries = []
-  
+
   Object.keys(allRates).forEach(it => {
     coinEntries.push($(`<div class="xs-margin-bottom">
-    <p class="d2 js-i18n">${allRates[it].cashIn}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country)}</p>
     <h4 class="js-i18n">${it}</h4>
-    <p class="d2 js-i18n">${allRates[it].cashOut}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country)}</p>
   </div>`))
   })
 

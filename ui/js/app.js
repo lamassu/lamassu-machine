@@ -127,7 +127,7 @@ function processData(data) {
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
-  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat);
+  if (data.allRates && data.ratesFiat && data.localeInfo) setRates(data.allRates, data.ratesFiat, data.localeInfo);
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null);
@@ -2141,13 +2141,18 @@ function setScreenOptions(opts) {
   opts.rates && opts.rates.active ? $('#rates-section').show() : $('#rates-section').hide();
 }
 
-function setRates(allRates, fiat) {
+function thousandSeparator(number, country) {
+  var numberFormatter = Intl.NumberFormat(country);
+  return numberFormatter.format(number);
+}
+
+function setRates(allRates, fiat, locales) {
   var ratesTable = $('.rates-content');
   var tableHeader = $('<div class="xs-margin-bottom">\n  <h4 class="js-i18n">Buy</h4>\n  <h4 class="js-i18n">Crypto</h4>\n  <h4 class="js-i18n">Sell</h4>\n</div>');
   var coinEntries = [];
 
   Object.keys(allRates).forEach(function (it) {
-    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + allRates[it].cashIn + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + allRates[it].cashOut + '</p>\n  </div>'));
+    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country) + '</p>\n  </div>'));
   });
 
   $('#rates-fiat-currency').text(fiat);
