@@ -15,30 +15,45 @@
   @include Heading;
   font-size: 12vh;
   line-height: 0.92;
+  @media (orientation: portrait) {
+    font-size: 12vw;
+  }
 }
 
 @mixin Heading-2 {
   @include Heading;
   font-size: 8vh;
   line-height: 0.88;
+  @media (orientation: portrait) {
+    font-size: 8vw;
+  }
 }
 
 @mixin Heading-3 {
   @include Heading;
   font-size: 6vh;
   line-height: 0.83;
+  @media (orientation: portrait) {
+    font-size: 6vw;
+  }
 }
 
 @mixin Heading-4 {
   @include Heading;
   font-size: 3vh;
   line-height: 1.67;
+  @media (orientation: portrait) {
+    font-size: 3vw;
+  }
 }
 
 @mixin Heading-5 {
   @include Heading;
   font-size: 5vh;
   line-height: 1.2;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 }
 
 @mixin Description {
@@ -53,6 +68,9 @@
   font-weight: 700;
   font-size: 5vh;
   line-height: 1.2;
+  @media (orientation: portrait) {
+    font-size: 5vw;
+  }
 }
 
 @mixin Tagline-2 {
@@ -60,6 +78,9 @@
   font-weight: 700;
   font-size: 3vh;
   line-height: 0.8;
+  @media (orientation: portrait) {
+    font-size: 3vw;
+  }
 }
 
 @mixin Description-1 {
@@ -67,6 +88,9 @@
   font-weight: 500;
   font-size: 4vh;
   line-height: 1.25;
+  @media (orientation: portrait) {
+    font-size: 4vw;
+  }
 }
 
 @mixin Description-2 {
@@ -74,18 +98,27 @@
   font-weight: 500;
   font-size: 3vh;
   line-height: 1.33;
+  @media (orientation: portrait) {
+    font-size: 3vw;
+  }
 }
 
 @mixin Mono-Text-1 {
   font-family: BPmono;
   font-size: 4vh;
   line-height: 1;
+  @media (orientation: portrait) {
+    font-size: 4vw;
+  }
 }
 
 @mixin Mono-Text-2 {
   font-family: BPmono;
   font-size: 3vh;
   line-height: 1;
+  @media (orientation: portrait) {
+    font-size: 3vh;
+  }
 }
 
 h1, .h1 {
