@@ -1,0 +1,122 @@
+@media (orientation: portrait) {
+  header {
+    padding: 2vh;
+  }
+
+  main {
+    flex-direction: column;
+  }
+
+  .primary-side {
+    padding: 0 5vw;
+    flex: 0;
+  }
+
+  .secondary-side {
+    padding: 0 5vw;
+    flex: 0;
+  }
+  
+  .primary-side-title {
+    line-height: 9vw;
+  }
+
+  .cash-out-box-wrapper, .cash-in-box-wrapper {
+    width: initial;
+    height: initial;
+  }
+
+  .circle-button {
+    @include button;
+    height: 40vw;
+    width: 40vw;
+    border-radius: 40vh;
+    background-color: $white;
+    text-align: center;
+    line-height: 6vw;
+  }
+
+  .inner-circle-button {
+    height: 35vw;
+    width: 35vw;
+    line-height: 6vw;
+  }
+
+  .small-action-button {
+    padding: 0 2.5vw;
+    height: 8vw;
+    min-width: 5vw;
+    border-radius: 2vw;
+  }
+
+  .bg-image {
+    background-color: $amazonite;
+  }
+
+  .bg-image img {
+    display: none;
+  }
+
+  .choose_coin_state header {
+    padding: 5vw;
+    min-height: 8vw;
+  }
+
+  .choose_coin_state main {
+    height: 80vh;
+    justify-content: space-between;
+    margin: 20vh 0 10vh;
+  }
+
+  .choose_coin_state footer {
+    padding: 5vw;
+    min-height: auto;
+  }
+
+  .change-language {
+    width: 30vw;
+  }
+
+  #choose-coin-header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  #crypto-buttons {
+    position: absolute;
+    top: 5vw;
+    left: 5vw;
+    width: 90vw;
+    justify-content: space-between;
+  }
+
+  #crypto-buttons > div {
+    padding: 0;
+  }
+
+  .js-terms-text-div {
+    width: 90vw;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .js-terms-text p {
+    margin-top: 0;
+  }
+  
+  #actions-scroll {
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    margin: 2vh auto;
+    gap: 2vh;
+    p {
+      margin: 0;
+    }
+  }
+
+}
+
