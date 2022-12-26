@@ -598,10 +598,6 @@ msgstr "Yes, verify phone"
 msgid "Suspicious address"
 msgstr "Suspicious address"
 
-#: On screen: suspicious-address
-msgid "This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet."
-msgstr "This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet."
-
 #: On screen: booting
 msgid "Booting up..."
 msgstr "Booting up..."
@@ -1045,6 +1041,10 @@ msgstr "Receipt sent successfully!"
 #: On screen: dynamic
 msgid "An error occurred, try again."
 msgstr "An error occurred, try again."
+
+#: On screen: dynamic
+msgid "This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."
+msgstr "This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."
 
 #: On screen: coins
 msgid "Bitcoin"
