@@ -281,9 +281,6 @@ main {
   }
 }
 
-.completed_state {}
-
-
 .key {
   height: 12vw;
   width: 14vw;
@@ -394,7 +391,8 @@ main {
 .sms_verification_state,
 .redeem_later_state,
 .retry_permission_id_state,
-.failed_scan_id_photo_state {
+.failed_scan_id_photo_state,
+.limit_reached_state {
   header {
     height: 36vh;
   }
@@ -496,11 +494,23 @@ main {
   }
 }
 
-.deposit_timeout_state {
+.custom_permission_screen2_numerical_state {
+  #custom-requirement-numeric-keypad {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: center;
+    .progress-button-wrapper {
+      justify-content: center;
+    }
+  }
+}
+
+.deposit_timeout_state,
+.send_only_state {
   header {
     height: 36vh;
     img {
-      width: 30vw;
+      width: 20vh;
     }
   }
 }
@@ -517,5 +527,50 @@ main {
 .minimum_tx_state {
   .header{
     margin-top: 27vh;
+  }
+}
+
+.wifi_password_state {
+  #wifi-keyboard {
+    .entry {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 2vh;
+      #input-passphrase {
+        margin-left: 0;
+      }
+      .backspace {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.choose_fiat_state {
+  main {
+    .primary-side {
+      text-align: center;
+    }
+    #choose-fiat-promo-button {
+      position: absolute;
+      bottom: 5vh;
+      left: calc(50vh - 50% - 6vh);
+      margin: 0;
+
+    }
+  }
+  #js-fiat-buttons {
+    position: absolute;
+    flex-wrap: wrap;
+    top: 35vh;
+    gap: 5vw;
+    justify-content: center;
+    height: initial;
+    padding: 0 5vw;
+    .cash-button {
+      margin: 0;
+      min-width: 40vw;
+      height: 7vh;
+    }
   }
 }
