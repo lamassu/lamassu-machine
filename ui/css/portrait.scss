@@ -26,14 +26,11 @@ main {
   height: initial;
 }
 
-.choose_coin_state {
+.choose_coin_state.choose-coin-two-way {
   #languages {
     bottom: 5vw;
     flex-direction: column;
-
-    button:nth-child(1) {}
   }
-
   #crypto-buttons {
     position: absolute;
     top: 0;
@@ -41,13 +38,59 @@ main {
     padding: 5vw 10vw 0;
     width: 100vw;
     justify-content: space-between;
-
     #cryptos {
       top: 0;
     }
-
     div {
       padding: 0;
+    }
+  }
+  #choose-coin-header {
+    padding: 5vw;
+    min-height: 8vw;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .change-language {
+      width: 30vw;
+    }
+  }  
+  main {
+    height: 80vh;
+    justify-content: space-between;
+    margin: 15vh 0 10vh;
+  }
+  footer {
+    padding: 5vw;
+    min-height: auto;
+    #coin-redeem {
+      margin-left: 0;
+    }
+  }
+}
+
+.choose_coin_state.choose-coin-cash-in {
+  #choose-coin-header{
+    padding: 5vw;
+    min-height: 8vw;
+    .change-language {
+      width: 30vw;
+    }
+  }
+  footer {
+    padding: 0;
+    min-height: inherit;
+    #crypto-buttons {
+      padding: 5vw;
+      width: 100vw;
+      gap: 8vw;
+      #cryptos {
+        margin-left: -1.2vh;
+        margin-bottom: -0.8vh;
+      }
+      div {
+        padding: 0;
+      }
     }
   }
 }
@@ -73,40 +116,6 @@ main {
   height: 8vw;
   min-width: 5vw;
   border-radius: 2vw;
-}
-
-.bg-image {
-  background-color: $amazonite;
-}
-
-.bg-image img {
-  display: none;
-}
-
-.choose_coin_state header {
-  padding: 5vw;
-  min-height: 8vw;
-}
-
-.choose_coin_state main {
-  height: 80vh;
-  justify-content: space-between;
-  margin: 20vh 0 10vh;
-}
-
-.choose_coin_state footer {
-  padding: 5vw;
-  min-height: auto;
-}
-
-.change-language {
-  width: 30vw;
-}
-
-#choose-coin-header {
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
 
 .js-terms-text-div {
@@ -145,7 +154,6 @@ main {
   h2 {
     text-align: center;
   }
-
   p {
     max-width: 60vw;
     margin-left: 15vw;
@@ -161,9 +169,13 @@ main {
 .insert_bills_state {
   main {
     text-align: center;
-
     img {
       width: 50vw;
+    }
+    #insert-first-bill-promo-button {
+      position: absolute;
+      bottom: 10vh;
+      left: calc(50vh - 50% - 6vh);
     }
   }
 }
@@ -194,7 +206,7 @@ main {
 
     .total-crypto-rec,
     .total-crypto-rec+p {
-      width: 55vw;
+      width: 40vw;
     }
 
     div:nth-child(2) {
@@ -247,7 +259,6 @@ main {
       margin-top: 10vw;
       text-align: center;
     }
-
     padding: 0 15vw;
   }
 
@@ -255,15 +266,12 @@ main {
   #security-keypad,
   #us-ssn-keypad {
     margin-left: 0;
-
     .keys {
       width: initial;
       margin: 0 auto;
     }
-
     .progress-button-wrapper {
       margin-top: 10vh;
-
       button {
         float: none;
         margin: 0 auto;
@@ -296,7 +304,6 @@ main {
   height: 4vw;
 }
 
-
 .info {
   main {
     width: 80vw;
@@ -304,7 +311,6 @@ main {
     min-height: 32vh;
     margin-top: 10vh;
   }
-
   header {
     height: 28vh;
   }
@@ -326,7 +332,6 @@ main {
       flex-direction: column;
     }
   }
-
   footer {
     margin: 5vh 0 0;
     padding: 0;
@@ -407,11 +412,11 @@ main {
     .primary-side {
       text-align: center;
       width: 80vw;
-      margin: 0 auto;
+      margin: 0 auto 20vh;
     }
     .secondary-side {
       img {
-        width: 50vw;
+        width: 70vw;
       }
     }
   }
@@ -436,7 +441,6 @@ main {
   }
 }
 
-
 .restart_state {
   main {
     img {
@@ -445,7 +449,6 @@ main {
     }
   }
 }
-
 
 .hard_limit_reached_state {
   .header {
@@ -571,6 +574,40 @@ main {
       margin: 0;
       min-width: 40vw;
       height: 7vh;
+    }
+  }
+}
+
+.out_of_coins_state {
+  main {
+    .contacts {
+      margin-top: 3vh;
+    }
+    .secondary-side {
+      align-items: center;
+    }
+  }
+}
+
+.completed_state {
+  .primary-side {
+    align-items: center;
+    margin-top: 25vh;
+    margin-bottom: 5vh;
+  }
+  .secondary-side {
+    .qr-wrapper {
+      position: absolute;
+      top: 0;
+      transform: scale(0.6);
+      margin-top: 0;
+    }
+    .take-a-photo {
+      margin: 5vh 0 0;
+      max-width: 80vw;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
   }
 }
