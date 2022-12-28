@@ -37,9 +37,21 @@ main {
     left: 0;
     padding: 5vw 10vw 0;
     width: 100vw;
-    justify-content: space-between;
+    gap: 8vw;
     #cryptos {
-      top: 0;
+      margin-top: 20vw;
+      bottom: inherit;
+      transform: scaleY(-1);
+      margin-left: -2vw;
+      button {
+        transform: scaleY(-1);
+      }
+      button:first-child {
+        border-radius: 0 0 2vw 2vw;
+      }
+      button:last-child {
+        border-radius: 2vw 2vw 0 0;
+      }
     }
     div {
       padding: 0;
@@ -51,6 +63,18 @@ main {
     position: absolute;
     bottom: 0;
     right: 0;
+    #languages {
+      transform: scaleY(-1);
+      button {
+        transform: scaleY(-1);
+      }
+      button:first-child {
+        border-radius: 0 0 2vw 2vw;
+      }
+      button:last-child {
+        border-radius: 2vw 2vw 0 0;
+      }
+    }
     .change-language {
       width: 30vw;
     }
@@ -175,7 +199,8 @@ main {
     #insert-first-bill-promo-button {
       position: absolute;
       bottom: 10vh;
-      left: calc(50vh - 50% - 6vh);
+      left: calc(50vw);
+      transform: translateX(-50%);
     }
   }
 }
@@ -247,7 +272,8 @@ main {
   #insert-first-bill-promo-button {
     position: absolute;
     bottom: 10vh;
-    left: calc(50vh - 50% - 4vh);
+    left: calc(50vw);
+    transform: translateX(-50%);
   }
 }
 
@@ -286,6 +312,13 @@ main {
     width: 80vw;
     height: initial;
     margin-bottom: 10vh;
+    #promo-keyboard {
+      .key {
+        height: 10vw;
+        width: 10vw;
+        line-height: 10vw;
+      }
+    }
   }
 }
 
@@ -322,27 +355,6 @@ main {
   }
 }
 
-.custom_permission_screen2_text_state {
-  main {
-    padding: 0 5vw;
-    width: 90vw;
-
-    .text-input-fields-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  footer {
-    margin: 5vh 0 0;
-    padding: 0;
-    width: 90vw;
-    justify-content: space-around;
-
-    button {
-      margin: 0;
-    }
-  }
-}
 
 .choose_fiat_state {
   main {
@@ -477,6 +489,9 @@ main {
         width: inherit;
         min-height: auto;
       }
+      .choice-list-item {
+        font-size: 4vw;
+      }
       .choice-list-actions-wrapper {
         flex-direction: column;
         margin: 10vh auto 0;
@@ -498,13 +513,56 @@ main {
 }
 
 .custom_permission_screen2_numerical_state {
+  main {
+    margin-top: 10vh;
+  }
   #custom-requirement-numeric-keypad {
     margin-left: 0;
     flex-direction: column;
     align-items: center;
+    .keys {
+      width: initial;
+      margin: 0 0 5vh;
+    }
     .progress-button-wrapper {
       justify-content: center;
     }
+  }
+}
+
+
+.custom_permission_screen2_text_state {
+  main {
+    padding: 15vw 5vw 0;
+    width: 90vw;
+    .text-input-fields-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  footer {
+    margin: 5vh 0 0;
+    padding: 0;
+    width: 90vw;
+    justify-content: space-around;
+
+    button {
+      margin: 0;
+    }
+  }
+  #custom-requirement-text-keyboard {
+    .key {
+      font-size: 3vw;
+      height: 10vw;
+      width: 10vw;
+      line-height: 10vw;
+    }
+  }
+}
+
+.custom_permission_state.info{
+  main {
+    margin-top: 0
   }
 }
 
@@ -514,6 +572,21 @@ main {
     height: 36vh;
     img {
       width: 20vh;
+    }
+  }
+}
+
+
+.send_only_state {
+  main {
+    min-height: 25vh;
+  }
+  .text-content {
+    max-width: none;
+    min-width: initial;
+    .send-only-total {
+      gap: 15vw;
+      min-width: initial;
     }
   }
 }
@@ -608,6 +681,105 @@ main {
       flex-direction: column;
       align-items: center;
       text-align: center;
+      gap: 1vh;
     }
+  }
+}
+
+.withdraw_failure_state {
+  .primary-side {
+    margin-top: 28vh;
+    text-align: center;
+  }
+  .print-receipt-wrapper {
+    gap: 5vw;
+    justify-content: center;
+    button {
+      margin: 0;
+    }
+  }
+  .qr-section {
+    transform: scale(0.6);
+    position: absolute;
+    top: 0;
+    div {
+      margin-top: 0;
+    }
+  }
+  .take-a-photo {
+    margin: 5vh 0 0;
+    max-width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
+  }
+}
+
+.deposit_state {
+  .primary-side {
+    margin-top: 35vh;
+    text-align: center;
+  }
+  .qr-wrapper {
+    transform: scale(0.6);
+    position: absolute;
+    top: 0;
+    div {
+      margin-top: 0;
+    }
+  }
+}
+
+.fiat_complete_state {
+  .primary-side {
+    margin-top: 32vh;
+    text-align: center;
+  }
+  .qr-wrapper {
+    transform: scale(0.6);
+    position: absolute;
+    top: 0;
+    div {
+      margin-top: 0;
+    }
+  }
+  .print-receipt-wrapper {
+    gap: 5vw;
+    justify-content: center;
+    button {
+      margin: 0;
+    }
+  }
+  .take-a-photo {
+    margin: 5vh 0 0;
+    max-width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
+  }
+}
+
+.fiat_receipt_state {
+  .primary-side {
+    margin-top: 32vh;
+    text-align: center;
+  }
+  .qr-wrapper {
+    transform: scale(0.6);
+    position: absolute;
+    top: 0;
+    div {
+      margin-top: 0;
+    }
+  }
+  .take-a-photo {
+    margin: 5vh 0 0;
+    max-width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1vh;
   }
 }
