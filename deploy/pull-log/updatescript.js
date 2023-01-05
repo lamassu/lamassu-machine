@@ -67,8 +67,8 @@ function tailFile(file, cb) {
 }
 
 async.series([
-  async.apply(command, `tar -czf /tmp/config.tar.gz ${machineLogs}`),
-  async.apply(tailFile, '/tmp/config.tar.gz'),
+  async.apply(command, `tar -czf /tmp/log-file.tar.gz ${machineLogs}`),
+  async.apply(tailFile, '/tmp/log-file.tar.gz'),
   async.apply(report, null, 'finished.')
 ], function(err) {
   if (err) throw err
