@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Lamassu machine</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      background-color: #82dda3;
+      font-family: 'MuseoSans', sans-serif;
+    }
+    main {
+      max-width: 42rem;
+      margin: 3rem auto;
+    }
+    button, input {
+      background-color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+    }
+    button { cursor: pointer; }
+    button:hover { background-color: #f0f0f0; }
+    button:focus, input:focus { outline: 2px solid #3d65ec; }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background-color: #66ba85;
+      padding: 2rem;
+      border-radius: 0.5rem;
+    }
+    input { width: 8rem; }
+    .in { margin-left: auto; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Fake Bills</h1>
+    <div class='container'>
+      <button title='Insert 10 bill' onclick='insert(10)'>10</button>
+      <button title='Insert 20 bill' onclick='insert(20)'>20</button>
+      <button title='Insert 50 bill' onclick='insert(50)'>50</button>
+      <button title='Insert 100 bill' onclick='insert(100)'>100</button>
+      <button title='Insert 200 bill' onclick='insert(200)'>200</button>
+      <div class='in'>
+        <input type='number' id='number-input' placeholder='Custom' min='0' step='1' oninput='validity.valid||(value="");'>
+        <button title='Insert' onclick='insertFromInput()'>▸</button>
+      </div>
+    </div>
+    <p id='status'></p>
+  </main>
+</body>
+<script>
+let timeout = null;
+
+const insertFromInput = () =>
+  insert(document.getElementById('number-input').value || 10)
+
+const insert = denomination => 
+  fetch(`/${denomination}`)
+  .then(r => {
+    if (!r.ok) {
+      setStatus('Error on machine side!')
+    } else {
+      setStatus(`${denomination} bill inserted.`)
+    }
+  })
+  .catch(_ => setStatus('Error sending command to the machine. Is machine running?'))
+
+const setStatus = status => {
+  if (timeout !== null)
+    clearTimeout(timeout)
+
+  document.getElementById('status').textContent = status
+  timeout = setTimeout(() => document.getElementById('status').textContent = '', 2000)
+}
+
+document.getElementById('number-input').addEventListener('keypress', e => e.key === 'Enter' ? insertFromInput() : 0)
+
+</script>
+</html>
