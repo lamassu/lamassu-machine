@@ -801,7 +801,10 @@ $(document).ready(function () {
   const previousFieldTextRequirementButton = document.getElementById('previous-text-requirement')
   touchEvent(submitTextRequirementButton, function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
-    var text = `${$('.text-input-field-1').data('content')} ${$('.text-input-field-2').data('content') || ''} ${$('.text-input-field-3').data('content') || ''}`
+    const text1 = $('.text-input-field-1').data('content')
+    const text2 = $('.text-input-field-2').data('content') || ''
+    const text3 = $('.text-input-field-3').data('content') || ''
+    const text = [text1, text2, text3].filter(t => t != '').join(' ')
     buttonPressed('customInfoRequestSubmit', text)
     $('.text-input-field-1').removeClass('faded').data('content', '').val('')
     $('.text-input-field-2').addClass('faded').data('content', '').val('')
