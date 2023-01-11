@@ -6,11 +6,11 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <style>
     body {
-      background-color: #82dda3;
+      background-color: #beeecf;
       font-family: 'MuseoSans', sans-serif;
     }
     main {
-      max-width: 42rem;
+      max-width: 52rem;
       margin: 3rem auto;
     }
     button, input {
@@ -23,6 +23,9 @@
     button { cursor: pointer; }
     button:hover { background-color: #f0f0f0; }
     button:focus, input:focus { outline: 2px solid #3d65ec; }
+    button:disabled, input:disabled {
+      background-color: #fff2;
+    }
     .container {
       display: flex;
       flex-wrap: wrap;
@@ -34,14 +37,19 @@
     #custom-bill-input { width: 8rem; }
     input { flex-grow: 1; }
     .in { margin-left: auto; }
+    #pairing-token input, #wallet-addresses input {
+      font-family: monospace;
+      font-size: 1rem
+    } 
     .address-row {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      gap: 1rem;
     }
-    .address-row > input { margin-left: 1rem; margin-right: 1rem; }
+    .address-row > h3 { width: 3rem; }
   </style>
 </head>
 <body>
@@ -59,22 +67,22 @@
       <div class='container'>
         <div class="address-row">
           <h3>BTC</h3>
-          <input type='text' id='btc-address-input' placeholder='Your BTC address...' oninput='validity.valid||(value="");'>
+          <input type='text' id='btc-address-input' placeholder='Your BTC address...'>
           <button id='btc-address-submit' title='Insert' onclick="insertWalletAddress('BTC')">▸</button>
         </div>
         <div class="address-row">
           <h3>ETH</h3>
-          <input type='text' id='eth-address-input' placeholder='Your ETH address...' oninput='validity.valid||(value="");'>
+          <input type='text' id='eth-address-input' placeholder='Your ETH address...'>
           <button id='eth-address-submit' title='Insert' onclick="insertWalletAddress('ETH')">▸</button>
         </div>
         <div class="address-row">
           <h3>BCH</h3>
-          <input type='text' id='bch-address-input' placeholder='Your BCH address...' oninput='validity.valid||(value="");'>
+          <input type='text' id='bch-address-input' placeholder='Your BCH address...'>
           <button id='bch-address-submit' title='Insert' onclick="insertWalletAddress('BCH')">▸</button>
         </div>
         <div class="address-row">
           <h3>USDT</h3>
-          <input type='text' id='usdt-address-input' placeholder='Your USDT address...' oninput='validity.valid||(value="");'>
+          <input type='text' id='usdt-address-input' placeholder='Your USDT address...'>
           <button id='usdt-address-submit' title='Insert' onclick="insertWalletAddress('USDT')">▸</button>
         </div>
       </div>
@@ -101,12 +109,12 @@
 
   const insertPairingToken = () => {
     const token = document.getElementById('token-input').value
-    return fetch(`/pairingToken?value=${token}`)
+    return fetch(`/devtools/pairingToken?value=${token}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
         } else {
-          setStatus(`Pairing token inserted successfully. You can now pair the machine`)
+          setStatus('Pairing token inserted successfully. You can now pair the machine')
         }
       })
       .catch(_ => setStatus('Error sending command to the machine. Is machine running?'))
@@ -114,7 +122,7 @@
 
   const insertWalletAddress = coin => {
     const address = document.getElementById(`${coin.toLowerCase()}-address-input`).value
-    return fetch(`/walletAddress?coin=${coin.toUpperCase()}&value=${address}`)
+    return fetch(`/devtools/walletAddress?coin=${coin.toUpperCase()}&value=${address}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
@@ -129,7 +137,7 @@
     insertBill(document.getElementById('custom-bill-input').value || 10)
 
   const insertBill = denomination => 
-    fetch(`/insertBill?value=${denomination}`)
+    fetch(`/devtools/insertBill?value=${denomination}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
