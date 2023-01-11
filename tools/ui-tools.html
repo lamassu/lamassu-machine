@@ -109,7 +109,7 @@
 
   const insertPairingToken = () => {
     const token = document.getElementById('token-input').value
-    return fetch(`/devtools/pairingToken?value=${token}`)
+    return fetch(`devtools/pairingToken?value=${token}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
@@ -122,7 +122,7 @@
 
   const insertWalletAddress = coin => {
     const address = document.getElementById(`${coin.toLowerCase()}-address-input`).value
-    return fetch(`/devtools/walletAddress?coin=${coin.toUpperCase()}&value=${address}`)
+    return fetch(`devtools/walletAddress?coin=${coin.toUpperCase()}&value=${address}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
@@ -137,7 +137,7 @@
     insertBill(document.getElementById('custom-bill-input').value || 10)
 
   const insertBill = denomination => 
-    fetch(`/devtools/insertBill?value=${denomination}`)
+    fetch(`devtools/insertBill?value=${denomination}`)
       .then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
