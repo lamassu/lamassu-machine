@@ -366,7 +366,7 @@ function setComplianceTimeout(interval) {
     return
 
   complianceTimeout = setTimeout(function () {
-      buttonPressed('cancelCustomInfoRequest')
+    buttonPressed('cancelCustomInfoRequest')
   }, interval == null ? 60000 : interval)
 }
 
@@ -2274,8 +2274,8 @@ function setScreenOptions (opts) {
   (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
 }
 
-function thousandSeparator (number, country) {
-  const numberFormatter = Intl.NumberFormat(country)
+function thousandSeparator (number, country, minimumFractionDigits) {
+  const numberFormatter = Intl.NumberFormat(country, { minimumFractionDigits })
   return numberFormatter.format(number)
 }
 
@@ -2289,10 +2289,14 @@ function setRates (allRates, fiat) {
   const coinEntries = []
 
   Object.keys(allRates).forEach(it => {
+    const cashIn = BN(allRates[it].cashIn)
+    const cashOut = BN(allRates[it].cashOut)
+    const biggestDecimalPlaces = Math.max(cashIn.dp(), cashOut.dp())
+
     coinEntries.push($(`<div class="xs-margin-bottom">
-    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashIn).toFixed(2), localeCode)}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country, biggestDecimalPlaces)}</p>
     <h4 class="js-i18n">${it}</h4>
-    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashOut).toFixed(2), localeCode)}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country, biggestDecimalPlaces)}</p>
   </div>`))
   })
 
