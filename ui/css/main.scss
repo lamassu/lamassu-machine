@@ -504,22 +504,37 @@ footer {
 
 .xl-margin-top {
   margin-top: 10vh;
+  @media (orientation: portrait) {
+    margin-top: 10vw;
+  }
 }
 
 .lg-margin-top {
   margin-top: 8vh;
+  @media (orientation: portrait) {
+    margin-top: 8vw;
+  }
 }
 
 .md-margin-top {
   margin-top: 6vh;
+  @media (orientation: portrait) {
+    margin-top: 6vw;
+  }
 }
 
 .nm-margin-top {
   margin-top: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-top {
   margin-top: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-top {
@@ -528,10 +543,16 @@ footer {
 
 .nm-margin-bottom {
   margin-bottom: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-bottom {
   margin-bottom: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-bottom {
@@ -540,6 +561,9 @@ footer {
 
 .xs-margin-bottom {
   margin-bottom: 1vh;
+  @media (orientation: portrait) {
+    margin-top: 1vw;
+  }
 }
 
 .row {
@@ -1834,4 +1858,9 @@ footer {
       color: $sapphire;
     }
   }
+}
+
+
+@media (orientation: portrait) {
+@import "./portrait.scss";
 }

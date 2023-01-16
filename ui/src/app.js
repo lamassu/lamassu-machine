@@ -310,6 +310,10 @@ function processData (data) {
     case 'rates':
       setState('rates')
       break
+    case 'suspiciousAddress':
+      suspiciousAddress(data.blacklistMessage)
+      setState('suspicious_address')
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -2060,7 +2064,9 @@ function calculateAspectRatio () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16'
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10'
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9'
@@ -2271,5 +2277,13 @@ function setAutomaticPrint (automaticPrint) {
     $('#print-receipt-cash-in-button').show()
     $('#print-receipt-cash-out-button').show()
     $('#print-receipt-cash-in-fail-button').show()
+  }
+}
+
+function suspiciousAddress (blacklistMessage) {
+  if (blacklistMessage) {
+    $(`#suspicious-address-message`).html(blacklistMessage)
+  } else {
+    $(`#suspicious-address-message`).html(translate("This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."))
   }
 }
