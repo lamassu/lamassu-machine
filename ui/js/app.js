@@ -1,6 +1,8 @@
 /* globals $, URLSearchParams, WebSocket, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var queryString = window.location.search;
@@ -57,6 +59,98 @@ var viewportButtonEventsActive = null;
 var viewportEvents = {};
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
+
+function groupBy(arr, by) {
+  var ret = {};
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var elem = _step.value;
+
+      var key = by(elem);
+      if (Object.hasOwn(ret, key)) ret[key].push(elem);else ret[key] = [elem];
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return ret;
+}
+
+function sumBy(arr, by) {
+  var ret = 0;
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = arr[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var x = _step2.value;
+
+      ret += by(x);
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  return ret;
+}
+
+function partitionBy(arr, by) {
+  var yes = [],
+      no = [];
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
+
+  try {
+    for (var _iterator3 = arr[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var x = _step3.value;
+
+      (by(x) ? yes : no).push(x);
+    }
+  } catch (err) {
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+        _iterator3.return();
+      }
+    } finally {
+      if (_didIteratorError3) {
+        throw _iteratorError3;
+      }
+    }
+  }
+
+  return [yes, no];
+}
 
 function connect() {
   console.log('ws://' + HOST + ':' + PORT + '/');
@@ -1520,21 +1614,47 @@ function formatDenomination(denom) {
 
 function buildCassetteButtons(_cassettes, numberOfButtons) {
   cassettes = _cassettes;
-  var activeCassettes = _cassettes.filter(function (it) {
-    return it.count === null || it.count > 0;
-  });
-  var inactiveCassettes = _cassettes.filter(function (it) {
-    return it.count === 0;
+
+  _cassettes = _cassettes.map(function (c) {
+    var isVirtual = c.count === null;
+    var isActive = isVirtual || c.count > 0;
+    return Object.assign(c, { isVirtual: isVirtual, isActive: isActive });
   });
 
-  var allCassettes = activeCassettes.concat(inactiveCassettes);
-  var selectedCassettes = allCassettes.slice(0, numberOfButtons);
-  var sortedCassettes = selectedCassettes.sort(function (a, b) {
+  var _partitionBy = partitionBy(_cassettes, function (it) {
+    return it.isVirtual;
+  }),
+      _partitionBy2 = _slicedToArray(_partitionBy, 2),
+      virtualCassettes = _partitionBy2[0],
+      physicalCassettes = _partitionBy2[1];
+
+  physicalCassettes = Object.entries(groupBy(physicalCassettes, function (c) {
+    return c.denomination;
+  })).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        denomination = _ref2[0],
+        arr = _ref2[1];
+
+    var count = sumBy(arr, function (x) {
+      return x.count;
+    });
+    var isActive = count > 0;
+    return { denomination: denomination, count: count, isActive: isActive };
+  });
+
+  var _partitionBy3 = partitionBy(physicalCassettes, function (it) {
+    return it.isActive;
+  }),
+      _partitionBy4 = _slicedToArray(_partitionBy3, 2),
+      activeCassettes = _partitionBy4[0],
+      inactiveCassettes = _partitionBy4[1];
+
+  _cassettes = activeCassettes.concat(virtualCassettes, inactiveCassettes).slice(0, numberOfButtons).sort(function (a, b) {
     return a.denomination - b.denomination;
   });
 
-  for (var i = 0; i < sortedCassettes.length; i++) {
-    var denomination = formatDenomination(sortedCassettes[i].denomination || 0);
+  for (var i = 0; i < _cassettes.length; i++) {
+    var denomination = formatDenomination(_cassettes[i].denomination || 0);
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
   }
 }
