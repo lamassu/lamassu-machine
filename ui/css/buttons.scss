@@ -152,10 +152,12 @@ button {
 
 .cash-in-color .filled-progress-button:disabled {
   color: $amazonite;
+  pointer-events: none;
 }
 
 .cash-out-color .filled-progress-button:disabled {
   color: $salmon;
+  pointer-events: none;
 }
 
 
