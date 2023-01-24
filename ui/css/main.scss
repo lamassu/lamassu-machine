@@ -64,6 +64,12 @@ footer {
   min-height: 12vh;
 }
 
+.print-receipt-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 @media (max-height: 900px) {
   .take-a-photo {
     display: flex;
@@ -498,22 +504,37 @@ footer {
 
 .xl-margin-top {
   margin-top: 10vh;
+  @media (orientation: portrait) {
+    margin-top: 10vw;
+  }
 }
 
 .lg-margin-top {
   margin-top: 8vh;
+  @media (orientation: portrait) {
+    margin-top: 8vw;
+  }
 }
 
 .md-margin-top {
   margin-top: 6vh;
+  @media (orientation: portrait) {
+    margin-top: 6vw;
+  }
 }
 
 .nm-margin-top {
   margin-top: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-top {
   margin-top: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-top {
@@ -522,10 +543,16 @@ footer {
 
 .nm-margin-bottom {
   margin-bottom: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-bottom {
   margin-bottom: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-bottom {
@@ -534,6 +561,9 @@ footer {
 
 .xs-margin-bottom {
   margin-bottom: 1vh;
+  @media (orientation: portrait) {
+    margin-top: 1vw;
+  }
 }
 
 .row {
@@ -689,12 +719,8 @@ footer {
   width: 30vh;
 }
 
-#choose-coin-header section {
+.rates-section {
   margin-left: 2em;
-}
-
-#choose-coin-header section:first-child {
-  margin-left: 0em;
 }
 
 #change-language-section #language-dropdown-toggle {
@@ -1282,26 +1308,20 @@ footer {
   display: block;
 }
 
-#print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {
-  margin-top: 3vh;
-}
+#print-receipt-cash-in-button, #print-receipt-cash-out-button, #print-receipt-cash-in-fail-button {}
 
 #send-sms-receipt-cash-in-button, #send-sms-receipt-cash-out-button, #send-sms-receipt-cash-in-fail-button {
   margin-left: 3vh;
-  margin-top: 3vh;
 }
 
 #fiat_complete_viewport #print-receipt-cash-out-button  #send-sms-receipt-cash-out-button {
   margin-top: 18vh;
 }
 
-#print-receipt-cash-in-message, #print-receipt-cash-out-message, #print-receipt-cash-in-fail-message {
-  margin-top: 4vh;
-}
+#print-receipt-cash-in-message, #print-receipt-cash-out-message, #print-receipt-cash-in-fail-message {}
 
 #send-sms-receipt-cash-in-message, #send-sms-receipt-cash-out-message, #send-sms-receipt-cash-in-fail-message {
   margin-left: 3vh;
-  margin-top: 4vh;
 }
 
 .promo-code-title-wrapper {
@@ -1473,6 +1493,10 @@ footer {
   .crypto-address, .crypto-address-no-br{
     display: flex;
     justify-content: flex-end;
+  }
+  .rates-section {
+    margin-left: 0; 
+    margin-right: 2em;
   }
 }
 
@@ -1834,4 +1858,9 @@ footer {
       color: $sapphire;
     }
   }
+}
+
+
+@media (orientation: portrait) {
+@import "./portrait.scss";
 }

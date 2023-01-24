@@ -51,9 +51,37 @@ let currentCoins = []
 let customRequirementNumericalKeypad = null
 let customRequirementTextKeyboard = null
 let customRequirementChoiceList = null
+var viewportButtonEventsActive = null
+var viewportEvents = {}
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr',
   'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr']
+
+function groupBy (arr, by) {
+  const ret = {}
+  for (const elem of arr) {
+    const key = by(elem)
+    if (Object.hasOwn(ret, key))
+      ret[key].push(elem)
+    else
+      ret[key] = [elem]
+  }
+  return ret
+}
+
+function sumBy (arr, by) {
+  let ret = 0
+  for (const x of arr)
+    ret += by(x)
+  return ret
+}
+
+function partitionBy (arr, by) {
+    const [yes, no] = [[], []]
+    for (const x of arr)
+        (by(x) ? yes : no).push(x)
+    return [yes, no]
+}
 
 function connect () {
   console.log(`ws://${HOST}:${PORT}/`)
@@ -128,11 +156,12 @@ function processData (data) {
   if (data.hardLimit) setHardLimit(data.hardLimit)
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel)
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes)
-  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat)
+  if (data.allRates && data.ratesFiat && data.localeInfo) setRates(data.allRates, data.ratesFiat, data.localeInfo)
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount)
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null)
   if (data.smsReceiptStatus) setReceiptPrint(null, data.smsReceiptStatus)
+  if (data.automaticPrint) setAutomaticPrint(data.automaticPrint)
 
   if (data.context) {
     $('.js-context').hide()
@@ -288,6 +317,10 @@ function processData (data) {
       break
     case 'rates':
       setState('rates')
+      break
+    case 'suspiciousAddress':
+      suspiciousAddress(data.blacklistMessage)
+      setState('suspicious_address')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -709,18 +742,14 @@ $(document).ready(function () {
     buttonPressed('blockedCustomerOk')
   })
   var insertBillCancelButton = document.getElementById('insertBillCancel')
-  touchImmediateEvent(insertBillCancelButton, function () {
+  touchImmediateEvent(insertBillCancelButton, null, function () {
     setBuyerAddress(null)
     buttonPressed('cancelInsertBill')
   })
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('scanCancel', 'cancelScan')
-  setupImmediateButton('completed_viewport', 'completed')
-  setupImmediateButton('withdraw_failure_viewport', 'completed')
-  setupImmediateButton('out_of_coins_viewport', 'completed')
-  setupImmediateButton('fiat_receipt_viewport', 'completed')
-  setupImmediateButton('fiat_complete_viewport', 'completed')
+  enableViewportButtonEvents()
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel')
   setupImmediateButton('depositCancel', 'depositCancel')
   setupImmediateButton('printer-scan-cancel', 'cancelScan')
@@ -734,7 +763,7 @@ $(document).ready(function () {
   setupButton('choose-fiat-promo-button', 'insertPromoCode')
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel')
-  touchImmediateEvent(promoCodeCancelButton, function () {
+  touchImmediateEvent(promoCodeCancelButton, null, function () {
     promoKeyboard.deactivate.bind(promoKeyboard)
     buttonPressed('cancelPromoCode')
   })
@@ -906,27 +935,14 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
-  setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
-  setupButton('custom-permission-no', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
-  })
-  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
-    $('.text-input-field-1').removeClass('faded').data('content', '').val('')
-    $('.text-input-field-2').addClass('faded').data('content', '').val('')
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1')
-  })
-  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', () => {
-  })
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest')
 
   setupButton('custom-permission-yes', 'permissionCustomInfoRequest')
   setupButton('custom-permission-no', 'finishBeforeSms')
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
-  })
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest',
+    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad))
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)()
     $('.text-input-field-1').removeClass('faded').data('content', '').val('')
     $('.text-input-field-2').addClass('faded').data('content', '').val('')
     customRequirementTextKeyboard.setInputBox('.text-input-field-1')
@@ -983,6 +999,24 @@ $(document).ready(function () {
   initDebug()
 })
 
+function disableViewportButtonEvents () {
+  viewportButtonEventsActive = false
+  disableImmediateButton('completed_viewport', 'completed')
+  disableImmediateButton('withdraw_failure_viewport', 'completed')
+  disableImmediateButton('out_of_coins_viewport', 'completed')
+  disableImmediateButton('fiat_receipt_viewport', 'completed')
+  disableImmediateButton('fiat_complete_viewport', 'completed')
+}
+
+function enableViewportButtonEvents () {
+  viewportButtonEventsActive = true
+  setupImmediateButton('completed_viewport', 'completed')
+  setupImmediateButton('withdraw_failure_viewport', 'completed')
+  setupImmediateButton('out_of_coins_viewport', 'completed')
+  setupImmediateButton('fiat_receipt_viewport', 'completed')
+  setupImmediateButton('fiat_complete_viewport', 'completed')
+}
+
 function targetButton (element) {
   var classList = element.classList || []
   var special = classList.contains('button') ||
@@ -1018,12 +1052,24 @@ function touchEvent (element, callback) {
   element.addEventListener('mousedown', handler)
 }
 
-function touchImmediateEvent (element, callback) {
+function touchImmediateEvent (element, action, callback) {
   function handler (e) {
     callback(e)
     e.stopPropagation()
     e.preventDefault()
   }
+
+  // Viewport events need to be disabled to improve UX in some cases. e.g. Not allowing to finish the transaction while a receipt is being printed
+  // To remove event listeners, the exact same function reference needs to be provided to removeEventListener().
+  // As such, the reference to the exact handler function needs to be saved to be called when disabling it, hence the need for viewportEvents
+  // As the same element can have different actions hooked on the same event, this needs to be stored as an array of <action, handler> pairs
+
+  // The viewportButtonEventsActive ensures that no repeated events are being added to the element
+  if (action && element.id.includes('_viewport')) {
+    if (!viewportEvents[element.id]) viewportEvents[element.id] = []
+    viewportEvents[element.id].push({ action, handler })
+  }
+
   if (shouldEnableTouch()) {
     element.addEventListener('touchstart', handler)
   }
@@ -1032,7 +1078,25 @@ function touchImmediateEvent (element, callback) {
 
 function setupImmediateButton (buttonClass, buttonAction, callback) {
   var button = document.getElementById(buttonClass)
-  touchImmediateEvent(button, function () {
+  touchImmediateEvent(button, buttonAction, function () {
+    if (callback) callback()
+    buttonPressed(buttonAction)
+  })
+}
+
+function disableTouchImmediateEvent(element, action) {
+  if (shouldEnableTouch()) {
+    element.removeEventListener('touchstart', viewportEvents[element.id].find(it => it.action === action).handler)
+  }
+  element.removeEventListener('mousedown', viewportEvents[element.id].find(it => it.action === action).handler)
+
+  // Trim the viewportEvents obj
+  viewportEvents[element.id] = viewportEvents[element.id].filter(it => it.action !== action)
+}
+
+function disableImmediateButton(buttonClass, buttonAction, callback) {
+  var button = document.getElementById(buttonClass)
+  disableTouchImmediateEvent(button, buttonAction, function () {
     if (callback) callback()
     buttonPressed(buttonAction)
   })
@@ -1312,7 +1376,7 @@ function startPage (text, acceptedTerms) {
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
     scrollSize = div.offsetHeight - 40
     updateButtonStyles()
-    if (textHeightQuantity <= div.offsetHeight) {
+    if (text.length <= 1000 && textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       document.getElementById('actions-scroll').style.display = ''
@@ -1535,15 +1599,31 @@ function formatDenomination (denom) {
 
 function buildCassetteButtons (_cassettes, numberOfButtons) {
   cassettes = _cassettes
-  var activeCassettes = _cassettes.filter(it => it.count === null || it.count > 0)
-  var inactiveCassettes = _cassettes.filter(it => it.count === 0)
 
-  var allCassettes = activeCassettes.concat(inactiveCassettes)
-  var selectedCassettes = allCassettes.slice(0, numberOfButtons)
-  var sortedCassettes = selectedCassettes.sort((a, b) => a.denomination - b.denomination)
+  _cassettes = _cassettes.map(c => {
+    const isVirtual = c.count === null
+    const isActive = isVirtual || c.count > 0
+    return Object.assign(c, { isVirtual, isActive })
+  })
 
-  for (var i = 0; i < sortedCassettes.length; i++) {
-    var denomination = formatDenomination(sortedCassettes[i].denomination || 0)
+  let [virtualCassettes, physicalCassettes] = partitionBy(_cassettes, it => it.isVirtual)
+
+  physicalCassettes = Object.entries(groupBy(physicalCassettes, c => c.denomination))
+    .map(([denomination, arr]) => {
+      const count = sumBy(arr, x => x.count)
+      const isActive = count > 0
+      return { denomination, count, isActive }
+    })
+
+  const [activeCassettes, inactiveCassettes] = partitionBy(physicalCassettes, it => it.isActive)
+
+  _cassettes = activeCassettes
+    .concat(virtualCassettes, inactiveCassettes)
+    .slice(0, numberOfButtons)
+    .sort((a, b) => a.denomination - b.denomination)
+
+  for (var i = 0; i < _cassettes.length; i++) {
+    var denomination = formatDenomination(_cassettes[i].denomination || 0)
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination)
   }
 }
@@ -1560,7 +1640,7 @@ function buildCassetteButtonEvents () {
   var fiatButtons = document.getElementById('js-fiat-buttons')
   var lastTouch = null
 
-  touchImmediateEvent(fiatButtons, function (e) {
+  touchImmediateEvent(fiatButtons, null, function (e) {
     var now = Date.now()
     if (lastTouch && now - lastTouch < 100) return
     lastTouch = now
@@ -2008,7 +2088,9 @@ function calculateAspectRatio () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16'
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10'
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9'
@@ -2116,11 +2198,12 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
   else status = smsReceiptStatus
 
   const className = receiptStatus ? 'print-receipt' : 'send-sms-receipt'
-  const printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...'
-  const success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!'
+  const printing = receiptStatus ? translate('Printing receipt...') : translate('Sending receipt...')
+  const success = receiptStatus ? translate('Receipt printed successfully!') : translate('Receipt sent successfully!')
 
   switch (status) {
     case 'disabled':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       $(`#${className}-cash-in-message`).addClass('hide')
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-out-message`).addClass('hide')
@@ -2129,6 +2212,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-button`).addClass('hide')
       break
     case 'available':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       $(`#${className}-cash-in-message`).addClass('hide')
       $(`#${className}-cash-in-button`).removeClass('hide')
       $(`#${className}-cash-out-message`).addClass('hide')
@@ -2137,6 +2221,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-button`).removeClass('hide')
       break
     case 'printing':
+      if (viewportButtonEventsActive) disableViewportButtonEvents()
       const message = locale.translate(printing).fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(message)
@@ -2149,6 +2234,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'success':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       const successMessage = '✔ ' + locale.translate(success).fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(successMessage)
@@ -2161,6 +2247,7 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
       $(`#${className}-cash-in-fail-message`).removeClass('hide')
       break
     case 'failed':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents()
       const failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch()
       $(`#${className}-cash-in-button`).addClass('hide')
       $(`#${className}-cash-in-message`).html(failMessage)
@@ -2179,7 +2266,12 @@ function setScreenOptions (opts) {
   (opts.rates && opts.rates.active) ? $('#rates-section').show() : $('#rates-section').hide()
 }
 
-function setRates (allRates, fiat) {
+function thousandSeparator (number, country) {
+  const numberFormatter = Intl.NumberFormat(country)
+  return numberFormatter.format(number)
+}
+
+function setRates (allRates, fiat, locales) {
   const ratesTable = $('.rates-content')
   const tableHeader = $(`<div class="xs-margin-bottom">
   <h4 class="js-i18n">Buy</h4>
@@ -2187,15 +2279,35 @@ function setRates (allRates, fiat) {
   <h4 class="js-i18n">Sell</h4>
 </div>`)
   const coinEntries = []
-  
+
   Object.keys(allRates).forEach(it => {
     coinEntries.push($(`<div class="xs-margin-bottom">
-    <p class="d2 js-i18n">${allRates[it].cashIn}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country)}</p>
     <h4 class="js-i18n">${it}</h4>
-    <p class="d2 js-i18n">${allRates[it].cashOut}</p>
+    <p class="d2 js-i18n">${thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country)}</p>
   </div>`))
   })
 
   $('#rates-fiat-currency').text(fiat)
   ratesTable.empty().append(tableHeader).append(coinEntries)
+}
+
+function setAutomaticPrint (automaticPrint) {
+  if (automaticPrint) {
+    $('#print-receipt-cash-in-button').hide()
+    $('#print-receipt-cash-out-button').hide()
+    $('#print-receipt-cash-in-fail-button').hide()
+  } else {
+    $('#print-receipt-cash-in-button').show()
+    $('#print-receipt-cash-out-button').show()
+    $('#print-receipt-cash-in-fail-button').show()
+  }
+}
+
+function suspiciousAddress (blacklistMessage) {
+  if (blacklistMessage) {
+    $(`#suspicious-address-message`).html(blacklistMessage)
+  } else {
+    $(`#suspicious-address-message`).html(translate("This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."))
+  }
 }

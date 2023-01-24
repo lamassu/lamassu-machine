@@ -1,6 +1,8 @@
 /* globals $, URLSearchParams, WebSocket, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var queryString = window.location.search;
@@ -53,8 +55,102 @@ var currentCoins = [];
 var customRequirementNumericalKeypad = null;
 var customRequirementTextKeyboard = null;
 var customRequirementChoiceList = null;
+var viewportButtonEventsActive = null;
+var viewportEvents = {};
 
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
+
+function groupBy(arr, by) {
+  var ret = {};
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var elem = _step.value;
+
+      var key = by(elem);
+      if (Object.hasOwn(ret, key)) ret[key].push(elem);else ret[key] = [elem];
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return ret;
+}
+
+function sumBy(arr, by) {
+  var ret = 0;
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = arr[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var x = _step2.value;
+
+      ret += by(x);
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  return ret;
+}
+
+function partitionBy(arr, by) {
+  var yes = [],
+      no = [];
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
+
+  try {
+    for (var _iterator3 = arr[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var x = _step3.value;
+
+      (by(x) ? yes : no).push(x);
+    }
+  } catch (err) {
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+        _iterator3.return();
+      }
+    } finally {
+      if (_didIteratorError3) {
+        throw _iteratorError3;
+      }
+    }
+  }
+
+  return [yes, no];
+}
 
 function connect() {
   console.log('ws://' + HOST + ':' + PORT + '/');
@@ -130,11 +226,12 @@ function processData(data) {
   if (data.hardLimit) setHardLimit(data.hardLimit);
   if (data.cryptomatModel) setCryptomatModel(data.cryptomatModel);
   if (data.areThereAvailablePromoCodes !== undefined) setAvailablePromoCodes(data.areThereAvailablePromoCodes);
-  if (data.allRates && data.ratesFiat) setRates(data.allRates, data.ratesFiat);
+  if (data.allRates && data.ratesFiat && data.localeInfo) setRates(data.allRates, data.ratesFiat, data.localeInfo);
 
   if (data.tx && data.tx.discount) setCurrentDiscount(data.tx.discount);
   if (data.receiptStatus) setReceiptPrint(data.receiptStatus, null);
   if (data.smsReceiptStatus) setReceiptPrint(null, data.smsReceiptStatus);
+  if (data.automaticPrint) setAutomaticPrint(data.automaticPrint);
 
   if (data.context) {
     $('.js-context').hide();
@@ -292,6 +389,10 @@ function processData(data) {
       break;
     case 'rates':
       setState('rates');
+      break;
+    case 'suspiciousAddress':
+      suspiciousAddress(data.blacklistMessage);
+      setState('suspicious_address');
       break;
     default:
       if (data.action) setState(window.snakecase(data.action));
@@ -702,18 +803,14 @@ $(document).ready(function () {
     buttonPressed('blockedCustomerOk');
   });
   var insertBillCancelButton = document.getElementById('insertBillCancel');
-  touchImmediateEvent(insertBillCancelButton, function () {
+  touchImmediateEvent(insertBillCancelButton, null, function () {
     setBuyerAddress(null);
     buttonPressed('cancelInsertBill');
   });
 
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass');
   setupImmediateButton('scanCancel', 'cancelScan');
-  setupImmediateButton('completed_viewport', 'completed');
-  setupImmediateButton('withdraw_failure_viewport', 'completed');
-  setupImmediateButton('out_of_coins_viewport', 'completed');
-  setupImmediateButton('fiat_receipt_viewport', 'completed');
-  setupImmediateButton('fiat_complete_viewport', 'completed');
+  enableViewportButtonEvents();
   setupImmediateButton('chooseFiatCancel', 'chooseFiatCancel');
   setupImmediateButton('depositCancel', 'depositCancel');
   setupImmediateButton('printer-scan-cancel', 'cancelScan');
@@ -727,7 +824,7 @@ $(document).ready(function () {
   setupButton('choose-fiat-promo-button', 'insertPromoCode');
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel');
-  touchImmediateEvent(promoCodeCancelButton, function () {
+  touchImmediateEvent(promoCodeCancelButton, null, function () {
     promoKeyboard.deactivate.bind(promoKeyboard);
     buttonPressed('cancelPromoCode');
   });
@@ -902,26 +999,13 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms');
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms');
 
-  setupButton('custom-permission-yes', 'permissionCustomInfoRequest');
-  setupButton('custom-permission-no', 'finishBeforeSms');
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
-  });
-  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', function () {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
-    $('.text-input-field-1').removeClass('faded').data('content', '').val('');
-    $('.text-input-field-2').addClass('faded').data('content', '').val('');
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1');
-  });
-  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest', function () {});
+  setupImmediateButton('custom-permission-cancel-choiceList', 'cancelCustomInfoRequest');
 
   setupButton('custom-permission-yes', 'permissionCustomInfoRequest');
   setupButton('custom-permission-no', 'finishBeforeSms');
-  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
-    customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
-  });
+  setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad));
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', function () {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
+    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)();
     $('.text-input-field-1').removeClass('faded').data('content', '').val('');
     $('.text-input-field-2').addClass('faded').data('content', '').val('');
     customRequirementTextKeyboard.setInputBox('.text-input-field-1');
@@ -978,6 +1062,24 @@ $(document).ready(function () {
   initDebug();
 });
 
+function disableViewportButtonEvents() {
+  viewportButtonEventsActive = false;
+  disableImmediateButton('completed_viewport', 'completed');
+  disableImmediateButton('withdraw_failure_viewport', 'completed');
+  disableImmediateButton('out_of_coins_viewport', 'completed');
+  disableImmediateButton('fiat_receipt_viewport', 'completed');
+  disableImmediateButton('fiat_complete_viewport', 'completed');
+}
+
+function enableViewportButtonEvents() {
+  viewportButtonEventsActive = true;
+  setupImmediateButton('completed_viewport', 'completed');
+  setupImmediateButton('withdraw_failure_viewport', 'completed');
+  setupImmediateButton('out_of_coins_viewport', 'completed');
+  setupImmediateButton('fiat_receipt_viewport', 'completed');
+  setupImmediateButton('fiat_complete_viewport', 'completed');
+}
+
 function targetButton(element) {
   var classList = element.classList || [];
   var special = classList.contains('button') || classList.contains('circle-button') || classList.contains('wifi-network-button') || classList.contains('square-button');
@@ -1012,12 +1114,24 @@ function touchEvent(element, callback) {
   element.addEventListener('mousedown', handler);
 }
 
-function touchImmediateEvent(element, callback) {
+function touchImmediateEvent(element, action, callback) {
   function handler(e) {
     callback(e);
     e.stopPropagation();
     e.preventDefault();
   }
+
+  // Viewport events need to be disabled to improve UX in some cases. e.g. Not allowing to finish the transaction while a receipt is being printed
+  // To remove event listeners, the exact same function reference needs to be provided to removeEventListener().
+  // As such, the reference to the exact handler function needs to be saved to be called when disabling it, hence the need for viewportEvents
+  // As the same element can have different actions hooked on the same event, this needs to be stored as an array of <action, handler> pairs
+
+  // The viewportButtonEventsActive ensures that no repeated events are being added to the element
+  if (action && element.id.includes('_viewport')) {
+    if (!viewportEvents[element.id]) viewportEvents[element.id] = [];
+    viewportEvents[element.id].push({ action: action, handler: handler });
+  }
+
   if (shouldEnableTouch()) {
     element.addEventListener('touchstart', handler);
   }
@@ -1026,7 +1140,31 @@ function touchImmediateEvent(element, callback) {
 
 function setupImmediateButton(buttonClass, buttonAction, callback) {
   var button = document.getElementById(buttonClass);
-  touchImmediateEvent(button, function () {
+  touchImmediateEvent(button, buttonAction, function () {
+    if (callback) callback();
+    buttonPressed(buttonAction);
+  });
+}
+
+function disableTouchImmediateEvent(element, action) {
+  if (shouldEnableTouch()) {
+    element.removeEventListener('touchstart', viewportEvents[element.id].find(function (it) {
+      return it.action === action;
+    }).handler);
+  }
+  element.removeEventListener('mousedown', viewportEvents[element.id].find(function (it) {
+    return it.action === action;
+  }).handler);
+
+  // Trim the viewportEvents obj
+  viewportEvents[element.id] = viewportEvents[element.id].filter(function (it) {
+    return it.action !== action;
+  });
+}
+
+function disableImmediateButton(buttonClass, buttonAction, callback) {
+  var button = document.getElementById(buttonClass);
+  disableTouchImmediateEvent(button, buttonAction, function () {
     if (callback) callback();
     buttonPressed(buttonAction);
   });
@@ -1268,7 +1406,7 @@ function startPage(text, acceptedTerms) {
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight;
     scrollSize = div.offsetHeight - 40;
     updateButtonStyles();
-    if (textHeightQuantity <= div.offsetHeight) {
+    if (text.length <= 1000 && textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none';
     } else {
       document.getElementById('actions-scroll').style.display = '';
@@ -1495,21 +1633,47 @@ function formatDenomination(denom) {
 
 function buildCassetteButtons(_cassettes, numberOfButtons) {
   cassettes = _cassettes;
-  var activeCassettes = _cassettes.filter(function (it) {
-    return it.count === null || it.count > 0;
-  });
-  var inactiveCassettes = _cassettes.filter(function (it) {
-    return it.count === 0;
+
+  _cassettes = _cassettes.map(function (c) {
+    var isVirtual = c.count === null;
+    var isActive = isVirtual || c.count > 0;
+    return Object.assign(c, { isVirtual: isVirtual, isActive: isActive });
   });
 
-  var allCassettes = activeCassettes.concat(inactiveCassettes);
-  var selectedCassettes = allCassettes.slice(0, numberOfButtons);
-  var sortedCassettes = selectedCassettes.sort(function (a, b) {
+  var _partitionBy = partitionBy(_cassettes, function (it) {
+    return it.isVirtual;
+  }),
+      _partitionBy2 = _slicedToArray(_partitionBy, 2),
+      virtualCassettes = _partitionBy2[0],
+      physicalCassettes = _partitionBy2[1];
+
+  physicalCassettes = Object.entries(groupBy(physicalCassettes, function (c) {
+    return c.denomination;
+  })).map(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        denomination = _ref2[0],
+        arr = _ref2[1];
+
+    var count = sumBy(arr, function (x) {
+      return x.count;
+    });
+    var isActive = count > 0;
+    return { denomination: denomination, count: count, isActive: isActive };
+  });
+
+  var _partitionBy3 = partitionBy(physicalCassettes, function (it) {
+    return it.isActive;
+  }),
+      _partitionBy4 = _slicedToArray(_partitionBy3, 2),
+      activeCassettes = _partitionBy4[0],
+      inactiveCassettes = _partitionBy4[1];
+
+  _cassettes = activeCassettes.concat(virtualCassettes, inactiveCassettes).slice(0, numberOfButtons).sort(function (a, b) {
     return a.denomination - b.denomination;
   });
 
-  for (var i = 0; i < sortedCassettes.length; i++) {
-    var denomination = formatDenomination(sortedCassettes[i].denomination || 0);
+  for (var i = 0; i < _cassettes.length; i++) {
+    var denomination = formatDenomination(_cassettes[i].denomination || 0);
     $('.cash-button[data-denomination-index=' + i + '] .js-denomination').text(denomination);
   }
 }
@@ -1526,7 +1690,7 @@ function buildCassetteButtonEvents() {
   var fiatButtons = document.getElementById('js-fiat-buttons');
   var lastTouch = null;
 
-  touchImmediateEvent(fiatButtons, function (e) {
+  touchImmediateEvent(fiatButtons, null, function (e) {
     var now = Date.now();
     if (lastTouch && now - lastTouch < 100) return;
     lastTouch = now;
@@ -1960,7 +2124,9 @@ function calculateAspectRatio() {
   var aspectRatioPt1 = w / r;
   var aspectRatioPt2 = h / r;
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16';
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10';
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9';
@@ -2057,11 +2223,12 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
   if (receiptStatus) status = receiptStatus;else status = smsReceiptStatus;
 
   var className = receiptStatus ? 'print-receipt' : 'send-sms-receipt';
-  var printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...';
-  var success = receiptStatus ? 'Receipt printed successfully!' : 'Receipt sent successfully!';
+  var printing = receiptStatus ? translate('Printing receipt...') : translate('Sending receipt...');
+  var success = receiptStatus ? translate('Receipt printed successfully!') : translate('Receipt sent successfully!');
 
   switch (status) {
     case 'disabled':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents();
       $('#' + className + '-cash-in-message').addClass('hide');
       $('#' + className + '-cash-in-button').addClass('hide');
       $('#' + className + '-cash-out-message').addClass('hide');
@@ -2070,6 +2237,7 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
       $('#' + className + '-cash-in-fail-button').addClass('hide');
       break;
     case 'available':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents();
       $('#' + className + '-cash-in-message').addClass('hide');
       $('#' + className + '-cash-in-button').removeClass('hide');
       $('#' + className + '-cash-out-message').addClass('hide');
@@ -2078,6 +2246,7 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
       $('#' + className + '-cash-in-fail-button').removeClass('hide');
       break;
     case 'printing':
+      if (viewportButtonEventsActive) disableViewportButtonEvents();
       var message = locale.translate(printing).fetch();
       $('#' + className + '-cash-in-button').addClass('hide');
       $('#' + className + '-cash-in-message').html(message);
@@ -2090,6 +2259,7 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
       $('#' + className + '-cash-in-fail-message').removeClass('hide');
       break;
     case 'success':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents();
       var successMessage = '✔ ' + locale.translate(success).fetch();
       $('#' + className + '-cash-in-button').addClass('hide');
       $('#' + className + '-cash-in-message').html(successMessage);
@@ -2102,6 +2272,7 @@ function setReceiptPrint(receiptStatus, smsReceiptStatus) {
       $('#' + className + '-cash-in-fail-message').removeClass('hide');
       break;
     case 'failed':
+      if (!viewportButtonEventsActive) enableViewportButtonEvents();
       var failMessage = '✖ ' + locale.translate('An error occurred, try again.').fetch();
       $('#' + className + '-cash-in-button').addClass('hide');
       $('#' + className + '-cash-in-message').html(failMessage);
@@ -2120,16 +2291,41 @@ function setScreenOptions(opts) {
   opts.rates && opts.rates.active ? $('#rates-section').show() : $('#rates-section').hide();
 }
 
-function setRates(allRates, fiat) {
+function thousandSeparator(number, country) {
+  var numberFormatter = Intl.NumberFormat(country);
+  return numberFormatter.format(number);
+}
+
+function setRates(allRates, fiat, locales) {
   var ratesTable = $('.rates-content');
   var tableHeader = $('<div class="xs-margin-bottom">\n  <h4 class="js-i18n">Buy</h4>\n  <h4 class="js-i18n">Crypto</h4>\n  <h4 class="js-i18n">Sell</h4>\n</div>');
   var coinEntries = [];
 
   Object.keys(allRates).forEach(function (it) {
-    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + allRates[it].cashIn + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + allRates[it].cashOut + '</p>\n  </div>'));
+    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country) + '</p>\n  </div>'));
   });
 
   $('#rates-fiat-currency').text(fiat);
   ratesTable.empty().append(tableHeader).append(coinEntries);
+}
+
+function setAutomaticPrint(automaticPrint) {
+  if (automaticPrint) {
+    $('#print-receipt-cash-in-button').hide();
+    $('#print-receipt-cash-out-button').hide();
+    $('#print-receipt-cash-in-fail-button').hide();
+  } else {
+    $('#print-receipt-cash-in-button').show();
+    $('#print-receipt-cash-out-button').show();
+    $('#print-receipt-cash-in-fail-button').show();
+  }
+}
+
+function suspiciousAddress(blacklistMessage) {
+  if (blacklistMessage) {
+    $('#suspicious-address-message').html(blacklistMessage);
+  } else {
+    $('#suspicious-address-message').html(translate("This address may be associated with a deceptive offer or a prohibited group. Please make sure you\'re using an address from your own wallet."));
+  }
 }
 //# sourceMappingURL=app.js.map

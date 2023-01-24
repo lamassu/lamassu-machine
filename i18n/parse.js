@@ -13,20 +13,18 @@ function strip (s) {
   return s.trim().replace(/[\n ]+/g, ' ')
 }
 
-function escapeDoubleQuotes(s){
+function escapeDoubleQuotes(s) {
   return s.replace(/\\([\s\S])|(")/g,"\\$1$2")
 }
 
 function parseAppLine (line) {
-  const re = /translate\(["'](.+)["'][,\)]/
-  const res = line.match(re)
-  return res && res[1]
+  const re = /translate\(["'](.+?)["'][,\)]/g
+  return _.map(s => s.match(/translate\(["'](.+?)["'][,\)]/)[1], line.match(re))
 }
 
 function parseJs (s) {
   const lines = s.split('\n')
-  const results = _.uniq(_.compact(_.map(parseAppLine, lines)))
-  return results
+  return _.compose(_.uniq, _.compact, _.flatten, _.map(parseAppLine))(lines)
 }
 
 function parseHtml (s) {
@@ -74,10 +72,10 @@ const app = fs.readFileSync(appPath, {encoding: 'utf8'})
 const outPath = path.resolve(__dirname, '../i18n/ui/lbm-ui_en-US.po')
 
 const coins = [
-  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash'
+  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash', 'Monero'
 ]
 
-function run (){
+function run () {
   try{
     const htmlResults = parseHtml(html)
     const appResults = parseJs(app)

@@ -265,7 +265,7 @@
           <div id="languages" class="dropdown hide"></div>
           <div class="js-two-language small-action-button tl2"></div>
         </section>
-        <section id="rates-section" class="button cash-out-color">
+        <section id="rates-section" class="button cash-out-color rates-section">
           <div id="rates-section-button" class="small-action-button tl2">
             <div class="js-i18n">Rates</div>
           </div>
@@ -381,7 +381,7 @@
           <p class="tl2 amount-deposited"></p>
           <p class="js-i18n d2 coins-to-address">Your coins are on their way to:</p>
           <p class="m2 crypto-address"></p>
-          <footer>
+          <div class="print-receipt-wrapper">
             <button id="print-receipt-cash-in-button" class="js-i18n bordered-progress-button button tl2">
               Print receipt
             </button>
@@ -390,7 +390,7 @@
               Send SMS receipt
             </button>
             <p id="send-sms-receipt-cash-in-message" class="d2 hide"></p>
-          </footer>
+          </div>
         </section>
         <section class="secondary-side qr-secondary-side">
           <div class="qr-wrapper">
@@ -1012,7 +1012,7 @@
               <span class="js-crypto-display-units"></span>
             </p>
           </div>
-          <footer>
+          <div class="print-receipt-wrapper">
             <button id="print-receipt-cash-out-button" class="js-i18n bordered-progress-button button tl2">
               Print receipt
             </button>
@@ -1021,7 +1021,7 @@
               Send SMS receipt
             </button>
             <p id="send-sms-receipt-cash-out-message" class="d2 hide"></p>
-          </footer>
+          </div>
         </section>
         <section class="secondary-side qr-secondary-side">
           <div class="qr-wrapper">
@@ -1289,7 +1289,7 @@
       </main>
     
       <footer>
-        <button id="submit-promo-code" class="filled-progress-button button">Submit</button>
+        <button id="submit-promo-code" class="filled-progress-button button js-i18n">Submit</button>
       </footer>
       
     </section><section
@@ -1645,7 +1645,7 @@
     >
       <header>
         <div id="rates-close" class="cancel-button-wrapper">
-          <img class="cancel-button" src="images/close-icon.svg" />
+          <img class="cancel-button" src="images/close-icon-amaz.svg" />
         </div>
       </header>
     
@@ -2013,8 +2013,7 @@
       <main>
         <h3 class="js-i18n xs-margin-bottom">Suspicious address</h3>
         <div class="text-content sm-margin-top">
-          <p class="js-i18n d2">
-            This address may be associated with a deceptive offer or a prohibited group. Please make sure you're using an address from your own wallet.
+          <p id="suspicious-address-message" class="d2">
           </p>
         </div>
       </main>
@@ -3206,7 +3205,7 @@
       <main>
         <section class="primary-side">
           <h2 class="js-i18n primary-side-title no-margin-top xs-margin-bottom">We got this</h2>
-          <p class="d2 no-margin-top">
+          <p class="js-i18n d2 no-margin-top">
             Our Internet was down for a bit but you'll receive your funds as soon as our connection is back.
           </p>
           <p class="js-i18n d2 white xs-margin-bottom">You Purchased</p>
@@ -3217,7 +3216,7 @@
           <p class="tl2 amount-deposited sm-margin-top"></p>
           <p class="js-i18n d2 no-margin-bottom sm-margin-top">Your coins are on their way to:</p>
           <p class="m2 crypto-address"></p>
-          <footer>
+          <div class="print-receipt-wrapper">
             <button id="print-receipt-cash-in-fail-button" class="js-i18n bordered-progress-button button tl2">
               Print receipt
             </button>
@@ -3226,7 +3225,7 @@
               Send SMS receipt
             </button>
             <p id="send-sms-receipt-cash-in-fail-message" class="d2 hide"></p>
-          </footer>
+          </div>
         </section>
         <section class="secondary-side qr-secondary-side">
           <section class="qr-section">
