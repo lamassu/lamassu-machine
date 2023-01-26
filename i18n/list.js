@@ -11,8 +11,8 @@ When `--compare` is used all other parameters will be treated as language codes.
 const fs = require('fs');
 const path = require('path');
 
-const localePath = path.resolve(__dirname, '..', 'ui', 'js', 'locales.js');
-const json = fs.readFileSync(localePath).slice(25, -37).toString();
+const localePath = path.resolve(__dirname, '..', 'ui', 'src', 'locales.js');
+const json = fs.readFileSync(localePath).slice(14, -1).toString();
 const languages = JSON.parse(json);
 
 let selectedLanguages = []
