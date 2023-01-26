@@ -37,7 +37,7 @@ if (!compare) {
   const poSentences = poFile
     .match(/msgid "(.+?)"\n/g)
     .map(s => s.match(/msgid "(.+?)"\n/)[1])
-    .map(s => s.replace("\\",''))
+    .map(s => s.replace(/\\/g, ''))
 
   if (selectedLanguages.length === 0)
     selectedLanguages = Object.keys(languages)
