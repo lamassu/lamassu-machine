@@ -72,7 +72,7 @@ const app = fs.readFileSync(appPath, {encoding: 'utf8'})
 const outPath = path.resolve(__dirname, '../i18n/ui/lbm-ui_en-US.po')
 
 const coins = [
-  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash', 'Monero'
+  'Bitcoin', 'Ethereum', 'Zcash', 'Litecoin', 'Dash', 'Bitcoin Cash', 'Monero', 'USDT'
 ]
 
 function run () {

@@ -1074,3 +1074,7 @@ msgstr "Bitcoin Cash"
 msgid "Monero"
 msgstr "Monero"
 
+#: On screen: coins
+msgid "USDT"
+msgstr "USDT"
+
