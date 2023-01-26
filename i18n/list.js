@@ -74,21 +74,21 @@ if (!compare) {
     if (missingSentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No missing translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${missingSentences.length} missing translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${missingSentences.length} missing translations (key not detected in .po file)`)
       quiet || console.log(missingSentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
 
     if (emptySentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No empty translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${emptySentences.length} empty translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${emptySentences.length} empty translations (key detected in .po file but translation is empty)`)
       quiet || console.log(emptySentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
 
     if (excessSentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No excess translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${excessSentences.length} excess translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${excessSentences.length} excess translations (key detected in .po file but not in reference)`)
       quiet || console.log(excessSentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
   });
