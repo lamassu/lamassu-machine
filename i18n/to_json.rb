@@ -28,4 +28,4 @@ Dir.glob(File.join('build', '*', 'ui', '*.po')).each {|f|
 	rec[locale] = json
 }
 
-File.write('../ui/js/locales.js', 'var locales = ' + JSON.dump(rec) + ';')
+File.write('../ui/src/locales.js', 'var locales = ' + JSON.dump(rec) + ';')
