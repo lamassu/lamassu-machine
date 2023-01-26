@@ -2250,9 +2250,9 @@ function thousandSeparator (number, country) {
 function setRates (allRates, fiat) {
   const ratesTable = $('.rates-content')
   const tableHeader = $(`<div class="xs-margin-bottom">
-  <h4 class="js-i18n">Buy</h4>
-  <h4 class="js-i18n">Crypto</h4>
-  <h4 class="js-i18n">Sell</h4>
+  <h4 class="js-i18n">${translate('Buy')}</h4>
+  <h4 class="js-i18n">${translate('Crypto')}</h4>
+  <h4 class="js-i18n">${translate('Sell')}</h4>
 </div>`)
   const coinEntries = []
 
