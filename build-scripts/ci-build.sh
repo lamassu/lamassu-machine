@@ -3,7 +3,7 @@ set -e
 
 if [ -z "$1" ]
   then
-    echo "Builds a lamassu-machine update package"
+    echo "Builds a lamassu-machine update package!"
     echo -e "\nUsage:"
     echo -e "build <password>\n"
     exit 1
