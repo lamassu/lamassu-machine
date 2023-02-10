@@ -1,0 +1,15 @@
+name: build
+
+on: [workflow_dispatch]
+
+jobs: 
+  everything:
+    runs-on: ubuntu-latest
+    env:
+      LICENCES_PASSWORD: ${{ secrets.LICENCES_PASSWORD }}
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Run script
+        shell: bash
+        run: build-scripts/ci-build.sh $LICENCES_PASSWORD
