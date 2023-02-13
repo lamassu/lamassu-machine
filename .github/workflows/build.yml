@@ -1,0 +1,23 @@
+name: build
+
+on: [workflow_dispatch]
+
+jobs: 
+  everything:
+    runs-on: ubuntu-latest
+    env:
+      LICENCES_PASSWORD: ${{ secrets.LICENCES_PASSWORD }}
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Get Repo
+        uses: actions/checkout@v2
+      - name: Run script
+        shell: bash
+        run: |
+         chmod +x ./build-scripts/ci-build.sh
+         ./build-scripts/ci-build.sh $LICENCES_PASSWORD
+      - uses: actions/upload-artifact@v3
+        with:
+          name: update.tar
+          path: ./update.tar

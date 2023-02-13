@@ -457,8 +457,7 @@ button {
   padding: 0 2vw;
   height: 8vh;
   border-radius: 4vh;
-  color: #ffffff;
-  min-width: 16vh; }
+  color: #ffffff; }
   .museo .filled-progress-button {
     font-family: 'MuseoSans', 'Rubik', 'Noto Sans CJK CS', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans CJK TC', 'Noto Sans Hebrew', 'Noto Kufi Arabic'; }
   .cash-in-color .filled-progress-button, .system-color .filled-progress-button {
@@ -2407,12 +2406,16 @@ footer {
 #custom-requirement-choicelist-wrapper {
   height: 90%;
   margin: 0 6vw;
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 0.5fr; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex; }
+
+.custom-requirement-question-wrapper {
+  width: 49%; }
 
 .choice-list-grid-wrapper {
   min-height: 60vh;
-  margin-right: 20px; }
+  width: 36%; }
 
 .choice-list-item {
   width: 95%;
@@ -2438,7 +2441,7 @@ footer {
 
 .choice-list-actions-wrapper {
   position: relative;
-  height: 100%;
+  height: 70vh;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
@@ -2454,7 +2457,7 @@ footer {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  margin-left: 25%; }
+  margin-left: 5%; }
   .choice-list-actions-wrapper p {
     margin: 4vh 0; }
 

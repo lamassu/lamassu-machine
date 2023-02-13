@@ -121,14 +121,30 @@ function installDeviceConfig (cb) {
   }
 }
 
-async.series([
-  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'), async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
+const commands = []
+
+commands.push(
+  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
+  async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
+)
+
+if (hardwareCode === 'aaeon') {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.386 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+} else if (hardwareCode === 'ssuboard') {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.arm32 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+} else {
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.amd64 ${applicationParentFolder}/lamassu-machine/verify/verify`))
+}
+
+commands.push(
   async.apply(installDeviceConfig),
   async.apply(updateSupervisor),
   async.apply(updateUdev),
   async.apply(updateAcpChromium),
   async.apply(report, null, 'finished.')
-], function(err) {
+)
+
+async.series(commands, function(err) {
   if (err) throw err;
 });
