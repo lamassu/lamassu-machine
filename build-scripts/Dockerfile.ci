@@ -1,0 +1,57 @@
+# ACP build 
+FROM lamassu/acp-build:1.0 as acp-build
+  ARG VERSION
+  ARG PASSWORD
+
+  RUN mkdir lamassu-machine && cd lamassu-machine && \
+    curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $PASSWORD --decrypt | xz -dc > licenses.json && \
+    curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x 
+
+  COPY ["package.json", "package-lock.json", "./lamassu-machine/"]
+  RUN cd lamassu-machine && npm install 
+  COPY . ./lamassu-machine/
+  RUN cd lamassu-machine && \
+    cp ./hardware/codebase/aaeon/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh aaeon --copy-device-config
+
+FROM lamassu/upboard-build:1.0 as upboard-gaia-build
+  COPY ["package.json", "package-lock.json", "./"]
+  RUN npm install 
+  COPY --from=acp-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && mv ../node_modules ./ && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard/gaia/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-gaia --copy-device-config
+
+FROM lamassu/upboard-build:1.0 as upboard-sintra-build
+  COPY ["package.json", "package-lock.json", "./"]
+  RUN npm install 
+  COPY --from=upboard-gaia-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && mv ../node_modules ./ && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard/sintra/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-sintra --copy-device-config
+
+FROM lamassu/upboard-build:1.0 as upboard-tejo-build
+  COPY ["package.json", "package-lock.json", "./"]
+  RUN npm install 
+  COPY --from=upboard-sintra-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && mv ../node_modules ./ && \
+    npm install @joepie91/v4l2camera@1.0.5 && \
+    mv node_modules/@joepie91/v4l2camera node_modules/ && \
+    rmdir node_modules/@joepie91 && \
+    cp ./hardware/codebase/upboard/tejo/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-tejo --copy-device-config
+
+FROM lamassu/ssu-build:1.0 as ssuboard-build
+  COPY ["package.json", "package-lock.json", "./"]
+  RUN npm install 
+  COPY --from=upboard-tejo-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && rm -rf node_modules && mv ../node_modules ./ && \
+    cp ./hardware/codebase/ssuboard/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh ssuboard --copy-device-config
+  RUN cd lamassu-machine && bash ./deploy/codebase/package.sh
