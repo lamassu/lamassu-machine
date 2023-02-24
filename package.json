@@ -63,7 +63,7 @@
     "image-size": "0.6.3",
     "microtime": "2.1.7",
     "nan": "2.14.0",
-    "node-sass": "4.11.0",
+    "node-sass": "^8.0.0",
     "p-whilst": "1.0.0",
     "parse5": "4.0.0",
     "postcss-cli": "6.1.1",
