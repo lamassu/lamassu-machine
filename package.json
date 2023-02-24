@@ -48,7 +48,7 @@
   "optionalDependencies": {
     "jpeg-turbo": "file:../node-jpeg-turbo",
     "manatee": "2.0.2",
-    "v4l2camera": "1.0.4",
+    "v4l2camera": "file:../v4l2camera",
     "nfc-pcsc": "^0.6.1",
     "pcsclite": "^0.6.0"
   },
