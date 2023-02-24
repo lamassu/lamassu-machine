@@ -46,7 +46,7 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
-    "jpeg-turbo": "github:lamassu/node-jpeg-turbo",
+    "jpeg-turbo": "file:../node-jpeg-turbo",
     "manatee": "2.0.2",
     "v4l2camera": "1.0.4",
     "nfc-pcsc": "^0.6.1",
