@@ -12,7 +12,7 @@ sudo apt-get install \
     build-essential cmake \
     libgtk2.0-dev pkg-config \
     libavcodec-dev libavformat-dev \
-    libswscale-dev libpcsclite-dev \
+    libswscale-dev \
     libv4l-dev libasound2-dev \
     gcc-4.9 g++-4.9
 export CXX="g++-4.9"
@@ -104,7 +104,7 @@ npm install
 node-gyp rebuild
 ```
 
-### If you're having trouble with nfc-pcsc module
+### If you're having trouble with pcsclite module
 
 ```
 apt-get install -y libpcsclite-dev
