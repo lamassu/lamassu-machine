@@ -2,10 +2,9 @@
 
 'use strict'
 
-const rewire = require('rewire')
 const readline = require('readline')
 
-const fobManager = rewire('../lib/ssuboard/fob-manager')
+const fobManager = require('../lib/ssuboard/fob-manager')
 
 const AVAILABLE_COMMANDS = ['ls', 'add', 'rm']
 
