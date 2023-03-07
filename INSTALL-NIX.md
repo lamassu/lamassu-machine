@@ -80,12 +80,6 @@ nix-shell --pure
 [nix-shell:<lamassu-machine-dir>]$ npm install
 ```
 
-### If you're having trouble with ENOENT: node_modules/node-sass/vendor 
-
-```
-npm rebuild node-sass
-```
-
 ### If you're having trouble with serialport bindings
 
 Configure mockPrinter on your device_config.json

@@ -1,5 +1,5 @@
 import test from 'ava'
-import sinon from 'sinon';
+// import sinon from 'sinon';
 import actionEmitter from '../../lib/action-emitter'
 import ledManager from '../../lib/ssuboard/mock/led-manager'
 import lc from '../../lib/ssuboard/mock/led-control'
@@ -12,10 +12,10 @@ test.before(_ => {
   ledManager.run()
 })
 
-test.beforeEach(_ => {
-  spyLC = sinon.spy(lc, 'timedPulse')
-  spyPD = sinon.spy(pd, 'isDoorSecured')
-})
+// test.beforeEach(_ => {
+//   spyLC = sinon.spy(lc, 'timedPulse')
+//   spyPD = sinon.spy(pd, 'isDoorSecured')
+// })
 
 test.afterEach(_ => {
   lc.timedPulse.restore()

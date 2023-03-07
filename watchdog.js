@@ -19,6 +19,10 @@ var running = false
 var platform = process.argv[2] || 'N7G1'
 var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 
+var WATCHDOG_INFO_PATH = './data/watchdog-info.json'
+
+fs.writeFileSync(WATCHDOG_INFO_PATH, JSON.stringify({ model: model, platform: platform}))
+
 process.on('SIGUSR2', function () {
   // USR1 is reserved by node
   console.log('Got SIGUSR2. Immune.')

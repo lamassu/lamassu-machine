@@ -47,10 +47,3 @@ initializeDevice(() => {
   billDispenser.dispense(200)
     .then(() => console.log('DONE'))
 })
-
-/*
-async.series([
-  async.apply(init),
-  function(cb) { console.log('DEBUG dispense closure'); billDispenser.dispense(6, cb); }
-]);
-*/

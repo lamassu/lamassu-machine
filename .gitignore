@@ -1,4 +1,3 @@
-lib-cov
 *.seed
 *.log
 *.csv
@@ -7,72 +6,39 @@ lib-cov
 *.gz
 *.swp
 
-sftp-config.json
-
-pids
-logs
-log
-results
-/build
+# Suffix for text editor backup files
+*~
 
 npm-debug.log
-
-jig/
-scratch/
-rwc
 
 i18n/*.zip
 ui/css/fonts
 
 /licenses.json
 libBarcodeScanner.*
-/hardware/codebase/N7G1/node_modules/manatee/build
-/hardware/codebase/aaeon/node_modules/manatee/build
 
 # compiled dependencies
 /node_modules
-jasmine
-istanbul
 
 # OS files
 .DS_Store
 
 .idea
 
-*.csv#
-
 /device_config.json
 /data
-/coverage
 /fonts
 /certs
 
 test/compliance/licenses
-
-cli.txt
-*~
-
-.project
-crowdin.yaml
-
-ne*.txt
-
-mock_data/compliance/NY_ID.png
-node_modules_old/
-.vagrant
-hardware/binaries/
-hardware/codebase/aaeon/node_modules
-native_modules.tgz
-ui-old/js/app.js
-ui-old/js/app.js.map
 
 ui/js/test-app.js
 ui/js/test-app.js.map
 ui/css/build
 ui/css/fonts
 
-stress-test/machines/
-stress-test/config.json
+test/stress/machines/
+test/stress/config.json
 
 result.jpg
 

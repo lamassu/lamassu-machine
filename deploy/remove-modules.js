@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra')
+const fs = require('fs')
 const path = require('path')
 var rimraf = require("rimraf");
 
@@ -11,7 +11,7 @@ const isNative = m => {
   const isNative = fs.existsSync(path.resolve(base, m, 'build', 'Release'))
 
   // TODO this is awfully manual right now. 
-  const mappedNative = m === '@lamassu' || m === '@pokusew' || m === '@joepie91' || m === 'keccak' || m === '@serialport'
+  const mappedNative = m === '@lamassu' || m === '@joepie91' || m === 'keccak' || m === '@serialport'
 
   if (mode === '--rem-native')
     return isNative || mappedNative

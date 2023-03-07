@@ -1,12 +1,11 @@
 import test from 'ava'
 import path from 'path'
 import fs from 'fs'
-import rewire from 'rewire'
 
 const mockData = { successfull: true, keyHandle: 'small' } 
 const u2fPath = path.resolve('./', 'u2f.json')
-const u2f = rewire('../../lib/ssuboard/u2f')
-const fobManager = rewire('../../lib/ssuboard/fob-manager')
+const fobManager = require('../../lib/ssuboard/fob-manager')
+// const u2f = rewire('../../lib/ssuboard/u2f')
 
 test.before(t => setupMocks())
 
@@ -38,14 +37,14 @@ test.serial('should fail registering already existing name', async t => {
   t.is(r.message, 'There\'s already a FOB named: fob')
 })
 
-const setupMocks = () => {
-  u2f.__set__('checkRegistration', () => Promise.resolve(mockData))
-  u2f.__set__('u2f', {request: () => ''})
-  u2f.__set__('nfc', {transmit: () => Promise.resolve()})
-  u2f.__set__('u2fPath', u2fPath)
-  fs.writeFileSync(u2fPath, JSON.stringify(mockData))
-  fobManager.__set__('u2f', u2f)
-}
+// const setupMocks = () => {
+//   u2f.__set__('checkRegistration', () => Promise.resolve(mockData))
+//   u2f.__set__('u2f', {request: () => ''})
+//   u2f.__set__('nfc', {transmit: () => Promise.resolve()})
+//   u2f.__set__('u2fPath', u2fPath)
+//   fs.writeFileSync(u2fPath, JSON.stringify(mockData))
+//   fobManager.__set__('u2f', u2f)
+// }
 
 test.after(() => {
   fs.unlinkSync(u2fPath)
