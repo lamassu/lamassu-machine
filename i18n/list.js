@@ -11,8 +11,8 @@ When `--compare` is used all other parameters will be treated as language codes.
 const fs = require('fs');
 const path = require('path');
 
-const localePath = path.resolve(__dirname, '..', 'ui', 'js', 'locales.js');
-const json = fs.readFileSync(localePath).slice(25, -37).toString();
+const localePath = path.resolve(__dirname, '..', 'ui', 'src', 'locales.js');
+const json = fs.readFileSync(localePath).slice(14, -1).toString();
 const languages = JSON.parse(json);
 
 let selectedLanguages = []
@@ -37,7 +37,7 @@ if (!compare) {
   const poSentences = poFile
     .match(/msgid "(.+?)"\n/g)
     .map(s => s.match(/msgid "(.+?)"\n/)[1])
-    .map(s => s.replace("\\",''))
+    .map(s => s.replace(/\\/g, ''))
 
   if (selectedLanguages.length === 0)
     selectedLanguages = Object.keys(languages)
@@ -74,21 +74,21 @@ if (!compare) {
     if (missingSentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No missing translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${missingSentences.length} missing translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${missingSentences.length} missing translations (key not detected in .po file)`)
       quiet || console.log(missingSentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
 
     if (emptySentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No empty translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${emptySentences.length} empty translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${emptySentences.length} empty translations (key detected in .po file but translation is empty)`)
       quiet || console.log(emptySentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
 
     if (excessSentences.length === 0) {
       console.log('\x1b[32m%s\x1b[0m', 'No excess translations')
     } else {
-      console.log('\x1b[31m%s\x1b[0m', `Detected ${excessSentences.length} excess translations`)
+      console.log('\x1b[31m%s\x1b[0m', `Detected ${excessSentences.length} excess translations (key detected in .po file but not in reference)`)
       quiet || console.log(excessSentences.reduce((a, b) => a + b + '\n', '').slice(0, -1))
     }
   });
