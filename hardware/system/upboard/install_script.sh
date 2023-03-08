@@ -7,14 +7,14 @@ PRINTER=$3
 
 if [ -z $1 ] || [ -z $2 ]; then
   echo 'usage: install_script <machine> <version> [printer]'
-  echo 'machines: "gaia", "sintra" or "tejo"'
+  echo 'machines: "gaia", "sintra", "tejo" or "aveiro"'
   echo 'version: git tag'
   echo 'printer [optional]: "nippon" or "zebra"'
   exit 1
 fi
 
-if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ]; then
-  echo 'Install script expects "gaia", "sintra" or "tejo" as machine parameter'
+if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ] && [ "$MACHINE" != "aveiro" ]; then
+  echo 'Install script expects "gaia", "sintra", "tejo" or "aveiro" as machine parameter'
   exit 1
 fi
 
@@ -71,6 +71,19 @@ curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.txz | 
 npm install --production
 npm i @joepie91/v4l2camera@1.0.5
 mv node_modules/@joepie91/v4l2camera node_modules/
+
+# install GSR50 interface
+if [ "$MACHINE" == "aveiro" ]; then
+  # install mono
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+  sudo apt install apt-transport-https ca-certificates
+  echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+  sudo apt update
+
+  # TODO: either clone the repository and use the release folder only or have the release in a tarball and just download and unzip
+  # git clone <REPO>
+  # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /usr/local/lib/fujitsu-gsr50
+fi
 
 # device config
 cp hardware/codebase/upboard/$MACHINE/device_config.json ./
