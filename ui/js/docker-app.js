@@ -1,4 +1,4 @@
-/* globals $, URLSearchParams, WebSocket, locales, Keyboard, Keypad, Jed, BigNumber, HOST, PORT, Origami, kjua, TimelineMax, Two */
+/* globals $, URLSearchParams, WebSocket, locales, Keyboard, Keypad, Jed, BigNumber, location.hostname, PORT, Origami, kjua, TimelineMax, Two */
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -57,8 +57,8 @@ var customRequirementChoiceList = null;
 var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', 'it', 'lt', 'nb', 'nl', 'pl', 'pt', 'ro', 'sl', 'sv', 'tr'];
 
 function connect() {
-  console.log('ws://' + HOST + ':' + PORT + '/');
-  websocket = new WebSocket('ws://' + HOST + ':' + PORT + '/');
+  console.log('ws://' + location.hostname + ':' + PORT + '/');
+  websocket = new WebSocket('ws://' + location.hostname + ':' + PORT + '/');
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data);
     processData(data);

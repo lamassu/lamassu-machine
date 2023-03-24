@@ -39,7 +39,6 @@ cp $UPDATESCRIPT $EXPORT_SCRIPT_DIR/updatescript.js
 
 # Codebase
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
-cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
