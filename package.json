@@ -67,10 +67,12 @@
   "scripts": {
     "test": "ava test",
     "build": "npm run build:html && npm run build:js && npm run build:sass && npm run build:autoprefix && npm run build:i18n && npm run build:test-files",
-    "build:test-files": "npm run build:docker-file-js && npm run build:docker-file-html && npm run build:test-file-html",
+    "build:test-files": "npm run build:docker-file-js && npm run build:docker-file-html && npm run build:docker-file-html2 && npm run build:test-file-html && npm run build:test-file-html2",
     "build:docker-file-js": "sed 's/HOST/location.hostname/g' ui/js/app.js > ui/js/docker-app.js",
     "build:docker-file-html": "sed 's/app.js/docker-app.js/g' ui/start.html > ui/start-docker.html",
+    "build:docker-file-html2": "sed -i 's/..\\/node_modules\\///g'  ui/start-docker.html",
     "build:test-file-html": "sed 's/app.js/test-app.js/g' ui/start.html > ui/start-test.html",
+    "build:test-file-html2": "sed -i 's/..\\/node_modules\\///g'  ui/start-test.html",
     "build:html": "node ./ui/scripts/inline-html.js",
     "build:js": "babel ui/src/ -s -d ui/js/",
     "build:sass": "sass ui/css/main.scss ui/css/build/main.css",

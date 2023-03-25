@@ -2,3 +2,10 @@
 ./build
 ./update-tar-build
 ./hardware/codebase/aaeon/node_modules
+Dockerfile
+device_config.json
+licenses.json
+.git
+.direnv
+certs/
+.envrc

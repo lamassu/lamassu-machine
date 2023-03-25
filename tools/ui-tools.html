@@ -109,8 +109,13 @@
 
   const insertPairingToken = () => {
     const token = document.getElementById('token-input').value
-    return fetch(`devtools/pairingToken?value=${token}`)
-      .then(r => {
+    return fetch(`devtools/pairingToken`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({token: token}),
+    }).then(r => {
         if (!r.ok) {
           setStatus('Error on machine side!')
         } else {
