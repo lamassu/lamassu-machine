@@ -16,13 +16,13 @@ const billValidator = bv.factory(config)
   
 billValidator.on('error', function (err) { console.log(err) })
 billValidator.on('disconnected', function () { console.log('Disconnnected') })
-billValidator.on('billAccepted', function () { console.log('Bill accepted') })
-billValidator.on('billRead', function (data) {
+billValidator.on('billsAccepted', function () { console.log('Bill accepted') })
+billValidator.on('billsRead', function (data) {
   console.log('Bill read: %j', data)
   id003.stack()
 })
-billValidator.on('billValid', function () { console.log('Bill valid') })
-billValidator.on('billRejected', function () { console.log('Bill rejected') })
+billValidator.on('billsValid', function () { console.log('Bills valid') })
+billValidator.on('billsRejected', function () { console.log('Bill rejected') })
 billValidator.on('timeout', function () { console.log('Bill timeout') })
 billValidator.on('standby', function () { console.log('Standby') })
 billValidator.on('jam', function () { console.log('jam') })
