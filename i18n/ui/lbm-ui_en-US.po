@@ -302,7 +302,7 @@ msgstr "Apologies. We've reached our mandated per-user limit."
 msgid "OK"
 msgstr "OK"
 
-#: On screen: hcm2-continue
+#: On screen: shutter-continue
 msgid "Depositing bills..."
 msgstr "Depositing bills..."
 

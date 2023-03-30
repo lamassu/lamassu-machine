@@ -326,8 +326,8 @@ function processData (data) {
       suspiciousAddress(data.blacklistMessage)
       setState('suspicious_address')
       break
-    case 'hcm2Continue':
-      setState('hcm2_continue')
+    case 'shutterContinue':
+      setState('shutter_continue')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -736,7 +736,7 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid })
   })
 
-  var hcm2Continue = document.getElementById('hcm2-continue')
+  var shutterContinue = document.getElementById('shutter-continue')
   var sendCoinsButton = document.getElementById('send-coins')
   var sendCoinsButton2 = document.getElementById('send-only-send-coins')
   touchEvent(sendCoinsButton, function () {
@@ -754,8 +754,8 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
-  touchEvent(hcm2Continue, function () {
-    buttonPressed('hcm2Continue')
+  touchEvent(shutterContinue, function () {
+    buttonPressed('shutterContinue')
   })
 
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
