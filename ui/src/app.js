@@ -216,7 +216,7 @@ function processData (data) {
       setState('security_code')
       break
     case 'scanned':
-      if (data.billValidator === 'HCM2') {
+      if (data.billValidatorHasShutter) {
         $('.blocked-customer-top').hide()
         setState('insert_bills_hcm2')
         break
