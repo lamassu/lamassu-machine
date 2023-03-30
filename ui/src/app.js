@@ -139,7 +139,7 @@ function processData (data) {
   if (data.version) setVersion(data.version)
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS)
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
-  if (data.readingBill) readingBill(data.readingBill)
+  if (data.readingBills) readingBills(data.readingBills)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx) {
     if (data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
@@ -1876,7 +1876,7 @@ function minimumTx (lowestBill) {
   window.setTimeout(revertScreen, 3000)
 }
 
-function readingBill (bill) {
+function readingBills (bill) {
   $('.js-processing-bill').html(translate('Processing %s ...', [formatFiat(bill)]))
   $('.js-send-crypto-enable').hide()
   $('.js-send-crypto-disable').show()
