@@ -338,23 +338,23 @@ msgstr "Would you like to insert more bills?"
 msgid "Yes, verify ID"
 msgstr "Yes, verify ID"
 
-#: On screen: insert-bills-hcm2
+#: On screen: insert-bills-shutter
 msgid "Wallet successfully validated!"
 msgstr "Wallet successfully validated!"
 
-#: On screen: insert-bills-hcm2
+#: On screen: insert-bills-shutter
 msgid "Insert a bill"
 msgstr "Insert a bill"
 
-#: On screen: insert-bills-hcm2
+#: On screen: insert-bills-shutter
 msgid "Please insert your first bill into the machine."
 msgstr "Please insert your first bill into the machine."
 
-#: On screen: insert-bills-hcm2
+#: On screen: insert-bills-shutter
 msgid "Your coins will be sent to:"
 msgstr "Your coins will be sent to:"
 
-#: On screen: insert-bills-hcm2
+#: On screen: insert-bills-shutter
 msgid "Continue"
 msgstr "Continue"
 

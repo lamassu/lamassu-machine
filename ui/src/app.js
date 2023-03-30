@@ -218,7 +218,7 @@ function processData (data) {
     case 'scanned':
       if (data.billValidatorHasShutter) {
         $('.blocked-customer-top').hide()
-        setState('insert_bills_hcm2')
+        setState('insert_bills_shutter')
         break
       }
       $('.js-send-crypto-disable').hide()
@@ -234,9 +234,9 @@ function processData (data) {
       $('.blocked-customer-top').hide()
       setState('insert_more_bills')
       break
-    case 'acceptingHcm2Bills':
+    case 'acceptingShutterBills':
       $('.blocked-customer-top').hide()
-      setState('insert_bills_hcm2')
+      setState('insert_bills_shutter')
       break
     case 'acceptingBill':
       setAccepting(true)
