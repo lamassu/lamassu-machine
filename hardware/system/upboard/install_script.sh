@@ -80,6 +80,15 @@ if [ "$MACHINE" == "aveiro" ]; then
   echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
   sudo apt update
 
+  # TODO: retrieve the USB driver for GSR50
+  # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /tmp/gsr50-driver
+
+  # Install driver
+  sudo bash /tmp/gsr50-driver/scr.install_gsr50_driver_only
+
+  # Delete driver files
+  sudo rm -rf /tmp/gsr50-driver
+
   # TODO: either clone the repository and use the release folder only or have the release in a tarball and just download and unzip
   # git clone <REPO>
   # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /usr/local/lib/fujitsu-gsr50
