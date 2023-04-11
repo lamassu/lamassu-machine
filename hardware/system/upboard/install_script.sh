@@ -74,11 +74,8 @@ mv node_modules/@joepie91/v4l2camera node_modules/
 
 # install GSR50 interface
 if [ "$MACHINE" == "aveiro" ]; then
-  # install mono
-  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-  sudo apt install apt-transport-https ca-certificates
-  echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-  sudo apt update
+  # install .NET 6
+  sudo apt-get update && sudo apt-get install -y dotnet-runtime-6.0
 
   # TODO: retrieve the USB driver for GSR50
   # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /tmp/gsr50-driver
@@ -89,8 +86,7 @@ if [ "$MACHINE" == "aveiro" ]; then
   # Delete driver files
   sudo rm -rf /tmp/gsr50-driver
 
-  # TODO: either clone the repository and use the release folder only or have the release in a tarball and just download and unzip
-  # git clone <REPO>
+  # TODO: retrieve the GSR50 interface
   # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /usr/local/lib/fujitsu-gsr50
 fi
 

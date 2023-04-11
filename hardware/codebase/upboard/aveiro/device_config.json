@@ -44,13 +44,10 @@
     }
   },
   "billValidator": {
-    "rs232": {
-      "device": "/dev/ttyJ5"
-    }
+    "deviceType": "gsr50"
   },
   "billDispenser": {
-    "model": "gsr50",
-    "device": "/dev/ttyJ7"
+    "model": "gsr50"
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
