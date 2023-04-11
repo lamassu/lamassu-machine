@@ -538,6 +538,10 @@
             <p id="custom-requirement-text-label2" class="d1 custom-requirement-text-label"></p>
             <input class="text-input-field-2 custom-requirement-text-input text-requirement-input faded passphrase h3" type="text" readonly value="">
           </div>
+          <div id="optional-text-field-3" class="text-input-field">
+            <p id="custom-requirement-text-label3" class="d1 custom-requirement-text-label"></p>
+            <input class="text-input-field-3 custom-requirement-text-input text-requirement-input faded passphrase h3" type="text" readonly value="">
+          </div>
         </div>
     
         <section id="custom-requirement-text-keyboard" class="standard-keyboard keys tl2">
@@ -899,6 +903,29 @@
           </div>
         </section>
       </main>
+    </section>
+    <section
+      class="viewport external_compliance_state info-no-image"
+      data-tr-section="external-validation"
+      data-screentype="info-contact-tp"
+    >
+      <main>
+        <h3 class="js-i18n">External compliance validation</h3>
+        <div class="text-content">
+          <p class="js-i18n d2">
+            In order to process your transaction, we will need to process your information through an external compliance system. This transaction will now be finished.
+          </p>
+          <p class="js-i18n d2">
+            Scan the following QR code and follow further instructions to proceed.
+          </p>
+        </div>
+        <div class="qr-wrapper">
+          <div id="qr-code-external-validation" class="qr"></div>
+        </div>
+      </main>
+      <footer>
+        <button id="external-validation-ok" class="filled-progress-button button"><div class="js-i18n">OK</div></button>
+      </footer>
     </section>
     <section
       class="viewport scan_face_photo_state no-action-info cash-in-color"

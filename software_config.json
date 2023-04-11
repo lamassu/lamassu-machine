@@ -18,6 +18,7 @@
     "pingInterval": 3600000,
     "speedtestInterval": 86400000,
     "termsDelay": 7000,
+    "externalValidationTimeout": 60000,
     "locale": {
       "localeInfo": {
         "primaryLocale": "en-US",

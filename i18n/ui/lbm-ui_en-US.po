@@ -218,6 +218,22 @@ msgstr "Collect bills"
 msgid "To continue dispensing, take your cash from the tray."
 msgstr "To continue dispensing, take your cash from the tray."
 
+#: On screen: external-validation
+msgid "External compliance validation"
+msgstr "External compliance validation"
+
+#: On screen: external-validation
+msgid "In order to process your transaction, we will need to process your information through an external compliance system. This transaction will now be finished."
+msgstr "In order to process your transaction, we will need to process your information through an external compliance system. This transaction will now be finished."
+
+#: On screen: external-validation
+msgid "Scan the following QR code and follow further instructions to proceed."
+msgstr "Scan the following QR code and follow further instructions to proceed."
+
+#: On screen: external-validation
+msgid "OK"
+msgstr "OK"
+
 #: On screen: facephoto
 msgid "Look at the dot"
 msgstr "Look at the dot"
@@ -297,10 +313,6 @@ msgstr "Temporary limit reached"
 #: On screen: hard-limit-reached
 msgid "Apologies. We've reached our mandated per-user limit."
 msgstr "Apologies. We've reached our mandated per-user limit."
-
-#: On screen: hard-limit-reached
-msgid "OK"
-msgstr "OK"
 
 #: On screen: id-scan-failed
 msgid "Sorry"

@@ -87,7 +87,8 @@ var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 var Keyboard = function Keyboard(options) {
   this.keyboardId = options.id;
   this.keyboard = $('#' + options.id);
-  this.inputBox = $(options.inputBox);
+  this.inputBoxNumber = options.inputBox;
+  this.inputBox = $('.text-input-field-' + options.inputBox);
   this.keyCase = options.keyCase || 'lc';
   this.backspaceTimeout = options.backspaceTimeout || null;
   this.active = options.active || true;
@@ -219,15 +220,20 @@ Keyboard.prototype._backspaceUp = function _backspaceUp(target) {
 };
 
 // pass the class or id of the new input box to put text into, include the . or # as well
-Keyboard.prototype.setInputBox = function setInputBox(newInputBox) {
+Keyboard.prototype.setInputBox = function setInputBox(newInputBoxNumber) {
   var constraintButtons = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-  this.inputBox = $(newInputBox);
+  this.inputBoxNumber = newInputBoxNumber;
+  this.inputBox = $('.text-input-field-' + newInputBoxNumber);
   if (!this.inputBox.data('content')) this.inputBox.data('content', '').val('');
   if (constraintButtons.length > 0) {
     this.constraintButtons = constraintButtons;
   }
   this._validateInput();
+};
+
+Keyboard.prototype.getInputBox = function getInputBox() {
+  return this.inputBoxNumber;
 };
 
 Keyboard.prototype.setConstraint = function setConstraint(constraintType) {
@@ -240,6 +246,9 @@ Keyboard.prototype.setConstraint = function setConstraint(constraintType) {
 
 Keyboard.prototype._validateInput = function _validateInput() {
   switch (this.constraint) {
+    case "spaceSeparationThreeFields":
+      this._validateSpaceSeparationThreeFields();
+      break;
     case "spaceSeparation":
       this._validateSpaceSeparation();
       break;
@@ -250,6 +259,19 @@ Keyboard.prototype._validateInput = function _validateInput() {
       this._validateEmail();
     default:
       break;
+  }
+};
+
+Keyboard.prototype._validateSpaceSeparationThreeFields = function _validateSpaceSeparationThreeFields() {
+  if (this.inputBoxNumber != 3) {
+    this._validateSpaceSeparation();
+  } else {
+    if (!!this.inputBox.data('content') && !this.inputBox.data('content').includes(' ')) {
+      this.constraintButtons.forEach(function (buttonId) {
+        $(buttonId).show();
+      });
+      return;
+    }
   }
 };
 
