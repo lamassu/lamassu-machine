@@ -330,21 +330,25 @@ msgstr "Would you like to insert more bills?"
 msgid "Yes, verify ID"
 msgstr "Yes, verify ID"
 
-#: On screen: insert-bills
+#: On screen: insert-bills-recycler
 msgid "Wallet successfully validated!"
 msgstr "Wallet successfully validated!"
 
-#: On screen: insert-bills
+#: On screen: insert-bills-recycler
 msgid "Insert a bill"
 msgstr "Insert a bill"
 
-#: On screen: insert-bills
+#: On screen: insert-bills-recycler
 msgid "Please insert your first bill into the machine."
 msgstr "Please insert your first bill into the machine."
 
-#: On screen: insert-bills
+#: On screen: insert-bills-recycler
 msgid "Your coins will be sent to:"
 msgstr "Your coins will be sent to:"
+
+#: On screen: insert-bills-recycler
+msgid "Continue"
+msgstr "Continue"
 
 #: On screen: insert-more-bills
 msgid "Insert another bill"
@@ -497,6 +501,10 @@ msgstr "If you are sure of the code, please contact the operator for clarificati
 #: On screen: invalid-promo-code
 msgid "Enter a different code"
 msgstr "Enter a different code"
+
+#: On screen: recycler-continue
+msgid "Depositing bills..."
+msgstr "Depositing bills..."
 
 #: On screen: register-phone
 msgid "Phone Number"

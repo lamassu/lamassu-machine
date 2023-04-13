@@ -132,6 +132,10 @@ function processData(data) {
     $('.js-context-' + data.context).show();
   }
 
+  var isRecycler = function isRecycler(billValidator) {
+    return billValidator === 'HCM2' || billValidator === 'GSR50';
+  };
+
   switch (data.action) {
     case 'wifiList':
       if (cryptomatModel === 'douro1') {
@@ -186,7 +190,11 @@ function processData(data) {
       setState('security_code');
       break;
     case 'scanned':
-      setState('insert_bills');
+      if (isRecycler(data.billValidator)) {
+        setState('insert_bills_recycler');
+      } else {
+        setState('insert_bills');
+      }
       break;
     case 'acceptingFirstBill':
       $('.js-send-crypto-disable').hide();
@@ -196,6 +204,10 @@ function processData(data) {
     case 'acceptingBills':
       $('.blocked-customer-top').hide();
       setState('insert_more_bills');
+      break;
+    case 'acceptingRecyclerBills':
+      $('.blocked-customer-top').hide();
+      setState('insert_bills_recycler');
       break;
     case 'acceptingBill':
       setAccepting(true);
@@ -277,6 +289,9 @@ function processData(data) {
       break;
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest);
+      break;
+    case 'recyclerContinue':
+      setState('recycler_continue');
       break;
     default:
       if (data.action) setState(window.snakecase(data.action));
@@ -659,6 +674,7 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid });
   });
 
+  var recyclerContinue = document.getElementById('recycler-continue');
   var sendCoinsButton = document.getElementById('send-coins');
   var sendCoinsButton2 = document.getElementById('send-only-send-coins');
   touchEvent(sendCoinsButton, function () {
@@ -669,6 +685,10 @@ $(document).ready(function () {
   touchEvent(sendCoinsButton2, function () {
     setState('sending_coins');
     buttonPressed('sendCoins');
+  });
+
+  touchEvent(recyclerContinue, function () {
+    buttonPressed('recyclerContinue');
   });
 
   var blockedCustomerOk = document.getElementById('blocked-customer-ok');

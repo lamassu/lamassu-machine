@@ -1,0 +1,5 @@
+KERNELS=="1-7.2:1.0", SYMLINK+="ttyJ4"
+KERNELS=="1-7.3:1.0", SYMLINK+="ttyJ5"
+KERNEL=="ttyS1", SYMLINK+="ttyJ7"
+SUBSYSTEM=="video4linux", KERNELS=="1-2", ATTRS{idVendor}=="0ac8", ATTRS{idProduct}=="0345", SYMLINK+="video-scan"
+SUBSYSTEM=="video4linux", KERNELS=="1-3", ATTRS{idVendor}=="0ac8", ATTRS{idProduct}=="0345", SYMLINK+="video-front"

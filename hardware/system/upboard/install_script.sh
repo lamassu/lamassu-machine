@@ -7,14 +7,14 @@ PRINTER=$3
 
 if [ -z $1 ] || [ -z $2 ]; then
   echo 'usage: install_script <machine> <version> [printer]'
-  echo 'machines: "gaia", "sintra" or "tejo"'
+  echo 'machines: "gaia", "sintra", "tejo" or "aveiro"'
   echo 'version: git tag'
   echo 'printer [optional]: "nippon" or "zebra"'
   exit 1
 fi
 
-if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ]; then
-  echo 'Install script expects "gaia", "sintra" or "tejo" as machine parameter'
+if [ "$MACHINE" != "gaia" ] && [ "$MACHINE" != "sintra" ] && [ "$MACHINE" != "tejo" ] && [ "$MACHINE" != "aveiro" ]; then
+  echo 'Install script expects "gaia", "sintra", "tejo" or "aveiro" as machine parameter'
   exit 1
 fi
 
@@ -71,6 +71,24 @@ curl -sS https://ssubucket.ams3.digitaloceanspaces.com/barcodescannerlibs.txz | 
 npm install --production
 npm i @joepie91/v4l2camera@1.0.5
 mv node_modules/@joepie91/v4l2camera node_modules/
+
+# install GSR50 interface
+if [ "$MACHINE" == "aveiro" ]; then
+  # install .NET 6
+  sudo apt-get update && sudo apt-get install -y dotnet-runtime-6.0
+
+  # TODO: retrieve the USB driver for GSR50
+  # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /tmp/gsr50-driver
+
+  # Install driver
+  sudo bash /tmp/gsr50-driver/scr.install_gsr50_driver_only
+
+  # Delete driver files
+  sudo rm -rf /tmp/gsr50-driver
+
+  # TODO: retrieve the GSR50 interface
+  # curl -sS https://ssubucket.ams3.digitaloceanspaces.com/<URL> | sudo tar -xJ -C /usr/local/lib/fujitsu-gsr50
+fi
 
 # device config
 cp hardware/codebase/upboard/$MACHINE/device_config.json ./

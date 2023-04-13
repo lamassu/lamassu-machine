@@ -847,6 +847,21 @@ footer {
   margin-top: -6vh;
 }
 
+.insert_bills_recycler_state .secondary-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.insert_bills_recycler_state footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
+  margin-top: -6vh;
+}
+
 .insert_more_bills_state .primary-side-title {
   max-width: 80vh;
 }
@@ -1360,6 +1375,11 @@ footer {
     display: flex;
     padding: 0 2vh 6vh;
   }
+}
+
+.insert_bills_recycler_state footer {
+  padding-left: 0;
+  padding-right: 9.4vw;
 }
 
 #networks {
