@@ -763,6 +763,7 @@ $(document).ready(function () {
 
   setupImmediateButton('scan-id-cancel', 'idDataActionCancel')
   setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel')
+  setupImmediateButton('scan-photo-manual-cancel', 'idPhotoActionCancel')
   setupImmediateButton('us-ssn-cancel', 'cancelUsSsn',
     usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
