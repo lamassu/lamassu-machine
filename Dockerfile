@@ -24,16 +24,16 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.8/ma
 WORKDIR lamassu-machine
 COPY --from=build ./lamassu/lamassu-machine ./
 
+RUN rm /etc/nginx/conf.d/default.conf
 RUN cp -r ./ui /usr/share/nginx/html
+COPY ./build-scripts/nginx.conf /etc/nginx/conf.d/
 # Bignumber.js is a requirement
 RUN mkdir /usr/share/nginx/html/ui/bignumber.js && cp ./node_modules/bignumber.js/bignumber.min.js /usr/share/nginx/html/ui/bignumber.js
 
 VOLUME ./data
 
 EXPOSE 80
-EXPOSE 8080
-EXPOSE 3078
 
-RUN chmod +x ./test.entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
-ENTRYPOINT [ "./test.entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
