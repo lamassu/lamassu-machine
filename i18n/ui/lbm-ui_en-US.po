@@ -335,36 +335,52 @@ msgid "Wallet successfully validated!"
 msgstr "Wallet successfully validated!"
 
 #: On screen: insert-bills-recycler
-msgid "Insert a bill"
-msgstr "Insert a bill"
+msgid "Insert another round of bills"
+msgstr "Insert another round of bills"
 
 #: On screen: insert-bills-recycler
-msgid "Please insert your first bill into the machine."
-msgstr "Please insert your first bill into the machine."
+msgid "deposited so far"
+msgstr "deposited so far"
 
 #: On screen: insert-bills-recycler
-msgid "Your coins will be sent to:"
-msgstr "Your coins will be sent to:"
+msgid "total purchased"
+msgstr "total purchased"
+
+#: On screen: insert-bills-recycler
+msgid "OR"
+msgstr "OR"
 
 #: On screen: insert-bills-recycler
 msgid "Continue"
 msgstr "Continue"
 
+#: On screen: insert-bills-recycler
+msgid "Finish"
+msgstr "Finish"
+
+#: On screen: insert-bills
+msgid "Insert a bill"
+msgstr "Insert a bill"
+
+#: On screen: insert-bills
+msgid "Please insert your first bill into the machine."
+msgstr "Please insert your first bill into the machine."
+
+#: On screen: insert-bills
+msgid "Your coins will be sent to:"
+msgstr "Your coins will be sent to:"
+
+#: On screen: insert-first-bills-recycler
+msgid "Insert bills"
+msgstr "Insert bills"
+
+#: On screen: insert-first-bills-recycler
+msgid "Please insert your first round of bills into the machine."
+msgstr "Please insert your first round of bills into the machine."
+
 #: On screen: insert-more-bills
 msgid "Insert another bill"
 msgstr "Insert another bill"
-
-#: On screen: insert-more-bills
-msgid "deposited so far"
-msgstr "deposited so far"
-
-#: On screen: insert-more-bills
-msgid "total purchased"
-msgstr "total purchased"
-
-#: On screen: insert-more-bills
-msgid "OR"
-msgstr "OR"
 
 #: On screen: insert-more-bills
 msgid "Finished?"

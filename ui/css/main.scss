@@ -847,13 +847,13 @@ footer {
   margin-top: -6vh;
 }
 
-.insert_bills_recycler_state .secondary-side {
+.insert_first_bills_recycler_state .secondary-side, .insert_bills_recycler_state .secondary-side {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.insert_bills_recycler_state footer {
+.insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1377,7 +1377,7 @@ footer {
   }
 }
 
-.insert_bills_recycler_state footer {
+.insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
   padding-left: 0;
   padding-right: 9.4vw;
 }

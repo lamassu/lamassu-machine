@@ -14,28 +14,37 @@
 
   <main class="lg-margin-top">
     <section class="primary-side">
-      <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert a bill</h2>
-      <div class="text-content">
-        <p class="d1 no-margin-top js-i18n">
-          Please insert your first bill into the machine.
-        </p>
-        <p class="d2 js-i18n-fixed-fee"></p>
-        <p class="d2 js-i18n coins-to-address">Your coins will be sent to:</p>
-        <p class="m2 crypto-address"></p>
+      <h5 class="primary-side-title js-i18n">Insert another round of bills</h5>
+      <div class="total md-margin-top">
+        <div class="fiat">
+          <span class="js-amount h2"></span>
+          <span class="js-currency h4"></span>
+        </div>
       </div>
-      <div>
-        <button id="insert-first-bill-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
-          Have a promo code?
-        </button>
-        <p id="insert-first-bill-code-added" class="d2" style="display:none"></p>
+      <p class="js-i18n d2 no-margin-top">deposited so far</p>
+      <div class="total-crypto-rec total sm-margin-top">
+        <span class="crypto-amount i18n-latin h2"></span>
+        <span class="crypto-units i18n-latin h4"></span>
       </div>
+      <p class="js-i18n d2 no-margin-top">total purchased</p>
     </section>
+
+    <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
     <section class="secondary-side">
-      <div id="recycler-continue" class="send-coins cash-in-color js-send-crypto-enable">
+      <div id="recycler-continue" class="send-coins cash-in-color js-continue-crypto-enable">
+        <section class="circle-button h3 purple-grey js-continue-crypto-enable">
+          <div class="inner-circle-button js-continue-crypto-enable">
+            <span class="js-i18n">
+              Continue
+            </span>
+          </div>
+        </section>
+      </div>
+      <div id="recycler-finish" class="send-coins cash-in-color js-send-crypto-enable">
         <section class="circle-button h3 purple-grey js-send-crypto-enable">
           <div class="inner-circle-button js-send-crypto-enable">
             <span class="js-i18n">
-              Continue
+              Finish
             </span>
           </div>
         </section>

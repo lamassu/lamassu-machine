@@ -1,0 +1,45 @@
+<section
+  class="viewport insert_first_bills_recycler_state cash-in-color"
+  data-tr-section="insert-first-bills-recycler"
+  data-screentype="flow-no-action-tp"
+>
+  <header>
+    <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
+    <!-- TODO: wait for nuno finished spec -->
+    <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
+    <div id="insertBillCancel" class="delay cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="lg-margin-top">
+    <section class="primary-side">
+      <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert bills</h2>
+      <div class="text-content">
+        <p class="d1 no-margin-top js-i18n">
+          Please insert your first round of bills into the machine.
+        </p>
+        <p class="d2 js-i18n-fixed-fee"></p>
+        <p class="d2 js-i18n coins-to-address">Your coins will be sent to:</p>
+        <p class="m2 crypto-address"></p>
+      </div>
+      <div>
+        <button id="insert-first-recycler-bills-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
+          Have a promo code?
+        </button>
+        <p id="insert-first-recycler-bills-code-added" class="d2" style="display:none"></p>
+      </div>
+    </section>
+    <section class="secondary-side">
+      <div id="recycler-continue-start" class="send-coins cash-in-color js-continue-crypto-enable">
+        <section class="circle-button h3 purple-grey js-continue-crypto-enable">
+          <div class="inner-circle-button js-continue-crypto-enable">
+            <span class="js-i18n">
+              Continue
+            </span>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</section>
