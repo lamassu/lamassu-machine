@@ -75,7 +75,6 @@ function verifyConnection() {
 }
 
 function buttonPressed(button, data) {
-  console.log('buttonActive', buttonActive);
   if (!buttonActive) return;
   wifiKeyboard.deactivate();
   promoKeyboard.deactivate();
@@ -89,7 +88,6 @@ function buttonPressed(button, data) {
   }, 300);
   var res = { button: button };
   if (data || data === null) res.data = data;
-  console.log(JSON.stringify(res));
   if (websocket) websocket.send(JSON.stringify(res));
 }
 
