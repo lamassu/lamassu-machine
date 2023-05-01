@@ -2267,8 +2267,8 @@ function setScreenOptions(opts) {
   opts.rates && opts.rates.active ? $('#rates-section').show() : $('#rates-section').hide();
 }
 
-function thousandSeparator(number, country) {
-  var numberFormatter = Intl.NumberFormat(country);
+function thousandSeparator(number, country, minimumFractionDigits) {
+  var numberFormatter = Intl.NumberFormat(country, { minimumFractionDigits: minimumFractionDigits });
   return numberFormatter.format(number);
 }
 
@@ -2278,7 +2278,11 @@ function setRates(allRates, fiat, locales) {
   var coinEntries = [];
 
   Object.keys(allRates).forEach(function (it) {
-    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country) + '</p>\n  </div>'));
+    var cashIn = BN(allRates[it].cashIn);
+    var cashOut = BN(allRates[it].cashOut);
+    var biggestDecimalPlaces = Math.max(cashIn.dp(), cashOut.dp());
+
+    coinEntries.push($('<div class="xs-margin-bottom">\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashIn).toFixed(2), locales.country, biggestDecimalPlaces) + '</p>\n    <h4 class="js-i18n">' + it + '</h4>\n    <p class="d2 js-i18n">' + thousandSeparator(BN(allRates[it].cashOut).toFixed(2), locales.country, biggestDecimalPlaces) + '</p>\n  </div>'));
   });
 
   $('#rates-fiat-currency').text(fiat);
