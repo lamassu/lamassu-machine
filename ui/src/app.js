@@ -679,8 +679,6 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid })
   })
 
-  var recyclerContinue = document.getElementById('recycler-continue')
-  var recyclerFinish = document.getElementById('send-coins')
   var sendCoinsButton = document.getElementById('send-coins')
   var sendCoinsButton2 = document.getElementById('send-only-send-coins')
   touchEvent(sendCoinsButton, function () {
@@ -695,7 +693,7 @@ $(document).ready(function () {
 
   setupButton('recycler-continue-start', 'recyclerContinue')
   setupButton('recycler-continue', 'recyclerContinue')
-  setupButton('recycler-finish', 'recyclerFinish')
+  setupButton('recycler-finish', 'sendCoins')
 
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
   touchEvent(blockedCustomerOk, function () {

@@ -671,8 +671,6 @@ $(document).ready(function () {
     buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid });
   });
 
-  var recyclerContinue = document.getElementById('recycler-continue');
-  var recyclerFinish = document.getElementById('send-coins');
   var sendCoinsButton = document.getElementById('send-coins');
   var sendCoinsButton2 = document.getElementById('send-only-send-coins');
   touchEvent(sendCoinsButton, function () {
@@ -687,7 +685,7 @@ $(document).ready(function () {
 
   setupButton('recycler-continue-start', 'recyclerContinue');
   setupButton('recycler-continue', 'recyclerContinue');
-  setupButton('recycler-finish', 'recyclerFinish');
+  setupButton('recycler-finish', 'sendCoins');
 
   var blockedCustomerOk = document.getElementById('blocked-customer-ok');
   touchEvent(blockedCustomerOk, function () {
@@ -1943,7 +1941,9 @@ function calculateAspectRatio() {
   var aspectRatioPt1 = w / r;
   var aspectRatioPt2 = h / r;
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16';
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10';
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9';
