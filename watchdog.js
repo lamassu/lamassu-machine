@@ -3,6 +3,9 @@
 
 var fs = require('fs')
 var cp = require('child_process')
+var path = require('path')
+
+var watchdogInfoLoader = require('./lib/watchdog-info')
 
 require('./lite-logging')
 
@@ -19,9 +22,12 @@ var running = false
 var platform = process.argv[2] || 'N7G1'
 var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 
-var WATCHDOG_INFO_PATH = './data/watchdog-info.json'
+var DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
 
-fs.writeFileSync(WATCHDOG_INFO_PATH, JSON.stringify({ model: model, platform: platform}))
+var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
+var dataPath = deviceConfig.brain.dataPath
+
+watchdogInfoLoader.save(dataPath, { model: model, platform: platform})
 
 process.on('SIGUSR2', function () {
   // USR1 is reserved by node

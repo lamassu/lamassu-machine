@@ -3021,6 +3021,8 @@ footer {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
+  gap: 5vw;
+  padding: 0 10vw;
 }
 
 .custom-permission-text-input-main {

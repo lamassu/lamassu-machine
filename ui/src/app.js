@@ -205,7 +205,7 @@ function processData (data) {
     case 'registerUsSsn':
       usSsnKeypad.activate()
       setState('register_us_ssn')
-      setComplianceTimeout()
+      setComplianceTimeout(null, 'finishBeforeSms')
       break
     case 'registerPhone':
       phoneKeypad.activate()
@@ -344,29 +344,31 @@ function translate (data, fetchArgs) {
 }
 
 function facephotoPermission () {
+  setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('permission_face_photo')
 }
 
 function usSsnPermission () {
-  setComplianceTimeout()
+  setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('us_ssn_permission')
 }
 
 function customInfoRequestPermission (customInfoRequest) {
   $('#custom-screen1-title').text(customInfoRequest.screen1.title)
   $('#custom-screen1-text').text(customInfoRequest.screen1.text)
-  setComplianceTimeout()
+  setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('custom_permission')
 }
 
-function setComplianceTimeout(interval) {
+function setComplianceTimeout (interval, complianceButton) {
   clearTimeout(complianceTimeout)
 
-  if (interval === 0)
+  if (interval === 0) {
     return
+  }
 
   complianceTimeout = setTimeout(function () {
-    buttonPressed('cancelCustomInfoRequest')
+    buttonPressed(complianceButton)
   }, interval == null ? 60000 : interval)
 }
 
@@ -383,6 +385,7 @@ function customInfoRequest (customInfoRequest) {
       customRequirementNumericalKeypad.activate()
       setState('custom_permission_screen2_numerical')
       setScreen('custom_permission_screen2_numerical')
+      setComplianceTimeout(null, 'cancelCustomInfoRequest')
       break
     case 'text':
       $('#custom-requirement-text-label1').text(customInfoRequest.input.label1)
@@ -413,7 +416,7 @@ function customInfoRequest (customInfoRequest) {
       }
       setState('custom_permission_screen2_text')
       setScreen('custom_permission_screen2_text')
-      setComplianceTimeout()
+      setComplianceTimeout(null, 'cancelCustomInfoRequest')
       break
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title)
@@ -421,7 +424,7 @@ function customInfoRequest (customInfoRequest) {
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType)
       setState('custom_permission_screen2_choiceList')
       setScreen('custom_permission_screen2_choiceList')
-      setComplianceTimeout()
+      setComplianceTimeout(null, 'cancelCustomInfoRequest')
       break
     default:
       return blockedCustomer()
@@ -429,11 +432,13 @@ function customInfoRequest (customInfoRequest) {
 }
 
 function idVerification () {
+  setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('permission_id')
 }
 
 function smsVerification (threshold) {
   console.log('sms threshold to be displayed', threshold)
+  setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('sms_verification')
 }
 
@@ -831,6 +836,7 @@ $(document).ready(function () {
 
   setupImmediateButton('scan-id-cancel', 'idDataActionCancel')
   setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel')
+  setupImmediateButton('scan-photo-manual-cancel', 'idPhotoActionCancel')
   setupImmediateButton('us-ssn-cancel', 'cancelUsSsn',
     usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
