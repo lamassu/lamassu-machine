@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "8.1.0-beta.2",
+  "version": "8.1.0",
   "dependencies": {
     "genmega": "file:../genmega-sdk/",
     "@apollo/client": "^3.5.10",
