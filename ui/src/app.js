@@ -1977,7 +1977,9 @@ function calculateAspectRatio () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16'
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10'
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9'
