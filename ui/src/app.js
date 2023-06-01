@@ -1288,7 +1288,7 @@ function startPage (text, acceptedTerms) {
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
     scrollSize = div.offsetHeight - 40
     updateButtonStyles()
-    if (textHeightQuantity <= div.offsetHeight) {
+    if (text.length <= 1000 && textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       document.getElementById('actions-scroll').style.display = ''
