@@ -1,14 +1,13 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "8.5.0-beta.1",
+  "version": "8.5.0-beta.3",
   "dependencies": {
     "genmega": "file:../genmega-sdk/",
     "@apollo/client": "^3.5.10",
     "@fczbkk/uuid4": "^3.0.0",
     "@haensl/subset-sum": "^3.0.5",
     "@lamassu/coins": "1.3.0",
-    "@lamassu/supyo": "file:../node-supyo/",
     "async": "~1.5.2",
     "base-x": "3.0.9",
     "bignumber.js": "^4.0.1",
@@ -19,7 +18,6 @@
     "express": "4.18.1",
     "got": "^7.1.0",
     "graphql": "^15.8.0",
-    "jsqr": "^1.3.1",
     "left-pad": "^1.1.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
@@ -42,7 +40,6 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
-    "jpeg-turbo": "file:../node-jpeg-turbo/",
     "pcsclite": "^0.6.0"
   },
   "devDependencies": {
