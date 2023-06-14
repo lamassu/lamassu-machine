@@ -1,0 +1,54 @@
+<section
+  class="viewport insert_bills_recycler_state cash-in-color"
+  data-tr-section="insert-bills-recycler"
+  data-screentype="flow-no-action-tp"
+>
+  <header>
+    <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
+    <!-- TODO: wait for nuno finished spec -->
+    <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
+    <div id="insertBillCancel" class="delay cancel-button-wrapper">
+      <img class="cancel-button" src="images/close-icon.svg" />
+    </div>
+  </header>
+
+  <main class="lg-margin-top">
+    <section class="primary-side">
+      <h5 class="primary-side-title js-i18n">Insert another round of bills</h5>
+      <div class="total md-margin-top">
+        <div class="fiat">
+          <span class="js-amount h2"></span>
+          <span class="js-currency h4"></span>
+        </div>
+      </div>
+      <p class="js-i18n d2 no-margin-top">deposited so far</p>
+      <div class="total-crypto-rec total sm-margin-top">
+        <span class="crypto-amount i18n-latin h2"></span>
+        <span class="crypto-units i18n-latin h4"></span>
+      </div>
+      <p class="js-i18n d2 no-margin-top">total purchased</p>
+    </section>
+
+    <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
+    <section class="secondary-side">
+      <div id="recycler-continue" class="send-coins cash-in-color js-continue-crypto-enable">
+        <section class="circle-button h3 purple-grey js-continue-crypto-enable">
+          <div class="inner-circle-button js-continue-crypto-enable">
+            <span class="js-i18n">
+              Continue
+            </span>
+          </div>
+        </section>
+      </div>
+      <div id="recycler-finish" class="send-coins cash-in-color js-send-crypto-enable">
+        <section class="circle-button h3 purple-grey js-send-crypto-enable">
+          <div class="inner-circle-button js-send-crypto-enable">
+            <span class="js-i18n">
+              Finish
+            </span>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</section>

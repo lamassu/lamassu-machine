@@ -109,7 +109,7 @@ function processData (data) {
   if (data.version) setVersion(data.version)
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS)
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
-  if (data.readingBill) readingBill(data.readingBill)
+  if (data.readingBills) readingBills(data.readingBills)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
@@ -127,6 +127,10 @@ function processData (data) {
   if (data.context) {
     $('.js-context').hide()
     $('.js-context-' + data.context).show()
+  }
+
+  const isRecycler = billValidator => {
+    return billValidator === 'HCM2' || billValidator === 'GSR50'
   }
 
   switch (data.action) {
@@ -181,16 +185,26 @@ function processData (data) {
       setState('security_code')
       break
     case 'scanned':
-      setState('insert_bills')
+      isRecycler(data.billValidator)
+        ? setState('insert_first_bills_recycler')
+        : setState('insert_bills')
       break
     case 'acceptingFirstBill':
-      $('.js-send-crypto-disable').hide()
       $('.js-send-crypto-enable').show()
       setState('insert_bills')
       break
     case 'acceptingBills':
       $('.blocked-customer-top').hide()
       setState('insert_more_bills')
+      break
+    case 'acceptingFirstRecyclerBills':
+      $('.js-continue-crypto-enable').show()
+      $('.js-send-crypto-enable').show()
+      setState('insert_first_bills_recycler')
+      break
+    case 'acceptingRecyclerBills':
+      $('.blocked-customer-top').hide()
+      setState('insert_bills_recycler')
       break
     case 'acceptingBill':
       setAccepting(true)
@@ -682,6 +696,10 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
+  setupButton('recycler-continue-start', 'recyclerContinue')
+  setupButton('recycler-continue', 'recyclerContinue')
+  setupButton('recycler-finish', 'sendCoins')
+
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
   touchEvent(blockedCustomerOk, function () {
     buttonPressed('blockedCustomerOk')
@@ -709,6 +727,7 @@ $(document).ready(function () {
   setupButton('printer-scan-again', 'printerScanAgain')
 
   setupButton('insert-first-bill-promo-button', 'insertPromoCode')
+  setupButton('insert-first-recycler-bills-promo-button', 'insertPromoCode')
   setupButton('choose-fiat-promo-button', 'insertPromoCode')
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel')
@@ -1495,7 +1514,7 @@ function setCredit (credit, lastBill) {
 
   $('.js-processing-bill').html(inserted)
 
-  $('.js-send-crypto-disable').hide()
+  $('.js-continue-crypto-enable').show()
   $('.js-send-crypto-enable').show()
 }
 
@@ -1727,10 +1746,10 @@ function minimumTx (lowestBill) {
   window.setTimeout(revertScreen, 3000)
 }
 
-function readingBill (bill) {
+function readingBills (bill) {
   $('.js-processing-bill').html(translate('Processing %s ...', [formatFiat(bill)]))
+  $('.js-continue-crypto-enable').hide()
   $('.js-send-crypto-enable').hide()
-  $('.js-send-crypto-disable').show()
 }
 
 function sendOnly (reason) {
@@ -2050,9 +2069,11 @@ function shouldEnableTouch () {
 function setAvailablePromoCodes (areThereAvailablePromoCodes) {
   if (areThereAvailablePromoCodes) {
     $('#insert-first-bill-promo-button').show()
+    $('#insert-first-recycler-bills-promo-button').show()
     $('#choose-fiat-promo-button').show()
   } else {
     $('#insert-first-bill-promo-button').hide()
+    $('#insert-first-recycler-bills-promo-button').hide()
     $('#choose-fiat-promo-button').hide()
   }
 }
@@ -2060,23 +2081,29 @@ function setAvailablePromoCodes (areThereAvailablePromoCodes) {
 function setCurrentDiscount (currentDiscount, promoCodeApplied) {
   if (promoCodeApplied) {
     $('#insert-first-bill-promo-button').hide()
+    $('#insert-first-recycler-bills-promo-button').hide()
     $('#choose-fiat-promo-button').hide()
   }
 
   if (!currentDiscount) {
     $('#insert-first-bill-code-added').hide()
+    $('#insert-first-recycler-bills-code-added').hide()
     $('#choose-fiat-code-added').hide()
   } else if (currentDiscount > 0) {
     const successMessage = '✔ ' + translate('Discount added (%s off commissions)', [`${currentDiscount}%`])
     $('#insert-first-bill-code-added').html(successMessage)
+    $('#insert-first-recycler-bills-code-added').html(successMessage)
     $('#choose-fiat-code-added').html(successMessage)
     $('#insert-first-bill-code-added').show()
+    $('#insert-first-recycler-bills-code-added').show()
     $('#choose-fiat-code-added').show()
 
   } else {
     $('#insert-first-bill-promo-button').show()
+    $('#insert-first-recycler-bills-promo-button').show()
     $('#choose-fiat-promo-button').show()
     $('#insert-first-bill-code-added').hide()
+    $('#insert-first-recycler-bills-code-added').hide()
     $('#choose-fiat-code-added').hide()
   }
 }

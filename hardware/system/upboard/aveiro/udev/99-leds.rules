@@ -1,0 +1,1 @@
+SUBSYSTEM=="leds", KERNEL=="upboard:*", ACTION=="add|change", RUN+="/usr/bin/find /sys$devpath -type f -exec /bin/chmod g+u {} + -exec /bin/chown :leds {} +"

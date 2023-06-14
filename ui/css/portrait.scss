@@ -205,6 +205,8 @@ main {
   }
 }
 
+.insert_bills_recycler_state,
+.insert_first_bills_recycler_state,
 .insert_more_bills_state {
   .primary-side {
     display: flex;
@@ -269,12 +271,21 @@ main {
     text-align: center;
   }
 
+  #insert-first-recycler-bills-promo-button,
   #insert-first-bill-promo-button {
     position: absolute;
     bottom: 10vh;
     left: calc(50vw);
     transform: translateX(-50%);
   }
+}
+
+.insert_bills_recycler_state .secondary-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20%;
 }
 
 .register_phone_state,
