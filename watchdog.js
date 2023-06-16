@@ -25,7 +25,7 @@ var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 var DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
 
 var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
-var dataPath = deviceConfig.brain.dataPath
+var dataPath = path.resolve(__dirname, deviceConfig.brain.dataPath)
 
 watchdogInfoLoader.save(dataPath, { model: model, platform: platform})
 
