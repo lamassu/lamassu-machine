@@ -3,7 +3,6 @@
   "license": "Unlicense",
   "version": "8.5.0-beta.3",
   "dependencies": {
-    "genmega": "file:../genmega-sdk/",
     "@apollo/client": "^3.5.10",
     "@fczbkk/uuid4": "^3.0.0",
     "@haensl/subset-sum": "^3.0.5",
@@ -40,6 +39,7 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
+    "genmega": "file:../genmega-sdk/",
     "pcsclite": "^0.6.0"
   },
   "devDependencies": {
