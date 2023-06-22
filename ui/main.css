@@ -3578,6 +3578,9 @@ footer {
     width: 70vw;
     margin-left: 10vw;
   }
+  .scan-image.only-gmuk1 {
+    margin-top: 5vh;
+  }
   .insert_bills_state main {
     text-align: center;
   }
