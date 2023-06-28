@@ -1652,7 +1652,12 @@ footer {
   margin-top: 1vh;
 }
 
-.sintra .only-sintra, .douro .only-douro, .gaia .only-gaia, .tejo .only-tejo, .gmuk1 .only-gmuk1 {
+.sintra .only-sintra,
+.douro .only-douro,
+.gaia .only-gaia,
+.tejo .only-tejo,
+.aveiro .only-aveiro,
+.gmuk1 .only-gmuk1 {
   display: block;
 }
 
@@ -3579,6 +3584,9 @@ footer {
     margin-left: 10vw;
   }
   .scan-image.only-gmuk1 {
+    margin-top: 5vh;
+  }
+  .scan-image.only-aveiro {
     margin-top: 5vh;
   }
   .insert_bills_state main {

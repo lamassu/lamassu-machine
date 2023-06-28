@@ -22,7 +22,7 @@ let localeCode = 'bg-BG'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('gmuk1')
+  $('body').addClass('aveiro')
   $('body').addClass('museo')
 
   const width = $('body').width()
