@@ -247,6 +247,16 @@ button {
   color: $salmon;
 }
 
+.cash-in-color .circle-button:disabled .inner-circle-button {
+  background-color: $amazonite-two;
+  color: $amazonite;
+}
+
+.cash-in-color .circle-button:disabled {
+  background-color: $amazonite-two;
+  color: $amazonite;
+}
+
 .action-button {
   @include button;
   padding: 0 2.5vw;

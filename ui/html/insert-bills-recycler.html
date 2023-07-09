@@ -7,9 +7,6 @@
     <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
     <!-- TODO: wait for nuno finished spec -->
     <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
-    <div id="insertBillCancel" class="delay cancel-button-wrapper">
-      <img class="cancel-button" src="images/close-icon.svg" />
-    </div>
   </header>
 
   <main class="lg-margin-top">
@@ -31,23 +28,23 @@
 
     <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
     <section class="secondary-side">
-      <div id="recycler-continue" class="send-coins cash-in-color js-continue-crypto-enable">
-        <section class="circle-button h3 purple-grey js-continue-crypto-enable">
+      <div class="send-coins cash-in-color js-continue-crypto-enable">
+        <button id="recycler-continue" class="circle-button h3 purple-grey js-continue-crypto-enable">
           <div class="inner-circle-button js-continue-crypto-enable">
             <span class="js-i18n">
               Continue
             </span>
           </div>
-        </section>
+        </button>
       </div>
-      <div id="recycler-finish" class="send-coins cash-in-color js-send-crypto-enable">
-        <section class="circle-button h3 purple-grey js-send-crypto-enable">
+      <div class="send-coins cash-in-color js-send-crypto-enable">
+        <button id="recycler-finish" class="circle-button h3 purple-grey js-send-crypto-enable">
           <div class="inner-circle-button js-send-crypto-enable">
             <span class="js-i18n">
               Finish
             </span>
           </div>
-        </section>
+        </button>
       </div>
     </section>
   </main>

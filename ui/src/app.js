@@ -202,7 +202,11 @@ function processData (data) {
       $('.js-send-crypto-enable').show()
       setState('insert_first_bills_recycler')
       break
+    case 'recyclerContinue':
+      disableRecyclerBillButtons()
+      break;
     case 'acceptingRecyclerBills':
+      enableRecyclerBillButtons()
       $('.blocked-customer-top').hide()
       setState('insert_bills_recycler')
       break
@@ -1159,6 +1163,20 @@ function setCryptomatModel (model) {
 
   versions.forEach(it => body.removeClass(it))
   $('body').addClass(model.startsWith('douro') ? 'douro' : model)
+}
+
+function enableRecyclerBillButtons() {
+  var continueButton = document.getElementById('recycler-continue');
+  var finishButton = document.getElementById('recycler-finish');
+  continueButton.disabled = false;
+  finishButton.disabled = false;
+}
+
+function disableRecyclerBillButtons() {
+  var continueButton = document.getElementById('recycler-continue');
+  var finishButton = document.getElementById('recycler-finish');
+  continueButton.disabled = true;
+  finishButton.disabled = true;
 }
 
 function setDirection (direction) {

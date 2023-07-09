@@ -867,6 +867,16 @@ button {
   color: #fe7f78;
 }
 
+.cash-in-color .circle-button:disabled .inner-circle-button {
+  background-color: #2cb9ac;
+  color: #37e8d7;
+}
+
+.cash-in-color .circle-button:disabled {
+  background-color: #2cb9ac;
+  color: #37e8d7;
+}
+
 .action-button {
   border: none;
   display: -webkit-box;
