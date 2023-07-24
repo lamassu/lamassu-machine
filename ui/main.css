@@ -3391,6 +3391,10 @@ footer {
   color: #0e4160;
 }
 
+button[disabled] {
+  pointer-events: none;
+}
+
 @media (orientation: portrait) {
   header {
     padding: 2vh;

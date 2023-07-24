@@ -1877,6 +1877,9 @@ footer {
   }
 }
 
+button[disabled] {
+  pointer-events: none;
+}
 
 @media (orientation: portrait) {
   @import "./portrait.scss";

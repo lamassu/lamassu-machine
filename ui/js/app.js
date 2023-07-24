@@ -707,6 +707,12 @@ $(document).ready(function () {
     buttonPressed('cancelInsertBill');
   });
 
+  var insertBillCancelRecyclerButton = document.getElementById('insertBillCancelRecycler');
+  touchImmediateEvent(insertBillRecyclerCancelButton, function () {
+    setBuyerAddress(null);
+    buttonPressed('cancelInsertBill');
+  });
+
   setupImmediateButton('wifiPassCancel', 'cancelWifiPass');
   setupImmediateButton('scanCancel', 'cancelScan');
   setupImmediateButton('completed_viewport', 'completed');
