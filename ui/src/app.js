@@ -715,7 +715,7 @@ $(document).ready(function () {
   })
 
   var insertBillCancelRecyclerButton = document.getElementById('insertBillCancelRecycler')
-  touchImmediateEvent(insertBillRecyclerCancelButton, function () {
+  touchImmediateEvent(insertBillCancelRecyclerButton, function () {
     setBuyerAddress(null)
     buttonPressed('cancelInsertBill')
   })
