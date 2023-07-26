@@ -4059,6 +4059,9 @@ button[disabled] {
     left: calc(50vh - 50% - 6vh);
     margin: 0;
   }
+  .choose_fiat_state main #choose-fiat-code-added {
+    margin: 1vh;
+  }
   .choose_fiat_state #js-fiat-buttons {
     position: absolute;
     -webkit-flex-wrap: wrap;
