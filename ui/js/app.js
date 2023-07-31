@@ -294,6 +294,9 @@ function processData(data) {
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest);
       break;
+    case 'actionRequiredMaintenance':
+      setState('actionRequiredMaintenance');
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -840,6 +843,8 @@ $(document).ready(function () {
 
   setupButton('terms-ok', 'termsAccepted');
   setupButton('terms-ko', 'idle');
+
+  setupButton('maintenance_restart', 'maintenanceRestart');
 
   calculateAspectRatio();
 
