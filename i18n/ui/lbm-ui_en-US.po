@@ -670,6 +670,14 @@ msgstr "Maintenance Required"
 msgid "Please contact the operator."
 msgstr "Please contact the operator."
 
+#: On screen: action_required_maintenance
+msgid "After you've completed all maintenance work, please touch the following button."
+msgstr "After you've completed all maintenance work, please touch the following button."
+
+#: On screen: action_required_maintenance
+msgid "Restart machine"
+msgstr "Restart machine"
+
 #: On screen: terms
 msgid "I agree"
 msgstr "I agree"
