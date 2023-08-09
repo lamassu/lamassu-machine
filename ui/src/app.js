@@ -292,7 +292,7 @@ function processData (data) {
       customInfoRequest(data.customInfoRequest)
       break
     case 'actionRequiredMaintenance':
-      setState('actionRequiredMaintenance')
+      setState('action_required_maintenance')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
