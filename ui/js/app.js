@@ -297,6 +297,9 @@ function processData(data) {
     case 'actionRequiredMaintenance':
       setState('action_required_maintenance');
       break;
+    case 'cashSlotRemoveBills':
+      setState('cash_slot_remove_bills');
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -699,6 +702,7 @@ $(document).ready(function () {
   setupButton('recycler-continue-start', 'recyclerContinue');
   setupButton('recycler-continue', 'recyclerContinue');
   setupButton('recycler-finish', 'sendCoins');
+  setupButton('cash-slot-bills-removed', 'cashSlotBillsRemoved');
 
   var blockedCustomerOk = document.getElementById('blocked-customer-ok');
   touchEvent(blockedCustomerOk, function () {

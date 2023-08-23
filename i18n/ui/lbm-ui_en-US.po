@@ -74,6 +74,18 @@ msgstr "Please contact the operator to sort this out, or try again later."
 msgid "One moment..."
 msgstr "One moment..."
 
+#: On screen: cash-slot-remove-bills
+msgid "Please remove all bills from the cash slot"
+msgstr "Please remove all bills from the cash slot"
+
+#: On screen: cash-slot-remove-bills
+msgid "Our machine has rejected these bills, please remove them."
+msgstr "Our machine has rejected these bills, please remove them."
+
+#: On screen: cash-slot-remove-bills
+msgid "Continue"
+msgstr "Continue"
+
 #: On screen: cash_in_only_coin
 msgid "Selling unavailable for this coin"
 msgstr "Selling unavailable for this coin"
@@ -349,10 +361,6 @@ msgstr "total purchased"
 #: On screen: insert-bills-recycler
 msgid "OR"
 msgstr "OR"
-
-#: On screen: insert-bills-recycler
-msgid "Continue"
-msgstr "Continue"
 
 #: On screen: insert-bills-recycler
 msgid "Finish"
