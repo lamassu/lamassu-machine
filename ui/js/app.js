@@ -61,6 +61,7 @@ function connect() {
   websocket = new WebSocket('ws://' + HOST + ':' + PORT + '/');
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data);
+    console.log('event', data);
     processData(data);
   };
   websocket.onerror = function (err) {
@@ -133,7 +134,7 @@ function processData(data) {
   }
 
   var isRecycler = function isRecycler(billValidator) {
-    return billValidator === 'HCM2' || billValidator === 'GSR50';
+    return billValidator === 'HCM2';
   };
 
   switch (data.action) {
