@@ -61,7 +61,6 @@ function connect() {
   websocket = new WebSocket('ws://' + HOST + ':' + PORT + '/');
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data);
-    console.log('event', data);
     processData(data);
   };
   websocket.onerror = function (err) {
