@@ -133,7 +133,7 @@ function processData(data) {
   }
 
   var isRecycler = function isRecycler(billValidator) {
-    return billValidator === 'HCM2' || billValidator === 'GSR50';
+    return billValidator === 'HCM2';
   };
 
   switch (data.action) {
