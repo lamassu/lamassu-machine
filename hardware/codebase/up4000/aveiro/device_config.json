@@ -27,7 +27,9 @@
     "deviceType": "gsr50"
   },
   "billDispenser": {
-    "model": "gsr50"
+    "model": "gsr50",
+    "cassettes": "1",
+    "stackers": "3"
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
