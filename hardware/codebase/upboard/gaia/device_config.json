@@ -8,35 +8,15 @@
     "nfcReader": null,
     "wifiDisabled": true
   },
-  "compliance": {
-    "paperWallet": false
-  },
   "kioskPrinter": {
     "model": "Nippon-2511D-2",
     "address": "/dev/ttyJ4"
   },
   "frontFacingCamera": {
-    "device": "/dev/video-front",
-    "facephoto": {
-      "width": 1280,
-      "height": 960,
-      "threshold": 20,
-      "minFaceSize": 180
-    }
+    "device": "/dev/video-front"
   },
   "scanner": {
-    "testnet": false,
-    "device": "/dev/video-scan",
-    "qr": {
-      "width": 640,
-      "height": 480
-    },
-    "photoId": {
-      "width": 1280,
-      "height": 960,
-      "threshold": 20,
-      "minFaceSize": 180
-    }
+    "device": "/dev/video-scan"
   },
   "wifi": {
     "wpa": {
