@@ -1,0 +1,61 @@
+{
+  "cryptomatModel": "aveiro",
+  "brain": {
+    "freeMemRatio": 0.01,
+    "powerStatus": null,
+    "dataPath": "data",
+    "wifiConfigPath": null,
+    "nfcReader": null,
+    "wifiDisabled": true
+  },
+  "kioskPrinter": {
+    "model": "Nippon-2511D-2",
+    "address": "/dev/ttyJ4"
+  },
+  "compliance": {
+    "paperWallet": false
+  },
+  "frontFacingCamera": {
+    "device": "/dev/video-front",
+    "facephoto": {
+      "width": 1280,
+      "height": 720,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
+  "scanner": {
+    "testnet": false,
+    "device": "/dev/video-scan",
+    "qr": {
+      "width": 640,
+      "height": 480
+    },
+    "photoId": {
+      "width": 1280,
+      "height": 720,
+      "threshold": 20,
+      "minFaceSize": 180
+    }
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "deviceType": "gsr50"
+  },
+  "billDispenser": {
+    "model": "gsr50"
+  },
+  "updater": {
+    "caFile": "/opt/certs/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
+    },
+    "packageJsonDir": "/opt/lamassu-machine"
+  }
+}
