@@ -11,7 +11,7 @@ const serialOptions = {baudRate: 9600, parity: 'even', dataBits: 8, stopBits: 1}
 class Emitter extends EventEmitter {}
 const emitter = new Emitter()
 
-const FS = new Buffer([0x1c])
+const FS = Buffer.from([0x1c])
 
 var serial
 
@@ -56,7 +56,7 @@ function buildResponse (frame) {
   const commandSlice = frame.slice(0, 3)
 
   function matches (arr) {
-    const buf = new Buffer(arr)
+    const buf = Buffer.from(arr)
     return buf.equals(commandSlice)
   }
 
@@ -72,7 +72,7 @@ function buildResponse (frame) {
 }
 
 function billCount (frame) {
-  const buf = new Buffer(139)
+  const buf = Buffer.alloc(139)
   buf.fill()
 
   const count0 = DP(frame.slice(4, 6))
@@ -88,8 +88,8 @@ function billCount (frame) {
   const dispense1 = count1 - reject1
   const counted = [D(count0), D(dispense1), D(0), D(0)]
   const rejected = [D(0), D(reject1), D(0), D(0)]
-  const body = new Buffer(R.flatten([counted, rejected]))
-  new Buffer(command).copy(buf)
+  const body = Buffer.from(R.flatten([counted, rejected]))
+  Buffer.from(command).copy(buf)
   body.copy(buf, 0x27)
   FS.copy(buf, 138)
 
@@ -97,9 +97,9 @@ function billCount (frame) {
 }
 
 function initialize () {
-  const buf = new Buffer(56)
+  const buf = Buffer.alloc(56)
   buf.fill()
-  const header = new Buffer([0xe0, 0x02, 0x34])
+  const header = Buffer.from([0xe0, 0x02, 0x34])
   header.copy(buf)
   FS.copy(buf, 55)
 
