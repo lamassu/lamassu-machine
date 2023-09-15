@@ -51,8 +51,6 @@
   },
   "updater": {
     "caFile": "/var/lib/lamassu-machine/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/var/lib/lamassu-machine/lamassu.pub.key"
     },

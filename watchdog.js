@@ -9,7 +9,7 @@ var watchdogInfoLoader = require('./lib/watchdog-info')
 
 require('./lite-logging')
 
-var BASE = '/tmp/extract'
+var BASE = '/opt/lamassu-updates/extract'
 var DONE_PATH = BASE + '/done.txt'
 var SCRIPT_PATH = BASE + '/package/updatescript.js'
 var RUNNING_PATH = BASE + '/running.txt'
