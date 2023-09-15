@@ -1728,7 +1728,9 @@ function t(id, str) {
   $('#js-i18n-' + id).html(str);
 }
 
-function translateCoin(cryptoCode) {
+function translateCoin(_cryptoCode) {
+  var coin = getCryptoCurrency(_cryptoCode);
+  var cryptoCode = coin.cryptoCodeDisplay || _cryptoCode;
   $('.js-i18n-scan-your-address').html(translate('Scan your <br/> %s address', [cryptoCode]));
   $('.js-i18n-please-scan').html(translate('Please scan the QR code <br/> to send us your %s.', [cryptoCode]));
   $('.js-i18n-did-send-coins').html(translate('Have you sent the %s yet?', [cryptoCode]));

@@ -1,11 +1,11 @@
 {
   "name": "lamassu-machine",
   "license": "Unlicense",
-  "version": "8.1.1",
+  "version": "8.1.5",
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "3.7.15",
     "@fczbkk/uuid4": "^3.0.0",
-    "@lamassu/coins": "1.3.0",
+    "@lamassu/coins": "1.3.1-trx.3",
     "@lamassu/supyo": "1.0.0",
     "async": "~1.5.2",
     "base-x": "3.0.9",
