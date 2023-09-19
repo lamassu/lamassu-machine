@@ -1,0 +1,121 @@
+APPENDIX A SOFTWARE LICENSE AGREEMENT
+
+This Appendix A Software License Agreement (hereinafter referred to as the "Agreement") is made between Lamassu Industries AG, a Swiss corporation, (hereinafter referred to as "Lamassu") and Lamassu’s customer to whom Lamassu’s proprietary software or products containing embedded or pre-loaded proprietary software, or both is made available (hereinafter referred to as "Licensee"). Licensee and Lamassu enter into an agreement to which this appendix is attached (hereinafter referred to as the "Primary Agreement"). 
+
+WHEREAS, Lamassu has developed and is the owner of the Lamassu software program that runs Lamassu Crypto ATMs (hereinafter referred to as the "Software"). Crypto ATMs means automated teller machines that allow a person to purchase or sell Bitcoin and other cryptocurrencies by using cash or debit card (hereinafter referred to as the "Crypto ATMs"). Software (i) means proprietary software in source code or object code format, and adaptations, translations, de-compilations, disassemblies, emulations, or derivative works of such software; (ii) means any modifications, enhancements, new versions and new releases of the software provided by Lamassu; and (iii) may contain one or more items of software owned by a third party supplier. The term "Software" does not include any third party software provided under separate license or third party software not licensable under the terms of this Agreement. 
+
+WHEREAS, Lamassu desires to grant to Licensee, and Licensee desires to obtain from Lamassu, a limited, non-exclusive license to use the Software subject to terms and conditions set forth in this Agreement.
+
+NOW, THEREFORE, in consideration of the mutual promises set forth herein, Lamassu and Licensee (hereinafter referred to as the "Parties") agree as follows:
+
+1. Scope
+
+1.1. Lamassu and Licensee enter into this Agreement in connection with Lamassu's delivery of certain proprietary Software or products containing embedded or pre-loaded proprietary Software, or both. This Agreement contains the terms and conditions of the license Lamassu is providing to Licensee, and Licensee’s use of the Software and documentation.
+
+1.2. The license granted in this Agreement is on a per Lamassu product basis and/or per non Lamassu Crypto ATM basis according to the Primary Agreement. For example, if Licensee intends to use the Software on 10 Lamassu Crypto ATMs, Licensee must obtain and pay for 10 license seats in accordance with the Primary Agreement. If Licensee purchases only one Lamassu Crypto ATM, Licensee obtains only one  license seat for the Software, Licensee is permitted to use the Software on the purchased Lamassu Crypto ATM but not on other Lamassu and/or non Lamassu Crypto ATMs owned by Licensee,  unless additional license seats are obtained and paid by Licensee. The same applies if Licensee intends to use the Software on non Lamassu Crypto ATMs. Licensee must obtain and pay a separate license seat for each non Lamassu Crypto ATM in accordance with the Primary Agreement.
+
+2. Granting of License
+
+2.1. Subject to the provisions of this Agreement and the payment of applicable fees outlined in the Primary Agreement, Lamassu grants to Licensee a personal, limited, non-transferable, non-sublicensable and non-exclusive license under Lamassu copyrights embodied in the Software to use the Software, in original source code or object code form, and the documentation solely in connection with Licensee's use of the Lamassu products or to modify, adapt, create derivative works of the Software for the purpose of running it on non Lamassu Crypto ATMs (hereinafter referred to as the "Contractual Use").
+
+2.2. If the Software licensed under this Agreement contains or is derived from Open Source Software, the terms and conditions governing the use of such Open Source Software are in the Open Source Software Licenses of the copyright owner and not this Agreement. If there is a conflict between the terms and conditions of this Agreement and the terms and conditions of the Open Source Software Licenses governing Licensee's use of the Open Source Software, the terms and conditions of the license grant of the applicable Open Source Software Licenses will take precedence over the license grants in this Agreement. 
+
+2.3. Licensee may copy the Software, so far as a copy is necessary for the Contractual Use of the Software. Necessary copies are for example, the installation of the Software on a storage medium and loading the Software into the working memory. Licensee are also entitled to make a reasonable number of copies of the Software for backup purposes only. This right also includes the regular production of backup copies for the purpose of quickly restoring data stocks after a system failure and the temporary use of the Software on an alternative system. Copies of the Software made for backup purposes must be marked accordingly and may not be used for other purposes. Licensee is entitled to edit and modify the Software (including error corrections) but is not permitted to publish any version of the Software with modifications with regard to the Source Code, the attributions and/ or any other part of the Software.
+
+2.4. Lamassu reserves for itself all other rights and interest not explicitly granted under this Agreement. The right of Licensee to decrypt according to Art. 21 URG is reserved.
+
+3. Limitations on Use
+
+3.1. Licensee may use the Software only for (i) Licensee's internal business purposes, (ii) the Contractual Use and (iii) only in accordance with the documentation. Any other use of the Software is strictly prohibited. Without limiting the general nature of these restrictions, Licensee will not make the Software available for use by third parties on a "time sharing," "application service provider," or "service bureau" basis or for any other similar commercial rental or sharing arrangement. 
+
+3.2. Licensee will not, and will not allow or enable any third party to: (i) reverse engineer, disassemble, peel components, decompile, reprogram or otherwise reduce the Software or any portion to a human perceptible form or otherwise attempt to recreate the source code; (ii) modify, adapt, create derivative works of, or merge the Software outside of the Contractual Use; (iii) copy, reproduce, distribute, lend, or lease the Software or documentation to any third party, grant any sublicense or other rights in the Software or documentation to any third party, or take any action that would cause the Software or documentation to be placed in the public domain; (iv) remove, or in any way alter or obscure, any copyright notice or other notice of Lamassu's proprietary rights; or (v) provide, copy, transmit, disclose, divulge or make the Software or documentation available to any third party. 
+
+4. Delivery of the Software
+
+4.1. The delivery of the Software takes place with consultation between the Parties. Lamassu shall register Licensee within its system and provide it with an access code.
+
+4.2. Licensee shall download the Software through their own access code and install it on their own server or Crypto ATM. Licensee shall not alter the Software's functionality or provide its access code to third parties. Licensee is responsible for maintaining the confidentiality of their access data, their account information and all activities resulting from accessing the Software using their username and access data.
+
+4.3. Licensee is responsible for the installation and the launch of the Software. 
+
+5. Updates & upgrades & bug fixes
+
+5.1. Licensee agrees and acknowledges that malfunctions of the Software cannot be completely excluded, even with the greatest care, and that the uninterrupted functionality of the Software cannot be guaranteed.
+
+5.2. Lamassu shall provide Licensee free of charge with all updates, upgrades, bug fixes and code corrections to correct Software malfunctions and defects in order to bring the Software into substantial conformity with its operating specifications.
+
+5.3. Lamassu may, but will not be required to, provide these services if Licensee has modified the Software or is in default.
+
+5.4. The ownership and any intellectual property rights to the work results continuously created by providing updates, upgrades and bug fixes belong fully and exclusively to Lamassu.
+
+5.5. If Licensee provides Lamassu with any feedback, ideas or suggestions regarding the Software, Lamassu may use all such feedback without restriction and shall not be subject to any non-disclosure or non-use obligations in respect of such feedback, and Licensee hereby grants Lamassu a worldwide, non-exclusive, perpetual, irrevocable, royalty-free, fully paid, sub-licensable and transferable license to use, edit, aggregate, reproduce, distribute, prepare derivative works of, display, perform, and otherwise fully exploit such feedback, ideas or suggestions regarding the Software, for any use or purpose whatsoever. 
+
+6. Warranty of Title and Functionality
+
+6.1. Lamassu hereby represents and warrants to Licensee that Lamassu is the owner of the Software and has the right to grant to Licensee the rights set forth in this Agreement. 
+
+6.2. If Licensee is not in breach of any of its obligations under this Agreement and the Primary Agreement, Lamassu warrants that the Software will perform the functions described in this Agreement if used in accordance with the Agreement. Failure to do so shall constitute a defect in the Software that is subject to warranty (hereinafter referred to as the "Defect"). This warranty shall not apply to the Software if modified by anyone, even if such modification is allowed under the terms of this Agreement, or if used improperly or in an operating environment not approved by Lamassu. 
+
+6.3. Lamassu does not warrant that Licensee's use of the Software or the Lamassu products will be uninterrupted, error-free, completely free of security vulnerabilities, or that the Software or the Lamassu products will meet Licensee's particular requirements. Lamassu makes no representations or warranties with respect to any third party software included in the Software. Licensee explicitly agrees and acknowledges that Lamassu does not warrant that the Software will satisfy or fulfill any regulators, customers and/or other authorities' requirements and expectations. It's in the sole responsibility of Licensee to clarify with the competent regulators whether the Software and other implemented measures fulfil the applicable requirements. 
+
+6.4. Licensee acknowledges, however, that malfunctions of the Software cannot be completely ruled out, even with the greatest care, and that the uninterrupted functionality of the Software cannot be guaranteed.
+
+6.5. Lamassu's sole obligation to Licensee and Licensee's exclusive remedy under this warranty is to use reasonable efforts to remedy any material Software defect covered by this warranty. These efforts will involve either replacing the media or attempting to correct significant, demonstrable program or documentation errors or security vulnerabilities. If Lamassu cannot correct the defect within a reasonable time, then at Lamassu's option, Lamassu will replace the defective Software with functionally-equivalent Software, license to Licensee substitute Software which will accomplish the same objective, or terminate the license and refund Licensee's paid license fee. 
+
+6.6. Licensee must give Lamassu sufficient notice of any defect within 5 calendar days of its discovery.
+
+6.7. The express warranties set forth in this Section 6 are in lieu of, and Lamassu disclaims, any and all other warranties (express or implied, oral or written) with respect to the Software or documentation, including, without limitation, any and all implied warranties of condition, title, non-infringement, merchantability, or fitness for a particular purpose or use by Licensee (whether or not Lamassu knows, has reason to know, has been advised, or is otherwise aware of any such purpose or use), whether arising by law, by reason of custom or usage of trade, or by course of dealing. In addition, Lamassu disclaims any warranty to any person other than Licensee with respect to the Software or documentation. Any further warranty claims of Licensee are expressly excluded.
+
+7. Limitation of Liability
+
+7.1. Lamassu shall not be responsible for, and shall not pay, any amount of incidental, consequential or other indirect damages, whether based on lost revenue or otherwise, regardless of whether Licensee was advised of the possibility of such losses in advance by Lamassu. 
+
+7.2. In no event shall Lamassu's liability hereunder exceed the amount paid by Licensee under the Primary Agreement, regardless of whether Licensee’s claim is based on contract, tort, strict liability, product liability or otherwise.
+
+7.3. This limitation of liability provision survives the expiration or termination of this Agreement and applies notwithstanding any contrary provision in this Agreement.
+
+8. Term and termination
+
+8.1. Licensee's right to use the Software and documentation will begin when the Primary Agreement is signed by both Parties and will continue (i) for the life of the Lamassu Products with which or for which the Software and documentation have been provided by Lamassu, unless Licensee breaches this Agreement, in which case this Agreement and Licensee's right to use the Software and documentation may be terminated immediately upon notice by Lamassu or (ii) for the duration of the Primary Agreement, unless Licensee breaches this Agreement or the Primary Agreement, in which case this Agreement and Licensee's right to use the Software and documentation may be terminated immediately upon notice by Lamassu.
+
+8.2. After termination of this Agreement, Licensee shall no longer use the Software. Upon first request by Lamassu, Licensee shall remove or delete and destroy all copies of the Software and documentation. 
+
+8.3. Licensee acknowledges that Lamassu made a considerable investment of resources in the development, marketing, and distribution of the Software and documentation and that Licensee's breach of this Agreement will result in irreparable harm to Lamassu for which solely monetary damages would be inadequate. If Licensee breaches this Agreement, Lamassu may terminate this Agreement and be entitled to all available remedies at law or in equity (including immediate injunctive relief and repossession of all non-embedded Software and associated documentation).
+
+8.4. Sections 3, 6, 7, 9, 10, 11, 12, 13, 14, and 15 survive the termination of this Agreement.
+
+9. Intellectual Property Rights
+
+9.1. The Software is and includes intellectual property of Lamassu. All associated intellectual property rights, including, without limitation, worldwide patent, trademark, copyright and trade secret rights, are reserved by Lamassu. Lamassu retains all right, title and interest in and copyrights to the Software, regardless of form or media in or on which the original or other copies may subsequently exist. This Agreement does not constitute a sale of the Software and no title or proprietary rights to the Software are transferred to Licensee hereby. Licensee acknowledges that the Software is a unique, confidential and valuable asset of Lamassu.
+
+9.2. All intellectual property developed, originated, or prepared by Lamassu in connection with providing the Software, Lamassu products, documentation or related services, remains vested exclusively in Lamassu, and Licensee will not have any shared development or other intellectual property rights.
+
+10. Confidentiality
+
+10.1. Licensee acknowledges that the Software contains proprietary trade secrets of Lamassu and Licensee hereby agrees to maintain the confidentiality of the Software using at least as great a degree of care as it uses to maintain the confidentiality of its own confidential information. Licensee agrees to promptly communicate the terms and conditions of this Agreement to those persons employed by Licensee who come into contact with the Software. Licensee is responsible in the event of a breach of confidentiality by any of its employees or agents. Licensee shall use reasonable efforts to ensure its compliance with its confidentiality obligations under this Agreement, including, without limitation, preventing the use of any portion of the Software for the purpose of deriving the source code of the Software.
+
+11. Successors
+
+11.1. This Agreement will be binding upon and will inure to the benefit of the Parties hereto and their respective representatives, successors and assigns except as otherwise provided herein.
+
+12. Severability
+
+12.1. In the event any provision of this Agreement is determined to be invalid or unenforceable, the remainder of this Agreement shall remain in force as if such provision were not a part of it.
+
+13. Non-assignment
+
+13.1. This Agreement, any claims and the licenses granted by it may not be assigned, sublicensed, or otherwise transferred by Licensee without the prior written consent of Lamassu. This Section 16.1 does not apply to Licensee with regard to current and future entities of Lamassu.
+
+13.2. This Agreement and any claims hereunder may not be assigned by Lamassu to any third party without the prior written consent of Licensee.
+
+14. Agreement
+
+14.1. This Agreement sets forth the entire understanding between the Parties with respect to the subject matter hereof, and merges and supersedes all prior agreements, discussions and understandings, express or implied, concerning such matters. This Agreement shall take precedence over any additional or conflicting term, which may be contained in Licensees' purchase order or Lamassu‘s order acknowledgment forms.
+
+15. Governing law / place of jurisdiction
+
+15.1. This Agreement shall be governed by and construed in accordance with the substantive laws of Switzerland under exclusion of its conflict of laws rules. The United Nations Convention on Contracts on the International Sale of Goods is expressly excluded.
+
+15.2. The Parties hereby irrevocably and unconditionally agree to the exclusive jurisdiction of the courts of Lucerne, Switzerland.
+
+IN WITNESS WHEREOF, the Parties have caused this Agreement to be executed.
