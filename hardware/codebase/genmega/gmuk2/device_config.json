@@ -4,7 +4,6 @@
   "brain": {
     "powerStatus": null,
     "dataPath": "data",
-    "wifiConfigPath": null,
     "nfcReader": null,
     "wifiDisabled": true
   },
