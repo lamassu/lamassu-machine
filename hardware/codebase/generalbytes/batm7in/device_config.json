@@ -2,7 +2,6 @@
   "cryptomatMaker": "generalbytes",
   "cryptomatModel": "batm7in",
   "brain": {
-    "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,

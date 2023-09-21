@@ -1,7 +1,6 @@
 {
   "cryptomatModel": "tejo",
   "brain": {
-    "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
     "wifiConfigPath": null,
