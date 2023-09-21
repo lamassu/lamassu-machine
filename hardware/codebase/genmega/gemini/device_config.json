@@ -1,5 +1,6 @@
 {
-  "cryptomatModel": "sintra",
+ "cryptomatMaker": "genmega",
+ "cryptomatModel": "gemini",
   "brain": {
     "powerStatus": null,
     "dataPath": "data",
@@ -7,14 +8,17 @@
     "wifiDisabled": true
   },
   "kioskPrinter": {
-    "model": "Nippon-2511D-2",
-    "address": "/dev/ttyJ4"
+    "model": "genmega",
+    "address": "/dev/ttyS4"
+  },
+  "compliance": {
+    "paperWallet": false
   },
   "frontFacingCamera": {
-    "device": "/dev/video-front"
+    "device":"/dev/video0"
   },
   "scanner": {
-    "device": "/dev/video-scan"
+    "device": "/dev/ttyS7"
   },
   "wifi": {
     "wpa": {
@@ -22,18 +26,19 @@
     }
   },
   "billValidator": {
+    "deviceType": "genmega",
     "rs232": {
-      "device": "/dev/ttyJ5"
+      "device": "/dev/ttyS2"
     }
   },
   "billDispenser": {
-    "model": "f56",
-    "device": "/dev/ttyJ7"
+    "model": "genmega",
+    "device": "/dev/ttyS3",
+    "license": "",
+    "cassettes": 2
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
     },
