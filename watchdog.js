@@ -76,7 +76,8 @@ function executeScript () {
     return
   }
   console.log('in execute')
-  child = cp.fork(SCRIPT_PATH, [platform, model])
+  const UPDATED_PATH = true
+  child = cp.fork(SCRIPT_PATH, [platform, model, UPDATED_PATH])
   child.on('error', function (err) {
     cleanUp()
     console.log(err)
