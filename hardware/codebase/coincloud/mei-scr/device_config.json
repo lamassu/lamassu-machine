@@ -1,5 +1,6 @@
 {
-  "cryptomatModel": "sintra",
+ "cryptomatMaker": "coincloud",
+ "cryptomatModel": "mei-scr",
   "brain": {
     "powerStatus": null,
     "dataPath": "data",
@@ -7,11 +8,13 @@
     "wifiDisabled": true
   },
   "kioskPrinter": {
-    "model": "Nippon-2511D-2",
-    "address": "/dev/ttyJ4"
+    "model": "Nippon-2511D-2"
+  },
+  "compliance": {
+    "paperWallet": false
   },
   "frontFacingCamera": {
-    "device": "/dev/video-front"
+    "device":"/dev/video-front"
   },
   "scanner": {
     "device": "/dev/video-scan"
@@ -22,18 +25,14 @@
     }
   },
   "billValidator": {
+    "deviceType": "cashflowSc",
     "rs232": {
-      "device": "/dev/ttyJ5"
+      "device": "/dev/ttyUSB0"
     }
   },
-  "billDispenser": {
-    "model": "f56",
-    "device": "/dev/ttyJ7"
-  },
+  "billDispenser": {},
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
     },

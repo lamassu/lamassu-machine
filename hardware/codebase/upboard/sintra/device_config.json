@@ -1,10 +1,8 @@
 {
   "cryptomatModel": "sintra",
   "brain": {
-    "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
-    "wifiConfigPath": null,
     "nfcReader": null,
     "wifiDisabled": true
   },
@@ -34,8 +32,6 @@
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
     },
