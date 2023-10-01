@@ -91,6 +91,10 @@ msgid "Languages"
 msgstr "Languages"
 
 #: On screen: choose_coin
+msgid "Rates"
+msgstr "Rates"
+
+#: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
 
@@ -498,6 +502,22 @@ msgstr "If you are sure of the code, please contact the operator for clarificati
 msgid "Enter a different code"
 msgstr "Enter a different code"
 
+#: On screen: rates
+msgid "Exchange Rates"
+msgstr "Exchange Rates"
+
+#: On screen: rates
+msgid "Buy"
+msgstr "Buy"
+
+#: On screen: rates
+msgid "Crypto"
+msgstr "Crypto"
+
+#: On screen: rates
+msgid "Sell"
+msgstr "Sell"
+
 #: On screen: register-phone
 msgid "Phone Number"
 msgstr "Phone Number"
@@ -874,6 +894,10 @@ msgstr "Connect"
 msgid "We got this"
 msgstr "We got this"
 
+#: On screen: withdraw_failure
+msgid "Our Internet was down for a bit but you'll receive your funds as soon as our connection is back."
+msgstr "Our Internet was down for a bit but you'll receive your funds as soon as our connection is back."
+
 #: On screen: dynamic
 msgid "This could take a few moments."
 msgstr "This could take a few moments."
@@ -1003,6 +1027,22 @@ msgid "Discount added (%s off commissions)"
 msgstr "Discount added (%s off commissions)"
 
 #: On screen: dynamic
+msgid "Printing receipt..."
+msgstr "Printing receipt..."
+
+#: On screen: dynamic
+msgid "Sending receipt..."
+msgstr "Sending receipt..."
+
+#: On screen: dynamic
+msgid "Receipt printed successfully!"
+msgstr "Receipt printed successfully!"
+
+#: On screen: dynamic
+msgid "Receipt sent successfully!"
+msgstr "Receipt sent successfully!"
+
+#: On screen: dynamic
 msgid "An error occurred, try again."
 msgstr "An error occurred, try again."
 
@@ -1029,4 +1069,8 @@ msgstr "Dash"
 #: On screen: coins
 msgid "Bitcoin Cash"
 msgstr "Bitcoin Cash"
+
+#: On screen: coins
+msgid "Monero"
+msgstr "Monero"
 
