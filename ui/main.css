@@ -2325,6 +2325,7 @@ footer {
 .standard-keyboard {
   box-sizing: border-box;
   width: 100%;
+  direction: ltr;
 }
 .standard-keyboard .standard-backspace {
   display: -webkit-box;
@@ -2826,11 +2827,13 @@ footer {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
           justify-content: flex-end;
-  margin-right: 24vh;
+  -webkit-margin-end: 24vh;
+          margin-inline-end: 24vh;
 }
 
 .submit-text-requirement-button {
-  margin-right: 160px;
+  -webkit-margin-end: 160px;
+          margin-inline-end: 160px;
   margin-top: 20px;
 }
 
