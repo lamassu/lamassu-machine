@@ -27,7 +27,7 @@
   "billDispenser": {
     "model": "gsr50",
     "cassettes": "1",
-    "stackers": "3"
+    "recyclers": "6"
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
