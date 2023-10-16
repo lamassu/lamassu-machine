@@ -297,6 +297,9 @@ function processData (data) {
     case 'cashSlotRemoveBills':
       setState('cash_slot_remove_bills')
       break
+    case 'startUpRemoveBills':
+      setState('start_up_remove_bills')
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
@@ -710,6 +713,7 @@ $(document).ready(function () {
   setupButton('recycler-continue', 'recyclerContinue')
   setupButton('recycler-finish', 'sendCoins')
   setupButton('cash-slot-bills-removed', 'cashSlotBillsRemoved')
+  setupButton('start-up-bills-removed', 'startUpBillsRemoved')
 
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
   touchEvent(blockedCustomerOk, function () {
