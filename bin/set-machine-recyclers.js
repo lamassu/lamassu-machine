@@ -1,4 +1,4 @@
-// Run this after creating the device_config.json file for the Aveiro machines. Only run this on Aveiro machines!
+// Run this after creating the device_config.json file for machines with recyclers. Only run this on machines with recyclers!
 
 const fs = require('fs')
 const path = require('path')
