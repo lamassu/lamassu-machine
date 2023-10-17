@@ -1,7 +1,6 @@
 {
   "cryptomatModel": "tejo",
   "brain": {
-    "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
     "nfcReader": null,
@@ -11,31 +10,11 @@
     "model": "Nippon-2511D-2",
     "address": "/dev/ttyJ4"
   },
-  "compliance": {
-    "paperWallet": false
-  },
   "frontFacingCamera": {
-    "device": "/dev/video-front",
-    "facephoto": {
-      "width": 1280,
-      "height": 720,
-      "threshold": 20,
-      "minFaceSize": 180
-    }
+    "device": "/dev/video-front"
   },
   "scanner": {
-    "testnet": false,
-    "device": "/dev/video-scan",
-    "qr": {
-      "width": 640,
-      "height": 480
-    },
-    "photoId": {
-      "width": 1280,
-      "height": 720,
-      "threshold": 20,
-      "minFaceSize": 180
-    }
+    "device": "/dev/video-scan"
   },
   "wifi": {
     "wpa": {
@@ -53,8 +32,6 @@
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
     },

@@ -22,7 +22,7 @@ let localeCode = 'bg-BG'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('sintra')
+  $('body').addClass('aveiro')
   $('body').addClass('museo')
 
   const width = $('body').width()
@@ -53,7 +53,10 @@ $(function () {
 
   phoneKeypad.activate()
 
-  let wifiKeyboard = new Keyboard('wifi-keyboard').init()
+  // let wifiKeyboard = new Keyboard({
+  //   id: 'wifi-keyboard',
+  //   inputBox: '#input-passphrase'
+  // }).init()
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     console.log('phoneNumber', result)

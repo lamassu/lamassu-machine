@@ -1,0 +1,42 @@
+{
+  "cryptomatModel": "tejo",
+  "brain": {
+    "powerStatus": null,
+    "dataPath": "data",
+    "nfcReader": null,
+    "wifiDisabled": true
+  },
+  "kioskPrinter": {
+    "model": "Nippon-2511D-2",
+    "address": "/dev/ttyJ4"
+  },
+  "frontFacingCamera": {
+    "device": "/dev/video-front"
+  },
+  "scanner": {
+    "device": "/dev/video-scan"
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "rs232": {
+      "device": "/dev/ttyJ5"
+    }
+  },
+  "billDispenser": {
+    "model": "f56",
+    "device": "/dev/ttyJ7"
+  },
+  "updater": {
+    "caFile": "/opt/certs/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
+    },
+    "packageJsonDir": "/opt/lamassu-machine"
+  }
+}

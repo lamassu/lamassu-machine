@@ -15,6 +15,11 @@ button {
   padding: 0 2vw;
   height: 8vh;
   border-radius: 4vh;
+  @media (orientation: portrait) {
+    padding: 0 2vh;
+    height: 8vw;
+    border-radius: 4vw;
+  }
 }
 
 @mixin pill-button-bg {
@@ -22,6 +27,11 @@ button {
   padding: 0 2vw;
   height: 8vh;
   border-radius: 2vh;
+  @media (orientation: portrait) {
+    padding: 0 2vh;
+    height: 8vw;
+    border-radius: 2vw;
+  }
 }
 
 @mixin round-button {
@@ -29,6 +39,11 @@ button {
   width: 9vh;
   height: 9vh;
   border-radius: 5vh;
+  @media (orientation: portrait) {
+    width: 9vw;
+    height: 9vw;
+    border-radius: 5vw;
+  }
 }
 
 @mixin cash-colors {
@@ -137,10 +152,12 @@ button {
 
 .cash-in-color .filled-progress-button:disabled {
   color: $amazonite;
+  pointer-events: none;
 }
 
 .cash-out-color .filled-progress-button:disabled {
   color: $salmon;
+  pointer-events: none;
 }
 
 
@@ -230,6 +247,16 @@ button {
 .cash-out-color .circle-button:disabled {
   background-color: $salmon-two;
   color: $salmon;
+}
+
+.cash-in-color .circle-button:disabled .inner-circle-button {
+  background-color: $amazonite-two;
+  color: $amazonite;
+}
+
+.cash-in-color .circle-button:disabled {
+  background-color: $amazonite-two;
+  color: $amazonite;
 }
 
 .action-button {

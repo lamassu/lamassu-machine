@@ -253,7 +253,7 @@
       data-tr-section="choose_coin"
       data-screentype="exception-tp"
     >
-      <header>
+      <header id="choose-coin-header">
         <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
           <div
             id="language-dropdown-toggle"
@@ -1129,6 +1129,56 @@
       </footer>
     </section>
     <section
+      class="viewport insert_bills_recycler_state cash-in-color"
+      data-tr-section="insert-bills-recycler"
+      data-screentype="flow-no-action-tp"
+    >
+      <header>
+        <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
+        <!-- TODO: wait for nuno finished spec -->
+        <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
+      </header>
+    
+      <main class="lg-margin-top">
+        <section class="primary-side">
+          <h5 class="primary-side-title js-i18n">Insert another round of bills</h5>
+          <div class="total md-margin-top">
+            <div class="fiat">
+              <span class="js-amount h2"></span>
+              <span class="js-currency h4"></span>
+            </div>
+          </div>
+          <p class="js-i18n d2 no-margin-top">deposited so far</p>
+          <div class="total-crypto-rec total sm-margin-top">
+            <span class="crypto-amount i18n-latin h2"></span>
+            <span class="crypto-units i18n-latin h4"></span>
+          </div>
+          <p class="js-i18n d2 no-margin-top">total purchased</p>
+        </section>
+    
+        <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
+        <section class="secondary-side">
+          <div class="send-coins cash-in-color js-continue-crypto-enable">
+            <button id="recycler-continue" class="circle-button h3 purple-grey js-continue-crypto-enable">
+              <div class="inner-circle-button js-continue-crypto-enable">
+                <span class="js-i18n">
+                  Continue
+                </span>
+              </div>
+            </button>
+          </div>
+          <div class="send-coins cash-in-color js-send-crypto-enable">
+            <button id="recycler-finish" class="circle-button h3 purple-grey js-send-crypto-enable">
+              <div class="inner-circle-button js-send-crypto-enable">
+                <span class="js-i18n">
+                  Finish
+                </span>
+              </div>
+            </button>
+          </div>
+        </section>
+      </main>
+    </section><section
       class="viewport insert_bills_state cash-in-color"
       data-tr-section="insert-bills"
       data-screentype="flow-no-action-tp"
@@ -1166,6 +1216,50 @@
       </main>
     </section>
     <section
+      class="viewport insert_first_bills_recycler_state cash-in-color"
+      data-tr-section="insert-first-bills-recycler"
+      data-screentype="flow-no-action-tp"
+    >
+      <header>
+        <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
+        <!-- TODO: wait for nuno finished spec -->
+        <p class="d2 paper-wallet-header-message js-paper-wallet js-i18n">Wallet successfully validated!</p>
+        <div id="insertBillCancelRecycler" class="delay cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main class="lg-margin-top">
+        <section class="primary-side">
+          <h2 class="js-i18n primary-side-title xs-margin-bottom">Insert bills</h2>
+          <div class="text-content">
+            <p class="d1 no-margin-top js-i18n">
+              Please insert your first round of bills into the machine.
+            </p>
+            <p class="d2 js-i18n-fixed-fee"></p>
+            <p class="d2 js-i18n coins-to-address">Your coins will be sent to:</p>
+            <p class="m2 crypto-address"></p>
+          </div>
+          <div>
+            <button id="insert-first-recycler-bills-promo-button" class="js-i18n bordered-progress-button button lg-margin-bottom d2">
+              Have a promo code?
+            </button>
+            <p id="insert-first-recycler-bills-code-added" class="d2" style="display:none"></p>
+          </div>
+        </section>
+        <section class="secondary-side">
+          <div id="recycler-continue-start" class="send-coins cash-in-color js-continue-crypto-enable">
+            <section class="circle-button h3 purple-grey js-continue-crypto-enable">
+              <div class="inner-circle-button js-continue-crypto-enable">
+                <span class="js-i18n">
+                  Continue
+                </span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </section><section
       class="viewport insert_more_bills_state cash-in-color"
       data-tr-section="insert-more-bills"
       data-screentype="exception-tp"
@@ -1586,6 +1680,8 @@
           <object class="scan-image only-sintra" data="images/scan/animation/sintra/pv-key.svg"></object>
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/pv-key.svg"></object>
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/pv-key.svg"></object>
+          <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/pv-key.svg"></object>
+          <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/pv-key.svg"></object>
         </section>
       </main>
     </section>
@@ -1622,7 +1718,17 @@
         </button>
       </footer>
     </section>
+    <!-- To become similar to verifying we should have no margin bottom on h3 and should use d1 instead of d2 -->
     <section
+      class="viewport recycler_continue_state info cash-in-color"
+      data-tr-section="recycler-continue"
+      data-screentype="info-no-action-tp"
+    >
+      <header></header>
+      <main>
+        <h2 class="js-i18n sm-margin-bottom">Depositing bills...</h2>
+      </main>
+    </section><section
       class="viewport register_phone_state"
       data-tr-section="register-phone"
       data-screentype="flow-action-tp"
@@ -1707,6 +1813,8 @@
           <object class="scan-image only-douro" data="images/scan/animation/douro/BTC-amazonite.svg"></object>
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
+          <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
+          <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1739,6 +1847,10 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/driver-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-in" data="images/scan/animation/tejo/driver-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/driver-salmon.svg"></object>
+          <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/driver-amazonite.svg"></object>
+          <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/driver-salmon.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/driver-amazonite.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/driver-salmon.svg"></object>
         </section>
       </main>
     </section>
@@ -1781,6 +1893,10 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/stateID-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-in" data="images/scan/animation/tejo/stateID-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/stateID-salmon.svg"></object>
+          <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/stateID-amazonite.svg"></object>
+          <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
         </section>
       </main>
     </section>
@@ -1813,6 +1929,10 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/stateID-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-in" data="images/scan/animation/tejo/stateID-amazonite.svg"></object>
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/stateID-salmon.svg"></object>
+          <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/stateID-amazonite.svg"></object>
+          <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
+          <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
         </section>
       </main>
     </section>
@@ -2122,6 +2242,9 @@
           <object class="scan-image only-sintra" data="images/scan/animation/sintra/BTC-amazonite.svg"></object>
           <object class="scan-image only-douro" data="images/scan/animation/douro/BTC-amazonite.svg"></object>
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
+          <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
+          <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
+          <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -2188,6 +2311,21 @@
             </td>
           </tr>
         </table>
+      </main>
+    </section>
+    
+    <section
+      class="viewport action_required_maintenance_state info system-color"
+      data-tr-section="action_required_maintenance"
+      data-screentype="system-tp info-contact-tp"
+    >
+      <header>
+        <img src="images/maintenance.svg" />
+      </header>
+      <main>
+        <h3 class="js-i18n xs-margin-bottom">Maintenance Required</h3>
+        <p class="js-i18n d2">After you've completed all maintenance work, please touch the following button.</p>
+        <button id="maintenance_restart" class="filled-progress-button button js-i18n">Restart machine</button>
       </main>
     </section>
     <section class="viewport terms_screen_state" data-tr-section="terms" data-screentype="exception-tp">

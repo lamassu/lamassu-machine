@@ -7,8 +7,10 @@ const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
 const machineCode = process.argv[3];
+const newPath = process.argv[4];
 
-const packagePath = '/tmp/extract/package/subpackage'
+const basePath = newPath ? '/opt/lamassu-updates/extract' : '/tmp/extract'
+const packagePath = `${basePath}/package/subpackage`
 
 const path = hardwareCode === 'upboard' ?
   `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
@@ -124,9 +126,9 @@ function installDeviceConfig (cb) {
 const commands = []
 
 commands.push(
-  async.apply(command, 'tar zxf /tmp/extract/package/subpackage.tgz -C /tmp/extract/package/'),
-  async.apply(command, `cp -PR /tmp/extract/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR /tmp/extract/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
+  async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
 )
 
 if (hardwareCode === 'aaeon') {

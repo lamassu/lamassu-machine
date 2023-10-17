@@ -1,0 +1,41 @@
+{
+  "cryptomatMaker": "generalbytes",
+  "cryptomatModel": "batm3",
+  "brain": {
+    "powerStatus": null,
+    "dataPath": "data",
+    "nfcReader": null,
+    "wifiDisabled": true
+  },
+  "kioskPrinter": {
+    "model": "None",
+    "address": "/dev/ttyJ4"
+  },
+  "frontFacingCamera": {
+    "device": "/dev/video-front"
+  },
+  "scanner": {
+    "device": "/dev/video-scan"
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "deviceType": "cashflowSc",
+    "rs232": {
+      "device": "/dev/ttyS0"
+    }
+  },
+  "billDispenser": {},
+  "updater": {
+    "caFile": "/opt/certs/lamassu.pem",
+    "downloadDir": "/tmp/download",
+    "extractDir": "/tmp/extract",
+    "extractor": {
+      "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
+    },
+    "packageJsonDir": "/opt/lamassu-machine"
+  }
+}

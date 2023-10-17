@@ -1,18 +1,17 @@
 with import (fetchTarball {
-  name = "nixpkgs-19.03";
-  url = https://github.com/NixOS/nixpkgs-channels/archive/69fabc286f745bca37a8cbead3665de31758e778.tar.gz;
-  sha256 = "0mkqv8d4vh6r1b34n7ik0gpzqhf60sj1masd89jndlckvklqh69j";
+  name = "nixpkgs-23.05";
+  url = https://github.com/NixOS/nixpkgs/archive/8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8.tar.gz;
+  sha256 = "17v6wigks04x1d63a2wcd7cc4z9ca6qr0f4xvw1pdw83f8a3c0nj";
 }) {};
 
 
 stdenv.mkDerivation {
     name = "node";
     buildInputs = [
-      nodejs-8_x
-      openssl_1_0_2
-      python2Full
+      nodejs-18_x
+      openssl
+      python3
       entr
-      libjpeg
       yasm
     ];
     shellHook = ''

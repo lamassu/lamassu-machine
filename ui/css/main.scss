@@ -409,7 +409,12 @@ footer {
   margin-top: 1vh;
 }
 
-.sintra .only-sintra, .douro .only-douro, .gaia .only-gaia, .tejo .only-tejo {
+.sintra .only-sintra,
+.douro .only-douro,
+.gaia .only-gaia,
+.tejo .only-tejo,
+.aveiro .only-aveiro,
+.gmuk1 .only-gmuk1 {
   display: block;
 }
 
@@ -498,22 +503,37 @@ footer {
 
 .xl-margin-top {
   margin-top: 10vh;
+  @media (orientation: portrait) {
+    margin-top: 10vw;
+  }
 }
 
 .lg-margin-top {
   margin-top: 8vh;
+  @media (orientation: portrait) {
+    margin-top: 8vw;
+  }
 }
 
 .md-margin-top {
   margin-top: 6vh;
+  @media (orientation: portrait) {
+    margin-top: 6vw;
+  }
 }
 
 .nm-margin-top {
   margin-top: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-top {
   margin-top: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-top {
@@ -522,10 +542,16 @@ footer {
 
 .nm-margin-bottom {
   margin-bottom: 4vh;
+  @media (orientation: portrait) {
+    margin-top: 4vw;
+  }
 }
 
 .sm-margin-bottom {
   margin-bottom: 2vh;
+  @media (orientation: portrait) {
+    margin-top: 2vw;
+  }
 }
 
 .no-margin-bottom {
@@ -534,6 +560,9 @@ footer {
 
 .xs-margin-bottom {
   margin-bottom: 1vh;
+  @media (orientation: portrait) {
+    margin-top: 1vw;
+  }
 }
 
 .row {
@@ -839,6 +868,21 @@ footer {
 }
 
 .insert_bills_state footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 9.4vw;
+  margin-bottom: 6vh;
+  margin-top: -6vh;
+}
+
+.insert_first_bills_recycler_state .secondary-side, .insert_bills_recycler_state .secondary-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1362,6 +1406,11 @@ footer {
   }
 }
 
+.insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
+  padding-left: 0;
+  padding-right: 9.4vw;
+}
+
 #networks {
   margin: auto;
   display: flex;
@@ -1774,4 +1823,64 @@ footer {
  #us-ssn-permission-cancel {
    display: initial;
  }
+}
+
+#rates main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rates-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rates-content {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    h4 {
+      margin: 0 4rem;
+      width: 10vw;
+      text-align: center;
+      color: $sapphire;
+    }
+    h4:first-child {
+      margin: 0;
+      text-align: right;
+      color: $sapphire;
+      font-weight: normal;
+    }
+    h4:last-child {
+      margin: 0;
+      text-align: left;
+      color: $sapphire;
+      font-weight: normal;
+    }
+    p:first-child {
+      margin: 0;
+      text-align: right;
+      color: $sapphire;
+    }
+    p:last-child {
+      margin: 0;
+      text-align: left;
+      color: $sapphire;
+    }
+  }
+}
+
+button[disabled] {
+  pointer-events: none;
+}
+
+@media (orientation: portrait) {
+  @import "./portrait.scss";
 }

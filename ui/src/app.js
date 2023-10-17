@@ -109,7 +109,7 @@ function processData (data) {
   if (data.version) setVersion(data.version)
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS)
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
-  if (data.readingBill) readingBill(data.readingBill)
+  if (data.readingBills) readingBills(data.readingBills)
   if (data.cryptoCode) translateCoin(data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
@@ -127,6 +127,10 @@ function processData (data) {
   if (data.context) {
     $('.js-context').hide()
     $('.js-context-' + data.context).show()
+  }
+
+  const isRecycler = billValidator => {
+    return billValidator === 'HCM2'
   }
 
   switch (data.action) {
@@ -181,16 +185,30 @@ function processData (data) {
       setState('security_code')
       break
     case 'scanned':
-      setState('insert_bills')
+      isRecycler(data.billValidator)
+        ? setState('insert_first_bills_recycler')
+        : setState('insert_bills')
       break
     case 'acceptingFirstBill':
-      $('.js-send-crypto-disable').hide()
       $('.js-send-crypto-enable').show()
       setState('insert_bills')
       break
     case 'acceptingBills':
       $('.blocked-customer-top').hide()
       setState('insert_more_bills')
+      break
+    case 'acceptingFirstRecyclerBills':
+      $('.js-continue-crypto-enable').show()
+      $('.js-send-crypto-enable').show()
+      setState('insert_first_bills_recycler')
+      break
+    case 'recyclerContinue':
+      disableRecyclerBillButtons()
+      break;
+    case 'acceptingRecyclerBills':
+      enableRecyclerBillButtons()
+      $('.blocked-customer-top').hide()
+      setState('insert_bills_recycler')
       break
     case 'acceptingBill':
       setAccepting(true)
@@ -272,6 +290,9 @@ function processData (data) {
       break
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest)
+      break
+    case 'actionRequiredMaintenance':
+      setState('action_required_maintenance')
       break
     default:
       if (data.action) setState(window.snakecase(data.action))
@@ -682,12 +703,22 @@ $(document).ready(function () {
     buttonPressed('sendCoins')
   })
 
+  setupButton('recycler-continue-start', 'recyclerContinue')
+  setupButton('recycler-continue', 'recyclerContinue')
+  setupButton('recycler-finish', 'sendCoins')
+
   const blockedCustomerOk = document.getElementById('blocked-customer-ok')
   touchEvent(blockedCustomerOk, function () {
     buttonPressed('blockedCustomerOk')
   })
   var insertBillCancelButton = document.getElementById('insertBillCancel')
   touchImmediateEvent(insertBillCancelButton, function () {
+    setBuyerAddress(null)
+    buttonPressed('cancelInsertBill')
+  })
+
+  var insertBillCancelRecyclerButton = document.getElementById('insertBillCancelRecycler')
+  touchImmediateEvent(insertBillCancelRecyclerButton, function () {
     setBuyerAddress(null)
     buttonPressed('cancelInsertBill')
   })
@@ -709,6 +740,7 @@ $(document).ready(function () {
   setupButton('printer-scan-again', 'printerScanAgain')
 
   setupButton('insert-first-bill-promo-button', 'insertPromoCode')
+  setupButton('insert-first-recycler-bills-promo-button', 'insertPromoCode')
   setupButton('choose-fiat-promo-button', 'insertPromoCode')
 
   var promoCodeCancelButton = document.getElementById('promo-code-cancel')
@@ -820,6 +852,8 @@ $(document).ready(function () {
 
   setupButton('terms-ok', 'termsAccepted')
   setupButton('terms-ko', 'idle')
+
+  setupButton('maintenance_restart', 'maintenanceRestart')
 
   calculateAspectRatio()
 
@@ -1141,6 +1175,20 @@ function setCryptomatModel (model) {
   $('body').addClass(model.startsWith('douro') ? 'douro' : model)
 }
 
+function enableRecyclerBillButtons() {
+  var continueButton = document.getElementById('recycler-continue');
+  var finishButton = document.getElementById('recycler-finish');
+  continueButton.disabled = false;
+  finishButton.disabled = false;
+}
+
+function disableRecyclerBillButtons() {
+  var continueButton = document.getElementById('recycler-continue');
+  var finishButton = document.getElementById('recycler-finish');
+  continueButton.disabled = true;
+  finishButton.disabled = true;
+}
+
 function setDirection (direction) {
   let states = [
     $('.scan_id_photo_state'),
@@ -1287,7 +1335,7 @@ function startPage (text, acceptedTerms) {
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight
     scrollSize = div.offsetHeight - 40
     updateButtonStyles()
-    if (textHeightQuantity <= div.offsetHeight) {
+    if (text.length <= 1000 && textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none'
     } else {
       document.getElementById('actions-scroll').style.display = ''
@@ -1494,7 +1542,7 @@ function setCredit (credit, lastBill) {
 
   $('.js-processing-bill').html(inserted)
 
-  $('.js-send-crypto-disable').hide()
+  $('.js-continue-crypto-enable').show()
   $('.js-send-crypto-enable').show()
 }
 
@@ -1726,10 +1774,10 @@ function minimumTx (lowestBill) {
   window.setTimeout(revertScreen, 3000)
 }
 
-function readingBill (bill) {
+function readingBills (bill) {
   $('.js-processing-bill').html(translate('Processing %s ...', [formatFiat(bill)]))
+  $('.js-continue-crypto-enable').hide()
   $('.js-send-crypto-enable').hide()
-  $('.js-send-crypto-disable').show()
 }
 
 function sendOnly (reason) {
@@ -1765,7 +1813,9 @@ function t (id, str) {
   $('#js-i18n-' + id).html(str)
 }
 
-function translateCoin (cryptoCode) {
+function translateCoin (_cryptoCode) {
+  const coin = getCryptoCurrency(_cryptoCode)
+  const cryptoCode = coin.cryptoCodeDisplay || _cryptoCode
   $('.js-i18n-scan-your-address').html(translate('Scan your <br/> %s address', [cryptoCode]))
   $('.js-i18n-please-scan').html(translate('Please scan the QR code <br/> to send us your %s.', [cryptoCode]))
   $('.js-i18n-did-send-coins').html(translate('Have you sent the %s yet?', [cryptoCode]))
@@ -1976,7 +2026,9 @@ function calculateAspectRatio () {
   const aspectRatioPt1 = w / r
   const aspectRatioPt2 = h / r
 
-  if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
+  if (aspectRatioPt1 < aspectRatioPt2) {
+    aspectRatio = '9:16'
+  } else if (aspectRatioPt1 === 8 && aspectRatioPt2 === 5) {
     aspectRatio = '16:10'
   } else if (aspectRatioPt1 === 16 && aspectRatioPt2 === 9) {
     aspectRatio = '16:9'
@@ -2047,9 +2099,11 @@ function shouldEnableTouch () {
 function setAvailablePromoCodes (areThereAvailablePromoCodes) {
   if (areThereAvailablePromoCodes) {
     $('#insert-first-bill-promo-button').show()
+    $('#insert-first-recycler-bills-promo-button').show()
     $('#choose-fiat-promo-button').show()
   } else {
     $('#insert-first-bill-promo-button').hide()
+    $('#insert-first-recycler-bills-promo-button').hide()
     $('#choose-fiat-promo-button').hide()
   }
 }
@@ -2057,23 +2111,29 @@ function setAvailablePromoCodes (areThereAvailablePromoCodes) {
 function setCurrentDiscount (currentDiscount, promoCodeApplied) {
   if (promoCodeApplied) {
     $('#insert-first-bill-promo-button').hide()
+    $('#insert-first-recycler-bills-promo-button').hide()
     $('#choose-fiat-promo-button').hide()
   }
 
   if (!currentDiscount) {
     $('#insert-first-bill-code-added').hide()
+    $('#insert-first-recycler-bills-code-added').hide()
     $('#choose-fiat-code-added').hide()
   } else if (currentDiscount > 0) {
     const successMessage = '✔ ' + translate('Discount added (%s off commissions)', [`${currentDiscount}%`])
     $('#insert-first-bill-code-added').html(successMessage)
+    $('#insert-first-recycler-bills-code-added').html(successMessage)
     $('#choose-fiat-code-added').html(successMessage)
     $('#insert-first-bill-code-added').show()
+    $('#insert-first-recycler-bills-code-added').show()
     $('#choose-fiat-code-added').show()
 
   } else {
     $('#insert-first-bill-promo-button').show()
+    $('#insert-first-recycler-bills-promo-button').show()
     $('#choose-fiat-promo-button').show()
     $('#insert-first-bill-code-added').hide()
+    $('#insert-first-recycler-bills-code-added').hide()
     $('#choose-fiat-code-added').hide()
   }
 }

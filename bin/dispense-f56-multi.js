@@ -7,7 +7,7 @@ if (deviceConfig.cryptomatModel !== 'tejo') {
 }
 
 if (!deviceConfig.billDispenser.cassettes) {
-  console.log('Number of cassettes is not defined in device_config.json. If you\'re running this on a Tejo machine, consider running \"node bin/set-tejo-cassettes.js <number of cassettes>\"')
+  console.log('Number of cassettes is not defined in device_config.json. If you\'re running this on a Tejo machine, consider running \"node bin/set-machine-cassettes.js <number of cassettes>\"')
   process.exit(2)
 }
 
