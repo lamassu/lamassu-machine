@@ -414,6 +414,10 @@ msgstr "It looks like you're using a wallet for a different coin or an address f
 msgid "Please check your QR code and try again."
 msgstr "Please check your QR code and try again."
 
+#: On screen: leftover-bills-in-cash-slot
+msgid "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
+msgstr "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
+
 #: On screen: limit-reached
 msgid "We're all out of coins!"
 msgstr "We're all out of coins!"
@@ -609,10 +613,6 @@ msgstr "If you'd like to make a larger purchase we need to ask for your mobile p
 #: On screen: sms-verification
 msgid "Yes, verify phone"
 msgstr "Yes, verify phone"
-
-#: On screen: start-up-remove-bills
-msgid "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
-msgstr "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
 
 #: On screen: suspicious-address
 msgid "Suspicious address"
