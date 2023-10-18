@@ -675,10 +675,12 @@ button {
 
 .cash-in-color .filled-progress-button:disabled {
   color: #37e8d7;
+  pointer-events: none;
 }
 
 .cash-out-color .filled-progress-button:disabled {
   color: #fe7f78;
+  pointer-events: none;
 }
 
 .filled-progress-button-bg {
