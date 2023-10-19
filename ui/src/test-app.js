@@ -22,7 +22,7 @@ let localeCode = 'bg-BG'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('aveiro')
+  $('body').addClass('coincloud')
   $('body').addClass('museo')
 
   const width = $('body').width()
@@ -307,7 +307,7 @@ function setupFakes () {
   ]
 
   states.forEach(it => {
-    setUpDirectionElement(it, 'cashOut')
+    setUpDirectionElement(it, 'cashIn')
   })
 
   function setUpDirectionElement (element, direction) {
