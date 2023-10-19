@@ -17,7 +17,7 @@
     "device":"/dev/video-front"
   },
   "scanner": {
-    "qrDevice":"/dev/video-front",
+    "qrDevice": "/dev/video-front",
     "device": "/dev/video-scan"
   },
   "wifi": {
