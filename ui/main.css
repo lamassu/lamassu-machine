@@ -1664,6 +1664,14 @@ footer {
   margin-top: 1vh;
 }
 
+.display-none {
+  display: none;
+}
+
+.coincloud .no-coincloud {
+  display: none;
+}
+
 .sintra .only-sintra,
 .douro .only-douro,
 .gaia .only-gaia,
