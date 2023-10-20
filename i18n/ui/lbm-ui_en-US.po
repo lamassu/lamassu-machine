@@ -558,6 +558,10 @@ msgstr "Please enter your mobile number for ID verification."
 msgid "Hold your QR code up to the scan window to proceed."
 msgstr "Hold your QR code up to the scan window to proceed."
 
+#: On screen: scan-address
+msgid "Hold your QR code up to the camera above the screen to proceed."
+msgstr "Hold your QR code up to the camera above the screen to proceed."
+
 #: On screen: scan-id
 msgid "Please verify your identity"
 msgstr "Please verify your identity"

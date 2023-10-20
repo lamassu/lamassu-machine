@@ -18,7 +18,7 @@ var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
 let locale = null
-let localeCode = 'bg-BG'
+let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
