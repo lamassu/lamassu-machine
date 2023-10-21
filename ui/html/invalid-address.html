@@ -8,12 +8,23 @@
   </header>
 
   <main>
-    <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
-    <div class="text-content sm-margin-top">
-      <p class="js-i18n d2">
-        It looks like you're using a wallet for a different coin or an address format we don't yet support.
-      </p>
-      <p class="js-i18n tl2">Please check your QR code and try again.</p>
+    <div id="invalid-address">
+      <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
+      <div class="text-content sm-margin-top">
+        <p class="js-i18n d2">
+          It looks like you're using a wallet for a different coin or an address format we don't yet support.
+        </p>
+        <p class="js-i18n tl2">Please check your QR code and try again.</p>
+      </div>
+    </div>
+    <div id="invalid-invoice" class="hide">
+      <h3 class="js-i18n xs-margin-bottom">Invalid LN invoice</h3>
+      <div class="text-content sm-margin-top">
+        <p class="js-i18n d2">
+          It looks like you're using a non-zero amount invoice and we only support flexible ones.
+        </p>
+        <p class="js-i18n tl2">Please create a new invoice and try again.</p>
+      </div>
     </div>
   </main>
 
