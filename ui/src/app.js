@@ -115,7 +115,7 @@ function processData (data) {
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS)
   if (data.sent && data.total) setPartialSend(data.sent, data.total)
   if (data.readingBill) readingBill(data.readingBill)
-  if (data.cryptoCode) translateCoin(data.cryptoCode === LN ? BTC : data.crytoCode)
+  if (data.cryptoCode) translateCoin(data.cryptoCode === LN ? BTC : data.cryptoCode)
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee)
   if (data.terms) setTermsScreen(data.terms)
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch)
