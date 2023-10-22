@@ -813,7 +813,7 @@ $(document).ready(function () {
   setupButton('initialize', 'initialize')
   // setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
-  setupButton('pairing-scan-cancel', 'pairingScanCancel')
+  setupImmediateButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingErrorOk')
   setupButton('cash-out-button', 'cashOut')
 
