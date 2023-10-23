@@ -210,25 +210,22 @@
       </section>
     </section>
     <section
-      class="viewport cash_slot_remove_bills_state cash-in-color"
+      class="viewport cash_slot_remove_bills_state info cash-in-color"
       data-tr-section="cash-slot-remove-bills"
       data-screentype="exception-tp"
     >
-      <main class="lg-margin-top">
-        <h5 class="primary-side-title js-i18n">Please remove all bills from the cash slot</h5>
-        <p class="primary-side js-i18n">Our machine has rejected these bills, please remove them.</p>
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Our machine has rejected these bills, please remove them and hit the Continue button below.
+        </p>
       </main>
-      <section class="secondary-side">
-        <div class="send-coins cash-in-color js-continue-crypto-enable">
-          <button id="cash-slot-bills-removed" class="circle-button h3 purple-grey js-continue-crypto-enable">
-            <div class="inner-circle-button js-continue-crypto-enable">
-              <span class="js-i18n">
-                Continue
-              </span>
-            </div>
-          </button>
-        </div>
-      </section>
+    
+      <footer>
+        <button id="cash-slot-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
+        </button>
+      </footer>
     </section>
     <section
       class="viewport cash_in_only_coin_state cash-out-color info-with-contact-and-info"
@@ -272,7 +269,7 @@
     <section
       class="viewport choose_coin_state"
       data-tr-section="choose_coin"
-      data-screentype="exception-tp"
+      data-screentype="flow-action-tp"
     >
       <header id="choose-coin-header">
         <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
@@ -832,11 +829,10 @@
           <div class="qr-wrapper">
             <div id="qr-code-deposit" class="qr"></div>
           </div>
-          <!-- TODO lightning still not enabled
           <div id="lightning-enabled" class="sm-margin-top">
             <img class="lightning-img" src="images/lightning.svg"/>
             <span class="d2">Lightning Enabled</span>
-          </div> -->
+          </div>
         </section>
       </main>
     </section>
@@ -1284,7 +1280,7 @@
     <section
       class="viewport insert_more_bills_state cash-in-color"
       data-tr-section="insert-more-bills"
-      data-screentype="exception-tp"
+      data-screentype="flow-no-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1414,18 +1410,49 @@
       </header>
     
       <main>
-        <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
-        <div class="text-content sm-margin-top">
-          <p class="js-i18n d2">
-            It looks like you're using a wallet for a different coin or an address format we don't yet support.
-          </p>
-          <p class="js-i18n tl2">Please check your QR code and try again.</p>
+        <div id="invalid-address">
+          <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
+          <div class="text-content sm-margin-top">
+            <p class="js-i18n d2">
+              It looks like you're using a wallet for a different coin or an address format we don't yet support.
+            </p>
+            <p class="js-i18n tl2">Please check your QR code and try again.</p>
+          </div>
+        </div>
+        <div id="invalid-invoice" class="hide">
+          <h3 class="js-i18n xs-margin-bottom">Invalid LN invoice</h3>
+          <div class="text-content sm-margin-top">
+            <p class="js-i18n d2">
+              It looks like you're using a non-zero amount invoice and we only support flexible ones.
+            </p>
+            <p class="js-i18n tl2">Please create a new invoice and try again.</p>
+          </div>
         </div>
       </main>
     
       <footer>
         <button id="invalid-address-try-again" class="filled-progress-button button js-i18n">
           Try again
+        </button>
+      </footer>
+    </section>
+    <section
+      class="viewport leftover_bills_in_cash_slot_state info cash-in-color"
+      data-tr-section="leftover-bills-in-cash-slot"
+      data-screentype="exception-tp"
+    >
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Something unexpected happened. Please remove all the bills from the cash
+          slot and hit the Continue button below. You may start a new transaction
+          afterwards.
+        </p>
+      </main>
+    
+      <footer>
+        <button id="leftover-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
         </button>
       </footer>
     </section>
@@ -2257,8 +2284,8 @@
     >
       <header>
         <div id="pairing-scan-cancel" class="fade-in-delay cancel-button-wrapper">
-        <img class="cancel-button" src="images/close-icon-amaz.svg" />
-      </div>
+          <img class="cancel-button" src="images/close-icon-amaz.svg" />
+        </div>
       </header>
       <main class="xl-margin-top">
         <section class="primary-side fade-in">
