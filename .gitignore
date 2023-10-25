@@ -14,9 +14,6 @@ npm-debug.log
 i18n/*.zip
 ui/css/fonts
 
-/licenses.json
-libBarcodeScanner.*
-
 # compiled dependencies
 /node_modules
 
