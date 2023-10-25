@@ -4,8 +4,7 @@ FROM lamassu/acp-build:1.0 as acp-build
   ARG PASSWORD
 
   RUN git clone https://github.com/lamassu/lamassu-machine -b ${VERSION} && cd lamassu-machine && \
-    curl -sS https://ssubucket.ams3.digitaloceanspaces.com/ssuboard/licenses-2018.12.28.json.xz.gpg | gpg --batch --passphrase $PASSWORD --decrypt | xz -dc > licenses.json && \
-    curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x 
+    curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x
 
   RUN cd lamassu-machine && npm install && \
     cp ./hardware/codebase/aaeon/device_config.json ./ && \
