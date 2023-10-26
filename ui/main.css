@@ -675,10 +675,12 @@ button {
 
 .cash-in-color .filled-progress-button:disabled {
   color: #37e8d7;
+  pointer-events: none;
 }
 
 .cash-out-color .filled-progress-button:disabled {
   color: #fe7f78;
+  pointer-events: none;
 }
 
 .filled-progress-button-bg {
@@ -1662,11 +1664,20 @@ footer {
   margin-top: 1vh;
 }
 
+.display-none {
+  display: none;
+}
+
+.coincloud .no-coincloud {
+  display: none;
+}
+
 .sintra .only-sintra,
 .douro .only-douro,
 .gaia .only-gaia,
 .tejo .only-tejo,
 .aveiro .only-aveiro,
+.coincloud .only-coincloud,
 .gmuk1 .only-gmuk1 {
   display: block;
 }
@@ -2594,6 +2605,7 @@ footer {
 .standard-keyboard {
   box-sizing: border-box;
   width: 100%;
+  direction: ltr;
 }
 .standard-keyboard .standard-backspace {
   display: -webkit-box;
@@ -3100,11 +3112,13 @@ footer {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
           justify-content: flex-end;
-  margin-right: 24vh;
+  -webkit-margin-end: 24vh;
+          margin-inline-end: 24vh;
 }
 
 .submit-text-requirement-button {
-  margin-right: 160px;
+  -webkit-margin-end: 160px;
+          margin-inline-end: 160px;
   margin-top: 20px;
 }
 
@@ -4058,6 +4072,9 @@ button[disabled] {
     left: -webkit-calc(50vh - 50% - 6vh);
     left: calc(50vh - 50% - 6vh);
     margin: 0;
+  }
+  .choose_fiat_state main #choose-fiat-code-added {
+    margin: 1vh;
   }
   .choose_fiat_state #js-fiat-buttons {
     position: absolute;

@@ -1,0 +1,2 @@
+KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0826", SYMLINK+="video-scan"
+KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="0ac8", ATTRS{idProduct}=="3500", SYMLINK+="video-front"

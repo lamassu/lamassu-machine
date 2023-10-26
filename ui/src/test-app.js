@@ -18,11 +18,11 @@ var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
 let locale = null
-let localeCode = 'bg-BG'
+let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('aveiro')
+  $('body').addClass('coincloud')
   $('body').addClass('museo')
 
   const width = $('body').width()
@@ -307,7 +307,7 @@ function setupFakes () {
   ]
 
   states.forEach(it => {
-    setUpDirectionElement(it, 'cashOut')
+    setUpDirectionElement(it, 'cashIn')
   })
 
   function setUpDirectionElement (element, direction) {

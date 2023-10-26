@@ -402,6 +402,18 @@ msgstr "It looks like you're using a wallet for a different coin or an address f
 msgid "Please check your QR code and try again."
 msgstr "Please check your QR code and try again."
 
+#: On screen: invalid-address
+msgid "Invalid LN invoice"
+msgstr "Invalid LN invoice"
+
+#: On screen: invalid-address
+msgid "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+msgstr "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+
+#: On screen: invalid-address
+msgid "Please create a new invoice and try again."
+msgstr "Please create a new invoice and try again."
+
 #: On screen: limit-reached
 msgid "We're all out of coins!"
 msgstr "We're all out of coins!"
@@ -542,6 +554,10 @@ msgstr "Please enter your mobile number for ID verification."
 msgid "Hold your QR code up to the scan window to proceed."
 msgstr "Hold your QR code up to the scan window to proceed."
 
+#: On screen: scan-address
+msgid "Hold your QR code up to the camera above the screen to proceed."
+msgstr "Hold your QR code up to the camera above the screen to proceed."
+
 #: On screen: scan-id
 msgid "Please verify your identity"
 msgstr "Please verify your identity"
@@ -669,6 +685,14 @@ msgstr "Maintenance Required"
 #: On screen: maintenance
 msgid "Please contact the operator."
 msgstr "Please contact the operator."
+
+#: On screen: action_required_maintenance
+msgid "After you've completed all maintenance work, please touch the following button."
+msgstr "After you've completed all maintenance work, please touch the following button."
+
+#: On screen: action_required_maintenance
+msgid "Restart machine"
+msgstr "Restart machine"
 
 #: On screen: terms
 msgid "I agree"

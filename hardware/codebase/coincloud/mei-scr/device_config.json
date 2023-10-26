@@ -1,0 +1,42 @@
+{
+ "cryptomatMaker": "coincloud",
+ "cryptomatModel": "mei-scr",
+  "brain": {
+    "powerStatus": null,
+    "dataPath": "data",
+    "nfcReader": null,
+    "wifiDisabled": true
+  },
+  "kioskPrinter": {
+    "model": "Nippon-2511D-2"
+  },
+  "compliance": {
+    "paperWallet": false
+  },
+  "frontFacingCamera": {
+    "device":"/dev/video-front"
+  },
+  "scanner": {
+    "qrDevice": "/dev/video-front",
+    "device": "/dev/video-scan"
+  },
+  "wifi": {
+    "wpa": {
+      "socket": null
+    }
+  },
+  "billValidator": {
+    "deviceType": "cashflowSc",
+    "rs232": {
+      "device": "/dev/ttyUSB0"
+    }
+  },
+  "billDispenser": {},
+  "updater": {
+    "caFile": "/opt/certs/lamassu.pem",
+    "extractor": {
+      "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
+    },
+    "packageJsonDir": "/opt/lamassu-machine"
+  }
+}

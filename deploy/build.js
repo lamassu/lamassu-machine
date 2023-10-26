@@ -3,9 +3,7 @@
 // NOTE: sample command for offline computer: openssl dgst -sha256 -sign ../lamassu.key  -hex -out update.sig update.tar
 var fs = require('fs')
 var tar = require('tar')
-var fstream = require('fstream')
 var path = require('path')
-var zlib = require('zlib')
 
 var packageBase = process.argv[2]
 var dependencies = process.argv[3] || null
@@ -22,21 +20,11 @@ var version = packageJson.version
 var timestamp = new Date()
 
 function makeTar (tarPath, rootPath, cb) {
-  var reader = fstream.Reader({path: rootPath, type: 'Directory'})
-  var writer = fstream.Writer({path: tarPath})
-  var packer = tar.Pack()
-  reader.pipe(packer).pipe(writer)
-
-  writer.on('close', cb)
+  tar.c({ file: tarPath }, [rootPath], cb)
 }
 
 function makeZippedTar (tarPath, rootPath, cb) {
-  var reader = fstream.Reader({path: rootPath, type: 'Directory'})
-  var writer = fstream.Writer({path: tarPath})
-  var packer = tar.Pack()
-  reader.pipe(packer).pipe(zlib.createGzip()).pipe(writer)
-
-  writer.on('close', cb)
+  tar.c({ file: tarPath, gzip: true }, [rootPath], cb)
 }
 
 function generateInfo () {

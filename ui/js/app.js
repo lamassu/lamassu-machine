@@ -91,6 +91,11 @@ function buttonPressed(button, data) {
   if (websocket) websocket.send(JSON.stringify(res));
 }
 
+var displayLN = 'Lightning Network';
+var displayBTC = 'Bitcoin';
+var LN = 'LN';
+var BTC = 'BTC';
+
 function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
   if (data.locale) setLocale(data.locale);
@@ -113,7 +118,7 @@ function processData(data) {
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS);
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
   if (data.readingBills) readingBills(data.readingBills);
-  if (data.cryptoCode) translateCoin(data.cryptoCode);
+  if (data.cryptoCode) translateCoin(data.cryptoCode === LN ? BTC : data.cryptoCode);
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee);
   if (data.terms) setTermsScreen(data.terms);
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch);
@@ -133,7 +138,7 @@ function processData(data) {
   }
 
   var isRecycler = function isRecycler(billValidator) {
-    return billValidator === 'HCM2' || billValidator === 'GSR50';
+    return billValidator === 'HCM2';
   };
 
   switch (data.action) {
@@ -294,6 +299,12 @@ function processData(data) {
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest);
       break;
+    case 'actionRequiredMaintenance':
+      setState('action_required_maintenance');
+      break;
+    case 'invalidAddress':
+      invalidAddress(data.lnInvoiceTypeError);
+      break;
     default:
       if (data.action) setState(window.snakecase(data.action));
   }
@@ -347,6 +358,17 @@ function setComplianceTimeout(interval, complianceButton) {
   complianceTimeout = setTimeout(function () {
     buttonPressed(complianceButton);
   }, interval == null ? 60000 : interval);
+}
+
+function invalidAddress(lnInvoiceTypeError) {
+  if (lnInvoiceTypeError) {
+    $('#invalid-address').hide();
+    $('#invalid-invoice').show();
+  } else {
+    $('#invalid-invoice').hide();
+    $('#invalid-address').show();
+  }
+  setScreen('invalid_address');
 }
 
 function customInfoRequest(customInfoRequest) {
@@ -504,7 +526,7 @@ function setupCoinsButtons() {
 
 function setCryptoBuy(coin) {
   var cashIn = $('.cash-in');
-  var translatedCoin = translate(coin.display);
+  var translatedCoin = translate(coin.display === displayLN ? displayBTC : coin.display);
   var buyStr = translate('Buy<br/>%s', [translatedCoin]);
 
   cashIn.html(buyStr);
@@ -512,7 +534,7 @@ function setCryptoBuy(coin) {
 
 function setCryptoSell(coin) {
   var cashOut = $('.cash-out');
-  var translatedCoin = translate(coin.display);
+  var translatedCoin = translate(coin.display === displayLN ? displayBTC : coin.display);
   var sellStr = translate('Sell<br/>%s', [translatedCoin]);
 
   cashOut.html(sellStr);
@@ -784,7 +806,7 @@ $(document).ready(function () {
   setupButton('initialize', 'initialize');
   // setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan');
-  setupButton('pairing-scan-cancel', 'pairingScanCancel');
+  setupImmediateButton('pairing-scan-cancel', 'pairingScanCancel');
   setupButton('pairing-error-ok', 'pairingErrorOk');
   setupButton('cash-out-button', 'cashOut');
 
@@ -841,6 +863,8 @@ $(document).ready(function () {
   setupButton('terms-ok', 'termsAccepted');
   setupButton('terms-ko', 'idle');
 
+  setupButton('maintenance_restart', 'maintenanceRestart');
+
   calculateAspectRatio();
 
   var cryptoButtons = document.getElementById('crypto-buttons');
@@ -868,7 +892,7 @@ $(document).ready(function () {
     });
     if (!wantedCoin) return;
 
-    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display };
+    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display === displayLN ? displayBTC : wantedCoin.display };
     switchCoin(coin);
   });
 
@@ -1619,14 +1643,14 @@ function setExchangeRate(_rates) {
     var cryptoToFiat = new BigNumber(rates.cashIn);
     var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2);
 
-    $('.crypto-rate-cash-in').html('1 ' + cryptoCode + ' = ' + rateStr);
+    $('.crypto-rate-cash-in').html('1 ' + (cryptoCode === LN ? BTC : cryptoCode) + ' = ' + rateStr);
   }
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut);
     var cashOutCryptoToFiat = cashOut && formatFiat(cashOut.round(2).toNumber(), 2);
 
-    $('.crypto-rate-cash-out').html('1 ' + cryptoCode + ' = ' + cashOutCryptoToFiat);
+    $('.crypto-rate-cash-out').html('1 ' + (cryptoCode === LN ? BTC : cryptoCode) + ' = ' + cashOutCryptoToFiat);
   }
 
   $('.js-crypto-display-units').text(displayCode);
@@ -1690,6 +1714,9 @@ function setTx(tx) {
 
 function formatAddressNoBreakLines(address) {
   if (!address) return;
+  if (address.length > 100) {
+    return address.substring(0, 99).replace(/(.{4})/g, '$1 ').concat('...');
+  }
   return address.replace(/(.{4})/g, '$1 ');
 }
 
@@ -1769,7 +1796,9 @@ function t(id, str) {
   $('#js-i18n-' + id).html(str);
 }
 
-function translateCoin(cryptoCode) {
+function translateCoin(_cryptoCode) {
+  var coin = getCryptoCurrency(_cryptoCode);
+  var cryptoCode = coin.cryptoCodeDisplay || _cryptoCode;
   $('.js-i18n-scan-your-address').html(translate('Scan your <br/> %s address', [cryptoCode]));
   $('.js-i18n-please-scan').html(translate('Please scan the QR code <br/> to send us your %s.', [cryptoCode]));
   $('.js-i18n-did-send-coins').html(translate('Have you sent the %s yet?', [cryptoCode]));
@@ -1899,6 +1928,8 @@ function deposit(tx) {
   $('#qr-code-deposit').empty();
   $('.deposit_state .loading').show();
   $('#qr-code-deposit').show();
+  $('#lightning-enabled').hide();
+  if (tx.cryptoCode === 'LN') $('#lightning-enabled').show();
 
   setState('deposit');
 }

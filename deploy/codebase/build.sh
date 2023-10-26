@@ -40,7 +40,6 @@ cp $UPDATESCRIPT $EXPORT_SCRIPT_DIR/updatescript.js
 # Codebase
 cp $MACHINE_DIR/*.js $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/software_config.json $TARGET_MACHINE_DIR
-cp $MACHINE_DIR/licenses.json $TARGET_MACHINE_DIR
 cp $MACHINE_DIR/package.json $TARGET_MACHINE_DIR
 cp -r $MACHINE_DIR/lib $TARGET_MACHINE_DIR
 cp -a $MACHINE_DIR/exec $TARGET_MACHINE_DIR
@@ -116,6 +115,47 @@ elif [ $1 == "upboard-tejo" ] ; then
   if [ $2 == "--copy-device-config" ] ; then
     mkdir $EXPORT_DIR/hardware/upboard/tejo
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/tejo/
+  fi
+elif [ $1 == "upboard-aveiro" ] ; then
+  mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/upboard/aveiro
+
+  cp $SYSTEM_DIR/upboard/aveiro/supervisor/conf.d/* $EXPORT_DIR/supervisor/upboard/aveiro
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/upboard/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/upboard/aveiro
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/upboard/aveiro/
+  fi
+elif [[ $1 = coincloud* ]] ; then
+  case $1 in
+    coincloud-ipro)
+      COINCLOUD_VERSION="jcm-ipro-rc"
+      ;;
+
+    coincloud-mei-bnr)
+      COINCLOUD_VERSION="mei-bnr"
+      ;;
+
+    coincloud-mei-scr)
+      COINCLOUD_VERSION="mei-scr"
+      ;;
+
+    *)
+      echo "Bad coincloud version"
+      exit 1
+      ;;
+  esac
+
+  mkdir -p $EXPORT_DIR/hardware/coincloud/node_modules
+  mkdir -p $EXPORT_DIR/supervisor/coincloud/$COINCLOUD_VERSION
+
+  cp $SYSTEM_DIR/coincloud/$COINCLOUD_VERSION/supervisor/conf.d/* $EXPORT_DIR/supervisor/coincloud/$COINCLOUD_VERSION
+  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/coincloud/
+  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/upboard/node_modules --rem-interpreted
+  if [ $2 == "--copy-device-config" ] ; then
+    mkdir $EXPORT_DIR/hardware/coincloud/$COINCLOUD_VERSION
+    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/coincloud/$COINCLOUD_VERSION/
   fi
 else
   echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"

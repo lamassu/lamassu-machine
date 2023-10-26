@@ -811,11 +811,10 @@
           <div class="qr-wrapper">
             <div id="qr-code-deposit" class="qr"></div>
           </div>
-          <!-- TODO lightning still not enabled
           <div id="lightning-enabled" class="sm-margin-top">
             <img class="lightning-img" src="images/lightning.svg"/>
             <span class="d2">Lightning Enabled</span>
-          </div> -->
+          </div>
         </section>
       </main>
     </section>
@@ -1392,12 +1391,23 @@
       </header>
     
       <main>
-        <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
-        <div class="text-content sm-margin-top">
-          <p class="js-i18n d2">
-            It looks like you're using a wallet for a different coin or an address format we don't yet support.
-          </p>
-          <p class="js-i18n tl2">Please check your QR code and try again.</p>
+        <div id="invalid-address">
+          <h3 class="js-i18n xs-margin-bottom">Invalid address</h3>
+          <div class="text-content sm-margin-top">
+            <p class="js-i18n d2">
+              It looks like you're using a wallet for a different coin or an address format we don't yet support.
+            </p>
+            <p class="js-i18n tl2">Please check your QR code and try again.</p>
+          </div>
+        </div>
+        <div id="invalid-invoice" class="hide">
+          <h3 class="js-i18n xs-margin-bottom">Invalid LN invoice</h3>
+          <div class="text-content sm-margin-top">
+            <p class="js-i18n d2">
+              It looks like you're using a non-zero amount invoice and we only support flexible ones.
+            </p>
+            <p class="js-i18n tl2">Please create a new invoice and try again.</p>
+          </div>
         </div>
       </main>
     
@@ -1804,8 +1814,11 @@
       <main class="xl-margin-top">
         <section class="primary-side fade-in">
           <h2 class="primary-side-title xs-margin-bottom js-i18n-scan-your-address"></h2>
-          <p class="d1 no-margin-top js-i18n">
+          <p class="d1 no-margin-top js-i18n no-coincloud">
             Hold your QR code up to the scan window to proceed.
+          </p>
+          <p class="d1 display-none no-margin-top js-i18n only-coincloud">
+            Hold your QR code up to the camera above the screen to proceed.
           </p>
         </section>
         <section class="secondary-side fade-in-delay">
@@ -1815,6 +1828,7 @@
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
           <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
           <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
+          <object class="scan-image only-coincloud" data="images/scan/animation/coincloud/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1851,6 +1865,7 @@
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/driver-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/driver-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/driver-salmon.svg"></object>
+          <object class="scan-image only-coincloud only-cash-in" data="images/scan/animation/coincloud/driver-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1897,6 +1912,7 @@
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
+          <object class="scan-image only-coincloud only-cash-out" data="images/scan/animation/coincloud/stateID-salmon.svg"></object>
         </section>
       </main>
     </section>
@@ -1933,6 +1949,7 @@
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
+          <object class="scan-image only-coincloud only-cash-in" data="images/scan/animation/coincloud/stateID-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -2228,8 +2245,8 @@
     >
       <header>
         <div id="pairing-scan-cancel" class="fade-in-delay cancel-button-wrapper">
-        <img class="cancel-button" src="images/close-icon-amaz.svg" />
-      </div>
+          <img class="cancel-button" src="images/close-icon-amaz.svg" />
+        </div>
       </header>
       <main class="xl-margin-top">
         <section class="primary-side fade-in">
@@ -2245,6 +2262,7 @@
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
           <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
           <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
+          <object class="scan-image only-coincloud" data="images/scan/animation/coincloud/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -2311,6 +2329,21 @@
             </td>
           </tr>
         </table>
+      </main>
+    </section>
+    
+    <section
+      class="viewport action_required_maintenance_state info system-color"
+      data-tr-section="action_required_maintenance"
+      data-screentype="system-tp info-contact-tp"
+    >
+      <header>
+        <img src="images/maintenance.svg" />
+      </header>
+      <main>
+        <h3 class="js-i18n xs-margin-bottom">Maintenance Required</h3>
+        <p class="js-i18n d2">After you've completed all maintenance work, please touch the following button.</p>
+        <button id="maintenance_restart" class="filled-progress-button button js-i18n">Restart machine</button>
       </main>
     </section>
     <section class="viewport terms_screen_state" data-tr-section="terms" data-screentype="exception-tp">

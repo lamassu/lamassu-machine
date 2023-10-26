@@ -651,7 +651,9 @@ main {
       bottom: 5vh;
       left: calc(50vh - 50% - 6vh);
       margin: 0;
-
+    }
+    #choose-fiat-code-added {
+      margin: 1vh;
     }
   }
   #js-fiat-buttons {
