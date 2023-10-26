@@ -12,7 +12,6 @@ COPY . ./
 RUN npm run build
 
 RUN cp ./mock_data/device_config.sample.json ./device_config.json
-RUN cp ./mock_data/licenses.sample.json ./licenses.json
 RUN cp -r ./deploy-files/fonts/* ./ui/css/fonts/
 
 
