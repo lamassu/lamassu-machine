@@ -1,4 +1,4 @@
-FROM lamassu/upboard-build:1.0 as build
+FROM lamassu/upboard-build:2.0 as build
 
 WORKDIR lamassu-machine
 
@@ -17,9 +17,9 @@ RUN cp -r ./deploy-files/fonts/* ./ui/css/fonts/
 
 
 # Runtime
-FROM nginx:1.21.4-alpine
+FROM nginx:1.25.3-alpine
 
-RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.8/main/ nodejs=8.14.0-r0 npm
+RUN apk add nodejs --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --allow-untrusted
 
 WORKDIR lamassu-machine
 COPY --from=build ./lamassu/lamassu-machine ./
