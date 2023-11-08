@@ -1,0 +1,1 @@
+SUBSYSTEM=="video4linux", ATTR{index}=="0", KERNELS=="1-2", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0826", SYMLINK+="video-scan"
