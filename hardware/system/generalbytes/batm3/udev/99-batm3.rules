@@ -1,2 +1,4 @@
+KERNEL=="ttyUSB0", SYMLINK+="ttyJ4"
+KERNEL=="ttyUSB1", SYMLINK+="ttyJ5"
 SUBSYSTEM=="video4linux", ATTR{index}=="0", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0826", SYMLINK+="video-scan"
 SUBSYSTEM=="video4linux", ATTR{index}=="0", ATTRS{idVendor}=="0ac8", ATTRS{idProduct}=="3500", SYMLINK+="video-front"
