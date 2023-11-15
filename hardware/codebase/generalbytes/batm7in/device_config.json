@@ -15,7 +15,7 @@
     "device": "/dev/video-front"
   },
   "scanner": {
-    "device": "/dev/video0"
+    "device": "/dev/video-scan"
   },
   "wifi": {
     "wpa": {
@@ -25,7 +25,7 @@
   "billValidator": {
     "deviceType": "cashflowSc",
     "rs232": {
-      "device": "/dev/ttyUSB0"
+      "device": "/dev/ttyJ5"
     }
   },
   "billDispenser": {},
