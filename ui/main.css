@@ -835,6 +835,20 @@ button {
   color: #403c51;
 }
 
+#recycler-continue,
+#recycler-finish {
+  height: 35vh;
+  width: 35vh;
+  border-radius: 35vh;
+}
+
+#recycler-continue .inner-circle-button,
+#recycler-finish .inner-circle-button {
+  height: 31vh;
+  width: 31vh;
+  border-radius: 31vh;
+}
+
 .cash-in-color .circle-button.active .inner-circle-button,
 .cash-in-color .circle-button:active .inner-circle-button {
   background-color: #0e4160;

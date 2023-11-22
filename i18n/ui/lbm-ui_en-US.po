@@ -362,6 +362,10 @@ msgstr "total purchased"
 msgid "Yes, count"
 msgstr "Yes, count"
 
+#: On screen: insert-bills-recycler
+msgid "No, send"
+msgstr "No, send"
+
 #: On screen: insert-bills
 msgid "Insert a bill"
 msgstr "Insert a bill"

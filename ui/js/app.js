@@ -307,6 +307,7 @@ function processData(data) {
       break;
     case 'leftoverBillsInCashSlot':
       setState('leftover_bills_in_cash_slot');
+      break;
     case 'invalidAddress':
       invalidAddress(data.lnInvoiceTypeError);
       break;
