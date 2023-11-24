@@ -74,6 +74,18 @@ msgstr "Please contact the operator to sort this out, or try again later."
 msgid "One moment..."
 msgstr "One moment..."
 
+#: On screen: cash-slot-remove-bills
+msgid "Please remove all bills from the cash slot"
+msgstr "Please remove all bills from the cash slot"
+
+#: On screen: cash-slot-remove-bills
+msgid "Our machine has rejected these bills, please remove them and hit the Continue button below."
+msgstr "Our machine has rejected these bills, please remove them and hit the Continue button below."
+
+#: On screen: cash-slot-remove-bills
+msgid "Continue"
+msgstr "Continue"
+
 #: On screen: cash_in_only_coin
 msgid "Selling unavailable for this coin"
 msgstr "Selling unavailable for this coin"
@@ -335,8 +347,8 @@ msgid "Wallet successfully validated!"
 msgstr "Wallet successfully validated!"
 
 #: On screen: insert-bills-recycler
-msgid "Insert another round of bills"
-msgstr "Insert another round of bills"
+msgid "Do you want to insert more bills?"
+msgstr "Do you want to insert more bills?"
 
 #: On screen: insert-bills-recycler
 msgid "deposited so far"
@@ -347,16 +359,12 @@ msgid "total purchased"
 msgstr "total purchased"
 
 #: On screen: insert-bills-recycler
-msgid "OR"
-msgstr "OR"
+msgid "Yes, count"
+msgstr "Yes, count"
 
 #: On screen: insert-bills-recycler
-msgid "Continue"
-msgstr "Continue"
-
-#: On screen: insert-bills-recycler
-msgid "Finish"
-msgstr "Finish"
+msgid "No, send"
+msgstr "No, send"
 
 #: On screen: insert-bills
 msgid "Insert a bill"
@@ -378,9 +386,17 @@ msgstr "Insert bills"
 msgid "Please insert your first round of bills into the machine."
 msgstr "Please insert your first round of bills into the machine."
 
+#: On screen: insert-first-bills-recycler
+msgid "Count bills"
+msgstr "Count bills"
+
 #: On screen: insert-more-bills
 msgid "Insert another bill"
 msgstr "Insert another bill"
+
+#: On screen: insert-more-bills
+msgid "OR"
+msgstr "OR"
 
 #: On screen: insert-more-bills
 msgid "Finished?"
@@ -413,6 +429,10 @@ msgstr "It looks like you're using a non-zero amount invoice and we only support
 #: On screen: invalid-address
 msgid "Please create a new invoice and try again."
 msgstr "Please create a new invoice and try again."
+
+#: On screen: leftover-bills-in-cash-slot
+msgid "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
+msgstr "Something unexpected happened. Please remove all the bills from the cash slot and hit the Continue button below. You may start a new transaction afterwards."
 
 #: On screen: limit-reached
 msgid "We're all out of coins!"

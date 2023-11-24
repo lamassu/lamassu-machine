@@ -1,0 +1,1 @@
+SUBSYSTEM=="tty", KERNEL=="ttyS1", SYMLINK+="ttyAMA0", GROUP="dialout"

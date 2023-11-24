@@ -210,6 +210,24 @@
       </section>
     </section>
     <section
+      class="viewport cash_slot_remove_bills_state info cash-in-color"
+      data-tr-section="cash-slot-remove-bills"
+      data-screentype="exception-tp"
+    >
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Our machine has rejected these bills, please remove them and hit the Continue button below.
+        </p>
+      </main>
+    
+      <footer>
+        <button id="cash-slot-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
+        </button>
+      </footer>
+    </section>
+    <section
       class="viewport cash_in_only_coin_state cash-out-color info-with-contact-and-info"
       data-tr-section="cash_in_only_coin"
       data-screentype="info-contact-tp"
@@ -251,7 +269,7 @@
     <section
       class="viewport choose_coin_state"
       data-tr-section="choose_coin"
-      data-screentype="exception-tp"
+      data-screentype="flow-action-tp"
     >
       <header id="choose-coin-header">
         <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
@@ -1130,7 +1148,7 @@
     <section
       class="viewport insert_bills_recycler_state cash-in-color"
       data-tr-section="insert-bills-recycler"
-      data-screentype="flow-no-action-tp"
+      data-screentype="flow-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1140,7 +1158,7 @@
     
       <main class="lg-margin-top">
         <section class="primary-side">
-          <h5 class="primary-side-title js-i18n">Insert another round of bills</h5>
+          <h5 class="primary-side-title js-i18n">Do you want to insert more bills?</h5>
           <div class="total md-margin-top">
             <div class="fiat">
               <span class="js-amount h2"></span>
@@ -1155,29 +1173,30 @@
           <p class="js-i18n d2 no-margin-top">total purchased</p>
         </section>
     
-        <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
         <section class="secondary-side">
           <div class="send-coins cash-in-color js-continue-crypto-enable">
             <button id="recycler-continue" class="circle-button h3 purple-grey js-continue-crypto-enable">
               <div class="inner-circle-button js-continue-crypto-enable">
                 <span class="js-i18n">
-                  Continue
+                  Yes, count
                 </span>
               </div>
             </button>
           </div>
+          <p></p>
           <div class="send-coins cash-in-color js-send-crypto-enable">
             <button id="recycler-finish" class="circle-button h3 purple-grey js-send-crypto-enable">
               <div class="inner-circle-button js-send-crypto-enable">
                 <span class="js-i18n">
-                  Finish
+                  No, send
                 </span>
               </div>
             </button>
           </div>
         </section>
       </main>
-    </section><section
+    </section>
+    <section
       class="viewport insert_bills_state cash-in-color"
       data-tr-section="insert-bills"
       data-screentype="flow-no-action-tp"
@@ -1217,7 +1236,7 @@
     <section
       class="viewport insert_first_bills_recycler_state cash-in-color"
       data-tr-section="insert-first-bills-recycler"
-      data-screentype="flow-no-action-tp"
+      data-screentype="flow-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1251,17 +1270,18 @@
             <section class="circle-button h3 purple-grey js-continue-crypto-enable">
               <div class="inner-circle-button js-continue-crypto-enable">
                 <span class="js-i18n">
-                  Continue
+                  Count bills
                 </span>
               </div>
             </section>
           </div>
         </section>
       </main>
-    </section><section
+    </section>
+    <section
       class="viewport insert_more_bills_state cash-in-color"
       data-tr-section="insert-more-bills"
-      data-screentype="exception-tp"
+      data-screentype="flow-no-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1414,6 +1434,26 @@
       <footer>
         <button id="invalid-address-try-again" class="filled-progress-button button js-i18n">
           Try again
+        </button>
+      </footer>
+    </section>
+    <section
+      class="viewport leftover_bills_in_cash_slot_state info cash-in-color"
+      data-tr-section="leftover-bills-in-cash-slot"
+      data-screentype="exception-tp"
+    >
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Something unexpected happened. Please remove all the bills from the cash
+          slot and hit the Continue button below. You may start a new transaction
+          afterwards.
+        </p>
+      </main>
+    
+      <footer>
+        <button id="leftover-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
         </button>
       </footer>
     </section>
