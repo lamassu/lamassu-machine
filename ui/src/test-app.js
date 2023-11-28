@@ -18,7 +18,7 @@ var usSsnKeypad = null
 let background = null
 let aspectRatio800 = true
 let locale = null
-let localeCode = 'bg-BG'
+let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
@@ -53,7 +53,7 @@ $(function () {
 
   phoneKeypad.activate()
 
-  let wifiKeyboard = new Keyboard('wifi-keyboard').init()
+  // let wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     console.log('phoneNumber', result)
@@ -272,11 +272,13 @@ function setupFakes () {
     $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_phone_state'),
+    $('.register_email_state'),
     $('.register_us_ssn_state'),
     $('.terms_screen_state'),
     $('.verifying_id_photo_state'),
     $('.verifying_face_photo_state'),
     $('.verifying_id_data_state'),
+    $('.email_verification_state'),
     $('.sms_verification_state'),
     $('.permission_id_state'),
     $('.bad_phone_number_state'),

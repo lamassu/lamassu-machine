@@ -91,10 +91,6 @@ msgid "Languages"
 msgstr "Languages"
 
 #: On screen: choose_coin
-msgid "Rates"
-msgstr "Rates"
-
-#: On screen: choose_coin
 msgid "Redeem"
 msgstr "Redeem"
 
@@ -218,6 +214,30 @@ msgstr "Collect bills"
 msgid "To continue dispensing, take your cash from the tray."
 msgstr "To continue dispensing, take your cash from the tray."
 
+#: On screen: email-verification
+msgid "Verify email to continue"
+msgstr "Verify email to continue"
+
+#: On screen: email-verification
+msgid "If you'd like to make a larger purchase we need to ask for your email. We'll then send you an confirmation code."
+msgstr "If you'd like to make a larger purchase we need to ask for your email. We'll then send you an confirmation code."
+
+#: On screen: email-verification
+msgid "Would you like to insert more bills?"
+msgstr "Would you like to insert more bills?"
+
+#: On screen: email-verification
+msgid "Yes, verify email"
+msgstr "Yes, verify email"
+
+#: On screen: email-verification
+msgid "No, send coins"
+msgstr "No, send coins"
+
+#: On screen: email-verification
+msgid "No, cancel"
+msgstr "No, cancel"
+
 #: On screen: facephoto
 msgid "Look at the dot"
 msgstr "Look at the dot"
@@ -257,14 +277,6 @@ msgstr "Shall we try another photo?"
 #: On screen: facephoto-failed-number
 msgid "Yes, try again"
 msgstr "Yes, try again"
-
-#: On screen: facephoto-failed-number
-msgid "No, send coins"
-msgstr "No, send coins"
-
-#: On screen: facephoto-failed-number
-msgid "No, cancel"
-msgstr "No, cancel"
 
 #: On screen: facephoto_retry
 msgid "Look into the camera"
@@ -325,10 +337,6 @@ msgstr "ID verification"
 #: On screen: id-verification
 msgid "If you'd like to make a larger purchase, we'll need to make sure you're you by asking for you to scan your ID."
 msgstr "If you'd like to make a larger purchase, we'll need to make sure you're you by asking for you to scan your ID."
-
-#: On screen: id-verification
-msgid "Would you like to insert more bills?"
-msgstr "Would you like to insert more bills?"
 
 #: On screen: id-verification
 msgid "Yes, verify ID"
@@ -513,22 +521,6 @@ msgstr "If you are sure of the code, please contact the operator for clarificati
 #: On screen: invalid-promo-code
 msgid "Enter a different code"
 msgstr "Enter a different code"
-
-#: On screen: rates
-msgid "Exchange Rates"
-msgstr "Exchange Rates"
-
-#: On screen: rates
-msgid "Buy"
-msgstr "Buy"
-
-#: On screen: rates
-msgid "Crypto"
-msgstr "Crypto"
-
-#: On screen: rates
-msgid "Sell"
-msgstr "Sell"
 
 #: On screen: register-phone
 msgid "Phone Number"
@@ -906,10 +898,6 @@ msgstr "Connect"
 msgid "We got this"
 msgstr "We got this"
 
-#: On screen: withdraw_failure
-msgid "Our Internet was down for a bit but you'll receive your funds as soon as our connection is back."
-msgstr "Our Internet was down for a bit but you'll receive your funds as soon as our connection is back."
-
 #: On screen: dynamic
 msgid "This could take a few moments."
 msgstr "This could take a few moments."
@@ -1039,22 +1027,6 @@ msgid "Discount added (%s off commissions)"
 msgstr "Discount added (%s off commissions)"
 
 #: On screen: dynamic
-msgid "Printing receipt..."
-msgstr "Printing receipt..."
-
-#: On screen: dynamic
-msgid "Sending receipt..."
-msgstr "Sending receipt..."
-
-#: On screen: dynamic
-msgid "Receipt printed successfully!"
-msgstr "Receipt printed successfully!"
-
-#: On screen: dynamic
-msgid "Receipt sent successfully!"
-msgstr "Receipt sent successfully!"
-
-#: On screen: dynamic
 msgid "An error occurred, try again."
 msgstr "An error occurred, try again."
 
@@ -1081,8 +1053,4 @@ msgstr "Dash"
 #: On screen: coins
 msgid "Bitcoin Cash"
 msgstr "Bitcoin Cash"
-
-#: On screen: coins
-msgid "Monero"
-msgstr "Monero"
 
