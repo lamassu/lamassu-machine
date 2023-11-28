@@ -777,7 +777,7 @@ $(document).ready(function () {
     var text = $('#email-input').data('content')
     buttonPressed('email', text)
     $('#email-input').data('content', '').val('')
-    emailKeyboard.setInputBox('.email-input-field')
+    emailKeyboard.setInputBox('#email-input')
   })
   touchEvent(submitTextRequirementButton, function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
@@ -825,9 +825,6 @@ $(document).ready(function () {
     usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
-  //TODO email
-  setupImmediateButton('email-cancel', 'cancelEmail',
-    phoneKeypad.deactivate.bind(phoneKeypad))
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
     securityKeypad.deactivate.bind(securityKeypad))
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
@@ -853,7 +850,6 @@ $(document).ready(function () {
   setupButton('cash-in-only-ok', 'idle')
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk')
-  //setupButton('bad-email-ok', 'badEmailOk')
   setupButton('bad-security-code-ok', 'badSecurityCodeOk')
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk')
   //setupButton('max-email-retries-ok', 'maxEmailRetriesOk')
@@ -864,7 +860,7 @@ $(document).ready(function () {
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
   setupButton('unknown-phone-number-ok', 'idle')
-  //setupButton('unknown-email-number-ok', 'idle')
+  setupButton('unknown-email-ok', 'idle')
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('tx-not-seen-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
@@ -947,6 +943,11 @@ $(document).ready(function () {
   setupButton('custom-permission-no', 'finishBeforeSms')
   setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', () => {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad)
+  })
+  setupImmediateButton('email-cancel', 'cancelEmail', () => {
+    emailKeyboard.deactivate.bind(emailKeyboard)
+    $('#email-input').data('content', '').val('')
+    emailKeyboard.setInputBox('#email-input')
   })
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', () => {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
