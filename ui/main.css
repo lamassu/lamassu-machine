@@ -952,6 +952,7 @@ footer .filled-progress-button:after, footer .bordered-progress-button:after {
 .address_reuse_state .text-content,
 .suspicious_address_state .text-content,
 .max_phone_retries_state .text-content,
+.email_verification_state .text-content,
 .sms_verification_state .text-content {
   max-width: 75vh;
 }
@@ -2794,6 +2795,17 @@ footer {
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
+}
+
+.email-input-field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
 }
 
 .text-input-field {

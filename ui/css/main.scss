@@ -1587,6 +1587,12 @@ footer {
   flex-direction: column;
 }
 
+.email-input-field {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
 .text-input-field {
   display: flex;
   flex-direction: column;

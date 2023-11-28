@@ -48,6 +48,7 @@ var cassettes = null
 let currentCryptoCode = null
 let currentCoin = null
 let currentCoins = []
+let emailKeyboard = null
 let customRequirementNumericalKeypad = null
 let customRequirementTextKeyboard = null
 let customRequirementChoiceList = null
@@ -75,12 +76,14 @@ function buttonPressed (button, data) {
   if (!buttonActive) return
   wifiKeyboard.deactivate()
   promoKeyboard.deactivate()
+  emailKeyboard.deactivate()
   customRequirementTextKeyboard.deactivate()
   buttonActive = false
   setTimeout(function () {
     buttonActive = true
     wifiKeyboard.activate()
     promoKeyboard.activate()
+    emailKeyboard.activate()
     customRequirementTextKeyboard.activate()
   }, 300)
   var res = { button: button }
@@ -181,6 +184,10 @@ function processData (data) {
       phoneKeypad.activate()
       setState('register_phone')
       break
+    case 'registerEmail':
+      emailKeyboard.setConstraint('email', ['#submit-email'])
+      setState('register_email')
+      break
     case 'securityCode':
       securityKeypad.activate()
       setState('security_code')
@@ -253,6 +260,9 @@ function processData (data) {
     case 'smsVerification':
       smsVerification(data.threshold)
       break
+    case 'emailVerification':
+      emailVerification(data.threshold);
+      break;
     case 'permission_id':
       idVerification()
       break
@@ -407,6 +417,11 @@ function smsVerification (threshold) {
   console.log('sms threshold to be displayed', threshold)
   setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('sms_verification')
+}
+
+function emailVerification(threshold) {
+  setComplianceTimeout(null, 'finishBeforeSms');
+  setScreen('email_verification');
 }
 
 function blockedCustomer () {
@@ -632,6 +647,16 @@ $(document).ready(function () {
     buttonPressed('customInfoRequestSubmit', result)
   })
 
+  emailKeyboard = new Keyboard({
+    id: 'email-keyboard',
+    inputBox: '#email-input',
+    submitButtonWrapper: '#submit-email-wrapper',
+    setComplianceTimeout: setComplianceTimeout
+  }).init(function (result) {
+    if (currentState !== 'register_email') return
+    buttonPressed('email', result)
+  })
+
   customRequirementTextKeyboard = new Keyboard({
     id: 'custom-requirement-text-keyboard',
     inputBox: '.text-input-field-1',
@@ -743,9 +768,17 @@ $(document).ready(function () {
     buttonPressed('submitPromoCode', { input: code })
   })
 
+  const submitEmailButton = document.getElementById('submit-email')
   const submitTextRequirementButton = document.getElementById('submit-text-requirement')
   const nextFieldTextRequirementButton = document.getElementById('next-text-requirement')
   const previousFieldTextRequirementButton = document.getElementById('previous-text-requirement')
+  touchEvent(submitEmailButton, function () {
+    emailKeyboard.deactivate.bind(emailKeyboard)
+    var text = $('#email-input').data('content')
+    buttonPressed('email', text)
+    $('#email-input').data('content', '').val('')
+    emailKeyboard.setInputBox('.email-input-field')
+  })
   touchEvent(submitTextRequirementButton, function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard)
     var text = `${$('.text-input-field-1').data('content')} ${$('.text-input-field-2').data('content') || ''}`
@@ -792,6 +825,9 @@ $(document).ready(function () {
     usSsnKeypad.deactivate.bind(usSsnKeypad))
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber',
     phoneKeypad.deactivate.bind(phoneKeypad))
+  //TODO email
+  setupImmediateButton('email-cancel', 'cancelEmail',
+    phoneKeypad.deactivate.bind(phoneKeypad))
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode',
     securityKeypad.deactivate.bind(securityKeypad))
   setupButton('id-verification-failed-ok', 'idVerificationFailedOk')
@@ -817,8 +853,10 @@ $(document).ready(function () {
   setupButton('cash-in-only-ok', 'idle')
 
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk')
+  //setupButton('bad-email-ok', 'badEmailOk')
   setupButton('bad-security-code-ok', 'badSecurityCodeOk')
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk')
+  //setupButton('max-email-retries-ok', 'maxEmailRetriesOk')
   setupButton('redeem-later-ok', 'idle')
   setupButton('pre-receipt-ok', 'fiatReceipt')
   setupButton('fiat-error-ok', 'idle')
@@ -826,6 +864,7 @@ $(document).ready(function () {
   setupButton('fiat-transaction-error-ok', 'fiatReceipt')
 
   setupButton('unknown-phone-number-ok', 'idle')
+  //setupButton('unknown-email-number-ok', 'idle')
   setupButton('unconfirmed-deposit-ok', 'idle')
   setupButton('tx-not-seen-ok', 'idle')
   setupButton('wrong-dispenser-currency-ok', 'idle')
@@ -885,6 +924,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-retry', 'retryFacephoto')
   setupButton('id-start-verification', 'permissionIdCompliance')
   setupButton('sms-start-verification', 'permissionSmsCompliance')
+  setupButton('email-start-verification', 'permissionEmailCompliance');
   setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
@@ -893,6 +933,8 @@ $(document).ready(function () {
   setupButton('send-coins-id-2', 'finishBeforeSms')
   setupButton('send-coins-sms', 'finishBeforeSms')
   setupButton('send-coins-sms-2', 'finishBeforeSms')
+  setupButton('send-coins-email', 'finishBeforeSms');
+  setupButton('send-coins-email-2', 'finishBeforeSms');
 
   setupButton('facephoto-permission-no', 'finishBeforeSms')
   setupButton('us-ssn-permission-send-coins', 'finishBeforeSms')
@@ -1070,6 +1112,7 @@ function setState (state, delay) {
 
   wifiKeyboard.reset()
   promoKeyboard.reset()
+  emailKeyboard.reset()
   customRequirementTextKeyboard.reset()
 
   if (state === 'idle') {
@@ -1170,15 +1213,18 @@ function setDirection (direction) {
     $('.register_us_ssn_state'),
     $('.us_ssn_permission_state'),
     $('.register_phone_state'),
+    $('.register_email_state'),
     $('.terms_screen_state'),
     $('.verifying_id_photo_state'),
     $('.verifying_face_photo_state'),
     $('.verifying_id_data_state'),
     $('.permission_id_state'),
     $('.sms_verification_state'),
+    $('.email_verification_state'),
     $('.bad_phone_number_state'),
     $('.bad_security_code_state'),
     $('.max_phone_retries_state'),
+    $('.max_email_retries_state'),
     $('.failed_permission_id_state'),
     $('.failed_verifying_id_photo_state'),
     $('.blocked_customer_state'),
