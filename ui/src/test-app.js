@@ -22,7 +22,7 @@ let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('coincloud')
+  $('body').addClass('grandola')
   $('body').addClass('museo')
 
   const width = $('body').width()
@@ -307,7 +307,7 @@ function setupFakes () {
   ]
 
   states.forEach(it => {
-    setUpDirectionElement(it, 'cashIn')
+    setUpDirectionElement(it, 'cashOut')
   })
 
   function setUpDirectionElement (element, direction) {
