@@ -22,7 +22,7 @@ let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('sintra')
+  $('body').addClass('tejo')
   $('body').addClass('museo')
 
   const width = $('body').width()
