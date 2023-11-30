@@ -1196,7 +1196,7 @@ function setHardLimit (limits) {
 
 function setCryptomatModel (model) {
   cryptomatModel = model
-  const versions = ['sintra', 'douro', 'gaia', 'tejo']
+  const versions = ['sintra', 'douro', 'gaia', 'tejo', 'grandola', 'aveiro', 'coincloud', 'gmuk1', 'batm7in']
   const body = $('body')
 
   versions.forEach(it => body.removeClass(it))

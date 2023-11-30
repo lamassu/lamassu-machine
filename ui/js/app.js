@@ -1189,7 +1189,7 @@ function setHardLimit(limits) {
 
 function setCryptomatModel(model) {
   cryptomatModel = model;
-  var versions = ['sintra', 'douro', 'gaia', 'tejo'];
+  var versions = ['sintra', 'douro', 'gaia', 'tejo', 'grandola', 'aveiro', 'coincloud', 'gmuk1', 'batm7in'];
   var body = $('body');
 
   versions.forEach(function (it) {

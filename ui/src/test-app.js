@@ -22,7 +22,7 @@ let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('coincloud')
+  $('body').addClass('batm7in')
   $('body').addClass('museo')
 
   const width = $('body').width()
