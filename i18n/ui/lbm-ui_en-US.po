@@ -414,11 +414,11 @@ msgstr "We're all out of coins!"
 msgid "Please try again later."
 msgstr "Please try again later."
 
-#: On screen: max-phone-retries
+#: On screen: max-email-retries
 msgid "Oops, this isn't working"
 msgstr "Oops, this isn't working"
 
-#: On screen: max-phone-retries
+#: On screen: max-email-retries
 msgid "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 msgstr "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 
@@ -781,6 +781,14 @@ msgstr "We see your transaction but we're still waiting for confirmation. This t
 #: On screen: unconfirmed-deposit
 msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
 msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+
+#: On screen: unknown-email
+msgid "We don't see any open orders associated with your email. If you have another email you may have used, you can try redeeming again with that email."
+msgstr "We don't see any open orders associated with your email. If you have another email you may have used, you can try redeeming again with that email."
+
+#: On screen: unknown-email
+msgid "If you're sure you have an open order associated with this email, please contact the operator."
+msgstr "If you're sure you have an open order associated with this email, please contact the operator."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."
