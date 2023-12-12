@@ -1,6 +1,6 @@
 {
   "name": "lamassu-machine",
-  "license": "Unlicense",
+  "license": "./LICENSE",
   "version": "8.1.7",
   "dependencies": {
     "@apollo/client": "3.7.15",
