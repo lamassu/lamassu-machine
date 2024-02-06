@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SUB_DIR=codebase
+SUB_DIR=codebase/package
 SCRIPT_DIR=$(dirname $0)
 MACHINE_DIR=$SCRIPT_DIR/../..
 EXPORT_ROOT=$MACHINE_DIR/build
