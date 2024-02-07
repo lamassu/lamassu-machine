@@ -94,7 +94,9 @@ function installDeviceConfig (cb) {
     }
     if (currentDeviceConfig.billValidator) {
       newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType
-      newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+      if (currentDeviceConfig.billValidator.rs232) {
+        newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+      }
     }
     if (currentDeviceConfig.kioskPrinter) {
       newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
