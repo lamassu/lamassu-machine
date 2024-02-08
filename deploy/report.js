@@ -44,9 +44,6 @@ module.exports.report = function report(err, res, cb) {
     method: 'POST',
     key: _certs.key,
     cert: _certs.cert,
-    ca: _certs.ca,
-    ciphers: 'AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH',
-    secureProtocol: 'TLSv1_method',
     rejectUnauthorized: true,
     headers: {
       'Content-Type': 'application/json',

@@ -12,11 +12,13 @@ const newPath = process.argv[4];
 const basePath = newPath ? '/opt/lamassu-updates/extract' : '/tmp/extract'
 const packagePath = `${basePath}/package/subpackage`
 
-const path = hardwareCode === 'upboard' ?
+const machineWithMultipleCodes = ['upboard', 'coincloud']
+
+const path = machineWithMultipleCodes.includes(hardwareCode) ?
   `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
   `${packagePath}/hardware/${hardwareCode}`
 
-const supervisorPath = hardwareCode === 'upboard' ?
+const supervisorPath = machineWithMultipleCodes.includes(hardwareCode) ?
   `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
   `${packagePath}/supervisor/${hardwareCode}`
 
