@@ -5,7 +5,8 @@ const async = require('./async');
 const cp = require('child_process');
 const report = require('./report').report;
 
-const hardwareCode = process.argv[2] === 'up4000' ? 'upboard' : process.argv[2];
+const hardwareCode = process.argv[2];
+const nodeModulesCode = process.argv[2] === 'up4000' ? 'upboard' : process.argv[2];
 const machineCode = process.argv[3];
 const newPath = process.argv[4];
 
@@ -132,7 +133,7 @@ const commands = []
 commands.push(
   async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
   async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
 )
 
 if (hardwareCode === 'aaeon') {
