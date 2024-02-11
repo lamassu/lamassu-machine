@@ -5,7 +5,7 @@
 Error.stackTraceLimit = 50
 
 // TODO: go through code and take out all evil throws
-require('../logging')
+require('../lib/logging')
 
 var minimist = require('minimist')
 var Brain = require('../lib/brain')

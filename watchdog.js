@@ -7,7 +7,18 @@ var path = require('path')
 
 var watchdogInfoLoader = require('./lib/watchdog-info')
 
-require('./lite-logging')
+var log = console.log;
+var error = console.error;
+
+console.log = function(){
+  var date = (new Date).toISOString() 
+  log(date, 'LOG', ...arguments)
+};
+
+console.error = function(){
+  var date = (new Date).toISOString() 
+  error(date, 'ERROR', ...arguments)
+};
 
 var BASE = '/opt/lamassu-updates/extract'
 var DONE_PATH = BASE + '/done.txt'

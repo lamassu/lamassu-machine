@@ -3,7 +3,6 @@
     "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
-    "wifiConfigPath": null,
     "mockCryptoQR": {},
     "mockCameraImage": "mock_data/compliance/license.jpg"
   },
