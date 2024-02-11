@@ -215,6 +215,22 @@ button {
   color: $purple-grey;
 }
 
+#recycler-continue,
+#recycler-finish {
+  $size: 35vh;
+  height: $size;
+  width: $size;
+  border-radius: $size;
+}
+
+#recycler-continue .inner-circle-button,
+#recycler-finish .inner-circle-button {
+  $size: 31vh;
+  height: $size;
+  width: $size;
+  border-radius: $size;
+}
+
 .cash-in-color .circle-button.active .inner-circle-button,
 .cash-in-color .circle-button:active .inner-circle-button {
   background-color: $sapphire;

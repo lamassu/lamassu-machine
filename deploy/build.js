@@ -19,12 +19,12 @@ var packageJson = JSON.parse(fs.readFileSync(packageJsonPath))
 var version = packageJson.version
 var timestamp = new Date()
 
-function makeTar (tarPath, rootPath, cb) {
-  tar.c({ file: tarPath }, [rootPath], cb)
+function makeTar (tarPath, cb) {
+  tar.c({ file: tarPath, cwd: path.resolve(packageBase) }, ['package'], cb)
 }
 
-function makeZippedTar (tarPath, rootPath, cb) {
-  tar.c({ file: tarPath, gzip: true }, [rootPath], cb)
+function makeZippedTar (tarPath, cb) {
+  tar.c({ file: tarPath, cwd: path.resolve(packageBase), gzip: true }, ['subpackage'], cb)
 }
 
 function generateInfo () {
@@ -42,9 +42,9 @@ function generateInfo () {
 if (fs.existsSync(TAR_PATH)) fs.unlinkSync(TAR_PATH)
 
 if (!fs.existsSync(SUBPACKAGE_DIR)) {
-  makeTar(TAR_PATH, PACKAGE_DIR, generateInfo)
+  makeTar(TAR_PATH, generateInfo)
 } else {
-  makeZippedTar(PACKAGE_DIR + '/subpackage.tgz', SUBPACKAGE_DIR, function () {
-    makeTar(TAR_PATH, PACKAGE_DIR, generateInfo)
+  makeZippedTar(PACKAGE_DIR + '/subpackage.tgz', function () {
+    makeTar(TAR_PATH, generateInfo)
   })
 }

@@ -210,6 +210,24 @@
       </section>
     </section>
     <section
+      class="viewport cash_slot_remove_bills_state info cash-in-color"
+      data-tr-section="cash-slot-remove-bills"
+      data-screentype="exception-tp"
+    >
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Our machine has rejected these bills, please remove them and hit the Continue button below.
+        </p>
+      </main>
+    
+      <footer>
+        <button id="cash-slot-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
+        </button>
+      </footer>
+    </section>
+    <section
       class="viewport cash_in_only_coin_state cash-out-color info-with-contact-and-info"
       data-tr-section="cash_in_only_coin"
       data-screentype="info-contact-tp"
@@ -251,7 +269,7 @@
     <section
       class="viewport choose_coin_state"
       data-tr-section="choose_coin"
-      data-screentype="exception-tp"
+      data-screentype="flow-action-tp"
     >
       <header id="choose-coin-header">
         <section id="change-language-section" class="button change-language js-menu-language hide cash-out-color">
@@ -895,6 +913,36 @@
       </main>
     </section>
     <section
+      class="viewport email_verification_state info"
+      data-tr-section="email-verification"
+      data-screentype="info-action-tp"
+    >
+      <header>
+      </header>
+    
+      <main>
+        <h3 class="js-i18n nm-margin-bottom">Verify email to continue</h3>
+        <div class="text-content">
+          <p class="js-i18n d2">
+            If you'd like to make a larger purchase we need to ask for your email. We'll then send you an confirmation code.
+          </p>
+          <p class="js-i18n tl2">Would you like to insert more bills?</p>
+        </div>
+      </main>
+    
+      <footer>
+        <button id="email-start-verification" class="filled-progress-button button js-i18n">
+          Yes, verify email
+        </button>
+        <button id="send-coins-email" class="bordered-progress-button button js-i18n js-inserted-notes">
+          No, send coins
+        </button>
+        <button id="send-coins-email-2" class="bordered-progress-button button js-i18n js-no-inserted-notes">
+          No, cancel
+        </button>
+      </footer>
+    </section>
+    <section
       class="viewport scan_face_photo_state no-action-info cash-in-color"
       data-tr-section="facephoto"
       data-screentype="info-no-action-tp"
@@ -1130,7 +1178,7 @@
     <section
       class="viewport insert_bills_recycler_state cash-in-color"
       data-tr-section="insert-bills-recycler"
-      data-screentype="flow-no-action-tp"
+      data-screentype="flow-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1140,7 +1188,7 @@
     
       <main class="lg-margin-top">
         <section class="primary-side">
-          <h5 class="primary-side-title js-i18n">Insert another round of bills</h5>
+          <h5 class="primary-side-title js-i18n">Do you want to insert more bills?</h5>
           <div class="total md-margin-top">
             <div class="fiat">
               <span class="js-amount h2"></span>
@@ -1155,29 +1203,30 @@
           <p class="js-i18n d2 no-margin-top">total purchased</p>
         </section>
     
-        <h3 class="or"><span class="js-i18n sapphire">OR</span></h3>
         <section class="secondary-side">
           <div class="send-coins cash-in-color js-continue-crypto-enable">
             <button id="recycler-continue" class="circle-button h3 purple-grey js-continue-crypto-enable">
               <div class="inner-circle-button js-continue-crypto-enable">
                 <span class="js-i18n">
-                  Continue
+                  Yes, count
                 </span>
               </div>
             </button>
           </div>
+          <p></p>
           <div class="send-coins cash-in-color js-send-crypto-enable">
             <button id="recycler-finish" class="circle-button h3 purple-grey js-send-crypto-enable">
               <div class="inner-circle-button js-send-crypto-enable">
                 <span class="js-i18n">
-                  Finish
+                  No, send
                 </span>
               </div>
             </button>
           </div>
         </section>
       </main>
-    </section><section
+    </section>
+    <section
       class="viewport insert_bills_state cash-in-color"
       data-tr-section="insert-bills"
       data-screentype="flow-no-action-tp"
@@ -1217,7 +1266,7 @@
     <section
       class="viewport insert_first_bills_recycler_state cash-in-color"
       data-tr-section="insert-first-bills-recycler"
-      data-screentype="flow-no-action-tp"
+      data-screentype="flow-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1251,17 +1300,18 @@
             <section class="circle-button h3 purple-grey js-continue-crypto-enable">
               <div class="inner-circle-button js-continue-crypto-enable">
                 <span class="js-i18n">
-                  Continue
+                  Count bills
                 </span>
               </div>
             </section>
           </div>
         </section>
       </main>
-    </section><section
+    </section>
+    <section
       class="viewport insert_more_bills_state cash-in-color"
       data-tr-section="insert-more-bills"
-      data-screentype="exception-tp"
+      data-screentype="flow-no-action-tp"
     >
       <header>
         <p class="d2 white crypto-rate crypto-rate-cash-in fade-in"></p>
@@ -1369,7 +1419,7 @@
                 <div class="key" data-ascii="78">N</div>
                 <div class="key" data-ascii="77">M</div>
                 <div class="key backspace standard-backspace-key" data-ascii="08">
-                  <img class="standard-backspace" src="images/delete-keypad.svg"/>
+                  <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
                 </div>
               </div>
             </div>
@@ -1381,7 +1431,8 @@
         <button id="submit-promo-code" class="filled-progress-button button">Submit</button>
       </footer>
       
-    </section><section
+    </section>
+    <section
       class="viewport invalid_address_state info cash-in-color"
       data-tr-section="invalid-address"
       data-screentype="info-action-tp"
@@ -1418,6 +1469,26 @@
       </footer>
     </section>
     <section
+      class="viewport leftover_bills_in_cash_slot_state info cash-in-color"
+      data-tr-section="leftover-bills-in-cash-slot"
+      data-screentype="exception-tp"
+    >
+      <main>
+        <h3 class="js-i18n">Please remove all bills from the cash slot</h3>
+        <p class="js-i18n d2">
+          Something unexpected happened. Please remove all the bills from the cash
+          slot and hit the Continue button below. You may start a new transaction
+          afterwards.
+        </p>
+      </main>
+    
+      <footer>
+        <button id="leftover-bills-removed" class="filled-progress-button button js-i18n">
+          Continue
+        </button>
+      </footer>
+    </section>
+    <section
       class="viewport limit_reached_state info cash-in-color"
       data-tr-section="limit-reached"
       data-screentype="info-action-tp"
@@ -1442,6 +1513,45 @@
           </div>
         </button>
     	</footer>
+    </section>
+    <section
+      class="viewport max_email_retries_state info-with-contact"
+      data-tr-section="max-email-retries"
+      data-screentype="info-contact-tp"
+    >
+      <header>
+      </header>
+    
+      <main>
+        <h3 class="js-i18n nm-margin-bottom">Oops, this isn't working</h3>
+        <section class="text-content">
+          <p class="js-i18n d2">
+            You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later.
+          </p>
+        </section>
+        <table class="contacts sm-margin-top sm-margin-bottom">
+          <tr>
+            <td>
+              <img src="images/contact/operator.svg" />
+              <span class="d2 operator-name"></span>
+            </td>
+            <td>
+              <img src="images/contact/phone.svg" />
+              <span class="d2 operator-phone"></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <img src="images/contact/email.svg" />
+              <span class="d2 operator-email"></span>
+            </td>
+          </tr>
+        </table>
+      </main>
+    
+      <footer>
+        <button class="filled-progress-button button" id="max-email-retries-ok"><div>OK</div></button>
+      </footer>
     </section>
     <section
       class="viewport max_phone_retries_state info-with-contact"
@@ -1691,6 +1801,7 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/pv-key.svg"></object>
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/pv-key.svg"></object>
           <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/pv-key.svg"></object>
+          <object class="scan-image only-grandola" data="images/scan/animation/grandola/pv-key.svg"></object>
           <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/pv-key.svg"></object>
         </section>
       </main>
@@ -1739,6 +1850,202 @@
         <h2 class="js-i18n sm-margin-bottom">Depositing bills...</h2>
       </main>
     </section><section
+      class="viewport register_email_state"
+      data-tr-section="register-email"
+      data-screentype="flow-action-tp"
+    >
+      <header>
+        <div id="email-cancel" class="delay cancel-button-wrapper">
+          <img class="cancel-button" src="images/close-icon.svg" />
+        </div>
+      </header>
+    
+      <main class="custom-permission-text-input-main">
+        <div class="text-input-fields-wrapper">
+          <div class="email-input-field">
+            <p class="d1 custom-requirement-text-label">Email</p>
+            <input id="email-input" class="custom-requirement-text-input text-requirement-input passphrase h3" type="text" readonly value="">
+          </div>
+        </div>
+    
+        <section id="email-keyboard" class="standard-keyboard keys tl2">
+          <div class="keyboard-layout i18n-latin" data-case="uc">
+            <div class="keyboard keyboard-lc">
+              <div class="row">
+                <div class="key" data-ascii="49">1</div>
+                <div class="key" data-ascii="50">2</div>
+                <div class="key" data-ascii="51">3</div>
+                <div class="key" data-ascii="52">4</div>
+                <div class="key" data-ascii="53">5</div>
+                <div class="key" data-ascii="54">6</div>
+                <div class="key" data-ascii="55">7</div>
+                <div class="key" data-ascii="56">8</div>
+                <div class="key" data-ascii="57">9</div>
+                <div class="key" data-ascii="48">0</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="113">q</div>
+                <div class="key" data-ascii="119">w</div>
+                <div class="key" data-ascii="101">e</div>
+                <div class="key" data-ascii="114">r</div>
+                <div class="key" data-ascii="116">t</div>
+                <div class="key" data-ascii="121">y</div>
+                <div class="key" data-ascii="117">u</div>
+                <div class="key" data-ascii="105">i</div>
+                <div class="key" data-ascii="111">o</div>
+                <div class="key" data-ascii="112">p</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="97">a</div>
+                <div class="key" data-ascii="115">s</div>
+                <div class="key" data-ascii="100">d</div>
+                <div class="key" data-ascii="102">f</div>
+                <div class="key" data-ascii="103">g</div>
+                <div class="key" data-ascii="104">h</div>
+                <div class="key" data-ascii="106">j</div>
+                <div class="key" data-ascii="107">k</div>
+                <div class="key" data-ascii="108">l</div>
+              </div>
+              <div class="row">
+                <div class="key shift special">Shift</div>
+                <div class="key" data-ascii="122">z</div>
+                <div class="key" data-ascii="120">x</div>
+                <div class="key" data-ascii="99">c</div>
+                <div class="key" data-ascii="118">v</div>
+                <div class="key" data-ascii="98">b</div>
+                <div class="key" data-ascii="110">n</div>
+                <div class="key" data-ascii="109">m</div>
+                <div class="key sym special">Sym</div>
+              </div>
+              <div class="row">
+                <div class="quick-keys">
+                  <div class="key" data-ascii="64">@</div>
+                  <div class="key" data-ascii="46">.</div>
+                </div>
+                <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+                <div class="key backspace standard-backspace-key" data-ascii="08">
+                  <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+                </div>
+              </div>
+            </div>
+            <div class="keyboard keyboard-uc" style="display:none">
+              <div class="row">
+                <div class="key" data-ascii="49">1</div>
+                <div class="key" data-ascii="50">2</div>
+                <div class="key" data-ascii="51">3</div>
+                <div class="key" data-ascii="52">4</div>
+                <div class="key" data-ascii="53">5</div>
+                <div class="key" data-ascii="54">6</div>
+                <div class="key" data-ascii="55">7</div>
+                <div class="key" data-ascii="56">8</div>
+                <div class="key" data-ascii="57">9</div>
+                <div class="key" data-ascii="48">0</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="81">Q</div>
+                <div class="key" data-ascii="87">W</div>
+                <div class="key" data-ascii="69">E</div>
+                <div class="key" data-ascii="82">R</div>
+                <div class="key" data-ascii="84">T</div>
+                <div class="key" data-ascii="89">Y</div>
+                <div class="key" data-ascii="85">U</div>
+                <div class="key" data-ascii="73">I</div>
+                <div class="key" data-ascii="79">O</div>
+                <div class="key" data-ascii="80">P</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="65">A</div>
+                <div class="key" data-ascii="83">S</div>
+                <div class="key" data-ascii="68">D</div>
+                <div class="key" data-ascii="70">F</div>
+                <div class="key" data-ascii="71">G</div>
+                <div class="key" data-ascii="72">H</div>
+                <div class="key" data-ascii="74">J</div>
+                <div class="key" data-ascii="75">K</div>
+                <div class="key" data-ascii="76">L</div>
+              </div>
+              <div class="row">
+                <div class="key active shift special">Shift</div>
+                <div class="key" data-ascii="90">Z</div>
+                <div class="key" data-ascii="88">X</div>
+                <div class="key" data-ascii="67">C</div>
+                <div class="key" data-ascii="86">V</div>
+                <div class="key" data-ascii="66">B</div>
+                <div class="key" data-ascii="78">N</div>
+                <div class="key" data-ascii="77">M</div>
+                <div class="key sym special">Sym</div>
+              </div>
+              <div class="row">
+                <div class="quick-keys">
+                  <div class="key" data-ascii="64">@</div>
+                  <div class="key" data-ascii="46">.</div>
+                </div>
+                <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+                <div class="key backspace standard-backspace-key" data-ascii="08">
+                  <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+                </div>
+              </div>
+            </div>
+            <div class="keyboard keyboard-sym" style="display:none">
+              <div class="row">
+                <div class="key" data-ascii="126">~</div>
+                <div class="key" data-ascii="33">!</div>
+                <div class="key" data-ascii="64">@</div>
+                <div class="key" data-ascii="35">#</div>
+                <div class="key" data-ascii="36">$</div>
+                <div class="key" data-ascii="37">%</div>
+                <div class="key" data-ascii="94">^</div>
+                <div class="key" data-ascii="38">&amp;</div>
+                <div class="key" data-ascii="42">*</div>
+                <div class="key" data-ascii="61">=</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="45">-</div>
+                <div class="key" data-ascii="95">_</div>
+                <div class="key" data-ascii="43">+</div>
+                <div class="key" data-ascii="92">\</div>
+                <div class="key" data-ascii="40">(</div>
+                <div class="key" data-ascii="41">)</div>
+                <div class="key" data-ascii="91">[</div>
+                <div class="key" data-ascii="93">]</div>
+                <div class="key" data-ascii="123">{</div>
+                <div class="key" data-ascii="125">}</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="124">|</div>
+                <div class="key" data-ascii="59">;</div>
+                <div class="key" data-ascii="58">:</div>
+                <div class="key" data-ascii="39">'</div>
+                <div class="key" data-ascii="34">"</div>
+                <div class="key" data-ascii="44">,</div>
+                <div class="key" data-ascii="46">.</div>
+              </div>
+              <div class="row">
+                <div class="key" data-ascii="60">&lt;</div>
+                <div class="key" data-ascii="62">&gt;</div>
+                <div class="key" data-ascii="47">/</div>
+                <div class="key" data-ascii="63">?</div>
+                <div class="key sym special">ABC</div>
+              </div>
+              <div class="row">
+                <div class="quick-keys">
+                  <div class="key" data-ascii="64">@</div>
+                  <div class="key" data-ascii="46">.</div>
+                </div>
+                <div class="key space custom-info-request-space-key" data-ascii="32">Space</div>
+                <div class="key backspace standard-backspace-key" data-ascii="08">
+                  <img class="backspace standard-backspace" src="images/delete-keypad.svg"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer id="submit-email-wrapper" class="submit-text-requirement-button-wrapper">
+          <button id="submit-email" class="filled-progress-button button submit-text-requirement-button">Submit</button>
+        </footer>
+      </main>
+    </section>
+    <section
       class="viewport register_phone_state"
       data-tr-section="register-phone"
       data-screentype="flow-action-tp"
@@ -1827,8 +2134,10 @@
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
           <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
+          <object class="scan-image only-grandola" data="images/scan/animation/grandola/BTC-amazonite.svg"></object>
           <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
           <object class="scan-image only-coincloud" data="images/scan/animation/coincloud/BTC-amazonite.svg"></object>
+          <object class="scan-image only-batm7in" data="images/scan/animation/batm7in/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1863,9 +2172,12 @@
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/driver-salmon.svg"></object>
           <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/driver-amazonite.svg"></object>
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/driver-salmon.svg"></object>
+          <object class="scan-image only-grandola only-cash-in" data="images/scan/animation/grandola/driver-amazonite.svg"></object>
+          <object class="scan-image only-grandola only-cash-out" data="images/scan/animation/grandola/driver-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/driver-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/driver-salmon.svg"></object>
           <object class="scan-image only-coincloud only-cash-in" data="images/scan/animation/coincloud/driver-amazonite.svg"></object>
+          <object class="scan-image only-batm7in" data="images/scan/animation/batm7in/driver-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1910,9 +2222,12 @@
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/stateID-salmon.svg"></object>
           <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/stateID-amazonite.svg"></object>
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
+          <object class="scan-image only-grandola only-cash-in" data="images/scan/animation/grandola/stateID-amazonite.svg"></object>
+          <object class="scan-image only-grandola only-cash-out" data="images/scan/animation/grandola/stateID-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
-          <object class="scan-image only-coincloud only-cash-out" data="images/scan/animation/coincloud/stateID-salmon.svg"></object>
+          <object class="scan-image only-coincloud only-cash-in" data="images/scan/animation/coincloud/stateID-amazonite.svg"></object>
+          <object class="scan-image only-batm7in" data="images/scan/animation/batm7in/stateID-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -1947,9 +2262,12 @@
           <object class="scan-image only-tejo only-cash-out" data="images/scan/animation/tejo/stateID-salmon.svg"></object>
           <object class="scan-image only-aveiro only-cash-in" data="images/scan/animation/aveiro/stateID-amazonite.svg"></object>
           <object class="scan-image only-aveiro only-cash-out" data="images/scan/animation/aveiro/stateID-salmon.svg"></object>
+          <object class="scan-image only-grandola only-cash-in" data="images/scan/animation/grandola/stateID-amazonite.svg"></object>
+          <object class="scan-image only-grandola only-cash-out" data="images/scan/animation/grandola/stateID-salmon.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-in" data="images/scan/animation/gmuk1/stateID-amazonite.svg"></object>
           <object class="scan-image only-gmuk1 only-cash-out" data="images/scan/animation/gmuk1/stateID-salmon.svg"></object>
           <object class="scan-image only-coincloud only-cash-in" data="images/scan/animation/coincloud/stateID-amazonite.svg"></object>
+          <object class="scan-image only-batm7in" data="images/scan/animation/batm7in/stateID-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -2257,12 +2575,15 @@
         </section>
         <section class="secondary-side fade-in-delay">
           <object class="scan-image only-sintra" data="images/scan/animation/sintra/BTC-amazonite.svg"></object>
+          <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
           <object class="scan-image only-douro" data="images/scan/animation/douro/BTC-amazonite.svg"></object>
           <object class="scan-image only-gaia" data="images/scan/animation/gaia/BTC-amazonite.svg"></object>
           <object class="scan-image only-tejo" data="images/scan/animation/tejo/BTC-amazonite.svg"></object>
           <object class="scan-image only-aveiro" data="images/scan/animation/aveiro/BTC-amazonite.svg"></object>
+          <object class="scan-image only-grandola" data="images/scan/animation/grandola/BTC-amazonite.svg"></object>
           <object class="scan-image only-gmuk1" data="images/scan/animation/gmuk1/BTC-amazonite.svg"></object>
           <object class="scan-image only-coincloud" data="images/scan/animation/coincloud/BTC-amazonite.svg"></object>
+          <object class="scan-image only-batm7in" data="images/scan/animation/batm7in/BTC-amazonite.svg"></object>
         </section>
       </main>
     </section>
@@ -2763,6 +3084,29 @@
             OK
           </div>
         </button>
+      </footer>
+    </section>
+    <section
+      class="viewport unknown_email_state info cash-out-color"
+      data-tr-section="unknown-email"
+      data-screentype="unaccounted-tp info-action-tp"
+    >
+      <header>
+        <img src="images/funds-received.svg" />
+      </header>
+      <main>
+        <h3 class="js-i18n xs-margin-bottom">All set</h3>
+        <div class="text-content">
+          <p class="js-i18n d2">
+            We don't see any open orders associated with your email. If you have another email you may have used, you can try redeeming again with that email.
+          </p>
+          <p class="js-i18n tl2">
+            If you're sure you have an open order associated with this email, please contact the operator.
+          </p>
+        </div>
+      </main>
+      <footer>
+        <button class="filled-progress-button button" id="unknown-email-ok"><div class="js-i18n">OK</div></button>
       </footer>
     </section>
     <section

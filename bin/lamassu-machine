@@ -10,6 +10,7 @@ require('../lib/logging')
 var minimist = require('minimist')
 var Brain = require('../lib/brain')
 var Configuration = require('../lib/configuration.js')
+const scanner = require('../lib/scanner')
 
 var bailed = false
 var brain = null
@@ -45,6 +46,12 @@ process.on('uncaughtException', err => {
   bail(err)
 })
 process.on('unhandledRejection', console.log)
-process.on('exit', function () { console.log('lamassu-machine exiting') })
+process.on('exit', function () {
+  scanner.cancel()
+  console.log('lamassu-machine exiting')
+})
+
+process.on('SIGTERM', () => process.exit())
+process.on('SIGINT', () => process.exit())
 
 startBrain()

@@ -6,17 +6,20 @@ const cp = require('child_process');
 const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
+const nodeModulesCode = process.argv[2] === 'up4000' ? 'upboard' : process.argv[2];
 const machineCode = process.argv[3];
 const newPath = process.argv[4];
 
 const basePath = newPath ? '/opt/lamassu-updates/extract' : '/tmp/extract'
 const packagePath = `${basePath}/package/subpackage`
 
-const path = hardwareCode === 'upboard' ?
+const machineWithMultipleCodes = ['upboard', 'coincloud']
+
+const path = machineWithMultipleCodes.includes(hardwareCode) ?
   `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
   `${packagePath}/hardware/${hardwareCode}`
 
-const supervisorPath = hardwareCode === 'upboard' ?
+const supervisorPath = machineWithMultipleCodes.includes(hardwareCode) ?
   `${packagePath}/supervisor/${hardwareCode}/${machineCode}` :
   `${packagePath}/supervisor/${hardwareCode}`
 
@@ -94,7 +97,9 @@ function installDeviceConfig (cb) {
     }
     if (currentDeviceConfig.billValidator) {
       newDeviceConfig.billValidator.deviceType = currentDeviceConfig.billValidator.deviceType
-      newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+      if (currentDeviceConfig.billValidator.rs232) {
+        newDeviceConfig.billValidator.rs232.device = currentDeviceConfig.billValidator.rs232.device
+      }
     }
     if (currentDeviceConfig.kioskPrinter) {
       newDeviceConfig.kioskPrinter.model = currentDeviceConfig.kioskPrinter.model
@@ -128,7 +133,7 @@ const commands = []
 commands.push(
   async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
   async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
 )
 
 if (hardwareCode === 'aaeon') {

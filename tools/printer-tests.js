@@ -1,6 +1,3 @@
-const minimist = require('minimist')
-const SerialPort = require('serialport')
-
 const BN = require('../lib/bn')
 const { utils: coinUtils } = require('@lamassu/coins')
 const printerLoader = require('../lib/printer/loader')

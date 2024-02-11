@@ -835,6 +835,20 @@ button {
   color: #403c51;
 }
 
+#recycler-continue,
+#recycler-finish {
+  height: 35vh;
+  width: 35vh;
+  border-radius: 35vh;
+}
+
+#recycler-continue .inner-circle-button,
+#recycler-finish .inner-circle-button {
+  height: 31vh;
+  width: 31vh;
+  border-radius: 31vh;
+}
+
 .cash-in-color .circle-button.active .inner-circle-button,
 .cash-in-color .circle-button:active .inner-circle-button {
   background-color: #0e4160;
@@ -1117,6 +1131,7 @@ footer .filled-progress-button:after, footer .bordered-progress-button:after {
 .address_reuse_state .text-content,
 .suspicious_address_state .text-content,
 .max_phone_retries_state .text-content,
+.email_verification_state .text-content,
 .sms_verification_state .text-content {
   max-width: 75vh;
 }
@@ -1660,6 +1675,10 @@ footer {
   margin-top: -3vh;
 }
 
+.scan-image.only-grandola {
+  width: 55vh;
+}
+
 .only-sintra {
   margin-top: 1vh;
 }
@@ -1677,7 +1696,9 @@ footer {
 .gaia .only-gaia,
 .tejo .only-tejo,
 .aveiro .only-aveiro,
+.grandola .only-grandola,
 .coincloud .only-coincloud,
+.batm7in .only-batm7in,
 .gmuk1 .only-gmuk1 {
   display: block;
 }
@@ -3079,6 +3100,17 @@ footer {
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
           flex-direction: column;
+}
+
+.email-input-field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
 }
 
 .text-input-field {

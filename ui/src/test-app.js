@@ -22,7 +22,7 @@ let localeCode = 'en-US'
 
 $(function () {
   $('body').css('cursor', 'default')
-  $('body').addClass('coincloud')
+  $('body').addClass('grandola')
   $('body').addClass('museo')
 
   const width = $('body').width()
@@ -53,10 +53,7 @@ $(function () {
 
   phoneKeypad.activate()
 
-  // let wifiKeyboard = new Keyboard({
-  //   id: 'wifi-keyboard',
-  //   inputBox: '#input-passphrase'
-  // }).init()
+  // let wifiKeyboard = new Keyboard('wifi-keyboard').init()
 
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     console.log('phoneNumber', result)
@@ -275,11 +272,13 @@ function setupFakes () {
     $('.scan_id_data_state'),
     $('.security_code_state'),
     $('.register_phone_state'),
+    $('.register_email_state'),
     $('.register_us_ssn_state'),
     $('.terms_screen_state'),
     $('.verifying_id_photo_state'),
     $('.verifying_face_photo_state'),
     $('.verifying_id_data_state'),
+    $('.email_verification_state'),
     $('.sms_verification_state'),
     $('.permission_id_state'),
     $('.bad_phone_number_state'),
@@ -307,7 +306,7 @@ function setupFakes () {
   ]
 
   states.forEach(it => {
-    setUpDirectionElement(it, 'cashIn')
+    setUpDirectionElement(it, 'cashOut')
   })
 
   function setUpDirectionElement (element, direction) {
