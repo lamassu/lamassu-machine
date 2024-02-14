@@ -1766,8 +1766,10 @@ function setTx(tx) {
 
 function formatAddressNoBreakLines(address) {
   if (!address) return;
-  if (address.length > 100) {
-    return address.substring(0, 99).replace(/(.{4})/g, '$1 ').concat('...');
+  if (address.length > 60) {
+    var firstPart = address.substring(0, 40).replace(/(.{4})/g, '$1 ');
+    var secondPart = address.substring(address.length - 16, address.length).replace(/(.{4})/g, '$1 ');
+    return firstPart.concat('... ').concat(secondPart);
   }
   return address.replace(/(.{4})/g, '$1 ');
 }
