@@ -92,7 +92,7 @@ function buttonPressed (button, data) {
 }
 
 const displayLN = 'Lightning Network'
-const displayBTC = 'Bitcoin (LN)'
+const displayBTC = 'Bitcoin<br>(LN)'
 const LN = 'LN'
 const BTC = 'BTC'
 

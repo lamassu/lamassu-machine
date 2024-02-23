@@ -95,7 +95,7 @@ function buttonPressed(button, data) {
 }
 
 var displayLN = 'Lightning Network';
-var displayBTC = 'Bitcoin (LN)';
+var displayBTC = 'Bitcoin<br>(LN)';
 var LN = 'LN';
 var BTC = 'BTC';
 
