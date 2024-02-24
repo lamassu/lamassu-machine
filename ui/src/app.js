@@ -356,7 +356,7 @@ function invalidAddress (lnInvoiceTypeError) {
     $('#invalid-invoice').hide()
     $('#invalid-address').show()
   }
-  setScreen('invalid_address')
+  setState('invalid_address')
 }
 
 function customInfoRequest (customInfoRequest) {
