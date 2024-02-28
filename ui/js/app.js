@@ -95,7 +95,7 @@ function buttonPressed(button, data) {
 }
 
 var displayLN = 'Lightning Network';
-var displayBTC = 'Bitcoin';
+var displayBTC = 'Bitcoin<br>(LN)';
 var LN = 'LN';
 var BTC = 'BTC';
 
@@ -121,7 +121,7 @@ function processData(data) {
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS);
   if (data.sent && data.total) setPartialSend(data.sent, data.total);
   if (data.readingBills) readingBills(data.readingBills);
-  if (data.cryptoCode) translateCoin(data.cryptoCode === LN ? BTC : data.cryptoCode);
+  if (data.cryptoCode) translateCoin(data.cryptoCode);
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee);
   if (data.terms) setTermsScreen(data.terms);
   if (data.dispenseBatch) dispenseBatch(data.dispenseBatch);
@@ -384,7 +384,7 @@ function invalidAddress(lnInvoiceTypeError) {
     $('#invalid-invoice').hide();
     $('#invalid-address').show();
   }
-  setScreen('invalid_address');
+  setState('invalid_address');
 }
 
 function customInfoRequest(customInfoRequest) {
