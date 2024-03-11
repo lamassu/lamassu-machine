@@ -3916,6 +3916,10 @@ button[disabled] {
   .limit_reached_state header {
     height: 36vh;
   }
+  .scan_face_photo_state img {
+    width: 2vh;
+    margin-bottom: 22vh;
+  }
   .dispensing_state main,
   .dispensing_collect_state main,
   .dispensing_partial_collect_state main {
