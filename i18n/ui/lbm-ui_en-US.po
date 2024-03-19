@@ -219,8 +219,8 @@ msgid "Verify email to continue"
 msgstr "Verify email to continue"
 
 #: On screen: email-verification
-msgid "If you'd like to make a larger purchase we need to ask for your email. We'll then send you an confirmation code."
-msgstr "If you'd like to make a larger purchase we need to ask for your email. We'll then send you an confirmation code."
+msgid "If you'd like to make a larger purchase we need to ask for your email. We'll then send you a confirmation code."
+msgstr "If you'd like to make a larger purchase we need to ask for your email. We'll then send you a confirmation code."
 
 #: On screen: email-verification
 msgid "Would you like to insert more bills?"
