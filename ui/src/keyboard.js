@@ -277,7 +277,6 @@ Keyboard.prototype._validateEmail = function _validateEmail() {
   const content = this.inputBox.data('content') || ''
   if (emailRegex.test(content)) {
     this.constraintButtons.forEach(buttonId => {
-      console.log(buttonId)
       $(buttonId).show()
     })
     return

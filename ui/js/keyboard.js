@@ -284,7 +284,6 @@ Keyboard.prototype._validateEmail = function _validateEmail() {
   var content = this.inputBox.data('content') || '';
   if (emailRegex.test(content)) {
     this.constraintButtons.forEach(function (buttonId) {
-      console.log(buttonId);
       $(buttonId).show();
     });
     return;
