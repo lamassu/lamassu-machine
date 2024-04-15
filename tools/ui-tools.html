@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Lamassu Machine Dev Tools</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      background-color: #beeecf;
+      font-family: 'MuseoSans', sans-serif;
+    }
+    main {
+      max-width: 52rem;
+      margin: 3rem auto;
+    }
+    button, input {
+      background-color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+    }
+    button { cursor: pointer; }
+    button:hover { background-color: #f0f0f0; }
+    button:focus, input:focus { outline: 2px solid #3d65ec; }
+    button:disabled, input:disabled {
+      background-color: #fff2;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background-color: #66ba85;
+      padding: 2rem;
+      border-radius: 0.5rem;
+    }
+    #custom-bill-input { width: 8rem; }
+    input { flex-grow: 1; }
+    .in { margin-left: auto; }
+    #pairing-token input, #wallet-addresses input {
+      font-family: monospace;
+      font-size: 1rem
+    } 
+    .address-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1rem;
+    }
+    .address-row > h3 { width: 3rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Dev Tools for lamassu-machine</h1>
+    <div id="pairing-token">
+      <h2>Pairing Token</h2>
+      <div class='container'>
+        <input type='text' id='token-input' placeholder='Your pairing token...' oninput='validity.valid||(value="");'>
+        <button id='token-submit' title='Insert' onclick='insertPairingToken()'>▸</button>
+      </div>
+    </div>
+    <div id="wallet-addresses">
+      <h2>Wallet Addresses</h2>
+      <div class='container'>
+        <div class="address-row">
+          <h3>BTC</h3>
+          <input type='text' id='btc-address-input' placeholder='Your BTC address...'>
+          <button id='btc-address-submit' title='Insert' onclick="insertWalletAddress('BTC')">▸</button>
+        </div>
+        <div class="address-row">
+          <h3>ETH</h3>
+          <input type='text' id='eth-address-input' placeholder='Your ETH address...'>
+          <button id='eth-address-submit' title='Insert' onclick="insertWalletAddress('ETH')">▸</button>
+        </div>
+        <div class="address-row">
+          <h3>BCH</h3>
+          <input type='text' id='bch-address-input' placeholder='Your BCH address...'>
+          <button id='bch-address-submit' title='Insert' onclick="insertWalletAddress('BCH')">▸</button>
+        </div>
+        <div class="address-row">
+          <h3>USDT</h3>
+          <input type='text' id='usdt-address-input' placeholder='Your USDT address...'>
+          <button id='usdt-address-submit' title='Insert' onclick="insertWalletAddress('USDT')">▸</button>
+        </div>
+      </div>
+    </div>
+    <div id="fake-bills">
+      <h2>Fake Bills</h2>
+      <div class='container'>
+        <button id='bill-10' title='Insert 10 bill' onclick='insertBill(10)'>10</button>
+        <button id='bill-20' title='Insert 20 bill' onclick='insertBill(20)'>20</button>
+        <button id='bill-50' title='Insert 50 bill' onclick='insertBill(50)'>50</button>
+        <button id='bill-100' title='Insert 100 bill' onclick='insertBill(100)'>100</button>
+        <button id='bill-200' title='Insert 200 bill' onclick='insertBill(200)'>200</button>
+        <div class='in'>
+          <input type='number' id='custom-bill-input' placeholder='Custom' min='0' step='1' oninput='validity.valid||(value="");'>
+          <button id='custom-bill-submit' title='Insert' onclick='insertBillFromInput()'>▸</button>
+        </div>
+      </div>
+      <p id='status'></p>
+    </div>
+  </main>
+</body>
+<script>
+  let timeout = null
+
+  const insertPairingToken = () => {
+    const token = document.getElementById('token-input').value
+    return fetch(`devtools/pairingToken`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({token: token}),
+    }).then(r => {
+        if (!r.ok) {
+          setStatus('Error on machine side!')
+        } else {
+          setStatus('Pairing token inserted successfully. You can now pair the machine')
+        }
+      })
+      .catch(_ => setStatus('Error sending command to the machine. Is machine running?'))
+  }
+
+  const insertWalletAddress = coin => {
+    const address = document.getElementById(`${coin.toLowerCase()}-address-input`).value
+    return fetch(`devtools/walletAddress?coin=${coin.toUpperCase()}&value=${address}`)
+      .then(r => {
+        if (!r.ok) {
+          setStatus('Error on machine side!')
+        } else {
+          setStatus(`${coin} address inserted successfully. You can now perform transactions with this address`)
+        }
+      })
+      .catch(_ => setStatus('Error sending command to the machine. Is machine running?'))
+  }
+
+  const insertBillFromInput = () =>
+    insertBill(document.getElementById('custom-bill-input').value || 10)
+
+  const insertBill = denomination => 
+    fetch(`devtools/insertBill?value=${denomination}`)
+      .then(r => {
+        if (!r.ok) {
+          setStatus('Error on machine side!')
+        } else {
+          setStatus(`${denomination} bill inserted.`)
+        }
+      })
+      .catch(_ => setStatus('Error sending command to the machine. Is machine running?'))
+
+  const setStatus = status => {
+    if (timeout !== null)
+      clearTimeout(timeout)
+
+    document.getElementById('status').textContent = status
+    timeout = setTimeout(() => document.getElementById('status').textContent = '', 2000)
+  }
+
+  document.getElementById('custom-bill-input').addEventListener('keypress', e => e.key === 'Enter' ? insertBillFromInput() : 0)
+</script>
+</html>

@@ -852,7 +852,6 @@ $(document).ready(function () {
   setupButton('promo-code-continue', 'cancelPromoCode')
 
   setupButton('initialize', 'initialize')
-  // setupButton('test-mode', 'testMode')
   setupButton('pairing-scan', 'pairingScan')
   setupImmediateButton('pairing-scan-cancel', 'pairingScanCancel')
   setupButton('pairing-error-ok', 'pairingErrorOk')
