@@ -544,10 +544,12 @@ button {
 
 .cash-in-color .filled-progress-button:disabled {
   color: #37e8d7;
+  pointer-events: none;
 }
 
 .cash-out-color .filled-progress-button:disabled {
   color: #fe7f78;
+  pointer-events: none;
 }
 
 .filled-progress-button-bg {
@@ -950,6 +952,7 @@ footer .filled-progress-button:after, footer .bordered-progress-button:after {
 .address_reuse_state .text-content,
 .suspicious_address_state .text-content,
 .max_phone_retries_state .text-content,
+.email_verification_state .text-content,
 .sms_verification_state .text-content {
   max-width: 75vh;
 }
@@ -2323,6 +2326,7 @@ footer {
 .standard-keyboard {
   box-sizing: border-box;
   width: 100%;
+  direction: ltr;
 }
 .standard-keyboard .standard-backspace {
   display: -webkit-box;
@@ -2793,6 +2797,17 @@ footer {
           flex-direction: column;
 }
 
+.email-input-field {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+}
+
 .text-input-field {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2824,11 +2839,13 @@ footer {
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
           justify-content: flex-end;
-  margin-right: 24vh;
+  -webkit-margin-end: 24vh;
+          margin-inline-end: 24vh;
 }
 
 .submit-text-requirement-button {
-  margin-right: 160px;
+  -webkit-margin-end: 160px;
+          margin-inline-end: 160px;
   margin-top: 20px;
 }
 

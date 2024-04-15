@@ -1204,6 +1204,7 @@ footer {
 .standard-keyboard {
   box-sizing: border-box;
   width: 100%;
+  direction: ltr;
   .standard-backspace {
     display: flex;
     align-items: center;
@@ -1586,6 +1587,12 @@ footer {
   flex-direction: column;
 }
 
+.email-input-field {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
 .text-input-field {
   display: flex;
   flex-direction: column;
@@ -1610,11 +1617,11 @@ footer {
 
 .submit-text-requirement-button-wrapper {
   justify-content: flex-end;
-  margin-right: 24vh;
+  margin-inline-end: 24vh;
 }
 
 .submit-text-requirement-button {
-  margin-right: 160px;
+  margin-inline-end: 160px;
   margin-top: 20px;
 }
 

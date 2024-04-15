@@ -50,6 +50,7 @@ var cassettes = null;
 var currentCryptoCode = null;
 var currentCoin = null;
 var currentCoins = [];
+var emailKeyboard = null;
 var customRequirementNumericalKeypad = null;
 var customRequirementTextKeyboard = null;
 var customRequirementChoiceList = null;
@@ -78,18 +79,25 @@ function buttonPressed(button, data) {
   if (!buttonActive) return;
   wifiKeyboard.deactivate();
   promoKeyboard.deactivate();
+  emailKeyboard.deactivate();
   customRequirementTextKeyboard.deactivate();
   buttonActive = false;
   setTimeout(function () {
     buttonActive = true;
     wifiKeyboard.activate();
     promoKeyboard.activate();
+    emailKeyboard.activate();
     customRequirementTextKeyboard.activate();
   }, 300);
   var res = { button: button };
   if (data || data === null) res.data = data;
   if (websocket) websocket.send(JSON.stringify(res));
 }
+
+var displayLN = 'Lightning Network';
+var displayBTC = 'Bitcoin<br>(LN)';
+var LN = 'LN';
+var BTC = 'BTC';
 
 function processData(data) {
   if (data.localeInfo) setLocaleInfo(data.localeInfo);
@@ -175,11 +183,15 @@ function processData(data) {
     case 'registerUsSsn':
       usSsnKeypad.activate();
       setState('register_us_ssn');
-      setComplianceTimeout();
+      setComplianceTimeout(null, 'finishBeforeSms');
       break;
     case 'registerPhone':
       phoneKeypad.activate();
       setState('register_phone');
+      break;
+    case 'registerEmail':
+      emailKeyboard.setConstraint('email', ['#submit-email']);
+      setState('register_email');
       break;
     case 'securityCode':
       securityKeypad.activate();
@@ -253,6 +265,9 @@ function processData(data) {
     case 'smsVerification':
       smsVerification(data.threshold);
       break;
+    case 'emailVerification':
+      emailVerification(data.threshold);
+      break;
     case 'permission_id':
       idVerification();
       break;
@@ -277,6 +292,9 @@ function processData(data) {
       break;
     case 'inputCustomInfoRequest':
       customInfoRequest(data.customInfoRequest);
+      break;
+    case 'invalidAddress':
+      invalidAddress(data.lnInvoiceTypeError);
       break;
     default:
       if (data.action) setState(window.snakecase(data.action));
@@ -305,29 +323,43 @@ function translate(data, fetchArgs) {
 }
 
 function facephotoPermission() {
+  setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('permission_face_photo');
 }
 
 function usSsnPermission() {
-  setComplianceTimeout();
+  setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('us_ssn_permission');
 }
 
 function customInfoRequestPermission(customInfoRequest) {
   $('#custom-screen1-title').text(customInfoRequest.screen1.title);
   $('#custom-screen1-text').text(customInfoRequest.screen1.text);
-  setComplianceTimeout();
+  setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('custom_permission');
 }
 
-function setComplianceTimeout(interval) {
+function setComplianceTimeout(interval, complianceButton) {
   clearTimeout(complianceTimeout);
 
-  if (interval === 0) return;
+  if (interval === 0) {
+    return;
+  }
 
   complianceTimeout = setTimeout(function () {
-    buttonPressed('cancelCustomInfoRequest');
+    buttonPressed(complianceButton);
   }, interval == null ? 60000 : interval);
+}
+
+function invalidAddress(lnInvoiceTypeError) {
+  if (lnInvoiceTypeError) {
+    $('#invalid-address').hide();
+    $('#invalid-invoice').show();
+  } else {
+    $('#invalid-invoice').hide();
+    $('#invalid-address').show();
+  }
+  setState('invalid_address');
 }
 
 function customInfoRequest(customInfoRequest) {
@@ -343,6 +375,7 @@ function customInfoRequest(customInfoRequest) {
       customRequirementNumericalKeypad.activate();
       setState('custom_permission_screen2_numerical');
       setScreen('custom_permission_screen2_numerical');
+      setComplianceTimeout(null, 'cancelCustomInfoRequest');
       break;
     case 'text':
       $('#custom-requirement-text-label1').text(customInfoRequest.input.label1);
@@ -363,7 +396,7 @@ function customInfoRequest(customInfoRequest) {
       }
       setState('custom_permission_screen2_text');
       setScreen('custom_permission_screen2_text');
-      setComplianceTimeout();
+      setComplianceTimeout(null, 'cancelCustomInfoRequest');
       break;
     case 'choiceList':
       $('#custom-screen2-choiceList-title').text(customInfoRequest.screen2.title);
@@ -371,7 +404,7 @@ function customInfoRequest(customInfoRequest) {
       customRequirementChoiceList.replaceChoices(customInfoRequest.input.choiceList, customInfoRequest.input.constraintType);
       setState('custom_permission_screen2_choiceList');
       setScreen('custom_permission_screen2_choiceList');
-      setComplianceTimeout();
+      setComplianceTimeout(null, 'cancelCustomInfoRequest');
       break;
     default:
       return blockedCustomer();
@@ -379,12 +412,19 @@ function customInfoRequest(customInfoRequest) {
 }
 
 function idVerification() {
+  setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('permission_id');
 }
 
 function smsVerification(threshold) {
   console.log('sms threshold to be displayed', threshold);
+  setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('sms_verification');
+}
+
+function emailVerification(threshold) {
+  setComplianceTimeout(null, 'finishBeforeSms');
+  setScreen('email_verification');
 }
 
 function blockedCustomer() {
@@ -482,7 +522,7 @@ function setupCoinsButtons() {
 
 function setCryptoBuy(coin) {
   var cashIn = $('.cash-in');
-  var translatedCoin = translate(coin.display);
+  var translatedCoin = translate(coin.display === displayLN ? displayBTC : coin.display);
   var buyStr = translate('Buy<br/>%s', [translatedCoin]);
 
   cashIn.html(buyStr);
@@ -490,7 +530,7 @@ function setCryptoBuy(coin) {
 
 function setCryptoSell(coin) {
   var cashOut = $('.cash-out');
-  var translatedCoin = translate(coin.display);
+  var translatedCoin = translate(coin.display === displayLN ? displayBTC : coin.display);
   var sellStr = translate('Sell<br/>%s', [translatedCoin]);
 
   cashOut.html(sellStr);
@@ -597,6 +637,16 @@ $(document).ready(function () {
   }, function (result) {
     if (currentState !== 'custom_permission_screen2_numerical') return;
     buttonPressed('customInfoRequestSubmit', result);
+  });
+
+  emailKeyboard = new Keyboard({
+    id: 'email-keyboard',
+    inputBox: '#email-input',
+    submitButtonWrapper: '#submit-email-wrapper',
+    setComplianceTimeout: setComplianceTimeout
+  }).init(function (result) {
+    if (currentState !== 'register_email') return;
+    buttonPressed('email', result);
   });
 
   customRequirementTextKeyboard = new Keyboard({
@@ -713,9 +763,17 @@ $(document).ready(function () {
     buttonPressed('submitPromoCode', { input: code });
   });
 
+  var submitEmailButton = document.getElementById('submit-email');
   var submitTextRequirementButton = document.getElementById('submit-text-requirement');
   var nextFieldTextRequirementButton = document.getElementById('next-text-requirement');
   var previousFieldTextRequirementButton = document.getElementById('previous-text-requirement');
+  touchEvent(submitEmailButton, function () {
+    emailKeyboard.deactivate.bind(emailKeyboard);
+    var text = $('#email-input').data('content');
+    buttonPressed('email', text);
+    $('#email-input').data('content', '').val('');
+    emailKeyboard.setInputBox('#email-input');
+  });
   touchEvent(submitTextRequirementButton, function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
     var text = $('.text-input-field-1').data('content') + ' ' + ($('.text-input-field-2').data('content') || '');
@@ -756,6 +814,7 @@ $(document).ready(function () {
 
   setupImmediateButton('scan-id-cancel', 'idDataActionCancel');
   setupImmediateButton('scan-photo-cancel', 'idPhotoActionCancel');
+  setupImmediateButton('scan-photo-manual-cancel', 'idPhotoActionCancel');
   setupImmediateButton('us-ssn-cancel', 'cancelUsSsn', usSsnKeypad.deactivate.bind(usSsnKeypad));
   setupImmediateButton('phone-number-cancel', 'cancelPhoneNumber', phoneKeypad.deactivate.bind(phoneKeypad));
   setupImmediateButton('security-code-cancel', 'cancelSecurityCode', securityKeypad.deactivate.bind(securityKeypad));
@@ -784,6 +843,7 @@ $(document).ready(function () {
   setupButton('bad-phone-number-ok', 'badPhoneNumberOk');
   setupButton('bad-security-code-ok', 'badSecurityCodeOk');
   setupButton('max-phone-retries-ok', 'maxPhoneRetriesOk');
+  //setupButton('max-email-retries-ok', 'maxEmailRetriesOk')
   setupButton('redeem-later-ok', 'idle');
   setupButton('pre-receipt-ok', 'fiatReceipt');
   setupButton('fiat-error-ok', 'idle');
@@ -791,6 +851,7 @@ $(document).ready(function () {
   setupButton('fiat-transaction-error-ok', 'fiatReceipt');
 
   setupButton('unknown-phone-number-ok', 'idle');
+  setupButton('unknown-email-ok', 'idle');
   setupButton('unconfirmed-deposit-ok', 'idle');
   setupButton('tx-not-seen-ok', 'idle');
   setupButton('wrong-dispenser-currency-ok', 'idle');
@@ -833,7 +894,7 @@ $(document).ready(function () {
     });
     if (!wantedCoin) return;
 
-    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display };
+    var coin = { cryptoCode: cryptoCode, display: wantedCoin.display === displayLN ? displayBTC : wantedCoin.display };
     switchCoin(coin);
   });
 
@@ -856,6 +917,7 @@ $(document).ready(function () {
   setupButton('facephoto-scan-failed-retry', 'retryFacephoto');
   setupButton('id-start-verification', 'permissionIdCompliance');
   setupButton('sms-start-verification', 'permissionSmsCompliance');
+  setupButton('email-start-verification', 'permissionEmailCompliance');
   setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto');
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance');
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance');
@@ -864,6 +926,8 @@ $(document).ready(function () {
   setupButton('send-coins-id-2', 'finishBeforeSms');
   setupButton('send-coins-sms', 'finishBeforeSms');
   setupButton('send-coins-sms-2', 'finishBeforeSms');
+  setupButton('send-coins-email', 'finishBeforeSms');
+  setupButton('send-coins-email-2', 'finishBeforeSms');
 
   setupButton('facephoto-permission-no', 'finishBeforeSms');
   setupButton('us-ssn-permission-send-coins', 'finishBeforeSms');
@@ -876,6 +940,11 @@ $(document).ready(function () {
   setupButton('custom-permission-no', 'finishBeforeSms');
   setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
+  });
+  setupImmediateButton('email-cancel', 'cancelEmail', function () {
+    emailKeyboard.deactivate.bind(emailKeyboard);
+    $('#email-input').data('content', '').val('');
+    emailKeyboard.setInputBox('#email-input');
   });
   setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', function () {
     customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
@@ -1039,6 +1108,7 @@ function setState(state, delay) {
 
   wifiKeyboard.reset();
   promoKeyboard.reset();
+  emailKeyboard.reset();
   customRequirementTextKeyboard.reset();
 
   if (state === 'idle') {
@@ -1132,7 +1202,7 @@ function setCryptomatModel(model) {
 }
 
 function setDirection(direction) {
-  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state'), $('.custom_permission_screen2_choiceList_state')];
+  var states = [$('.scan_id_photo_state'), $('.scan_manual_id_photo_state'), $('.scan_id_data_state'), $('.security_code_state'), $('.register_us_ssn_state'), $('.us_ssn_permission_state'), $('.register_phone_state'), $('.register_email_state'), $('.terms_screen_state'), $('.verifying_id_photo_state'), $('.verifying_face_photo_state'), $('.verifying_id_data_state'), $('.permission_id_state'), $('.sms_verification_state'), $('.email_verification_state'), $('.bad_phone_number_state'), $('.bad_security_code_state'), $('.max_phone_retries_state'), $('.max_email_retries_state'), $('.failed_permission_id_state'), $('.failed_verifying_id_photo_state'), $('.blocked_customer_state'), $('.fiat_error_state'), $('.fiat_transaction_error_state'), $('.failed_scan_id_data_state'), $('.sanctions_failure_state'), $('.error_permission_id_state'), $('.scan_face_photo_state'), $('.retry_scan_face_photo_state'), $('.permission_face_photo_state'), $('.failed_scan_face_photo_state'), $('.hard_limit_reached_state'), $('.failed_scan_id_photo_state'), $('.retry_permission_id_state'), $('.waiting_state'), $('.insert_promo_code_state'), $('.promo_code_not_found_state'), $('.custom_permission_state'), $('.custom_permission_screen2_numerical_state'), $('.custom_permission_screen2_text_state'), $('.custom_permission_screen2_choiceList_state')];
   states.forEach(function (it) {
     setUpDirectionElement(it, direction);
   });
@@ -1238,7 +1308,7 @@ function startPage(text, acceptedTerms) {
     textHeightQuantity = document.getElementById('js-terms-text').offsetHeight;
     scrollSize = div.offsetHeight - 40;
     updateButtonStyles();
-    if (textHeightQuantity <= div.offsetHeight) {
+    if (text.length <= 1000 && textHeightQuantity <= div.offsetHeight) {
       document.getElementById('actions-scroll').style.display = 'none';
     } else {
       document.getElementById('actions-scroll').style.display = '';
@@ -1570,14 +1640,14 @@ function setExchangeRate(_rates) {
     var cryptoToFiat = new BigNumber(rates.cashIn);
     var rateStr = formatFiat(cryptoToFiat.round(2).toNumber(), 2);
 
-    $('.crypto-rate-cash-in').html('1 ' + cryptoCode + ' = ' + rateStr);
+    $('.crypto-rate-cash-in').html('1 ' + (cryptoCode === LN ? BTC : cryptoCode) + ' = ' + rateStr);
   }
 
   if (rates.cashOut) {
     var cashOut = new BigNumber(rates.cashOut);
     var cashOutCryptoToFiat = cashOut && formatFiat(cashOut.round(2).toNumber(), 2);
 
-    $('.crypto-rate-cash-out').html('1 ' + cryptoCode + ' = ' + cashOutCryptoToFiat);
+    $('.crypto-rate-cash-out').html('1 ' + (cryptoCode === LN ? BTC : cryptoCode) + ' = ' + cashOutCryptoToFiat);
   }
 
   $('.js-crypto-display-units').text(displayCode);
@@ -1641,6 +1711,11 @@ function setTx(tx) {
 
 function formatAddressNoBreakLines(address) {
   if (!address) return;
+  if (address.length > 60) {
+    var firstPart = address.substring(0, 40).replace(/(.{4})/g, '$1 ');
+    var secondPart = address.substring(address.length - 16, address.length).replace(/(.{4})/g, '$1 ');
+    return firstPart.concat('... ').concat(secondPart);
+  }
   return address.replace(/(.{4})/g, '$1 ');
 }
 
@@ -1720,7 +1795,9 @@ function t(id, str) {
   $('#js-i18n-' + id).html(str);
 }
 
-function translateCoin(cryptoCode) {
+function translateCoin(_cryptoCode) {
+  var coin = getCryptoCurrency(_cryptoCode);
+  var cryptoCode = coin.cryptoCodeDisplay || _cryptoCode;
   $('.js-i18n-scan-your-address').html(translate('Scan your <br/> %s address', [cryptoCode]));
   $('.js-i18n-please-scan').html(translate('Please scan the QR code <br/> to send us your %s.', [cryptoCode]));
   $('.js-i18n-did-send-coins').html(translate('Have you sent the %s yet?', [cryptoCode]));
@@ -1850,6 +1927,8 @@ function deposit(tx) {
   $('#qr-code-deposit').empty();
   $('.deposit_state .loading').show();
   $('#qr-code-deposit').show();
+  $('#lightning-enabled').hide();
+  if (tx.cryptoCode === 'LN') $('#lightning-enabled').show();
 
   setState('deposit');
 }

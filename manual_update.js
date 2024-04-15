@@ -15,12 +15,12 @@ config.skipVerify = true
 var extractor = require(codeRoot + '/lib/update/extractor').factory(config)
 
 var fileInfo = {
-  rootPath: '/tmp/extract',
-  filePath: '/tmp/update.tar'
+  rootPath: '/opt/lamassu-updates/extract',
+  filePath: '/opt/lamassu-updates/download/update.tar'
 }
 
 function triggerWatchdog (cb) {
-  var donePath = '/tmp/extract/done.txt'
+  var donePath = '/opt/lamassu-updates/extract/done.txt'
   fs.writeFile(donePath, 'DONE\n', null, function (err) {
     if (err) throw err
     console.log('watchdog triggered')

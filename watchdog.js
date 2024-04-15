@@ -20,7 +20,7 @@ console.error = function(){
   error(date, 'ERROR', ...arguments)
 };
 
-var BASE = '/tmp/extract'
+var BASE = '/opt/lamassu-updates/extract'
 var DONE_PATH = BASE + '/done.txt'
 var SCRIPT_PATH = BASE + '/package/updatescript.js'
 var RUNNING_PATH = BASE + '/running.txt'
@@ -87,7 +87,8 @@ function executeScript () {
     return
   }
   console.log('in execute')
-  child = cp.fork(SCRIPT_PATH, [platform, model])
+  const UPDATED_PATH = true
+  child = cp.fork(SCRIPT_PATH, [platform, model, UPDATED_PATH])
   child.on('error', function (err) {
     cleanUp()
     console.log(err)

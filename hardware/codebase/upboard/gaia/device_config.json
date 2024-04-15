@@ -52,8 +52,6 @@
   },
   "updater": {
     "caFile": "/opt/certs/lamassu.pem",
-    "downloadDir": "/tmp/download",
-    "extractDir": "/tmp/extract",
     "extractor": {
       "lamassuPubKeyFile": "/opt/certs/lamassu.pub.key"
     },

@@ -8,7 +8,7 @@ with import (fetchTarball {
 stdenv.mkDerivation {
     name = "node";
     buildInputs = [
-      nodejs-8_x
+      nodejs-6_x
       openssl_1_0_2
       python2Full
       entr

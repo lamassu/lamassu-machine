@@ -214,6 +214,30 @@ msgstr "Collect bills"
 msgid "To continue dispensing, take your cash from the tray."
 msgstr "To continue dispensing, take your cash from the tray."
 
+#: On screen: email-verification
+msgid "Verify email to continue"
+msgstr "Verify email to continue"
+
+#: On screen: email-verification
+msgid "If you'd like to make a larger purchase we need to ask for your email. We'll then send you a confirmation code."
+msgstr "If you'd like to make a larger purchase we need to ask for your email. We'll then send you a confirmation code."
+
+#: On screen: email-verification
+msgid "Would you like to insert more bills?"
+msgstr "Would you like to insert more bills?"
+
+#: On screen: email-verification
+msgid "Yes, verify email"
+msgstr "Yes, verify email"
+
+#: On screen: email-verification
+msgid "No, send coins"
+msgstr "No, send coins"
+
+#: On screen: email-verification
+msgid "No, cancel"
+msgstr "No, cancel"
+
 #: On screen: facephoto
 msgid "Look at the dot"
 msgstr "Look at the dot"
@@ -253,14 +277,6 @@ msgstr "Shall we try another photo?"
 #: On screen: facephoto-failed-number
 msgid "Yes, try again"
 msgstr "Yes, try again"
-
-#: On screen: facephoto-failed-number
-msgid "No, send coins"
-msgstr "No, send coins"
-
-#: On screen: facephoto-failed-number
-msgid "No, cancel"
-msgstr "No, cancel"
 
 #: On screen: facephoto_retry
 msgid "Look into the camera"
@@ -323,10 +339,6 @@ msgid "If you'd like to make a larger purchase, we'll need to make sure you're y
 msgstr "If you'd like to make a larger purchase, we'll need to make sure you're you by asking for you to scan your ID."
 
 #: On screen: id-verification
-msgid "Would you like to insert more bills?"
-msgstr "Would you like to insert more bills?"
-
-#: On screen: id-verification
 msgid "Yes, verify ID"
 msgstr "Yes, verify ID"
 
@@ -382,6 +394,18 @@ msgstr "It looks like you're using a wallet for a different coin or an address f
 msgid "Please check your QR code and try again."
 msgstr "Please check your QR code and try again."
 
+#: On screen: invalid-address
+msgid "Invalid LN invoice"
+msgstr "Invalid LN invoice"
+
+#: On screen: invalid-address
+msgid "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+msgstr "It looks like you're using a non-zero amount invoice and we only support flexible ones."
+
+#: On screen: invalid-address
+msgid "Please create a new invoice and try again."
+msgstr "Please create a new invoice and try again."
+
 #: On screen: limit-reached
 msgid "We're all out of coins!"
 msgstr "We're all out of coins!"
@@ -390,11 +414,11 @@ msgstr "We're all out of coins!"
 msgid "Please try again later."
 msgstr "Please try again later."
 
-#: On screen: max-phone-retries
+#: On screen: max-email-retries
 msgid "Oops, this isn't working"
 msgstr "Oops, this isn't working"
 
-#: On screen: max-phone-retries
+#: On screen: max-email-retries
 msgid "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 msgstr "You've hit the maximum number of retries. Please contact the operator to sort this out, or try again later."
 
@@ -757,6 +781,14 @@ msgstr "We see your transaction but we're still waiting for confirmation. This t
 #: On screen: unconfirmed-deposit
 msgid "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
 msgstr "Please come back for your cash and press <strong>Redeem</strong> when you get our text message."
+
+#: On screen: unknown-email
+msgid "We don't see any open orders associated with your email. If you have another email you may have used, you can try redeeming again with that email."
+msgstr "We don't see any open orders associated with your email. If you have another email you may have used, you can try redeeming again with that email."
+
+#: On screen: unknown-email
+msgid "If you're sure you have an open order associated with this email, please contact the operator."
+msgstr "If you're sure you have an open order associated with this email, please contact the operator."
 
 #: On screen: unknown-phone-number
 msgid "We don't see any open orders associated with your phone. If you have another phone you may have used, you can try redeeming again with that number."

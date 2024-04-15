@@ -36,6 +36,7 @@
 .address_reuse_state,
 .suspicious_address_state,
 .max_phone_retries_state,
+.email_verification_state,
 .sms_verification_state {
   .text-content {
     max-width: 75vh;
