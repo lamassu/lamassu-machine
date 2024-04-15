@@ -434,6 +434,12 @@ main {
   }
 }
 
+.scan_face_photo_state {
+  img {
+    width: 2vh;
+    margin-bottom: 22vh;
+  }
+}
 
 .dispensing_state,
 .dispensing_collect_state,
