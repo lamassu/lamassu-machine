@@ -4,7 +4,6 @@
     "freeMemRatio": 0.01,
     "powerStatus": null,
     "dataPath": "data",
-    "wifiConfigPath": null,
     "nfcReader": null,
     "wifiDisabled": true
   },

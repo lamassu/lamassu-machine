@@ -5,15 +5,11 @@ var path = require('path')
 var _ = require('lodash')
 
 var codeRoot = __dirname
-var SOFTWARE_CONFIG_PATH = path.resolve(codeRoot, 'software_config.json')
 var DEVICE_CONFIG_PATH = path.resolve(codeRoot, 'device_config.json')
 
-var softwareConfig = JSON.parse(fs.readFileSync(SOFTWARE_CONFIG_PATH))
 var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
 
-var masterConfig = softwareConfig
-_.merge(masterConfig, deviceConfig)
-var config = masterConfig.updater.extractor
+var config = deviceConfig.updater.extractor
 
 config.skipVerify = true
 var extractor = require(codeRoot + '/lib/update/extractor').factory(config)

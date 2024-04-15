@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ -z $1 ] || [ -z $2 ]; then 
-  echo "Usage: npm run build-update-tar -- <path/to/build/folder> <path/to/deploy-files.tar.gz>"
-else
-  docker build -t lamassu-update -f update-tar-build/Dockerfile .
-  docker run -v $1:/usr/app/build -v $2:/usr/app/deploy-files.tar.gz lamassu-update
-fi

@@ -17,7 +17,6 @@
     "got": "^7.1.0",
     "graphql": "^15.8.0",
     "jsqr": "^1.3.1",
-    "left-pad": "^1.1.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
     "minimist": "^1.2.0",
@@ -67,7 +66,8 @@
   },
   "scripts": {
     "test": "ava test",
-    "build": "npm run build:html && npm run && npm run build:js && npm run build:sass && npm run build:autoprefix && npm run build:i18n",
+    "build": "npm run build:html && npm run build:js && npm run build:sass && npm run build:autoprefix && npm run build:i18n && npm run build:test-files",
+    "build:test-files": "bash ./build-scripts/build-docker.sh",
     "build:html": "node ./ui/scripts/inline-html.js",
     "build:js": "babel ui/src/ -s -d ui/js/",
     "build:sass": "sass ui/css/main.scss ui/css/build/main.css",
