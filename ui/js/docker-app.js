@@ -59,7 +59,7 @@ var MUSEO = ['ca', 'cs', 'da', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hr', 'hu', '
 
 function connect() {
   console.log('ws://' + HOST + ':' + PORT + '/');
-  websocket = new WebSocket('ws://' + HOST + ':' + PORT + '/');
+  websocket = new WebSocket('ws://' + location.hostname + '/ws');
   websocket.onmessage = function (event) {
     var data = $.parseJSON(event.data);
     processData(data);
