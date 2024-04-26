@@ -3,7 +3,6 @@
 var argv = require('minimist')(process.argv.slice(2))
 var _ = require('lodash')
 
-const leds = require('../lib/leds/leds')
 
 var billDispenser
 
@@ -18,7 +17,6 @@ if (notes.length !== 2) {
   process.exit(1)
 }
 
-leds.flashValidator()
 billDispenser = require('../lib/billdispenser').factory({device: device})
 billDispenser.open()
   .then(
@@ -29,7 +27,6 @@ billDispenser.open()
     })
   .then(
     result => {
-      leds.off()
       console.dir(result.bills)
       setTimeout(() => process.exit(0), 500)
     })

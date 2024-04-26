@@ -31,8 +31,14 @@ FROM lamassu/upboard-build:2.0 as upboard-aveiro-build
     cp ./hardware/codebase/upboard/aveiro/device_config.json ./ && \
     bash ./deploy/codebase/build.sh upboard-aveiro --copy-device-config
 
-FROM lamassu/upboard-build:2.0 as coincloud-ipro-build
+FROM lamassu/upboard-build:2.0 as upboard-grandola-build
   COPY --from=upboard-aveiro-build /lamassu/lamassu-machine /lamassu/lamassu-machine
+  RUN cd lamassu-machine && \
+    cp ./hardware/codebase/up4000/grandola/device_config.json ./ && \
+    bash ./deploy/codebase/build.sh upboard-aveiro --copy-device-config
+
+FROM lamassu/upboard-build:2.0 as coincloud-ipro-build
+  COPY --from=upboard-grandola-build /lamassu/lamassu-machine /lamassu/lamassu-machine
   RUN cd lamassu-machine && \
     cp ./hardware/codebase/coincloud/jcm-ipro-rc/device_config.json ./ && \
     bash ./deploy/codebase/build.sh coincloud-ipro --copy-device-config

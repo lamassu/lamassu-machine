@@ -73,16 +73,6 @@ if [ $1 == "aaeon" ] ; then
   if [ $2 == "--copy-device-config" ] ; then
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/aaeon/
   fi
-elif [ $1 == "ssuboard" ] ; then
-  mkdir -p $EXPORT_DIR/hardware/ssuboard/node_modules
-  mkdir -p $EXPORT_DIR/supervisor/ssuboard
-
-  cp $SYSTEM_DIR/ssuboard/supervisor/conf.d/* $EXPORT_DIR/supervisor/ssuboard
-  cp -R $MACHINE_DIR/node_modules $EXPORT_DIR/hardware/ssuboard/
-  node $MACHINE_DIR/deploy/remove-modules.js $EXPORT_DIR/hardware/ssuboard/node_modules --rem-interpreted
-  if [ $2 == "--copy-device-config" ] ; then
-    cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/ssuboard/
-  fi
 elif [ $1 == "upboard-sintra" ] ; then
   mkdir -p $EXPORT_DIR/hardware/upboard/node_modules
   mkdir -p $EXPORT_DIR/supervisor/upboard/sintra
@@ -158,7 +148,7 @@ elif [[ $1 = coincloud* ]] ; then
     cp $MACHINE_DIR/device_config.json $EXPORT_DIR/hardware/coincloud/$COINCLOUD_VERSION/
   fi
 else
-  echo "The first argument should the target's platform name: aaeon, ssuboard, upboard"
+  echo "The first argument should the target's platform name: aaeon, upboard"
   exit 1
 fi
 
