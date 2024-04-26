@@ -1,9 +1,7 @@
 {
   "cryptomatModel": "sintra",
   "brain": {
-    "powerStatus": null,
     "dataPath": "data",
-    "nfcReader": null,
     "wifiDisabled": true
   },
   "kioskPrinter": {

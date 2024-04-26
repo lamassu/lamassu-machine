@@ -2,9 +2,7 @@
  "cryptomatMaker": "genmega",
  "cryptomatModel": "gmuk2",
   "brain": {
-    "powerStatus": null,
     "dataPath": "data",
-    "nfcReader": null,
     "wifiDisabled": true
   },
   "kioskPrinter": {

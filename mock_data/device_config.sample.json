@@ -1,7 +1,5 @@
 {
   "brain": {
-    "freeMemRatio": 0.01,
-    "powerStatus": null,
     "dataPath": "data",
     "mockCryptoQR": {},
     "mockCameraImage": "mock_data/compliance/license.jpg"
