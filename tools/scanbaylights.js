@@ -1,6 +1,6 @@
 const actionEmitter = require('../lib/action-emitter')
 
-const ledManager = require('../lib/ssuboard/led-manager')
+const ledManager = require('../lib/upboard/sintra/led-manager')
 
 function lightOn () {
   actionEmitter.emit('brain', {action: 'scanBayLightOn'})

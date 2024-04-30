@@ -1,16 +1,11 @@
 {
   "cryptomatModel": "douro1",
   "brain": {
-    "freeMemRatio": 0.01,
-    "powerStatus": null,
     "dataPath": "/var/lib/lamassu-machine",
-    "batteryCapacityPath": null,
     "tempSensorPath": [
       "/sys/class/hwmon/hwmon0/device/temp2_input",
       "/sys/class/hwmon/hwmon1/device/temp2_input"
     ],
-    "scanLightOnInterval": null,
-    "scanLightOffInterval": 1000,
     "resetBasePath": "/sys/bus/usb/devices"
   },
   "wifi": {

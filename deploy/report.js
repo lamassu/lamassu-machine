@@ -7,7 +7,7 @@ var path = require('path');
 function loadCerts() {
   var config;
 
-  // ssuboard & aaeon-upboard
+  // aaeon-upboard & up4000
   if (fs.existsSync('/opt/lamassu-machine')) {
     config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
     if (fs.existsSync(config.updater.caFile)) return {

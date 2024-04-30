@@ -2,9 +2,7 @@
  "cryptomatMaker": "coincloud",
  "cryptomatModel": "jcm-ipro-rc",
   "brain": {
-    "powerStatus": null,
     "dataPath": "data",
-    "nfcReader": null,
     "wifiDisabled": true
   },
   "kioskPrinter": {

@@ -2,9 +2,7 @@
   "cryptomatMaker": "generalbytes",
   "cryptomatModel": "batm3",
   "brain": {
-    "powerStatus": null,
     "dataPath": "data",
-    "nfcReader": null,
     "wifiDisabled": true
   },
   "kioskPrinter": {

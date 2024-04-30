@@ -1,11 +1,11 @@
-const delay = require('delay')
+const { setTimeout: delay } = require('node:timers/promises')
 
 const actionEmitter = require('../lib/action-emitter')
 
 const ledManager = process.argv[2] === 'gaia' ?
   require('../lib/upboard/gaia/led-manager')
   :
-  require('../lib/ssuboard/led-manager')
+  require('../lib/upboard/sintra/led-manager')
 
 const ledAddresses = process.argv[2] === 'tejo'
   ? require('../lib/upboard/tejo/led-addresses')

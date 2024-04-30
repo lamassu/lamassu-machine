@@ -1,9 +1,7 @@
 {
   "cryptomatModel": "tejo",
   "brain": {
-    "powerStatus": null,
     "dataPath": "data",
-    "nfcReader": null,
     "wifiDisabled": true
   },
   "kioskPrinter": {
