@@ -13,7 +13,7 @@ const newPath = process.argv[4];
 const basePath = newPath ? '/opt/lamassu-updates/extract' : '/tmp/extract'
 const packagePath = `${basePath}/package/subpackage`
 
-const machineWithMultipleCodes = ['upboard', 'coincloud']
+const machineWithMultipleCodes = ['upboard', 'coincloud', 'generalbytes', 'genmega']
 
 const path = machineWithMultipleCodes.includes(hardwareCode) ?
   `${packagePath}/hardware/${hardwareCode}/${machineCode}` :
