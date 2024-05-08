@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "./LICENSE",
-  "version": "10.0.0-rc.7",
+  "version": "10.0.0-rc.8",
   "dependencies": {
     "@apollo/client": "3.7.15",
     "@fczbkk/uuid4": "^3.0.0",
@@ -10,6 +10,7 @@
     "async": "~1.5.2",
     "base-x": "3.0.9",
     "bignumber.js": "^4.0.1",
+    "cheerio": "^1.0.0-rc.10",
     "clim": "*",
     "core-js": "^3.21.1",
     "got": "^7.1.0",
@@ -41,7 +42,6 @@
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.0",
     "benchmark": "2.1.4",
-    "cheerio": "^1.0.0-rc.10",
     "copy-node-modules": "1.1.1",
     "postcss-cli": "6.1.1",
     "rimraf": "2.6.3",
