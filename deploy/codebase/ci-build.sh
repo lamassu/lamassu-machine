@@ -5,7 +5,6 @@ set -e
 setup_board_model() {
   local board="$1"
   local model="$2"
-  local config_flag="$3"
 
   # Define export directories for the board and model
   board_export_dir="$EXPORT_DIR/hardware/$board"
