@@ -1,15 +1,13 @@
 FROM lamassu/upboard-build:2.0 as build
-  ARG VERSION
-  ARG PASSWORD
 
-  RUN mkdir lamassu-machine && cd lamassu-machine && \
-    curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x
+  WORKDIR lamassu-machine
 
-  COPY ["package.json", "package-lock.json", "./lamassu-machine/"]
+  RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x
+
+  COPY ["package.json", "package-lock.json", "./"]
   RUN npm version --allow-same-version --git-tag-version false --commit-hooks false 1.0.0
-  RUN cd lamassu-machine && npm install
-  COPY . ./lamassu-machine/
+  RUN npm install
+  COPY . ./
 
-  RUN cd lamassu-machine && \
-      bash ./deploy/codebase/ci-build.sh && \
+  RUN bash ./deploy/codebase/ci-build.sh && \
       bash ./deploy/codebase/package.sh
