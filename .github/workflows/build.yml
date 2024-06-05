@@ -2,22 +2,50 @@ name: build
 
 on: [workflow_dispatch]
 
-jobs: 
+jobs:
   everything:
     runs-on: ubuntu-latest
-    env:
-      LICENCES_PASSWORD: ${{ secrets.LICENCES_PASSWORD }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
+
       - name: Get Repo
         uses: actions/checkout@v2
-      - name: Run script
-        shell: bash
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          install: true
+
+      - name: Build Docker image
         run: |
-         chmod +x ./build-scripts/ci-build.sh
-         ./build-scripts/ci-build.sh $LICENCES_PASSWORD
-      - uses: actions/upload-artifact@v3
+          docker build --cache-from=type=local,src=/tmp/.buildx-cache \
+                       --cache-to=type=local,dest=/tmp/.buildx-cache-new \
+                       -t build:latest -f build-scripts/Dockerfile.ci .
+
+      - name: Extract update.tar
+        run: |
+          id=$(docker create build:latest)
+          docker cp $id:/lamassu/lamassu-machine/build/codebase/update.tar ./update.tar
+          docker rm -v $id
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
           name: update.tar
           path: ./update.tar
+
+      - name: Save Docker cache
+        if: always()
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache-new
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
