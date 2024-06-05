@@ -29,12 +29,13 @@ jobs:
           context: .
           file: build-scripts/Dockerfile.ci
           load: true
+          tags: ci_image:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
       - name: Extract artifact from Docker image
         run: |
-          docker create --name extract_artifact ${{ github.sha }}
+          docker create --name extract_artifact ci_image:latest
           docker cp extract_artifact:/lamassu/lamassu-machine/build/codebase/update.tar ./update.tar
           docker rm extract_artifact
 
