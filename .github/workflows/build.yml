@@ -5,12 +5,14 @@ on: [workflow_dispatch]
 jobs:
   everything:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: build:${{ github.sha }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
       - name: Get Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -28,12 +30,12 @@ jobs:
       - name: Build Docker image
         run: |
           docker build --cache-from=type=local,src=/tmp/.buildx-cache \
-                       --cache-to=type=local,dest=/tmp/.buildx-cache-new \
-                       -t build:latest -f build-scripts/Dockerfile.ci .
+                     --cache-to=type=local,dest=/tmp/.buildx-cache \
+                     -t ${{ env.IMAGE_TAG }} -f build-scripts/Dockerfile.ci .
 
       - name: Extract update.tar
         run: |
-          id=$(docker create build:latest)
+          id=$(docker create ${{ env.IMAGE_TAG }})
           docker cp $id:/lamassu/lamassu-machine/build/codebase/update.tar ./update.tar
           docker rm -v $id
 
@@ -47,5 +49,5 @@ jobs:
         if: always()
         uses: actions/cache@v3
         with:
-          path: /tmp/.buildx-cache-new
+          path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
