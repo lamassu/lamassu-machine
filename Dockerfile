@@ -12,6 +12,7 @@ COPY . ./
 RUN npm run build
 
 RUN cp ./mock_data/device_config.sample.json ./device_config.json
+run mkdir ./ui/css/fonts
 RUN cp -r ./deploy-files/fonts/* ./ui/css/fonts/
 
 
