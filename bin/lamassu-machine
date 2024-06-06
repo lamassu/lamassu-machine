@@ -10,7 +10,7 @@ require('../lib/logging')
 var minimist = require('minimist')
 var Brain = require('../lib/brain')
 var Configuration = require('../lib/configuration.js')
-const scanner = require('../lib/scanner')
+let scanner = null
 
 var bailed = false
 var brain = null
@@ -33,6 +33,12 @@ function startBrain () {
   var config = Configuration.loadConfig(commandLine)
 
   brain = new Brain(config)
+
+  const isGenmegaMachine = config.cryptomatMaker === 'genmega'
+  this.scanner = config.mockCam
+    ? require('../lib/mocks/scanner')
+    : require(`../lib/${isGenmegaMachine ? 'scanner-genmega' : 'scanner'}`)
+
   brain.on('error', bail)
   brain.run()
 }
@@ -47,7 +53,7 @@ process.on('uncaughtException', err => {
 })
 process.on('unhandledRejection', console.log)
 process.on('exit', function () {
-  scanner.cancel()
+  if (scanner) scanner.cancel()
   console.log('lamassu-machine exiting')
 })
 
