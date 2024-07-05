@@ -63,8 +63,7 @@ function watch () {
     }
     return
   }
-  var exists = fs.existsSync(DONE_PATH)
-  if (exists) executeScript()
+  if (fs.existsSync(DONE_PATH)) executeScript()
 }
 
 function kill () {
@@ -76,8 +75,7 @@ function executeScript () {
   // TODO: check sig, and make sure we only run this once to completion
   if (running) return
 
-  var exists = fs.existsSync(SCRIPT_PATH)
-  if (!exists) {
+  if (!fs.existsSync(SCRIPT_PATH)) {
     console.error('Script file not present: %s', SCRIPT_PATH)
     return
   }
