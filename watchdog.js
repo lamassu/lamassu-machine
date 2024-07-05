@@ -1,11 +1,11 @@
 // This just looks for a script file, checks it's signature, and runs it
 'use strict'
 
-var fs = require('fs')
-var cp = require('child_process')
-var path = require('path')
+const fs = require('fs')
+const cp = require('child_process')
+const path = require('path')
 
-var watchdogInfoLoader = require('./lib/watchdog-info')
+const watchdogInfoLoader = require('./lib/watchdog-info')
 
 var log = console.log;
 var error = console.error;
