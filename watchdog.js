@@ -7,16 +7,16 @@ const path = require('path')
 
 const watchdogInfoLoader = require('./lib/watchdog-info')
 
-var log = console.log;
-var error = console.error;
+const log = console.log;
+const error = console.error;
 
 console.log = function(){
-  var date = (new Date).toISOString() 
+  const date = (new Date).toISOString()
   log(date, 'LOG', ...arguments)
 };
 
 console.error = function(){
-  var date = (new Date).toISOString() 
+  const date = (new Date).toISOString()
   error(date, 'ERROR', ...arguments)
 };
 
@@ -26,17 +26,17 @@ const SCRIPT_PATH = path.join(BASE, 'package', 'updatescript.js')
 const RUNNING_PATH = path.join(BASE, 'running.txt')
 const TIMEOUT = 600000
 
-var child = null
-var t0 = null
-var running = false
+let child = null
+let t0 = null
+let running = false
 
-var platform = process.argv[2] || 'N7G1'
-var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
+const platform = process.argv[2] || 'N7G1'
+const model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 
-var DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
+const DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
 
-var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
-var dataPath = path.resolve(__dirname, deviceConfig.brain.dataPath)
+const deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
+const dataPath = path.resolve(__dirname, deviceConfig.brain.dataPath)
 
 watchdogInfoLoader.save(dataPath, { model: model, platform: platform})
 
@@ -57,7 +57,7 @@ setInterval(function () {
 
 function watch () {
   if (running) {
-    var interval = Date.now() - t0
+    const interval = Date.now() - t0
     if (interval > TIMEOUT) {
       kill()
     }
