@@ -20,11 +20,11 @@ console.error = function(){
   error(date, 'ERROR', ...arguments)
 };
 
-var BASE = '/opt/lamassu-updates/extract'
-var DONE_PATH = BASE + '/done.txt'
-var SCRIPT_PATH = BASE + '/package/updatescript.js'
-var RUNNING_PATH = BASE + '/running.txt'
-var TIMEOUT = 600000
+const BASE = '/opt/lamassu-updates/extract'
+const DONE_PATH = path.join(BASE, 'done.txt')
+const SCRIPT_PATH = path.join(BASE, 'package', 'updatescript.js')
+const RUNNING_PATH = path.join(BASE, 'running.txt')
+const TIMEOUT = 600000
 
 var child = null
 var t0 = null
