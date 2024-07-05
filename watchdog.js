@@ -79,8 +79,7 @@ function executeScript () {
     console.error('Script file not present: %s', SCRIPT_PATH)
     return
   }
-  var success = start()
-  if (!success) {
+  if (!start()) {
     console.log("Can't run, there's a new update")
     return
   }
