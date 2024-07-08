@@ -128,28 +128,23 @@ function installDeviceConfig (cb) {
   }
 }
 
-const commands = []
+const upgrade = () => new Promise((resolve, reject) => {
+  const commands = [
+    async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
+    async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+    async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
 
-commands.push(
-  async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
-)
+    (hardwareCode === 'aaeon') ?
+      async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.386 ${applicationParentFolder}/lamassu-machine/verify/verify`) :
+      async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.amd64 ${applicationParentFolder}/lamassu-machine/verify/verify`),
 
-if (hardwareCode === 'aaeon') {
-  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.386 ${applicationParentFolder}/lamassu-machine/verify/verify`))
-} else {
-  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.amd64 ${applicationParentFolder}/lamassu-machine/verify/verify`))
-}
+    async.apply(installDeviceConfig),
+    async.apply(updateSupervisor),
+    async.apply(updateUdev),
+    async.apply(updateAcpChromium),
+    async.apply(report, null, 'finished.')
+  ]
+  async.series(commands, err => err ? reject(err) : resolve())
+})
 
-commands.push(
-  async.apply(installDeviceConfig),
-  async.apply(updateSupervisor),
-  async.apply(updateUdev),
-  async.apply(updateAcpChromium),
-  async.apply(report, null, 'finished.')
-)
-
-async.series(commands, function(err) {
-  if (err) throw err;
-});
+module.exports = { upgrade }
