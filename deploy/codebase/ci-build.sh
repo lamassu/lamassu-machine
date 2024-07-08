@@ -53,6 +53,7 @@ mkdir -p $TARGET_MACHINE_DIR/bin
 # Copy common files for the setup
 cp $MACHINE_DIR/node_modules/async/lib/async.js $EXPORT_SCRIPT_DIR
 cp $SCRIPT_DIR/../report.js $EXPORT_SCRIPT_DIR
+cp $SCRIPT_DIR/lamassu-machine-manager.js $EXPORT_SCRIPT_DIR/lamassu-machine-manager.js
 cp $SCRIPT_DIR/updateinit.js $EXPORT_SCRIPT_DIR/updatescript.js
 
 rm -rf $TARGET_MACHINE_DIR/verify
