@@ -2,7 +2,6 @@
 
 var fs = require('fs')
 var path = require('path')
-var _ = require('lodash')
 
 var codeRoot = __dirname
 var DEVICE_CONFIG_PATH = path.resolve(codeRoot, 'device_config.json')
