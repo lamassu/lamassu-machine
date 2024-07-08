@@ -37,11 +37,11 @@ function command(cmd, cb) {
 function updateUdev (cb) {
   if (hardwareCode !== 'aaeon') return cb()
 
-  async.series([ 
+  async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
     async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
   ], (err) => {
-    if (err) throw err; 
+    if (err) throw err;
     cb()
   })
 }
@@ -53,12 +53,12 @@ function updateSupervisor (cb) {
       console.log('failure activating systemctl')
     }
 
-    async.series([ 
+    async.series([
       async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
       async.apply(command, `users | grep -q ubilinux && sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
       async.apply(command, 'supervisorctl update'),
     ], (err) => {
-      if (err) throw err; 
+      if (err) throw err;
       cb()
     })
   })
@@ -67,7 +67,7 @@ function updateSupervisor (cb) {
 function updateAcpChromium (cb) {
   if (hardwareCode !== 'aaeon') return cb()
 
-  async.series([ 
+  async.series([
     async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
     async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
   ], function(err) {
@@ -80,10 +80,10 @@ function installDeviceConfig (cb) {
   try {
     const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
     const newDeviceConfigPath = `${path}/device_config.json`
-    
+
     // Updates don't necessarily need to carry a device_config.json file
     if (!fs.existsSync(newDeviceConfigPath)) return cb()
-    
+
     const currentDeviceConfig = require(currentDeviceConfigPath)
     const newDeviceConfig = require(newDeviceConfigPath)
 
