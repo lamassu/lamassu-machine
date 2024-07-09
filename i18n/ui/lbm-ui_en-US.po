@@ -854,14 +854,6 @@ msgstr "We don't see any open orders associated with your phone. If you have ano
 msgid "If you're sure you have an open order associated with this phone, please contact the operator."
 msgstr "If you're sure you have an open order associated with this phone, please contact the operator."
 
-#: On screen: locked
-msgid "This Machine Is Locked"
-msgstr "This Machine Is Locked"
-
-#: On screen: locked
-msgid "Please ask for assistance."
-msgstr "Please ask for assistance."
-
 #: On screen: pre-receipt
 msgid "What next?"
 msgstr "What next?"

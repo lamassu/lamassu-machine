@@ -17,6 +17,7 @@
     "graphql": "^15.8.0",
     "lodash": "^4.17.4",
     "machina": "^2.0.0",
+    "@lamassu/bnr-advance": "file:../mei-bnr",
     "minimist": "^1.2.0",
     "node-fetch": "^2.6.7",
     "node-forge": "^0.7.1",
