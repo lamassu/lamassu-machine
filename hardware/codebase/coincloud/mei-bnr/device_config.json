@@ -24,7 +24,7 @@
     }
   },
   "billValidator": {
-    "deviceType": "bnrAdvance",
+    "deviceType": "bnrAdvance"
   },
   "billDispenser": {},
   "updater": {
