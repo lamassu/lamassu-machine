@@ -80,13 +80,13 @@ const writeOldService = (service_from, service_to, from_name, to_name) => readFi
   .then(service => replaceAll(service, NODE, NODE_BACKUP))
   .then(service => writeFile(service_to, service))
 
-const installServices = () => Promise.all([
+const installOldServices = () => Promise.all([
   writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
   writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
 ])
 
 // Install new node
-const installNode = () => Promise.resolve()
+const upgradeNode = () => Promise.resolve()
   // Backup /usr/bin/node
   .then(() => cp(NODE, NODE_BACKUP))
   .then(() => cp(NEW_NODE, NODE))
@@ -94,8 +94,8 @@ const installNode = () => Promise.resolve()
 const upgrade = () => Promise.resolve()
   .then(stopSupervisorServices)
   .then(backupMachine)
-  .then(installNode)
-  .then(installServices)
+  .then(upgradeNode)
+  .then(installOldServices)
   .then(restartSupervisorServices)
 
 const downgrade = () => Promise.resolve() // TODO
