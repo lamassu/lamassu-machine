@@ -34,10 +34,15 @@ const writeFile = (path, data) => new Promise((resolve, reject) =>
   fs.writeFile(path, data, null, err => err ? reject(err) : resolve())
 )
 
+const unlink = path => new Promise((resolve, reject) =>
+  fs.unlink(path, err => err ? reject(err) : resolve())
+)
+
 const execFile = (cmd, args) => new Promise((resolve, reject) =>
   child_process.execFile(cmd, args, null, err => err ? reject(err) : resolve())
 )
 
+const rm = _ => execFile('rm', arguments)
 const cp = _ => execFile('cp', arguments)
 const supervisorctl = _ => execFile('supervisorctl', arguments)
 
@@ -65,7 +70,7 @@ const UPDATER_CONF_BACKUP = path.join(BACKUP, 'lamassu-updater.conf')
 
 const stopSupervisorServices = () => supervisorctl('stop', 'all')
 
-const restartSupervisorServices = () => Promise.resolve()
+const restartSupervisorServices = () => Promise.resolve() // TODO: confirm subcommands
   .then(() => supervisorctl('update', 'all'))
   .then(() => supervisorctl('start', 'all'))
 
@@ -98,6 +103,22 @@ const upgrade = () => Promise.resolve()
   .then(installOldServices)
   .then(restartSupervisorServices)
 
-const downgrade = () => Promise.resolve() // TODO
+
+const downgradeMachine = () => Promise.resolve() // TODO
+
+const downgradeNode = () => cp(NODE_BACKUP, NODE)
+
+const uninstallOldServices = () => Promise.all([unlink(OLD_WATCHDOG_CONF), unlink(OLD_UPDATER_CONF)])
+
+const removeBackup = () => rm('-rf', BACKUP)
+
+const downgrade = () => Promise.resolve()
+  .then(stopSupervisorServices)
+  .then(downgradeMachine)
+  .then(downgradeNode)
+  .then(uninstallOldServices)
+  .then(removeBackup)
+  .then(restartSupervisorServices)
+
 
 module.exports = { upgrade, downgrade }
