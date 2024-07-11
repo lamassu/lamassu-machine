@@ -63,8 +63,12 @@ const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
 const UPDATER_CONF_BACKUP = path.join(BACKUP, 'lamassu-updater.conf')
 
 
-// Stop Supervisor services
 const stopSupervisorServices = () => supervisorctl('stop', 'all')
+
+const restartSupervisorServices = () => Promise.resolve()
+  .then(() => supervisorctl('update', 'all'))
+  .then(() => supervisorctl('start', 'all'))
+
 
 const backupMachine = () => mkdir(BACKUP)
   // Backup /opt/lamassu-machine/
@@ -86,13 +90,6 @@ const installNode = () => Promise.resolve()
   // Backup /usr/bin/node
   .then(() => cp(NODE, NODE_BACKUP))
   .then(() => cp(NEW_NODE, NODE))
-
-
-// Restart Supervisor services
-const restartSupervisorServices = () => Promise.resolve()
-  .then(() => supervisorctl('update', 'all'))
-  .then(() => supervisorctl('start', 'all'))
-
 
 const upgrade = () => Promise.resolve()
   .then(stopSupervisorServices)
