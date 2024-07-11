@@ -24,10 +24,7 @@
     }
   },
   "billValidator": {
-    "deviceType": "cashflowSc",
-    "rs232": {
-      "device": "/dev/ttyUSB0"
-    }
+    "deviceType": "bnrAdvance",
   },
   "billDispenser": {},
   "updater": {
