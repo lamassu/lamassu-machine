@@ -6,7 +6,7 @@ FROM lamassu/upboard-build:2.1 as build
   RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x
   RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/bnr-sdk.tar.gz.gpg | \
     gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
-    tar -xzf - -C /var/lib
+    tar -xzf - -C /usr/lib
 
   ARG NPM_TOKEN
   COPY ["package.json", "package-lock.json", ".npmrc", "./"]
