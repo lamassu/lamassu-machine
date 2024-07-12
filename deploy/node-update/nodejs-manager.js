@@ -44,6 +44,7 @@ const execFile = (cmd, args) => new Promise((resolve, reject) =>
 
 const rm = _ => execFile('rm', arguments)
 const cp = _ => execFile('cp', arguments)
+const mv = _ => execFile('mv', arguments)
 const supervisorctl = _ => execFile('supervisorctl', arguments)
 
 
@@ -103,7 +104,9 @@ const upgrade = () => Promise.resolve()
   .then(restartSupervisorServices)
 
 
-const downgradeMachine = () => Promise.resolve() // TODO
+const downgradeMachine = () => Promise.resolve()
+  .then(() => rm('-rf', LAMASSU_MACHINE))
+  .then(() => mv(LAMASSU_MACHINE_BACKUP, LAMASSU_MACHINE))
 
 const downgradeNode = () => cp(NODE_BACKUP, NODE)
 
