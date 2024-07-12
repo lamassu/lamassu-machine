@@ -70,9 +70,8 @@ const UPDATER_CONF_BACKUP = path.join(BACKUP, 'lamassu-updater.conf')
 
 const stopSupervisorServices = () => supervisorctl('stop', 'all')
 
-const restartSupervisorServices = () => Promise.resolve() // TODO: confirm subcommands
+const restartSupervisorServices = () => Promise.resolve()
   .then(() => supervisorctl('update', 'all'))
-  .then(() => supervisorctl('start', 'all'))
 
 
 const backupMachine = () => mkdir(BACKUP)
