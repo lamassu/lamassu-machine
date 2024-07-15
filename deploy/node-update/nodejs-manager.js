@@ -27,7 +27,7 @@ const mkdir = path => new Promise((resolve, reject) =>
 )
 
 const readFile = path => new Promise((resolve, reject) =>
-  fs.readFile(path, null, (err, data) => err ? reject(err) : resolve(data))
+  fs.readFile(path, { encoding: 'utf8' }, (err, data) => err ? reject(err) : resolve(data))
 )
 
 const writeFile = (path, data) => new Promise((resolve, reject) =>
