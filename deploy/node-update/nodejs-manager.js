@@ -123,4 +123,4 @@ const downgrade = () => Promise.resolve()
   .then(restartSupervisorServices)
 
 
-module.exports = { upgrade, downgrade }
+module.exports = { upgrade, downgrade, new_node_path: NEW_NODE }
