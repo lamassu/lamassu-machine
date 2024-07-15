@@ -23,4 +23,7 @@ const respawn = () => spawn(
   }
 ).unref()
 
-if (is_child) upgrade() else respawn()
+if (is_child)
+  upgrade()
+else
+  respawn()
