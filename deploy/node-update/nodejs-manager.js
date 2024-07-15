@@ -62,6 +62,7 @@ const NEW_NODE = path.join(PACKAGE, 'node')
 const SUPERVISOR_CONF = '/etc/supervisor/conf.d/'
 const WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'lamassu-watchdog.conf')
 const OLD_WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-watchdog.conf')
+const UPDATER_CONF = path.join(SUPERVISOR_CONF, 'lamassu-updater.conf')
 const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
 
 
