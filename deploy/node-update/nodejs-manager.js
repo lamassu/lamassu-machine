@@ -59,7 +59,7 @@ const NODE = '/usr/bin/node'
 const NODE_BACKUP = path.join(BACKUP, 'node')
 const NEW_NODE = path.join(PACKAGE, 'node')
 
-const SUPERVISOR_CONF = '/etc/supervisor/conf/'
+const SUPERVISOR_CONF = '/etc/supervisor/conf.d/'
 const WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'lamassu-watchdog.conf')
 const OLD_WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-watchdog.conf')
 const WATCHDOG_CONF_BACKUP = path.join(BACKUP, 'lamassu-watchdog.conf')
