@@ -16,11 +16,8 @@ const upgrade = () => Promise.resolve()
 
 const respawn = () => spawn(
   nodemngr.new_node_path,
-  [script, platform, model, updated_path, detached],
-  {
-    detached: true,
-    stdio: ['ignore', process.stdout, process.stderr]
-  }
+  [script, platform, model, updated_path, true],
+  { detached: true, stdio: 'inherit' }
 ).unref()
 
 if (is_child)
