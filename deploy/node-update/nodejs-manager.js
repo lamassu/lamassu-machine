@@ -48,8 +48,6 @@ const mv = _ => execFile('mv', arguments)
 const supervisorctl = _ => execFile('supervisorctl', arguments)
 
 
-const [platform, model, updated_path] = process.argv.slice(2)
-
 const PACKAGE = path.resolve(__dirname) // TODO: confirm this
 const OPT = '/opt/'
 const BACKUP = path.join(OPT, 'backup/')
