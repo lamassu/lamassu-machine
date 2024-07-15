@@ -42,10 +42,10 @@ const execFile = (cmd, args) => new Promise((resolve, reject) =>
   child_process.execFile(cmd, args, null, err => err ? reject(err) : resolve())
 )
 
-const rm = _ => execFile('rm', arguments)
-const cp = _ => execFile('cp', arguments)
-const mv = _ => execFile('mv', arguments)
-const supervisorctl = _ => execFile('supervisorctl', arguments)
+const rm = args => execFile('rm', args)
+const cp = args => execFile('cp', args)
+const mv = args => execFile('mv', args)
+const supervisorctl = args => execFile('supervisorctl', args)
 
 
 const PACKAGE = path.resolve(__dirname) // TODO: confirm this
@@ -66,15 +66,24 @@ const UPDATER_CONF = path.join(SUPERVISOR_CONF, 'lamassu-updater.conf')
 const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
 
 
-const stopSupervisorServices = () => supervisorctl('stop', 'all')
+const stopSupervisorServices = () => {
+  console.log("Stopping Supervisor services")
+  return supervisorctl(['stop', 'all'])
+}
 
-const restartSupervisorServices = () => Promise.resolve()
-  .then(() => supervisorctl('update', 'all'))
+const restartSupervisorServices = () => {
+  console.log("Restarting Supervisor services")
+  return supervisorctl(['update', 'all'])
+    .then(() => supervisorctl(['restart', 'all']))
+}
 
 
-const backupMachine = () => mkdir(BACKUP)
-  // Backup /opt/lamassu-machine/
-  .then(() => cp('-ar', LAMASSU_MACHINE, LAMASSU_MACHINE_BACKUP))
+const backupMachine = () => {
+  console.log("Backing up machine")
+  return mkdir(BACKUP)
+    // Backup /opt/lamassu-machine/
+    .then(() => cp(['-ar', LAMASSU_MACHINE, LAMASSU_MACHINE_BACKUP]))
+}
 
 const writeOldService = (service_from, service_to, from_name, to_name) => readFile(service_from)
   .then(service => replaceAll(service, OPT, BACKUP))
@@ -82,34 +91,43 @@ const writeOldService = (service_from, service_to, from_name, to_name) => readFi
   .then(service => replaceAll(service, NODE, NODE_BACKUP))
   .then(service => writeFile(service_to, service))
 
-const installOldServices = () => Promise.all([
-  writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
-  writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
-])
+const installOldServices = () => {
+  console.log("Installing fallback Supervisor services")
+  return Promise.all([
+    writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
+    writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
+  ])
+}
 
 // Install new node
-const upgradeNode = () => Promise.resolve()
-  // Backup /usr/bin/node
-  .then(() => cp(NODE, NODE_BACKUP))
-  .then(() => cp(NEW_NODE, NODE))
+const upgradeNode = () => {
+  console.log("Upgrading Node.js executable")
+  return Promise.resolve()
+    // Backup /usr/bin/node
+    .then(() => cp([NODE, NODE_BACKUP]))
+    .then(() => cp([NEW_NODE, NODE]))
+}
 
-const upgrade = () => Promise.resolve()
-  .then(stopSupervisorServices)
-  .then(backupMachine)
-  .then(upgradeNode)
-  .then(installOldServices)
-  .then(restartSupervisorServices)
+const upgrade = () => {
+  console.log("Starting Node.js upgrade process")
+  return Promise.resolve()
+    .then(stopSupervisorServices)
+    .then(backupMachine)
+    .then(upgradeNode)
+    .then(installOldServices)
+    .then(restartSupervisorServices)
+}
 
 
 const downgradeMachine = () => Promise.resolve()
-  .then(() => rm('-rf', LAMASSU_MACHINE))
-  .then(() => mv(LAMASSU_MACHINE_BACKUP, LAMASSU_MACHINE))
+  .then(() => rm(['-rf', LAMASSU_MACHINE]))
+  .then(() => mv([LAMASSU_MACHINE_BACKUP, LAMASSU_MACHINE]))
 
-const downgradeNode = () => cp(NODE_BACKUP, NODE)
+const downgradeNode = () => cp([NODE_BACKUP, NODE])
 
 const uninstallOldServices = () => Promise.all([unlink(OLD_WATCHDOG_CONF), unlink(OLD_UPDATER_CONF)])
 
-const removeBackup = () => rm('-rf', BACKUP)
+const removeBackup = () => rm(['-rf', BACKUP])
 
 const downgrade = () => Promise.resolve()
   .then(stopSupervisorServices)
