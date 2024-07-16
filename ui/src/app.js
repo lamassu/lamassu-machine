@@ -23,6 +23,7 @@ var termsConditionsAcceptanceInterval = null
 var termsConditionsAcceptanceTimeout = null
 var T_C_TIMEOUT = 30000
 var complianceTimeout = null;
+var cashDirection = null;
 
 var fiatCode = null
 var locale = null
@@ -290,6 +291,9 @@ function processData (data) {
     case 'usSsnPermission':
       usSsnPermission()
       break
+    case 'externalPermission':
+      externalPermission()
+      break
     case 'blockedCustomer':
       blockedCustomer()
       break
@@ -357,6 +361,11 @@ function facephotoPermission () {
 function usSsnPermission () {
   setComplianceTimeout(null, 'finishBeforeSms')
   setScreen('us_ssn_permission')
+}
+
+function externalPermission () {
+  setComplianceTimeout(null, 'finishBeforeSms')
+  setScreen('external_permission')
 }
 
 function customInfoRequestPermission (customInfoRequest) {
@@ -968,6 +977,7 @@ $(document).ready(function () {
   setupButton('ready-to-scan-id-card-photo', 'scanIdCardPhoto')
   setupButton('facephoto-permission-yes', 'permissionPhotoCompliance')
   setupButton('us-ssn-permission-yes', 'permissionUsSsnCompliance')
+  setupButton('external-permission-yes', 'permissionExternalCompliance')
 
   setupButton('send-coins-id', 'finishBeforeSms')
   setupButton('send-coins-id-2', 'finishBeforeSms')
@@ -980,6 +990,7 @@ $(document).ready(function () {
   setupButton('us-ssn-permission-send-coins', 'finishBeforeSms')
   setupButton('us-ssn-permission-cancel', 'finishBeforeSms')
   setupButton('us-ssn-cancel', 'finishBeforeSms')
+  setupButton('external-permission-send-coins', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel', 'finishBeforeSms')
   setupButton('facephoto-scan-failed-cancel2', 'finishBeforeSms')
 
@@ -1305,11 +1316,13 @@ function setDirection (direction) {
     $('.insert_promo_code_state'),
     $('.promo_code_not_found_state'),
     $('.custom_permission_state'),
+    $('.external_permission_state'),
     $('.custom_permission_screen2_numerical_state'),
     $('.custom_permission_screen2_text_state'),
     $('.custom_permission_screen2_choiceList_state'),
     $('.external_compliance_state')
   ]
+  cashDirection = direction
   states.forEach(it => {
     setUpDirectionElement(it, direction)
   })
@@ -2291,6 +2304,6 @@ function setReceiptPrint (receiptStatus, smsReceiptStatus) {
 }
 
 function externalCompliance (url) {
-  setTimeout(() => qrize(url, $('#qr-code-external-validation'), CASH_OUT_QR_COLOR), 1000)
+  qrize(url, $('#qr-code-external-validation'), cashDirection === 'cashIn' ? CASH_IN_QR_COLOR : CASH_OUT_QR_COLOR)
   return setScreen('external_compliance')
 }

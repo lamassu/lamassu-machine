@@ -4058,6 +4058,9 @@ button[disabled] {
     width: 10vw;
     line-height: 10vw;
   }
+  .external_permission_state.info main, .external_permission_state.no-action-info main, .external_permission_state.info-with-contact main, .external_permission_state.info-with-contact-and-info main, .external_permission_state.info-no-image main {
+    margin-top: 0;
+  }
   .custom_permission_state.info main, .custom_permission_state.no-action-info main, .custom_permission_state.info-with-contact main, .custom_permission_state.info-with-contact-and-info main, .custom_permission_state.info-no-image main {
     margin-top: 0;
   }
