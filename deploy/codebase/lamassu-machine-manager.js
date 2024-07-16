@@ -6,7 +6,7 @@ const cp = require('child_process');
 const report = require('./report').report;
 
 const hardwareCode = process.argv[2];
-const nodeModulesCode = hardwareCode === 'up4000' ? 'upboard' : process.argv[2];
+const nodeModulesCode = hardwareCode === 'up4000' ? 'upboard' : hardwareCode;
 const machineCode = process.argv[3];
 const newPath = process.argv[4];
 
@@ -122,8 +122,7 @@ function installDeviceConfig (cb) {
     fs.writeFileSync(currentDeviceConfigPath, adjustedDeviceConfig)
 
     cb()
-  }
-  catch (err) {
+  } catch (err) {
     cb(err)
   }
 }
