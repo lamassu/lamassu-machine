@@ -11,7 +11,7 @@ const isNative = m => {
   const isNative = fs.existsSync(path.resolve(base, m, 'build', 'Release'))
 
   // TODO this is awfully manual right now. 
-  const mappedNative = m === 'keccak' || m === '@serialport'
+  const mappedNative = m === 'keccak' || m === '@serialport' || m === '@lamassu'
 
   if (mode === '--rem-native')
     return isNative || mappedNative
