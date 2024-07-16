@@ -239,6 +239,22 @@ msgid "No, cancel"
 msgstr "No, cancel"
 
 #: On screen: external-validation
+msgid "External compliance required"
+msgstr "External compliance required"
+
+#: On screen: external-validation
+msgid "To proceed, we are required to ask you to go through an external compliance system."
+msgstr "To proceed, we are required to ask you to go through an external compliance system."
+
+#: On screen: external-validation
+msgid "Continue?"
+msgstr "Continue?"
+
+#: On screen: external-validation
+msgid "Yes, continue"
+msgstr "Yes, continue"
+
+#: On screen: external-validation
 msgid "External compliance validation"
 msgstr "External compliance validation"
 
