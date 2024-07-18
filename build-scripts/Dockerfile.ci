@@ -1,10 +1,19 @@
-FROM lamassu/upboard-build:2.0 as build
+FROM lamassu/upboard-build:2.1 as build
 
   WORKDIR lamassu-machine
 
+  ARG GPG_PASSPHRASE
   RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/deploy-files_2019.06.07.txz | xz -dc | tar -x
+  RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/bnr-sdk.tar.gz.gpg | \
+    gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
+    tar -xzf - -C /usr/lib
 
-  COPY ["package.json", "package-lock.json", "./"]
+  ARG NPM_TOKEN
+  COPY ["package.json", "package-lock.json", ".npmrc", "./"]
+
+  RUN npm install --global json && \
+    json -I -f package.json -e 'this.dependencies["@lamassu/bnr-advance"] = this.optionalDependencies["@lamassu/bnr-advance"]; delete this.optionalDependencies["@lamassu/bnr-advance"]'
+
   RUN npm version --allow-same-version --git-tag-version false --commit-hooks false 1.0.0
   RUN npm install
   COPY . ./

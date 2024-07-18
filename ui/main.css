@@ -1143,6 +1143,10 @@ footer .filled-progress-button:after, footer .bordered-progress-button:after {
   max-width: 78vh;
 }
 
+.external_compliance_state .text-content {
+  max-width: 65vw;
+}
+
 .printer_error_state .text-content {
   max-width: 79vh;
 }
@@ -4054,6 +4058,9 @@ button[disabled] {
     width: 10vw;
     line-height: 10vw;
   }
+  .external_permission_state.info main, .external_permission_state.no-action-info main, .external_permission_state.info-with-contact main, .external_permission_state.info-with-contact-and-info main, .external_permission_state.info-no-image main {
+    margin-top: 0;
+  }
   .custom_permission_state.info main, .custom_permission_state.no-action-info main, .custom_permission_state.info-with-contact main, .custom_permission_state.info-with-contact-and-info main, .custom_permission_state.info-no-image main {
     margin-top: 0;
   }
@@ -4273,4 +4280,33 @@ button[disabled] {
     text-align: center;
     gap: 1vh;
   }
+}
+.external_compliance_state {
+  footer-margin-top: 15px;
+}
+
+.external_compliance_state footer {
+  margin-top: 5vh;
+}
+
+.external-validation-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.external-validation-info div {
+  margin-right: 15px;
+}
+.external-validation-info div:last-child {
+  margin-right: 0px;
 }

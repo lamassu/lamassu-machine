@@ -36,6 +36,9 @@ jobs:
           tags: ci_image:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
+          build-args: |
+            NPM_TOKEN=${{ secrets.NPM_TOKEN }}
+            GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }}
 
       - name: Extract artifact from Docker image
         run: |
