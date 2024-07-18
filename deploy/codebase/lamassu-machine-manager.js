@@ -28,27 +28,24 @@ const udevPath = `${packagePath}/udev/aaeon`
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
-function command(cmd, cb) {
-  cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
-    cb(err);
-  });
+const ignoreErrorsCallback = cb => err => err ? cb(err) : cb()
+
+const command = (cmd, cb) => {
+  console.log("Running command", cmd)
+  return cp.exec(cmd, {timeout: TIMEOUT}, ignoreErrorsCallback(cb))
 }
 
 function updateUdev (cb) {
   if (hardwareCode !== 'aaeon') return cb()
-
-  async.series([
+  return async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
     async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
-  ], (err) => {
-    if (err) throw err;
-    cb()
-  })
+  ], ignoreErrorsCallback(cb))
 }
 
 function updateSupervisor (cb) {
   if (hardwareCode === 'aaeon') return cb()
-  cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
+  return cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
     if (err) {
       console.log('failure activating systemctl')
     }
@@ -57,23 +54,16 @@ function updateSupervisor (cb) {
       async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
       async.apply(command, `users | grep -q ubilinux && sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
       async.apply(command, 'supervisorctl update'),
-    ], (err) => {
-      if (err) throw err;
-      cb()
-    })
+    ], ignoreErrorsCallback(cb))
   })
 }
 
 function updateAcpChromium (cb) {
   if (hardwareCode !== 'aaeon') return cb()
-
-  async.series([
-    async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/` ),
-    async.apply(command, `cp ${path}/start-chrome /home/iva/` ),
-  ], function(err) {
-    if (err) throw err;
-    cb()
-  });
+  return async.series([
+    async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/`),
+    async.apply(command, `cp ${path}/start-chrome /home/iva/`),
+  ], ignoreErrorsCallback(cb))
 }
 
 function installDeviceConfig (cb) {
@@ -121,29 +111,22 @@ function installDeviceConfig (cb) {
     const adjustedDeviceConfig = JSON.stringify(newDeviceConfig, null, 2)
     fs.writeFileSync(currentDeviceConfigPath, adjustedDeviceConfig)
 
-    cb()
+    return cb()
   } catch (err) {
-    cb(err)
+    return cb(err)
   }
 }
 
-const upgrade = () => new Promise((resolve, reject) => {
-  const commands = [
-    async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
-    async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-    async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
-
-    (hardwareCode === 'aaeon') ?
-      async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.386 ${applicationParentFolder}/lamassu-machine/verify/verify`) :
-      async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.amd64 ${applicationParentFolder}/lamassu-machine/verify/verify`),
-
-    async.apply(installDeviceConfig),
-    async.apply(updateSupervisor),
-    async.apply(updateUdev),
-    async.apply(updateAcpChromium),
-    async.apply(report, null, 'finished.')
-  ]
-  async.series(commands, err => err ? reject(err) : resolve())
-})
+const upgrade = () => async.series([
+  async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
+  async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${hardwareCode === 'aaeon' ? '386' : 'amd64'} ${applicationParentFolder}/lamassu-machine/verify/verify`),
+  async.apply(installDeviceConfig),
+  async.apply(updateSupervisor),
+  async.apply(updateUdev),
+  async.apply(updateAcpChromium),
+  cb => report(null, 'finished.', ignoreErrorsCallback(cb))
+])
 
 module.exports = { upgrade }

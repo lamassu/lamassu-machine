@@ -10,8 +10,14 @@ const upgrade = () => Promise.resolve()
   .then(nodemngr.upgrade)
   .then(lmmngr.upgrade)
   .then(
-    () => console.log("all went well"),
-    err => console.log(err)
+    () => {
+      console.log("all went well")
+      process.exit(0)
+    },
+    err => {
+      console.log(err)
+      process.exit(1)
+    }
   )
 
 const respawn = () => spawn(
