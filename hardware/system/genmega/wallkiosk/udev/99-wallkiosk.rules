@@ -1,0 +1,8 @@
+# CIS USB device 0x27a2:0x1201
+SUBSYSTEM=="usb", ATTRS{idVendor}=="27a2", ATTRS{idProduct}=="1201", MODE="0666"
+# RPU USB device 0x32ea:0x02XX
+SUBSYSTEM=="usb", ATTRS{idVendor}=="32ea", ATTRS{idProduct}=="0201", MODE="0666"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="32ea", ATTRS{idProduct}=="0204", MODE="0666"
+# CSK USB device 0x1c51:0xXXXX, 0xecec:0xXXXX
+SUBSYSTEM=="usb", ATTR{idVendor}=="1c51", GROUP="wisecube", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="ecec", GROUP="wisecube", MODE="0666"
