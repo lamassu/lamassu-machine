@@ -66,6 +66,20 @@ const UPDATER_CONF = path.join(SUPERVISOR_CONF, 'lamassu-updater.conf')
 const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
 
 
+const [script, platform, model, updated_path, is_child] = process.argv.slice(1)
+
+const respawn = () => {
+  spawn(
+    NEW_NODE,
+    [script, platform, model, updated_path, true],
+    { detached: true, stdio: 'inherit' }
+  ).unref()
+  process.exit(0)
+}
+
+const respawn_if_needed = () => is_child ? Promise.resolve() : respawn()
+
+
 const stopSupervisorServices = () => {
   console.log("Stopping Supervisor services")
   return supervisorctl(['stop', 'all'])
@@ -110,7 +124,7 @@ const upgradeNode = () => {
 
 const upgrade = () => {
   console.log("Starting Node.js upgrade process")
-  return Promise.resolve()
+  return respawn_if_needed()
     .then(stopSupervisorServices)
     .then(backupMachine)
     .then(upgradeNode)
@@ -129,13 +143,16 @@ const uninstallOldServices = () => Promise.all([unlink(OLD_WATCHDOG_CONF), unlin
 
 const removeBackup = () => rm(['-rf', BACKUP])
 
-const downgrade = () => Promise.resolve()
-  .then(stopSupervisorServices)
-  .then(downgradeMachine)
-  .then(downgradeNode)
-  .then(uninstallOldServices)
-  .then(removeBackup)
-  .then(restartSupervisorServices)
+const downgrade = () => {
+  console.log("Starting Node.js downgrade process")
+  return respawn_if_needed()
+    .then(stopSupervisorServices)
+    .then(downgradeMachine)
+    .then(downgradeNode)
+    .then(uninstallOldServices)
+    .then(removeBackup)
+    .then(restartSupervisorServices)
+}
 
 
-module.exports = { upgrade, downgrade, new_node_path: NEW_NODE }
+module.exports = { upgrade, downgrade }
