@@ -69,7 +69,7 @@ const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
 const [script, platform, model, updated_path, is_child] = process.argv.slice(1)
 
 const respawn = () => {
-  spawn(
+  child_process.spawn(
     NEW_NODE,
     [script, platform, model, updated_path, true],
     { detached: true, stdio: 'inherit' }
