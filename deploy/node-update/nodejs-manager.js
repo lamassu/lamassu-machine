@@ -130,6 +130,7 @@ const upgrade = () => {
     .then(upgradeNode)
     .then(installOldServices)
     .then(restartSupervisorServices)
+    .then(() => undefined)
 }
 
 
@@ -152,6 +153,7 @@ const downgrade = () => {
     .then(uninstallOldServices)
     .then(removeBackup)
     .then(restartSupervisorServices)
+    .then(() => undefined)
 }
 
 
