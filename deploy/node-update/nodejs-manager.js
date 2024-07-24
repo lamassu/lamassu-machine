@@ -134,15 +134,27 @@ const upgrade = () => {
 }
 
 
-const downgradeMachine = () => Promise.resolve()
-  .then(() => rm(['-rf', LAMASSU_MACHINE]))
-  .then(() => mv([LAMASSU_MACHINE_BACKUP, LAMASSU_MACHINE]))
+const downgradeMachine = () => {
+  console.log("Restoring backed-up lamassu-machine")
+  return Promise.resolve()
+    .then(() => rm(['-rf', LAMASSU_MACHINE]))
+    .then(() => mv([LAMASSU_MACHINE_BACKUP, LAMASSU_MACHINE]))
+}
 
-const downgradeNode = () => cp([NODE_BACKUP, NODE])
+const downgradeNode = () => {
+  console.log("Restoring backed-up Node.js")
+  return cp([NODE_BACKUP, NODE])
+}
 
-const uninstallOldServices = () => Promise.all([unlink(OLD_WATCHDOG_CONF), unlink(OLD_UPDATER_CONF)])
+const uninstallOldServices = () => {
+  console.log("Removing old Supervisor services")
+  return Promise.all([unlink(OLD_WATCHDOG_CONF), unlink(OLD_UPDATER_CONF)])
+}
 
-const removeBackup = () => rm(['-rf', BACKUP])
+const removeBackup = () => {
+  console.log("Removing backup")
+  return rm(['-rf', BACKUP])
+}
 
 const downgrade = () => {
   console.log("Starting Node.js downgrade process")
