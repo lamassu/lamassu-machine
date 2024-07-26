@@ -167,7 +167,7 @@ const uninstallOldServices = () => {
     fs.promises.readdir(SUPERVISOR_BACKUP, { encoding: 'utf8' })
       .then(fnames => fnames.map(fname => path.join(SUPERVISOR_BACKUP, fname)))
   ])
-    .then(([_, _, services]) => Promise.all(
+    .then(([_watchdog, _updater, services]) => Promise.all(
       services.map(service => cp([service, '-t', SUPERVISOR_CONF]))
     ))
 }
