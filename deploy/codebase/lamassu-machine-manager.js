@@ -27,11 +27,11 @@ const udevPath = `${packagePath}/udev/aaeon`
 const TIMEOUT = 600000;
 const applicationParentFolder = hardwareCode === 'aaeon' ? '/opt/apps/machine' : '/opt'
 
-const ignoreErrorsCallback = cb => err => err ? cb(err) : cb()
-
-const command = (cmd, cb) => {
-  console.log("Running command", cmd)
-  return cp.exec(cmd, {timeout: TIMEOUT}, ignoreErrorsCallback(cb))
+function command(cmd, cb) {
+  console.log(`Running command \`${cmd}\``)
+  cp.exec(cmd, {timeout: TIMEOUT}, function(err) {
+    cb(err);
+  });
 }
 
 function updateUdev (cb) {
@@ -39,22 +39,43 @@ function updateUdev (cb) {
   return async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
     async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
-  ], ignoreErrorsCallback(cb))
+  ], (err) => {
+    if (err) throw err;
+    cb()
+  })
 }
 
 function updateSupervisor (cb) {
   if (hardwareCode === 'aaeon') return cb()
-  return cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
-    if (err) {
-      console.log('failure activating systemctl')
-    }
 
-    async.series([
-      async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
-      async.apply(command, `users | grep -q ubilinux && sed -i 's/user=machine/user=ubilinux/g' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
-      async.apply(command, 'supervisorctl update'),
-    ], ignoreErrorsCallback(cb))
-  })
+  const getOSUser = () =>
+    fs.promises.readFile('/etc/os-release', { encoding: 'utf8' })
+      .then(
+        text => text
+          .split('\n')
+          .includes('IMAGE_ID=lamassu-machine-xubuntu') ?
+            'lamassu' :
+            'ubilinux',
+        _err => 'ubilinux',
+      )
+
+  (machineWithMultipleCodes.includes(hardwareCode) ? getOSUser() : Promise.resolve('lamassu'))
+    .then(osuser => {
+      cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
+        if (err) {
+          console.log('failure activating systemctl')
+        }
+
+        async.series([
+          async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+          async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
+          async.apply(command, 'supervisorctl update'),
+        ], (err) => {
+          if (err) throw err;
+          cb()
+        })
+      })
+    })
 }
 
 function updateAcpChromium (cb) {
@@ -62,7 +83,10 @@ function updateAcpChromium (cb) {
   return async.series([
     async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/`),
     async.apply(command, `cp ${path}/start-chrome /home/iva/`),
-  ], ignoreErrorsCallback(cb))
+  ], function(err) {
+    if (err) throw err;
+    cb()
+  });
 }
 
 function installDeviceConfig (cb) {
@@ -116,16 +140,33 @@ function installDeviceConfig (cb) {
   }
 }
 
-const upgrade = () => async.series([
-  async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-  async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
-  async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${hardwareCode === 'aaeon' ? '386' : 'amd64'} ${applicationParentFolder}/lamassu-machine/verify/verify`),
-  async.apply(installDeviceConfig),
-  async.apply(updateSupervisor),
-  async.apply(updateUdev),
-  async.apply(updateAcpChromium),
-  cb => report(null, 'finished.', ignoreErrorsCallback(cb))
-])
+const upgrade = () => {
+  const arch = hardwareCode === 'aaeon' ? '386' :
+    hardwareCode === 'ssuboard' ? 'arm32' :
+    'amd64'
+  const commands = []
+
+  commands.push(
+    async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
+    async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
+    async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
+  )
+
+  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${arch} ${applicationParentFolder}/lamassu-machine/verify/verify`))
+
+  commands.push(
+    async.apply(installDeviceConfig),
+    async.apply(updateSupervisor),
+    async.apply(updateUdev),
+    async.apply(updateAcpChromium),
+    async.apply(report, null, 'finished.')
+  )
+
+  return new Promise((resolve, reject) => {
+    async.series(commands, function(err) {
+      return err ? reject(err) : resolve();
+    });
+  })
+}
 
 module.exports = { upgrade }
