@@ -144,23 +144,18 @@ const upgrade = () => {
   const arch = hardwareCode === 'aaeon' ? '386' :
     hardwareCode === 'ssuboard' ? 'arm32' :
     'amd64'
-  const commands = []
 
-  commands.push(
+  const commands = [
     async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
     async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
-    async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
-  )
-
-  commands.push(async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${arch} ${applicationParentFolder}/lamassu-machine/verify/verify`))
-
-  commands.push(
+    async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
+    async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${arch} ${applicationParentFolder}/lamassu-machine/verify/verify`)),
     async.apply(installDeviceConfig),
     async.apply(updateSupervisor),
     async.apply(updateUdev),
     async.apply(updateAcpChromium),
     async.apply(report, null, 'finished.')
-  )
+  ]
 
   return new Promise((resolve, reject) => {
     async.series(commands, function(err) {
