@@ -123,7 +123,7 @@ const installOldServices = () => {
       .then(service => writeFile(watchdog_conf, service))
 
   return Promise.all([
-    cp(['-ar', SUPERVISOR_CONF, '-t', SUPERVISOR_BACKUP]),
+    cp(['-ar', SUPERVISOR_CONF, SUPERVISOR_BACKUP]),
     getOS()
   ])
     .then(([_, os]) => Promise.all([
