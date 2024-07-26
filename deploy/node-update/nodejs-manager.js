@@ -14,6 +14,7 @@ const child_process = require('child_process')
  * Backup directory tree structure:
  * backup/
  *     lamassu-machine/
+ *     supervisor/
  *     node
  */
 
@@ -64,6 +65,7 @@ const WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'lamassu-watchdog.conf')
 const OLD_WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-watchdog.conf')
 const UPDATER_CONF = path.join(SUPERVISOR_CONF, 'lamassu-updater.conf')
 const OLD_UPDATER_CONF = path.join(SUPERVISOR_CONF, 'old-lamassu-updater.conf')
+const SUPERVISOR_BACKUP = path.join(BACKUP, 'supervisor')
 
 
 const [script, platform, model, updated_path, is_child] = process.argv.slice(1)
@@ -107,10 +109,11 @@ const writeOldService = (service_from, service_to, from_name, to_name) => readFi
 
 const installOldServices = () => {
   console.log("Installing fallback Supervisor services")
-  return Promise.all([
-    writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
-    writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
-  ])
+  return cp(['-ar', SUPERVISOR_CONF, '-t', SUPERVISOR_BACKUP])
+    .then(() => Promise.all([
+      writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
+      writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
+    ]))
 }
 
 // Install new node
