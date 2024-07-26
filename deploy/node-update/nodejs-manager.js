@@ -23,14 +23,6 @@ const replaceAll = (s, p, r) => s.replace(
   r.replace(/\$/g, "$$$$")
 )
 
-const mkdir = path => new Promise((resolve, reject) =>
-  fs.mkdir(path, null, err => err ? reject(err) : resolve())
-)
-
-const readFile = path => new Promise((resolve, reject) =>
-  fs.readFile(path, { encoding: 'utf8' }, (err, data) => err ? reject(err) : resolve(data))
-)
-
 const writeFile = (path, data) => new Promise((resolve, reject) =>
   fs.writeFile(path, data, null, err => err ? reject(err) : resolve())
 )
@@ -96,16 +88,17 @@ const restartSupervisorServices = () => {
 
 const backupMachine = () => {
   console.log("Backing up machine")
-  return mkdir(BACKUP)
+  return fs.promises.mkdir(BACKUP, { recursive: true })
     // Backup /opt/lamassu-machine/
     .then(() => cp(['-ar', LAMASSU_MACHINE, LAMASSU_MACHINE_BACKUP]))
 }
 
-const writeOldService = (service_from, service_to, from_name, to_name) => readFile(service_from)
-  .then(service => replaceAll(service, OPT, BACKUP))
-  .then(service => replaceAll(service, from_name, to_name))
-  .then(service => replaceAll(service, NODE, NODE_BACKUP))
-  .then(service => writeFile(service_to, service))
+const writeOldService = (service_from, service_to, from_name, to_name) =>
+  fs.promises.readFile(service_from, { encoding: 'utf8' })
+    .then(service => replaceAll(service, OPT, BACKUP))
+    .then(service => replaceAll(service, from_name, to_name))
+    .then(service => replaceAll(service, NODE, NODE_BACKUP))
+    .then(service => writeFile(service_to, service))
 
 const getOS = () => fs.promises.readFile('/etc/os-release', { encoding: 'utf8' })
   .then(
@@ -118,7 +111,7 @@ const installOldServices = () => {
   console.log("Installing fallback Supervisor services")
   const fixLamassuBrowserService = (os, watchdog_conf) => (os === 'xubuntu') ?
     Promise.resolve() :
-    readFile(watchdog_conf)
+    fs.promises.readFile(watchdog_conf, { encoding: 'utf8' })
       .then(service => service.replace('/home/lamassu/chrome-linux/chrome', '/usr/bin/chromium'))
       .then(service => writeFile(watchdog_conf, service))
 

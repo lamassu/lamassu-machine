@@ -35,6 +35,7 @@ function command(cmd, cb) {
 }
 
 function updateUdev (cb) {
+  console.log("Updating udev rules")
   if (hardwareCode !== 'aaeon') return cb()
   return async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
@@ -46,6 +47,7 @@ function updateUdev (cb) {
 }
 
 function updateSupervisor (cb) {
+  console.log("Updating Supervisor services")
   if (hardwareCode === 'aaeon') return cb()
 
   const getOSUser = () =>
@@ -79,6 +81,7 @@ function updateSupervisor (cb) {
 }
 
 function updateAcpChromium (cb) {
+  console.log("Updating ACP Chromium")
   if (hardwareCode !== 'aaeon') return cb()
   return async.series([
     async.apply(command, `cp ${path}/sencha-chrome.conf /home/iva/.config/upstart/`),
@@ -90,6 +93,7 @@ function updateAcpChromium (cb) {
 }
 
 function installDeviceConfig (cb) {
+  console.log("Installing `device_config.json`")
   try {
     const currentDeviceConfigPath = `${applicationParentFolder}/lamassu-machine/device_config.json`
     const newDeviceConfigPath = `${path}/device_config.json`
