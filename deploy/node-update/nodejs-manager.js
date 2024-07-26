@@ -107,10 +107,27 @@ const writeOldService = (service_from, service_to, from_name, to_name) => readFi
   .then(service => replaceAll(service, NODE, NODE_BACKUP))
   .then(service => writeFile(service_to, service))
 
+const getOS = () => fs.promises.readFile('/etc/os-release', { encoding: 'utf8' })
+  .then(
+    text => text.split('\n').includes('IMAGE_ID=lamassu-machine-xubuntu') ?
+      'xubuntu' : 'ubilinux',
+    _err => null,
+  )
+
 const installOldServices = () => {
   console.log("Installing fallback Supervisor services")
-  return cp(['-ar', SUPERVISOR_CONF, '-t', SUPERVISOR_BACKUP])
-    .then(() => Promise.all([
+  const fixLamassuBrowserService = (os, watchdog_conf) => (os === 'xubuntu') ?
+    Promise.resolve() :
+    readFile(watchdog_conf)
+      .then(service => service.replace('/home/lamassu/chrome-linux/chrome', '/usr/bin/chromium'))
+      .then(service => writeFile(watchdog_conf, service))
+
+  return Promise.all([
+    cp(['-ar', SUPERVISOR_CONF, '-t', SUPERVISOR_BACKUP]),
+    getOS()
+  ])
+    .then(([_, os]) => Promise.all([
+      fixLamassuBrowserService(os, path.join(SUPERVISOR_CONF, 'lamassu-browser.conf')),
       writeOldService(WATCHDOG_CONF, OLD_WATCHDOG_CONF, 'lamassu-watchdog', 'old-lamassu-watchdog'),
       writeOldService(UPDATER_CONF, OLD_UPDATER_CONF, 'lamassu-updater', 'old-lamassu-updater')
     ]))
