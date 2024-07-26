@@ -152,6 +152,7 @@ const downgradeNode = () => {
 const uninstallOldServices = () => {
   console.log("Removing old Supervisor services")
   return Promise.all([unlink(OLD_WATCHDOG_CONF), unlink(OLD_UPDATER_CONF)])
+    .then(() => cp([path.join(SUPERVISOR_BACKUP, '*'), '-t', SUPERVISOR_CONF]))
 }
 
 const removeBackup = () => {
