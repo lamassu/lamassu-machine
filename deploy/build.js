@@ -20,11 +20,11 @@ var version = packageJson.version
 var timestamp = new Date()
 
 function makeTar (tarPath, cb) {
-  tar.c({ file: tarPath, cwd: path.resolve(packageBase) }, ['package'], cb)
+  tar.c({ file: tarPath, cwd: path.resolve(packageBase), portable: true, noMtime: true }, ['package'], cb)
 }
 
 function makeZippedTar (tarPath, cb) {
-  tar.c({ file: tarPath, cwd: path.resolve(packageBase), gzip: true }, ['subpackage'], cb)
+  tar.c({ file: tarPath, cwd: path.resolve(packageBase), portable: true, noMtime: true, gzip: true }, ['subpackage'], cb)
 }
 
 function generateInfo () {
