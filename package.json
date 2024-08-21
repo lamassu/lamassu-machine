@@ -1,7 +1,7 @@
 {
   "name": "lamassu-machine",
   "license": "./LICENSE",
-  "version": "10.0.0-rc.17",
+  "version": "10.0.0-rc.18",
   "dependencies": {
     "@apollo/client": "3.7.15",
     "@haensl/subset-sum": "^3.0.5",
@@ -31,7 +31,7 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
-    "@lamassu/bnr-advance": "1.1.1",
+    "@lamassu/bnr-advance": "1.2.0",
     "genmega": "file:../genmega-sdk/"
   },
   "devDependencies": {
