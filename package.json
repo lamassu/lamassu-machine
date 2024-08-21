@@ -31,7 +31,7 @@
     "xstate": "^3.0.4"
   },
   "optionalDependencies": {
-    "@lamassu/bnr-advance": "1.1.1",
+    "@lamassu/bnr-advance": "1.2.0",
     "genmega": "file:../genmega-sdk/"
   },
   "devDependencies": {
