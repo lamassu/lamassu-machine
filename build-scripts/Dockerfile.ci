@@ -8,9 +8,10 @@ FROM lamassu/upboard-build:2.1 as build
     gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
     tar -xzf - -C /usr/lib
 
-  RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/libgenmegadevice_amd64_0.7-0.deb.gpg | \
-    gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
-    dpkg -i -
+RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/libgenmegadevice_amd64_0.7-0.deb.gpg -o /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg && \
+    gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --output /tmp/libgenmegadevice_amd64_0.7-0.deb --decrypt /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg && \
+    dpkg -i /tmp/libgenmegadevice_amd64_0.7-0.deb && \
+    rm /tmp/libgenmegadevice_amd64_0.7-0.deb /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg
 
   ARG NPM_TOKEN
   COPY ["package.json", "package-lock.json", ".npmrc", "./"]
