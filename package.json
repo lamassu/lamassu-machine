@@ -32,7 +32,7 @@
   },
   "optionalDependencies": {
     "@lamassu/bnr-advance": "1.2.0",
-    "genmega": "file:../genmega-sdk/"
+    "genmega": "git+https://github.com/lamassu/genmega-sdk.git"
   },
   "devDependencies": {
     "autoprefixer": "9.4.5",

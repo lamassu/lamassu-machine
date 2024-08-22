@@ -8,11 +8,16 @@ FROM lamassu/upboard-build:2.1 as build
     gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
     tar -xzf - -C /usr/lib
 
+  RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/libgenmegadevice_amd64_0.7-0.deb.gpg | \
+    gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
+    dpkg -i -
+
   ARG NPM_TOKEN
   COPY ["package.json", "package-lock.json", ".npmrc", "./"]
 
-  RUN npm install --global json && \
-    json -I -f package.json -e 'this.dependencies["@lamassu/bnr-advance"] = this.optionalDependencies["@lamassu/bnr-advance"]; delete this.optionalDependencies["@lamassu/bnr-advance"]'
+  RUN npm install --global json
+  RUN json -I -f package.json -e 'this.dependencies["@lamassu/bnr-advance"] = this.optionalDependencies["@lamassu/bnr-advance"]; delete this.optionalDependencies["@lamassu/bnr-advance"]'
+  RUN json -I -f package.json -e 'this.dependencies["genmega"] = this.optionalDependencies["genmega"]; delete this.optionalDependencies["genmega"]'
 
   RUN npm version --allow-same-version --git-tag-version false --commit-hooks false 1.0.0
   RUN npm install
