@@ -1,4 +1,4 @@
-FROM lamassu/upboard-build:2.1 as build
+FROM lamassu/upboard-build:3.0 as build
 
   WORKDIR lamassu-machine
 
