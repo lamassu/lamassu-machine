@@ -132,6 +132,7 @@ const commands = []
 
 commands.push(
   async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
+  async.apply(command, `rm -rf ${applicationParentFolder}/lamassu-machine/node_modules/genmega`),
   async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
   async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${nodeModulesCode}/node_modules ${applicationParentFolder}/lamassu-machine/`)
 )
