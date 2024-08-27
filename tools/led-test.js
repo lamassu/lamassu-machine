@@ -1,21 +1,14 @@
 const { setTimeout: delay } = require('node:timers/promises')
-
+const ledManager = require('../lib/leds/led-manager')
 const actionEmitter = require('../lib/action-emitter')
 
-const ledManager = process.argv[2] === 'gaia' ?
-  require('../lib/upboard/gaia/led-manager')
-  :
-  require('../lib/upboard/sintra/led-manager')
-
-const ledAddresses = process.argv[2] === 'tejo'
-  ? require('../lib/upboard/tejo/led-addresses')
-  : null
+const machine = process.argv[2]
 
 function emit (subsystem, action) {
   return () => actionEmitter.emit(subsystem, {action})
 }
 
-ledManager.run(ledAddresses)
+ledManager.run(machine)
   .then(emit('brain', 'billValidatorPending'))
   .then(() => delay(3000))
   .then(emit('brain', 'billValidatorAccepting'))
