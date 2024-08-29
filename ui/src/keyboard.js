@@ -114,12 +114,6 @@ Keyboard.prototype.init = function init (callback) {
     self._validateInput()
   })
 
-  if (this.keyboardId === 'wifi-keyboard') {
-    this.keyboard.find('.entry .backspace').get(0).addEventListener('mouseup', function (e) {
-      var target = $(e.target)
-      self._backspaceUp(target)
-    })
-  }
   return this
 }
 
@@ -182,23 +176,12 @@ Keyboard.prototype._keyPress = function _keyPress (target) {
 }
 
 Keyboard.prototype._backspace = function _backspace (target) {
-  if (this.keyboardId !== 'wifi-keyboard') {
-    var inputBox = this.inputBox
-    var content = inputBox.data('content')
-    var result = content.substring(0, content.length - 1)
-    inputBox.data('content', result)
-    inputBox.val(result)
-    inputBox.caretToEnd()
-  } else {
-    target.addClass('active')
-    var inputBox = this.inputBox
-    window.clearTimeout(this.backspaceTimeout)
-    this.backspaceTimeout = window.setTimeout(function () {
-      inputBox.data('content', '')
-      inputBox.val('')
-      inputBox.caretToEnd()
-    }, 1000)
-  }
+  var inputBox = this.inputBox
+  var content = inputBox.data('content')
+  var result = content.substring(0, content.length - 1)
+  inputBox.data('content', result)
+  inputBox.val(result)
+  inputBox.caretToEnd()
 }
 
 Keyboard.prototype._backspaceUp = function _backspaceUp (target) {

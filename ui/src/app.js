@@ -38,7 +38,6 @@ var currentState
 
 var accepting = false
 var websocket = null
-var wifiKeyboard = null
 var promoKeyboard = null
 var usSsnKeypad = null
 var phoneKeypad = null
@@ -75,14 +74,12 @@ function verifyConnection () {
 
 function buttonPressed (button, data) {
   if (!buttonActive) return
-  wifiKeyboard.deactivate()
   promoKeyboard.deactivate()
   emailKeyboard.deactivate()
   customRequirementTextKeyboard.deactivate()
   buttonActive = false
   setTimeout(function () {
     buttonActive = true
-    wifiKeyboard.activate()
     promoKeyboard.activate()
     emailKeyboard.activate()
     customRequirementTextKeyboard.activate()
@@ -110,8 +107,6 @@ function processData (data) {
     setCredit(data.credit, lastBill)
   }
   if (data.tx) setTx(data.tx)
-  if (data.wifiList) setWifiList(data.wifiList)
-  if (data.wifiSsid) setWifiSsid(data.wifiSsid)
   if (data.sendOnly) sendOnly(data.reason)
   if (data.fiatCredit) fiatCredit(data.fiatCredit)
   if (data.depositInfo) setDepositAddress(data.depositInfo)
@@ -143,24 +138,6 @@ function processData (data) {
   }
 
   switch (data.action) {
-    case 'wifiList':
-      if (cryptomatModel === 'douro1') {
-        setState('wifi')
-      } else {
-        setState('connect_ethernet')
-      }
-      break
-    case 'wifiPass':
-      setState('wifi_password')
-      break
-    case 'wifiConnecting':
-      t('wifi-connecting', translate('This could take a few moments.'))
-      setState('wifi_connecting')
-      break
-    case 'wifiConnected':
-      t('wifi-connecting', translate('Connected. Waiting for ticker.'))
-      setState('wifi_connecting') // in case we didn't go through wifi-connecting
-      break
     case 'pairing':
       setState('pairing')
       break
@@ -651,11 +628,6 @@ $(document).ready(function () {
 
   BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_HALF_EVEN })
 
-  wifiKeyboard = new Keyboard({
-    id: 'wifi-keyboard',
-    inputBox: '#input-passphrase'
-  }).init()
-
   promoKeyboard = new Keyboard({
     id: 'promo-keyboard',
     inputBox: '.promo-code-input'
@@ -721,38 +693,6 @@ $(document).ready(function () {
 
   initTranslatePage()
 
-  var wifiNetworkButtons = document.getElementById('networks')
-  touchEvent(wifiNetworkButtons, function (e) {
-    var target = $(e.target)
-    if (target.attr('id') === 'more-networks') {
-      moreNetworks()
-    } else {
-      var networkButton = target.closest('.wifi-network-button')
-      $('#networks > .active').removeClass('active')
-      networkButton.addClass('active')
-      window.setTimeout(function () { networkButton.removeClass('active') }, 1000)
-      var ssidEl = networkButton.find('.ssid')
-      var ssid = ssidEl.data('ssid')
-      if (ssid) {
-        var displaySsid = ssidEl.text()
-        var rawSsid = ssidEl.data('raw-ssid')
-        buttonPressed('wifiSelect',
-          { ssid: ssid, rawSsid: rawSsid, displaySsid: displaySsid })
-      }
-    }
-  })
-
-  var wifiConnectButton = document.getElementById('wifiConnect')
-  touchEvent(wifiConnectButton, function () {
-    var wifiConnectButtonJ = $(wifiConnectButton)
-    wifiConnectButtonJ.addClass('active')
-    window.setTimeout(function () { wifiConnectButtonJ.removeClass('active') }, 500)
-    var pass = $('#wifi-keyboard input.passphrase').data('content')
-    var ssid = $('#js-i18n-wifi-for-ssid').data('ssid')
-    var rawSsid = $('#js-i18n-wifi-for-ssid').data('raw-ssid')
-    buttonPressed('wifiConnect', { pass: pass, ssid: ssid, rawSsid: rawSsid })
-  })
-
   var sendCoinsButton = document.getElementById('send-coins')
   var sendCoinsButton2 = document.getElementById('send-only-send-coins')
   touchEvent(sendCoinsButton, function () {
@@ -787,7 +727,6 @@ $(document).ready(function () {
     buttonPressed('cancelInsertBill')
   })
 
-  setupImmediateButton('wifiPassCancel', 'cancelWifiPass')
   setupImmediateButton('scanCancel', 'cancelScan')
   setupImmediateButton('completed_viewport', 'completed')
   setupImmediateButton('withdraw_failure_viewport', 'completed')
@@ -1082,7 +1021,6 @@ function targetButton (element) {
   var classList = element.classList || []
   var special = classList.contains('button') ||
     classList.contains('circle-button') ||
-    classList.contains('wifi-network-button') ||
     classList.contains('square-button')
   if (special) { return element }
   return targetButton(element.parentNode)
@@ -1168,7 +1106,6 @@ function setState (state, delay) {
   previousState = currentState
   currentState = state
 
-  wifiKeyboard.reset()
   promoKeyboard.reset()
   emailKeyboard.reset()
   customRequirementTextKeyboard.reset()
@@ -1186,38 +1123,6 @@ function setState (state, delay) {
 }
 
 function revertScreen () { setScreen(currentState) }
-
-function setWifiList (recs, requestedPage) {
-  var networks = $('#networks')
-  if (!recs) recs = networks.data('recs')
-  var page = requestedPage || networks.data('page') || 0
-  var offset = page * 4
-  if (offset > recs.length - 1) {
-    offset = 0
-    page = 0
-  }
-  $('#more-networks').css({ 'display': 'none' })
-  networks.empty()
-  networks.data('page', page)
-  networks.data('recs', recs)
-  var remainingCount = recs.length - offset
-  var len = Math.min(remainingCount, 4)
-  for (var i = 0; i < len; i++) {
-    var rec = recs[i + offset]
-    var bars = Math.floor(rec.strength * 4) + 1
-    var html = '<div class="wifi-network-button filled-action-button tl2">' +
-    '<span class="ssid" data-raw-ssid="' + rec.rawSsid + '" data-ssid="' +
-      rec.ssid + '">' + rec.displaySsid +
-    '</span>' + '<div class="wifiicon-wrapper"><img src="images/wifiicon/' + bars + '.svg"/></div></div>'
-    networks.append(html)
-  }
-
-  var moreTxt = translate('MORE')
-  var button = '<span display="inline-block" id="more-networks" class="button filled-action-button tl2">' + moreTxt + '</span>'
-  if (recs.length > 4) {
-    networks.append(button)
-  }
-}
 
 function setUpDirectionElement (element, direction) {
   if (direction === 'cashOut') {
@@ -1470,19 +1375,6 @@ function updateButtonStyles () {
   } else {
     buttonDown.disabled = false
   }
-}
-
-function moreNetworks () {
-  var networks = $('#networks')
-  var page = networks.data('page')
-  setWifiList(null, page + 1)
-}
-
-function setWifiSsid (data) {
-  $('#js-i18n-wifi-for-ssid').data('ssid', data.ssid)
-  $('#js-i18n-wifi-for-ssid').data('raw-ssid', data.rawSsid)
-  t('wifi-for-ssid', translate('for %s', ['<strong>' + data.ssid + '</strong>']))
-  t('wifi-connect', translate("You're connecting to the WiFi network %s", ['<strong>' + data.ssid + '</strong>']))
 }
 
 function setLocaleInfo (data) {

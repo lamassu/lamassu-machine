@@ -5,11 +5,6 @@
     "mockCameraImage": "mock_data/compliance/license.jpg"
   },
   "cryptomatModel": "sintra",
-  "wifi": {
-    "wpa": {
-      "socket": null
-    }
-  },
   "billValidator": {
     "rs232": {
       "device": null
