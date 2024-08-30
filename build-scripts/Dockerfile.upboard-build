@@ -1,4 +1,4 @@
-FROM amd64/debian:bookworm as upboard
+FROM amd64/debian:bullseye as upboard
 
 WORKDIR /lamassu
 

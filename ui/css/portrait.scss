@@ -563,6 +563,9 @@ main {
     .text-input-fields-wrapper {
       display: flex;
       flex-direction: column;
+      .text-input-field {
+        width: 100%;
+      }
     }
   }
   footer {

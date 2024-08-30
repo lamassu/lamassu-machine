@@ -1,4 +1,4 @@
-FROM lamassu/upboard-build:2.1 as build
+FROM lamassu/upboard-build:3.0 as build
 
   WORKDIR lamassu-machine
 
@@ -8,11 +8,18 @@ FROM lamassu/upboard-build:2.1 as build
     gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --decrypt | \
     tar -xzf - -C /usr/lib
 
+  RUN apt-get install -y libusb-1.0-0-dev
+  RUN curl -sL https://ssubucket.ams3.digitaloceanspaces.com/libgenmegadevice_amd64_0.7-0.deb.gpg -o /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg && \
+    gpg --batch --yes --passphrase "$GPG_PASSPHRASE" --output /tmp/libgenmegadevice_amd64_0.7-0.deb --decrypt /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg && \
+    dpkg -i /tmp/libgenmegadevice_amd64_0.7-0.deb && \
+    rm /tmp/libgenmegadevice_amd64_0.7-0.deb /tmp/libgenmegadevice_amd64_0.7-0.deb.gpg
+
   ARG NPM_TOKEN
   COPY ["package.json", "package-lock.json", ".npmrc", "./"]
 
-  RUN npm install --global json && \
-    json -I -f package.json -e 'this.dependencies["@lamassu/bnr-advance"] = this.optionalDependencies["@lamassu/bnr-advance"]; delete this.optionalDependencies["@lamassu/bnr-advance"]'
+  RUN npm install --global json
+  RUN json -I -f package.json -e 'this.dependencies["@lamassu/bnr-advance"] = this.optionalDependencies["@lamassu/bnr-advance"]; delete this.optionalDependencies["@lamassu/bnr-advance"]'
+  RUN json -I -f package.json -e 'this.dependencies["genmega"] = this.optionalDependencies["genmega"]; delete this.optionalDependencies["genmega"]'
 
   RUN npm version --allow-same-version --git-tag-version false --commit-hooks false 1.0.0
   RUN npm install

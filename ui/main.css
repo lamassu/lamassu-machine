@@ -4042,6 +4042,9 @@ button[disabled] {
     -webkit-flex-direction: column;
             flex-direction: column;
   }
+  .custom_permission_screen2_text_state main .text-input-fields-wrapper .text-input-field {
+    width: 100%;
+  }
   .custom_permission_screen2_text_state footer {
     margin: 5vh 0 0;
     padding: 0;

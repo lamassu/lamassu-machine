@@ -5,3 +5,4 @@ KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="046d", ATTRS{idProduc
 KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="32e4", ATTRS{idProduct}=="9520", SYMLINK+="video-front"
 KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK+="video-front"
 KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="32e4", ATTRS{idProduct}=="0317", SYMLINK+="video-front"
+KERNEL=="video[0-9]*", ATTR{index}=="0", ATTRS{idVendor}=="0764", ATTRS{idProduct}=="0501", SYMLINK+="video-front"
