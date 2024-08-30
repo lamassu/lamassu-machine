@@ -1,5 +1,11 @@
 'use strict'
 
+/*
+ * How to use:
+ * 1. Copy `update.tar` into `/opt/lamassu-updates/download/`
+ * 2. Run `node manual_update.js`
+ */
+
 var fs = require('fs')
 var path = require('path')
 
