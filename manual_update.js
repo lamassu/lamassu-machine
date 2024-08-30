@@ -1,8 +1,13 @@
 'use strict'
 
+/*
+ * How to use:
+ * 1. Copy `update.tar` into `/opt/lamassu-updates/download/`
+ * 2. Run `node manual_update.js`
+ */
+
 var fs = require('fs')
 var path = require('path')
-var _ = require('lodash')
 
 var codeRoot = __dirname
 var DEVICE_CONFIG_PATH = path.resolve(codeRoot, 'device_config.json')
