@@ -4,6 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const child_process = require('child_process')
 
+const ensure_x64 = process.arch === 'x64' ? Promise.resolve() : Promise.reject()
+
 /*
  * Package tree structure:
  * package/
@@ -137,7 +139,8 @@ const upgradeNode = () => {
 
 const upgrade = () => {
   console.log("Starting Node.js upgrade process")
-  return respawn_if_needed()
+  return ensure_x64
+    .then(respawn_if_needed)
     .then(stopSupervisorServices)
     .then(backupMachine)
     .then(upgradeNode)
@@ -179,7 +182,8 @@ const removeBackup = () => {
 
 const downgrade = () => {
   console.log("Starting Node.js downgrade process")
-  return respawn_if_needed()
+  return ensure_x64
+    .then(respawn_if_needed)
     .then(stopSupervisorServices)
     .then(downgradeMachine)
     .then(downgradeNode)
