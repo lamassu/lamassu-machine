@@ -67,14 +67,24 @@ const SUPERVISOR_BACKUP = path.join(BACKUP, 'supervisor')
 
 const [script, platform, model, updated_path, is_child] = process.argv.slice(1)
 
-const respawn = () => {
-  child_process.spawn(
-    NEW_NODE,
-    [script, platform, model, updated_path, true],
-    { detached: true, stdio: 'inherit' }
-  ).unref()
-  process.exit(0)
-}
+const createWriteStream = (path) => new Promise((resolve, reject) =>
+  fs.createWriteStream(path)
+    .on('open', resolve)
+    .on('error', reject)
+)
+
+const respawn = () =>
+  Promise.all([
+    createWriteStream("/opt/nodejs-upgrade.stdout.log"),
+    createWriteStream("/opt/nodejs-upgrade.stderr.log"),
+  ])
+  .then(([stdout, stderr]) => {
+    console.log("Run `tail -f /opt/nodejs-upgrade.std{out,err}.log` to follow the upgrade's progress")
+    const args = [script, platform, model, updated_path, true]
+    const opts = { detached: true, stdio: [null, stdout, stderr] }
+    child_process.spawn(NEW_NODE, args, opts).unref()
+    process.exit(0)
+  })
 
 const respawn_if_needed = () => is_child ? Promise.resolve() : respawn()
 
