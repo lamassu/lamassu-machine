@@ -4,7 +4,9 @@ const path = require('path')
 const fs = require('fs')
 const child_process = require('child_process')
 
-const ensure_x64 = process.arch === 'x64' ? Promise.resolve() : Promise.reject()
+const ensure_x64 = process.arch === 'x64' ?
+  Promise.resolve() :
+  Promise.reject("This upgrade package is for x64 platforms only")
 
 /*
  * Package tree structure:
