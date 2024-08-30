@@ -1,42 +1,42 @@
 // This just looks for a script file, checks it's signature, and runs it
 'use strict'
 
-var fs = require('fs')
-var cp = require('child_process')
-var path = require('path')
+const fs = require('fs')
+const cp = require('child_process')
+const path = require('path')
 
-var watchdogInfoLoader = require('./lib/watchdog-info')
+const watchdogInfoLoader = require('./lib/watchdog-info')
 
-var log = console.log;
-var error = console.error;
+const log = console.log;
+const error = console.error;
 
 console.log = function(){
-  var date = (new Date).toISOString() 
+  const date = (new Date).toISOString()
   log(date, 'LOG', ...arguments)
 };
 
 console.error = function(){
-  var date = (new Date).toISOString() 
+  const date = (new Date).toISOString()
   error(date, 'ERROR', ...arguments)
 };
 
-var BASE = '/opt/lamassu-updates/extract'
-var DONE_PATH = BASE + '/done.txt'
-var SCRIPT_PATH = BASE + '/package/updatescript.js'
-var RUNNING_PATH = BASE + '/running.txt'
-var TIMEOUT = 600000
+const BASE = '/opt/lamassu-updates/extract'
+const DONE_PATH = path.join(BASE, 'done.txt')
+const SCRIPT_PATH = path.join(BASE, 'package', 'updatescript.js')
+const RUNNING_PATH = path.join(BASE, 'running.txt')
+const TIMEOUT = 600000
 
-var child = null
-var t0 = null
-var running = false
+let child = null
+let t0 = null
+let running = false
 
-var platform = process.argv[2] || 'N7G1'
-var model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
+const platform = process.argv[2] || 'N7G1'
+const model = process.argv[3] || (platform === 'upboard' ? 'gaia' : null)
 
-var DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
+const DEVICE_CONFIG_PATH = path.resolve(__dirname, 'device_config.json')
 
-var deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
-var dataPath = path.resolve(__dirname, deviceConfig.brain.dataPath)
+const deviceConfig = JSON.parse(fs.readFileSync(DEVICE_CONFIG_PATH))
+const dataPath = path.resolve(__dirname, deviceConfig.brain.dataPath)
 
 watchdogInfoLoader.save(dataPath, { model: model, platform: platform})
 
@@ -57,14 +57,13 @@ setInterval(function () {
 
 function watch () {
   if (running) {
-    var interval = Date.now() - t0
+    const interval = Date.now() - t0
     if (interval > TIMEOUT) {
       kill()
     }
     return
   }
-  var exists = fs.existsSync(DONE_PATH)
-  if (exists) executeScript()
+  if (fs.existsSync(DONE_PATH)) executeScript()
 }
 
 function kill () {
@@ -76,13 +75,11 @@ function executeScript () {
   // TODO: check sig, and make sure we only run this once to completion
   if (running) return
 
-  var exists = fs.existsSync(SCRIPT_PATH)
-  if (!exists) {
+  if (!fs.existsSync(SCRIPT_PATH)) {
     console.error('Script file not present: %s', SCRIPT_PATH)
     return
   }
-  var success = start()
-  if (!success) {
+  if (!start()) {
     console.log("Can't run, there's a new update")
     return
   }
