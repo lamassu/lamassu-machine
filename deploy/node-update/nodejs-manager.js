@@ -106,7 +106,7 @@ const backupMachine = () => {
   return fs.promises.mkdir(BACKUP, { recursive: true })
     // Backup /opt/lamassu-machine/
     .then(() => cp(['-ar', LAMASSU_MACHINE, LAMASSU_MACHINE_BACKUP]))
-    .then(() => sed(['-i', 's|\\<deviceConfig\\.brain\\.dataPath\\>|path.resolve(__dirname, &)|;', path.join(LAMASSU_MACHINE_BACKUP, 'watchdog.js')]))
+    .then(() => sed(['-i', 's|\\<deviceConfig\\.brain\\.dataPath\\>\\s*$|path.resolve(__dirname, &)|;', path.join(LAMASSU_MACHINE_BACKUP, 'watchdog.js')]))
 }
 
 const writeOldService = (service_from, service_to, from_name, to_name) =>
