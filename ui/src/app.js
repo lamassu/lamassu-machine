@@ -325,6 +325,19 @@ function processData (data) {
     case 'externalCompliance':
       externalCompliance(data.externalComplianceUrl)
       break
+    case 'scanAddress':
+      console.log($('#liveview-iframe'))
+      $('#liveview-iframe').hide()
+      $('#liveview-placeholder-text').show()
+      setState('scan_address')
+      break
+    case 'enableLiveView':
+      $('#liveview-placeholder-text').hide()
+      const liveviewIframe = $('#liveview-iframe')
+      console.log(liveviewIframe)
+      liveviewIframe.show()
+      liveviewIframe.attr('src', liveviewIframe.attr('src')) // Reload iframe
+      break
     default:
       if (data.action) setState(window.snakecase(data.action))
   }
