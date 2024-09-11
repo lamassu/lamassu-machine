@@ -35,6 +35,8 @@ const unlink = path => new Promise((resolve, reject) =>
   fs.unlink(path, err => err ? reject(err) : resolve())
 )
 
+const fileExists = path => new Promise(resolve => fs.access(path, err => resolve(!!err)))
+
 const execFile = (cmd, args) => new Promise((resolve, reject) =>
   child_process.execFile(cmd, args, null, err => err ? reject(err) : resolve())
 )
@@ -44,9 +46,10 @@ const mv = args => execFile('mv', args)
 const rm = args => execFile('rm', args)
 const sed = args => execFile('sed', args)
 const supervisorctl = args => execFile('supervisorctl', args)
+const tar = args => execFile('tar', args)
 
 
-const PACKAGE = path.resolve(__dirname) // TODO: confirm this
+const PACKAGE = path.resolve(__dirname)
 const OPT = '/opt/'
 const BACKUP = path.join(OPT, 'backup/')
 
@@ -56,6 +59,7 @@ const LAMASSU_MACHINE_BACKUP = path.join(BACKUP, 'lamassu-machine/')
 const NODE = '/usr/bin/node'
 const NODE_BACKUP = path.join(BACKUP, 'node')
 const NEW_NODE = path.join(PACKAGE, 'node')
+const NEW_NODE_TGZ = path.join(PACKAGE, 'node.tgz')
 
 const SUPERVISOR_CONF = '/etc/supervisor/conf.d/'
 const WATCHDOG_CONF = path.join(SUPERVISOR_CONF, 'lamassu-watchdog.conf')
@@ -142,6 +146,20 @@ const installOldServices = () => {
     ]))
 }
 
+const gunzip_new_node = () => {
+  console.log("Checking if the new Node.js executable already exists")
+  return fileExists(NEW_NODE)
+    .then(exists => {
+      if (exists) {
+        console.log("Node.js executable exists -- skipping gunzip")
+        return Promise.resolve()
+      } else {
+        console.log("Gunzipping Node.js executable")
+        return tar(['xf', NEW_NODE_TGZ, '-C', PACKAGE])
+      }
+    })
+}
+
 // Install new node
 const upgradeNode = () => {
   console.log("Upgrading Node.js executable")
@@ -154,6 +172,7 @@ const upgradeNode = () => {
 const upgrade = () => {
   console.log("Starting Node.js upgrade process")
   return ensure_x64
+    .then(gunzip_new_node)
     .then(respawn_if_needed)
     .then(stopSupervisorServices)
     .then(backupMachine)
@@ -197,6 +216,7 @@ const removeBackup = () => {
 const downgrade = () => {
   console.log("Starting Node.js downgrade process")
   return ensure_x64
+    .then(gunzip_new_node)
     .then(respawn_if_needed)
     .then(stopSupervisorServices)
     .then(downgradeMachine)
