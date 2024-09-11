@@ -63,20 +63,14 @@ function updateSupervisor (cb) {
 
   (machineWithMultipleCodes.includes(hardwareCode) ? getOSUser() : Promise.resolve('lamassu'))
     .then(osuser => {
-      cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
-        if (err) {
-          console.log('failure activating systemctl')
-        }
-
-        async.series([
-          async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
-          async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
-          async.apply(command, 'supervisorctl update'),
-          async.apply(command, 'supervisorctl restart all'),
-        ], (err) => {
-          if (err) throw err;
-          cb()
-        })
+      async.series([
+        async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+        async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
+        async.apply(command, 'supervisorctl update'),
+        async.apply(command, 'supervisorctl restart all'),
+      ], (err) => {
+        if (err) throw err;
+        cb()
       })
     })
 }
