@@ -130,6 +130,3 @@ cp -a $BUILD_FILES_DIR/fonts/NotoKufiArabic $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $BUILD_FILES_DIR/fonts/NotoSansHebrew $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $BUILD_FILES_DIR/fonts/Rubik $TARGET_MACHINE_DIR/ui/css/fonts
 cp -a $BUILD_FILES_DIR/fonts/SourceSansPro $TARGET_MACHINE_DIR/ui/css/fonts
-
-git --git-dir=$MACHINE_DIR/.git rev-parse --short HEAD > $EXPORT_DIR/revision.txt
-cat $EXPORT_DIR/revision.txt
