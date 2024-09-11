@@ -39,7 +39,8 @@ function updateUdev (cb) {
   if (hardwareCode !== 'aaeon') return cb()
   return async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
-    async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
+    async.apply(command, 'udevadm control --reload-rules'),
+    async.apply(command, 'udevadm trigger'),
   ], (err) => {
     if (err) throw err;
     cb()
