@@ -72,6 +72,7 @@ function updateSupervisor (cb) {
           async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
           async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
           async.apply(command, 'supervisorctl update'),
+          async.apply(command, 'supervisorctl restart all'),
         ], (err) => {
           if (err) throw err;
           cb()
