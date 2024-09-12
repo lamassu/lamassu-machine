@@ -20,7 +20,6 @@ var two = null
 var cryptomatModel = null
 var termsConditionsTimeout = null
 var termsConditionsAcceptanceInterval = null
-var termsConditionsAcceptanceTimeout = null
 var T_C_TIMEOUT = 30000
 var complianceTimeout = null;
 var cashDirection = null;
@@ -1397,7 +1396,6 @@ function setTermsConditionsAcceptanceDelay (screen, data) {
 
 function clearTermsConditionsAcceptanceDelay () {
   clearInterval(termsConditionsAcceptanceInterval)
-  clearTimeout(termsConditionsAcceptanceTimeout)
 }
 
 function resetTermsConditionsTimeout () {
