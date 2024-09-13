@@ -51,36 +51,30 @@ function updateSupervisor (cb) {
   console.log("Updating Supervisor services")
   if (hardwareCode === 'aaeon') return cb()
 
-  const getOSUser = () =>
-    fs.promises.readFile('/etc/os-release', { encoding: 'utf8' })
-      .then(
-        text => text
-          .split('\n')
-          .includes('IMAGE_ID=lamassu-machine-xubuntu') ?
-            'lamassu' :
-            'ubilinux',
-        err => {
-          console.log("Error reading /etc/os-release")
-          return 'ubilinux'
-        }
-      )
+  const isLMX = () =>
+    fs.readFileSync('/etc/os-release', { encoding: 'utf8' })
+      .split('\n')
+      .includes('IMAGE_ID=lamassu-machine-xubuntu')
 
-  (machineWithMultipleCodes.includes(hardwareCode) ? getOSUser() : Promise.resolve('lamassu'))
-    .catch(err => {
-      console.log(err)
-      return 'lamassu'
-    })
-    .then(osuser => {
-      async.series([
-        async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
-        async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
-        async.apply(command, 'supervisorctl update'),
-        async.apply(command, 'supervisorctl restart all'),
-      ], (err) => {
-        if (err) throw err;
-        cb()
-      })
-    })
+  const getOSUser = () => {
+    try {
+      return (!machineWithMultipleCodes.includes(hardwareCode) || isLMX()) ? 'lamassu' : 'ubilinux'
+    } catch (err) {
+      return 'ubilinux'
+    }
+  }
+
+  const osuser = getOSUser()
+
+  async.series([
+    async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+    async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
+    async.apply(command, 'supervisorctl update'),
+    async.apply(command, 'supervisorctl restart all'),
+  ], err => {
+    if (err) throw err;
+    cb()
+  })
 }
 
 function updateAcpChromium (cb) {
