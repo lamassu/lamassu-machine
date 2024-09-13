@@ -59,10 +59,17 @@ function updateSupervisor (cb) {
           .includes('IMAGE_ID=lamassu-machine-xubuntu') ?
             'lamassu' :
             'ubilinux',
-        _err => 'ubilinux',
+        err => {
+          console.log("Error reading /etc/os-release")
+          return 'ubilinux'
+        }
       )
 
   (machineWithMultipleCodes.includes(hardwareCode) ? getOSUser() : Promise.resolve('lamassu'))
+    .catch(err => {
+      console.log(err)
+      return 'lamassu'
+    })
     .then(osuser => {
       async.series([
         async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),

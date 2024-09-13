@@ -35,7 +35,7 @@ const unlink = path => new Promise((resolve, reject) =>
   fs.unlink(path, err => err ? reject(err) : resolve())
 )
 
-const fileExists = path => new Promise(resolve => fs.access(path, err => resolve(!!err)))
+const fileExists = path => new Promise(resolve => fs.access(path, err => resolve(!err)))
 
 const execFile = (cmd, args) => new Promise((resolve, reject) =>
   child_process.execFile(cmd, args, null, err => err ? reject(err) : resolve())
