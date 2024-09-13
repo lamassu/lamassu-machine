@@ -39,7 +39,8 @@ function updateUdev (cb) {
   if (hardwareCode !== 'aaeon') return cb()
   return async.series([
     async.apply(command, `cp ${udevPath}/* /etc/udev/rules.d/`),
-    async.apply(command, 'udevadm control --reload-rules && udevadm trigger'),
+    async.apply(command, 'udevadm control --reload-rules'),
+    async.apply(command, 'udevadm trigger'),
   ], (err) => {
     if (err) throw err;
     cb()
@@ -50,35 +51,30 @@ function updateSupervisor (cb) {
   console.log("Updating Supervisor services")
   if (hardwareCode === 'aaeon') return cb()
 
-  const getOSUser = () =>
-    fs.promises.readFile('/etc/os-release', { encoding: 'utf8' })
-      .then(
-        text => text
-          .split('\n')
-          .includes('IMAGE_ID=lamassu-machine-xubuntu') ?
-            'lamassu' :
-            'ubilinux',
-        _err => 'ubilinux',
-      )
+  const isLMX = () =>
+    fs.readFileSync('/etc/os-release', { encoding: 'utf8' })
+      .split('\n')
+      .includes('IMAGE_ID=lamassu-machine-xubuntu')
 
-  (machineWithMultipleCodes.includes(hardwareCode) ? getOSUser() : Promise.resolve('lamassu'))
-    .then(osuser => {
-      cp.exec('systemctl enable supervisor', {timeout: TIMEOUT}, function(err) {
-        if (err) {
-          console.log('failure activating systemctl')
-        }
+  const getOSUser = () => {
+    try {
+      return (!machineWithMultipleCodes.includes(hardwareCode) || isLMX()) ? 'lamassu' : 'ubilinux'
+    } catch (err) {
+      return 'ubilinux'
+    }
+  }
 
-        async.series([
-          async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
-          async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
-          async.apply(command, 'supervisorctl update'),
-          async.apply(command, 'supervisorctl restart all'),
-        ], (err) => {
-          if (err) throw err;
-          cb()
-        })
-      })
-    })
+  const osuser = getOSUser()
+
+  async.series([
+    async.apply(command, `cp ${supervisorPath}/* /etc/supervisor/conf.d/`),
+    async.apply(command, `sed -i 's|^user=.*\$|user=${osuser}|;' /etc/supervisor/conf.d/lamassu-browser.conf || true`),
+    async.apply(command, 'supervisorctl update'),
+    async.apply(command, 'supervisorctl restart all'),
+  ], err => {
+    if (err) throw err;
+    cb()
+  })
 }
 
 function updateAcpChromium (cb) {
@@ -152,7 +148,7 @@ const upgrade = () => {
 
   const commands = [
     async.apply(command, `tar zxf ${basePath}/package/subpackage.tgz -C ${basePath}/package/`),
-    async.apply(command, `rm -rf ${applicationParentFolder}/lamassu-machine/node_modules/genmega`),
+    async.apply(command, `rm -rf ${applicationParentFolder}/lamassu-machine/node_modules/`),
     async.apply(command, `cp -PR ${basePath}/package/subpackage/lamassu-machine ${applicationParentFolder}`),
     async.apply(command, `cp -PR ${basePath}/package/subpackage/hardware/${hardwareCode}/node_modules ${applicationParentFolder}/lamassu-machine/`),
     async.apply(command, `mv ${applicationParentFolder}/lamassu-machine/verify/verify.${arch} ${applicationParentFolder}/lamassu-machine/verify/verify`),
