@@ -4,6 +4,8 @@ const path = require('path')
 const fs = require('fs')
 const child_process = require('child_process')
 
+const originalReport = require('./report').report;
+
 const ensure_x64 = process.arch === 'x64' ?
   Promise.resolve() :
   Promise.reject("This upgrade package is for x64 platforms only")
@@ -227,5 +229,31 @@ const downgrade = () => {
     .then(() => undefined)
 }
 
+const FALLBACK_REPORT = `
+const report = require('./report').report
+const [err, res] = process.argv.slice(2)
+report(err, res, reqErr => {
+  if (reqErr) {
+    console.log("Fallback report failed:", reqErr)
+    process.exit(1)
+  }
+  process.exit(0)
+})
+`
 
-module.exports = { upgrade, downgrade }
+const fallbackReport = (resolve, reject, err, res) =>
+  child_process.spawn(
+    NODE_BACKUP,
+    ["-e", FALLBACK_REPORT, err, res],
+    { timeout: 60000 }
+  )
+  .on('exit', (code, signal) => code === 0 ? resolve() : reject({ code, signal }))
+  .on('error', perr => reject(perr))
+
+const report = (err, res) => new Promise((resolve, reject) =>
+  originalReport(err, res, reqErr =>
+    reqErr ? fallbackReport(resolve, reject, err, res) : resolve()
+  )
+)
+
+module.exports = { upgrade, downgrade, report }
