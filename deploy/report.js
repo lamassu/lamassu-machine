@@ -56,10 +56,10 @@ module.exports.report = function report(err, res, cb) {
   var req = https.request(options, function(res) {
     res.setEncoding('utf8');
     res.resume();
-    res.on('end', cb);
+    res.on('end', () => cb());
   });
 
-  req.on('error', function(err) { console.log(err); cb(); });
+  req.on('error', function(err) { console.log(err); cb(err); });
   req.write(data);
   req.end();
 };
