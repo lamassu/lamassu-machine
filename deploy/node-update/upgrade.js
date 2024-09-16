@@ -5,6 +5,7 @@ const lmmngr = require('./lamassu-machine-manager')
 
 const upgrade = () => Promise.resolve()
   .then(nodemngr.upgrade)
+  .then(() => { lmmngr.report = nodemngr.report })
   .then(lmmngr.upgrade)
   .then(
     () => {

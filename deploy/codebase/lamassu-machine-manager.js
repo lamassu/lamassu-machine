@@ -157,7 +157,7 @@ const upgrade = () => {
     async.apply(updateSupervisor),
     async.apply(updateUdev),
     async.apply(updateAcpChromium),
-    async.apply(report, null, 'finished.')
+    async.apply(module.exports.report, null, 'finished.')
   ]
 
   return new Promise((resolve, reject) => {
@@ -167,4 +167,4 @@ const upgrade = () => {
   })
 }
 
-module.exports = { upgrade }
+module.exports = { upgrade, report }
