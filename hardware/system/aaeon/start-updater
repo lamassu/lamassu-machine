@@ -1,3 +1,0 @@
-#!/bin/bash
-cd /opt/apps/machine/lamassu-machine
-/usr/bin/node /opt/apps/machine/lamassu-machine/lib/update/updater.js

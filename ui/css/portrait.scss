@@ -640,22 +640,6 @@ main {
   }
 }
 
-.wifi_password_state {
-  #wifi-keyboard {
-    .entry {
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 2vh;
-      #input-passphrase {
-        margin-left: 0;
-      }
-      .backspace {
-        margin: 0;
-      }
-    }
-  }
-}
-
 .choose_fiat_state {
   main {
     .primary-side {

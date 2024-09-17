@@ -1,8 +1,7 @@
 {
   "cryptomatModel": "sintra",
   "brain": {
-    "dataPath": "data",
-    "wifiDisabled": true
+    "dataPath": "data"
   },
   "kioskPrinter": {
     "model": "Nippon-2511D-2",
@@ -13,11 +12,6 @@
   },
   "scanner": {
     "device": "/dev/video-scan"
-  },
-  "wifi": {
-    "wpa": {
-      "socket": null
-    }
   },
   "billValidator": {
     "rs232": {

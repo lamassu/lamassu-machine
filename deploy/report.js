@@ -5,25 +5,12 @@ var fs = require('fs');
 var path = require('path');
 
 function loadCerts() {
-  var config;
-
-  // aaeon-upboard & up4000
-  if (fs.existsSync('/opt/lamassu-machine')) {
-    config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
-    if (fs.existsSync(config.updater.caFile)) return {
+  const config = JSON.parse(fs.readFileSync('/opt/lamassu-machine/device_config.json'));
+  if (fs.existsSync(config.updater.caFile)) {
+    return {
       ca: fs.readFileSync(config.updater.caFile),
       cert: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.pem')),
       key: fs.readFileSync(path.resolve('/opt/lamassu-machine', config.brain.dataPath, 'client.key'))
-    };
-  }
-
-  // aaeon-acp (pre-convergence)
-  if (fs.existsSync('/opt/apps/machine/lamassu-machine')) {
-    config = JSON.parse(fs.readFileSync('/opt/apps/machine/lamassu-machine/device_config.json'));
-    if (fs.existsSync(config.updater.caFile)) return {
-      ca: fs.readFileSync(config.updater.caFile),
-      cert: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.pem')),
-      key: fs.readFileSync(path.resolve(config.brain.dataPath, 'client.key'))
     };
   }
 }

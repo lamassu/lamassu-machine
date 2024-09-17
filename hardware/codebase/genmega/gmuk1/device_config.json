@@ -2,8 +2,7 @@
  "cryptomatMaker": "genmega",
  "cryptomatModel": "gmuk1",
   "brain": {
-    "dataPath": "data",
-    "wifiDisabled": true
+    "dataPath": "data"
   },
   "kioskPrinter": {
     "model": "genmega",
@@ -17,11 +16,6 @@
   },
   "scanner": {
     "device": "/dev/ttyS7"
-  },
-  "wifi": {
-    "wpa": {
-      "socket": null
-    }
   },
   "billValidator": {
     "deviceType": "genmega",

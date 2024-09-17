@@ -2,8 +2,7 @@
   "cryptomatMaker": "generalbytes",
   "cryptomatModel": "batm7in",
   "brain": {
-    "dataPath": "data",
-    "wifiDisabled": true
+    "dataPath": "data"
   },
   "kioskPrinter": {
     "model": "None",
@@ -14,11 +13,6 @@
   },
   "scanner": {
     "device": "/dev/video-scan"
-  },
-  "wifi": {
-    "wpa": {
-      "socket": null
-    }
   },
   "billValidator": {
     "deviceType": "cashflowSc",

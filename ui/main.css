@@ -2747,125 +2747,9 @@ footer {
   margin-top: 8vh;
 }
 
-#wifi-keyboard {
-  box-sizing: border-box;
-  width: 100%;
-}
-#wifi-keyboard #wifiPassCancel {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  margin: 6vh 6vh -4vh 0;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-          justify-content: flex-end;
-}
-#wifi-keyboard .pass-top {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-}
-#wifi-keyboard .passphrase {
-  border: none;
-  text-align: center;
-  color: #ffffff;
-  background-color: #0e4160;
-  margin-left: 28vw;
-}
-#wifi-keyboard .connect-wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-}
-#wifi-keyboard .backspace {
-  font-size: 6vh;
-  margin: 0 1vh;
-}
-#wifi-keyboard .row {
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-}
-#wifi-keyboard .key {
-  box-sizing: border-box;
-  border: 1px solid;
-  margin: 0.3vh;
-}
-#wifi-keyboard .key:active {
-  border: none;
-}
-#wifi-keyboard .special {
-  width: 19vh;
-}
-#wifi-keyboard .space {
-  width: 91vh;
-}
-#wifi-keyboard .entry {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  padding: 0 2vh 6vh;
-}
-
 .insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
   padding-left: 0;
   padding-right: 9.4vw;
-}
-
-#networks {
-  margin: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-}
-#networks .ssid {
-  margin: auto;
-}
-#networks .wifiicon-wrapper {
-  min-width: 6vh;
-  height: 10vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-}
-#networks img {
-  margin: auto;
-  width: 6vh;
-}
-#networks .filled-action-button {
-  width: 40vh;
-  height: 10vh;
-  margin: 1vh;
-}
-
-.wifi-network-button .bar1 {
-  background-image: url("images/wifiicon/1.svg");
-}
-
-.wifi-network-button .bar2 {
-  background-image: url("images/wifiicon/2.svg");
-}
-
-.wifi-network-button .bar3 {
-  background-image: url("images/wifiicon/3.svg");
-}
-
-.wifi-network-button .bar4 {
-  background-image: url("images/wifiicon/4.svg");
 }
 
 #metrics {
@@ -4094,20 +3978,6 @@ button[disabled] {
   }
   .minimum_tx_state .header {
     margin-top: 27vh;
-  }
-  .wifi_password_state #wifi-keyboard .entry {
-    -webkit-flex-wrap: wrap;
-            flex-wrap: wrap;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-            justify-content: flex-end;
-    gap: 2vh;
-  }
-  .wifi_password_state #wifi-keyboard .entry #input-passphrase {
-    margin-left: 0;
-  }
-  .wifi_password_state #wifi-keyboard .entry .backspace {
-    margin: 0;
   }
   .choose_fiat_state main .primary-side {
     text-align: center;

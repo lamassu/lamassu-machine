@@ -1,6 +1,0 @@
-# Logitech camera (default)
-KERNEL=="video[0-9]*", ATTR{name}="UVC Camera (046d:0825)", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK+="video-scan"
-# Delock camera (optional)
-KERNEL=="video[0-9]*", ATTR{name}="5M Camera ", ATTRS{idVendor}=="090c", ATTRS{idProduct}=="f37d", SYMLINK+="video-front"
-# Kayeton camera (optional)
-KERNEL=="video[0-9]*", ATTR{name}="USB Video Device", ATTRS{idVendor}=="0ac8", ATTRS{idProduct}=="0345", SYMLINK+="video-front"

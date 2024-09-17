@@ -1372,99 +1372,9 @@ footer {
   margin-top: 8vh;
 }
 
-#wifi-keyboard {
-  box-sizing: border-box;
-  width: 100%;
-  #wifiPassCancel {
-    display: flex;
-    margin: 6vh 6vh -4vh 0;
-    justify-content: flex-end;
-  }
-  .pass-top {
-    display: flex;
-    flex-direction: column;
-  }
-  .passphrase {
-    border: none;
-    text-align: center;
-    color: $white;
-    background-color: $sapphire;
-    margin-left: 28vw;
-  }
-  .connect-wrapper {
-    display: flex;
-    justify-content: center;
-  }
-  .backspace {
-    font-size: 6vh;
-    margin: 0 1vh;
-  }
-  .row {
-    justify-content: center;
-  }
-  .key {
-    box-sizing: border-box;
-    border: 1px solid;
-    margin: 0.3vh;
-    &:active {
-      border: none;
-    }
-  }
-  .special {
-    width: 19vh;
-  }
-  .space {
-    width: 91vh;
-  }
-  .entry {
-    display: flex;
-    padding: 0 2vh 6vh;
-  }
-}
-
 .insert_first_bills_recycler_state footer, .insert_bills_recycler_state footer {
   padding-left: 0;
   padding-right: 9.4vw;
-}
-
-#networks {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .ssid {
-    margin: auto;
-  }
-  .wifiicon-wrapper {
-    min-width: 6vh;
-    height: 10vh;
-    display: flex;
-  }
-  img {
-    margin: auto;
-    width: 6vh;
-  }
-  .filled-action-button {
-    width: 40vh;
-    height: 10vh;
-    margin: 1vh;
-  }
-}
-
-.wifi-network-button .bar1 {
-  background-image: url('images/wifiicon/1.svg');
-}
-
-.wifi-network-button .bar2 {
-  background-image: url('images/wifiicon/2.svg');
-}
-
-.wifi-network-button .bar3 {
-  background-image: url('images/wifiicon/3.svg');
-}
-
-.wifi-network-button .bar4 {
-  background-image: url('images/wifiicon/4.svg');
 }
 
 #metrics {

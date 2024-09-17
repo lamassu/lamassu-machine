@@ -2,8 +2,7 @@
  "cryptomatMaker": "coincloud",
  "cryptomatModel": "mei-bnr",
   "brain": {
-    "dataPath": "data",
-    "wifiDisabled": true
+    "dataPath": "data"
   },
   "kioskPrinter": {
     "model": "Nippon-2511D-2"
@@ -17,11 +16,6 @@
   "scanner": {
     "qrDevice": "/dev/video-front",
     "device": "/dev/video-scan"
-  },
-  "wifi": {
-    "wpa": {
-      "socket": null
-    }
   },
   "billValidator": {
     "deviceType": "bnrAdvance"

@@ -53,8 +53,6 @@ $(function () {
 
   phoneKeypad.activate()
 
-  // let wifiKeyboard = new Keyboard('wifi-keyboard').init()
-
   usSsnKeypad = new Keypad('us-ssn-keypad', { type: 'usSsn' }, function (result) {
     console.log('phoneNumber', result)
   })
@@ -243,29 +241,9 @@ function setupFakes () {
   $('.js-terms-title').text('Disclaimer')
   $('.js-terms-text').text(`Once cryptocurrency is transferred to any party, it cannot be reversed, cancelled, or refunded. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control. By using this cryptomat, you agree that all sales are final and that you are using an address that you own and control.`)
   $('.js-pairing-error').text('Failure accessing server')
-  $('.js-i18n-wifi-connect').text('You\'re connecting to the WiFi network Taranto')
-  $('.js-i18n-wifi-connecting').html('This could take a few moments.')
   $('.operator-name').html('Rafael Taranto')
   $('.operator-phone').html('+55 82 2288-3828')
   $('.operator-email').html('my-long-email@hotmail.com.br')
-  $('#networks').html(`
-    <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">sm</span>
-      <div class="wifiicon-wrapper"><img src="images/wifiicon/4.svg"></span></div>
-    </div>
-    <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">larger</span>
-      <div class="wifiicon-wrapper"><img src="images/wifiicon/3.svg"></span></div>
-    </div>
-    <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">some letter</span>
-      <div class="wifiicon-wrapper"><img src="images/wifiicon/2.svg"></span></div>
-    </div>
-    <div class="wifi-network-button filled-action-button tl2">
-      <span class="ssid" data-raw-ssid="taranto" data-ssid="taranto">lots and lots of letters</span>
-      <div class="wifiicon-wrapper"><img src="images/wifiicon/1.svg"></span></div>
-    </div>
-  `)
 
   let states = [
     $('.scan_id_photo_state'),

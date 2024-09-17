@@ -882,26 +882,6 @@ msgstr "We don't see any open orders associated with your phone. If you have ano
 msgid "If you're sure you have an open order associated with this phone, please contact the operator."
 msgstr "If you're sure you have an open order associated with this phone, please contact the operator."
 
-#: On screen: pre-receipt
-msgid "What next?"
-msgstr "What next?"
-
-#: On screen: pre-receipt
-msgid "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
-msgstr "We weren't able to verify your phone number, so we may not be able to contact you when your cash is ready."
-
-#: On screen: pre-receipt
-msgid "Please snap a photo of the next screen for your electronic receipt, then contact the operator."
-msgstr "Please snap a photo of the next screen for your electronic receipt, then contact the operator."
-
-#: On screen: wifi-failed
-msgid "WiFi failed to connect..."
-msgstr "WiFi failed to connect..."
-
-#: On screen: wifi-failed
-msgid "Please try the password again."
-msgstr "Please try the password again."
-
 #: On screen: us-ssn-permission
 msgid "US SSN required"
 msgstr "US SSN required"
@@ -954,41 +934,9 @@ msgstr "Verifying photo card..."
 msgid "Verifying photo..."
 msgstr "Verifying photo..."
 
-#: On screen: wifi
-msgid "Select a WiFi network"
-msgstr "Select a WiFi network"
-
-#: On screen: wifi
-msgid "Only secured networks are shown."
-msgstr "Only secured networks are shown."
-
-#: On screen: wifi
-msgid "Or connect Ethernet"
-msgstr "Or connect Ethernet"
-
-#: On screen: wifi
-msgid "A wired connection is preferred for stability."
-msgstr "A wired connection is preferred for stability."
-
-#: On screen: wifi-password
-msgid "WiFi password"
-msgstr "WiFi password"
-
-#: On screen: wifi-password
-msgid "Connect"
-msgstr "Connect"
-
 #: On screen: withdraw_failure
 msgid "We got this"
 msgstr "We got this"
-
-#: On screen: dynamic
-msgid "This could take a few moments."
-msgstr "This could take a few moments."
-
-#: On screen: dynamic
-msgid "Connected. Waiting for ticker."
-msgstr "Connected. Waiting for ticker."
 
 #: On screen: dynamic
 msgid "More"
@@ -1011,10 +959,6 @@ msgid "Lamassu Cryptomat"
 msgstr "Lamassu Cryptomat"
 
 #: On screen: dynamic
-msgid "MORE"
-msgstr "MORE"
-
-#: On screen: dynamic
 msgid "Please come back in %s weeks"
 msgstr "Please come back in %s weeks"
 
@@ -1025,14 +969,6 @@ msgstr "Please come back in %s days and %s hours"
 #: On screen: dynamic
 msgid "Please come back in %s hours"
 msgstr "Please come back in %s hours"
-
-#: On screen: dynamic
-msgid "for %s"
-msgstr "for %s"
-
-#: On screen: dynamic
-msgid "You're connecting to the WiFi network %s"
-msgstr "You're connecting to the WiFi network %s"
 
 #: On screen: dynamic
 msgid "Transaction Fee: %s"

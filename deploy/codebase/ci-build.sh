@@ -82,7 +82,6 @@ cp -a $BUILD_FILES_DIR/fonts/* $TARGET_MACHINE_DIR/ui/css/fonts
 
 # Create lists of boards and models
 declare -A boards_and_models=(
- # ["aaeon"]=""
   ["upboard"]="sintra gaia tejo aveiro"
   ["up4000"]="sintra gaia tejo aveiro"
   ["coincloud"]="jcm-ipro-rc mei-bnr mei-scr"
@@ -93,12 +92,7 @@ declare -A boards_and_models=(
 # Loop through each board and its models
 for board in "${!boards_and_models[@]}"; do
   models="${boards_and_models[$board]}"
-  if [[ -z "$models" ]]; then
-    # For boards with no models (e.g., aaeon), run setup without model
-    setup_board_model "$board" ""
-  else
-    for model in $models; do
-      setup_board_model "$board" "$model"
-    done
-  fi
+  for model in $models; do
+    setup_board_model "$board" "$model"
+  done
 done
