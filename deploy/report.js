@@ -30,7 +30,7 @@ function loadCerts() {
 
 var _certs = loadCerts();
 
-module.exports.report = function report(err, res, cb) {
+module.exports.report = function report(err, res, cb, oldparams) {
   console.log(res);
   var data = JSON.stringify({
     error: err ? err : null,
@@ -50,6 +50,16 @@ module.exports.report = function report(err, res, cb) {
       'Content-Length': data.length
     }
   };
+
+  if (oldparams) {
+    // NOTE: Temporarily allow old parameters to support Sencha reporting on Node.js <v10
+    options = Object.assign(options, {
+      ca: _certs.ca,
+      ciphers: 'AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH',
+      secureProtocol: 'TLSv1_method',
+    })
+  }
+
   options.agent = new https.Agent(options);
 
   // Set up the request

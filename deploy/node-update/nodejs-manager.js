@@ -238,7 +238,7 @@ report(err, res, reqErr => {
     process.exit(1)
   }
   process.exit(0)
-})
+}, true)
 `
 
 const fallbackReport = (resolve, reject, err, res) =>
