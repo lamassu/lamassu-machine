@@ -1903,10 +1903,6 @@ button[disabled] {
   pointer-events: none;
 }
 
-@media (orientation: portrait) {
-  @import "./portrait.scss";
-}
-
 .external_compliance_state {
   footer: {
     margin-top: 15px;
@@ -1928,4 +1924,8 @@ button[disabled] {
   div:last-child {
     margin-right: 0px;
   };
+}
+
+@media (orientation: portrait) {
+  @import "./portrait.scss";
 }
