@@ -296,6 +296,7 @@ function processData (data) {
       invalidAddress(data.lnInvoiceTypeError)
       break
     case 'externalCompliance':
+      clearTimeout(complianceTimeout)
       externalCompliance(data.externalComplianceUrl)
       break
     default:
