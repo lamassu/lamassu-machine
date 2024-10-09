@@ -22,7 +22,6 @@ var two = null;
 var cryptomatModel = null;
 var termsConditionsTimeout = null;
 var termsConditionsAcceptanceInterval = null;
-var termsConditionsAcceptanceTimeout = null;
 var T_C_TIMEOUT = 30000;
 var complianceTimeout = null;
 var cashDirection = null;
@@ -326,6 +325,7 @@ function processData(data) {
       invalidAddress(data.lnInvoiceTypeError);
       break;
     case 'externalCompliance':
+      clearTimeout(complianceTimeout);
       externalCompliance(data.externalComplianceUrl);
       break;
     default:
@@ -1348,7 +1348,6 @@ function setTermsConditionsAcceptanceDelay(screen, data) {
 
 function clearTermsConditionsAcceptanceDelay() {
   clearInterval(termsConditionsAcceptanceInterval);
-  clearTimeout(termsConditionsAcceptanceTimeout);
 }
 
 function resetTermsConditionsTimeout() {
