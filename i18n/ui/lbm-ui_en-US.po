@@ -251,12 +251,16 @@ msgid "No, cancel"
 msgstr "No, cancel"
 
 #: On screen: external-validation
-msgid "External compliance required"
-msgstr "External compliance required"
+msgid "Customer verification required"
+msgstr "Customer verification required"
 
 #: On screen: external-validation
-msgid "To proceed, we are required to ask you to go through an external compliance system."
-msgstr "To proceed, we are required to ask you to go through an external compliance system."
+msgid "To proceed, we are required to verify your identify using a service on your phone."
+msgstr "To proceed, we are required to verify your identify using a service on your phone."
+
+#: On screen: external-validation
+msgid "The process is quick and you’ll need an ID card to complete it."
+msgstr "The process is quick and you’ll need an ID card to complete it."
 
 #: On screen: external-validation
 msgid "Continue?"
@@ -267,16 +271,16 @@ msgid "Yes, continue"
 msgstr "Yes, continue"
 
 #: On screen: external-validation
-msgid "External compliance validation"
-msgstr "External compliance validation"
+msgid "Customer verification"
+msgstr "Customer verification"
 
 #: On screen: external-validation
-msgid "In order to process your transaction, we will need to process your information through an external compliance system. This transaction will now be finished."
-msgstr "In order to process your transaction, we will need to process your information through an external compliance system. This transaction will now be finished."
+msgid "In order to transact further, we will need to verify your identity through an external service. In the meantime, your current transaction will be completed and your funds sent."
+msgstr "In order to transact further, we will need to verify your identity through an external service. In the meantime, your current transaction will be completed and your funds sent."
 
 #: On screen: external-validation
-msgid "Scan the following QR code and follow further instructions to proceed."
-msgstr "Scan the following QR code and follow further instructions to proceed."
+msgid "To proceed, scan the QR code below and follow the instructions on the website it takes you to. After a quick verification, you may purchase more at this machine."
+msgstr "To proceed, scan the QR code below and follow the instructions on the website it takes you to. After a quick verification, you may purchase more at this machine."
 
 #: On screen: external-validation
 msgid "OK"
