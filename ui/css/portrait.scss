@@ -468,6 +468,15 @@ main {
   }
 }
 
+.external_compliance_state {
+  main {
+    margin-bottom: 4vh;
+  }
+  footer {
+    margin-top: 0;
+  }
+}
+
 .maintenance_state,
 .locked_state {
   header {

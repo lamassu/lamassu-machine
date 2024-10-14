@@ -5,8 +5,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var queryString = window.location.search;
 var params = new URLSearchParams(queryString.substring(1));
-var SCREEN = params.get('screen');
-var DEBUG_MODE = SCREEN ? 'demo' : params.get('debug');
+var DEBUG_MODE = params.get('debug');
 var CASH_OUT_QR_COLOR = '#403c51';
 var CASH_IN_QR_COLOR = '#0e4160';
 var NUMBER_OF_BUTTONS = 3;
@@ -18,11 +17,9 @@ var totalPages = 0;
 var aspectRatio = '16:10';
 var isTwoWay = null;
 var isRTL = false;
-var two = null;
 var cryptomatModel = null;
 var termsConditionsTimeout = null;
 var termsConditionsAcceptanceInterval = null;
-var termsConditionsAcceptanceTimeout = null;
 var T_C_TIMEOUT = 30000;
 var complianceTimeout = null;
 var cashDirection = null;
@@ -38,7 +35,6 @@ var coins;
 
 var currentState;
 
-var accepting = false;
 var websocket = null;
 var promoKeyboard = null;
 var usSsnKeypad = null;
@@ -46,7 +42,6 @@ var phoneKeypad = null;
 var securityKeypad = null;
 var previousState = null;
 var buttonActive = true;
-var cassettes = null;
 var currentCryptoCode = null;
 var currentCoin = null;
 var currentCoins = [];
@@ -115,7 +110,6 @@ function processData(data) {
   if (data.depositInfo) setDepositAddress(data.depositInfo);
   if (data.version) setVersion(data.version);
   if (data.cassettes) buildCassetteButtons(data.cassettes, NUMBER_OF_BUTTONS);
-  if (data.sent && data.total) setPartialSend(data.sent, data.total);
   if (data.readingBills) readingBills(data.readingBills);
   if (data.cryptoCode) translateCoin(data.cryptoCode);
   if (data.tx && data.tx.cashInFee) setFixedFee(data.tx.cashInFee);
@@ -204,10 +198,8 @@ function processData(data) {
       setState('insert_bills_recycler');
       break;
     case 'acceptingBill':
-      setAccepting(true);
-      break;
     case 'rejectedBill':
-      setAccepting(false);
+      // still need to prevent screen change
       break;
     case 'cryptoTransferPending':
       setState('sending_coins');
@@ -257,10 +249,10 @@ function processData(data) {
       chooseCoin(data.coins, data.twoWayMode);
       break;
     case 'smsVerification':
-      smsVerification(data.threshold);
+      smsVerification();
       break;
     case 'emailVerification':
-      emailVerification(data.threshold);
+      emailVerification();
       break;
     case 'permission_id':
       idVerification();
@@ -303,6 +295,7 @@ function processData(data) {
       invalidAddress(data.lnInvoiceTypeError);
       break;
     case 'externalCompliance':
+      clearTimeout(complianceTimeout);
       externalCompliance(data.externalComplianceUrl);
       break;
     default:
@@ -430,13 +423,12 @@ function idVerification() {
   setScreen('permission_id');
 }
 
-function smsVerification(threshold) {
-  console.log('sms threshold to be displayed', threshold);
+function smsVerification() {
   setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('sms_verification');
 }
 
-function emailVerification(threshold) {
+function emailVerification() {
   setComplianceTimeout(null, 'finishBeforeSms');
   setScreen('email_verification');
 }
@@ -454,7 +446,6 @@ function chooseCoin(coins, twoWayMode) {
 
   isTwoWay = twoWayMode;
   setChooseCoinColors();
-  // setupAnimation(twoWayMode, aspectRatio800)
 
   var defaultCoin = coins[0];
 
@@ -948,12 +939,6 @@ $(document).ready(function () {
   setupImmediateButton('custom-permission-cancel-numerical', 'cancelCustomInfoRequest', function () {
     customRequirementNumericalKeypad.deactivate.bind(customRequirementNumericalKeypad);
   });
-  setupImmediateButton('custom-permission-cancel-text', 'cancelCustomInfoRequest', function () {
-    customRequirementTextKeyboard.deactivate.bind(customRequirementTextKeyboard);
-    $('.text-input-field-1').removeClass('faded').data('content', '').val('');
-    $('.text-input-field-2').addClass('faded').data('content', '').val('');
-    customRequirementTextKeyboard.setInputBox('.text-input-field-1');
-  });
 
   setupButton('external-validation-ok', 'finishBeforeSms');
 
@@ -1253,7 +1238,6 @@ function setTermsConditionsAcceptanceDelay(screen, data) {
 
 function clearTermsConditionsAcceptanceDelay() {
   clearInterval(termsConditionsAcceptanceInterval);
-  clearTimeout(termsConditionsAcceptanceTimeout);
 }
 
 function resetTermsConditionsTimeout() {
@@ -1315,17 +1299,8 @@ function updateButtonStyles() {
   textHeightQuantity = document.getElementById('js-terms-text').offsetHeight;
   var buttonDown = document.getElementById('scroll-down');
   var buttonUp = document.getElementById('scroll-up');
-  if (currentPage === 0) {
-    buttonUp.disabled = true;
-  } else {
-    buttonUp.disabled = false;
-  }
-
-  if (currentPage * scrollSize + scrollSize > textHeightQuantity && currentPage !== 0) {
-    buttonDown.disabled = true;
-  } else {
-    buttonDown.disabled = false;
-  }
+  buttonUp.disabled = currentPage === 0;
+  buttonDown.disabled = currentPage * scrollSize + scrollSize > textHeightQuantity && currentPage !== 0;
 }
 
 function setLocaleInfo(data) {
@@ -1358,7 +1333,6 @@ function setLocale(data) {
   isRTL = isArabic || isHebrew;
 
   setChooseCoinColors();
-  // setupAnimation(isTwoWay, aspectRatio800)
 
   if (isRTL) {
     $('body').addClass('i18n-rtl');
@@ -1495,7 +1469,6 @@ function formatDenomination(denom) {
 }
 
 function buildCassetteButtons(_cassettes, numberOfButtons) {
-  cassettes = _cassettes;
   var activeCassettes = _cassettes.filter(function (it) {
     return it.count === null || it.count > 0;
   });
@@ -1546,7 +1519,7 @@ function updateCrypto(selector, cryptoAmount, cryptoDisplayCode) {
 
 function lookupDecimalChar(localeCode) {
   var num = 1.1;
-  var localized = num.toLocaleString(jsLocaleCode, {
+  var localized = num.toLocaleString(localeCode, {
     useGrouping: true,
     maximumFractionDigits: 1,
     minimumFractionDigits: 1
@@ -1694,15 +1667,6 @@ function setBuyerAddress(address) {
   $('.crypto-address').html(formatAddress(address));
 }
 
-function setAccepting(currentAccepting) {
-  accepting = currentAccepting;
-  if (accepting) {
-    $('.bill img').transition({ x: 0, y: -303 }, 1000, 'ease-in');
-  } else {
-    $('.bill img').transition({ x: 0, y: 0 }, 1000, 'ease-out');
-  }
-}
-
 function highBill(highestBill, reason) {
   var reasonText = reason === 'transactionLimit' ? translate('Transaction limit reached.') : translate("We're a little low on crypto.");
 
@@ -1747,11 +1711,6 @@ function sendOnly(reason) {
   }
 
   setState('send_only');
-}
-
-function setPartialSend(sent, total) {
-  $('#already-sent').text(formatFiat(sent.fiat));
-  $('#pending-sent').text(formatFiat(total.fiat - sent.fiat));
 }
 
 function t(id, str) {
@@ -1826,9 +1785,7 @@ function displayCrypto(cryptoAtoms, cryptoCode) {
   // number of decimal places vary based on displayScale value
   var decimalPlaces = coin.displayScale - coin.unitScale + 6;
   var cryptoAmount = new BigNumber(cryptoAtoms).div(scale).round(decimalPlaces).toNumber();
-  var cryptoDisplay = formatCrypto(cryptoAmount);
-
-  return cryptoDisplay;
+  return formatCrypto(cryptoAmount);
 }
 
 function BN(s) {
@@ -1958,41 +1915,6 @@ function calculateAspectRatio() {
 
 var background = null;
 
-function doTransition(cb) {
-  // TODO Disable animations for V1
-  var toShow = null;
-  var toShowOver = null;
-
-  if (isTwoWay) {
-    toShow = ['#bg-to-show'];
-    toShowOver = ['.crypto-buttons', '.cash-in-box-wrapper'];
-  } else {
-    toShow = ['#bg-to-show'];
-    toShowOver = ['header', 'main'];
-  }
-
-  two.start();
-  var tl = new TimelineMax();
-  tl.set('.fade-in-delay', { opacity: 0, y: +30 }).set('.fade-in', { opacity: 0, y: +30 }).set(toShow, { zIndex: 1 }).set(toShowOver, { zIndex: 2 }).to(background, 0.5, { scale: isTwoWay ? 3 : 2 }).to('.fade-in', 0.4, {
-    opacity: 1,
-    onStart: cb,
-    y: 0
-  }, '=-0.2').to('.fade-in-delay', 0.4, { opacity: 1, y: 0 }, '=-0.2').set(background, { scale: 1 }).set(toShow, { zIndex: -1 }).set(toShowOver, { zIndex: 0 });
-  two.pause();
-}
-
-function setupAnimation(isTwoWay, isAr800) {
-  var elem = document.getElementById('bg-to-show');
-  while (elem.firstChild) {
-    elem.removeChild(elem.firstChild);
-  }
-  two = new Two({ fullscreen: true, type: Two.Types.svg, autostart: true }).appendTo(elem);
-
-  var elementId = (isTwoWay ? 'two-way' : 'one-way') + '-' + (isAr800 ? '800' : '1080') + (isRTL ? '-rtl' : '');
-  background = two.interpret(document.getElementById(elementId));
-  background.scale = 1;
-}
-
 function shouldEnableTouch() {
   var ua = navigator.userAgent;
   if (ua.match(/surf/ig)) return false;
@@ -2048,8 +1970,7 @@ function setCurrentDiscount(currentDiscount, promoCodeApplied) {
 }
 
 function setReceiptPrint(receiptStatus, smsReceiptStatus) {
-  var status = null;
-  if (receiptStatus) status = receiptStatus;else status = smsReceiptStatus;
+  var status = receiptStatus ? receiptStatus : smsReceiptStatus;
 
   var className = receiptStatus ? 'print-receipt' : 'send-sms-receipt';
   var printing = receiptStatus ? 'Printing receipt...' : 'Sending receipt...';

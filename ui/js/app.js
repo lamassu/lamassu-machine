@@ -20,7 +20,6 @@ var isRTL = false;
 var cryptomatModel = null;
 var termsConditionsTimeout = null;
 var termsConditionsAcceptanceInterval = null;
-var termsConditionsAcceptanceTimeout = null;
 var T_C_TIMEOUT = 30000;
 var complianceTimeout = null;
 var cashDirection = null;
@@ -150,7 +149,12 @@ function processData(data) {
       if (currentState !== 'maintenance') setState('booting');
       break;
     case 'idle':
+    case 'fakeIdle':
       setState('idle');
+      break;
+    case 'dualIdle':
+    case 'fakeDualIdle':
+      setState('dual_idle');
       break;
     case 'registerUsSsn':
       usSsnKeypad.activate();
@@ -291,6 +295,7 @@ function processData(data) {
       invalidAddress(data.lnInvoiceTypeError);
       break;
     case 'externalCompliance':
+      clearTimeout(complianceTimeout);
       externalCompliance(data.externalComplianceUrl);
       break;
     default:
@@ -1233,7 +1238,6 @@ function setTermsConditionsAcceptanceDelay(screen, data) {
 
 function clearTermsConditionsAcceptanceDelay() {
   clearInterval(termsConditionsAcceptanceInterval);
-  clearTimeout(termsConditionsAcceptanceTimeout);
 }
 
 function resetTermsConditionsTimeout() {
