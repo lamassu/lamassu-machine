@@ -3,7 +3,7 @@ name: Docker Build and Publish
 on:
   push:
     branches:
-      - release-10.0
+      - dev
 
 env:
   DOCKERHUB_REPO: lamassu/lamassu-machine
